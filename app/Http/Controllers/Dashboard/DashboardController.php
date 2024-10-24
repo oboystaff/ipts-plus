@@ -427,7 +427,7 @@ class DashboardController extends Controller
                 'totalAmount' => isset($totalAmount) ? number_format($totalAmount, 2) : 0,
                 'totalDue' => isset($totalArrears) && isset($totalAmount) ? number_format($totalArrears + $totalAmount, 2) : 0,
                 'payments' => isset($payments) ? $payments : [],
-                'paymentTotal' => isset($payments) ? number_format($payments->sum('amount'), 2) : 0,
+                'paymentTotal' => isset($payments) ? number_format(collect($payments)->sum('amount'), 2) : 0,
                 'totalBillP' => isset($totalBillP) ? number_format($totalBillP, 2) : 0,
                 'totalArrearsP' => isset($totalArrearsP) ? number_format($totalArrearsP, 2) : 0,
                 'totalExpectedPaymentsP' => isset($totalExpectedPaymentsP) ? number_format($totalExpectedPaymentsP, 2) : 0,
