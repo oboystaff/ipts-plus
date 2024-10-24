@@ -55,7 +55,7 @@
                                             alt="" style="width: 100px; height: 100px;">
                                     </div>
                                     <h4 class="text-center mb-4">ERMS PLUS</h4>
-                                    <form action="{{ route('auth.login') }}" method="post">
+                                    <form action="{{ route('auth.changePassword') }}" method="post">
                                         @csrf
 
                                         <div class="form-group first">
@@ -75,26 +75,21 @@
                                             </br>
                                             <label for="password"><b>Confirm Password</b></label>
                                             <input type="password"
-                                                class="form-control @error('password') is-invalid @enderror"
-                                                placeholder="Password" id="password" name="password">
+                                                class="form-control @error('password_confirmation') is-invalid @enderror"
+                                                placeholder="Confirm Password" id="password_confirmation"
+                                                name="password_confirmation">
                                             </br>
 
-                                            @error('password')
+                                            @error('password_confirmation')
                                                 <span class="invalid-feedback" role="alert">
                                                     {{ $message }}
                                                 </span>
                                             @enderror
                                         </div>
 
-                                        <input type="submit" value="Log In" class="btn btn-block btn-success"
-                                            style="margin-top: -20px">
-
+                                        <input type="submit" value="Change Password" class="btn btn-block btn-success"
+                                            style="margin-top: 20px">
                                     </form>
-                                    <div class="new-account mt-3">
-                                        <p>Don't have an account? <a class="text-primary"
-                                                href="{{ route('auth.register') }} ">Register
-                                                Now </a></p>
-                                    </div>
                                 </div>
                             </div>
                         </div>

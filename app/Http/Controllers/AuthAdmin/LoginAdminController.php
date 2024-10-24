@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\AuthAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\ChangePasswordRequest;
 use App\Http\Requests\Auth\LoginAdminRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CustomerType;
+use Illuminate\Support\Facades\Hash;
 
 
 class LoginAdminController extends Controller
@@ -63,8 +65,14 @@ class LoginAdminController extends Controller
             }
         }
 
+        $user = auth()->user();
+
         session()->regenerate();
-        return redirect()->route('dashboard.operational');
+        if (Hash::check(env('DEFAULT_PASSWORD'), $user->password)) {
+            return redirect()->route('auth.change');
+        } else {
+            return redirect()->route('dashboard.operational');
+        }
     }
 
     public function logout(Request $request)
@@ -78,5 +86,15 @@ class LoginAdminController extends Controller
         return view('auth.change-password');
     }
 
-    public function changePassword() {}
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        $data = $request->validated();
+        $data['password'] = Hash::make($data['password']);
+
+        $user = $request->user();
+
+        $user->update($data);
+
+        return redirect()->route('auth.index')->with('status', 'Password changed successfully');
+    }
 }
