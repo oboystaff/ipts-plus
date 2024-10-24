@@ -421,7 +421,7 @@ class DashboardController extends Controller
             $customerData = [
                 'properties' => isset($properties) ? $properties : [],
                 'businesses' => isset($businesses) ? $businesses : [],
-                'total' => isset($properties) ? number_format($properties->sum('ratable_value'), 2) : 0,
+                'total' => isset($properties) ? number_format(collect($properties)->sum('ratable_value'), 2) : 0,
                 'bills' => isset($bills) ? $bills : [],
                 'totalArrears' => isset($totalArrears) ? number_format($totalArrears, 2) : 0,
                 'totalAmount' => isset($totalAmount) ? number_format($totalAmount, 2) : 0,
