@@ -48,10 +48,10 @@
                                 <label for="other_name">Prefix</label>
                                 <select name="prefix" class="form-control @error('prefix') is-invalid @enderror">
                                     <option disabled selected>Select Prefix</option>
-                                    <option value="Mr">Mr</option>
-                                    <option value="Mrs">Mrs</option>
-                                    <option value="Miss">Miss</option>
-                                    <option value="Dr">Dr</option>
+                                    <option value="Mr" {{ $citizen->prefix == 'Mr' ? 'selected' : '' }}>Mr</option>
+                                    <option value="Mrs" {{ $citizen->prefix == 'Mrs' ? 'selected' : '' }}>Mrs</option>
+                                    <option value="Miss" {{ $citizen->prefix == 'Miss' ? 'selected' : '' }}>Miss</option>
+                                    <option value="Dr" {{ $citizen->prefix == 'Dr' ? 'selected' : '' }}>Dr</option>
                                 </select>
 
                                 @error('prefix')

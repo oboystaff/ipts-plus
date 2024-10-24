@@ -175,15 +175,8 @@
 
                             <div class="col-md-6 mb-3">
                                 <label for="ghana_card_number">Ghana Card Number</label>
-                                <input type="text"
-                                    class="form-control @error('Ghana_card_number') is-invalid @enderror"
-                                    name="Ghana_card_number" placeholder="Ghana Card Number">
-
-                                @error('Ghana_card_number')
-                                    <span class="invalid-feedback" role="alert">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
+                                <input type="text" class="form-control" name="Ghana_card_number"
+                                    placeholder="Ghana Card Number">
                             </div>
 
                             <div class="col-md-12">

@@ -33,7 +33,7 @@ class UpdateCustomerRequest extends FormRequest
             'telephone_number' => 'required|string|digits:10|unique:citizens,telephone_number,' . $citizen->id,
             'country_of_citizenship' => 'required|string',
             'customer_type' => 'required|string|exists:customer_types,id',
-            'Ghana_card_number' => 'required|string|unique:citizens,Ghana_card_number,' . $citizen->id,
+            'Ghana_card_number' => 'nullable|string|unique:citizens,Ghana_card_number,' . $citizen->id,
             'status' => 'required|string'
         ];
     }

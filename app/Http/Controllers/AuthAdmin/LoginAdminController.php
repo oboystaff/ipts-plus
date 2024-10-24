@@ -72,4 +72,11 @@ class LoginAdminController extends Controller
         Auth::logout();
         return redirect()->route('auth.index');
     }
+
+    public function change()
+    {
+        return view('auth.change-password');
+    }
+
+    public function changePassword() {}
 }

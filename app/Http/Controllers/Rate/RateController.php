@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Rate;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Rate\CreateRateRequest;
-use App\Http\Requests\rate\UpdateRateRequest;
+use App\Http\Requests\Rate\UpdateRateRequest;
 use App\Models\Rate;
 use App\Models\Zone;
 use App\Models\Assembly;

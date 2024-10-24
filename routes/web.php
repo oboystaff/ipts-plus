@@ -181,6 +181,8 @@ Route::group(['prefix' => ''], function () {
     Route::post('/frontstore', [CitizenController::class, 'frontstore'])->name('citizens.frontstore');
     Route::post('/login', [AuthAdmin\LoginAdminController::class, 'login'])->name('auth.login');
     Route::get('/logout', [AuthAdmin\LoginAdminController::class, 'logout'])->name('auth.logout');
+    Route::get('/change/password', [AuthAdmin\LoginAdminController::class, 'change'])->name('auth.change');
+    Route::post('/change/password', [AuthAdmin\LoginAdminController::class, 'changePassword'])->name('auth.changePassword');
 });
 
 
