@@ -47,11 +47,10 @@
                                         <th>Account Number</th>
                                         <th>First Name</th>
                                         <th>Last Name</th>
-                                        <th>Other Name</th>
+                                        <th>Prefix</th>
                                         <th>Gender</th>
                                         <th>Date of Birth</th>
                                         <th>Marital Status</th>
-                                        <th>NIA Number</th>
                                         <th>Telephone Number</th>
                                         <th>Country of Citizenship</th>
                                         <th>Customer Type</th>
@@ -82,11 +81,10 @@
                                                 </a>
                                             </td>
                                             <td>{{ $citizen->last_name }}</td>
-                                            <td>{{ $citizen->other_name ?? 'N/A' }}</td>
+                                            <td>{{ $citizen->prefix ?? 'N/A' }}</td>
                                             <td>{{ $citizen->gender }}</td>
                                             <td>{{ $citizen->date_of_birth }}</td>
                                             <td>{{ $citizen->marital_status }}</td>
-                                            <td>{{ $citizen->nia_number ?? 'N/A' }}</td>
                                             <td>{{ $citizen->telephone_number }}</td>
                                             <td>{{ $citizen->country_of_citizenship }}</td>
                                             <td>{{ $citizen->customerType->name ?? '' }}</td>

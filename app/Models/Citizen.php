@@ -12,11 +12,10 @@ class Citizen extends Model
     protected $fillable = [
         'first_name',
         'last_name',
-        'other_name',
+        'prefix',
         'gender',
         'date_of_birth',
         'marital_status',
-        'nia_number',
         'account_number',
         'telephone_number',
         'country_of_citizenship',
@@ -24,9 +23,6 @@ class Citizen extends Model
         'status',
         'Ghana_card_number',
         'created_by',
-        'email',
-        'password',
-        'accesstype',
         'user_id'
     ];
 
@@ -38,5 +34,10 @@ class Citizen extends Model
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

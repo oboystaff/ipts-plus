@@ -40,7 +40,11 @@ class LoginAdminController extends Controller
         }
 
         if (empty($result)) {
-            if (!auth()->attempt(['phone' => $data['username'], 'password' => $data['password']])) {
+            if (!auth()->attempt([
+                'phone' => $data['username'],
+                'password' => $data['password'],
+                'status' => 'Active'
+            ])) {
                 throw ValidationException::withMessages([
                     'username' => 'Your provided credentials could not be verified.'
                 ]);
@@ -48,7 +52,11 @@ class LoginAdminController extends Controller
         }
 
         if (!empty($result)) {
-            if (!auth()->attempt(['email' => $data['username'], 'password' => $data['password']])) {
+            if (!auth()->attempt([
+                'email' => $data['username'],
+                'password' => $data['password'],
+                'status' => 'Active'
+            ])) {
                 throw ValidationException::withMessages([
                     'username' => 'Your provided credentials could not be verified.'
                 ]);

@@ -3,14 +3,18 @@
 namespace App\Http\Controllers\Citizens;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Activate\ActivateCitizenRequest;
+use App\Http\Requests\Activate\ResendOTPRequest;
 use App\Http\Requests\Customer\CreateCustomerRequest;
 use App\Http\Requests\Customer\UpdateCustomerRequest;
 use App\Jobs\Registration\SendRegistrationReminder;
+use App\Jobs\OTP\SendOTPSMS;
 use Illuminate\Http\Request;
 use App\Models\Citizen;
 use App\Models\CustomerType;
 use App\Models\User;
 use App\Models\Assembly;
+use App\Models\OTP;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -60,6 +64,7 @@ class CitizenController extends Controller
 
             $data['account_number'] = $accountNumber;
             $data['created_by'] = $request->user()->id;
+            $data['status'] = 'Active';
 
             $userLoginData = [
                 'name' => $data['first_name'] . ' ' . $data['last_name'],
@@ -111,6 +116,7 @@ class CitizenController extends Controller
 
             $data['account_number'] = $accountNumber;
             $data['created_by'] = $request->user()->id ?? 'customer';
+            $data['status'] = 'InActive';
 
             $userLoginData = [
                 'name' => $data['first_name'] . ' ' . $data['last_name'],
@@ -118,7 +124,7 @@ class CitizenController extends Controller
                 'phone' => $data['telephone_number'],
                 'password' => Hash::make(env('DEFAULT_PASSWORD')),
                 'access_level' => 'customer',
-                'status' => 'Active'
+                'status' => 'InActive'
             ];
 
             $user = User::where('phone', $data['telephone_number'])->first();
@@ -138,11 +144,59 @@ class CitizenController extends Controller
             }
 
             dispatch(new SendRegistrationReminder($customer));
+            dispatch(new SendOTPSMS($customer))->delay(now()->addSeconds(5));
 
-            return redirect()->route('auth.index')->with('status', 'Citizen created successfully!');
+            return redirect()->route('citizens.activate')->with('status', 'Citizen created successfully, kindly activate your account with the code sent to your phone.');
         } catch (\Exception $ex) {
             return $ex->getMessage();
         }
+    }
+
+    public function activate()
+    {
+        return view('auth.activate');
+    }
+
+    public function activateCitizen(ActivateCitizenRequest $request)
+    {
+        $code = OTP::where('code', $request->code)->first();
+
+        if (empty($code)) {
+            return redirect()->route('citizens.activate')->with('error', 'The code entered is invalid try again!');
+        }
+
+        $customer = Citizen::where('id', $code->citizen_id)->first();
+
+        if ($customer) {
+            $user = User::where('id', $customer->user_id)->first();
+
+            $customer->update(['status' => 'Active']);
+            $user->update(['status' => 'Active']);
+
+            dispatch(new SendRegistrationReminder($customer));
+        }
+
+        return redirect()->route('auth.index')->with('status', 'Account activated successfully');
+    }
+
+    public function resend()
+    {
+        return view('auth.resend');
+    }
+
+    public function resendOTP(ResendOTPRequest $request)
+    {
+        $customer = Citizen::where('telephone_number', $request->telephone_number)->first();
+
+        if (empty($customer)) {
+            return redirect()->route('citizens.resend')->with('error', 'Telephone number does not exist for any of the account!');
+        }
+
+        if ($customer) {
+            dispatch(new SendOTPSMS($customer));
+        }
+
+        return redirect()->route('citizens.activate')->with('status', 'OTP resent successfully');
     }
 
     // Display the specified resource.

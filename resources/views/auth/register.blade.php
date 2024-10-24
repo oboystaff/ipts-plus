@@ -70,16 +70,28 @@
 
                                         <div class="row mt-3">
                                             <div class="col-sm-6 mt-2 mt-sm-0">
-                                                <input type="text" class="form-control" name="other_name"
-                                                    placeholder="Other Name">
+                                                <select name="prefix"
+                                                    class="form-control @error('prefix') is-invalid @enderror">
+                                                    <option disabled selected>Select Prefix</option>
+                                                    <option value="Mr">Mr</option>
+                                                    <option value="Mrs">Mrs</option>
+                                                    <option value="Miss">Miss</option>
+                                                    <option value="Dr">Dr</option>
+                                                </select>
+
+                                                @error('prefix')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        {{ $message }}
+                                                    </span>
+                                                @enderror
                                             </div>
 
                                             <div class="col-sm-6 mt-2 mt-sm-0">
                                                 <select name="gender"
                                                     class="form-control @error('gender') is-invalid @enderror">
                                                     <option value="">Select Gender</option>
-                                                    <option value="male">Male</option>
-                                                    <option value="female">Female</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
                                                 </select>
 
                                                 @error('gender')
@@ -107,10 +119,10 @@
                                                 <select name="marital_status"
                                                     class="form-control @error('marital_status') is-invalid @enderror">
                                                     <option value="">Marital Status</option>
-                                                    <option value="single">Single</option>
-                                                    <option value="married">Married</option>
-                                                    <option value="divorced">Divorced</option>
-                                                    <option value="widowed">Widowed</option>
+                                                    <option value="Single">Single</option>
+                                                    <option value="Married">Married</option>
+                                                    <option value="Divorced">Divorced</option>
+                                                    <option value="Widowed">Widowed</option>
                                                 </select>
 
                                                 @error('marital_status')
@@ -122,18 +134,6 @@
                                         </div>
 
                                         <div class="row mt-3">
-                                            <div class="col-sm-6 mt-2 mt-sm-0">
-                                                <input type="text"
-                                                    class="form-control @error('nia_number') is-invalid @enderror"
-                                                    name="nia_number" placeholder="NIA Number">
-
-                                                @error('nia_number')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        {{ $message }}
-                                                    </span>
-                                                @enderror
-                                            </div>
-
                                             <div class="col-sm-6">
                                                 <input type="text"
                                                     class="form-control @error('telephone_number') is-invalid @enderror"
@@ -145,9 +145,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                        </div>
 
-                                        <div class="row mt-3">
                                             <div class="col-sm-6 mt-2 mt-sm-0">
                                                 <select name="country_of_citizenship"
                                                     class="form-control @error('country_of_citizenship') is-invalid @enderror">
@@ -166,7 +164,9 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                        </div>
 
+                                        <div class="row mt-3">
                                             <div class="col-sm-6">
                                                 <select name="customer_type"
                                                     class="form-control @error('customer_type') is-invalid @enderror">
@@ -183,29 +183,13 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                        </div>
 
-                                        <div class="row mt-3">
                                             <div class="col-sm-6">
                                                 <input type="text"
                                                     class="form-control @error('Ghana_card_number') is-invalid @enderror"
                                                     name="Ghana_card_number" placeholder="Ghana Card Number">
 
                                                 @error('Ghana_card_number')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        {{ $message }}
-                                                    </span>
-                                                @enderror
-                                            </div>
-
-                                            <div class="col-sm-6 mt-2 mt-sm-0">
-                                                <select name="status"
-                                                    class="form-control @error('status') is-invalid @enderror">
-                                                    <option value="Active">Active</option>
-                                                    <option value="InActive">In Active</option>
-                                                </select>
-
-                                                @error('status')
                                                     <span class="invalid-feedback" role="alert">
                                                         {{ $message }}
                                                     </span>
@@ -225,8 +209,8 @@
 
                                     <div class="new-account mt-3">
                                         <p>Already have an account? <a class="text-primary"
-                                                href=" {{ route('auth.index') }}">Sign
-                                                In</a></p>
+                                                href=" {{ route('citizens.activate') }}">Activate
+                                                Account</a></p>
                                     </div>
                                 </div>
                             </div>

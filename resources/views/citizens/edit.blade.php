@@ -45,9 +45,20 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="other_name">Other Name</label>
-                                <input type="text" class="form-control" id="other_name" name="other_name"
-                                    value="{{ $citizen->other_name }}">
+                                <label for="other_name">Prefix</label>
+                                <select name="prefix" class="form-control @error('prefix') is-invalid @enderror">
+                                    <option disabled selected>Select Prefix</option>
+                                    <option value="Mr">Mr</option>
+                                    <option value="Mrs">Mrs</option>
+                                    <option value="Miss">Miss</option>
+                                    <option value="Dr">Dr</option>
+                                </select>
+
+                                @error('prefix')
+                                    <span class="invalid-feedback" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="col-md-6 mb-3">
@@ -98,18 +109,6 @@
                                 </select>
 
                                 @error('marital_status')
-                                    <span class="invalid-feedback" role="alert">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="nia_number">NIA Number</label>
-                                <input type="text" class="form-control @error('nia_number') is-invalid @enderror"
-                                    name="nia_number" placeholder="NIA Number" value="{{ $citizen->nia_number }}">
-
-                                @error('nia_number')
                                     <span class="invalid-feedback" role="alert">
                                         {{ $message }}
                                     </span>

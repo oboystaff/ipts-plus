@@ -63,8 +63,20 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="other_name">Other Name</label>
-                                <input type="text" class="form-control" name="other_name" placeholder="Other Name">
+                                <label for="other_name">Prefix</label>
+                                <select name="prefix" class="form-control @error('prefix') is-invalid @enderror">
+                                    <option disabled selected>Select Prefix</option>
+                                    <option value="Mr">Mr</option>
+                                    <option value="Mrs">Mrs</option>
+                                    <option value="Miss">Miss</option>
+                                    <option value="Dr">Dr</option>
+                                </select>
+
+                                @error('prefix')
+                                    <span class="invalid-feedback" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="col-md-6 mb-3">
@@ -106,18 +118,6 @@
                                 </select>
 
                                 @error('marital_status')
-                                    <span class="invalid-feedback" role="alert">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="nia_number">NIA Number</label>
-                                <input type="text" class="form-control @error('nia_number') is-invalid @enderror"
-                                    name="nia_number" placeholder="NIA Number">
-
-                                @error('nia_number')
                                     <span class="invalid-feedback" role="alert">
                                         {{ $message }}
                                     </span>
@@ -180,21 +180,6 @@
                                     name="Ghana_card_number" placeholder="Ghana Card Number">
 
                                 @error('Ghana_card_number')
-                                    <span class="invalid-feedback" role="alert">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="status">Status</label>
-                                <select name="status" class="form-control @error('status') is-invalid @enderror">
-                                    <option disabled selected>Select Status</option>
-                                    <option value="Active">Active</option>
-                                    <option value="In Active">In Active</option>
-                                </select>
-
-                                @error('status')
                                     <span class="invalid-feedback" role="alert">
                                         {{ $message }}
                                     </span>

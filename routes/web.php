@@ -174,6 +174,10 @@ Route::group(['prefix' => 'customer-type', 'middleware' => 'auth:sanctum'], func
 Route::group(['prefix' => ''], function () {
     Route::get('/', [AuthAdmin\LoginAdminController::class, 'index'])->name('auth.index');
     Route::get('/register', [AuthAdmin\LoginAdminController::class, 'register'])->name('auth.register');
+    Route::get('/activate', [CitizenController::class, 'activate'])->name('citizens.activate');
+    Route::post('/activate', [CitizenController::class, 'activateCitizen'])->name('citizens.activateCitizen');
+    Route::get('/resend/otp', [CitizenController::class, 'resend'])->name('citizens.resend');
+    Route::post('/resend/otp', [CitizenController::class, 'resendOTP'])->name('citizens.resendOTP');
     Route::post('/frontstore', [CitizenController::class, 'frontstore'])->name('citizens.frontstore');
     Route::post('/login', [AuthAdmin\LoginAdminController::class, 'login'])->name('auth.login');
     Route::get('/logout', [AuthAdmin\LoginAdminController::class, 'logout'])->name('auth.logout');
