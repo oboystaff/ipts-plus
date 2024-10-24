@@ -28,12 +28,12 @@ class CreateCustomerRequest extends FormRequest
             'gender' => 'required|string',
             'date_of_birth' => 'required|date',
             'marital_status' => 'required|string',
-            'nia_number' => 'nullable|string',
-            'telephone_number' => 'required|string',
+            'nia_number' => 'required|string|unique:citizens,nia_number',
+            'telephone_number' => 'required|string|unique:citizens,telephone_number',
             'country_of_citizenship' => 'required|string',
             'customer_type' => 'required|string|exists:customer_types,id',
-            'status' => 'required|string',
-            'Ghana_card_number' => 'nullable|string|unique:citizens'
+            'Ghana_card_number' => 'required|string|unique:citizens',
+            'status' => 'required|string'
         ];
     }
 }

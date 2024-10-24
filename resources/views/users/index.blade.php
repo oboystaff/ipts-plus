@@ -103,10 +103,10 @@
                                                     </div>
                                                     <div class="dropdown-menu dropdown-menu-right" style="">
                                                         <a class="dropdown-item"
-                                                            href="{{ route('users.edit', $user) }}">Edit
+                                                            href="{{ route('users.show', $user) }}">View
                                                             Information</a>
                                                         <a class="dropdown-item"
-                                                            href="{{ route('users.show', $user) }}">View
+                                                            href="{{ route('users.edit', $user) }}">Edit
                                                             Information</a>
                                                     </div>
                                                 </div>

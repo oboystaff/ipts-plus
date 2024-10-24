@@ -21,19 +21,21 @@ class UpdateCustomerRequest extends FormRequest
      */
     public function rules(): array
     {
+        $citizen = $this->route('citizen');
+
         return [
-            'first_name' => 'nullable|string',
-            'last_name' => 'nullable|string',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'other_name' => 'nullable|string',
-            'gender' => 'nullable|string',
-            'date_of_birth' => 'nullable|date',
-            'marital_status' => 'nullable|string',
-            'nia_number' => 'nullable|string',
-            'telephone_number' => 'nullable|string',
-            'country_of_citizenship' => 'nullable|string',
-            'customer_type' => 'nullable|string|exists:customer_types,id',
-            'status' => 'nullable|string',
-            'Ghana_card_number' => 'nullable|string'
+            'gender' => 'required|string',
+            'date_of_birth' => 'required|date',
+            'marital_status' => 'required|string',
+            'nia_number' => 'required|string|unique:citizens,nia_number,' . $citizen->id,
+            'telephone_number' => 'required|string|unique:citizens,telephone_number,' . $citizen->id,
+            'country_of_citizenship' => 'required|string',
+            'customer_type' => 'required|string|exists:customer_types,id',
+            'Ghana_card_number' => 'required|string|unique:citizens,Ghana_card_number,' . $citizen->id,
+            'status' => 'required|string'
         ];
     }
 }

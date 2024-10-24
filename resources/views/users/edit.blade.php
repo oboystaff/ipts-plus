@@ -36,7 +36,7 @@
 
                             <div class="mb-3 col-md-6">
                                 <label class="form-label">Email</label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                <input type="text" class="form-control @error('email') is-invalid @enderror"
                                     placeholder="Enter email" name="email" value="{{ old('email', $user->email) }}"
                                     required>
 

@@ -92,7 +92,7 @@
                                             <td>{{ $citizen->customerType->name ?? '' }}</td>
                                             <td>{{ $citizen->status }}</td>
                                             <td>{{ $citizen->Ghana_card_number }}</td>
-                                            <td>{{ $citizen->createdBy->name ?? '' }}</td>
+                                            <td>{{ $citizen->createdBy->name ?? 'Customer' }}</td>
                                             <td>
                                                 <div class="dropdown">
                                                     <div class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
