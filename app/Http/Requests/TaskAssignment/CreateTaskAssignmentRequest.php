@@ -25,7 +25,9 @@ class CreateTaskAssignmentRequest extends FormRequest
             'supervisor_id' => ['required', 'exists:users,id'],
             'agent_id' => ['required', 'exists:users,id'],
             'assembly_code' => ['required', 'exists:assemblies,assembly_code'],
-            'task' => ['required', 'string']
+            'task' => ['required', 'string'],
+            'block_data' => ['required', 'array'],
+            'block_data.*' => ['required', 'exists:blocks,id']
         ];
     }
 }

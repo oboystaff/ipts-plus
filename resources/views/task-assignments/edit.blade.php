@@ -18,12 +18,23 @@
                             <a href="{{ route('task-assignments.index') }}" class="btn btn-primary btn-sm ms-2">Back</a>
                         </div>
                     </div>
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <div class="card-body">
                         <div class="basic-form">
-                            <form method="POST" action="{{ route('task-assignments.store') }}">
+                            <form method="POST" action="{{ route('task-assignments.update', $taskAssignment) }}">
                                 @csrf
 
-                                <input type="hidden" name="assembly_code" value="{{ $data['assemblyCode'] }}">
+                                <input type="hidden" name="assembly_code" value="{{ $assemblyData['assemblyCode'] }}">
                                 <input type="hidden" name="supervisor_id" value="{{ $supervisor->id }}">
 
                                 <div class="row">
@@ -45,9 +56,28 @@
                                         <label for="assembly_code" class="form-label">Assembly</label>
                                         <input type="text" class="form-control @error('assembly') is-invalid @enderror"
                                             id="assembly" name="assembly" placeholder="Assembly"
-                                            value="{{ $data['assembly'] }}" readonly>
+                                            value="{{ $assemblyData['assembly'] }}" readonly>
 
                                         @error('assembly')
+                                            <span class="invalid-feedback" role="alert">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-sm-6 mb-3">
+                                        <label for="block_data" class="form-label">Block</label>
+                                        <select multiple
+                                            class="default-select form-control wide @error('block_data') is-invalid @enderror"
+                                            id="block_data" name="block_data[]" required>
+                                            @foreach ($blockss as $block)
+                                                <option value="{{ $block->id }}"
+                                                    @if (collect($taskAssignment->block_data ?? [])->contains('block_id', $block->id)) selected @endif>
+                                                    {{ $block->block_name }}</option>
+                                            @endforeach
+                                        </select>
+
+                                        @error('block_data')
                                             <span class="invalid-feedback" role="alert">
                                                 {{ $message }}
                                             </span>
@@ -60,7 +90,9 @@
                                             name="agent_id">
                                             <option value="">Select Agent</option>
                                             @foreach ($agents as $agent)
-                                                <option value="{{ $agent->id }}">{{ $agent->name }}</option>
+                                                <option value="{{ $agent->id }}"
+                                                    {{ old('agent_id', $taskAssignment->agent_id) == $agent->id ? 'selected' : '' }}>
+                                                    {{ $agent->name }}</option>
                                             @endforeach
                                         </select>
 
@@ -96,6 +128,56 @@
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
+
+                                @if (!empty($taskAssignment->block_data))
+                                    <div class="alert alert-warning alert-dismissible fade show" style="margin-top:30px">
+                                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+                                            stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                            class="me-2">
+                                            <polyline points="9 11 12 14 22 4"></polyline>
+                                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                                        </svg>
+                                        <strong>AGENT ASSIGNED BLOCKS DETAILS</strong>
+                                    </div>
+
+                                    <div class="tab-content" id="myTabContent-3">
+                                        <div class="tab-pane fade show active" id="withoutBorder" role="tabpanel"
+                                            aria-labelledby="home-tab-3">
+                                            <div class="card-body pt-0">
+                                                <div class="table-responsive">
+                                                    <table id="example4" class="display table" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>S/N</th>
+                                                                <th>Block Code</th>
+                                                                <th>Block Name</th>
+                                                                <th>Assembly</th>
+                                                                <th>Task</th>
+                                                                <th>Status</th>
+                                                                <th>Assigned By</th>
+                                                                <th>Created Date</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($blocks as $index => $block)
+                                                                <tr>
+                                                                    <td>{{ $index + 1 }}</td>
+                                                                    <td>{{ $block->block_code }}</td>
+                                                                    <td>{{ $block->block_name }}</td>
+                                                                    <td>{{ $block->assembly }}</td>
+                                                                    <td>{{ $block->task }}</td>
+                                                                    <td>{{ $block->status }}</td>
+                                                                    <td>{{ $block->created_by }}</td>
+                                                                    <td>{{ $block->created_at }}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             </form>
                         </div>
                     </div>

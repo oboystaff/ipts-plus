@@ -47,7 +47,7 @@
                                         <th>Agent Name</th>
                                         <th>Assembly Name</th>
                                         <th>Task</th>
-                                        <th>Status</th>
+                                        <th>Blocks Assigned</th>
                                         <th>Assigned By</th>
                                         <th>Date Created</th>
                                         <th>Action</th>
@@ -61,7 +61,7 @@
                                             <td>{{ $taskAssignment->agent->name ?? '' }}</td>
                                             <td>{{ $taskAssignment->assembly->name ?? '' }}</td>
                                             <td>{{ $taskAssignment->task }}</td>
-                                            <td>{{ $taskAssignment->status }}</td>
+                                            <td>{{ $taskAssignment->block_count ?? '' }}</td>
                                             <td>{{ $taskAssignment->createdBy->name ?? '' }}</td>
                                             <td>{{ $taskAssignment->created_at }}</td>
                                             <td>

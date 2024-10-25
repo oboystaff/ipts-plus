@@ -14,8 +14,12 @@ class TaskAssignment extends Model
         'agent_id',
         'assembly_code',
         'task',
-        'status',
+        'block_data',
         'created_by'
+    ];
+
+    protected $casts = [
+        'block_data' => 'array',
     ];
 
     public function supervisor()

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('agent_id');
             $table->string('assembly_code');
             $table->string('task');
-            $table->string('status')->default('Pending');
+            $table->json('block_data');
             $table->string('created_by');
             $table->timestamps();
         });

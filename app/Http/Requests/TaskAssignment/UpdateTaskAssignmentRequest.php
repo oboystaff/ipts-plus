@@ -11,7 +11,7 @@ class UpdateTaskAssignmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class UpdateTaskAssignmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'agent_id' => ['required', 'exists:users,id'],
+            'task' => ['required', 'string'],
+            'block_data' => ['required', 'array'],
+            'block_data.*' => ['required', 'exists:blocks,id']
         ];
     }
 }

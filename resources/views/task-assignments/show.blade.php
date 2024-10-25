@@ -76,6 +76,57 @@
                                             </span>
                                         @enderror
                                     </div>
+
+                                    @if (!empty($taskAssignment->block_data))
+                                        <div class="alert alert-warning alert-dismissible fade show"
+                                            style="margin-top:30px">
+                                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+                                                stroke-width="2" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round" class="me-2">
+                                                <polyline points="9 11 12 14 22 4"></polyline>
+                                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                                            </svg>
+                                            <strong>AGENT ASSIGNED BLOCKS DETAILS</strong>
+                                        </div>
+
+                                        <div class="tab-content" id="myTabContent-3">
+                                            <div class="tab-pane fade show active" id="withoutBorder" role="tabpanel"
+                                                aria-labelledby="home-tab-3">
+                                                <div class="card-body pt-0">
+                                                    <div class="table-responsive">
+                                                        <table id="example4" class="display table" style="width: 100%">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>S/N</th>
+                                                                    <th>Block Code</th>
+                                                                    <th>Block Name</th>
+                                                                    <th>Assembly</th>
+                                                                    <th>Task</th>
+                                                                    <th>Status</th>
+                                                                    <th>Assigned By</th>
+                                                                    <th>Created Date</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($blocks as $index => $block)
+                                                                    <tr>
+                                                                        <td>{{ $index + 1 }}</td>
+                                                                        <td>{{ $block->block_code }}</td>
+                                                                        <td>{{ $block->block_name }}</td>
+                                                                        <td>{{ $block->assembly }}</td>
+                                                                        <td>{{ $block->task }}</td>
+                                                                        <td>{{ $block->status }}</td>
+                                                                        <td>{{ $block->created_by }}</td>
+                                                                        <td>{{ $block->created_at }}</td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <div class="col-md-12">
