@@ -15,14 +15,24 @@
                         </div>
                     </div>
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <div class="card-body">
                         <form class="row g-3 needs-validation" method="POST" action="{{ route('users.store') }}">
                             @csrf
 
                             <div class="mb-4 col-md-6">
                                 <label class="form-label">Full Name</label>
-                                <input type="text" class="form-control" placeholder="Kojo Ahenkan" name="name"
-                                    required>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                    placeholder="Full Name" name="name" required>
 
                                 @error('name')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -31,8 +41,8 @@
 
                             <div class="mb-4 col-md-6">
                                 <label class="form-label">Email</label>
-                                <input type="email" class="form-control" placeholder="propertyuser@meclhia.com"
-                                    name="email" required>
+                                <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                    placeholder="Email Address" name="email" required>
 
                                 @error('email')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -67,8 +77,8 @@
 
                             <div class="mb-4 col-md-6">
                                 <label>Phone</label>
-                                <input type="text" class="form-control" placeholder="eg: 024 1234 456" name="phone"
-                                    required>
+                                <input type="text" class="form-control @error('phone') is-invalid @enderror"
+                                    placeholder="Phone Number" name="phone" required>
 
                                 @error('phone')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -77,12 +87,25 @@
 
                             <div class="mb-4 col-md-6">
                                 <label>Access Level</label>
-                                <select class="form-control" name="access_level" id="access_level" required>
-                                    <option value="Melchia_Account_Manager">Melchia Account Manager</option>
-                                    <option value="Assembly_Administrator">Assembly Administrator</option>
-                                    <option value="Assembly_Agent">Assembly Agent</option>
-                                    <option value="customer">Customer</option>
+                                <select class="form-control @error('access_level') is-invalid @enderror" name="access_level"
+                                    id="access_level" required>
+                                    <option value="">Select Access Level</option>
+                                    @if (\Illuminate\Support\Str::contains(\Auth::user()->access_level, 'Assembly'))
+                                        <option value="Assembly_Supervisor">Assembly Supervisor</option>
+                                        <option value="Assembly_Agent">Assembly Agent</option>
+                                        <option value="customer">Customer</option>
+                                    @else
+                                        <option value="Melchia_Account_Manager">Melchia Account Manager</option>
+                                        <option value="Assembly_Administrator">Assembly Administrator</option>
+                                        <option value="Assembly_Supervisor">Assembly Supervisor</option>
+                                        <option value="Assembly_Agent">Assembly Agent</option>
+                                        <option value="customer">Customer</option>
+                                    @endif
                                 </select>
+
+                                @error('access_level')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="mb-4 col-md-6">
@@ -101,8 +124,9 @@
                             </div>
 
                             <div class="mb-4 col-md-6" id="assembly_code_field" style="display: none;">
-                                <label>Assembly Code</label>
+                                <label>Assembly</label>
                                 <select class="form-control" name="assembly_code">
+                                    <option value="">Select Assembly</option>
                                     @foreach ($assemblies as $assembly)
                                         <option value="{{ $assembly->assembly_code }}">{{ $assembly->name }}</option>
                                     @endforeach
@@ -110,8 +134,9 @@
                             </div>
 
                             <div class="mb-4 col-md-6" id="division_code_field" style="display: none;">
-                                <label>Division Code</label>
+                                <label>Division</label>
                                 <select class="form-control" name="division_code">
+                                    <option value="">Select Division</option>
                                     @foreach ($divisions as $division)
                                         <option value="{{ $division->division_code }}">{{ $division->division_name }}
                                         </option>
@@ -144,7 +169,7 @@
             if (this.value == 'Assembly_Administrator') {
                 assemblyField.style.display = 'block';
                 divisionField.style.display = 'none';
-            } else if (this.value == 'Assembly_Agent') {
+            } else if (this.value == 'Assembly_Agent' || this.value == 'Assembly_Supervisor') {
                 assemblyField.style.display = 'block';
                 divisionField.style.display = 'block';
             } else {

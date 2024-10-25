@@ -23,15 +23,17 @@
                 @endif
 
                 <div class="card">
+
                     <div class="card-header flex-wrap d-flex justify-content-between">
                         <div>
-                            <h4 class="heading mb-0">Users</h4>
+                            <h4 class="heading mb-0">Assembly Task Assignment</h4>
                         </div>
 
                         <div class="d-flex align-items-center">
-                            @can('users.create')
-                                <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm ms-2">+ Create User</a>
-                            @endcan
+                            {{-- @can('blocks.create') --}}
+                            <a href="{{ route('task-assignments.create') }}" class="btn btn-primary btn-sm ms-2">+ Assign
+                                Task</a>
+                            {{-- @endcan --}}
                         </div>
                     </div>
 
@@ -41,46 +43,27 @@
                                 <thead>
                                     <tr>
                                         <th>S/N</th>
-                                        <th>Full Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Date Of Joining</th>
-                                        <th>Access Level</th>
-                                        <th>Assembly</th>
-                                        <th>Role</th>
+                                        <th>Supervisor Name</th>
+                                        <th>Agent Name</th>
+                                        <th>Assembly Name</th>
+                                        <th>Task</th>
                                         <th>Status</th>
+                                        <th>Assigned By</th>
+                                        <th>Date Created</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $index => $user)
+                                    @foreach ($taskAssignments as $index => $taskAssignment)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->phone }}</td>
-                                            <td>{{ $user->created_at }}</td>
-                                            <td>
-                                                @if ($user->access_level == 'Assembly_Administrator')
-                                                    Assembly Administrator
-                                                @elseif ($user->access_level == 'customer')
-                                                    General Customer
-                                                @elseif ($user->access_level == 'Assembly_Agent')
-                                                    Assembly Agent
-                                                @elseif ($user->access_level == 'Assembly_Supervisor')
-                                                    Assembly Supervisor
-                                                @elseif (empty($user->access_level))
-                                                    Melchia Supper User
-                                                @else
-                                                    {{ $user->access_level }}
-                                                @endif
-                                            </td>
-                                            <td>{{ $user->assembly->name ?? 'N/A' }}</td>
-                                            <td>
-                                                {{ $user->roleName->name ?? 'N/A' }}
-                                            </td>
-
-                                            <td>{{ ucfirst($user->status) }}</td>
+                                            <td>{{ $taskAssignment->supervisor->name ?? '' }}</td>
+                                            <td>{{ $taskAssignment->agent->name ?? '' }}</td>
+                                            <td>{{ $taskAssignment->assembly->name ?? '' }}</td>
+                                            <td>{{ $taskAssignment->task }}</td>
+                                            <td>{{ $taskAssignment->status }}</td>
+                                            <td>{{ $taskAssignment->createdBy->name ?? '' }}</td>
+                                            <td>{{ $taskAssignment->created_at }}</td>
                                             <td>
                                                 <div class="dropdown">
                                                     <div class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -103,13 +86,15 @@
                                                             </path>
                                                         </svg>
                                                     </div>
-                                                    <div class="dropdown-menu dropdown-menu-right" style="">
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('users.show', $user) }}">View
-                                                            Information</a>
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('users.edit', $user) }}">Edit
-                                                            Information</a>
+                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                        <div class="py-2">
+                                                            <a class="dropdown-item"
+                                                                href=" {{ route('task-assignments.show', $taskAssignment->id) }}">View
+                                                            </a>
+                                                            <a class="dropdown-item"
+                                                                href=" {{ route('task-assignments.edit', $taskAssignment->id) }}">Edit
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -122,7 +107,8 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
 
-    @section('page-scripts')
-    @endsection
+@section('page-scripts')
+@endsection

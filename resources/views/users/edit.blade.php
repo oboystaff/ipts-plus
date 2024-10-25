@@ -84,18 +84,45 @@
                                 <select class="form-control @error('access_level') is-invalid @enderror" name="access_level"
                                     required>
                                     <option value="">Select Access Level</option>
-                                    <option value="Melchia_Account_Manager"
-                                        {{ old('access_level', $user->access_level) == 'Melchia_Account_Manager' ? 'selected' : '' }}>
-                                        Melchia Account Manager</option>
-                                    <option value="Assembly_Administrator"
-                                        {{ old('access_level', $user->access_level) == 'Assembly_Administrator' ? 'selected' : '' }}>
-                                        Assembly Administrator</option>
-                                    <option value="Assembly_Agent"
-                                        {{ old('access_level', $user->access_level) == 'Assembly_Agent' ? 'selected' : '' }}>
-                                        Assembly Agent</option>
-                                    <option value="Assembly_Agent"
-                                        {{ old('access_level', $user->access_level) == 'customer' ? 'selected' : '' }}>
-                                        Customer</option>
+                                    @if (\Illuminate\Support\Str::contains(\Auth::user()->access_level, 'Assembly'))
+                                        <option value="Assembly_Administrator"
+                                            {{ old('access_level', $user->access_level) == 'Assembly_Administrator' ? 'selected' : '' }}>
+                                            Assembly Administrator
+                                        </option>
+                                        <option value="Assembly_Supervisor"
+                                            {{ old('access_level', $user->access_level) == 'Assembly_Supervisor' ? 'selected' : '' }}>
+                                            Assembly Supervisor
+                                        </option>
+                                        <option value="Assembly_Agent"
+                                            {{ old('access_level', $user->access_level) == 'Assembly_Agent' ? 'selected' : '' }}>
+                                            Assembly Agent
+                                        </option>
+                                        <option value="Assembly_Agent"
+                                            {{ old('access_level', $user->access_level) == 'customer' ? 'selected' : '' }}>
+                                            Customer
+                                        </option>
+                                    @else
+                                        <option value="Melchia_Account_Manager"
+                                            {{ old('access_level', $user->access_level) == 'Melchia_Account_Manager' ? 'selected' : '' }}>
+                                            Melchia Account Manager
+                                        </option>
+                                        <option value="Assembly_Administrator"
+                                            {{ old('access_level', $user->access_level) == 'Assembly_Administrator' ? 'selected' : '' }}>
+                                            Assembly Administrator
+                                        </option>
+                                        <option value="Assembly_Supervisor"
+                                            {{ old('access_level', $user->access_level) == 'Assembly_Supervisor' ? 'selected' : '' }}>
+                                            Assembly Supervisor
+                                        </option>
+                                        <option value="Assembly_Agent"
+                                            {{ old('access_level', $user->access_level) == 'Assembly_Agent' ? 'selected' : '' }}>
+                                            Assembly Agent
+                                        </option>
+                                        <option value="Assembly_Agent"
+                                            {{ old('access_level', $user->access_level) == 'customer' ? 'selected' : '' }}>
+                                            Customer
+                                        </option>
+                                    @endif
                                 </select>
 
                                 @error('access_level')

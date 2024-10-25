@@ -24,6 +24,8 @@ use App\Http\Controllers\Rate\RateController;
 use App\Http\Controllers\Rate\BusRateController;
 use App\Http\Controllers\Payment\PaymentController;
 use App\Http\Controllers\Report;
+use App\Http\Controllers\AgentAssignment\AgentAssignmentController;
+use App\Http\Controllers\TaskAssignment\TaskAssignmentController;
 
 
 // Route::group(['prefix' => 'payments', 'middleware' => 'auth:sanctum'], function () {
@@ -300,4 +302,22 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function ()
     Route::get('/bill-report', [Report\BillReportController::class, 'index'])->name('bill-reports.index');
     Route::get('/payment-report', [Report\PaymentReportController::class, 'index'])->name('payment-reports.index');
     Route::get('/debtors-report', [Report\DebtorsReportController::class, 'index'])->name('debtors-reports.index');
+});
+
+Route::group(['prefix' => 'agent-assignment', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [AgentAssignmentController::class, 'index'])->name('agent-assignments.index');
+    Route::get('/create', [AgentAssignmentController::class, 'create'])->name('agent-assignments.create');
+    Route::post('/create', [AgentAssignmentController::class, 'store'])->name('agent-assignments.store');
+    Route::get('/{agentAssignment}/show', [AgentAssignmentController::class, 'show'])->name('agent-assignments.show');
+    Route::get('/{agentAssignment}/edit', [AgentAssignmentController::class, 'edit'])->name('agent-assignments.edit');
+    Route::post('/{agentAssignment}/update', [AgentAssignmentController::class, 'update'])->name('agent-assignments.update');
+});
+
+Route::group(['prefix' => 'task-assignment', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [TaskAssignmentController::class, 'index'])->name('task-assignments.index');
+    Route::get('/create', [TaskAssignmentController::class, 'create'])->name('task-assignments.create');
+    Route::post('/create', [TaskAssignmentController::class, 'store'])->name('task-assignments.store');
+    Route::get('/{taskAssignment}/show', [TaskAssignmentController::class, 'show'])->name('task-assignments.show');
+    Route::get('/{taskAssignment}/edit', [TaskAssignmentController::class, 'edit'])->name('task-assignments.edit');
+    Route::post('/{taskAssignment}/update', [TaskAssignmentController::class, 'update'])->name('task-assignments.update');
 });

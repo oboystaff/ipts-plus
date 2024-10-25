@@ -29,8 +29,8 @@ class CreateUserRequest extends FormRequest
             'phone' => 'required|string|max:15|unique:users,phone',
             'access_level' => 'required|string',
             'status' => 'required|string',
-            'assembly_code' => 'nullable|string',
-            'division_code' => 'nullable|string',
+            'assembly_code' => 'required_if:access_level,Assembly_Supervisor|nullable|string',
+            'division_code' => 'required_if:access_level,Assembly_Supervisor|nullable|string',
             'role' => 'required|string'
         ];
     }

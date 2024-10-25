@@ -155,6 +155,7 @@
                                                             class="avatar avatar-md" alt="">
                                                         <div>
                                                             <h6>{{ auth()->user()->name ?? '' }}</h6>
+                                                            <span>{{ auth()->user()->access_level ?? '' }}</span>
                                                             <span>{{ auth()->user()->phone ?? '' }}</span>
                                                         </div>
                                                     </div>
@@ -177,7 +178,6 @@
                                                     </a>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </li>
@@ -485,6 +485,9 @@
                                     <li><a href="{{ route('rates.index') }}">Manage Rates (Property)</a></li>
                                     <li><a href="{{ route('rates.bus.index') }}">Manage Rates (Business)</a></li>
                                 @endcan
+
+                                <li><a href="{{ route('agent-assignments.index') }}">Agent Assignment</a></li>
+                                <li><a href="{{ route('task-assignments.index') }}">Task Assignment</a></li>
                             </ul>
                         </li>
                     @endcanany
