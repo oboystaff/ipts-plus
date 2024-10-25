@@ -764,6 +764,83 @@
                                 <hr />
                             </div>
 
+                            <!-- customer types -->
+                            <div class="check_group">
+                                <div class="row">
+                                    <div class="col-md-3 text-center">
+                                        <h5>@lang('role.agent-assignments')</h5>
+                                    </div>
+
+                                    <div class="col-md-2 text-center">
+                                        <label class="d-block" for="chk-ani">
+                                            <input class="form-check-input check_all" id="chk-ani " type="checkbox">
+                                            @lang('role.select_all')
+                                        </label>
+
+                                    </div>
+                                    <div class="col-md-7 col-md-offset-1">
+                                        <label for="chk-ani">
+                                            <input class="form-check-input" name="permissions[]" id="chk-ani"
+                                                value="@lang('agent-assignments.view')"
+                                                @if (in_array('agent-assignments.view', $role_permissions)) checked @endif type="checkbox">
+                                            @lang('role.agent-assignments.view')
+                                        </label>
+                                        <label class="d-block" for="chk-ani">
+                                            <input class="form-check-input" name="permissions[]" id="chk-ani"
+                                                value="@lang('agent-assignments.create')"
+                                                @if (in_array('agent-assignments.create', $role_permissions)) checked @endif type="checkbox">
+                                            @lang('role.agent-assignments.create')
+                                        </label>
+                                        <label for="chk-ani">
+                                            <input class="form-check-input" name="permissions[]" id="chk-ani"
+                                                value="@lang('agent-assignments.update')"
+                                                @if (in_array('agent-assignments.update', $role_permissions)) checked @endif type="checkbox">
+                                            @lang('role.agent-assignments.update')
+                                        </label>
+                                    </div>
+                                </div>
+                                <hr />
+                            </div>
+
+                            <!-- customer types -->
+                            <div class="check_group">
+                                <div class="row">
+                                    <div class="col-md-3 text-center">
+                                        <h5>@lang('role.task-assignments')</h5>
+                                    </div>
+
+                                    <div class="col-md-2 text-center">
+                                        <label class="d-block" for="chk-ani">
+                                            <input class="form-check-input check_all" id="chk-ani " type="checkbox">
+                                            @lang('role.select_all')
+                                        </label>
+
+                                    </div>
+                                    <div class="col-md-7 col-md-offset-1">
+                                        <label for="chk-ani">
+                                            <input class="form-check-input" name="permissions[]" id="chk-ani"
+                                                value="@lang('task-assignments.view')"
+                                                @if (in_array('task-assignments.view', $role_permissions)) checked @endif type="checkbox">
+                                            @lang('role.task-assignments.view')
+                                        </label>
+                                        <label class="d-block" for="chk-ani">
+                                            <input class="form-check-input" name="permissions[]" id="chk-ani"
+                                                value="@lang('task-assignments.create')"
+                                                @if (in_array('task-assignments.create', $role_permissions)) checked @endif type="checkbox">
+                                            @lang('role.task-assignments.create')
+                                        </label>
+                                        <label for="chk-ani">
+                                            <input class="form-check-input" name="permissions[]" id="chk-ani"
+                                                value="@lang('task-assignments.update')"
+                                                @if (in_array('task-assignments.update', $role_permissions)) checked @endif type="checkbox">
+                                            @lang('role.task-assignments.update')
+                                        </label>
+                                    </div>
+                                </div>
+                                <hr />
+                            </div>
+
+
                             <div class="col-12">
                                 <button class="btn btn-primary" type="submit">Update Permission</button>
                             </div>

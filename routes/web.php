@@ -320,4 +320,5 @@ Route::group(['prefix' => 'task-assignment', 'middleware' => 'auth:sanctum'], fu
     Route::get('/{taskAssignment}/show', [TaskAssignmentController::class, 'show'])->name('task-assignments.show');
     Route::get('/{taskAssignment}/edit', [TaskAssignmentController::class, 'edit'])->name('task-assignments.edit');
     Route::post('/{taskAssignment}/update', [TaskAssignmentController::class, 'update'])->name('task-assignments.update');
+    Route::get('/update/status', [TaskAssignmentController::class, 'updateStatus'])->name('task-assignments.updateStatus');
 });

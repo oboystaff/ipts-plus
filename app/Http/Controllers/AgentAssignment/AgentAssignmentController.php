@@ -13,6 +13,10 @@ class AgentAssignmentController extends Controller
 {
     public function index(Request $request)
     {
+        if (!auth()->user()->can('agent-assignments.view')) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $agentAssignments = AgentAssignment::orderBy('created_at', 'DESC')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
@@ -30,6 +34,10 @@ class AgentAssignmentController extends Controller
 
     public function create(Request $request)
     {
+        if (!auth()->user()->can('agent-assignments.create')) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $agents = User::where('access_level', 'Assembly_Agent')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
@@ -85,6 +93,10 @@ class AgentAssignmentController extends Controller
 
     public function edit(Request $request, AgentAssignment $agentAssignment)
     {
+        if (!auth()->user()->can('agent-assignments.update')) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $supervisors = User::where('access_level', 'Assembly_Supervisor')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);

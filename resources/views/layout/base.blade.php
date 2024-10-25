@@ -437,7 +437,7 @@
                     @endcanany
 
                     @canany(['assemblies.view', 'divisions.view', 'blocks.view', 'zones.view', 'property-uses.view',
-                        'rates.view'])
+                        'rates.view', 'agent-assignments.view', 'task-assignments.view'])
                         <li><a class="has-arrow " href="javascript:void(0);">
                                 <div class="menu-icon">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -486,8 +486,13 @@
                                     <li><a href="{{ route('rates.bus.index') }}">Manage Rates (Business)</a></li>
                                 @endcan
 
-                                <li><a href="{{ route('agent-assignments.index') }}">Agent Assignment</a></li>
-                                <li><a href="{{ route('task-assignments.index') }}">Task Assignment</a></li>
+                                @can('agent-assignments.view')
+                                    <li><a href="{{ route('agent-assignments.index') }}">Agent Assignment</a></li>
+                                @endcan
+
+                                @can('task-assignments.view')
+                                    <li><a href="{{ route('task-assignments.index') }}">Task Assignment</a></li>
+                                @endcan
                             </ul>
                         </li>
                     @endcanany

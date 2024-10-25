@@ -126,7 +126,9 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    @if (\Auth::user()->access_level == 'Assembly_Supervisor')
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    @endif
                                 </div>
 
                                 @if (!empty($taskAssignment->block_data))
@@ -139,6 +141,21 @@
                                         </svg>
                                         <strong>AGENT ASSIGNED BLOCKS DETAILS</strong>
                                     </div>
+
+                                    @if (session()->has('status'))
+                                        <div class="alert alert-success alert-dismissible fade show">
+                                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+                                                stroke-width="2" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round" class="me-2">
+                                                <polyline points="9 11 12 14 22 4"></polyline>
+                                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                                            </svg>
+                                            <strong>{{ session('status') }}</strong>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
+                                            </button>
+                                        </div>
+                                    @endif
 
                                     <div class="tab-content" id="myTabContent-3">
                                         <div class="tab-pane fade show active" id="withoutBorder" role="tabpanel"
@@ -156,6 +173,9 @@
                                                                 <th>Status</th>
                                                                 <th>Assigned By</th>
                                                                 <th>Created Date</th>
+                                                                @if (\Auth::user()->access_level == 'Assembly_Agent')
+                                                                    <th>Action</th>
+                                                                @endif
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -166,24 +186,76 @@
                                                                     <td>{{ $block->block_name }}</td>
                                                                     <td>{{ $block->assembly }}</td>
                                                                     <td>{{ $block->task }}</td>
-                                                                    <td>{{ $block->status }}</td>
+                                                                    @if ($block->status == 'Completed')
+                                                                        <td><span
+                                                                                class="badge light badge-success">{{ $block->status }}</span>
+                                                                        </td>
+                                                                    @else
+                                                                        <td><span
+                                                                                class="badge light badge-danger">{{ $block->status }}</span>
+                                                                        </td>
+                                                                    @endif
                                                                     <td>{{ $block->created_by }}</td>
                                                                     <td>{{ $block->created_at }}</td>
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
+                                                                    @if (\Auth::user()->access_level == 'Assembly_Agent')
+                                                                        <td>
+                                                                            <div class="dropdown">
+                                                                                <div class="btn-link"
+                                                                                    data-bs-toggle="dropdown"
+                                                                                    aria-expanded="false">
+                                                                                    <svg width="24" height="24"
+                                                                                        viewBox="0 0 24 24" fill="none"
+                                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                                        <path
+                                                                                            d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
+                                                                                            stroke="#737B8B"
+                                                                                            stroke-width="2"
+                                                                                            stroke-linecap="round"
+                                                                                            stroke-linejoin="round">
+                                                                                        </path>
+                                                                                        <path
+                                                                                            d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
+                                                                                            stroke="#737B8B"
+                                                                                            stroke-width="2"
+                                                                                            stroke-linecap="round"
+                                                                                            stroke-linejoin="round">
+                                                                                        </path>
+                                                                                        <path
+                                                                                            d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
+                                                                                            stroke="#737B8B"
+                                                                                            stroke-width="2"
+                                                                                            stroke-linecap="round"
+                                                                                            stroke-linejoin="round">
+                                                                                        </path>
+                                                                                    </svg>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="dropdown-menu dropdown-menu-end">
+                                                                                    <div class="py-2">
+                                                                                        <a class="dropdown-item"
+                                                                                            href="{{ route('task-assignments.updateStatus', ['id' => $block->id, 'block_id' => $block->block_id]) }}">Mark
+                                                                                            As Done
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </div>
+                                                                    @endif
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endif
-                            </form>
+                                                </td>
+                                                </tr>
+                                @endforeach
+                                </tbody>
+                                </table>
                         </div>
                     </div>
                 </div>
             </div>
+            @endif
+            </form>
         </div>
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
 @endsection
 

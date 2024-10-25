@@ -16,6 +16,10 @@ class TaskAssignmentController extends Controller
 {
     public function index(Request $request)
     {
+        if (!auth()->user()->can('task-assignments.view')) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $taskAssignments = TaskAssignment::orderBy('created_at', 'DESC')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
@@ -38,6 +42,10 @@ class TaskAssignmentController extends Controller
 
     public function create(Request $request)
     {
+        if (!auth()->user()->can('task-assignments.create')) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $loggedInSupervisorId = $request->user()->id;
         $agents = User::where('access_level', 'Assembly_Agent')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
@@ -129,6 +137,10 @@ class TaskAssignmentController extends Controller
 
     public function edit(Request $request, TaskAssignment $taskAssignment)
     {
+        if (!auth()->user()->can('task-assignments.update')) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $loggedInSupervisorId = $request->user()->id;
         $agents = User::where('access_level', 'Assembly_Agent')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
@@ -146,7 +158,12 @@ class TaskAssignmentController extends Controller
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
-            ->where('id', $request->user()->id)
+            ->when($request->user()->access_level == 'Assembly_Supervisor', function ($query) use ($request) {
+                $query->where('id', $request->user()->id);
+            })
+            ->when($request->user()->access_level == 'Assembly_Agent', function ($query) use ($request, $taskAssignment) {
+                $query->where('id', $taskAssignment->supervisor->id);
+            })
             ->where('status', 'Active')
             ->first();
 
@@ -178,8 +195,12 @@ class TaskAssignmentController extends Controller
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
             ->get()
-            ->map(function ($block) use ($taskAssignment, $status) {
+            ->map(function ($block) use ($taskAssignment, $status, $blockData) {
+                $blockEntry = collect($blockData)->firstWhere('block_id', $block->id);
+
                 $result = new stdClass();
+                $result->id = $taskAssignment->id;
+                $result->block_id = $blockEntry['block_id'];
                 $result->block_code = $block->block_code;
                 $result->block_name = $block->block_name;
                 $result->assembly = $block->assembly->name ?? '';
@@ -212,5 +233,27 @@ class TaskAssignmentController extends Controller
         $taskAssignment->update($data);
 
         return redirect()->route('task-assignments.index')->with('status', 'Task assignment updated successfully.');
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $taskAssignment = TaskAssignment::where('id', $request->id)->first();
+        $blockData = $taskAssignment->block_data;
+
+        $statusUpdate = [
+            $request->block_id => "Completed",
+        ];
+
+        // Update the block_data
+        foreach ($blockData as &$data) {
+            if (array_key_exists($data['block_id'], $statusUpdate)) {
+                $data['status'] = $statusUpdate[$data['block_id']];
+            }
+        }
+
+        $taskAssignment->block_data = $blockData;
+        $taskAssignment->save();
+
+        return redirect()->back()->with('status', 'Task assignment updated successfully.');
     }
 }

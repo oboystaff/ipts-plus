@@ -21,6 +21,8 @@ return [
     'properties' => 'Properties',
     'business-types' => 'Business Types',
     'business-classes' => 'Business Classes',
+    'agent-assignments' => 'Agent Assignments',
+    'task-assignments' => 'Task Assignments',
     'businesses' => 'Businesses',
     'assemblies' => 'Assemblies',
     'divisions' => 'Divisions',
@@ -134,6 +136,14 @@ return [
     'property-uses.view' => 'View Property Use',
     'property-uses.create' => 'Add Property Use',
     'property-uses.update' => 'Edit Property Use',
+
+    'agent-assignments.view' => 'View Agent Assignment',
+    'agent-assignments.create' => 'Add Agent Assignment',
+    'agent-assignments.update' => 'Edit Agent Assignment',
+
+    'task-assignments.view' => 'View Task Assignment',
+    'task-assignments.create' => 'Add Task Assignment',
+    'task-assignments.update' => 'Edit Task Assignment',
 
     //report
     'reports.view' => 'View Reports',

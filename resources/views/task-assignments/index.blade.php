@@ -30,10 +30,10 @@
                         </div>
 
                         <div class="d-flex align-items-center">
-                            {{-- @can('blocks.create') --}}
-                            <a href="{{ route('task-assignments.create') }}" class="btn btn-primary btn-sm ms-2">+ Assign
-                                Task</a>
-                            {{-- @endcan --}}
+                            @can('task-assignments.create')
+                                <a href="{{ route('task-assignments.create') }}" class="btn btn-primary btn-sm ms-2">+ Assign
+                                    Task</a>
+                            @endcan
                         </div>
                     </div>
 
