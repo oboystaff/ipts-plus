@@ -18,6 +18,17 @@
                             <a href="{{ route('agent-assignments.index') }}" class="btn btn-primary btn-sm ms-2">Back</a>
                         </div>
                     </div>
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <div class="card-body">
                         <div class="basic-form">
                             <form method="POST" action="{{ route('agent-assignments.store') }}">
