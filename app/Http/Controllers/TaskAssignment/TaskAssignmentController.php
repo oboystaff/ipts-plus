@@ -72,6 +72,8 @@ class TaskAssignmentController extends Controller
             $blocks = Block::orderBy('block_name', 'ASC')
                 ->where('division_code', $division->id)
                 ->get();
+        } else {
+            $blocks = [];
         }
 
         $assembly = $request->user()->assembly->name ?? '';
