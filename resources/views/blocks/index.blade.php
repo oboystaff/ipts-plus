@@ -26,13 +26,13 @@
 
                     <div class="card-header flex-wrap d-flex justify-content-between">
                         <div>
-                            <h4 class="heading mb-0">Assembly Bloacks</h4>
+                            <h4 class="heading mb-0">Assembly Blocks</h4>
                         </div>
 
                         <div class="d-flex align-items-center">
                             @can('blocks.create')
                                 <a href="{{ route('blocks.create') }}" class="btn btn-primary btn-sm ms-2">+ Create
-                                    Assembly Bloacks</a>
+                                    Assembly Blocks</a>
                             @endcan
                         </div>
                     </div>
