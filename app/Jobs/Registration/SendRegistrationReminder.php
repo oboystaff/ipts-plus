@@ -31,7 +31,7 @@ class SendRegistrationReminder implements ShouldQueue
         $msg = "Hello " . $this->citizen->first_name . ",";
         $msg .= " Thanks for registering on ERMS PLUS, your Account No. is: " . $this->citizen->account_number . ".";
         $msg .= " You can use your phone number " . $this->citizen->telephone_number . " or Account No. and default";
-        $msg .= " password: " . env('DEFAULT_PASSWORD') . " to login at  www.ermsplusgh.com.";
+        $msg .= " password: " . env('DEFAULT_PASSWORD') . " to login at  www.app.melchia.com";
         $msg .= " For further inquiries, please call this number " . env('COMPANY_CONTACT');
 
         $phone = $this->citizen->telephone_number;
