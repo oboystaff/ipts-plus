@@ -8,6 +8,9 @@ use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\User\UserController;
 use App\Http\Controllers\API\Assembly\AssemblyController;
 use App\Http\Controllers\API\Division\DivisionController;
+use App\Http\Controllers\API\Customer\CustomerController;
+use App\Http\Controllers\API\Bill\BillController;
+use App\Http\Controllers\API\Payment\PaymentController;
 
 
 /*
@@ -50,4 +53,24 @@ Route::group(['prefix' => 'division', 'middleware' => 'auth:sanctum'], function 
     Route::get('/', [DivisionController::class, 'index']);
     Route::get('/show/{id}', [DivisionController::class, 'show']);
     Route::get('/assembly/{code}', [DivisionController::class, 'assemblyDivision']);
+});
+
+Route::group(['prefix' => 'customer', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [CustomerController::class, 'index']);
+    Route::get('/show/{id}', [CustomerController::class, 'show']);
+    Route::post('/update/{id}', [CustomerController::class, 'update']);
+});
+
+Route::group(['prefix' => 'bill', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [BillController::class, 'index']);
+    Route::get('/show/{id}', [BillController::class, 'show']);
+    Route::get('/customer/{id}', [BillController::class, 'customerBill']);
+    Route::get('/pending/customer/{id}', [BillController::class, 'pendingBill']);
+});
+
+Route::group(['prefix' => 'payment', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [PaymentController::class, 'index']);
+    Route::get('/show/{id}', [PaymentController::class, 'show']);
+    Route::get('/customer/{id}', [PaymentController::class, 'customerPayment']);
+    Route::post('/create', [PaymentController::class, 'makePayment']);
 });

@@ -42,4 +42,9 @@ class Bill extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'bills_id', 'bills_id');
+    }
 }
