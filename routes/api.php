@@ -12,6 +12,8 @@ use App\Http\Controllers\API\Customer\CustomerController;
 use App\Http\Controllers\API\Bill\BillController;
 use App\Http\Controllers\API\Payment\PaymentController;
 use App\Http\Controllers\API\Agent\AgentController;
+use App\Http\Controllers\API\CustomerSupport\CustomerSupportController;
+use App\Http\Controllers\API\Dashboard\DashboardController;
 
 
 /*
@@ -86,4 +88,17 @@ Route::group(['prefix' => 'agent', 'middleware' => 'auth:sanctum'], function () 
     Route::get('/payment/{id}', [AgentController::class, 'agentPayment']);
     Route::post('/task/update/{id}', [AgentController::class, 'taskUpdate']);
     Route::post('/upload/report', [AgentController::class, 'uploadReport']);
+});
+
+Route::group(['prefix' => 'customer-support', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [CustomerSupportController::class, 'index']);
+    Route::get('/show/{id}', [CustomerSupportController::class, 'show']);
+    Route::get('/user/{id}', [CustomerSupportController::class, 'userShow']);
+    Route::post('/create', [CustomerSupportController::class, 'store']);
+    Route::post('/update/{id}', [CustomerSupportController::class, 'update']);
+});
+
+Route::group(['prefix' => 'dashboard', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/payment/{id}', [DashboardController::class, 'agentPayment']);
+    Route::get('/task/{id}', [DashboardController::class, 'agentTask']);
 });
