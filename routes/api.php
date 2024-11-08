@@ -11,6 +11,7 @@ use App\Http\Controllers\API\Division\DivisionController;
 use App\Http\Controllers\API\Customer\CustomerController;
 use App\Http\Controllers\API\Bill\BillController;
 use App\Http\Controllers\API\Payment\PaymentController;
+use App\Http\Controllers\API\Agent\AgentController;
 
 
 /*
@@ -73,4 +74,16 @@ Route::group(['prefix' => 'payment', 'middleware' => 'auth:sanctum'], function (
     Route::get('/show/{id}', [PaymentController::class, 'show']);
     Route::get('/customer/{id}', [PaymentController::class, 'customerPayment']);
     Route::post('/create', [PaymentController::class, 'makePayment']);
+});
+
+Route::group(['prefix' => 'agent', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [AgentController::class, 'index']);
+    Route::get('/show/{id}', [AgentController::class, 'show']);
+    Route::post('/update/{id}', [AgentController::class, 'update']);
+    Route::get('/task', [AgentController::class, 'agentTask']);
+    Route::get('/task/show/{id}', [AgentController::class, 'agentTaskShow']);
+    Route::get('/task/{id}', [AgentController::class, 'agentTaskAssignment']);
+    Route::get('/payment/{id}', [AgentController::class, 'agentPayment']);
+    Route::post('/task/update/{id}', [AgentController::class, 'taskUpdate']);
+    Route::post('/upload/report', [AgentController::class, 'uploadReport']);
 });

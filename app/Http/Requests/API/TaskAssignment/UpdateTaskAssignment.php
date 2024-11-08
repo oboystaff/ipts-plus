@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\TaskAssignment;
+namespace App\Http\Requests\API\TaskAssignment;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateTaskAssignmentRequest extends FormRequest
+class UpdateTaskAssignment extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,8 @@ class UpdateTaskAssignmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'agent_id' => ['required', 'exists:users,id'],
-            'task' => ['required', 'string'],
-            'block_data' => ['required', 'array'],
-            'block_data.*' => ['required', 'exists:blocks,id']
+            'block_id' => ['required', 'exists:blocks,id'],
+            'status' => ['required', 'string', 'in:Completed,Pending']
         ];
     }
 }
