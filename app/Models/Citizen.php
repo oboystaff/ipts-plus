@@ -40,4 +40,14 @@ class Citizen extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function properties()
+    {
+        return $this->hasMany(Property::class, 'customer_name');
+    }
+
+    public function businesses()
+    {
+        return $this->hasMany(Business::class, 'citizen_account_number');
+    }
 }

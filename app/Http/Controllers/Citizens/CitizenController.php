@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 use App\Models\Citizen;
 use App\Models\CustomerType;
 use App\Models\User;
-use App\Models\Assembly;
 use App\Models\OTP;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
@@ -28,6 +27,18 @@ class CitizenController extends Controller
         }
 
         $citizens = Citizen::orderBy('created_at', 'DESC')
+            ->when($request->user()->access_level === 'Assembly_Administrator', function ($query) use ($request) {
+                $assemblyCode = $request->user()->assembly_code;
+
+                $query->where(function ($subQuery) use ($assemblyCode) {
+                    $subQuery->whereHas('properties', function ($propertyQuery) use ($assemblyCode) {
+                        $propertyQuery->where('assembly_code', $assemblyCode);
+                    })
+                        ->orWhereHas('businesses', function ($businessQuery) use ($assemblyCode) {
+                            $businessQuery->where('assembly_code', $assemblyCode);
+                        });
+                });
+            })
             ->get();
 
         return view('citizens.index', compact('citizens'));
