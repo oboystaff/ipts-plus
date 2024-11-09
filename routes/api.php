@@ -14,6 +14,8 @@ use App\Http\Controllers\API\Payment\PaymentController;
 use App\Http\Controllers\API\Agent\AgentController;
 use App\Http\Controllers\API\CustomerSupport\CustomerSupportController;
 use App\Http\Controllers\API\Dashboard\DashboardController;
+use App\Http\Controllers\API\Property\PropertyController;
+use App\Http\Controllers\API\Business\BusinessController;
 
 
 /*
@@ -101,4 +103,16 @@ Route::group(['prefix' => 'customer-support', 'middleware' => 'auth:sanctum'], f
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/payment/{id}', [DashboardController::class, 'agentPayment']);
     Route::get('/task/{id}', [DashboardController::class, 'agentTask']);
+});
+
+Route::group(['prefix' => 'property', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [PropertyController::class, 'index']);
+    Route::get('/show/{id}', [PropertyController::class, 'show']);
+    Route::get('/customer/{id}', [PropertyController::class, 'customerProperty']);
+});
+
+Route::group(['prefix' => 'business', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [BusinessController::class, 'index']);
+    Route::get('/show/{id}', [BusinessController::class, 'show']);
+    Route::get('/customer/{id}', [BusinessController::class, 'customerBusiness']);
 });
