@@ -554,8 +554,8 @@
 
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Developed by <a href="" target="_blank"> Assets Circle Network
-                    </a> 2024
+                <p>Copyright © Developed by <a href="" target="_blank">Assets Circle Network</a>
+                    <?= date('Y') ?>
                 </p>
             </div>
         </div>
