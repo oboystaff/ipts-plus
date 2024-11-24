@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\API\Auth\ChangePasswordRequest as AuthChangePasswordRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Validation\ValidationException;
@@ -50,6 +51,12 @@ class LoginController extends Controller
                 ->first();
 
             session()->regenerate();
+
+            if (Hash::check(env('DEFAULT_PASSWORD'), $user->password)) {
+                $user['must_change_password'] = true;
+            } else {
+                $user['must_change_password'] = false;
+            }
 
             return response()->json([
                 'message' => 'User logged in successfully',
@@ -102,6 +109,20 @@ class LoginController extends Controller
             $user = User::where('id', $otp->citizen_id)->first();
             $user->update($data);
         }
+
+        return response()->json([
+            'message' => 'Password changed successfully'
+        ]);
+    }
+
+    public function changePasswordNoOTP(AuthChangePasswordRequest $request)
+    {
+        $data = $request->validated();
+        $data['password'] = Hash::make($data['password']);
+
+        $user = $request->user();
+
+        $user->update($data);
 
         return response()->json([
             'message' => 'Password changed successfully'

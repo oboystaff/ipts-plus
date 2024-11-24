@@ -46,6 +46,7 @@ Route::group(['prefix' => 'user'], function () {
         Route::get('/show/{id}', [UserController::class, 'show']);
         Route::post('/update/{id}', [UserController::class, 'update']);
         Route::post('/logout', [LoginController::class, 'logout']);
+        Route::post('/change/password/no/otp', [LoginController::class, 'changePasswordNoOTP']);
     });
 });
 
