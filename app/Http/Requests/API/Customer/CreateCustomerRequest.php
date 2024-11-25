@@ -25,11 +25,11 @@ class CreateCustomerRequest extends FormRequest
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'prefix' => 'required|string',
-            'gender' => 'required|string',
-            'date_of_birth' => 'required|date',
-            'marital_status' => 'required|string',
+            'gender' => 'required|string|in:Male,Female',
+            'date_of_birth' => 'required|date|date_format:Y-m-d|before:today',
+            'marital_status' => 'required|string|in:Single,Married,Divorced,Widowed',
             'telephone_number' => 'required|string|digits:10|unique:citizens,telephone_number',
-            'country_of_citizenship' => 'required|string',
+            'country_of_citizenship' => 'required|string|in:Ghana,Nigeria,Togo',
             'customer_type' => 'required|string|exists:customer_types,id',
             'Ghana_card_number' => 'nullable|string|unique:citizens'
         ];

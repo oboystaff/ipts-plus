@@ -38,6 +38,7 @@ Route::post('/payment/callback', [PaymentTempController::class, 'paymentCallback
 Route::post('/login', [LoginController::class, 'index']);
 Route::post('/send/otp', [LoginController::class, 'sendOTP']);
 Route::post('/change/password', [LoginController::class, 'changePassword']);
+Route::post('/customer/create/front', [CustomerController::class, 'frontstore']);
 
 Route::group(['prefix' => 'user'], function () {
     Route::group(['middleware' => ['auth:sanctum']], function () {
