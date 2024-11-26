@@ -97,7 +97,7 @@
                                             {{ old('access_level', $user->access_level) == 'Assembly_Agent' ? 'selected' : '' }}>
                                             Assembly Agent
                                         </option>
-                                        <option value="Assembly_Agent"
+                                        <option value="customer"
                                             {{ old('access_level', $user->access_level) == 'customer' ? 'selected' : '' }}>
                                             Customer
                                         </option>
@@ -118,7 +118,11 @@
                                             {{ old('access_level', $user->access_level) == 'Assembly_Agent' ? 'selected' : '' }}>
                                             Assembly Agent
                                         </option>
-                                        <option value="Assembly_Agent"
+                                        <option value="GRA_Administrator"
+                                            {{ old('access_level', $user->access_level) == 'GRA_Administrator' ? 'selected' : '' }}>
+                                            GRA Administrator
+                                        </option>
+                                        <option value="customer"
                                             {{ old('access_level', $user->access_level) == 'customer' ? 'selected' : '' }}>
                                             Customer
                                         </option>

@@ -71,6 +71,8 @@
                                                     Assembly Supervisor
                                                 @elseif (empty($user->access_level))
                                                     Melchia Supper User
+                                                @elseif ($user->access_level == 'GRA_Administrator')
+                                                    GRA Administrator
                                                 @else
                                                     {{ $user->access_level }}
                                                 @endif

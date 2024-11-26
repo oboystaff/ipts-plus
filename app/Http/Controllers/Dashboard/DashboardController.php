@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Assembly;
 use App\Models\Business;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -11,6 +12,7 @@ use App\Models\Invoice;
 use App\Models\Property;
 use App\Models\Bill;
 use App\Models\Citizen;
+use App\Models\GhanaRegion;
 use App\Models\User;
 use App\Models\Payment;
 
@@ -224,6 +226,22 @@ class DashboardController extends Controller
         for ($month = 1; $month <= 12; $month++) {
             $chartData3[] = $paymentsData2->get($month, 0);
         }
+
+        $yearlyCashPayments = Payment::where('payment_mode', 'cash')
+            ->whereYear('created_at', Carbon::now()->year)
+            ->sum('amount');
+
+        $yearlyMomoPayments = Payment::where('payment_mode', 'momo')
+            ->where('transaction_status', 'Success')
+            ->whereYear('created_at', Carbon::now()->year)
+            ->sum('amount');
+
+        $yearlyReceivables = $totalBill - $yearlyPayments->total;
+
+        $totalAssembly = Assembly::where('status', 'Active')
+            ->count();
+
+        $regions = GhanaRegion::with('assemblies')->get();
 
         //Customer Data
         $customerData = [];
@@ -453,7 +471,12 @@ class DashboardController extends Controller
             'yearlyPayments' => isset($yearlyPayments) ? number_format($yearlyPayments->total, 2) : 0,
             'totalBill' => isset($totalBill) ? number_format($totalBill, 2) : 0,
             'totalArrears' => isset($totalArrears) ? number_format($totalArrears, 2) : 0,
-            'totalExpectedPayments' => isset($totalExpectedPayments) ? number_format($totalExpectedPayments, 2) : 0
+            'totalExpectedPayments' => isset($totalExpectedPayments) ? number_format($totalExpectedPayments, 2) : 0,
+            'yearlyCashPayments' => isset($yearlyCashPayments) ? number_format($yearlyCashPayments, 2) : 0,
+            'yearlyMomoPayments' => isset($yearlyMomoPayments) ? number_format($yearlyMomoPayments, 2) : 0,
+            'yearlyReceivables' => isset($yearlyReceivables) ? number_format($yearlyReceivables, 2) : 0,
+            'totalAssembly' => isset($totalAssembly) ? $totalAssembly : 0,
+            'regions' => isset($regions) ? $regions : ''
         ];
 
         return view('dashboard.operational', compact('total', 'chartData', 'chartData2', 'chartData3', 'customerData'));

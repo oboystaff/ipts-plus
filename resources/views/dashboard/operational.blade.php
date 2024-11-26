@@ -4,9 +4,10 @@
 @endsection
 
 @section('page-content')
+
     <div class="container-fluid">
         <div class="row">
-            @if (\Auth::user()->access_level !== 'customer')
+            @if (\Auth::user()->access_level !== 'customer' && \Auth::user()->access_level !== 'GRA_Administrator')
                 <div class="col-xl-2 col-xxl-3 col-sm-6">
                     <div class="card crm-cart bg-secondary border-0">
                         <div class="card-header border-0 pb-0">
@@ -88,7 +89,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="col-xl-2 col-xxl-3 col-sm-4">
@@ -406,7 +406,380 @@
                         </div>
                     </div>
                 </div>
-            @else
+            @elseif (\Auth::user()->access_level == 'GRA_Administrator')
+                <div class="col-xl-2 col-xxl-3 col-sm-6">
+                    <div class="card crm-cart bg-secondary border-0">
+                        <div class="card-header border-0 pb-0">
+                            <span class="text-white fs-16">Total Business Bill<i
+                                    class="fa-solid fa-chevron-up ms-1"></i></span>
+                            <div class="icon-box bg-white">
+                                <svg width="20" height="20" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <text x="0" y="16" font-size="20" font-family="Arial, sans-serif"
+                                        fill="var(--primary)">
+                                        ₵
+                                    </text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="crm-cart-data">
+                                <p>GHS {{ $total['totalBusinessBill'] }}</p>
+                                <span class="d-block mb-3 text-black">Overall Yearly Business Bill</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-2 col-xxl-3 col-sm-6">
+                    <div class="card crm-cart bg-secondary border-0">
+                        <div class="card-header border-0 pb-0">
+                            <span class="text-white fs-16">Total Property Bill<i
+                                    class="fa-solid fa-chevron-up ms-1"></i></span>
+                            <div class="icon-box bg-white">
+                                <svg width="20" height="20" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <text x="0" y="16" font-size="20" font-family="Arial, sans-serif"
+                                        fill="var(--primary)">
+                                        ₵
+                                    </text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="crm-cart-data">
+                                <p>GHS {{ $total['totalPropertyBill'] }}</p>
+                                <span class="d-block mb-3 text-black">Overall Yearly Property Bill</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-2 col-xxl-3 col-sm-4">
+                    <div class="card crm-cart bg-secondary border-0">
+                        <div class="card-header border-0 pb-0">
+                            <span class="text-white fs-16">Total Bills<i class="fa-solid fa-chevron-up ms-1"></i></span>
+                            <div class="icon-box bg-white">
+                                <svg id="_x31__px" height="24" viewBox="0 0 24 24" width="24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <text x="0" y="16" font-size="20" font-family="Arial, sans-serif"
+                                        fill="var(--primary)">
+                                        ₵
+                                    </text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="crm-cart-data">
+                                <p class="text-black">GHS {{ $total['totalBill'] }}</p>
+                                <span class="d-block mb-3 text-black">Overall Yearly Total Bills</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-2 col-xxl-3 col-sm-4">
+                    <div class="card crm-cart bg-secondary border-0">
+                        <div class="card-header border-0 pb-0">
+                            <span class="text-white fs-16">Total Cash Payment<i
+                                    class="fa-solid fa-chevron-up ms-1"></i></span>
+                            <div class="icon-box bg-white">
+                                <svg id="_x31__px" height="24" viewBox="0 0 24 24" width="24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <text x="0" y="16" font-size="20" font-family="Arial, sans-serif"
+                                        fill="var(--primary)">
+                                        ₵
+                                    </text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="crm-cart-data">
+                                <p class="text-black">GHS {{ $total['yearlyCashPayments'] }}</p>
+                                <span class="d-block mb-3 text-black">Overall Yearly Cash Payment</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-2 col-xxl-3 col-sm-4">
+                    <div class="card crm-cart bg-primary border-0">
+                        <div class="card-header border-0 pb-0">
+                            <span class="text-white fs-16">Total Momo Payment<i
+                                    class="fa-solid fa-chevron-up ms-1"></i></span>
+                            <div class="icon-box bg-white">
+                                <svg id="_x31__px" height="24" viewBox="0 0 24 24" width="24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <text x="0" y="16" font-size="20" font-family="Arial, sans-serif"
+                                        fill="var(--primary)">
+                                        ₵
+                                    </text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="crm-cart-data">
+                                <p class="text-white">GHS {{ $total['yearlyMomoPayments'] }}</p>
+                                <span class="d-block mb-3 text-white">Overall Yearly Momo Payment</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-2 col-xxl-3 col-sm-4">
+                    <div class="card crm-cart bg-primary border-0">
+                        <div class="card-header border-0 pb-0">
+                            <span class="text-white fs-16">Total Payment<i class="fa-solid fa-chevron-up ms-1"></i></span>
+                            <div class="icon-box bg-white">
+                                <svg id="_x31__px" height="24" viewBox="0 0 24 24" width="24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <text x="0" y="16" font-size="20" font-family="Arial, sans-serif"
+                                        fill="var(--primary)">
+                                        ₵
+                                    </text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="crm-cart-data">
+                                <p class="text-white">GHS {{ $total['yearlyPayments'] }}</p>
+                                <span class="d-block mb-3 text-white">Overall Yearly Total Payment</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-2 col-xxl-3 col-sm-4">
+                    <div class="card crm-cart bg-primary border-0">
+                        <div class="card-header border-0 pb-0">
+                            <span class="text-white fs-16">Total Receivables<i
+                                    class="fa-solid fa-chevron-up ms-1"></i></span>
+                            <div class="icon-box bg-white">
+                                <svg id="_x31__px" height="24" viewBox="0 0 24 24" width="24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <text x="0" y="16" font-size="20" font-family="Arial, sans-serif"
+                                        fill="var(--primary)">
+                                        ₵
+                                    </text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="crm-cart-data">
+                                <p class="text-white">GHS {{ $total['yearlyReceivables'] }}</p>
+                                <span class="d-block mb-3 text-white">Overall Yearly Total Receivables</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-2 col-xxl-3 col-sm-4">
+                    <div class="card crm-cart bg-primary border-0">
+                        <div class="card-header border-0 pb-0">
+                            <span class="text-white fs-16">Total Business<i
+                                    class="fa-solid fa-chevron-up ms-1"></i></span>
+                            <div class="icon-box bg-white">
+                                <svg id="_x31__px" height="24" viewBox="0 0 24 24" width="24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="m17.5 13c-3.584 0-6.5-2.916-6.5-6.5s2.916-6.5 6.5-6.5 6.5 2.916 6.5 6.5-2.916 6.5-6.5 6.5zm0-12c-3.033 0-5.5 2.467-5.5 5.5s2.467 5.5 5.5 5.5 5.5-2.467 5.5-5.5-2.467-5.5-5.5-5.5z" />
+                                    <path
+                                        d="m17.5 10c-.276 0-.5-.224-.5-.5v-6c0-.276.224-.5.5-.5s.5.224.5.5v6c0 .276-.224.5-.5.5z" />
+                                    <path
+                                        d="m20.5 7h-6c-.276 0-.5-.224-.5-.5s.224-.5.5-.5h6c.276 0 .5.224.5.5s-.224.5-.5.5z" />
+                                    <path
+                                        d="m19.5 17h-13c-.238 0-.443-.168-.49-.402l-2-10c-.03-.147.009-.299.103-.415.095-.116.237-.183.387-.183h4c.276 0 .5.224.5.5s-.224.5-.5.5h-3.39l1.8 9h12.18l.277-1.385c.054-.271.317-.448.588-.392.271.054.446.317.392.588l-.357 1.787c-.047.234-.252.402-.49.402z" />
+                                    <path
+                                        d="m6.5 17c-.233 0-.442-.164-.49-.402l-2.479-12.394c-.14-.699-.759-1.206-1.471-1.206h-.001l-1.559.002c-.276 0-.5-.224-.5-.5s.223-.5.5-.5l1.558-.002h.002c1.188 0 2.219.845 2.452 2.01l2.478 12.394c.054.271-.122.534-.392.588-.033.007-.066.01-.098.01z" />
+                                    <path
+                                        d="m21.5 19h-17c-.827 0-1.5-.673-1.5-1.5s.673-1.5 1.5-1.5h2c.276 0 .5.224.5.5s-.224.5-.5.5h-2c-.276 0-.5.224-.5.5s.224.5.5.5h17c.276 0 .5.224.5.5s-.224.5-.5.5z" />
+                                    <path
+                                        d="m8 24c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm0-3c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1z" />
+                                    <path
+                                        d="m17 24c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm0-3c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="crm-cart-data">
+                                <p class="text-white">{{ $total['totalBusinesses'] }}</p>
+                                <span class="d-block mb-3 text-white">Total Businesses</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-2 col-xxl-3 col-sm-4">
+                    <div class="card crm-cart bg-success border-0">
+                        <div class="card-header border-0 pb-0">
+                            <span class="text-white fs-16">Total Property<i
+                                    class="fa-solid fa-chevron-up ms-1"></i></span>
+                            <div class="icon-box bg-white">
+                                <svg id="_x31__px" height="24" viewBox="0 0 24 24" width="24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="m17.5 13c-3.584 0-6.5-2.916-6.5-6.5s2.916-6.5 6.5-6.5 6.5 2.916 6.5 6.5-2.916 6.5-6.5 6.5zm0-12c-3.033 0-5.5 2.467-5.5 5.5s2.467 5.5 5.5 5.5 5.5-2.467 5.5-5.5-2.467-5.5-5.5-5.5z" />
+                                    <path
+                                        d="m17.5 10c-.276 0-.5-.224-.5-.5v-6c0-.276.224-.5.5-.5s.5.224.5.5v6c0 .276-.224.5-.5.5z" />
+                                    <path
+                                        d="m20.5 7h-6c-.276 0-.5-.224-.5-.5s.224-.5.5-.5h6c.276 0 .5.224.5.5s-.224.5-.5.5z" />
+                                    <path
+                                        d="m19.5 17h-13c-.238 0-.443-.168-.49-.402l-2-10c-.03-.147.009-.299.103-.415.095-.116.237-.183.387-.183h4c.276 0 .5.224.5.5s-.224.5-.5.5h-3.39l1.8 9h12.18l.277-1.385c.054-.271.317-.448.588-.392.271.054.446.317.392.588l-.357 1.787c-.047.234-.252.402-.49.402z" />
+                                    <path
+                                        d="m6.5 17c-.233 0-.442-.164-.49-.402l-2.479-12.394c-.14-.699-.759-1.206-1.471-1.206h-.001l-1.559.002c-.276 0-.5-.224-.5-.5s.223-.5.5-.5l1.558-.002h.002c1.188 0 2.219.845 2.452 2.01l2.478 12.394c.054.271-.122.534-.392.588-.033.007-.066.01-.098.01z" />
+                                    <path
+                                        d="m21.5 19h-17c-.827 0-1.5-.673-1.5-1.5s.673-1.5 1.5-1.5h2c.276 0 .5.224.5.5s-.224.5-.5.5h-2c-.276 0-.5.224-.5.5s.224.5.5.5h17c.276 0 .5.224.5.5s-.224.5-.5.5z" />
+                                    <path
+                                        d="m8 24c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm0-3c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1z" />
+                                    <path
+                                        d="m17 24c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm0-3c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="crm-cart-data">
+                                <p class="text-white">{{ $total['totalProperties'] }}</p>
+                                <span class="d-block mb-3 text-white">Total Properties</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-2 col-xxl-3 col-sm-4">
+                    <div class="card crm-cart bg-success border-0">
+                        <div class="card-header border-0 pb-0">
+                            <span class="text-white fs-16">Total Active Assembly<i
+                                    class="fa-solid fa-chevron-up ms-1"></i></span>
+                            <div class="icon-box bg-white">
+                                <svg id="_x31__px" height="24" viewBox="0 0 24 24" width="24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="m17.5 13c-3.584 0-6.5-2.916-6.5-6.5s2.916-6.5 6.5-6.5 6.5 2.916 6.5 6.5-2.916 6.5-6.5 6.5zm0-12c-3.033 0-5.5 2.467-5.5 5.5s2.467 5.5 5.5 5.5 5.5-2.467 5.5-5.5-2.467-5.5-5.5-5.5z" />
+                                    <path
+                                        d="m17.5 10c-.276 0-.5-.224-.5-.5v-6c0-.276.224-.5.5-.5s.5.224.5.5v6c0 .276-.224.5-.5.5z" />
+                                    <path
+                                        d="m20.5 7h-6c-.276 0-.5-.224-.5-.5s.224-.5.5-.5h6c.276 0 .5.224.5.5s-.224.5-.5.5z" />
+                                    <path
+                                        d="m19.5 17h-13c-.238 0-.443-.168-.49-.402l-2-10c-.03-.147.009-.299.103-.415.095-.116.237-.183.387-.183h4c.276 0 .5.224.5.5s-.224.5-.5.5h-3.39l1.8 9h12.18l.277-1.385c.054-.271.317-.448.588-.392.271.054.446.317.392.588l-.357 1.787c-.047.234-.252.402-.49.402z" />
+                                    <path
+                                        d="m6.5 17c-.233 0-.442-.164-.49-.402l-2.479-12.394c-.14-.699-.759-1.206-1.471-1.206h-.001l-1.559.002c-.276 0-.5-.224-.5-.5s.223-.5.5-.5l1.558-.002h.002c1.188 0 2.219.845 2.452 2.01l2.478 12.394c.054.271-.122.534-.392.588-.033.007-.066.01-.098.01z" />
+                                    <path
+                                        d="m21.5 19h-17c-.827 0-1.5-.673-1.5-1.5s.673-1.5 1.5-1.5h2c.276 0 .5.224.5.5s-.224.5-.5.5h-2c-.276 0-.5.224-.5.5s.224.5.5.5h17c.276 0 .5.224.5.5s-.224.5-.5.5z" />
+                                    <path
+                                        d="m8 24c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm0-3c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1z" />
+                                    <path
+                                        d="m17 24c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm0-3c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="crm-cart-data">
+                                <p class="text-white">{{ $total['totalAssembly'] }}</p>
+                                <span class="d-block mb-3 text-white">Total Active Assemblies</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12">
+                    <div class="card dz-card" id="accordion-one">
+                        <div class="card-header flex-wrap border-0">
+                            <div>
+                                <h4 class="card-title">Assemblies By Region</h4>
+                            </div>
+                        </div>
+
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="Preview" role="tabpanel"
+                                aria-labelledby="home-tab">
+                                <div class="card-body pt-0">
+                                    <!-- Default accordion -->
+                                    <div class="accordion accordion-primary" id="accordion-regions">
+                                        @foreach ($total['regions'] as $index => $region)
+                                            <div class="accordion-item">
+                                                <div class="accordion-header rounded-lg" id="heading{{ $index }}"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#collapse{{ $index }}"
+                                                    aria-controls="collapse{{ $index }}" aria-expanded="false"
+                                                    role="button">
+                                                    <span class="accordion-header-icon"></span>
+                                                    <span class="accordion-header-text">{{ $region->name }}</span>
+                                                    <span class="accordion-header-indicator"></span>
+                                                </div>
+                                                <div id="collapse{{ $index }}" class="collapse"
+                                                    aria-labelledby="heading{{ $index }}"
+                                                    data-bs-parent="#accordion-regions">
+                                                    <div class="accordion-body-text">
+                                                        @if ($region->assemblies->count() > 0)
+                                                            <table class="table table-bordered table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>S/N</th>
+                                                                        <th>Assembly Name</th>
+                                                                        <th>Total Properties</th>
+                                                                        <th>Total Businesses</th>
+                                                                        <th>Total Bills (GHS)</th>
+                                                                        <th>Total Payments (GHS)</th>
+                                                                        <th>Total Receivables (GHS)</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach ($region->assemblies as $key => $assembly)
+                                                                        @php
+                                                                            $totalPropertiesCount = $assembly->properties->count();
+                                                                            $totalBusinessesCount = $assembly->businesses->count();
+                                                                            $totalBills = $assembly->bills->sum(
+                                                                                'amount',
+                                                                            );
+                                                                            $totalBillsCount = isset($totalBills)
+                                                                                ? number_format($totalBills, 2)
+                                                                                : 0;
+                                                                            $totalPayments = $assembly->payments
+                                                                                ->filter(function ($payment) {
+                                                                                    if (
+                                                                                        $payment->payment_mode == 'momo'
+                                                                                    ) {
+                                                                                        return $payment->transaction_status ==
+                                                                                            'Success';
+                                                                                    }
+
+                                                                                    return true;
+                                                                                })
+                                                                                ->sum('amount');
+                                                                            $totalPaymentsCount = isset($totalPayments)
+                                                                                ? number_format($totalPayments, 2)
+                                                                                : 0;
+                                                                            $totalReceivables =
+                                                                                $totalBills - $totalPayments;
+                                                                        @endphp
+
+                                                                        <tr>
+                                                                            <td>{{ $key + 1 }}</td>
+                                                                            <td>{{ $assembly->name }}</td>
+                                                                            <td>{{ $totalPropertiesCount }}</td>
+                                                                            <td>{{ $totalBusinessesCount }}</td>
+                                                                            <td>{{ $totalBillsCount }}</td>
+                                                                            <td>{{ $totalPaymentsCount }}</td>
+                                                                            <td>{{ number_format($totalReceivables, 2) }}
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                        @else
+                                                            <p>No assemblies available for this region.</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @elseif (\Auth::user()->access_level == 'customer')
                 <div class="col-xl-4 col-lg-12 col-sm-12">
                     <div class="card overflow-hidden">
                         <div class="text-center p-5 overlay-box">
@@ -748,7 +1121,8 @@
                                                         @endif
                                                         <td>{{ number_format($bill->arrears, 2) }}</td>
                                                         <td>{{ number_format($bill->amount, 2) }}</td>
-                                                        <td>{{ number_format($bill->amount + $bill->arrears, 2) }}</td>
+                                                        <td>{{ number_format($bill->amount + $bill->arrears, 2) }}
+                                                        </td>
                                                         <td>{{ $bill->createdBy->name ?? 'N/A' }}</td>
                                                         <td>{{ $bill->created_at }}</td>
                                                         <td>

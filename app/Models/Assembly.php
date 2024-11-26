@@ -12,7 +12,6 @@ class Assembly extends Model
 
     protected $table = 'assemblies';
 
-
     protected $fillable = [
         'name',
         'assembly_code',
@@ -32,6 +31,26 @@ class Assembly extends Model
     public function assemblySupervisor()
     {
         return $this->belongsTo(User::class, 'supervisor');
+    }
+
+    public function properties()
+    {
+        return $this->hasMany(Property::class, 'assembly_code', 'assembly_code');
+    }
+
+    public function businesses()
+    {
+        return $this->hasMany(Business::class, 'assembly_code', 'assembly_code');
+    }
+
+    public function bills()
+    {
+        return $this->hasMany(Bill::class, 'assembly_code', 'assembly_code');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'assembly_code', 'assembly_code');
     }
 
     public static function generateImageFileName()

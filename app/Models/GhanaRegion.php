@@ -13,6 +13,10 @@ class GhanaRegion extends Model
     protected $fillable = [
         'regionalcode',
         'name',
-        // Add other fillable fields as needed
     ];
+
+    public function assemblies()
+    {
+        return $this->hasMany(Assembly::class, 'regional_code', 'regional_code');
+    }
 }
