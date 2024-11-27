@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(AgentAssignment::class, 'agent_id');
     }
+
+    public function customer()
+    {
+        return $this->hasOne(Citizen::class, 'user_id');
+    }
 }

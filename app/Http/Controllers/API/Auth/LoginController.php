@@ -46,7 +46,8 @@ class LoginController extends Controller
                 }
             }
 
-            $user = User::where('phone', $request->validated('username'))
+            $user = User::with(['customer'])
+                ->where('phone', $request->validated('username'))
                 ->orWhere('email', $request->validated('username'))
                 ->first();
 
