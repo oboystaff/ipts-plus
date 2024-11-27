@@ -711,61 +711,67 @@
                                                     data-bs-parent="#accordion-regions">
                                                     <div class="accordion-body-text">
                                                         @if ($region->assemblies->count() > 0)
-                                                            <table class="table table-bordered table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>S/N</th>
-                                                                        <th>Assembly Name</th>
-                                                                        <th>Total Properties</th>
-                                                                        <th>Total Businesses</th>
-                                                                        <th>Total Bills (GHS)</th>
-                                                                        <th>Total Payments (GHS)</th>
-                                                                        <th>Total Receivables (GHS)</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    @foreach ($region->assemblies as $key => $assembly)
-                                                                        @php
-                                                                            $totalPropertiesCount = $assembly->properties->count();
-                                                                            $totalBusinessesCount = $assembly->businesses->count();
-                                                                            $totalBills = $assembly->bills->sum(
-                                                                                'amount',
-                                                                            );
-                                                                            $totalBillsCount = isset($totalBills)
-                                                                                ? number_format($totalBills, 2)
-                                                                                : 0;
-                                                                            $totalPayments = $assembly->payments
-                                                                                ->filter(function ($payment) {
-                                                                                    if (
-                                                                                        $payment->payment_mode == 'momo'
-                                                                                    ) {
-                                                                                        return $payment->transaction_status ==
-                                                                                            'Success';
-                                                                                    }
-
-                                                                                    return true;
-                                                                                })
-                                                                                ->sum('amount');
-                                                                            $totalPaymentsCount = isset($totalPayments)
-                                                                                ? number_format($totalPayments, 2)
-                                                                                : 0;
-                                                                            $totalReceivables =
-                                                                                $totalBills - $totalPayments;
-                                                                        @endphp
-
+                                                            <div
+                                                                class="table-responsive active-projects user-tbl  dt-filter">
+                                                                <table id="assemblyTable-{{ $region->id }}">
+                                                                    <thead>
                                                                         <tr>
-                                                                            <td>{{ $key + 1 }}</td>
-                                                                            <td>{{ $assembly->name }}</td>
-                                                                            <td>{{ $totalPropertiesCount }}</td>
-                                                                            <td>{{ $totalBusinessesCount }}</td>
-                                                                            <td>{{ $totalBillsCount }}</td>
-                                                                            <td>{{ $totalPaymentsCount }}</td>
-                                                                            <td>{{ number_format($totalReceivables, 2) }}
-                                                                            </td>
+                                                                            <th>S/N</th>
+                                                                            <th>Assembly Name</th>
+                                                                            <th>Total Properties</th>
+                                                                            <th>Total Businesses</th>
+                                                                            <th>Total Bills (GHS)</th>
+                                                                            <th>Total Payments (GHS)</th>
+                                                                            <th>Total Receivables (GHS)</th>
                                                                         </tr>
-                                                                    @endforeach
-                                                                </tbody>
-                                                            </table>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @foreach ($region->assemblies as $key => $assembly)
+                                                                            @php
+                                                                                $totalPropertiesCount = $assembly->properties->count();
+                                                                                $totalBusinessesCount = $assembly->businesses->count();
+                                                                                $totalBills = $assembly->bills->sum(
+                                                                                    'amount',
+                                                                                );
+                                                                                $totalBillsCount = isset($totalBills)
+                                                                                    ? number_format($totalBills, 2)
+                                                                                    : 0;
+                                                                                $totalPayments = $assembly->payments
+                                                                                    ->filter(function ($payment) {
+                                                                                        if (
+                                                                                            $payment->payment_mode ==
+                                                                                            'momo'
+                                                                                        ) {
+                                                                                            return $payment->transaction_status ==
+                                                                                                'Success';
+                                                                                        }
+
+                                                                                        return true;
+                                                                                    })
+                                                                                    ->sum('amount');
+                                                                                $totalPaymentsCount = isset(
+                                                                                    $totalPayments,
+                                                                                )
+                                                                                    ? number_format($totalPayments, 2)
+                                                                                    : 0;
+                                                                                $totalReceivables =
+                                                                                    $totalBills - $totalPayments;
+                                                                            @endphp
+
+                                                                            <tr>
+                                                                                <td>{{ $key + 1 }}</td>
+                                                                                <td>{{ $assembly->name }}</td>
+                                                                                <td>{{ $totalPropertiesCount }}</td>
+                                                                                <td>{{ $totalBusinessesCount }}</td>
+                                                                                <td>{{ $totalBillsCount }}</td>
+                                                                                <td>{{ $totalPaymentsCount }}</td>
+                                                                                <td>{{ number_format($totalReceivables, 2) }}
+                                                                                </td>
+                                                                            </tr>
+                                                                        @endforeach
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         @else
                                                             <p>No assemblies available for this region.</p>
                                                         @endif
@@ -1684,5 +1690,37 @@
         };
 
         monthlyPerformance();
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            @foreach ($total['regions'] as $region)
+                $('#assemblyTable-{{ $region->id }}').DataTable({
+                    'dom': 'ZBfrltip',
+                    buttons: [
+
+                        {
+                            extend: 'excel',
+                            text: '<i class="fa-solid fa-file-excel"></i> Export Report',
+                            className: 'btn btn-sm border-0'
+                        }
+                    ],
+
+                    searching: true,
+                    pageLength: 12,
+                    select: false,
+                    lengthChange: false,
+                    language: {
+                        paginate: {
+                            next: '<i class="fa-solid fa-angle-right"></i>',
+                            previous: '<i class="fa-solid fa-angle-left"></i>'
+                        },
+                        'search': ' <i class="fa-solid fa-magnifying-glass"></i>',
+                        searchPlaceholder: "Search..."
+
+                    },
+                });
+            @endforeach
+        });
     </script>
 @endsection

@@ -11,6 +11,7 @@ class SendSMS
             $encodedMsg = urlencode($msg);
 
             $url = 'https://apps.mnotify.net/smsapi?key=HdtmmlE3XEu1XUJocrtfLWMi5&to=' . $phone . '&msg=' . $encodedMsg . '&sender_id=ERMS';
+            //$url = 'https://sms.hubtel.com/v1/messages/send?clientsecret=xxxxxxxx&clientid=xxxxxxxx&from=Hubtel&to=0244xxxxxx&content=Helloworld';
 
             return self::fireSMS($url);
         } catch (\Exception $ex) {

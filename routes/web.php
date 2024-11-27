@@ -322,3 +322,12 @@ Route::group(['prefix' => 'task-assignment', 'middleware' => 'auth:sanctum'], fu
     Route::post('/{taskAssignment}/update', [TaskAssignmentController::class, 'update'])->name('task-assignments.update');
     Route::get('/update/status', [TaskAssignmentController::class, 'updateStatus'])->name('task-assignments.updateStatus');
 });
+
+Route::get('/test', function () {
+    $phone = '0248593031';
+    $msg = 'Hello world from hubtel gateway';
+
+    $result = \App\Actions\SMS\SendSMS::sendSMS($phone, $msg);
+
+    return $result;
+});
