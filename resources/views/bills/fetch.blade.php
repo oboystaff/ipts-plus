@@ -103,7 +103,8 @@
                                                             <div class="dropdown-menu dropdown-menu-end">
                                                                 <div class="py-2">
                                                                     <a class="dropdown-item"
-                                                                        href=" {{ route('bills.show', $bill) }}">View
+                                                                        href=" {{ route('bills.show', $bill) }}"
+                                                                        target="_blank">View
                                                                     </a>
                                                                     <a class="dropdown-item"
                                                                         href=" {{ route('payments.create', $bill) }}">Make

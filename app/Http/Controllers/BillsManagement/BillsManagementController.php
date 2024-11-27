@@ -553,9 +553,9 @@ class BillsManagementController extends Controller
         return view('bills.receipt', compact('bill'));
     }
 
-    public function show($id)
+    public function show(Bill $bill)
     {
-        // Logic for displaying a single bill
+        return view('bills.show', compact('bill'));
     }
 
     public function edit($id)

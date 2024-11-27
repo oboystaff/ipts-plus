@@ -69,7 +69,7 @@ Route::group(['prefix' => 'bills-management', 'middleware' => 'auth:sanctum'], f
     Route::post('/property', [BillsManagementController::class, 'property'])->name('bills.property');
     Route::get('/fetch/bill', [BillsManagementController::class, 'fetchBill'])->name('bills.fetchBill');
     Route::get('/{bill}/receipt', [BillsManagementController::class, 'receipt'])->name('bills.receipt');
-    Route::get('/{id}', [BillsManagementController::class, 'show'])->name('bills.show');
+    Route::get('/{bill}', [BillsManagementController::class, 'show'])->name('bills.show');
     Route::get('/{id}/edit', [BillsManagementController::class, 'edit'])->name('bills.edit');
     Route::put('/{id}', [BillsManagementController::class, 'update'])->name('bills.update');
     Route::delete('/{id}', [BillsManagementController::class, 'destroy'])->name('bills.destroy');
