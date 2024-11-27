@@ -138,8 +138,7 @@ class CustomerController extends Controller
 
     public function show($id)
     {
-        $customer = Citizen::where('id', $id)
-            ->orWhere('user_id', $id)
+        $customer = Citizen::where('user_id', $id)
             ->first();
 
         if (empty($customer)) {
@@ -156,8 +155,7 @@ class CustomerController extends Controller
 
     public function update(UpdateCustomerRequest $request, $id)
     {
-        $customer = Citizen::where('id', $id)
-            ->orWhere('user_id', $id)
+        $customer = Citizen::where('user_id', $id)
             ->first();
 
         if (empty($customer)) {
