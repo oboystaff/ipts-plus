@@ -78,7 +78,7 @@ class BillController extends Controller
         }
 
         $bills = Bill::orderBy('created_at', 'DESC')
-            ->with(['property', 'business', 'assembly'])
+            ->with(['property', 'business', 'assembly', 'payments'])
             ->where(function ($query) use ($customer) {
                 $query->whereHas('property', function ($q) use ($customer) {
                     $q->where('customer_name',  $customer->id);
