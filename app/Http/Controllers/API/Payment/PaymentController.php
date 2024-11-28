@@ -95,7 +95,6 @@ class PaymentController extends Controller
     {
         $payment = Payment::where('id', $id)
             ->with(['assembly', 'bill'])
-            ->orWhere('bills_id', $id)
             ->first();
 
         if (empty($payment)) {
