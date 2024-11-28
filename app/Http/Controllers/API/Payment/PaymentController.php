@@ -78,7 +78,8 @@ class PaymentController extends Controller
                 $payment->update($data);
 
                 return response()->json([
-                    'message' => 'Payment processed successfully. Kindly ' . $data['prompt']
+                    'message' => 'Payment processed successfully. Kindly ' . $data['prompt'],
+                    'data' => $payment
                 ]);
             } else {
                 // Handle payment initiation failure
