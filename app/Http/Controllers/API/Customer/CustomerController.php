@@ -167,7 +167,8 @@ class CustomerController extends Controller
         $customer->update($request->validated());
 
         return response()->json([
-            'message' => 'Customer updated successfully'
+            'message' => 'Customer updated successfully',
+            'data' => $customer
         ]);
     }
 }
