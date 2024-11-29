@@ -156,6 +156,7 @@ class CustomerController extends Controller
     public function update(UpdateCustomerRequest $request, $id)
     {
         $customer = Citizen::where('user_id', $id)
+            ->with(['user'])
             ->first();
 
         if (empty($customer)) {
