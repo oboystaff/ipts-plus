@@ -156,7 +156,6 @@ class CustomerController extends Controller
     public function update(UpdateCustomerRequest $request, $id)
     {
         $customer = Citizen::where('user_id', $id)
-            ->with(['user'])
             ->first();
 
         if (empty($customer)) {
@@ -167,9 +166,13 @@ class CustomerController extends Controller
 
         $customer->update($request->validated());
 
+        $user = User::where('id', $customer->user_id)
+            ->with(['customer'])
+            ->first();
+
         return response()->json([
             'message' => 'Customer updated successfully',
-            'data' => $customer
+            'data' => $user
         ]);
     }
 }
