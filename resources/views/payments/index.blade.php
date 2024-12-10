@@ -94,18 +94,16 @@
                                                         </svg>
                                                     </div>
                                                     <div class="dropdown-menu dropdown-menu-end">
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('payments.show', $payment) }}">View
+                                                            Payment</a>
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('payments.receipt', $payment) }}"
+                                                            target="_blank">View
+                                                            Receipt</a>
                                                         {{-- <a class="dropdown-item"
-                                                                    href="{{ route('payments.show', $payment) }}">Make
-                                                                    Payment</a>
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('payments.fetch', $payment->bills_id) }}">View
-                                                                    Payment</a>
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('receipt.show', $payment) }}">View
-                                                                    Receipt</a>
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('payments.edit', $payment) }}">Amend
-                                                                    Bill</a> --}}
+                                                            href="{{ route('payments.edit', $payment) }}">Amend
+                                                            Bill</a> --}}
                                                     </div>
                                                 </div>
                                             </td>

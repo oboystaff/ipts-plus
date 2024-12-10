@@ -555,7 +555,21 @@ class BillsManagementController extends Controller
 
     public function show(Bill $bill)
     {
-        return view('bills.show', compact('bill'));
+        if ($bill->property && $bill->property->customer) {
+            $rateImposed = Rate::where('zone_id', $bill->property->zone_id)
+                ->where('property_use_id', $bill->property->property_use_id)
+                ->where('assembly_code', $bill->property->assembly->assembly_code)
+                ->first();
+        } else if ($bill->business && $bill->business->customer) {
+            $rateImposed = Rate::where('zone_id', $bill->business->zone_id)
+                ->where('property_use_id', $bill->business->property_use_id)
+                ->where('assembly_code', $bill->business->assembly->assembly_code)
+                ->first();
+        }
+
+        $bill['rate_imposed'] = isset($rateImposed) ? $rateImposed->rate : 0;
+
+        return view('bills.receipt', compact('bill'));
     }
 
     public function edit($id)

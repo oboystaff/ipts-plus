@@ -1,182 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bill Receipt</title>
-    <style>
-        /* General Reset */
-        body {
-            font-family: Arial, sans-serif;
+    <title></title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <br />
+    <style type="text/css">
+        <!--
+        p {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
         }
 
-        .receipt-container {
-            max-width: 500px;
-            margin: 30px auto;
-            background: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            border: 1px solid #ddd;
+        .ft10 {
+            font-size: 11px;
+            font-family: Times;
+            color: #000000;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .header h1 {
-            font-size: 20px;
-            margin: 0;
-            color: #333;
-        }
-
-        .header p {
+        .ft11 {
             font-size: 14px;
-            margin: 5px 0;
-            color: #555;
+            font-family: Times;
+            color: #000000;
         }
 
-        .receipt-info {
-            margin-bottom: 20px;
-            font-size: 14px;
+        .ft12 {
+            font-size: 17px;
+            font-family: Times;
+            color: #000000;
         }
-
-        .receipt-info .row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-
-        .receipt-info strong {
-            color: #444;
-        }
-
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        .table th,
-        .table td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-
-        .table th {
-            background-color: #f8f8f8;
-            font-size: 14px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .table td {
-            font-size: 13px;
-        }
-
-        .total {
-            font-size: 16px;
-            font-weight: bold;
-            text-align: right;
-            margin-top: 10px;
-        }
-
-        .footer {
-            text-align: center;
-            font-size: 12px;
-            color: #777;
-            margin-top: 20px;
-        }
-
-        @media print {
-            .receipt-container {
-                border: none;
-                box-shadow: none;
-                margin: 0;
-            }
-        }
+        -->
     </style>
 </head>
 
-<body>
-    @php
-        $billType = '';
-        $name = '';
-        $totalDue = 0;
-
-        if ($bill->property_id !== null) {
-            $firstname = $bill->property->customer->first_name ?? '';
-            $lastname = $bill->property->customer->last_name ?? '';
-            $billType = 'Property Bill';
-        } else {
-            $firstname = $bill->business->customer->first_name ?? '';
-            $lastname = $bill->business->customer->last_name ?? '';
-            $billType = 'Business Bill';
-        }
-
-        $name = $firstname . ' ' . $lastname;
-        $totalDue = $bill->arrears + $bill->amount;
-    @endphp
-
-    <div class="receipt-container">
-        <!-- Header Section -->
-        <div class="header">
-            <h1>Billing Receipt</h1>
-            <p>{{ $bill->assembly->name ?? 'N/A' }} | Address | Contact</p>
-        </div>
-
-        <!-- Receipt Information -->
-        <div class="receipt-info">
-            <div class="row">
-                <span><strong>Bill No:</strong> {{ $bill->bills_id }}</span>
-                <span><strong>Year:</strong> {{ $bill->bills_year }}</span>
-            </div>
-            <div class="row">
-                <span><strong>Customer Name:</strong> {{ $name }}</span>
-                <span><strong>Bill Type:</strong> {{ $billType }}</span>
-            </div>
-        </div>
-
-        <!-- Bill Table -->
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Description</th>
-                    <th>Amount (GHS)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Arrears</td>
-                    <td>{{ number_format($bill->arrears, 2) }}</td>
-                </tr>
-                <tr>
-                    <td>Current Amount</td>
-                    <td>{{ number_format($bill->amount, 2) }}</td>
-                </tr>
-                <tr>
-                    <td><strong>Amount Due</strong></td>
-                    <td><strong>{{ number_format($totalDue, 2) }}</strong></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- Total Section -->
-        <div class="total">
-            <p>Total Due: GHS {{ number_format($totalDue, 2) }}</p>
-        </div>
-
-        <!-- Footer Section -->
-        <div class="footer">
-            <p>Please make your payment at your earliest convenience.</p>
-            <p>This receipt was generated electronically and is valid without a signature.</p>
-        </div>
+<body bgcolor="#A0A0A0" vlink="blue" link="blue">
+    <div id="page1-div" style="position:relative;width:892px;height:630px;">
+        <img width="892" height="630" src="{{ asset('assets/images/template/target001.png') }}"
+            alt="background image" />
+        <p style="position:absolute;top:101px;left:142px;white-space:nowrap" class="ft10"><b>ABN08378033</b></p>
+        <p style="position:absolute;top:172px;left:77px;white-space:nowrap" class="ft11"><b>SOUTH&#160;ODORKOR</b></p>
+        <p style="position:absolute;top:208px;left:60px;white-space:nowrap" class="ft11">
+            <b>RESIDENTIAL&#160;PRIVATE</b>
+        </p>
+        <p style="position:absolute;top:258px;left:96px;white-space:nowrap" class="ft11"><b>FIRST&#160;CLASS</b></p>
+        <p style="position:absolute;top:275px;left:92px;white-space:nowrap" class="ft11"><b>RESIDENTIAL</b></p>
+        <p style="position:absolute;top:327px;left:199px;white-space:nowrap" class="ft10"><b>460740</b></p>
+        <p style="position:absolute;top:363px;left:191px;white-space:nowrap" class="ft10"><b>0.00135.</b></p>
+        <p style="position:absolute;top:388px;left:202px;white-space:nowrap" class="ft10"><b>622.00</b></p>
+        <p style="position:absolute;top:415px;left:202px;white-space:nowrap" class="ft10"><b>400.00</b></p>
+        <p style="position:absolute;top:442px;left:213px;white-space:nowrap" class="ft10"><b>5.00.</b></p>
+        <p style="position:absolute;top:473px;left:191px;white-space:nowrap" class="ft10"><b>1,027.00</b></p>
+        <p style="position:absolute;top:177px;left:377px;white-space:nowrap" class="ft12"><b>SOUTH&#160;ODORKOR</b>
+        </p>
+        <p style="position:absolute;top:214px;left:377px;white-space:nowrap" class="ft12">
+            <b>RESIDENTIAL&#160;PRIVATE</b>
+        </p>
+        <p style="position:absolute;top:246px;left:377px;white-space:nowrap" class="ft12">
+            <b>FIRST&#160;CLASS&#160;RESIDENTIAL</b>
+        </p>
+        <p style="position:absolute;top:325px;left:496px;white-space:nowrap" class="ft11"><b>460740</b></p>
+        <p style="position:absolute;top:382px;left:487px;white-space:nowrap" class="ft11"><b>0.00135.</b></p>
+        <p style="position:absolute;top:292px;left:791px;white-space:nowrap" class="ft11"><b>400.00</b></p>
+        <p style="position:absolute;top:319px;left:791px;white-space:nowrap" class="ft11"><b>622.00</b></p>
+        <p style="position:absolute;top:345px;left:802px;white-space:nowrap" class="ft11"><b>5.00.</b></p>
+        <p style="position:absolute;top:376px;left:778px;white-space:nowrap" class="ft11"><b>1,027.00</b></p>
+        <p style="position:absolute;top:101px;left:373px;white-space:nowrap" class="ft12"><b>ABN08378033</b></p>
+        <p style="position:absolute;top:104px;left:724px;white-space:nowrap" class="ft12"><b>2024</b></p>
+        <p style="position:absolute;top:423px;left:540px;white-space:nowrap" class="ft11"><b>2024</b></p>
     </div>
 </body>
 

@@ -20,7 +20,9 @@ class Assembly extends Model
         'geo_reference_area',
         'logo',
         'invoice_layout',
-        'status'
+        'status',
+        'address',
+        'phone'
     ];
 
     public function region()

@@ -56,6 +56,17 @@
                                     value="{{ $assembly->assemblySupervisor->name ?? '' }}" readonly>
                             </div>
 
+                            <div class="col-md-6 mb-3">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" id="address" name="address"
+                                    value="{{ $assembly->address ?? '' }}" readonly>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="phone">Phone</label>
+                                <input type="text" class="form-control" id="phone" name="phone"
+                                    value="{{ $assembly->phone ?? '' }}" readonly>
+                            </div>
 
                             <div class="col-md-6">
                                 <div class="row">

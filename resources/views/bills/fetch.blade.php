@@ -104,7 +104,7 @@
                                                                 <div class="py-2">
                                                                     <a class="dropdown-item"
                                                                         href=" {{ route('bills.show', $bill) }}"
-                                                                        target="_blank">View
+                                                                        target="_blank">Print Bill Receipt
                                                                     </a>
                                                                     <a class="dropdown-item"
                                                                         href=" {{ route('payments.create', $bill) }}">Make

@@ -132,7 +132,15 @@ class PaymentController extends Controller
         }
     }
 
-    public function show() {}
+    public function show(Payment $payment)
+    {
+        return view('payments.show', compact('payment'));
+    }
+
+    public function receipt(Payment $payment)
+    {
+        return view('payments.receipt', compact('payment'));
+    }
 
     public function edit() {}
 

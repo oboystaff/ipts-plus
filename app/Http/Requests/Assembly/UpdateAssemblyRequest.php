@@ -29,7 +29,9 @@ class UpdateAssemblyRequest extends FormRequest
             'logo' => ['nullable', 'file', 'mimes:jpeg,jpg,png,gif'],
             'invoice_layout' => ['nullable', 'string'],
             'status' => ['nullable', 'string'],
-            'geo_reference_area' => ['nullable', 'string']
+            'geo_reference_area' => ['nullable', 'string'],
+            'address' => ['nullable', 'string'],
+            'phone' => ['nullable', 'string']
         ];
     }
 }

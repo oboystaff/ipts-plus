@@ -105,6 +105,32 @@
                                 @enderror
                             </div>
 
+                            <div class="mb-4 col-md-6">
+                                <label class="form-label">Address</label>
+                                <div class="autocomplete">
+                                    <input type="text" class="form-control @error('address') is-invalid @enderror"
+                                        placeholder="Enter Assembly Address" id="address" name="address"
+                                        value="{{ $assembly->address }}">
+                                </div>
+
+                                @error('address')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-4 col-md-6">
+                                <label class="form-label">Phone Number</label>
+                                <div class="autocomplete">
+                                    <input type="text" class="form-control @error('phone') is-invalid @enderror"
+                                        placeholder="Enter Assembly Phone" id="phone" name="phone"
+                                        value="{{ $assembly->phone }}">
+                                </div>
+
+                                @error('phone')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                             <div class="col-md-6 mb-3">
                                 <div class="row">
                                     <div class="col-md-6">

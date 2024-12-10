@@ -28,7 +28,9 @@ class CreateAssemblyRequest extends FormRequest
             'regional_code' => ['required', 'string', 'exists:ghana_regions,regional_code'],
             'supervisor' => ['required', 'string', 'exists:users,id'],
             'logo' => ['nullable', 'file', 'mimes:jpeg,jpg,png,gif'],
-            'invoice_layout' => ['nullable', 'string']
+            'invoice_layout' => ['nullable', 'string'],
+            'address' => ['required', 'string'],
+            'phone' => ['required', 'string']
         ];
     }
 }

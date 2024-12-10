@@ -51,6 +51,7 @@ Route::group(['prefix' => 'payment', 'middleware' => 'auth:sanctum'], function (
     Route::get('/customer/create/{bill}', [PaymentController::class, 'customerCreate'])->name('payments.customerCreate');
     Route::post('/create', [PaymentController::class, 'store'])->name('payments.store');
     Route::get('/{payment}/show', [PaymentController::class, 'show'])->name('payments.show');
+    Route::get('/{payment}/receipt', [PaymentController::class, 'receipt'])->name('payments.receipt');
     Route::get('/{payment}/edit', [PaymentController::class, 'edit'])->name('payments.edit');
     Route::post('/{payment}/update', [PaymentController::class, 'update'])->name('payments.update');
 });
