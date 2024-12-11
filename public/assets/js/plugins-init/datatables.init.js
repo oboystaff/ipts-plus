@@ -337,6 +337,50 @@ let dataSet = [
 		},
 		
     });
+	var table = $('#empoloyees-tbl4').DataTable({
+		//dom: 'Bfrtip',
+		'dom': 'ZBfrltip',
+		buttons: [
+            
+			{ extend: 'excel', text: '<i class="fa-solid fa-file-excel"></i> Export Report',
+              className: 'btn btn-sm border-0'
+			}
+        ],
+		searching: false,
+		select: false,   
+        pageLength:7,			
+        lengthChange:false ,
+		language: {
+			paginate: {
+				next: '<i class="fa-solid fa-angle-right"></i>',
+				previous: '<i class="fa-solid fa-angle-left"></i>' 
+			}
+			
+		},
+		
+    });
+	var table = $('#empoloyees-tbl5').DataTable({
+		//dom: 'Bfrtip',
+		'dom': 'ZBfrltip',
+		buttons: [
+            
+			{ extend: 'excel', text: '<i class="fa-solid fa-file-excel"></i> Export Report',
+              className: 'btn btn-sm border-0'
+			}
+        ],
+		searching: false,
+		select: false,   
+        pageLength:7,			
+        lengthChange:false ,
+		language: {
+			paginate: {
+				next: '<i class="fa-solid fa-angle-right"></i>',
+				previous: '<i class="fa-solid fa-angle-left"></i>' 
+			}
+			
+		},
+		
+    });
 	var table = $('#reports-tbl').DataTable({
 		//dom: 'Bfrtip',
 		'dom': 'ZBfrltip',

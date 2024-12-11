@@ -170,7 +170,7 @@
                                                 <div class="tbl-caption">
                                                     <h4 class="heading mb-0">Bill Generation History</h4>
                                                 </div>
-                                                <table id="empoloyees-tbl3" class="table">
+                                                <table id="empoloyees-tbl" class="table">
                                                     <thead>
                                                         <tr>
                                                             <th>S/N</th>
@@ -294,114 +294,111 @@
 
                                     <div id="profile-settings" class="tab-pane fade">
                                         <div class="pt-3">
-                                            <div class="settings-form">
-                                                <div class="table-responsive active-projects">
-                                                    <div class="tbl-caption">
-                                                        <h4 class="heading mb-0">Payment History</h4>
-                                                    </div>
-                                                    <table id="empoloyees-tbl3" class="table">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>SN</th>
-                                                                <th>Bills ID</th>
-                                                                <th>Name</th>
-                                                                <th>Amount</th>
-                                                                <th>Payment Mode</th>
-                                                                <th>Status</th>
-                                                                <th>Assembly</th>
-                                                                <th>Paid By</th>
-                                                                <th>Payment Date</th>
-                                                                <th>Action</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach ($customerData['payments'] as $index => $payment)
-                                                                @php
-                                                                    $name = '';
-                                                                    if (
-                                                                        $payment->bill->property &&
+                                            <div class="table-responsive active-projects">
+                                                <div class="tbl-caption">
+                                                    <h4 class="heading mb-0">Payment History</h4>
+                                                </div>
+                                                <table id="empoloyees-tbl4" class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>SN</th>
+                                                            <th>Bills ID</th>
+                                                            <th>Name</th>
+                                                            <th>Amount</th>
+                                                            <th>Payment Mode</th>
+                                                            <th>Status</th>
+                                                            <th>Assembly</th>
+                                                            <th>Paid By</th>
+                                                            <th>Payment Date</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($customerData['payments'] as $index => $payment)
+                                                            @php
+                                                                $name = '';
+                                                                if (
+                                                                    $payment->bill->property &&
+                                                                    $payment->bill->property->customer
+                                                                ) {
+                                                                    $firstname =
                                                                         $payment->bill->property->customer
-                                                                    ) {
-                                                                        $firstname =
-                                                                            $payment->bill->property->customer
-                                                                                ->first_name ?? '';
-                                                                        $lastname =
-                                                                            $payment->bill->property->customer
-                                                                                ->last_name ?? '';
-                                                                        $name = $firstname . ' ' . $lastname;
-                                                                    } elseif (
-                                                                        $payment->bill->business &&
+                                                                            ->first_name ?? '';
+                                                                    $lastname =
+                                                                        $payment->bill->property->customer->last_name ??
+                                                                        '';
+                                                                    $name = $firstname . ' ' . $lastname;
+                                                                } elseif (
+                                                                    $payment->bill->business &&
+                                                                    $payment->bill->business->customer
+                                                                ) {
+                                                                    $firstname =
                                                                         $payment->bill->business->customer
-                                                                    ) {
-                                                                        $firstname =
-                                                                            $payment->bill->business->customer
-                                                                                ->first_name ?? '';
-                                                                        $lastname =
-                                                                            $payment->bill->business->customer
-                                                                                ->last_name ?? '';
-                                                                        $name = $firstname . ' ' . $lastname;
-                                                                    }
-                                                                @endphp
-                                                                <tr>
-                                                                    <td>{{ $index + 1 }}</td>
-                                                                    <td>{{ $payment->bills_id }}</td>
-                                                                    <td>{{ $name }}</td>
-                                                                    <td>{{ number_format($payment->amount, 2) }}</td>
-                                                                    <td>{{ $payment->payment_mode }}</td>
-                                                                    <td>{{ $payment->transaction_status }}</td>
-                                                                    <td>{{ $payment->assembly->name ?? 'N/A' }}</td>
-                                                                    <td>{{ $payment->createdBy->name ?? 'N/A' }}</td>
-                                                                    <td>{{ $payment->created_at }}</td>
-                                                                    <td>
-                                                                        <div class="dropdown">
-                                                                            <div class="btn-link"
-                                                                                data-bs-toggle="dropdown"
-                                                                                aria-expanded="false">
-                                                                                <svg width="24" height="24"
-                                                                                    viewBox="0 0 24 24" fill="none"
-                                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                                    <path
-                                                                                        d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
-                                                                                        stroke="#737B8B" stroke-width="2"
-                                                                                        stroke-linecap="round"
-                                                                                        stroke-linejoin="round">
-                                                                                    </path>
-                                                                                    <path
-                                                                                        d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
-                                                                                        stroke="#737B8B" stroke-width="2"
-                                                                                        stroke-linecap="round"
-                                                                                        stroke-linejoin="round">
-                                                                                    </path>
-                                                                                    <path
-                                                                                        d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
-                                                                                        stroke="#737B8B" stroke-width="2"
-                                                                                        stroke-linecap="round"
-                                                                                        stroke-linejoin="round">
-                                                                                    </path>
-                                                                                </svg>
-                                                                            </div>
-                                                                            <div class="dropdown-menu dropdown-menu-end">
-                                                                                <a class="dropdown-item"
-                                                                                    href="{{ route('payments.receipt', $payment) }}"
-                                                                                    target="_blank">View
-                                                                                    Receipt</a>
-                                                                                {{-- <a class="dropdown-item"
+                                                                            ->first_name ?? '';
+                                                                    $lastname =
+                                                                        $payment->bill->business->customer->last_name ??
+                                                                        '';
+                                                                    $name = $firstname . ' ' . $lastname;
+                                                                }
+                                                            @endphp
+                                                            <tr>
+                                                                <td>{{ $index + 1 }}</td>
+                                                                <td>{{ $payment->bills_id }}</td>
+                                                                <td>{{ $name }}</td>
+                                                                <td>{{ number_format($payment->amount, 2) }}</td>
+                                                                <td>{{ $payment->payment_mode }}</td>
+                                                                <td>{{ $payment->transaction_status }}</td>
+                                                                <td>{{ $payment->assembly->name ?? 'N/A' }}</td>
+                                                                <td>{{ $payment->createdBy->name ?? 'N/A' }}</td>
+                                                                <td>{{ $payment->created_at }}</td>
+                                                                <td>
+                                                                    <div class="dropdown">
+                                                                        <div class="btn-link" data-bs-toggle="dropdown"
+                                                                            aria-expanded="false">
+                                                                            <svg width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path
+                                                                                    d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
+                                                                                    stroke="#737B8B" stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round">
+                                                                                </path>
+                                                                                <path
+                                                                                    d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
+                                                                                    stroke="#737B8B" stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round">
+                                                                                </path>
+                                                                                <path
+                                                                                    d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
+                                                                                    stroke="#737B8B" stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round">
+                                                                                </path>
+                                                                            </svg>
+                                                                        </div>
+                                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                                            <a class="dropdown-item"
+                                                                                href="{{ route('payments.receipt', $payment) }}"
+                                                                                target="_blank">View
+                                                                                Receipt</a>
+                                                                            {{-- <a class="dropdown-item"
                                                                                     href="{{ route('payments.edit', $payment) }}">Amend
                                                                                     Bill</a> --}}
-                                                                            </div>
                                                                         </div>
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                        <tfoot>
-                                                            <th colspan="2"></th>
-                                                            <th>Total (GHS)</th>
-                                                            <th>{{ $customerData['paymentTotal'] }}</th>
-                                                            <th colspan="7"></th>
-                                                        </tfoot>
-                                                    </table>
-                                                </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <th colspan="2"></th>
+                                                        <th>Total (GHS)</th>
+                                                        <th>{{ $customerData['paymentTotal'] }}</th>
+                                                        <th colspan="7"></th>
+                                                    </tfoot>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
@@ -480,7 +477,7 @@
                                                 <div class="tbl-caption">
                                                     <h4 class="heading mb-0">Business Information</h4>
                                                 </div>
-                                                <table id="empoloyees-tbl3" class="table">
+                                                <table id="empoloyees-tbl2" class="table">
                                                     <thead>
                                                         <tr>
                                                             <th>S/N</th>
