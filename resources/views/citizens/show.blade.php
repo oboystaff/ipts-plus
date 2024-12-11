@@ -298,7 +298,7 @@
                                                 <div class="tbl-caption">
                                                     <h4 class="heading mb-0">Payment History</h4>
                                                 </div>
-                                                <table id="empoloyees-tbl4" class="table">
+                                                <table id="empoloyees-tbl2" class="table">
                                                     <thead>
                                                         <tr>
                                                             <th>SN</th>
@@ -396,7 +396,7 @@
                                                         <th colspan="2"></th>
                                                         <th>Total (GHS)</th>
                                                         <th>{{ $customerData['paymentTotal'] }}</th>
-                                                        <th colspan="7"></th>
+                                                        <th colspan="6"></th>
                                                     </tfoot>
                                                 </table>
                                             </div>
@@ -477,7 +477,7 @@
                                                 <div class="tbl-caption">
                                                     <h4 class="heading mb-0">Business Information</h4>
                                                 </div>
-                                                <table id="empoloyees-tbl2" class="table">
+                                                <table id="empoloyees-tbl1" class="table">
                                                     <thead>
                                                         <tr>
                                                             <th>S/N</th>

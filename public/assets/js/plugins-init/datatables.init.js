@@ -326,7 +326,7 @@ let dataSet = [
         ],
 		searching: false,
 		select: false,   
-        pageLength:7,			
+        pageLength:5,			
         lengthChange:false ,
 		language: {
 			paginate: {
@@ -414,7 +414,7 @@ let dataSet = [
         ],
 		searching: false,
 		select: false,   
-        /* pageLength:5, */			
+        pageLength:5,		
         lengthChange:false ,
 		language: {
 			paginate: {
@@ -436,7 +436,7 @@ let dataSet = [
         ],
 		searching: false,
 		select: false,   
-        pageLength:8,			
+        pageLength:5,			
         lengthChange:false ,
 		language: {
 			paginate: {
