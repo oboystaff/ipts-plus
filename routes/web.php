@@ -28,22 +28,6 @@ use App\Http\Controllers\AgentAssignment\AgentAssignmentController;
 use App\Http\Controllers\TaskAssignment\TaskAssignmentController;
 
 
-// Route::group(['prefix' => 'payments', 'middleware' => 'auth:sanctum'], function () {
-//     Route::get('/', [PaymentTempController::class, 'index'])->name('payments.index');
-//     Route::get('/{id}/make', [PaymentTempController::class, 'show'])->name('payments.show');
-//     Route::post('/{id}/process', [PaymentTempController::class, 'processPayment'])->name('payments.process');
-//     Route::get('/{id}/receipt', [PaymentTempController::class, 'showReceipt'])->name('payments.receipt');
-//     Route::get('/receipt/{id}', [PaymentTempController::class, 'showReceipt'])->name('receipt.show');
-//     Route::get('/{id}/edit', [PaymentTempController::class, 'edit'])->name('payments.edit');
-//     Route::put('/{id}', [PaymentTempController::class, 'update'])->name('payments.update');
-//     Route::post('/callback', [PaymentTempController::class, 'paymentCallback'])->name('payments.callback_old');
-//     Route::get('/success', [PaymentTempController::class, 'paymentSuccess'])->name('payments.success');
-//     Route::get('/cancel', [PaymentTempController::class, 'paymentCancel'])->name('payments.cancel');
-//     Route::get('/import/invoices', [PaymentTempController::class, 'import'])->name('payments.import');
-//     Route::post('/import/invoices', [PaymentTempController::class, 'importData'])->name('payments.importData');
-//     Route::get('/customer/{id}', [PaymentTempController::class, 'fetchPayment'])->name('payments.fetch');
-//     Route::get('/invoice', [PaymentTempController::class, 'invoicePayment'])->name('payments.invoice');
-// });
 
 Route::group(['prefix' => 'payment', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [PaymentController::class, 'index'])->name('payments.index');

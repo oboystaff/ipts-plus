@@ -11,6 +11,10 @@ use App\Jobs\Registration\SendRegistrationReminder;
 use App\Jobs\OTP\SendOTPSMS;
 use Illuminate\Http\Request;
 use App\Models\Citizen;
+use App\Models\Bill;
+use App\Models\Payment;
+use App\Models\Property;
+use App\Models\Business;
 use App\Models\CustomerType;
 use App\Models\User;
 use App\Models\OTP;
@@ -211,9 +215,65 @@ class CitizenController extends Controller
     }
 
     // Display the specified resource.
-    public function show(Citizen $citizen)
+    public function show(Request $request, Citizen $citizen)
     {
-        return view('citizens.show', compact('citizen'));
+        $bills = Bill::orderBy('created_at', 'DESC')
+            ->with(['property', 'business'])
+            ->where(function ($query) use ($citizen) {
+                $query->whereHas('property', function ($q) use ($citizen) {
+                    $q->where('customer_name',  $citizen->id);
+                })
+                    ->whereNotNull('property_id')
+                    ->whereNull('business_id');
+            })
+            ->orWhere(function ($query) use ($citizen) {
+                $query->whereHas('business', function ($q) use ($citizen) {
+                    $q->where('citizen_account_number', $citizen->id);
+                })
+                    ->whereNotNull('business_id')
+                    ->whereNull('property_id');
+            })
+            ->get();
+
+        $payments = Payment::orderBy('created_at', 'DESC')
+            ->whereHas('bill', function ($query) use ($citizen) {
+                $query->whereHas('property', function ($propertyQuery) use ($citizen) {
+                    $propertyQuery->where('customer_name', $citizen->id)
+                        ->whereNotNull('property_id')
+                        ->whereNull('business_id');
+                })
+                    ->orWhereHas('business', function ($businessQuery) use ($citizen) {
+                        $businessQuery->where('citizen_account_number', $citizen->id)
+                            ->whereNotNull('business_id')
+                            ->whereNull('property_id');
+                    });
+            })
+            ->get();
+
+        $properties = Property::orderBy('created_at', 'DESC')
+            ->where('customer_name', $citizen->id)
+            ->get();
+
+        $businesses = Business::orderBy('created_at', 'DESC')
+            ->where('citizen_account_number', $citizen->id)
+            ->get();
+
+        $totalArrears = $bills->sum('arrears');
+        $totalAmount = $bills->sum('amount');
+
+        $customerData = [
+            'properties' => isset($properties) ? $properties : [],
+            'businesses' => isset($businesses) ? $businesses : [],
+            'total' => isset($properties) ? number_format(collect($properties)->sum('ratable_value'), 2) : 0,
+            'bills' => isset($bills) ? $bills : [],
+            'payments' => isset($payments) ? $payments : [],
+            'totalArrears' => isset($totalArrears) ? number_format($totalArrears, 2) : 0,
+            'totalAmount' => isset($totalAmount) ? number_format($totalAmount, 2) : 0,
+            'totalDue' => isset($totalArrears) && isset($totalAmount) ? number_format($totalArrears + $totalAmount, 2) : 0,
+            'paymentTotal' => isset($payments) ? number_format(collect($payments)->sum('amount'), 2) : 0
+        ];
+
+        return view('citizens.show', compact('citizen', 'customerData'));
     }
 
     // Show the form for editing the specified resource.

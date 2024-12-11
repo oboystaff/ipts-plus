@@ -50,146 +50,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-4">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="profile-statistics">
-                                    <div class="text-center">
-                                        <div class="row">
-                                            <div class="col">
-                                                <h3 class="m-b-0">GHS 0.00 </h3><span>Arrears</span>
-                                            </div>
-                                            <div class="col">
-                                                <h3 class="m-b-0">GHS 0.00</h3><span>Current Bill </span>
-                                            </div>
-                                            <div class="col">
-                                                <h3 class="m-b-0">0.0</h3><span>Bills Count</span>
-                                            </div>
-                                        </div>
-                                        <div class="mt-4">
-                                            <a href="javascript:void(0);" class="btn btn-primary mb-1"
-                                                data-bs-toggle="modal" data-bs-target="#sendMessageModal">Pay Bill</a>
-                                            <button class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#replyModal"><span class="me-2"><i
-                                                        class="fa fa-reply"></i></span>Re-Generate Bill</button>
-                                        </div>
-                                    </div>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="sendMessageModal">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Initiate Payment</h5>
-                                                    <button type="button" class="btn-close"
-                                                        data-bs-dismiss="modal"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form class="comment-form">
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <div class="mb-3">
-                                                                    <label class="text-black font-w600 form-label">Amount-
-                                                                        GHS
-                                                                        <span class="required">*</span></label>
-                                                                    <input type="text" class="form-control"
-                                                                        value=" " name="Amount" placeholder="Amount">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="mb-3">
-                                                                    <label class="text-black font-w600 form-label">Mode Of
-                                                                        Payment
-                                                                        <span class="required">*</span></label>
-                                                                    <select name="gender" class="form-select">
-                                                                        <option value="Momo">Mobile Money</option>
-                                                                        <option value="Card">Card Payment -(VISA / Master
-                                                                            Card)</option>
-                                                                        <option value="Cash">Cash</option>
-                                                                        <option value="Cheque">Cheque Payment</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12">
-
-
-                                                            </div>
-                                                            <div class="col-lg-12">
-                                                                <div class="mb-3 mb-0">
-                                                                    <input type="submit" value="Pay"
-                                                                        class="submit btn btn-primary" name="submit">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="profile-interest">
-                                    <h5 class="text-primary d-inline">Avalibale Mode Of Payments</h5>
-                                    <div class="row mt-4 sp4" id="lightgallery">
-                                        <a data-exthumbimage="{{ asset('assets/images/profile/gmoney.jpeg') }}"
-                                            data-src="{{ asset('assets/images/profile/gmoney.jpeg') }}"
-                                            class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                            <img src="{{ asset('assets/images/profile/gmoney.jpeg') }}" alt=""
-                                                class="px-1 py-1 img-fluid rounded">
-                                        </a>
-
-                                        <a data-exthumbimage="{{ asset('assets/images/profile/cash.webp') }}"
-                                            data-src="{{ asset('assets/images/profile/cash.webp') }}"
-                                            class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                            <img src="{{ asset('assets/images/profile/cash.webp') }}" alt=""
-                                                class="px-1 py-1 img-fluid rounded">
-                                        </a>
-
-                                        <a data-exthumbimage="{{ asset('assets/images/profile/master.jpeg') }}"
-                                            data-src="{{ asset('assets/images/profile/master.jpeg') }}"
-                                            class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                            <img src="{{ asset('assets/images/profile/master.jpeg') }}" alt=""
-                                                class="px-1 py-1 img-fluid rounded">
-                                        </a>
-                                        <a data-exthumbimage="{{ asset('assets/images/profile/momon.jpeg') }}"
-                                            data-src="images/profile/momon.jpeg') }}"
-                                            class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                            <img src="{{ asset('assets/images/profile/momon.jpeg') }}" alt=""
-                                                class="px-1 py-1 img-fluid rounded">
-                                        </a>
-                                        <a data-exthumbimage="{{ asset('assets/images/profile/visa.png') }}"
-                                            data-src="{{ asset('assets/images/profile/visa.png') }}"
-                                            class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                            <img src="{{ asset('assets/images/profile/visa.png') }}" alt=""
-                                                class="px-1 py-1 img-fluid rounded">
-                                        </a>
-                                        <a data-exthumbimage="{{ asset('assets/images/profile/Hubtel.jpeg') }}"
-                                            data-src="{{ asset('assets/images/profile/Hubtel.jpeg') }}"
-                                            class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                            <img src="{{ asset('assets/images/profile/Hubtel.jpeg') }}" alt=""
-                                                class="px-1 py-1 img-fluid rounded">
-                                        </a>
-                                        <a data-exthumbimage="{{ asset('assets/images/profile/cash.webp') }}"
-                                            data-src="{{ asset('assets/images/profile/cash.webp') }}"
-                                            class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                            <img src="i{{ asset('assets/mages/profile/cash.webp') }}" alt=""
-                                                class="px-1 py-1 img-fluid rounded">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-xl-8">
+            <div class="col-xl-12">
                 <div class="card h-auto">
                     <div class="card-body">
                         <div class="profile-tab">
@@ -204,6 +65,12 @@
                                     </li>
                                     <li class="nav-item"><a href="#profile-settings" data-bs-toggle="tab"
                                             class="nav-link">Payments History</a>
+                                    </li>
+                                    <li class="nav-item"><a href="#property" data-bs-toggle="tab" class="nav-link">Property
+                                            Information</a>
+                                    </li>
+                                    <li class="nav-item"><a href="#business" data-bs-toggle="tab" class="nav-link">Business
+                                            Information</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content">
@@ -225,8 +92,7 @@
                                                         <div class="form-group">
                                                             <label for="last_name">Last Name</label>
                                                             <input type="text" class="form-control" id="last_name"
-                                                                name="last_name" value="{{ $citizen->last_name }}"
-                                                                readonly>
+                                                                name="last_name" value="{{ $citizen->last_name }}" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -253,8 +119,8 @@
                                                         <div class="form-group">
                                                             <label for="date_of_birth">Date of Birth</label>
                                                             <input type="text" class="form-control" id="date_of_birth"
-                                                                name="date_of_birth"
-                                                                value="{{ $citizen->date_of_birth }}" readonly>
+                                                                name="date_of_birth" value="{{ $citizen->date_of_birth }}"
+                                                                readonly>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -271,8 +137,8 @@
                                                         <div class="form-group">
                                                             <label for="nia_number">NIA Number</label>
                                                             <input type="text" class="form-control" id="nia_number"
-                                                                name="nia_number" value="{{ $citizen->nia_number }}"
-                                                                readonly>
+                                                                name="nia_number"
+                                                                value="{{ $citizen->nia_number ?? 'N/A' }}" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -299,110 +165,130 @@
                                     </div>
 
                                     <div id="about-me" class="tab-pane fade">
-                                        <div class="table-responsive active-projects">
-                                            <div class="tbl-caption">
-                                                <h4 class="heading mb-0">Bill Generation History</h4>
+                                        <div class="pt-3">
+                                            <div class="table-responsive active-projects">
+                                                <div class="tbl-caption">
+                                                    <h4 class="heading mb-0">Bill Generation History</h4>
+                                                </div>
+                                                <table id="empoloyees-tbl3" class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S/N</th>
+                                                            <th>Bill No</th>
+                                                            <th>Name</th>
+                                                            <th>Bill Date</th>
+                                                            <th>Bill Year</th>
+                                                            <th>Bill Type</th>
+                                                            <th>Arrears</th>
+                                                            <th>Current Amount</th>
+                                                            <th>Amount Due</th>
+                                                            <th>Created By</th>
+                                                            <th>Date Created</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($customerData['bills'] as $index => $bill)
+                                                            @php
+                                                                $billType = '';
+
+                                                                if ($bill->property_id !== null) {
+                                                                    $firstname =
+                                                                        $bill->property->customer->first_name ?? '';
+                                                                    $lastname =
+                                                                        $bill->property->customer->last_name ?? '';
+                                                                    $billType = 'Property Bill';
+                                                                } else {
+                                                                    $firstname =
+                                                                        $bill->business->customer->first_name ?? '';
+                                                                    $lastname =
+                                                                        $bill->business->customer->last_name ?? '';
+                                                                    $billType = 'Business Bill';
+                                                                }
+                                                                $name = $firstname . ' ' . $lastname;
+                                                            @endphp
+
+                                                            <tr class="btn-reveal-trigger">
+                                                                <td>{{ $index + 1 }}</td>
+                                                                <td>{{ $bill->bills_id }}</td>
+                                                                <td>{{ $name ?? '' }}</td>
+                                                                <td>{{ $bill->billing_date }}</td>
+                                                                <td>{{ $bill->bills_year }}</td>
+                                                                @if ($bill->property_id !== null)
+                                                                    <td>
+                                                                        <span class="badge light badge-success">
+                                                                            {{ $billType }}
+                                                                        </span>
+                                                                    </td>
+                                                                @else
+                                                                    <td>
+                                                                        <span class="badge light badge-warning">
+                                                                            {{ $billType }}
+                                                                        </span>
+                                                                    </td>
+                                                                @endif
+                                                                <td>{{ number_format($bill->arrears, 2) }}</td>
+                                                                <td>{{ number_format($bill->amount, 2) }}</td>
+                                                                <td>{{ number_format($bill->amount + $bill->arrears, 2) }}
+                                                                </td>
+                                                                <td>{{ $bill->createdBy->name ?? 'N/A' }}</td>
+                                                                <td>{{ $bill->created_at }}</td>
+                                                                <td>
+                                                                    <div class="dropdown">
+                                                                        <div class="btn-link" data-bs-toggle="dropdown"
+                                                                            aria-expanded="false">
+                                                                            <svg width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path
+                                                                                    d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
+                                                                                    stroke="#737B8B" stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round">
+                                                                                </path>
+                                                                                <path
+                                                                                    d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
+                                                                                    stroke="#737B8B" stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round">
+                                                                                </path>
+                                                                                <path
+                                                                                    d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
+                                                                                    stroke="#737B8B" stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round">
+                                                                                </path>
+                                                                            </svg>
+                                                                        </div>
+                                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                                            <div class="py-2">
+                                                                                <a class="dropdown-item"
+                                                                                    href=" {{ route('bills.show', $bill) }}"
+                                                                                    target="_blank">Print Bill Receipt
+                                                                                </a>
+                                                                                <a class="dropdown-item"
+                                                                                    href=" {{ route('payments.create', $bill) }}">Make
+                                                                                    Payment
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th colspan="5"></th>
+                                                            <th>Total (GHS)</th>
+                                                            <th>{{ $customerData['totalArrears'] }}</th>
+                                                            <th>{{ $customerData['totalAmount'] }}</th>
+                                                            <th>{{ $customerData['totalDue'] }}</th>
+                                                            <th colspan="3"></th>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
                                             </div>
-                                            <table id="empoloyees-tbl3" class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Marketplaces</th>
-                                                        <th>Date</th>
-                                                        <th>Payouts</th>
-                                                        <th>Status</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Marketing Revenue</td>
-                                                        <td>Jan 12, 2023</td>
-                                                        <td>$5659.68</td>
-                                                        <td><span class="badge badge-success border-0">Completed</span>
-                                                        </td>
-                                                        <td class="edit-action">
-                                                            <div class="icon-box icon-box-xs bg-primary me-1">
-                                                                <i class="fa-solid fa-pencil text-white"></i>
-                                                            </div>
-                                                            <div class="icon-box icon-box-xs bg-danger  ms-1">
-                                                                <i class="fa-solid fa-trash text-white"></i>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Edward Market</td>
-                                                        <td>Feb 14, 2022</td>
-                                                        <td>$3586.68</td>
-                                                        <td><span class="badge badge-danger border-0">Pending</span></td>
-                                                        <td class="edit-action">
-                                                            <div class="icon-box icon-box-xs bg-primary me-1">
-                                                                <i class="fa-solid fa-pencil text-white"></i>
-                                                            </div>
-                                                            <div class="icon-box icon-box-xs bg-danger  ms-1">
-                                                                <i class="fa-solid fa-trash text-white"></i>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>David Market</td>
-                                                        <td>Mar 16, 2022</td>
-                                                        <td>$4528.68</td>
-                                                        <td><span class="badge badge-info border-0">Completed</span></td>
-                                                        <td class="edit-action">
-                                                            <div class="icon-box icon-box-xs bg-primary me-1">
-                                                                <i class="fa-solid fa-pencil text-white"></i>
-                                                            </div>
-                                                            <div class="icon-box icon-box-xs bg-danger  ms-1">
-                                                                <i class="fa-solid fa-trash text-white"></i>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Brian Market</td>
-                                                        <td>April 18, 2022</td>
-                                                        <td>$4528.68</td>
-                                                        <td><span class="badge badge-info border-0">Completed</span></td>
-                                                        <td class="edit-action">
-                                                            <div class="icon-box icon-box-xs bg-primary me-1">
-                                                                <i class="fa-solid fa-pencil text-white"></i>
-                                                            </div>
-                                                            <div class="icon-box icon-box-xs bg-danger  ms-1">
-                                                                <i class="fa-solid fa-trash text-white"></i>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Edward Market</td>
-                                                        <td>May 25, 2022</td>
-                                                        <td>$2128.68</td>
-                                                        <td><span class="badge badge-primary border-0">Inprogress</span>
-                                                        </td>
-                                                        <td class="edit-action">
-                                                            <div class="icon-box icon-box-xs bg-primary me-1">
-                                                                <i class="fa-solid fa-pencil text-white"></i>
-                                                            </div>
-                                                            <div class="icon-box icon-box-xs bg-danger  ms-1">
-                                                                <i class="fa-solid fa-trash text-white"></i>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Donald Revenue</td>
-                                                        <td>June 30, 2022</td>
-                                                        <td>$1269.53</td>
-                                                        <td><span class="badge badge-primary border-0">Inprogress</span>
-                                                        </td>
-                                                        <td class="edit-action">
-                                                            <div class="icon-box icon-box-xs bg-primary me-1">
-                                                                <i class="fa-solid fa-pencil text-white"></i>
-                                                            </div>
-                                                            <div class="icon-box icon-box-xs bg-danger  ms-1">
-                                                                <i class="fa-solid fa-trash text-white"></i>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
                                         </div>
                                     </div>
 
@@ -416,136 +302,233 @@
                                                     <table id="empoloyees-tbl3" class="table">
                                                         <thead>
                                                             <tr>
-                                                                <th>Marketplaces</th>
-                                                                <th>Date</th>
-                                                                <th>Payouts</th>
+                                                                <th>SN</th>
+                                                                <th>Bills ID</th>
+                                                                <th>Name</th>
+                                                                <th>Amount</th>
+                                                                <th>Payment Mode</th>
                                                                 <th>Status</th>
+                                                                <th>Assembly</th>
+                                                                <th>Paid By</th>
+                                                                <th>Payment Date</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>Marketing Revenue</td>
-                                                                <td>Jan 12, 2023</td>
-                                                                <td>$5659.68</td>
-                                                                <td><span
-                                                                        class="badge badge-success border-0">Completed</span>
-                                                                </td>
-                                                                <td class="edit-action">
-                                                                    <div class="icon-box icon-box-xs bg-primary me-1">
-                                                                        <i class="fa-solid fa-pencil text-white"></i>
-                                                                    </div>
-                                                                    <div class="icon-box icon-box-xs bg-danger  ms-1">
-                                                                        <i class="fa-solid fa-trash text-white"></i>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Edward Market</td>
-                                                                <td>Feb 14, 2022</td>
-                                                                <td>$3586.68</td>
-                                                                <td><span
-                                                                        class="badge badge-danger border-0">Pending</span>
-                                                                </td>
-                                                                <td class="edit-action">
-                                                                    <div class="icon-box icon-box-xs bg-primary me-1">
-                                                                        <i class="fa-solid fa-pencil text-white"></i>
-                                                                    </div>
-                                                                    <div class="icon-box icon-box-xs bg-danger  ms-1">
-                                                                        <i class="fa-solid fa-trash text-white"></i>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>David Market</td>
-                                                                <td>Mar 16, 2022</td>
-                                                                <td>$4528.68</td>
-                                                                <td><span
-                                                                        class="badge badge-info border-0">Completed</span>
-                                                                </td>
-                                                                <td class="edit-action">
-                                                                    <div class="icon-box icon-box-xs bg-primary me-1">
-                                                                        <i class="fa-solid fa-pencil text-white"></i>
-                                                                    </div>
-                                                                    <div class="icon-box icon-box-xs bg-danger  ms-1">
-                                                                        <i class="fa-solid fa-trash text-white"></i>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Brian Market</td>
-                                                                <td>April 18, 2022</td>
-                                                                <td>$4528.68</td>
-                                                                <td><span
-                                                                        class="badge badge-info border-0">Completed</span>
-                                                                </td>
-                                                                <td class="edit-action">
-                                                                    <div class="icon-box icon-box-xs bg-primary me-1">
-                                                                        <i class="fa-solid fa-pencil text-white"></i>
-                                                                    </div>
-                                                                    <div class="icon-box icon-box-xs bg-danger  ms-1">
-                                                                        <i class="fa-solid fa-trash text-white"></i>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Edward Market</td>
-                                                                <td>May 25, 2022</td>
-                                                                <td>$2128.68</td>
-                                                                <td><span
-                                                                        class="badge badge-primary border-0">Inprogress</span>
-                                                                </td>
-                                                                <td class="edit-action">
-                                                                    <div class="icon-box icon-box-xs bg-primary me-1">
-                                                                        <i class="fa-solid fa-pencil text-white"></i>
-                                                                    </div>
-                                                                    <div class="icon-box icon-box-xs bg-danger  ms-1">
-                                                                        <i class="fa-solid fa-trash text-white"></i>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Donald Revenue</td>
-                                                                <td>June 30, 2022</td>
-                                                                <td>$1269.53</td>
-                                                                <td><span
-                                                                        class="badge badge-primary border-0">Inprogress</span>
-                                                                </td>
-                                                                <td class="edit-action">
-                                                                    <div class="icon-box icon-box-xs bg-primary me-1">
-                                                                        <i class="fa-solid fa-pencil text-white"></i>
-                                                                    </div>
-                                                                    <div class="icon-box icon-box-xs bg-danger  ms-1">
-                                                                        <i class="fa-solid fa-trash text-white"></i>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
+                                                            @foreach ($customerData['payments'] as $index => $payment)
+                                                                @php
+                                                                    $name = '';
+                                                                    if (
+                                                                        $payment->bill->property &&
+                                                                        $payment->bill->property->customer
+                                                                    ) {
+                                                                        $firstname =
+                                                                            $payment->bill->property->customer
+                                                                                ->first_name ?? '';
+                                                                        $lastname =
+                                                                            $payment->bill->property->customer
+                                                                                ->last_name ?? '';
+                                                                        $name = $firstname . ' ' . $lastname;
+                                                                    } elseif (
+                                                                        $payment->bill->business &&
+                                                                        $payment->bill->business->customer
+                                                                    ) {
+                                                                        $firstname =
+                                                                            $payment->bill->business->customer
+                                                                                ->first_name ?? '';
+                                                                        $lastname =
+                                                                            $payment->bill->business->customer
+                                                                                ->last_name ?? '';
+                                                                        $name = $firstname . ' ' . $lastname;
+                                                                    }
+                                                                @endphp
+                                                                <tr>
+                                                                    <td>{{ $index + 1 }}</td>
+                                                                    <td>{{ $payment->bills_id }}</td>
+                                                                    <td>{{ $name }}</td>
+                                                                    <td>{{ number_format($payment->amount, 2) }}</td>
+                                                                    <td>{{ $payment->payment_mode }}</td>
+                                                                    <td>{{ $payment->transaction_status }}</td>
+                                                                    <td>{{ $payment->assembly->name ?? 'N/A' }}</td>
+                                                                    <td>{{ $payment->createdBy->name ?? 'N/A' }}</td>
+                                                                    <td>{{ $payment->created_at }}</td>
+                                                                    <td>
+                                                                        <div class="dropdown">
+                                                                            <div class="btn-link"
+                                                                                data-bs-toggle="dropdown"
+                                                                                aria-expanded="false">
+                                                                                <svg width="24" height="24"
+                                                                                    viewBox="0 0 24 24" fill="none"
+                                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                                    <path
+                                                                                        d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
+                                                                                        stroke="#737B8B" stroke-width="2"
+                                                                                        stroke-linecap="round"
+                                                                                        stroke-linejoin="round">
+                                                                                    </path>
+                                                                                    <path
+                                                                                        d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
+                                                                                        stroke="#737B8B" stroke-width="2"
+                                                                                        stroke-linecap="round"
+                                                                                        stroke-linejoin="round">
+                                                                                    </path>
+                                                                                    <path
+                                                                                        d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
+                                                                                        stroke="#737B8B" stroke-width="2"
+                                                                                        stroke-linecap="round"
+                                                                                        stroke-linejoin="round">
+                                                                                    </path>
+                                                                                </svg>
+                                                                            </div>
+                                                                            <div class="dropdown-menu dropdown-menu-end">
+                                                                                <a class="dropdown-item"
+                                                                                    href="{{ route('payments.receipt', $payment) }}"
+                                                                                    target="_blank">View
+                                                                                    Receipt</a>
+                                                                                {{-- <a class="dropdown-item"
+                                                                                    href="{{ route('payments.edit', $payment) }}">Amend
+                                                                                    Bill</a> --}}
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
                                                         </tbody>
+                                                        <tfoot>
+                                                            <th colspan="2"></th>
+                                                            <th>Total (GHS)</th>
+                                                            <th>{{ $customerData['paymentTotal'] }}</th>
+                                                            <th colspan="7"></th>
+                                                        </tfoot>
                                                     </table>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="replyModal">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Post Reply</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    <div id="property" class="tab-pane fade">
+                                        <div class="pt-3">
+                                            <div class="table-responsive active-projects">
+                                                <div class="tbl-caption">
+                                                    <h4 class="heading mb-0">Property Information</h4>
+                                                </div>
+                                                <table id="empoloyees-tbl3" class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S/N</th>
+                                                            <th>Entity Type</th>
+                                                            <th>Category</th>
+                                                            <th>Digital Address</th>
+                                                            <th>Location</th>
+                                                            <th>Street Name</th>
+                                                            <th>Rated</th>
+                                                            <th>Validated</th>
+                                                            <th>Property Number</th>
+                                                            <th>Owner Account</th>
+                                                            <th>Owner Name</th>
+                                                            <th>Ratable Value</th>
+                                                            <th>Assembly</th>
+                                                            <th>Division</th>
+                                                            <th>Block</th>
+                                                            <th>Zone</th>
+                                                            <th>Property Use</th>
+                                                            <th>Date Created</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($customerData['properties'] as $index => $property)
+                                                            <tr>
+                                                                <td>{{ $index + 1 }}</td>
+                                                                <td>{{ $property->entityType->name ?? '' }}</td>
+                                                                <td>{{ $property->entityType->category ?? '' }}</td>
+                                                                <td>{{ $property->digital_address }}</td>
+                                                                <td>{{ $property->location }}</td>
+                                                                <td>{{ $property->street_name }}</td>
+                                                                <td>{{ $property->rated }}</td>
+                                                                <td>{{ $property->validated }}</td>
+                                                                <td>{{ $property->property_number }}</td>
+                                                                <td>{{ $property->customer->account_number ?? 'N/A' }}</td>
+                                                                <td>{{ $property->customer->first_name ?? '' }}
+                                                                    {{ $property->customer->last_name ?? 'N/A' }}
+                                                                </td>
+                                                                <td>{{ number_format($property->ratable_value, 2) }}</td>
+                                                                <td>{{ $property->assembly->name ?? 'N/A' }}</td>
+                                                                <td>{{ $property->division->division_name ?? 'N/A' }}</td>
+                                                                <td>{{ $property->block->block_name ?? 'N/A' }}</td>
+                                                                <td>{{ $property->zone->name ?? 'N/A' }}</td>
+                                                                <td>{{ $property->propertyUse->name ?? 'N/A' }}</td>
+                                                                <td>{{ $property->created_at }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th colspan="10"></th>
+                                                            <th>Total (GHS)</th>
+                                                            <th>{{ $customerData['total'] }}</th>
+                                                            <th colspan="6"></th>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
                                         </div>
-                                        <div class="modal-body">
-                                            <form>
-                                                <textarea class="form-control h-50" rows="4">Message</textarea>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger light"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Reply</button>
+                                    </div>
+
+                                    <div id="business" class="tab-pane fade">
+                                        <div class="pt-3">
+                                            <div class="table-responsive active-projects">
+                                                <div class="tbl-caption">
+                                                    <h4 class="heading mb-0">Business Information</h4>
+                                                </div>
+                                                <table id="empoloyees-tbl3" class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S/N</th>
+                                                            <th>Business Name</th>
+                                                            <th>Business Type</th>
+                                                            <th>Business Class</th>
+                                                            <th>Location</th>
+                                                            <th>Email</th>
+                                                            <th>Phone</th>
+                                                            <th>Business Owner</th>
+                                                            <th>Assembly</th>
+                                                            <th>Division</th>
+                                                            <th>Block</th>
+                                                            <th>Zone</th>
+                                                            <th>Property Use</th>
+                                                            <th>Created By</th>
+                                                            <th>Date Created</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($customerData['businesses'] as $index => $business)
+                                                            @php
+                                                                $firstname = $business->customer->first_name ?? '';
+                                                                $lastname = $business->customer->last_name ?? '';
+                                                                $fullname = $firstname . ' ' . $lastname;
+                                                            @endphp
+
+                                                            <tr>
+                                                                <td>{{ $index + 1 }}</td>
+                                                                <td>{{ $business->business_name }}</td>
+                                                                <td>{{ $business->businessType->name ?? '' }}</td>
+                                                                <td>{{ $business->businessClass->name ?? '' }}</td>
+                                                                <td>{{ $business->location }}</td>
+                                                                <td>{{ $business->email }}</td>
+                                                                <td>{{ $business->business_phone }}</td>
+                                                                <td>{{ $fullname ?? '' }}</td>
+                                                                <td>{{ $business->assembly->name ?? 'N/A' }}</td>
+                                                                <td>{{ $business->division->division_name ?? 'N/A' }}</td>
+                                                                <td>{{ $business->block->block_name ?? 'N/A' }}</td>
+                                                                <td>{{ $business->zone->name ?? 'N/A' }}</td>
+                                                                <td>{{ $business->propertyUse->name ?? 'N/A' }}</td>
+                                                                <td>{{ $business->createdBy->name ?? 'N/A' }}</td>
+                                                                <td>{{ $business->created_at }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
