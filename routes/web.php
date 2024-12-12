@@ -28,7 +28,6 @@ use App\Http\Controllers\AgentAssignment\AgentAssignmentController;
 use App\Http\Controllers\TaskAssignment\TaskAssignmentController;
 
 
-
 Route::group(['prefix' => 'payment', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [PaymentController::class, 'index'])->name('payments.index');
     Route::get('/create/{bill}', [PaymentController::class, 'create'])->name('payments.create');
