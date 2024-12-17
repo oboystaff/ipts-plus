@@ -4,10 +4,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/lightgallery.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/fileinput.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/autocomplete.css') }}">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-draw/1.0.4/leaflet.draw.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-draw/1.0.4/leaflet.draw.css" />
+    <!-- Leaflet css -->
+    <link href="{{ asset('assets/app/map/leaflet/leaflet.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/app/map/leaflet/OverPassLayer.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/app/map/leaflet/leaflet-geoman.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/app/map/leaflet/L.Control.SlideMenu.css') }}" rel="stylesheet">
 @endsection
 
 
@@ -157,10 +158,15 @@
                                         </div>
                                     </div>
 
-                                    {{-- <div class="mb-4 col-md-12">
-                                        <label class="form-label">Select Geo Reference Area</label>
-                                        <div id="map" style="height: 500px;"></div>
-                                    </div> --}}
+                                    <div class="mb-4 col-md-12">
+                                        <label class="form-label">Select Assembly Boundary</label>
+                                        <div class="map-header" id="app-map-container"
+                                            style="width:100%; height:500px; position:relative; margin:0; padding:0;">
+
+                                            <div class="map-header-layer" id="map"
+                                                style="width:100%; height:100%;"></div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="col-12">
@@ -251,6 +257,20 @@
 @section('page-scripts')
     <script src="{{ asset('assets/js/fileinput.min.js') }}"></script>
     <script src="{{ asset('assets/js/lightgallery-all.min.js') }}"></script>
+    <!-- leaflet js-->
+    <script src="{{ asset('assets/app/map/geojsonhint.js') }}"></script>
+    <script src="{{ asset('assets/app/map/geojsonUtil.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/leaflet.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/OverPassLayer.bundle.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/Leaflet.Control.Custom.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/leaflet-geoman.min.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/L.Control.SlideMenu.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/easy-button.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/osmtogeojson.js') }}"></script>
+    <script src="{{ asset('assets/app/map/StyleFactory.js') }}"></script>
+    <script src="{{ asset('assets/app/map/MapTileProvider.js') }}"></script>
+    <script src="{{ asset('assets/app/map/MapController.js?v=' . \Illuminate\Support\Str::random(5)) }}"></script>
+    <script src="{{ asset('assets/app/assemblies/boundary.js?v=' . \Illuminate\Support\Str::random(5)) }}"></script>
 
     <script>
         $(document).ready(function() {
@@ -373,166 +393,6 @@
 
             autocomplete(document.getElementById("supervisor_id"), supervisors);
 
-        });
-    </script>
-
-    <script>
-        let map = L.map('map').setView([7.9465, -1.0232], 7);
-
-        let ghanaBounds = [
-            [4.7387, -3.2609], // Southwest corner
-            [11.1749, 1.1918], // Northeast corner
-        ];
-
-        map.setMaxBounds(ghanaBounds); // Restrict view to Ghana
-        map.fitBounds(ghanaBounds);
-
-        // Add OpenStreetMap layer
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        let ghanaGeoJSON = {
-            "type": "Feature",
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [-3.2609, 4.7387],
-                        [1.1918, 4.7387],
-                        [1.1918, 11.1749],
-                        [-3.2609, 11.1749],
-                        [-3.2609, 4.7387]
-                    ]
-                ]
-            }
-        };
-
-        L.geoJSON(ghanaGeoJSON, {
-            style: {
-                color: "blue",
-                weight: 2,
-                fillOpacity: 0.1,
-            },
-        }).addTo(map);
-
-        // Initialize Leaflet.Draw
-        let drawnItems = new L.FeatureGroup();
-        map.addLayer(drawnItems);
-
-        // let drawControl = new L.Control.Draw({
-        //     edit: {
-        //         featureGroup: drawnItems,
-        //     },
-        //     draw: {
-        //         polygon: true,
-        //         polyline: false,
-        //         rectangle: false,
-        //         circle: false,
-        //         marker: false,
-        //     },
-        // });
-
-        var drawControl = new L.Control.Draw({
-            // position: 'topright',
-            draw: {
-                polygon: {
-                    shapeOptions: {
-                        color: 'purple'
-                    },
-                    allowIntersection: false,
-                    drawError: {
-                        color: 'orange',
-                        timeout: 1000
-                    },
-                },
-                polyline: {
-                    shapeOptions: {
-                        color: 'red'
-                    },
-                },
-                rect: {
-                    shapeOptions: {
-                        color: 'green'
-                    },
-                },
-                circle: {
-                    shapeOptions: {
-                        color: 'steelblue'
-                    },
-                },
-            },
-            edit: {
-                featureGroup: drawnItems
-            }
-        });
-
-        map.addControl(drawControl);
-
-        // Custom Controls (Add to Zoom Control Area)
-        let customControls = L.control({
-            position: 'topleft'
-        });
-
-        customControls.onAdd = function() {
-            let container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-
-            // Polygon Button
-            let polygonButton = L.DomUtil.create('a', '', container);
-            polygonButton.innerHTML = '⬠'; // Polygon icon
-            polygonButton.title = "Draw Polygon";
-            polygonButton.style.cursor = "pointer";
-            polygonButton.style.fontSize = "16px";
-            polygonButton.onclick = function() {
-                new L.Draw.Polygon(map, drawControl.options.draw.polygon).enable();
-            };
-
-            // Triangle Button (Draw as a Polygon)
-            let triangleButton = L.DomUtil.create('a', '', container);
-            triangleButton.innerHTML = '▲'; // Triangle icon
-            triangleButton.title = "Draw Triangle";
-            triangleButton.style.cursor = "pointer";
-            triangleButton.style.fontSize = "16px";
-            triangleButton.onclick = function() {
-                new L.Draw.Polygon(map, {
-                    shapeOptions: {
-                        color: 'orange',
-                    },
-                    allowIntersection: false,
-                    showArea: true,
-                }).enable();
-            };
-
-            // Circle Button
-            let circleButton = L.DomUtil.create('a', '', container);
-            circleButton.innerHTML = '⬤'; // Circle icon
-            circleButton.title = "Draw Circle";
-            circleButton.style.cursor = "pointer";
-            circleButton.style.fontSize = "16px";
-            circleButton.onclick = function() {
-                new L.Draw.Circle(map, drawControl.options.draw.circle).enable();
-            };
-
-            return container;
-        };
-
-        // Add custom controls to the map
-        customControls.addTo(map);
-
-        // Capture the drawn polygon and save its coordinates
-        map.on(L.Draw.Event.CREATED, function(event) {
-            alert('Hello world');
-            let layer = event.layer;
-            drawnItems.clearLayers(); // Allow only one polygon
-            drawnItems.addLayer(layer);
-
-            // Extract the coordinates
-            let coordinates = layer.toGeoJSON().geometry.coordinates;
-            document.getElementById('boundary').value = JSON.stringify(coordinates);
-        });
-
-        map.on("click", function(e) {
-            alert("Hello world");
         });
     </script>
 @endsection

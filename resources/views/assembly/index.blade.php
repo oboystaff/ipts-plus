@@ -113,6 +113,9 @@
                                                                 href=" {{ route('assembly.edit', $assembly->id) }}">Quick
                                                                 Summary
                                                             </a>
+                                                            <a class="dropdown-item"
+                                                                href=" {{ route('assembly.map') }}">View Map
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>

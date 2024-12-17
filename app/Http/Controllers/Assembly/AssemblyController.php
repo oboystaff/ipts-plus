@@ -146,4 +146,9 @@ class AssemblyController extends Controller
         return redirect()->route('assembly.index')
             ->with('success', 'Assembly deleted successfully.');
     }
+
+    public function map()
+    {
+        return view('assembly.map');
+    }
 }
