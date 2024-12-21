@@ -129,5 +129,5 @@
 @endsection
 
 @section('page-scripts')
-    <script src="{{ asset('assets/js/report/customer-report.js?v1=1234') }}"></script>
+    <script src="{{ asset('assets/js/report/customer-report.js?v1=5678') }}"></script>
 @endsection
