@@ -82,7 +82,6 @@
                                                     <th>Gender</th>
                                                     <th>Date of Birth</th>
                                                     <th>Marital Status</th>
-                                                    <th>NIA Number</th>
                                                     <th>Telephone Number</th>
                                                     <th>Country of Citizenship</th>
                                                     <th>Customer Type</th>

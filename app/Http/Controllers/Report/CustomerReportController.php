@@ -45,7 +45,7 @@ class CustomerReportController extends Controller
                             return $citizen->other_name ?? 'N/A';
                         })
                         ->editColumn('created_by', function (Citizen $citizen) {
-                            return $citizen->createdBy->name ?? '';
+                            return $citizen->createdBy->name ?? 'N/A';
                         })
                         ->editColumn('created_at', function (Citizen $citizen) {
                             return $citizen->created_at;

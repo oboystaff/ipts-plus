@@ -65,7 +65,6 @@ $(document).ready(function () {
                     {data: 'gender', name: 'gender'},
                     {data: 'date_of_birth', name: 'date_of_birth'},
                     {data: 'marital_status', name: 'marital_status'},
-                    {data: 'nia_number', name: 'nia_number'},
                     {data: 'telephone_number', name: 'telephone_number'},
                     {data: 'country_of_citizenship', name: 'country_of_citizenship'},
                     {data: 'customer_type', name: 'customer_type'},
