@@ -30,7 +30,8 @@ class CreateAssemblyRequest extends FormRequest
             'logo' => ['nullable', 'file', 'mimes:jpeg,jpg,png,gif'],
             'invoice_layout' => ['nullable', 'string'],
             'address' => ['required', 'string'],
-            'phone' => ['required', 'string']
+            'phone' => ['required', 'string'],
+            'geo_coordinate' => ['nullable', 'string']
         ];
     }
 }

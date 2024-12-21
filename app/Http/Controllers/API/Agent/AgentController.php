@@ -12,7 +12,9 @@ use App\Models\Block;
 use Illuminate\Support\Facades\Hash;
 use App\Models\TaskAssignment;
 use App\Models\Payment;
+use App\Models\Property;
 use App\Models\ReportUpload;
+
 
 class AgentController extends Controller
 {
@@ -162,6 +164,12 @@ class AgentController extends Controller
             ], 422);
         }
 
+        $totalTask = 0;
+        $totalTaskType = [
+            'totalTask' => [],
+            'Pending' => [],
+            'Completed' => [],
+        ];
         $taskAssignments = TaskAssignment::orderBy('created_at', 'DESC')
             ->with(['supervisor', 'agent', 'assembly'])
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
@@ -175,21 +183,110 @@ class AgentController extends Controller
             })
             ->where('agent_id', $agent->id)
             ->get()
-            ->map(function ($assignment) {
+            ->map(function ($assignment) use (&$totalTask, &$totalTaskType) {
                 $assignment->block_data = collect($assignment->block_data)->map(function ($block) {
                     $blockModel = Block::find($block['block_id']);
                     $block['block_name'] = $blockModel ? $blockModel->block_name : 'Unknown';
+
+                    $block['property_count'] = Property::where('block_id', $block['block_id'])->count();
+
                     return $block;
                 })->toArray();
 
                 $assignment->block_count = count($assignment->block_data);
+                $totalTask = collect($assignment->block_data)->sum('property_count');
+
+                foreach ($assignment->block_data as $block) {
+                    $taskStatus = $block['status'];
+                    $taskType = $assignment->task;
+
+                    if (!isset($totalTaskType['totalTask'][$taskType])) {
+                        $totalTaskType['totalTask'][$taskType] = 0;
+                    }
+
+                    $totalTaskType['totalTask'][$taskType] += $block['property_count'];
+
+                    if ($taskStatus === 'Pending') {
+                        if (!isset($totalTaskType['Pending'][$taskType])) {
+                            $totalTaskType['Pending'][$taskType] = 0;
+                        }
+                        $totalTaskType['Pending'][$taskType] += $block['property_count'];
+                    } elseif ($taskStatus === 'Completed') {
+                        if (!isset($totalTaskType['Completed'][$taskType])) {
+                            $totalTaskType['Completed'][$taskType] = 0;
+                        }
+                        $totalTaskType['Completed'][$taskType] += $block['property_count'];
+                    }
+                }
 
                 return $assignment;
             });
 
         return response()->json([
             'message' => 'Get all agent task assignments',
+            'data' => $taskAssignments,
+            'dashboard' => $totalTaskType
+        ]);
+    }
+
+    public function agentTaskBlock($id, $task_type)
+    {
+        $agent = User::where('id', $id)
+            ->where('access_level', 'Assembly_Agent')
+            ->first();
+
+        if (empty($agent)) {
+            return response()->json([
+                'message' => 'Agent not found or the user is not an agent, check and try again'
+            ], 422);
+        }
+
+        $taskAssignments = TaskAssignment::orderBy('created_at', 'DESC')
+            ->where('agent_id', $agent->id)
+            ->where('task', 'LIKE', $task_type)
+            ->get()
+            ->map(function ($assignment) {
+                $assignment->block_data = collect($assignment->block_data)->map(function ($block) {
+                    $blockModel = Block::find($block['block_id']);
+
+                    if ($blockModel) {
+                        $block['block_code'] = $blockModel->block_code;
+                        $block['block_name'] = $blockModel->block_name;
+                    } else {
+                        $block['block_name'] = 'Unknown';
+                        $block['block_description'] = 'No description available';
+                    }
+
+                    $block['property_count'] = Property::where('block_id', $block['block_id'])->count();
+
+                    return $block;
+                })->toArray();
+
+                return $assignment;
+            });
+
+        return response()->json([
+            'message' => 'Get agent task blocks by task type',
             'data' => $taskAssignments
+        ]);
+    }
+
+    public function agentPropertyBlock($id)
+    {
+        $properties = Property::orderBy('created_at', 'DESC')
+            ->with(['customer', 'assembly', 'zone', 'division', 'block'])
+            ->where('block_id', $id)
+            ->get();
+
+        if (count($properties) == 0) {
+            return response()->json([
+                'message' => 'No properties under the block provided'
+            ], 422);
+        }
+
+        return response()->json([
+            'message' => 'Get properties by block',
+            'data' => $properties
         ]);
     }
 

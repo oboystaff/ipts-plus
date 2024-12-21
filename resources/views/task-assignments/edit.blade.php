@@ -107,9 +107,13 @@
                                         <label for="task" class="form-label">Task</label>
                                         <select class="form-control @error('task') is-invalid @enderror" name="task">
                                             <option value="">Select Task</option>
-                                            <option value="Payment"
-                                                {{ $taskAssignment->task == 'Payment' ? 'selected' : '' }}>
-                                                Payment
+                                            <option value="Payment Collection"
+                                                {{ $taskAssignment->task == 'Payment Collection' ? 'selected' : '' }}>
+                                                Payment Collection
+                                            </option>
+                                            <option value="Bill Distribution"
+                                                {{ $taskAssignment->task == 'Bill Distribution' ? 'selected' : '' }}>
+                                                Bill Distribution
                                             </option>
                                             <option value="Data Collection"
                                                 {{ $taskAssignment->task == 'Data Collection' ? 'selected' : '' }}>Data

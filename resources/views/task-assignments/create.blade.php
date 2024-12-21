@@ -117,7 +117,8 @@
                                             <label for="task" class="form-label">Task</label>
                                             <select class="form-control @error('task') is-invalid @enderror" name="task">
                                                 <option value="">Select Task</option>
-                                                <option value="Payment">Payment</option>
+                                                <option value="Payment Collection">Payment Collection</option>
+                                                <option value="Bill Distribution">Bill Distribution</option>
                                                 <option value="Data Collection">Data Collection</option>
                                             </select>
 

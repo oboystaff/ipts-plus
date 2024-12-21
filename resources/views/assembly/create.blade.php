@@ -27,13 +27,24 @@
                         </div>
                     </div>
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger mt-2">
+                            <strong>Please fix the following errors:</strong>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <div class="card-body">
                         <form class="row g-3 needs-validation" method="POST" action="{{ route('assembly.store') }}"
                             enctype="multipart/form-data">
                             @csrf
 
                             <input type="hidden" id="supervisor" name="supervisor">
-                            <input type="hidden" name="boundary" id="boundary">
+                            <input type="hidden" name="geo_coordinate" id="geo_coordinate">
 
                             <div class="mb-4 col-md-6">
                                 <label class="form-label">Assembly Name</label>
@@ -117,11 +128,6 @@
                                     data-initial-preview-config="" data-required="false" data-overwrite-initial="false"
                                     data-max-file-size="15000" data-browse-label="Browse"
                                     data-browse-icon="<i class='fa fa-folder-open'></i>" />
-                                @if ($errors->any())
-                                    <div class="alert alert-danger mt-2">
-                                        <strong>Please re-upload files</strong>
-                                    </div>
-                                @endif
                             </div>
 
                             <div class="mb-4 col-md-12">

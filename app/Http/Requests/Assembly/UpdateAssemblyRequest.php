@@ -25,13 +25,14 @@ class UpdateAssemblyRequest extends FormRequest
             'name' => ['nullable', 'string'],
             'assembly_code' => ['nullable', 'string'],
             'regional_code' => ['nullable', 'string', 'exists:ghana_regions,regional_code'],
-            'supervisor' => ['nullable', 'string', 'exists:users,id'],
+            'supervisor' => ['nullable', 'string'],
             'logo' => ['nullable', 'file', 'mimes:jpeg,jpg,png,gif'],
             'invoice_layout' => ['nullable', 'string'],
             'status' => ['nullable', 'string'],
             'geo_reference_area' => ['nullable', 'string'],
             'address' => ['nullable', 'string'],
-            'phone' => ['nullable', 'string']
+            'phone' => ['nullable', 'string'],
+            'geo_coordinate' => ['nullable', 'string']
         ];
     }
 }

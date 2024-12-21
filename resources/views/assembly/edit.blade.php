@@ -4,6 +4,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/lightgallery.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/fileinput.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/autocomplete.css') }}">
+    <!-- Leaflet css -->
+    <link href="{{ asset('assets/app/map/leaflet/leaflet.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/app/map/leaflet/OverPassLayer.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/app/map/leaflet/leaflet-geoman.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/app/map/leaflet/L.Control.SlideMenu.css') }}" rel="stylesheet">
 @endsection
 
 @section('page-content')
@@ -21,12 +26,24 @@
                         </div>
                     </div>
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger mt-2">
+                            <strong>Please fix the following errors:</strong>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <div class="card-body">
                         <form class="row g-3 needs-validation" action="{{ route('assembly.update', $assembly->id) }}"
                             method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <input type="hidden" id="supervisor" name="supervisor" value="{{ $assembly->supervisor }}">
+                            <input type="hidden" name="geo_coordinate" id="geo_coordinate">
 
                             <div class="col-md-6 mb-3">
                                 <label for="name">Assembly Name</label>
@@ -41,7 +58,8 @@
                             <div class="col-md-6 mb-3">
                                 <label for="assembly_code">Assembly Code</label>
                                 <input type="text" class="form-control @error('assembly_code') is-invalid @enderror"
-                                    id="assembly_code" name="assembly_code" value="{{ $assembly->assembly_code }}" required>
+                                    id="assembly_code" name="assembly_code" value="{{ $assembly->assembly_code }}"
+                                    required>
 
                                 @error('assembly_code')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -61,17 +79,6 @@
                                 </select>
 
                                 @error('regional_code')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="geo_reference_area">Geo Reference Area</label>
-                                <input type="text" class="form-control @error('geo_reference_area') is-invalid @enderror"
-                                    id="geo_reference_area" name="geo_reference_area"
-                                    value="{{ $assembly->geo_reference_area }}">
-
-                                @error('geo_reference_area')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -131,13 +138,16 @@
                                 @enderror
                             </div>
 
+                            <div class="col-md-6 mb-4">
+                            </div>
+
                             <div class="col-md-6 mb-3">
                                 <div class="row">
                                     <div class="col-md-6">
                                         @if (isset($assembly->logo))
                                             <label>Assembly Logo</label>
-                                            <img src="{{ asset('storage/images/logo/' . $assembly->logo) }}" width="300"
-                                                height="340" style="border-radius: 10px;">
+                                            <img src="{{ asset('storage/images/logo/' . $assembly->logo) }}"
+                                                width="300" height="340" style="border-radius: 10px;">
                                         @else
                                             <h4 style="color:red">No logo uploaded for the selected assembly</h4>
                                         @endif
@@ -151,11 +161,6 @@
                                             data-overwrite-initial="false" data-max-file-size="15000"
                                             data-browse-label="Browse"
                                             data-browse-icon="<i class='fa fa-folder-open'></i>" />
-                                        @if ($errors->any())
-                                            <div class="alert alert-danger mt-2">
-                                                <strong>Please re-upload files</strong>
-                                            </div>
-                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -206,6 +211,11 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="phone">Select Assembly Boundary</label>
+                                <div id="map" style="height: 500px;"></div>
                             </div>
 
                             <div class="col-md-12">
@@ -297,6 +307,19 @@
 @section('page-scripts')
     <script src="{{ asset('assets/js/fileinput.min.js') }}"></script>
     <script src="{{ asset('assets/js/lightgallery-all.min.js') }}"></script>
+    <!-- leaflet js-->
+    <script src="{{ asset('assets/app/map/geojsonhint.js') }}"></script>
+    <script src="{{ asset('assets/app/map/geojsonUtil.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/leaflet.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/OverPassLayer.bundle.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/Leaflet.Control.Custom.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/leaflet-geoman.min.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/L.Control.SlideMenu.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/easy-button.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/osmtogeojson.js') }}"></script>
+    <script src="{{ asset('assets/app/map/StyleFactory.js') }}"></script>
+    <script src="{{ asset('assets/app/map/MapTileProvider.js') }}"></script>
+    <script src="{{ asset('assets/app/map/MapController.js?v=' . \Illuminate\Support\Str::random(5)) }}"></script>
 
     <script>
         $(document).ready(function() {
@@ -419,6 +442,131 @@
 
             autocomplete(document.getElementById("supervisor_id"), supervisors);
 
+            //End of auto complete
+
+            const map = L.map('map').setView([7.95277, -1.03071], 6);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            L.control.layers(MapController.getBaseMaps()).addTo(map);
+
+            map.pm.addControls({
+                drawMarker: true,
+                drawPolygon: true,
+                editPolygon: true,
+                drawPolyline: true,
+                editMode: true,
+                deleteLayer: true
+            });
+
+            var content = '<div class="input-group">' +
+                '    <input type="text" class="form-control input-sm" placeholder="Enter Address" id="input-geocode-search" value="Adenta,Accra">' +
+                '    <span class="input-group-btn">' +
+                '        <button  id="btn-geocode-search" class="btn btn-primary btn-sm" type="button" title="Search An Address"><i class="icofont icofont-search"></i> Search</button>' +
+                '    </span>' +
+                '</div>';
+            L.control.slideMenu(content, {
+                position: 'topright',
+                width: '600px',
+                height: '50px',
+                menuposition: 'topright',
+                icon: 'fa-search'
+
+            }).addTo(map);
+
+            map.on('pm:create', function(event) {
+                const workingLayer = event.layer;
+
+                if (workingLayer !== null) {
+                    const geoJsonData = workingLayer.toGeoJSON();
+                    const polygonCoordinates = geoJsonData.geometry.coordinates;
+                    const geo_coordinate = JSON.stringify(polygonCoordinates);
+
+                    $("input[name='geo_coordinate']").val(geo_coordinate);
+                } else {
+                    alert("Invalid input")
+                }
+            });
+
+            const rawData = @json($assembly->geo_coordinate);
+            const parsedData = JSON.parse(rawData);
+            const boundaries = formatBoundaries(parsedData);
+
+            const allBounds = [];
+            boundaries.forEach(boundary => {
+                if (boundary.type === 'polygon') {
+                    const coordinates = JSON.parse(boundary.coordinates).map(coord => [coord[1], coord[
+                        0]]); // Swap latitude and longitude
+                    L.polygon(coordinates, {
+                        color: 'blue',
+                        fillColor: '#3388ff',
+                        fillOpacity: 0.5
+                    }).addTo(map);
+                    allBounds.push(...coordinates);
+                } else if (boundary.type === 'circle') {
+                    const center = JSON.parse(boundary.coordinates).center;
+                    const radius = JSON.parse(boundary.coordinates).radius;
+                    L.circle([center.lat, center.lng], {
+                        radius: radius,
+                        color: 'red',
+                        fillColor: '#f03',
+                        fillOpacity: 0.5
+                    }).addTo(map);
+                    allBounds.push([center.lat, center.lng]);
+                } else if (boundary.type === 'line') {
+                    const lineCoordinates = JSON.parse(boundary.coordinates).map(coord => [coord[1], coord[
+                        0]]); // Swap latitude and longitude
+                    L.polyline(lineCoordinates, {
+                        color: 'green'
+                    }).addTo(map);
+                    allBounds.push(...lineCoordinates);
+                }
+            });
+
+            if (allBounds.length > 0) {
+                const bounds = L.latLngBounds(allBounds);
+                map.fitBounds(bounds);
+            }
+
+            function formatBoundaries(rawData) {
+                const formattedBoundaries = rawData.map(data => {
+                    if (Array.isArray(data)) {
+                        const isPolygon = Array.isArray(data[0]) && Array.isArray(data[data.length - 1]) &&
+                            data[0][0] === data[data.length - 1][0] &&
+                            data[0][1] === data[data.length - 1][1];
+
+                        if (isPolygon) {
+                            return {
+                                type: 'polygon',
+                                coordinates: JSON.stringify(data)
+                            };
+                        } else if (Array.isArray(data[0])) {
+                            return {
+                                type: 'line',
+                                coordinates: JSON.stringify(data)
+                            };
+                        }
+                    } else if (typeof data === 'object' && data.center && data.radius) {
+                        return {
+                            type: 'circle',
+                            coordinates: JSON.stringify({
+                                center: data.center,
+                                radius: data.radius
+                            })
+                        };
+                    }
+
+                    return {
+                        type: 'unknown',
+                        coordinates: JSON.stringify(data)
+                    };
+                });
+
+                return formattedBoundaries;
+            }
         });
     </script>
 @endsection

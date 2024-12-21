@@ -216,7 +216,6 @@ Route::group(['prefix' => 'assembly', 'middleware' => 'auth:sanctum'], function 
     Route::post('/{assembly}', [AssemblyController::class, 'update'])->name('assembly.update');
     Route::delete('/{assembly}', [AssemblyController::class, 'destroy'])->name('assembly.destroy');
     Route::get('/{assembly}', [AssemblyController::class, 'show'])->name('assembly.show');
-    Route::get('/assembly/map', [AssemblyController::class, 'map'])->name('assembly.map');
 });
 
 // Division Routes

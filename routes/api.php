@@ -90,6 +90,8 @@ Route::group(['prefix' => 'agent', 'middleware' => 'auth:sanctum'], function () 
     Route::get('/task', [AgentController::class, 'agentTask']);
     Route::get('/task/show/{id}', [AgentController::class, 'agentTaskShow']);
     Route::get('/task/{id}', [AgentController::class, 'agentTaskAssignment']);
+    Route::get('/task/block/{id}/{task_type}', [AgentController::class, 'agentTaskBlock']);
+    Route::get('/task/property/{id}', [AgentController::class, 'agentPropertyBlock']);
     Route::get('/payment/{id}', [AgentController::class, 'agentPayment']);
     Route::post('/task/update/{id}', [AgentController::class, 'taskUpdate']);
     Route::post('/upload/report', [AgentController::class, 'uploadReport']);

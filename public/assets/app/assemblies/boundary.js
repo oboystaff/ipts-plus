@@ -42,9 +42,9 @@ var ASM = function () {
                 if (workingLayer !== null) { 
                     const geoJsonData = workingLayer.toGeoJSON();
                     const polygonCoordinates = geoJsonData.geometry.coordinates;
-                    const boundary = JSON.stringify(polygonCoordinates);
+                    const geo_coordinate = JSON.stringify(polygonCoordinates);
 
-                    alert(boundary);
+                    $("input[name='geo_coordinate']").val(geo_coordinate);
                 } else {
                     alert("Invalid input")
                 }

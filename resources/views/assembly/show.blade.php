@@ -1,5 +1,13 @@
 @extends('layout.base')
 
+@section('page-styles')
+    <!-- Leaflet css -->
+    <link href="{{ asset('assets/app/map/leaflet/leaflet.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/app/map/leaflet/OverPassLayer.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/app/map/leaflet/leaflet-geoman.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/app/map/leaflet/L.Control.SlideMenu.css') }}" rel="stylesheet">
+@endsection
+
 @section('page-content')
     <div class="container-fluid">
         <div class="row">
@@ -39,12 +47,6 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="geo_reference_area">Geo Reference Area</label>
-                                <input type="text" class="form-control" id="geo_reference_area" name="geo_reference_area"
-                                    value="{{ $assembly->geo_reference_area }}" readonly>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
                                 <label for="status">Status</label>
                                 <input type="text" class="form-control" id="status" name="status"
                                     value="{{ $assembly->status }}" readonly>
@@ -66,6 +68,9 @@
                                 <label for="phone">Phone</label>
                                 <input type="text" class="form-control" id="phone" name="phone"
                                     value="{{ $assembly->phone ?? '' }}" readonly>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
                             </div>
 
                             <div class="col-md-6">
@@ -91,10 +96,118 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-md-12">
+                                <label for="phone">Selected Boundary</label>
+                                <div id="map" style="height: 500px;"></div>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('page-scripts')
+    <!-- leaflet js-->
+    <script src="{{ asset('assets/app/map/geojsonhint.js') }}"></script>
+    <script src="{{ asset('assets/app/map/geojsonUtil.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/leaflet.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/OverPassLayer.bundle.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/Leaflet.Control.Custom.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/leaflet-geoman.min.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/L.Control.SlideMenu.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/easy-button.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/osmtogeojson.js') }}"></script>
+    <script src="{{ asset('assets/app/map/StyleFactory.js') }}"></script>
+    <script src="{{ asset('assets/app/map/MapTileProvider.js') }}"></script>
+    <script src="{{ asset('assets/app/map/MapController.js?v=' . \Illuminate\Support\Str::random(5)) }}"></script>
+
+    <script>
+        const map = L.map('map').setView([7.95277, -1.03071], 6);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        const rawData = @json($assembly->geo_coordinate);
+        const parsedData = JSON.parse(rawData);
+        const boundaries = formatBoundaries(parsedData);
+
+        const allBounds = [];
+        boundaries.forEach(boundary => {
+            if (boundary.type === 'polygon') {
+                const coordinates = JSON.parse(boundary.coordinates).map(coord => [coord[1], coord[
+                    0]]); // Swap latitude and longitude
+                console.log('Polygon coordinates:', coordinates);
+                L.polygon(coordinates, {
+                    color: 'blue',
+                    fillColor: '#3388ff',
+                    fillOpacity: 0.5
+                }).addTo(map);
+                allBounds.push(...coordinates);
+            } else if (boundary.type === 'circle') {
+                const center = JSON.parse(boundary.coordinates).center;
+                const radius = JSON.parse(boundary.coordinates).radius;
+                L.circle([center.lat, center.lng], {
+                    radius: radius,
+                    color: 'red',
+                    fillColor: '#f03',
+                    fillOpacity: 0.5
+                }).addTo(map);
+                allBounds.push([center.lat, center.lng]);
+            } else if (boundary.type === 'line') {
+                const lineCoordinates = JSON.parse(boundary.coordinates).map(coord => [coord[1], coord[
+                    0]]); // Swap latitude and longitude
+                L.polyline(lineCoordinates, {
+                    color: 'green'
+                }).addTo(map);
+                allBounds.push(...lineCoordinates);
+            }
+        });
+
+        if (allBounds.length > 0) {
+            const bounds = L.latLngBounds(allBounds);
+            map.fitBounds(bounds);
+        }
+
+        function formatBoundaries(rawData) {
+            const formattedBoundaries = rawData.map(data => {
+                if (Array.isArray(data)) {
+                    const isPolygon = Array.isArray(data[0]) && Array.isArray(data[data.length - 1]) &&
+                        data[0][0] === data[data.length - 1][0] &&
+                        data[0][1] === data[data.length - 1][1];
+
+                    if (isPolygon) {
+                        return {
+                            type: 'polygon',
+                            coordinates: JSON.stringify(data)
+                        };
+                    } else if (Array.isArray(data[0])) {
+                        return {
+                            type: 'line',
+                            coordinates: JSON.stringify(data)
+                        };
+                    }
+                } else if (typeof data === 'object' && data.center && data.radius) {
+                    return {
+                        type: 'circle',
+                        coordinates: JSON.stringify({
+                            center: data.center,
+                            radius: data.radius
+                        })
+                    };
+                }
+
+                return {
+                    type: 'unknown',
+                    coordinates: JSON.stringify(data)
+                };
+            });
+
+            return formattedBoundaries;
+        }
+    </script>
 @endsection

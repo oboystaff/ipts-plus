@@ -17,7 +17,7 @@ class Assembly extends Model
         'assembly_code',
         'regional_code',
         'supervisor',
-        'geo_reference_area',
+        'geo_coordinate',
         'logo',
         'invoice_layout',
         'status',

@@ -109,13 +109,6 @@
                                                             <a class="dropdown-item"
                                                                 href=" {{ route('assembly.edit', $assembly->id) }}">Edit
                                                             </a>
-                                                            <a class="dropdown-item"
-                                                                href=" {{ route('assembly.edit', $assembly->id) }}">Quick
-                                                                Summary
-                                                            </a>
-                                                            <a class="dropdown-item"
-                                                                href=" {{ route('assembly.map') }}">View Map
-                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -134,27 +127,10 @@
 
 
 @section('page-scripts')
-    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-    {{-- <script type="text/javascript" src="{{ asset('assets/maps/mapdata.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/maps/countrymap.js') }}"></script> --}}
-    <script>
-        maptilersdk.config.apiKey = 'q05Q2zgVhPLcM1AwSVLs';
-        const map = new maptilersdk.Map({
-            container: 'map', // container's id or the HTML element in which the SDK will render the map
-            style: maptilersdk.MapStyle.STREETS,
-            center: [16.62662018, 49.2125578], // starting position [lng, lat]
-            zoom: 14 // starting zoom
-        });
-    </script>
-    <script src="https://cdn.maptiler.com/maptiler-sdk-js/v2.0.3/maptiler-sdk.umd.js"></script>
-
-
     <script src="{{ asset('assets/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/datatables/js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/datatables/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/datatables/js/jszip.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins-init/datatables.init.js') }}"></script>
-
-
     <script src="{{ asset('assets/js/dashboard/crm.js') }}"></script>
 @endsection
