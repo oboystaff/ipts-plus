@@ -171,6 +171,7 @@ class AgentController extends Controller
             'Pending' => [],
             'Completed' => [],
         ];
+
         $taskAssignments = TaskAssignment::orderBy('created_at', 'DESC')
             ->with(['supervisor', 'agent', 'assembly'])
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
@@ -205,19 +206,32 @@ class AgentController extends Controller
 
                     if ($task === 'Payment Collection') {
                         $block['total_payments'] = Property::where('block_id', $block['block_id'])
-                            ->with(['bills.payments' => function ($query) {
-                                $query->select(DB::raw('SUM(CASE WHEN payment_mode = "momo" AND transaction_status = "Success" THEN amount WHEN payment_mode != "momo" THEN amount ELSE 0 END) as total_payments'));
-                            }])
                             ->get()
                             ->reduce(function ($carry, $property) {
-                                $propertyPayments = $property->bills->reduce(function ($billCarry, $bill) {
-                                    return $billCarry + ($bill->payments->first()->total_payments ?? 0);
-                                }, 0);
+                                $propertyPayments = DB::table('payments')
+                                    ->join('bills', 'payments.bills_id', '=', 'bills.bills_id')
+                                    ->where('bills.property_id', $property->id)
+                                    ->select(
+                                        DB::raw('SUM(CASE 
+                                            WHEN payment_mode = "momo" AND transaction_status = "Success" THEN payments.amount 
+                                            WHEN payment_mode != "momo" THEN payments.amount 
+                                            ELSE 0 
+                                        END) as total_payments')
+                                    )
+                                    ->value('total_payments') ?? 0;
 
                                 return $carry + $propertyPayments;
                             }, 0);
-                    } else {
-                        $block['total_payments'] = 0;
+
+                        $block['total_bills'] = Property::where('block_id', $block['block_id'])
+                            ->get()
+                            ->reduce(function ($carry, $property) {
+                                $propertyBills = DB::table('bills')
+                                    ->where('property_id', $property->id)
+                                    ->sum('amount');
+
+                                return $carry + $propertyBills;
+                            }, 0);
                     }
 
                     return $block;
@@ -240,19 +254,51 @@ class AgentController extends Controller
                         if (!isset($totalTaskType['Pending'][$taskType])) {
                             $totalTaskType['Pending'][$taskType] = 0;
                         }
+
                         $totalTaskType['Pending'][$taskType] += $block['property_count'];
                     } elseif ($taskStatus === 'Completed') {
                         if (!isset($totalTaskType['Completed'][$taskType])) {
                             $totalTaskType['Completed'][$taskType] = 0;
                         }
+
                         $totalTaskType['Completed'][$taskType] += $block['property_count'];
                     }
 
                     if ($taskType === 'Payment Collection') {
-                        if (!isset($totalTaskType['Payments'][$taskType])) {
-                            $totalTaskType['Payments'][$taskType] = 0;
+                        if (!isset($totalTaskType['totalPayments'][$taskType])) {
+                            $totalTaskType['totalPayments'][$taskType] = 0;
                         }
-                        $totalTaskType['Payments'][$taskType] += $block['total_payments'];
+
+                        if (!isset($totalTaskType['totalBills'][$taskType])) {
+                            $totalTaskType['totalBills'][$taskType] = 0;
+                        }
+
+                        $block['total_payments'] = Property::where('block_id', $block['block_id'])
+                            ->get()
+                            ->reduce(function ($carry, $property) {
+                                return $carry + DB::table('payments')
+                                    ->join('bills', 'payments.bills_id', '=', 'bills.bills_id')
+                                    ->where('bills.property_id', $property->id)
+                                    ->select(
+                                        DB::raw('SUM(CASE 
+                                            WHEN payment_mode = "momo" AND transaction_status = "Success" THEN payments.amount 
+                                            WHEN payment_mode != "momo" THEN payments.amount 
+                                            ELSE 0 
+                                        END) as total_payments')
+                                    )
+                                    ->value('total_payments') ?? 0;
+                            }, 0);
+
+                        $block['total_bills'] = Property::where('block_id', $block['block_id'])
+                            ->get()
+                            ->reduce(function ($carry, $property) {
+                                return $carry + DB::table('bills')
+                                    ->where('property_id', $property->id)
+                                    ->sum('amount');
+                            }, 0);
+
+                        $totalTaskType['totalPayments'][$taskType] += $block['total_payments'];
+                        $totalTaskType['totalBills'][$taskType] += $block['total_bills'];
                     }
                 }
 
@@ -263,6 +309,10 @@ class AgentController extends Controller
                         if ($value === 0) {
                             $totalTaskType['Completed'][$taskType] = (object)[];
                         }
+                    }
+
+                    if (!empty($totalTaskType['Completed'])) {
+                        $totalTaskType['Completed'] = (array)$totalTaskType['Completed'];
                     }
                 }
 
@@ -321,7 +371,7 @@ class AgentController extends Controller
     public function agentPropertyBlock($id)
     {
         $properties = Property::orderBy('created_at', 'DESC')
-            ->with(['customer', 'assembly', 'zone', 'division', 'block'])
+            ->with(['customer', 'assembly', 'zone', 'division', 'block', 'bills.payments'])
             ->where('block_id', $id)
             ->get();
 
