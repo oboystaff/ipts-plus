@@ -15,6 +15,7 @@ use App\Models\Block;
 use App\Models\Division;
 use App\Models\Zone;
 use App\Models\PropertyUser;
+use Illuminate\Support\Facades\DB;
 
 
 class PropertyController extends Controller
@@ -29,7 +30,34 @@ class PropertyController extends Controller
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
-            ->get();
+            ->with([
+                'bills' => function ($query) {
+                    $query->select('property_id', DB::raw('SUM(amount) as total_bills'))
+                        ->groupBy('property_id');
+                }
+            ])
+            ->get()
+            ->map(function ($property) {
+                $property->total_bills = $property->bills->first()->total_bills ?? 0;
+                $firstname = $property->customer->first_name ?? '';
+                $lastname = $property->customer->last_name ?? '';
+                $property->owner = $firstname . ' ' . $lastname;
+                $property->property_no = $property->property_number ?? 'N/A';
+
+                $property->total_payments = DB::table('payments')
+                    ->join('bills', 'payments.bills_id', '=', 'bills.bills_id')
+                    ->where('bills.property_id', $property->id)
+                    ->select(
+                        DB::raw('SUM(CASE 
+                                WHEN payment_mode = "momo" AND transaction_status = "Success" THEN payments.amount 
+                                WHEN payment_mode != "momo" THEN payments.amount 
+                                ELSE 0 
+                         END) as total_payments')
+                    )
+                    ->value('total_payments') ?? 0;
+
+                return $property;
+            });
 
         $customers = Citizen::query()
             ->get();

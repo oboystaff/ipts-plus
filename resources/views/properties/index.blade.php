@@ -1,6 +1,11 @@
 @extends('layout.base')
 
 @section('page-styles')
+    <!-- Leaflet css -->
+    <link href="{{ asset('assets/app/map/leaflet/leaflet.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/app/map/leaflet/OverPassLayer.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/app/map/leaflet/leaflet-geoman.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/app/map/leaflet/L.Control.SlideMenu.css') }}" rel="stylesheet">
 @endsection
 
 @section('page-content')
@@ -132,6 +137,11 @@
                             </table>
                         </div>
                     </div>
+                    <hr />
+                    <div class="col-md-12">
+                        <label for="phone">Customer Properties On Map</label>
+                        <div id="map" style="height: 600px;"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -139,139 +149,122 @@
 @endsection
 
 @section('page-scripts')
+    <!-- leaflet js-->
+    <script src="{{ asset('assets/app/map/geojsonhint.js') }}"></script>
+    <script src="{{ asset('assets/app/map/geojsonUtil.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/leaflet.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/OverPassLayer.bundle.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/Leaflet.Control.Custom.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/leaflet-geoman.min.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/L.Control.SlideMenu.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/easy-button.js') }}"></script>
+    <script src="{{ asset('assets/app/map/leaflet/osmtogeojson.js') }}"></script>
+    <script src="{{ asset('assets/app/map/StyleFactory.js') }}"></script>
+    <script src="{{ asset('assets/app/map/MapTileProvider.js') }}"></script>
+    <script src="{{ asset('assets/app/map/MapController.js?v=' . \Illuminate\Support\Str::random(5)) }}"></script>
+
     <script>
-        $(document).ready(function() {
-            $('.view-property-btn').click(function(e) {
-                e.preventDefault();
-                var propertyId = $(this).data('property-id');
-                $.ajax({
-                    url: '/properties/' + propertyId,
-                    method: 'GET',
-                    success: function(response) {
-                        // Populate modal with data
-                        $('#propertyModal .modal-body').html(`
+        var map = L.map('map').setView([0, 0], 2);
 
-                        <!-- Add more properties as needed -->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="entity_type" class="form-label">Entity Type:</label>
-                                    <input type="text" class="form-control" id="entity_type" value="${response.entity_type}" readonly>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="digital_address" class="form-label">Digital Address:</label>
-                                    <input type="text" class="form-control" id="digital_address" value="${response.digital_address}" readonly>
-                                </div>
-                                <!-- Add more fields as needed -->
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="location" class="form-label">Location:</label>
-                                    <input type="text" class="form-control" id="location" value="${response.location}" readonly>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="street_name" class="form-label">Street Name:</label>
-                                    <input type="text" class="form-control" id="street_name" value="${response.street_name}" readonly>
-                                </div>
-                                <!-- Add more fields as needed -->
-                            </div>
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
 
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="location" class="form-label">Is This Property Rated?:</label>
-                                    <input type="text" class="form-control" id="location" value="${response.rated}" readonly>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="street_name" class="form-label">Is This Property Validated:</label>
-                                    <input type="text" class="form-control" id="street_name" value="${response.validated}" readonly>
-                                </div>
-                                <!-- Add more fields as needed -->
-                            </div>
+        var properties = @json($properties);
 
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="location" class="form-label">Ratable Value:</label>
-                                    <input type="text" class="form-control" id="location" value="${response.ratable_value}" readonly>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="street_name" class="form-label">Property Number  :</label>
-                                    <input type="text" class="form-control" id="street_name" value="${response.property_number}" readonly>
-                                </div>
-                                <!-- Add more fields as needed -->
-                            </div>
-                        </div>
-                         <h5 class="modal-title" >Owners Bio Data</h5>
-                         <div class="row">
-                        <table id="empoloyees-tbl3" class="table">
-                            <thead>
-                                <tr>
-                                    <th>Owner  ID</th>
-                                    <th>Owner Name</th>
-                                    <th>Owner Phone</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><span>${response.customer_id}</span></td>
-                                    <td>
-                                        <div class="products">
-                                            <img src="{{ asset('assets/images/arms.png') }}" class="avatar avatar-md" alt="">
-                                            <div>
-                                                <h6><a href="javascript:void(0)">Ricky Antony</a></h6>
-                                                <span>${response.first_name}</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><a href="javascript:void(0)" class="text-primary">${response.customer_phone}</a></td>
-                                    <td>
-                                        <span>+12 123 456 7890</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    `);
-                        // Show modal
-                        $('#propertyModal').modal('show');
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            // Click event handler for the Assign Owner button
-            $('.assign-owner-btn').click(function(e) {
-                e.preventDefault();
-                // Show the modal for assigning owners
-                $('#assignOwnerModal').modal('show');
-            });
+        properties.forEach(function(property) {
+            if (property.latitude && property.longitude) {
+                var totalBill = property.total_bills || 0;
+                var totalPaid = property.total_payments || 0;
+                var markerColor;
 
-            // AJAX request to search for citizens
-            $('#ownerSearch').keyup(function() {
-                var query = $(this).val();
-                if (query !== '') {
-                    $.ajax({
-                        url: '/citizens/search',
-                        method: 'GET',
-                        data: {
-                            query: query
-                        },
-                        success: function(response) {
-                            $('#citizenSearchResults').html(response);
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(xhr.responseText);
-                        }
-                    });
+                if (totalPaid >= totalBill && totalBill > 0) {
+                    markerColor = 'blue';
+                } else if (totalPaid > 0 && totalPaid < totalBill) {
+                    markerColor = 'yellow';
                 } else {
-                    $('#citizenSearchResults').html('');
+                    markerColor = 'red';
                 }
-            });
+
+                var customIcon = L.icon({
+                    iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-${markerColor}.png`,
+                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                });
+
+                var marker = L.marker([property.latitude, property.longitude], {
+                    icon: customIcon
+                }).addTo(map);
+
+                var popup = L.popup().setContent(`
+                    <b>Property No.:</b> ${property.property_no}<br>
+                    <b>Owner:</b> ${property.owner}<br>
+                    <th>Location:</b> ${property.location}<br>
+                    <b>Status:</b> ${markerColor === 'blue' ? 'Fully Paid' : markerColor === 'yellow' ? 'Partial Payment' : 'No Payment'}
+                `);
+
+                marker.on('mouseover', function(e) {
+                    popup.setLatLng(e.latlng).openOn(map);
+                });
+
+                marker.on('mouseout', function() {
+                    map.closePopup(popup);
+                });
+            }
         });
+
+        properties.forEach(function(property) {
+            if (property.latitude && property.longitude) {
+                var totalBill = property.total_bills || 0;
+                var totalPaid = property.total_payments || 0;
+                var markerColor;
+
+                if (totalPaid >= totalBill && totalBill > 0) {
+                    markerColor = 'blue';
+                } else if (totalPaid > 0 && totalPaid < totalBill) {
+                    markerColor = 'yellow';
+                } else {
+                    markerColor = 'red';
+                }
+
+                var customIcon = L.icon({
+                    iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-${markerColor}.png`,
+                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                });
+
+                var marker = L.marker([property.latitude, property.longitude], {
+                    icon: customIcon
+                }).addTo(map);
+
+                var popup = L.popup().setContent(`
+                    <b>Property ID:</b> ${property.id}<br>
+                    <b>Total Bill:</b> $${totalBill.toFixed(2)}<br>
+                    <b>Total Paid:</b> $${totalPaid.toFixed(2)}<br>
+                    <b>Status:</b> ${markerColor === 'blue' ? 'Fully Paid' : markerColor === 'yellow' ? 'Partially Paid' : 'No Payment'}
+                `);
+
+                marker.on('mouseover', function(e) {
+                    popup.setLatLng(e.latlng).openOn(map);
+                });
+
+                marker.on('mouseout', function() {
+                    map.closePopup(popup);
+                });
+            }
+        });
+
+        var bounds = L.latLngBounds(properties.map(function(property) {
+            return [property.latitude, property.longitude];
+        }));
+
+        map.fitBounds(bounds);
     </script>
 @endsection

@@ -14,6 +14,7 @@ use App\Models\TaskAssignment;
 use App\Models\Payment;
 use App\Models\Property;
 use App\Models\ReportUpload;
+use Illuminate\Support\Facades\DB;
 
 
 class AgentController extends Controller
@@ -184,11 +185,40 @@ class AgentController extends Controller
             ->where('agent_id', $agent->id)
             ->get()
             ->map(function ($assignment) use (&$totalTask, &$totalTaskType) {
-                $assignment->block_data = collect($assignment->block_data)->map(function ($block) {
+                $assignment->block_data = collect($assignment->block_data)->map(function ($block) use ($assignment) {
                     $blockModel = Block::find($block['block_id']);
                     $block['block_name'] = $blockModel ? $blockModel->block_name : 'Unknown';
 
                     $block['property_count'] = Property::where('block_id', $block['block_id'])->count();
+
+                    $taskAssignment = TaskAssignment::where('id', $assignment->id)->first();
+                    $task = null;
+
+                    if ($taskAssignment && is_array($taskAssignment->block_data)) {
+                        foreach ($taskAssignment->block_data as $taskBlock) {
+                            if ($taskBlock['block_id'] == $block['block_id']) {
+                                $task = $assignment->task;
+                                break;
+                            }
+                        }
+                    }
+
+                    if ($task === 'Payment Collection') {
+                        $block['total_payments'] = Property::where('block_id', $block['block_id'])
+                            ->with(['bills.payments' => function ($query) {
+                                $query->select(DB::raw('SUM(CASE WHEN payment_mode = "momo" AND transaction_status = "Success" THEN amount WHEN payment_mode != "momo" THEN amount ELSE 0 END) as total_payments'));
+                            }])
+                            ->get()
+                            ->reduce(function ($carry, $property) {
+                                $propertyPayments = $property->bills->reduce(function ($billCarry, $bill) {
+                                    return $billCarry + ($bill->payments->first()->total_payments ?? 0);
+                                }, 0);
+
+                                return $carry + $propertyPayments;
+                            }, 0);
+                    } else {
+                        $block['total_payments'] = 0;
+                    }
 
                     return $block;
                 })->toArray();
@@ -216,6 +246,23 @@ class AgentController extends Controller
                             $totalTaskType['Completed'][$taskType] = 0;
                         }
                         $totalTaskType['Completed'][$taskType] += $block['property_count'];
+                    }
+
+                    if ($taskType === 'Payment Collection') {
+                        if (!isset($totalTaskType['Payments'][$taskType])) {
+                            $totalTaskType['Payments'][$taskType] = 0;
+                        }
+                        $totalTaskType['Payments'][$taskType] += $block['total_payments'];
+                    }
+                }
+
+                if (isset($totalTaskType['Completed']) && empty($totalTaskType['Completed'])) {
+                    $totalTaskType['Completed'] = (object)[];
+                } else {
+                    foreach ($totalTaskType['Completed'] as $taskType => $value) {
+                        if ($value === 0) {
+                            $totalTaskType['Completed'][$taskType] = (object)[];
+                        }
                     }
                 }
 

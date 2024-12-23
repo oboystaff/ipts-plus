@@ -66,6 +66,11 @@ class Property extends Model
         return $this->belongsTo(Block::class, 'block_id');
     }
 
+    public function bills()
+    {
+        return $this->hasMany(Bill::class, 'property_id');
+    }
+
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
