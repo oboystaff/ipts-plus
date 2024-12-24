@@ -6,6 +6,46 @@
 @section('page-content')
     <div class="container-fluid mh-auto">
         <div class="row">
+
+            <div class="col-xl-4  col-lg-6 col-sm-6">
+                <div class="widget-stat card">
+                    <div class="card-body p-4">
+                        <h4 class="card-title">Total Pending Payments </h4>
+                        <h3> GHS {{ $data['totalPendingPayments'] }}</h3>
+                        <div class="progress mb-2">
+                            <div class="progress-bar progress-animated bg-warning" style="width: 80%"></div>
+                        </div>
+                        <small>Total Pending Payments</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4  col-lg-6 col-sm-6">
+                <div class="widget-stat card">
+                    <div class="card-body p-4">
+                        <h4 class="card-title">Total Successful Payments </h4>
+                        <h3>GHS {{ $data['totalSuccessfulPayments'] }}</h3>
+                        <div class="progress mb-2">
+                            <div class="progress-bar progress-animated bg-success" style="width: 80%"></div>
+                        </div>
+                        <small>Total Successful Payments</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4  col-lg-6 col-sm-6">
+                <div class="widget-stat card">
+                    <div class="card-body p-4">
+                        <h4 class="card-title">Total Failed Payments </h4>
+                        <h3>GHS {{ $data['totalFailedPayments'] }}</h3>
+                        <div class="progress mb-2">
+                            <div class="progress-bar progress-animated bg-danger" style="width: 80%"></div>
+                        </div>
+                        <small>Total Failed Payments</small>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-xl-12 active-p">
 
                 @if (session()->has('status'))

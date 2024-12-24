@@ -34,9 +34,32 @@ class PaymentController extends Controller
             })
             ->get();
 
+        $successfulPayments = $payments->filter(function ($payment) {
+            return ($payment->payment_mode === 'momo' && $payment->transaction_status === 'Success') ||
+                $payment->payment_mode === 'cash';
+        });
+
+        $pendingPayments = $payments->filter(function ($payment) {
+            return $payment->payment_mode === 'momo' && $payment->transaction_status === 'Pending';
+        });
+
+        $failedPayments = $payments->filter(function ($payment) {
+            return $payment->payment_mode === 'momo' && $payment->transaction_status === 'Failed';
+        });
+
+        $totalSuccessfulPayments = $successfulPayments->sum('amount');
+        $totalPendingPayments = $pendingPayments->sum('amount');
+        $totalFailedPayments = $failedPayments->sum('amount');
+
         $total = number_format($payments->sum('amount'), 2);
 
-        return view('payments.index', compact('payments', 'total'));
+        $data = [
+            'totalSuccessfulPayments' => isset($totalSuccessfulPayments) ? number_format($totalSuccessfulPayments, 2) : 0,
+            'totalPendingPayments' => isset($totalPendingPayments) ? number_format($totalPendingPayments, 2) : 0,
+            'totalFailedPayments' => isset($totalFailedPayments) ? number_format($totalFailedPayments, 2) : 0
+        ];
+
+        return view('payments.index', compact('payments', 'total', 'data'));
     }
 
     public function create(Bill $bill)
