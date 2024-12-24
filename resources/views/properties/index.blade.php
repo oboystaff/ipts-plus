@@ -138,8 +138,12 @@
                         </div>
                     </div>
                     <hr />
-                    <div class="col-md-12">
-                        <label for="phone">Customer Properties On Map</label>
+                    <div class="col-md-12" style="margin-left:20px;">
+                        <label for="phone" style="font-size:15px;margin-bottom:20px">Customer Properties On Map (<span
+                                style="color:blue;font-weight:bold">Blue:</span>
+                            Full Payment, <span style="color:yellow;font-weight:bold">Yellow:</span> Partial Payment, <span
+                                style="color:red;font-weight:bold">Red:</span> No
+                            Payment)</label>
                         <div id="map" style="height: 600px;"></div>
                     </div>
                 </div>
@@ -205,50 +209,6 @@
                     <b>Owner:</b> ${property.owner}<br>
                     <th>Location:</b> ${property.location}<br>
                     <b>Status:</b> ${markerColor === 'blue' ? 'Fully Paid' : markerColor === 'yellow' ? 'Partial Payment' : 'No Payment'}
-                `);
-
-                marker.on('mouseover', function(e) {
-                    popup.setLatLng(e.latlng).openOn(map);
-                });
-
-                marker.on('mouseout', function() {
-                    map.closePopup(popup);
-                });
-            }
-        });
-
-        properties.forEach(function(property) {
-            if (property.latitude && property.longitude) {
-                var totalBill = property.total_bills || 0;
-                var totalPaid = property.total_payments || 0;
-                var markerColor;
-
-                if (totalPaid >= totalBill && totalBill > 0) {
-                    markerColor = 'blue';
-                } else if (totalPaid > 0 && totalPaid < totalBill) {
-                    markerColor = 'yellow';
-                } else {
-                    markerColor = 'red';
-                }
-
-                var customIcon = L.icon({
-                    iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-${markerColor}.png`,
-                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-                    iconSize: [25, 41],
-                    iconAnchor: [12, 41],
-                    popupAnchor: [1, -34],
-                    shadowSize: [41, 41]
-                });
-
-                var marker = L.marker([property.latitude, property.longitude], {
-                    icon: customIcon
-                }).addTo(map);
-
-                var popup = L.popup().setContent(`
-                    <b>Property ID:</b> ${property.id}<br>
-                    <b>Total Bill:</b> $${totalBill.toFixed(2)}<br>
-                    <b>Total Paid:</b> $${totalPaid.toFixed(2)}<br>
-                    <b>Status:</b> ${markerColor === 'blue' ? 'Fully Paid' : markerColor === 'yellow' ? 'Partially Paid' : 'No Payment'}
                 `);
 
                 marker.on('mouseover', function(e) {
