@@ -16,7 +16,7 @@ use App\Http\Controllers\API\CustomerSupport\CustomerSupportController;
 use App\Http\Controllers\API\Dashboard\DashboardController;
 use App\Http\Controllers\API\Property\PropertyController;
 use App\Http\Controllers\API\Business\BusinessController;
-
+use App\Http\Controllers\API\USSD\USSDController;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,4 +120,8 @@ Route::group(['prefix' => 'business', 'middleware' => 'auth:sanctum'], function 
     Route::get('/', [BusinessController::class, 'index']);
     Route::get('/show/{id}', [BusinessController::class, 'show']);
     Route::get('/customer/{id}', [BusinessController::class, 'customerBusiness']);
+});
+
+Route::group(['prefix' => 'ussd', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/customer/{phone}', [USSDController::class, 'customerInfo']);
 });
