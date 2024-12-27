@@ -122,6 +122,8 @@ Route::group(['prefix' => 'business', 'middleware' => 'auth:sanctum'], function 
     Route::get('/customer/{id}', [BusinessController::class, 'customerBusiness']);
 });
 
+Route::get('/ussd/generate/token', [USSDController::class, 'generateToken']);
+
 Route::group(['prefix' => 'ussd', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/customer/{phone}', [USSDController::class, 'customerInfo']);
 });
