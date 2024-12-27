@@ -36,7 +36,7 @@ class USSDController extends Controller
             ], 422);
         }
 
-        $user->tokens()->delete();
+        $user->tokens()->where('name', 'Static Token')->delete();
         $token = $user->createToken('Static Token')->plainTextToken;
 
         return response()->json([
