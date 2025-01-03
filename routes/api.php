@@ -17,6 +17,11 @@ use App\Http\Controllers\API\Dashboard\DashboardController;
 use App\Http\Controllers\API\Property\PropertyController;
 use App\Http\Controllers\API\Business\BusinessController;
 use App\Http\Controllers\API\USSD\USSDController;
+use App\Http\Controllers\API\BusinessClassType\EntityTypeController;
+use App\Http\Controllers\API\Block\BlockController;
+use App\Http\Controllers\API\Zone\ZoneController;
+use App\Http\Controllers\API\PropertyUse\PropertyUseController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -129,4 +134,24 @@ Route::get('/ussd/generate/token', [USSDController::class, 'generateToken']);
 
 Route::group(['prefix' => 'ussd', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/customer/{phone}', [USSDController::class, 'customerInfo']);
+});
+
+Route::group(['prefix' => 'entity-type', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [EntityTypeController::class, 'index']);
+    Route::get('/show/{id}', [EntityTypeController::class, 'show']);
+});
+
+Route::group(['prefix' => 'block', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [BlockController::class, 'index']);
+    Route::get('/show/{id}', [BlockController::class, 'show']);
+});
+
+Route::group(['prefix' => 'zone', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [ZoneController::class, 'index']);
+    Route::get('/show/{id}', [ZoneController::class, 'show']);
+});
+
+Route::group(['prefix' => 'property-use', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/{zone_id}', [PropertyUseController::class, 'index']);
+    Route::get('/show/{id}', [PropertyUseController::class, 'show']);
 });
