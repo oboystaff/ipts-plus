@@ -26,36 +26,19 @@
                                         <thead>
                                             <tr>
                                                 <th>S/N</th>
-                                                <th>Entity Type</th>
-                                                <th>Category</th>
-                                                <th>Digital Address</th>
-                                                <th>Location</th>
-                                                <th>Street Name</th>
-                                                <th>Rated</th>
-                                                <th>Validated</th>
                                                 <th>Property Number</th>
                                                 <th>Owner Account</th>
                                                 <th>Owner Name</th>
                                                 <th>Ratable Value</th>
                                                 <th>Assembly</th>
-                                                <th>Division</th>
-                                                <th>Block</th>
-                                                <th>Zone</th>
-                                                <th>Property Use</th>
                                                 <th>Date Created</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($customerData['properties'] as $index => $property)
                                                 <tr>
                                                     <td>{{ $index + 1 }}</td>
-                                                    <td>{{ $property->entityType->name ?? '' }}</td>
-                                                    <td>{{ $property->entityType->category ?? '' }}</td>
-                                                    <td>{{ $property->digital_address }}</td>
-                                                    <td>{{ $property->location }}</td>
-                                                    <td>{{ $property->street_name }}</td>
-                                                    <td>{{ $property->rated }}</td>
-                                                    <td>{{ $property->validated }}</td>
                                                     <td>{{ $property->property_number }}</td>
                                                     <td>{{ $property->customer->account_number ?? 'N/A' }}</td>
                                                     <td>{{ $property->customer->first_name ?? '' }}
@@ -63,19 +46,48 @@
                                                     </td>
                                                     <td>{{ number_format($property->ratable_value, 2) }}</td>
                                                     <td>{{ $property->assembly->name ?? 'N/A' }}</td>
-                                                    <td>{{ $property->division->division_name ?? 'N/A' }}</td>
-                                                    <td>{{ $property->block->block_name ?? 'N/A' }}</td>
-                                                    <td>{{ $property->zone->name ?? 'N/A' }}</td>
-                                                    <td>{{ $property->propertyUse->name ?? 'N/A' }}</td>
                                                     <td>{{ $property->created_at }}</td>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <div class="btn-link" data-bs-toggle="dropdown"
+                                                                aria-expanded="false">
+                                                                <svg width="24" height="24" viewBox="0 0 24 24"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
+                                                                        stroke="#737B8B" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                                    </path>
+                                                                    <path
+                                                                        d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
+                                                                        stroke="#737B8B" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                                    </path>
+                                                                    <path
+                                                                        d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
+                                                                        stroke="#737B8B" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                                    </path>
+                                                                </svg>
+                                                            </div>
+                                                            <div class="dropdown-menu dropdown-menu-end">
+                                                                <div class="py-2">
+                                                                    <a class="dropdown-item"
+                                                                        href=" {{ route('citizens.viewProperty', $property) }}">View
+                                                                        Property
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                         <tfoot>
-                                            <th colspan="10"></th>
+                                            <th colspan="3"></th>
                                             <th>Total (GHS)</th>
                                             <th>{{ $customerData['total'] }}</th>
-                                            <th colspan="6"></th>
+                                            <th colspan="3"></th>
                                         </tfoot>
                                     </table>
                                 </div>

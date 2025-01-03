@@ -13,8 +13,6 @@
 
             </div>
 
-
-
             <div class="col-xl-12 active-p">
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab">
@@ -26,7 +24,7 @@
                                         <thead>
                                             <tr>
                                                 <th>SN</th>
-                                                <th>Bills ID</th>
+                                                <th>Bill ID</th>
                                                 <th>Name</th>
                                                 <th>Amount</th>
                                                 <th>Payment Mode</th>
@@ -93,18 +91,9 @@
                                                                 </svg>
                                                             </div>
                                                             <div class="dropdown-menu dropdown-menu-end">
-                                                                {{-- <a class="dropdown-item"
-                                                                    href="{{ route('payments.show', $payment) }}">Make
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('citizens.viewPayment', $payment) }}">View
                                                                     Payment</a>
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('payments.fetch', $payment->bills_id) }}">View
-                                                                    Payment</a>
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('receipt.show', $payment) }}">View
-                                                                    Receipt</a>
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('payments.edit', $payment) }}">Amend
-                                                                    Bill</a> --}}
                                                             </div>
                                                         </div>
                                                     </td>

@@ -28,18 +28,11 @@
                                                 <th>S/N</th>
                                                 <th>Business Name</th>
                                                 <th>Business Type</th>
-                                                <th>Business Class</th>
-                                                <th>Location</th>
-                                                <th>Email</th>
-                                                <th>Phone</th>
                                                 <th>Business Owner</th>
                                                 <th>Assembly</th>
-                                                <th>Division</th>
-                                                <th>Block</th>
-                                                <th>Zone</th>
-                                                <th>Property Use</th>
                                                 <th>Created By</th>
                                                 <th>Date Created</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -54,18 +47,43 @@
                                                     <td>{{ $index + 1 }}</td>
                                                     <td>{{ $business->business_name }}</td>
                                                     <td>{{ $business->businessType->name ?? '' }}</td>
-                                                    <td>{{ $business->businessClass->name ?? '' }}</td>
-                                                    <td>{{ $business->location }}</td>
-                                                    <td>{{ $business->email }}</td>
-                                                    <td>{{ $business->business_phone }}</td>
                                                     <td>{{ $fullname ?? '' }}</td>
                                                     <td>{{ $business->assembly->name ?? 'N/A' }}</td>
-                                                    <td>{{ $business->division->division_name ?? 'N/A' }}</td>
-                                                    <td>{{ $business->block->block_name ?? 'N/A' }}</td>
-                                                    <td>{{ $business->zone->name ?? 'N/A' }}</td>
-                                                    <td>{{ $business->propertyUse->name ?? 'N/A' }}</td>
                                                     <td>{{ $business->createdBy->name ?? 'N/A' }}</td>
                                                     <td>{{ $business->created_at }}</td>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <div class="btn-link" data-bs-toggle="dropdown"
+                                                                aria-expanded="false">
+                                                                <svg width="24" height="24" viewBox="0 0 24 24"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
+                                                                        stroke="#737B8B" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                                    </path>
+                                                                    <path
+                                                                        d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
+                                                                        stroke="#737B8B" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                                    </path>
+                                                                    <path
+                                                                        d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
+                                                                        stroke="#737B8B" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                                    </path>
+                                                                </svg>
+                                                            </div>
+                                                            <div class="dropdown-menu dropdown-menu-end">
+                                                                <div class="py-2">
+                                                                    <a class="dropdown-item"
+                                                                        href=" {{ route('citizens.viewBusiness', $business) }}">View
+                                                                        Business
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

@@ -25,9 +25,6 @@
                                                 <th>S/N</th>
                                                 <th>Bill No</th>
                                                 <th>Name</th>
-                                                <th>Bill Date</th>
-                                                <th>Bill Year</th>
-                                                <th>Bill Type</th>
                                                 <th>Arrears</th>
                                                 <th>Current Amount</th>
                                                 <th>Amount Due</th>
@@ -57,21 +54,6 @@
                                                     <td>{{ $index + 1 }}</td>
                                                     <td>{{ $bill->bills_id }}</td>
                                                     <td>{{ $name ?? '' }}</td>
-                                                    <td>{{ $bill->billing_date }}</td>
-                                                    <td>{{ $bill->bills_year }}</td>
-                                                    @if ($bill->property_id !== null)
-                                                        <td>
-                                                            <span class="badge light badge-success">
-                                                                {{ $billType }}
-                                                            </span>
-                                                        </td>
-                                                    @else
-                                                        <td>
-                                                            <span class="badge light badge-warning">
-                                                                {{ $billType }}
-                                                            </span>
-                                                        </td>
-                                                    @endif
                                                     <td>{{ number_format($bill->arrears, 2) }}</td>
                                                     <td>{{ number_format($bill->amount, 2) }}</td>
                                                     <td>{{ number_format($bill->amount + $bill->arrears, 2) }}
@@ -104,7 +86,8 @@
                                                             <div class="dropdown-menu dropdown-menu-end">
                                                                 <div class="py-2">
                                                                     <a class="dropdown-item"
-                                                                        href=" {{ route('payments.customerCreate', $bill) }}">View
+                                                                        href=" {{ route('citizens.viewBill', $bill) }}">View
+                                                                        Bill
                                                                     </a>
                                                                     <a class="dropdown-item"
                                                                         href=" {{ route('payments.customerCreate', $bill) }}">Make
@@ -119,7 +102,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th colspan="5"></th>
+                                                <th colspan="2"></th>
                                                 <th>Total (GHS)</th>
                                                 <th>{{ $customerData['totalArrears'] }}</th>
                                                 <th>{{ $customerData['totalAmount'] }}</th>

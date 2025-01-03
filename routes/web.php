@@ -144,6 +144,10 @@ Route::group(['prefix' => 'citizen', 'middleware' => 'auth:sanctum'], function (
     Route::get('/{citizen}/edit', [CitizenController::class, 'edit'])->name('citizens.edit');
     Route::post('/{citizen}', [CitizenController::class, 'update'])->name('citizens.update');
     Route::delete('/{citizen}', [CitizenController::class, 'destroy'])->name('citizens.destroy');
+    Route::get('/view/bill/{bill}', [CitizenController::class, 'viewBill'])->name('citizens.viewBill');
+    Route::get('/view/property/{property}', [CitizenController::class, 'viewProperty'])->name('citizens.viewProperty');
+    Route::get('/view/business/{business}', [CitizenController::class, 'viewBusiness'])->name('citizens.viewBusiness');
+    Route::get('/view/payment/{payment}', [CitizenController::class, 'viewPayment'])->name('citizens.viewPayment');
 });
 
 // Route for Customer Types
@@ -159,7 +163,7 @@ Route::group(['prefix' => 'customer-type', 'middleware' => 'auth:sanctum'], func
 //LOGIN MANAGEMENT
 Route::group(['prefix' => ''], function () {
     Route::get('/', [AuthAdmin\LoginAdminController::class, 'LandingPage'])->name('auth.LandingPage');
-     Route::get('/index', [AuthAdmin\LoginAdminController::class, 'index'])->name('auth.index');
+    Route::get('/index', [AuthAdmin\LoginAdminController::class, 'index'])->name('auth.index');
     Route::get('/register', [AuthAdmin\LoginAdminController::class, 'register'])->name('auth.register');
     Route::get('/activate', [CitizenController::class, 'activate'])->name('citizens.activate');
     Route::post('/activate', [CitizenController::class, 'activateCitizen'])->name('citizens.activateCitizen');

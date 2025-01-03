@@ -304,4 +304,24 @@ class CitizenController extends Controller
 
         return redirect()->route('citizens.index')->with('success', 'Citizen deleted successfully!');
     }
+
+    public function viewBill(Bill $bill)
+    {
+        return view('dashboard.index-bill', compact('bill'));
+    }
+
+    public function viewProperty(Property $property)
+    {
+        return view('dashboard.index-property', compact('property'));
+    }
+
+    public function viewBusiness(Business $business)
+    {
+        return view('dashboard.index-business', compact('business'));
+    }
+
+    public function viewPayment(Payment $payment)
+    {
+        return view('dashboard.index-payment', compact('payment'));
+    }
 }
