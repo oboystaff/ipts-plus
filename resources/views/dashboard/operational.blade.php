@@ -443,8 +443,8 @@
 
                                     @php
                                         // Define the totals
-                                        $totalBusinessBill = $total['totalBusinessBill'];
-                                        $totalPropertyBill = $total['totalPropertyBill'];
+                                        $totalBusinessBill = (float) $total['totalBusinessBill'];
+                                        $totalPropertyBill = (float) $total['totalPropertyBill'];
 
                                         // Calculate the summation
                                         $totalSum = $totalBusinessBill + $totalPropertyBill;
@@ -462,12 +462,12 @@
                                                 <i class="ti ti-arrow-up text-success"></i></span>
                                         </div>
                                         <div class="col col-xl-4 border-end border-inline-end-dashed">
-                                            <span class="d-block text-muted mb-1 fs-12">GRA-(15%)</span>
+                                            <span class="d-block text-muted mb-1 fs-12">GRA - (15%)</span>
                                             <span class="fw-semibold h6 mb-0 text-center">{{ number_format($gracut, 2) }}
                                                 <i class="ti ti-arrow-down text-danger"></i></span>
                                         </div>
                                         <div class="col col-xl-4">
-                                            <span class="d-block text-muted mb-1 fs-12">Level 10 -(15%)</span>
+                                            <span class="d-block text-muted mb-1 fs-12">Level 10 - (15%)</span>
                                             <span
                                                 class="fw-semibold h6 mb-0 text-center">{{ number_format($level10cut, 2) }}<i
                                                     class="ti ti-arrow-up text-success"></i></span>

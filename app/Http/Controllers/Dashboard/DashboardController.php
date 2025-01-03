@@ -481,7 +481,7 @@ class DashboardController extends Controller
 
         return view('dashboard.operational', compact('total', 'chartData', 'chartData2', 'chartData3', 'customerData'));
     }
-     public function Mybills(Request $request)
+    public function Mybills(Request $request)
     {
         if (!auth()->user()->can('dashboards.operational')) {
             abort(403, 'Unauthorized action.');
@@ -939,7 +939,7 @@ class DashboardController extends Controller
 
         return view('dashboard.mybills', compact('total', 'chartData', 'chartData2', 'chartData3', 'customerData'));
     }
-     public function Myproperties(Request $request)
+    public function Myproperties(Request $request)
     {
         if (!auth()->user()->can('dashboards.operational')) {
             abort(403, 'Unauthorized action.');
@@ -1397,7 +1397,7 @@ class DashboardController extends Controller
 
         return view('dashboard.myproperties', compact('total', 'chartData', 'chartData2', 'chartData3', 'customerData'));
     }
-     public function Mybusiness(Request $request)
+    public function Mybusiness(Request $request)
     {
         if (!auth()->user()->can('dashboards.operational')) {
             abort(403, 'Unauthorized action.');
@@ -1855,7 +1855,7 @@ class DashboardController extends Controller
 
         return view('dashboard.mybusiness', compact('total', 'chartData', 'chartData2', 'chartData3', 'customerData'));
     }
-     public function Mypaymenthistory(Request $request)
+    public function Mypaymenthistory(Request $request)
     {
         if (!auth()->user()->can('dashboards.operational')) {
             abort(403, 'Unauthorized action.');
@@ -2313,5 +2313,4 @@ class DashboardController extends Controller
 
         return view('dashboard.mypaymenthistory', compact('total', 'chartData', 'chartData2', 'chartData3', 'customerData'));
     }
-
 }
