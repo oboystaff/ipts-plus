@@ -111,13 +111,16 @@
                                 <thead>
                                     <tr>
                                         <th>SN</th>
-                                        <th>Bills ID</th>
-                                        <th>Name</th>
+                                        <th>Bill ID</th>
+                                        <th>Owners Name</th>
                                         <th>Amount</th>
                                         <th>Payment Mode</th>
                                         <th>Status</th>
                                         <th>Assembly</th>
                                         <th>Paid By</th>
+                                        <th>Transaction ID</th>
+                                        <th>Phone</th>
+                                        <th>Network</th>
                                         <th>Payment Date</th>
                                         <th>Action</th>
                                     </tr>
@@ -145,6 +148,10 @@
                                             <td>{{ $payment->transaction_status }}</td>
                                             <td>{{ $payment->assembly->name ?? 'N/A' }}</td>
                                             <td>{{ $payment->createdBy->name ?? 'N/A' }}</td>
+                                            <th>{{ !empty($payment->transaction_id) ? $payment->transaction_id : 'N/A' }}
+                                            </th>
+                                            <th>{{ $payment->phone ?? 'N/A' }}</th>
+                                            <td>{{ $payment->network ?? 'N/A' }}</td>
                                             <td>{{ $payment->created_at }}</td>
                                             <td>
                                                 <div class="dropdown">

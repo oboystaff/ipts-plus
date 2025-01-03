@@ -90,8 +90,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>SN</th>
-                                                    <th>Bills ID</th>
-                                                    <th>Name</th>
+                                                    <th>Bill ID</th>
+                                                    <th>Owners Name</th>
                                                     <th>Amount</th>
                                                     <th>Payment Mode</th>
                                                     <th>Status</th>
@@ -101,6 +101,9 @@
                                                     <th>Zone</th>
                                                     <th>Property Use</th>
                                                     <th>Paid By</th>
+                                                    <th>Transaction ID</th>
+                                                    <th>Phone</th>
+                                                    <th>Network</th>
                                                     <th>Payment Date</th>
                                                 </tr>
                                             </thead>
@@ -111,7 +114,7 @@
                                                     <th colspan="2"></th>
                                                     <th id="title"></th>
                                                     <th id="total_amount"></th>
-                                                    <th colspan="9"></th>
+                                                    <th colspan="12"></th>
                                                 </tr>
                                             </tfoot>
                                         </table>

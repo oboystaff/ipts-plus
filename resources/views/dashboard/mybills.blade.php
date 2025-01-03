@@ -10,10 +10,7 @@
                 <div class="card-header">
                     <div class="card-title">Customer Service / My Bills</div>
                 </div>
-
             </div>
-
-
 
             <div class="col-xl-12 active-p">
                 <div class="tab-content" id="pills-tabContent">
@@ -106,6 +103,9 @@
                                                             </div>
                                                             <div class="dropdown-menu dropdown-menu-end">
                                                                 <div class="py-2">
+                                                                    <a class="dropdown-item"
+                                                                        href=" {{ route('payments.customerCreate', $bill) }}">View
+                                                                    </a>
                                                                     <a class="dropdown-item"
                                                                         href=" {{ route('payments.customerCreate', $bill) }}">Make
                                                                         Payment

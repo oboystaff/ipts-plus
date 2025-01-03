@@ -107,6 +107,15 @@ class PaymentReportController extends Controller
 
                             return $propertyUse;
                         })
+                        ->editColumn('transaction_id', function (Payment $payment) {
+                            return !empty($payment->transaction_id) ? $payment->transaction_id : "N/A";
+                        })
+                        ->editColumn('phone', function (Payment $payment) {
+                            return $payment->phone ?? 'N/A';
+                        })
+                        ->editColumn('network', function (Payment $payment) {
+                            return $payment->network ?? 'N/A';
+                        })
                         ->editColumn('created_by', function (Payment $payment) {
                             return $payment->createdBy->name ?? '';
                         })
