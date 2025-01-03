@@ -7,151 +7,146 @@
     <div class="container-fluid mh-auto">
         <div class="row">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h4 class="heading mb-0">Property Bills Management </h4>
+                <div class="card-header">
+                    <div class="card-title">Bills Management / Property Bills</div>
+                </div>
                 <div class="d-flex align-items-center">
                     @can('bills.create')
-                        <a href="{{ route('bills.create') }}" class="btn btn-primary btn-sm ms-2">+ Bulk Bills Generate </a>
+                        {{-- <a href="{{ route('bills.create') }}" class="btn btn-primary btn-sm ms-2">+ Bulk Bills Generate </a> --}}
+                        <button class="btn btn-primary btn-wave">
+                            <a href="{{ route('bills.create') }}" class="text-white text-decoration-none">
+                                <i class="ri-share-forward-line me-1 rtl-icon-transform lh-1 d-inline-block"></i> Bulk Bills
+                            </a>
+                        </button>
                     @endcan
 
                     @can('bills.create')
-                        <a href="{{ route('bills.singleCreate') }}" class="btn btn-primary btn-sm ms-2">+ Single Bill Generate
-                        </a>
+                        {{-- <a href="{{ route('bills.singleCreate') }}" class="btn btn-primary btn-sm ms-2">+ Single Bill Generate
+                        </a> --}}...
+                        <button class="btn btn-primary btn-wave">
+                            <a href="{{ route('bills.singleCreate') }}" class="text-white text-decoration-none">
+                                <i class="ri-share-forward-line me-1 rtl-icon-transform lh-1 d-inline-block"></i> Single Bills
+                            </a>
+                        </button>
                     @endcan
 
                     @can('bills.create')
-                        <a href="{{ route('bills.divisionCreate') }}" class="btn btn-primary btn-sm ms-2">+ Division Bills
-                            Generate </a>
+                        {{-- <a href="{{ route('bills.divisionCreate') }}" class="btn btn-primary btn-sm ms-2">+ Division Bills
+                            Generate </a> --}}...
+                        <button class="btn btn-primary btn-wave">
+                            <a href="{{ route('bills.divisionCreate') }}" class="text-white text-decoration-none">
+                                <i class="ri-share-forward-line me-1 rtl-icon-transform lh-1 d-inline-block"></i> Division Bills
+                            </a>
+                        </button>
                     @endcan
 
                     @can('bills.create')
-                        <a href="{{ route('bills.blockCreate') }}" class="btn btn-primary btn-sm ms-2">+ Blocks Bill Generate
-                        </a>
+                        {{-- <a href="{{ route('bills.blockCreate') }}" class="btn btn-primary btn-sm ms-2">+ Blocks Bill Generate
+                        </a> --}}...
+                        <button class="btn btn-primary btn-wave">
+                            <a href="{{ route('bills.divisionCreate') }}" class="text-white text-decoration-none">
+                                <i class="ri-share-forward-line me-1 rtl-icon-transform lh-1 d-inline-block"></i> Block Bills
+                            </a>
+                        </button>
                     @endcan
                 </div>
             </div>
 
-            <div class="col-xl-3  col-lg-6 col-sm-6">
-                <div class="widget-stat card">
-                    <div class="card-body p-4">
-                        <h4 class="card-title">Total Bills Payables </h4>
-                        <h3> GHS {{ $total['totalExpectedPayments'] }}</h3>
-                        <div class="progress mb-2">
-                            <div class="progress-bar progress-animated bg-primary" style="width: 80%"></div>
+            <div class="row">
+                <div class="col-xl-3">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex gap-2 justify-content-between">
+                                <div class="d-flex flex-column justify-content-between gap-2">
+
+                                    <div id="crmchart01"></div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="avatar avatar-md bg-primary bg-opacity-25 avatar-rounded mb-2">
+                                        <div class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded">
+                                            <i class="ri-bar-chart-box-line fs-18"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="fw-semibold mb-2"> GHS {{ $total['totalExpectedPayments'] }} </h4>
+                                        <div class="text-muted mb-0">Total Bills Payables </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <small>80% Increase in 20 Days</small>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex gap-2 justify-content-between">
+                                <div class="d-flex flex-column justify-content-between gap-2">
+
+                                    <div id="crmchart02"></div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="avatar avatar-md bg-secondary bg-opacity-25 avatar-rounded mb-2">
+                                        <div class="avatar avatar-sm bg-secondary text-fixed-white avatar-rounded">
+                                            <i class="ri-user-add-line fs-18"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="fw-semibold mb-2">GHS {{ $total['totalPayments'] }} </h4>
+                                        <div class="text-muted mb-0"> Total Bills Paid </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex gap-2 justify-content-between">
+                                <div class="d-flex flex-column justify-content-between gap-2">
+
+                                    <div id="crmchart03"></div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="avatar avatar-md bg-success bg-opacity-25 avatar-rounded mb-2">
+                                        <div class="avatar avatar-sm bg-success text-fixed-white avatar-rounded">
+                                            <i class="ri-shake-hands-line fs-18"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="fw-semibold mb-2">GHS {{ $total['totalUnpaidBills'] }} </h4>
+                                        <div class="text-muted mb-0"> Total Un-Paid Bills</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex gap-2 justify-content-between">
+                                <div class="d-flex flex-column justify-content-between gap-2">
+
+                                    <div id="crmchart04"></div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="avatar avatar-md bg-info bg-opacity-25 avatar-rounded mb-2">
+                                        <div class="avatar avatar-sm bg-info text-fixed-white avatar-rounded">
+                                            <i class="ri-hourglass-line fs-18"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="fw-semibold mb-2">{{ $total['paymentPercentage'] }}%</h4>
+                                        <div class="text-muted mb-0"> Payment Percentage</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xl-3  col-lg-6 col-sm-6">
-                <div class="widget-stat card">
-                    <div class="card-body p-4">
-                        <h4 class="card-title">Total Bills Paid </h4>
-                        <h3>GHS {{ $total['totalPayments'] }}</h3>
-                        <div class="progress mb-2">
-                            <div class="progress-bar progress-animated bg-warning" style="width: 50%"></div>
-                        </div>
-                        <small>50% Increase in 25 Days</small>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3  col-lg-6 col-sm-6">
-                <div class="widget-stat card">
-                    <div class="card-body p-4">
-                        <h4 class="card-title">Total Un-Paid Bills </h4>
-                        <h3>GHS {{ $total['totalUnpaidBills'] }}</h3>
-                        <div class="progress mb-2">
-                            <div class="progress-bar progress-animated bg-red" style="width: 76%"></div>
-                        </div>
-                        <small>76% Increase in 20 Days</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3  col-lg-6 col-sm-6">
-                <div class="widget-stat card">
-                    <div class="card-body p-4">
-                        <h4 class="card-title">Payment Percentage</h4>
-                        <h3>{{ $total['paymentPercentage'] }}%</h3>
-                        <div class="progress mb-2">
-                            <div class="progress-bar progress-animated bg-success" style="width: 30%"></div>
-                        </div>
-                        <small>30% Increase in 30 Days</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-md-4">
-                <div class="card sale-card">
-                    <div class="card-header pb-0 border-0 align-items-baseline">
-                        <div>
-                            <span>Variance of Arrears and Current Bill </span>
-                            <h4>GHS {{ $total['totalBillVariance'] }} <i class="fa-solid fa-arrow-trend-up ms-1"></i>
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="card-body p-0 custome-tooltip">
-                        <div id="totalSale"></div>
-                    </div>
-                    <div class="card-footer border-0">
-                        <span class="tag bg-secondary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                <polyline points="17 6 23 6 23 12"></polyline>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-md-4">
-                <div class="card sale-card">
-                    <div class="card-header pb-0 border-0 align-items-baseline">
-                        <div>
-                            <span>Total Current Bill</span>
-                            <h4>GHS {{ $total['totalBill'] }} <i class="fa-solid fa-arrow-trend-down ms-1"></i>
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="card-body p-0 custome-tooltip">
-                        <div id="totalPurchase"></div>
-                    </div>
-                    <div class="card-footer border-0">
-                        <span class="tag bg-secondary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                <polyline points="17 6 23 6 23 12"></polyline>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-md-4">
-                <div class="card sale-card">
-                    <div class="card-header pb-0 border-0 align-items-baseline">
-                        <div>
-                            <span>Total Arrears
-                            </span>
-                            <h4>GHS {{ $total['totalBillArrears'] }}<i class="fa-solid fa-arrow-trend-down ms-1"></i></h4>
-                        </div>
-                    </div>
-                    <div class="card-body p-0 custome-tooltip">
-                        <div id="activeCustomers"></div>
-                    </div>
-                    <div class="card-footer border-0">
-                        <span class="tag bg-secondary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                <polyline points="17 6 23 6 23 12"></polyline>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-            </div>
 
             @if (session()->has('status'))
                 <div class="alert alert-success alert-dismissible fade show">
@@ -169,13 +164,12 @@
 
             <div class="col-xl-12 active-p">
                 <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-list" role="tabpanel"
-                        aria-labelledby="pills-list-tab">
+                    <div class="tab-pane fade show active" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab">
 
                         <div class="card">
                             <div class="card-body px-0">
                                 <div class="table-responsive active-projects user-tbl  dt-filter">
-                                    <table id="user-tbl" class="table shorting">
+                                    <table id="file-export" class="table table-bordered text-nowrap w-100">
                                         <thead>
                                             <tr>
                                                 <th>S/N</th>

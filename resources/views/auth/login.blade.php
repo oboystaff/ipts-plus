@@ -1,102 +1,138 @@
-<!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr" data-nav-layout="horizontal" data-nav-style="menu-click" data-menu-position="fixed"
+    data-theme-mode="light">
 
 <head>
-    <link rel="stylesheet" href="{{ asset('assets/auth/css/bootstrap.min.css') }}">
-    <meta charset="utf-8">
+
+    <!-- Meta Data -->
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="keywords" content="">
-    <meta name="author" content="">
-    <meta name="robots" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="ERMS APP">
-    <meta property="og:title" content="ERMS APP">
-    <meta property="og:description" content="ERMS APP">
-    <meta property="og:image" content="https:/yashadmin.dexignzone.com/xhtml/social-image.png">
-    <meta name="format-detection" content="telephone=no">
+    <title>IPTS-Level 10 </title>
+    <meta name="Description" content="Level 10">
+    <meta name="Author" content="Level 10">
 
-    <!-- PAGE TITLE HERE -->
-    <title>ERMS APP</title>
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('assets/images/brand-logos/favicon.ico') }}" type="image/x-icon">
 
-    <!-- FAVICONS ICON -->
-    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    <!-- Bootstrap Css -->
+    <link id="style" href="{{ asset('assets/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Style Css -->
+    <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
+
+    <!-- Icons Css -->
+    <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
+
+    <!-- Node Waves Css -->
+    <link href="{{ asset('assets/libs/node-waves/waves.min.css') }}" rel="stylesheet">
+
+    <!-- SwiperJS Css -->
+    <link rel="stylesheet" href="{{ asset('assets/libs/swiper/swiper-bundle.min.css') }}">
+
+    <!-- Color Picker Css -->
+    <link rel="stylesheet" href="{{ asset('assets/libs/flatpickr/flatpickr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/libs/@simonwep/pickr/themes/nano.min.css') }}">
+
+    <!-- Choices Css -->
+    <link rel="stylesheet" href="{{ asset('assets/libs/choices.js/public/assets/styles/choices.min.css') }}">
+
+    <script>
+        if (localStorage.rixzodarktheme) {
+            document.querySelector("html").setAttribute("data-theme-mode", "dark")
+        }
+        if (localStorage.rixzortl) {
+            document.querySelector("html").setAttribute("dir", "rtl")
+            document.querySelector("#style")?.setAttribute("href",
+                "{{ asset('assets/libs/bootstrap/css/bootstrap.rtl.min.css') }}");
+        }
+    </script>
+
+
 </head>
 
-<body class="vh-100"
-    style="background-image: url('{{ asset('assets/images/gh.jpeg') }}'); background-position: center; background-size: cover; background-attachment: fixed; height: 100vh;">
-    <div class="authincation
-    h-100">
-        <div class="container h-100">
-            <div class="row justify-content-center h-100 align-items-center">
-                <div class="col-md-6">
-                    <div class="authincation-content">
-                        <div class="row no-gutters">
-                            <div class="col-xl-12">
-                                <div class="auth-form">
-                                    @if (session()->has('status'))
-                                        <div class="alert alert-success alert-dismissible fade show">
-                                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
-                                                stroke-width="2" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round" class="me-2">
-                                                <polyline points="9 11 12 14 22 4"></polyline>
-                                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11">
-                                                </path>
-                                            </svg>
-                                            <strong>{{ session('status') }}</strong>
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
-                                            </button>
-                                        </div>
-                                    @endif
+<body>
 
-                                    <div class="text-center mb-3">
-                                        <img src="{{ asset('assets/images/arms.png') }}" class="rounded-circle"
-                                            alt="" style="width: 100px; height: 100px;">
-                                    </div>
-                                    <h4 class="text-center mb-4">ERMS PLUS</h4>
-                                    <form action="{{ route('auth.login') }}" method="post">
-                                        @csrf
 
-                                        <div class="form-group first">
-                                            <label for="email"><b>Phone number</b></label>
-                                            <input type="text"
-                                                class="form-control @error('username') is-invalid @enderror"
-                                                placeholder="Phone number" id="username" name="username">
-
-                                            @error('username')
-                                                <span class="invalid-feedback" role="alert">
-                                                    {{ $message }}
-                                                </span>
-                                            @enderror
-                                        </div>
-
-                                        <div class="form-group last mb-3">
-                                            </br>
-                                            <label for="password"><b>Password</b></label>
-                                            <input type="password"
-                                                class="form-control @error('password') is-invalid @enderror"
-                                                placeholder="Password" id="password" name="password">
-                                            </br>
-
-                                            @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    {{ $message }}
-                                                </span>
-                                            @enderror
-                                        </div>
-
-                                        <input type="submit" value="Log In" class="btn btn-block btn-success"
-                                            style="margin-top: -20px">
-
-                                    </form>
-                                    <div class="new-account mt-3">
-                                        <p>Don't have an account? <a class="text-primary"
-                                                href="{{ route('auth.register') }} ">Register
-                                                Now </a></p>
-                                    </div>
-                                </div>
+    <div class="row authentication authentication-cover-main mx-0">
+        <div class="col-xxl-5 col-xl-7">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-xxl-7 col-xl-9 col-lg-6 col-md-6 col-sm-8 col-12">
+                    <div class="card custom-card my-auto border authentication-cover-right">
+                        <div class="card-body p-4">
+                            <div
+                                class="text-center mb-4 bg-primary-transparent rounded border border-primary border-opacity-10 pt-2 position-relative overflow-hidden">
+                                <i class="ri-lock-2-line position-absolute lock-icon-auth"></i>
+                                <img src="{{ asset('assets/images/level10.png') }}" alt=""
+                                    class="img-fluid ms-4">
                             </div>
+                            <form action="{{ route('auth.login') }}" method="post">
+                                @csrf
+
+                                <div class="row gy-3">
+                                    <label for="username"><b>Phone number / IPTS Access Code</b></label>
+                                    <input type="text" class="form-control @error('username') is-invalid @enderror"
+                                        placeholder="Phone number" id="username" name="username">
+
+                                    @error('username')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group last mb-3">
+                                    </br>
+                                    <label for="password"><b>Password</b></label>
+                                    <input type="password"
+                                        class="form-control signin-password-input @error('password') is-invalid @enderror"
+                                        placeholder="Password" id="password" name="password">
+                                    </br>
+
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <!-- Buttons on the same line -->
+                                <div class="d-flex justify-content-between">
+                                    <input type="submit" value="Log In" class="btn btn-success">
+                                    <button type="button" class="btn btn-danger"
+                                        onclick="window.location='{{ route('auth.LandingPage') }}';">
+                                        Back
+                                    </button>
+                                </div>
+                            </form>
+
+                            <div class="text-center">
+                                <p class="text-muted mt-3 mb-0">Don't have an account? <a
+                                        class="text-primary fw-medium text-decoration-underline"
+                                        href="{{ route('auth.register') }}">Sign Up</a></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-7 col-xl-5 col-lg-12 d-xl-block d-none px-0">
+            <div class="authentication-cover overflow-hidden">
+                <div class="aunthentication-cover-content d-flex align-items-center justify-content-center">
+                    <div>
+                        <a href="index.html">
+                            <img src="{{ asset('assets/images/arms.png') }}" alt=""
+                                class="authentication-brand toggle-white img-fluid mb-4">
+                        </a>
+                        <h4 class="text-fixed-white mb-2 fw-medium">Welcome Back! <span
+                                class="text-secondary text-shadow">Sign In</span></h4>
+                        <h6 class="text-fixed-white mb-3 fw-medium">Access Your Account</h6>
+                        <p class="text-fixed-white mb-1 op-6">Please enter your Phone number / IPTS Access Code and
+                            password to continue.</p>
+
+                        <div class="d-flex mb-1 gap-2 flex-wrap flex-lg-nowrap">
+
+
                         </div>
                     </div>
                 </div>
@@ -104,23 +140,11 @@
         </div>
     </div>
 
-    <script src="{{ asset('assets/vendor/global/global.min.js') }}"></script>
-    <script src="{{ asset('assets/js/custom.js') }}"></script>
-    <script src="{{ asset('assets/js/deznav-init.js') }}"></script>
-    <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
-        var Tawk_API = Tawk_API || {},
-            Tawk_LoadStart = new Date();
-        (function() {
-            var s1 = document.createElement("script"),
-                s0 = document.getElementsByTagName("script")[0];
-            s1.async = true;
-            s1.src = 'https://embed.tawk.to/663e4f9b9a809f19fb2fa32d/1hthme206';
-            s1.charset = 'UTF-8';
-            s1.setAttribute('crossorigin', '*');
-            s0.parentNode.insertBefore(s1, s0);
-        })();
-    </script>
-</body>
 
-</html>
+    <!-- Bootstrap JS -->
+    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Show Password JS -->
+    <script src="{{ asset('assets/js/show-password.js') }}"></script>
+
+</body>

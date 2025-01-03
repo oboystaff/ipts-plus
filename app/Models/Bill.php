@@ -20,6 +20,7 @@ class Bill extends Model
         'arrears',
         'amount',
         'billing_date',
+        'issue_bill',
         'created_by',
     ];
 

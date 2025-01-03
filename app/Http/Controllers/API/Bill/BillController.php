@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Bill;
 use App\Models\Citizen;
 use Illuminate\Http\Request;
+use App\Http\Requests\API\Bill\IssueBillRequest;
 
 
 class BillController extends Controller
@@ -159,6 +160,23 @@ class BillController extends Controller
         return response()->json([
             'message' => 'Get all pending bills',
             'data' => $bills
+        ]);
+    }
+
+    public function issueBill(IssueBillRequest $request)
+    {
+        $bill = Bill::where('bills_id', $request->input('bills_id'))->first();
+
+        if (empty($bill)) {
+            return response()->json([
+                'message' => 'Customer with this bill id does not exist'
+            ], 422);
+        }
+
+        $bill->update(['issue_bill' => 'Yes']);
+
+        return response()->json([
+            'message' => 'Customer bill issued successfully'
         ]);
     }
 }

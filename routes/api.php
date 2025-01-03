@@ -74,6 +74,7 @@ Route::group(['prefix' => 'bill', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/show/{id}', [BillController::class, 'show']);
     Route::get('/customer/{id}', [BillController::class, 'customerBill']);
     Route::get('/pending/customer/{id}', [BillController::class, 'pendingBill']);
+    Route::post('/issue', [BillController::class, 'issueBill']);
 });
 
 Route::group(['prefix' => 'payment', 'middleware' => 'auth:sanctum'], function () {
@@ -114,6 +115,8 @@ Route::group(['prefix' => 'property', 'middleware' => 'auth:sanctum'], function 
     Route::get('/', [PropertyController::class, 'index']);
     Route::get('/show/{id}', [PropertyController::class, 'show']);
     Route::get('/customer/{id}', [PropertyController::class, 'customerProperty']);
+    Route::post('/create', [PropertyController::class, 'store']);
+    Route::post('/update/{id}', [PropertyController::class, 'update']);
 });
 
 Route::group(['prefix' => 'business', 'middleware' => 'auth:sanctum'], function () {

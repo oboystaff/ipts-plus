@@ -4,1315 +4,1223 @@
 @endsection
 
 @section('page-content')
-
     <div class="container-fluid">
-        <div class="row">
-            @if (\Auth::user()->access_level !== 'customer' && \Auth::user()->access_level !== 'GRA_Administrator')
-                <div class="col-xl-2 col-xxl-3 col-sm-6">
-                    <div class="card crm-cart bg-secondary border-0">
-                        <div class="card-header border-0 pb-0">
-                            <span class="text-white fs-16">Total Business Bill<i
-                                    class="fa-solid fa-chevron-up ms-1"></i></span>
-                            <div class="icon-box bg-white">
-                                <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <text x="0" y="16" font-size="20" font-family="Arial, sans-serif" fill="var(--primary)">
-                                        ₵
-                                    </text>
-                                </svg>
-                            </div>
-                        </div>
+        @if (\Auth::user()->access_level !== 'customer' && \Auth::user()->access_level !== 'GRA_Administrator')
+            <div class="row">
+                <div class="col-xxl-7 col-xl-12 col-lg-12">
+                    <div class="card custom-card overflow-hidden nft-main-card">
                         <div class="card-body">
-                            <div class="crm-cart-data">
-                                <p>GHS {{ $total['totalBusinessBill'] }}</p>
-                                <span class="d-block mb-3 text-black">Overall Yearly Business Bill</span>
-                                <a href="{{ route('bills.fetchBill', ['display' => 'business']) }}"
-                                    class="badge bg-white text-black border-0">View Data</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-xxl-3 col-sm-6">
-                    <div class="card crm-cart bg-secondary border-0">
-                        <div class="card-header border-0 pb-0">
-                            <span class="text-white fs-16">Total Property Bill<i
-                                    class="fa-solid fa-chevron-up ms-1"></i></span>
-                            <div class="icon-box bg-white">
-                                <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <text x="0" y="16" font-size="20" font-family="Arial, sans-serif" fill="var(--primary)">
-                                        ₵
-                                    </text>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="crm-cart-data">
-                                <p>GHS {{ $total['totalPropertyBill'] }}</p>
-                                <span class="d-block mb-3 text-black">Overall Yearly Property Bill</span>
-                                <a href="{{ route('bills.fetchBill', ['display' => 'property']) }}"
-                                    class="badge bg-white text-black border-0">View Data</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-xxl-3 col-sm-4">
-                    <div class="card crm-cart bg-primary border-0">
-                        <div class="card-header border-0 pb-0">
-                            <span class="text-white fs-16">Total Business<i class="fa-solid fa-chevron-up ms-1"></i></span>
-                            <div class="icon-box bg-white">
-                                <svg id="_x31__px" height="24" viewBox="0 0 24 24" width="24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="m17.5 13c-3.584 0-6.5-2.916-6.5-6.5s2.916-6.5 6.5-6.5 6.5 2.916 6.5 6.5-2.916 6.5-6.5 6.5zm0-12c-3.033 0-5.5 2.467-5.5 5.5s2.467 5.5 5.5 5.5 5.5-2.467 5.5-5.5-2.467-5.5-5.5-5.5z" />
-                                    <path
-                                        d="m17.5 10c-.276 0-.5-.224-.5-.5v-6c0-.276.224-.5.5-.5s.5.224.5.5v6c0 .276-.224.5-.5.5z" />
-                                    <path
-                                        d="m20.5 7h-6c-.276 0-.5-.224-.5-.5s.224-.5.5-.5h6c.276 0 .5.224.5.5s-.224.5-.5.5z" />
-                                    <path
-                                        d="m19.5 17h-13c-.238 0-.443-.168-.49-.402l-2-10c-.03-.147.009-.299.103-.415.095-.116.237-.183.387-.183h4c.276 0 .5.224.5.5s-.224.5-.5.5h-3.39l1.8 9h12.18l.277-1.385c.054-.271.317-.448.588-.392.271.054.446.317.392.588l-.357 1.787c-.047.234-.252.402-.49.402z" />
-                                    <path
-                                        d="m6.5 17c-.233 0-.442-.164-.49-.402l-2.479-12.394c-.14-.699-.759-1.206-1.471-1.206h-.001l-1.559.002c-.276 0-.5-.224-.5-.5s.223-.5.5-.5l1.558-.002h.002c1.188 0 2.219.845 2.452 2.01l2.478 12.394c.054.271-.122.534-.392.588-.033.007-.066.01-.098.01z" />
-                                    <path
-                                        d="m21.5 19h-17c-.827 0-1.5-.673-1.5-1.5s.673-1.5 1.5-1.5h2c.276 0 .5.224.5.5s-.224.5-.5.5h-2c-.276 0-.5.224-.5.5s.224.5.5.5h17c.276 0 .5.224.5.5s-.224.5-.5.5z" />
-                                    <path
-                                        d="m8 24c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm0-3c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1z" />
-                                    <path
-                                        d="m17 24c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm0-3c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="crm-cart-data">
-                                <p class="text-white">{{ $total['totalBusinesses'] }}</p>
-                                <span class="d-block mb-3 text-white">Total Businesses</span>
-                                <a href="{{ route('businesses.index', ['display' => 'active']) }}"
-                                    class="badge bg-white text-black border-0">View Data</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            <div class="row gap-3 gap-sm-0 mx-0 py-3 rounded-3">
+                                <div class="col-xxl-8 col-xl-6 col-lg-8 col-12">
+                                    <div class="p-2">
+                                        @php
+                                            $hour = date('H');
+                                            if ($hour < 12) {
+                                                $greeting = 'Good Morning';
+                                            } elseif ($hour < 18) {
+                                                $greeting = 'Good Afternoon';
+                                            } else {
+                                                $greeting = 'Good Evening';
+                                            }
+                                        @endphp
+                                        <h6 class="fw-semibold mb-3 op-9 text-fixed-white"> {{ $greeting }}
+                                            {{ Auth::user()->name }} ! &#128075;</h6>
+                                        <h4 class="fw-semibold mb-2  text-fixed-white"> "Welcome to Your <span
+                                                class="text-secondary"> IPTS</span> Dashboard!" </h4>
+                                        <p class="mb-4 text-fixed-white op-7 fs-12">
+                                            Empowering you to manage your contributions with ease, transparency, and
+                                            confidence.
+                                            Together, we’re building stronger communities!
 
-                <div class="col-xl-2 col-xxl-3 col-sm-4">
-                    <div class="card crm-cart bg-primary border-0">
-                        <div class="card-header border-0 pb-0">
-                            <span class="text-white fs-16">Total Property<i class="fa-solid fa-chevron-up ms-1"></i></span>
-                            <div class="icon-box bg-white">
-                                <svg id="_x31__px" height="24" viewBox="0 0 24 24" width="24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="m17.5 13c-3.584 0-6.5-2.916-6.5-6.5s2.916-6.5 6.5-6.5 6.5 2.916 6.5 6.5-2.916 6.5-6.5 6.5zm0-12c-3.033 0-5.5 2.467-5.5 5.5s2.467 5.5 5.5 5.5 5.5-2.467 5.5-5.5-2.467-5.5-5.5-5.5z" />
-                                    <path
-                                        d="m17.5 10c-.276 0-.5-.224-.5-.5v-6c0-.276.224-.5.5-.5s.5.224.5.5v6c0 .276-.224.5-.5.5z" />
-                                    <path
-                                        d="m20.5 7h-6c-.276 0-.5-.224-.5-.5s.224-.5.5-.5h6c.276 0 .5.224.5.5s-.224.5-.5.5z" />
-                                    <path
-                                        d="m19.5 17h-13c-.238 0-.443-.168-.49-.402l-2-10c-.03-.147.009-.299.103-.415.095-.116.237-.183.387-.183h4c.276 0 .5.224.5.5s-.224.5-.5.5h-3.39l1.8 9h12.18l.277-1.385c.054-.271.317-.448.588-.392.271.054.446.317.392.588l-.357 1.787c-.047.234-.252.402-.49.402z" />
-                                    <path
-                                        d="m6.5 17c-.233 0-.442-.164-.49-.402l-2.479-12.394c-.14-.699-.759-1.206-1.471-1.206h-.001l-1.559.002c-.276 0-.5-.224-.5-.5s.223-.5.5-.5l1.558-.002h.002c1.188 0 2.219.845 2.452 2.01l2.478 12.394c.054.271-.122.534-.392.588-.033.007-.066.01-.098.01z" />
-                                    <path
-                                        d="m21.5 19h-17c-.827 0-1.5-.673-1.5-1.5s.673-1.5 1.5-1.5h2c.276 0 .5.224.5.5s-.224.5-.5.5h-2c-.276 0-.5.224-.5.5s.224.5.5.5h17c.276 0 .5.224.5.5s-.224.5-.5.5z" />
-                                    <path
-                                        d="m8 24c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm0-3c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1z" />
-                                    <path
-                                        d="m17 24c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm0-3c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="crm-cart-data">
-                                <p class="text-white">{{ $total['totalProperties'] }}</p>
-                                <span class="d-block mb-3 text-white">Total Properties</span>
-                                <a href="{{ route('properties.index') }}" class="badge bg-white text-black border-0">View
-                                    Data</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-xl-4 col-md-4">
-                    <div class="card sale-card">
-                        <div class="card-header pb-0 border-0 align-items-baseline">
-                            <div>
-                                <span>Total Assembly Agents</span>
-                                <h4>{{ $total['totalAssemblyAgents'] }} <i class="fa-solid fa-arrow-trend-up ms-1"></i></h4>
-                            </div>
-                            <a href="{{ route('users.index', ['display' => 'agent']) }}"
-                                class="badge badge-primary border-0">View
-                                Data<i class="fa-solid fa-caret-up ms-1"></i></a>
-                        </div>
-                        <div class="card-body p-0 custome-tooltip">
-                            <div id="totalSale"></div>
-                        </div>
-                        <div class="card-footer border-0">
-                            <span class="tag bg-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                    <polyline points="17 6 23 6 23 12"></polyline>
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-4">
-                    <div class="card sale-card">
-                        <div class="card-header pb-0 border-0 align-items-baseline">
-                            <div>
-                                <span>Total Active Assembly Agents</span>
-                                <h4>{{ $total['totalActiveAssemblyAgents'] }} <i
-                                        class="fa-solid fa-arrow-trend-down ms-1"></i>
-                                </h4>
-                            </div>
-                            <a href="{{ route('users.index', ['display' => 'active']) }}"
-                                class="badge badge-secondary border-0">View Data<i
-                                    class="fa-solid fa-caret-down ms-1"></i></a>
-                        </div>
-                        <div class="card-body p-0 custome-tooltip">
-                            <div id="totalPurchase"></div>
-                        </div>
-                        <div class="card-footer border-0">
-                            <span class="tag bg-secondary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                    <polyline points="17 6 23 6 23 12"></polyline>
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-4">
-                    <div class="card sale-card">
-                        <div class="card-header pb-0 border-0 align-items-baseline">
-                            <div>
-                                <span>Total In-Active Assembly Agents</span>
-                                <h4>{{ $total['totalInactiveAssemblyAgents'] }} <i
-                                        class="fa-solid fa-arrow-trend-down ms-1"></i></h4>
-                            </div>
-                            <a href="{{ route('users.index', ['display' => 'inactive']) }}"
-                                class="badge badge-info border-0">View Data<i class="fa-solid fa-caret-down ms-1"></i></a>
-                        </div>
-                        <div class="card-body p-0 custome-tooltip">
-                            <div id="activeCustomers"></div>
-                        </div>
-                        <div class="card-footer border-0">
-                            <span class="tag bg-info">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                    <polyline points="17 6 23 6 23 12"></polyline>
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                                        </p>
+                                        <div class="d-flex gap-2 flex-wrap">
+                                            <button class="btn btn-success btn-wave waves-effect waves-light"
+                                                onclick="window.location.href='{{ route('bills.fetchBill', ['display' => 'property']) }}'">
+                                                View BoP Bills
+                                            </button>
+                                            <button class="btn btn-secondary btn-wave waves-effect waves-light"
+                                                onclick="window.location.href='{{ route('businesses.index', ['display' => 'active']) }}'">
+                                                View Property Bills
+                                            </button>
 
-                <div class="col-xl-3 col-md-3">
-                    <div class="card sale-card">
-                        <div class="card-header pb-0 border-0 align-items-baseline">
-                            <div>
-                                <span>Total Daily Payments</span>
-                                <h4>GHS {{ $total['dailyPayments'] }} <i class="fa-solid fa-arrow-trend-up ms-1"></i></h4>
-                            </div>
-                            <a href="{{ route('payments.index', ['display' => 'daily']) }}"
-                                class="badge badge-primary border-0">View
-                                Data<i class="fa-solid fa-caret-up ms-1"></i></a>
-                        </div>
-                        <div class="card-body p-0 custome-tooltip">
-                            <div id="totalSale"></div>
-                        </div>
-                        <div class="card-footer border-0">
-                            <span class="tag bg-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                    <polyline points="17 6 23 6 23 12"></polyline>
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-3">
-                    <div class="card sale-card">
-                        <div class="card-header pb-0 border-0 align-items-baseline">
-                            <div>
-                                <span>Total Weekly Payments</span>
-                                <h4>GHS {{ $total['weeklyPayments'] }} <i class="fa-solid fa-arrow-trend-down ms-1"></i>
-                                </h4>
-                            </div>
-                            <a href="{{ route('payments.index', ['display' => 'weekly']) }}"
-                                class="badge badge-secondary border-0">View Data<i
-                                    class="fa-solid fa-caret-down ms-1"></i></a>
-                        </div>
-                        <div class="card-body p-0 custome-tooltip">
-                            <div id="totalPurchase"></div>
-                        </div>
-                        <div class="card-footer border-0">
-                            <span class="tag bg-secondary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                    <polyline points="17 6 23 6 23 12"></polyline>
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-3">
-                    <div class="card sale-card">
-                        <div class="card-header pb-0 border-0 align-items-baseline">
-                            <div>
-                                <span>Total Monthly Payments</span>
-                                <h4>GHS {{ $total['monthlyPayments'] }} <i class="fa-solid fa-arrow-trend-down ms-1"></i>
-                                </h4>
-                            </div>
-                            <a href="{{ route('payments.index', ['display' => 'monthly']) }}"
-                                class="badge badge-info border-0">View Data<i class="fa-solid fa-caret-down ms-1"></i></a>
-                        </div>
-                        <div class="card-body p-0 custome-tooltip">
-                            <div id="activeCustomers"></div>
-                        </div>
-                        <div class="card-footer border-0">
-                            <span class="tag bg-info">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                    <polyline points="17 6 23 6 23 12"></polyline>
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-3">
-                    <div class="card sale-card">
-                        <div class="card-header pb-0 border-0 align-items-baseline">
-                            <div>
-                                <span>Total Yearly Payments</span>
-                                <h4>GHS {{ $total['yearlyPayments'] }} <i class="fa-solid fa-arrow-trend-down ms-1"></i>
-                                </h4>
-                            </div>
-                            <a href="{{ route('payments.index', ['display' => 'yearly']) }}"
-                                class="badge badge-secondary border-0">View Data<i
-                                    class="fa-solid fa-caret-down ms-1"></i></a>
-                        </div>
-                        <div class="card-body p-0 custome-tooltip">
-                            <div id="activeCustomers"></div>
-                        </div>
-                        <div class="card-footer border-0">
-                            <span class="tag bg-secondary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                    <polyline points="17 6 23 6 23 12"></polyline>
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-4 col-lg-12 col-sm-12">
-                    <div class="card overflow-hidden">
-                        <div class="text-center p-5 overlay-box" style="background-image: url(images/big/img5.jpg);">
-                            <img src="images/profile/profile.png" width="100" class="img-fluid rounded-circle"
-                                alt="">
-                            <h3 class="mt-3 mb-0 text-white">Bills And Payments</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="row text-center">
-                                <div class="col-6">
-                                    <div class="bgl-primary rounded p-3">
-                                        <h4 class="mb-0">GHS {{ $total['totalBill'] }}</h4>
-                                        <small>Total Bills</small>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="bgl-primary rounded p-3">
-                                        <h4 class="mb-0">GHS {{ $total['totalArrears'] }}</h4>
-                                        <small>Arrears </small>
-                                    </div>
-                                </div>
-                                <p></p>
-                            </div>
-
-                            <div class="row text-center">
-                                <div class="col-6">
-                                    <div class="bgl-primary rounded p-3">
-                                        <h4 class="mb-0">GHS {{ $total['totalExpectedPayments'] }}</h4>
-                                        <small>Expected Payments</small>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="bgl-primary rounded p-3">
-                                        <h4 class="mb-0">GHS {{ $total['yearlyPayments'] }}</h4>
-                                        <small>Actual Payments</small>
+                                <div class="col-xxl-4 col-xl-6 col-lg-4 my-auto text-end">
+                                    <div class="featured-nft text-end">
+                                        <img src="../assets/images/gh.png" alt=""
+                                            class="img-fluid nft-cardimg rounded-3">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer mt-0">
-                            <a href="{{ route('bills.fetchBill', ['display' => 'fetch_bill']) }}"
-                                class="btn btn-primary btn-lg btn-block">
-                                View Detailed Analysis
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="card">
-                        <div class="card-header border-0">
-                            <h4 class="heading mb-0">Weekly Payments Performance</h4>
-                        </div>
-                        <div class="card-body py-0 custome-tooltip">
-                            <div id="activity1"></div>
-                        </div>
-                        <div class="card-footer border-0 pt-0">
-                            <a href="{{ route('payments.index') }}" class="btn btn-primary btn-block">Explore Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="card">
-                        <div class="card-header border-0">
-                            <h4 class="heading mb-0">Monthly Payments Performance</h4>
-                        </div>
-                        <div class="card-body py-0 custome-tooltip">
-                            <div id="activity2"></div>
-                        </div>
-                        <div class="card-footer border-0 pt-0">
-                            <a href="{{ route('payments.index') }}" class="btn btn-primary btn-block">Explore Details</a>
-                        </div>
                     </div>
                 </div>
 
-                <div class="col-xl-12">
-                    <div class="card overflow-hidden">
-                        <div class="card-header border-0">
-                            <div>
-                                <h4 class="heading mb-0">Revenue Payment Analysis</h4>
-                            </div>
-                        </div>
+            </div>
+
+            <!-- Start::row-1 -->
+            <div class="row">
+                <div class="col-xl-3">
+                    <div class="card custom-card">
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-xl-12 col-sm-12">
-                                    <canvas id="billPaymentChart" height="100"></canvas>
+                            <div class="d-flex gap-2 justify-content-between">
+                                <div class="d-flex flex-column justify-content-between gap-2">
+
+                                    <div id="crmchart01"></div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="avatar avatar-md bg-primary bg-opacity-25 avatar-rounded mb-2">
+                                        <div class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded">
+                                            <i class="ri-bar-chart-box-line fs-18"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="fw-semibold mb-2"> 211</h4>
+                                        <div class="text-muted mb-0"> Total Assemblies </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            @elseif (\Auth::user()->access_level == 'GRA_Administrator')
-                <div class="col-xl-2 col-xxl-3 col-sm-6">
-                    <div class="card crm-cart bg-secondary border-0">
-                        <div class="card-header border-0 pb-0">
-                            <span class="text-white fs-16">Total Business Bill<i
-                                    class="fa-solid fa-chevron-up ms-1"></i></span>
-                            <div class="icon-box bg-white">
-                                <svg width="20" height="20" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <text x="0" y="16" font-size="20" font-family="Arial, sans-serif"
-                                        fill="var(--primary)">
-                                        ₵
-                                    </text>
-                                </svg>
+                <div class="col-xl-3">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex gap-2 justify-content-between">
+                                <div class="d-flex flex-column justify-content-between gap-2">
+
+                                    <div id="crmchart02"></div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="avatar avatar-md bg-secondary bg-opacity-25 avatar-rounded mb-2">
+                                        <div class="avatar avatar-sm bg-secondary text-fixed-white avatar-rounded">
+                                            <i class="ri-user-add-line fs-18"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="fw-semibold mb-2">GHS {{ $total['totalArrears'] }}</h4>
+                                        <div class="text-muted mb-0">Outstanding Balances</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="card custom-card">
                         <div class="card-body">
-                            <div class="crm-cart-data">
-                                <p>GHS {{ $total['totalBusinessBill'] }}</p>
-                                <span class="d-block mb-3 text-black">Overall Yearly Business Bill</span>
+                            <div class="d-flex gap-2 justify-content-between">
+                                <div class="d-flex flex-column justify-content-between gap-2">
+
+                                    <div id="crmchart03"></div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="avatar avatar-md bg-success bg-opacity-25 avatar-rounded mb-2">
+                                        <div class="avatar avatar-sm bg-success text-fixed-white avatar-rounded">
+                                            <i class="ri-shake-hands-line fs-18"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="fw-semibold mb-2">{{ $total['totalProperties'] }}</h4>
+                                        <div class="text-muted mb-0">Registered Properties </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-xl-2 col-xxl-3 col-sm-6">
-                    <div class="card crm-cart bg-secondary border-0">
-                        <div class="card-header border-0 pb-0">
-                            <span class="text-white fs-16">Total Property Bill<i
-                                    class="fa-solid fa-chevron-up ms-1"></i></span>
-                            <div class="icon-box bg-white">
-                                <svg width="20" height="20" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <text x="0" y="16" font-size="20" font-family="Arial, sans-serif"
-                                        fill="var(--primary)">
-                                        ₵
-                                    </text>
-                                </svg>
-                            </div>
-                        </div>
+                <div class="col-xl-3">
+                    <div class="card custom-card">
                         <div class="card-body">
-                            <div class="crm-cart-data">
-                                <p>GHS {{ $total['totalPropertyBill'] }}</p>
-                                <span class="d-block mb-3 text-black">Overall Yearly Property Bill</span>
+                            <div class="d-flex gap-2 justify-content-between">
+                                <div class="d-flex flex-column justify-content-between gap-2">
+
+                                    <div id="crmchart04"></div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="avatar avatar-md bg-info bg-opacity-25 avatar-rounded mb-2">
+                                        <div class="avatar avatar-sm bg-info text-fixed-white avatar-rounded">
+                                            <i class="ri-hourglass-line fs-18"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="fw-semibold mb-2">3.6%</h4>
+                                        <div class="text-muted mb-0">Collection Rate </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-xl-2 col-xxl-3 col-sm-4">
-                    <div class="card crm-cart bg-secondary border-0">
-                        <div class="card-header border-0 pb-0">
-                            <span class="text-white fs-16">Total Bills<i class="fa-solid fa-chevron-up ms-1"></i></span>
-                            <div class="icon-box bg-white">
-                                <svg id="_x31__px" height="24" viewBox="0 0 24 24" width="24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <text x="0" y="16" font-size="20" font-family="Arial, sans-serif"
-                                        fill="var(--primary)">
-                                        ₵
-                                    </text>
-                                </svg>
-                            </div>
+                <div class="card custom-card">
+                    <div class="card-header justify-content-between">
+                        <div class="card-title">
+                            Payment Trends
                         </div>
-                        <div class="card-body">
-                            <div class="crm-cart-data">
-                                <p class="text-black">GHS {{ $total['totalBill'] }}</p>
-                                <span class="d-block mb-3 text-black">Overall Yearly Total Bills</span>
+                        <a href="{{ route('payments.index', ['display' => 'yearly']) }}" class="btn btn-primary btn-sm">View
+                            All Payments</a>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="list-unstyled row mt-1">
+                            <div class="col-xl-3 col-sm-6 mb-3 mb-xl-0">
+                                <div
+                                    class="border border-primary border-opacity-10 align-items-center gap-2 p-3 text-center rounded-3 pod-artist">
+                                    <div class="lh-1 mb-3 rounded-circle">
+                                        <span class="podcast-author rounded-circle d-inline-block">
+                                            <span class="avatar avatar-xxl p-1 bg-white avatar-rounded">
+                                                <img src="{{ asset('assets/images/coin.jpg') }}" alt="">
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <a href="javascript:void(0);" class="fw-semibold">Today's Payment</a>
+                                        <p class="text-muted mb-2">As At , {{ \Carbon\Carbon::now()->format('l, F j, Y ') }}
+                                        </p>
+                                        <span class="text-primary fw-semibold">GHS {{ $total['dailyPayments'] }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-sm-6 mb-3 mb-xl-0">
+                                <div
+                                    class="border border-secondary border-opacity-10 align-items-center gap-2 p-3 text-center rounded-3 pod-artist">
+                                    <div class="lh-1 mb-3">
+                                        <span class="podcast-author secondary rounded-circle d-inline-block">
+                                            <span class="avatar avatar-xxl p-1 bg-white avatar-rounded">
+                                                <img src="{{ asset('assets/images/coin.jpg') }}" alt="">
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <a href="javascript:void(0);" class="fw-semibold">This Weeks Payment </a>
+                                        <p class="text-muted mb-2">As At ,
+                                            {{ \Carbon\Carbon::now()->format('l, F j, Y ') }}
+                                        </p>
+                                        <span class="text-secondary fw-semibold">GHS {{ $total['weeklyPayments'] }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-sm-6 mb-3 mb-xl-0">
+                                <div
+                                    class="border border-success border-opacity-10 align-items-center gap-2 p-3 text-center rounded-3 pod-artist">
+                                    <div class="lh-1 mb-3">
+                                        <span class="podcast-author success rounded-circle d-inline-block">
+                                            <span class="avatar avatar-xxl p-1 bg-white avatar-rounded">
+                                                <img src="{{ asset('assets/images/coin.jpg') }}" alt="">
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <a href="javascript:void(0);" class="fw-semibold">This Months Payment </a>
+                                        <p class="text-muted mb-2">As At ,
+                                            {{ \Carbon\Carbon::now()->format('l, F j, Y ') }}
+                                        </p>
+                                        <span class="text-success fw-semibold">GHS {{ $total['monthlyPayments'] }} </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-sm-6">
+                                <div
+                                    class="border border-info border-opacity-10 align-items-center gap-2 p-3 text-center rounded-3 pod-artist">
+                                    <div class="lh-1 mb-3">
+                                        <span class="podcast-author info rounded-circle d-inline-block">
+                                            <span class="avatar avatar-xxl p-1 bg-white avatar-rounded">
+                                                <img src="{{ asset('assets/images/coin.jpg') }}" alt="">
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <a href="javascript:void(0);" class="fw-semibold">This Years Payment</a>
+                                        <p class="text-muted mb-2">As At ,
+                                            {{ \Carbon\Carbon::now()->format('l, F j, Y ') }}
+                                        </p>
+                                        <span class="text-info fw-semibold">GHS {{ $total['yearlyPayments'] }} </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-xl-2 col-xxl-3 col-sm-4">
-                    <div class="card crm-cart bg-secondary border-0">
-                        <div class="card-header border-0 pb-0">
-                            <span class="text-white fs-16">Total Cash Payment<i
-                                    class="fa-solid fa-chevron-up ms-1"></i></span>
-                            <div class="icon-box bg-white">
-                                <svg id="_x31__px" height="24" viewBox="0 0 24 24" width="24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <text x="0" y="16" font-size="20" font-family="Arial, sans-serif"
-                                        fill="var(--primary)">
-                                        ₵
-                                    </text>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="crm-cart-data">
-                                <p class="text-black">GHS {{ $total['yearlyCashPayments'] }}</p>
-                                <span class="d-block mb-3 text-black">Overall Yearly Cash Payment</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xxl-3 col-sm-4">
-                    <div class="card crm-cart bg-primary border-0">
-                        <div class="card-header border-0 pb-0">
-                            <span class="text-white fs-16">Total Momo Payment<i
-                                    class="fa-solid fa-chevron-up ms-1"></i></span>
-                            <div class="icon-box bg-white">
-                                <svg id="_x31__px" height="24" viewBox="0 0 24 24" width="24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <text x="0" y="16" font-size="20" font-family="Arial, sans-serif"
-                                        fill="var(--primary)">
-                                        ₵
-                                    </text>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="crm-cart-data">
-                                <p class="text-white">GHS {{ $total['yearlyMomoPayments'] }}</p>
-                                <span class="d-block mb-3 text-white">Overall Yearly Momo Payment</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xxl-3 col-sm-4">
-                    <div class="card crm-cart bg-primary border-0">
-                        <div class="card-header border-0 pb-0">
-                            <span class="text-white fs-16">Total Payment<i class="fa-solid fa-chevron-up ms-1"></i></span>
-                            <div class="icon-box bg-white">
-                                <svg id="_x31__px" height="24" viewBox="0 0 24 24" width="24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <text x="0" y="16" font-size="20" font-family="Arial, sans-serif"
-                                        fill="var(--primary)">
-                                        ₵
-                                    </text>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="crm-cart-data">
-                                <p class="text-white">GHS {{ $total['yearlyPayments'] }}</p>
-                                <span class="d-block mb-3 text-white">Overall Yearly Total Payment</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xxl-3 col-sm-4">
-                    <div class="card crm-cart bg-primary border-0">
-                        <div class="card-header border-0 pb-0">
-                            <span class="text-white fs-16">Total Receivables<i
-                                    class="fa-solid fa-chevron-up ms-1"></i></span>
-                            <div class="icon-box bg-white">
-                                <svg id="_x31__px" height="24" viewBox="0 0 24 24" width="24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <text x="0" y="16" font-size="20" font-family="Arial, sans-serif"
-                                        fill="var(--primary)">
-                                        ₵
-                                    </text>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="crm-cart-data">
-                                <p class="text-white">GHS {{ $total['yearlyReceivables'] }}</p>
-                                <span class="d-block mb-3 text-white">Overall Yearly Total Receivables</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xxl-3 col-sm-4">
-                    <div class="card crm-cart bg-primary border-0">
-                        <div class="card-header border-0 pb-0">
-                            <span class="text-white fs-16">Total Business<i
-                                    class="fa-solid fa-chevron-up ms-1"></i></span>
-                            <div class="icon-box bg-white">
-                                <svg id="_x31__px" height="24" viewBox="0 0 24 24" width="24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="m17.5 13c-3.584 0-6.5-2.916-6.5-6.5s2.916-6.5 6.5-6.5 6.5 2.916 6.5 6.5-2.916 6.5-6.5 6.5zm0-12c-3.033 0-5.5 2.467-5.5 5.5s2.467 5.5 5.5 5.5 5.5-2.467 5.5-5.5-2.467-5.5-5.5-5.5z" />
-                                    <path
-                                        d="m17.5 10c-.276 0-.5-.224-.5-.5v-6c0-.276.224-.5.5-.5s.5.224.5.5v6c0 .276-.224.5-.5.5z" />
-                                    <path
-                                        d="m20.5 7h-6c-.276 0-.5-.224-.5-.5s.224-.5.5-.5h6c.276 0 .5.224.5.5s-.224.5-.5.5z" />
-                                    <path
-                                        d="m19.5 17h-13c-.238 0-.443-.168-.49-.402l-2-10c-.03-.147.009-.299.103-.415.095-.116.237-.183.387-.183h4c.276 0 .5.224.5.5s-.224.5-.5.5h-3.39l1.8 9h12.18l.277-1.385c.054-.271.317-.448.588-.392.271.054.446.317.392.588l-.357 1.787c-.047.234-.252.402-.49.402z" />
-                                    <path
-                                        d="m6.5 17c-.233 0-.442-.164-.49-.402l-2.479-12.394c-.14-.699-.759-1.206-1.471-1.206h-.001l-1.559.002c-.276 0-.5-.224-.5-.5s.223-.5.5-.5l1.558-.002h.002c1.188 0 2.219.845 2.452 2.01l2.478 12.394c.054.271-.122.534-.392.588-.033.007-.066.01-.098.01z" />
-                                    <path
-                                        d="m21.5 19h-17c-.827 0-1.5-.673-1.5-1.5s.673-1.5 1.5-1.5h2c.276 0 .5.224.5.5s-.224.5-.5.5h-2c-.276 0-.5.224-.5.5s.224.5.5.5h17c.276 0 .5.224.5.5s-.224.5-.5.5z" />
-                                    <path
-                                        d="m8 24c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm0-3c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1z" />
-                                    <path
-                                        d="m17 24c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm0-3c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="crm-cart-data">
-                                <p class="text-white">{{ $total['totalBusinesses'] }}</p>
-                                <span class="d-block mb-3 text-white">Total Businesses</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xxl-3 col-sm-4">
-                    <div class="card crm-cart bg-success border-0">
-                        <div class="card-header border-0 pb-0">
-                            <span class="text-white fs-16">Total Property<i
-                                    class="fa-solid fa-chevron-up ms-1"></i></span>
-                            <div class="icon-box bg-white">
-                                <svg id="_x31__px" height="24" viewBox="0 0 24 24" width="24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="m17.5 13c-3.584 0-6.5-2.916-6.5-6.5s2.916-6.5 6.5-6.5 6.5 2.916 6.5 6.5-2.916 6.5-6.5 6.5zm0-12c-3.033 0-5.5 2.467-5.5 5.5s2.467 5.5 5.5 5.5 5.5-2.467 5.5-5.5-2.467-5.5-5.5-5.5z" />
-                                    <path
-                                        d="m17.5 10c-.276 0-.5-.224-.5-.5v-6c0-.276.224-.5.5-.5s.5.224.5.5v6c0 .276-.224.5-.5.5z" />
-                                    <path
-                                        d="m20.5 7h-6c-.276 0-.5-.224-.5-.5s.224-.5.5-.5h6c.276 0 .5.224.5.5s-.224.5-.5.5z" />
-                                    <path
-                                        d="m19.5 17h-13c-.238 0-.443-.168-.49-.402l-2-10c-.03-.147.009-.299.103-.415.095-.116.237-.183.387-.183h4c.276 0 .5.224.5.5s-.224.5-.5.5h-3.39l1.8 9h12.18l.277-1.385c.054-.271.317-.448.588-.392.271.054.446.317.392.588l-.357 1.787c-.047.234-.252.402-.49.402z" />
-                                    <path
-                                        d="m6.5 17c-.233 0-.442-.164-.49-.402l-2.479-12.394c-.14-.699-.759-1.206-1.471-1.206h-.001l-1.559.002c-.276 0-.5-.224-.5-.5s.223-.5.5-.5l1.558-.002h.002c1.188 0 2.219.845 2.452 2.01l2.478 12.394c.054.271-.122.534-.392.588-.033.007-.066.01-.098.01z" />
-                                    <path
-                                        d="m21.5 19h-17c-.827 0-1.5-.673-1.5-1.5s.673-1.5 1.5-1.5h2c.276 0 .5.224.5.5s-.224.5-.5.5h-2c-.276 0-.5.224-.5.5s.224.5.5.5h17c.276 0 .5.224.5.5s-.224.5-.5.5z" />
-                                    <path
-                                        d="m8 24c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm0-3c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1z" />
-                                    <path
-                                        d="m17 24c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm0-3c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="crm-cart-data">
-                                <p class="text-white">{{ $total['totalProperties'] }}</p>
-                                <span class="d-block mb-3 text-white">Total Properties</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xxl-3 col-sm-4">
-                    <div class="card crm-cart bg-success border-0">
-                        <div class="card-header border-0 pb-0">
-                            <span class="text-white fs-16">Total Active Assembly<i
-                                    class="fa-solid fa-chevron-up ms-1"></i></span>
-                            <div class="icon-box bg-white">
-                                <svg id="_x31__px" height="24" viewBox="0 0 24 24" width="24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="m17.5 13c-3.584 0-6.5-2.916-6.5-6.5s2.916-6.5 6.5-6.5 6.5 2.916 6.5 6.5-2.916 6.5-6.5 6.5zm0-12c-3.033 0-5.5 2.467-5.5 5.5s2.467 5.5 5.5 5.5 5.5-2.467 5.5-5.5-2.467-5.5-5.5-5.5z" />
-                                    <path
-                                        d="m17.5 10c-.276 0-.5-.224-.5-.5v-6c0-.276.224-.5.5-.5s.5.224.5.5v6c0 .276-.224.5-.5.5z" />
-                                    <path
-                                        d="m20.5 7h-6c-.276 0-.5-.224-.5-.5s.224-.5.5-.5h6c.276 0 .5.224.5.5s-.224.5-.5.5z" />
-                                    <path
-                                        d="m19.5 17h-13c-.238 0-.443-.168-.49-.402l-2-10c-.03-.147.009-.299.103-.415.095-.116.237-.183.387-.183h4c.276 0 .5.224.5.5s-.224.5-.5.5h-3.39l1.8 9h12.18l.277-1.385c.054-.271.317-.448.588-.392.271.054.446.317.392.588l-.357 1.787c-.047.234-.252.402-.49.402z" />
-                                    <path
-                                        d="m6.5 17c-.233 0-.442-.164-.49-.402l-2.479-12.394c-.14-.699-.759-1.206-1.471-1.206h-.001l-1.559.002c-.276 0-.5-.224-.5-.5s.223-.5.5-.5l1.558-.002h.002c1.188 0 2.219.845 2.452 2.01l2.478 12.394c.054.271-.122.534-.392.588-.033.007-.066.01-.098.01z" />
-                                    <path
-                                        d="m21.5 19h-17c-.827 0-1.5-.673-1.5-1.5s.673-1.5 1.5-1.5h2c.276 0 .5.224.5.5s-.224.5-.5.5h-2c-.276 0-.5.224-.5.5s.224.5.5.5h17c.276 0 .5.224.5.5s-.224.5-.5.5z" />
-                                    <path
-                                        d="m8 24c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm0-3c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1z" />
-                                    <path
-                                        d="m17 24c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm0-3c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="crm-cart-data">
-                                <p class="text-white">{{ $total['totalAssembly'] }}</p>
-                                <span class="d-block mb-3 text-white">Total Active Assemblies</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-12">
-                    <div class="card dz-card" id="accordion-one">
-                        <div class="card-header flex-wrap border-0">
-                            <div>
-                                <h4 class="card-title">Assemblies By Region</h4>
-                            </div>
-                        </div>
-
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="Preview" role="tabpanel"
-                                aria-labelledby="home-tab">
-                                <div class="card-body pt-0">
-                                    <!-- Default accordion -->
-                                    <div class="accordion accordion-primary" id="accordion-regions">
-                                        @foreach ($total['regions'] as $index => $region)
-                                            <div class="accordion-item">
-                                                <div class="accordion-header rounded-lg" id="heading{{ $index }}"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#collapse{{ $index }}"
-                                                    aria-controls="collapse{{ $index }}" aria-expanded="false"
-                                                    role="button">
-                                                    <span class="accordion-header-icon"></span>
-                                                    <span class="accordion-header-text">{{ $region->name }}</span>
-                                                    <span class="accordion-header-indicator"></span>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div
+                                    class="mb-4 d-flex align-items-center justify-content-between bg-light p-2 px-3 rounded-3">
+                                    <h6 class="fw-semibold mb-0">Operational Information :</h6>
+                                    <button class="btn btn-primary btn-sm" type="button">View All</button>
+                                </div>
+                                <div
+                                    class="row row-cols-md-4 row-cols-sm-3 row-cols-xxl-auto personal-favourite-contacts mb-0 gap-2 flex-wrap">
+                                    <div class="col flex-fill">
+                                        <div
+                                            class="d-flex align-items-center bg-primary-transparent rounded-pill p-2 pe-5">
+                                            <div class="me-2">
+                                                <span class="avatar avatar-md avatar-rounded bg-primary p-2">
+                                                    <i class="ri-macbook-line fs-18 lh-1"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-fill">
+                                                <div class="fw-semibold mb-0 text-default">Total Agents
                                                 </div>
-                                                <div id="collapse{{ $index }}" class="collapse"
-                                                    aria-labelledby="heading{{ $index }}"
-                                                    data-bs-parent="#accordion-regions">
-                                                    <div class="accordion-body-text">
-                                                        @if ($region->assemblies->count() > 0)
+                                                <span class="text-muted">{{ $total['totalAssemblyAgents'] }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col flex-fill">
+                                        <div
+                                            class="d-flex align-items-center bg-secondary-transparent rounded-pill p-2 pe-5">
+                                            <div class="me-2">
+                                                <span class="avatar avatar-md avatar-rounded bg-secondary p-2">
+                                                    <i class="ri-briefcase-2-line fs-18 lh-1"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-fill">
+                                                <div class="fw-semibold mb-0 text-default"> Active Agents</div>
+                                                <span class="text-muted">{{ $total['totalActiveAssemblyAgents'] }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col flex-fill">
+                                        <div
+                                            class="d-flex align-items-center bg-success-transparent rounded-pill p-2 pe-5">
+                                            <div class="me-2">
+                                                <span class="avatar avatar-md avatar-rounded bg-success p-2">
+                                                    <i class="ri-heart-pulse-line fs-18 lh-1"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-fill">
+                                                <div class="fw-semibold mb-0 text-default"> In-Active Agents</div>
+                                                <span class="text-muted">{{ $total['totalInactiveAssemblyAgents'] }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col flex-fill">
+                                        <div class="d-flex align-items-center bg-info-transparent rounded-pill p-2 pe-5">
+                                            <div class="me-2">
+                                                <span class="avatar avatar-md avatar-rounded bg-info p-2">
+                                                    <i class="ri-football-line fs-18 lh-1"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-fill">
+                                                <div class="fw-semibold mb-0 text-default">Total Businessess</div>
+                                                <span class="text-muted">{{ $total['totalBusinesses'] }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col flex-fill">
+                                        <div class="d-flex align-items-center bg-pink-transparent rounded-pill p-2 pe-5">
+                                            <div class="me-2">
+                                                <span class="avatar avatar-md avatar-rounded bg-warning p-2">
+                                                    <i class="ri-briefcase-2-line fs-18 lh-1"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-fill">
+                                                <div class="fw-semibold mb-0 text-default">Total Properties</div>
+                                                <span class="text-muted">{{ $total['totalProperties'] }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+                <div class="col-xl-3">
+                    <div class="card custom-card profit-analysis-card">
+                        <div class="card-body p-0">
+                            <div class="p-4 pb-1">
+                                <h4 class="mb-1 d-flex align-items-center fw-semibold flex-wrap">GHS
+                                    {{ $total['totalExpectedPayments'] }}<span
+                                        class="text-success fw-medium fs-12 ms-2"><i
+                                            class="ti ti-arrow-up align-middle me-1"></i> </span> </h4>
+                                <span class="fs-14 d-block">Expected Revenue </span>
+                            </div>
+                            <div id="profit-analysis"></div>
+                            <div id="profit-analysis1"></div>
+                            <div id="profit-analysis2"></div>
+                        </div>
+                    </div>
+                    <div class="card custom-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Bills And Payments
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="progress-stacked progress-sm mb-4 mt-2 gap-1">
+                                <div class="progress-bar rounded" role="progressbar" style="width: 45%"
+                                    aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-secondary rounded" role="progressbar" style="width: 25%"
+                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success rounded" role="progressbar" style="width: 30%"
+                                    aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <ul class="list-unstyled sales-traffic-list">
+                                <li>
+                                    <div class="d-flex align-items-center flex-wrap justify-content-between">
+                                        <div class="fw-semibold"> Bills</div>
+                                        <div class="fw-semibold"><span
+                                                class="text-success fs-11 fw-medium me-2 d-inline-block"><i
+                                                    class="ti ti-arrow-up alilgn-middle me-1"></i>0.56%</span>GHS
+                                            {{ $total['totalBill'] }}</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex align-items-center flex-wrap justify-content-between">
+                                        <div class="fw-semibold">Arrears</div>
+                                        <div class="fw-semibold"><span
+                                                class="text-success fs-11 fw-medium me-2 d-inline-block"><i
+                                                    class="ti ti-arrow-up alilgn-middle me-1"></i>4.23%</span> GHS
+                                            {{ $total['totalArrears'] }} </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex align-items-center flex-wrap justify-content-between">
+                                        <div class="fw-semibold">Revenue</div>
+                                        <div class="fw-semibold"><span
+                                                class="text-danger fs-11 fw-medium me-2 d-inline-block"><i
+                                                    class="ti ti-arrow-down alilgn-middle me-1"></i>6.88%</span>GHS
+                                            {{ $total['totalExpectedPayments'] }}
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9">
+                    <div class="card custom-card">
+                        <div class="card-header justify-content-between">
+                            <div class="card-title">
+                                BoP's Bill / Property Rate Bill & Payment Statistics
+                            </div>
+                            <div class="dropdown">
+                                <a href="javascript:void(0);" class="btn btn-sm btn-light btn-wave fs-12 text-muted"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    View All<i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Download</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Import</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Export</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div id="sales-statistics" class="p-3"></div>
+                            <div id="sales-statistics1"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card custom-card overflow-hidden">
+                                <div class="card-header justify-content-between">
+                                    <div class="card-title">
+                                        Revenue Statistics
+                                    </div>
+
+                                </div>
+                                <div class="card-body text-center p-0">
+                                    <div id="revenue-statistics1"></div>
+                                    <div class="revenue-statistics">
+                                        <div id="revenue-statistics"></div>
+                                        <div class="chart-circle-value"></div>
+                                    </div>
+
+                                    @php
+                                        // Define the totals
+                                        $totalBusinessBill = $total['totalBusinessBill'];
+                                        $totalPropertyBill = $total['totalPropertyBill'];
+
+                                        // Calculate the summation
+                                        $totalSum = $totalBusinessBill + $totalPropertyBill;
+
+                                        // Define the cuts
+                                        $gracut = $totalSum * 1.5; // 15%
+                                        $level10cut = $totalSum * 1.5; // 15%
+                                        $assemblycut = $totalSum * 7.0; // 70%
+                                    @endphp
+                                    <div class="row justify-content-center mt-4 p-3 gx-xl-1 gx-xxl-3">
+                                        <div class="col col-xl-4 border-end border-inline-end-dashed">
+                                            <span class="d-block text-muted mb-1 fs-12">Assembly Fund - (70%)</span>
+                                            <span
+                                                class="fw-semibold h6 mb-0 text-center">{{ number_format($assemblycut, 2) }}
+                                                <i class="ti ti-arrow-up text-success"></i></span>
+                                        </div>
+                                        <div class="col col-xl-4 border-end border-inline-end-dashed">
+                                            <span class="d-block text-muted mb-1 fs-12">GRA-(15%)</span>
+                                            <span class="fw-semibold h6 mb-0 text-center">{{ number_format($gracut, 2) }}
+                                                <i class="ti ti-arrow-down text-danger"></i></span>
+                                        </div>
+                                        <div class="col col-xl-4">
+                                            <span class="d-block text-muted mb-1 fs-12">Level 10 -(15%)</span>
+                                            <span
+                                                class="fw-semibold h6 mb-0 text-center">{{ number_format($level10cut, 2) }}<i
+                                                    class="ti ti-arrow-up text-success"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="card custom-card income-card">
+                                <div class="card-body p-0">
+                                    <div class="d-flex align-items-center flex-wrap gap-2 lh-1 p-3">
+                                        <div class="circle-content">
+                                            <div id="income"></div>
+                                            <i class='bx bx-wallet fs-5 text-success'></i>
+                                        </div>
+                                        <div class="d-flex flex-column flex-fill">
+                                            <span class="fw-semibold h6 mb-2">GHS {{ $total['totalBusinessBill'] }}</span>
+                                            <p class="fs-13 mb-0">Total Revenue Generated For BoP</p>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="d-block text-danger fw-medium fs-13 mb-2">
+                                                <i class="ti ti-arrow-down"></i>0.96%
+                                            </span>
+                                            <span>This Month -AS AT
+                                                {{ \Carbon\Carbon::now()->format('l, F j, Y h:i A') }}</span>
+                                        </div>
+                                    </div>
+                                    <div id="income-chart"></div>
+                                </div>
+                            </div>
+                            <div class="card custom-card expense-card">
+                                <div class="card-body p-0">
+                                    <div class="d-flex align-items-center flex-wrap gap-2 lh-1 p-3">
+                                        <div class="circle-content">
+                                            <div id="expense"></div>
+                                            <i class='bx bx-dollar-circle fs-5 text-secondary'></i>
+                                        </div>
+                                        <div class="d-flex flex-column flex-fill">
+                                            <span class="fw-semibold h6 mb-2">GHS {{ $total['totalPropertyBill'] }}</span>
+                                            <p class="fs-13 mb-0">Total Revenue Generated For Property Rate </p>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="d-block text-success fw-medium fs-13 mb-2">
+                                                <i class="ti ti-arrow-up"></i>4.27%
+                                            </span>
+                                            <span>This Month AS AT-
+                                                {{ \Carbon\Carbon::now()->format('l, F j, Y h:i A') }}</span>
+                                        </div>
+                                    </div>
+                                    <div id="expenditure-chart"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12 col-md-12">
+                <div class="card">
+
+
+                    <div class="card-header">
+                        <div class="card-title">Weekly Payments Performance</div>
+                    </div>
+                    <div class="card-body py-0 custome-tooltip">
+                        <div id="activity1"></div>
+                    </div>
+                    <div class="card-footer border-0 pt-0">
+                        <a href="{{ route('payments.index') }}" class="btn btn-primary btn-block">Explore Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12 col-md-12">
+                <div class="card">
+
+                    <div class="card-header">
+                        <div class="card-title">Monthly Payments Performance</div>
+                    </div>
+                    <div class="card-body py-0 custome-tooltip">
+                        <div id="activity2"></div>
+                    </div>
+                    <div class="card-footer border-0 pt-0">
+                        <a href="{{ route('payments.index') }}" class="btn btn-primary btn-block">Explore Details</a>
+                    </div>
+                </div>
+            </div>
+        @elseif (\Auth::user()->access_level == 'GRA_Administrator')
+            <div class="accordion customized-accordion accordions-items-separate" id="customizedAccordion">
+                <div class="accordion-item custom-accordion-primary">
+                    <h2 class="accordion-header" id="customizedAccordionOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#customized-AccordionOne" aria-expanded="true"
+                            aria-controls="customized-AccordionOne">
+                            Financial Overview
+                        </button>
+                    </h2>
+                    <div id="customized-AccordionOne" class="accordion-collapse collapse show"
+                        aria-labelledby="customizedAccordionOne" data-bs-parent="#customizedAccordion">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-xxl-9">
+                                    <div class="row">
+                                        <div class="col-xl-3">
+                                            <div class="card custom-card">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-start gap-3 flex-wrap">
+                                                        <div>
+                                                            <span
+                                                                class="avatar avatar-md avatar-rounded bg-primary shadow shadow-primary">
+                                                                <i class="ti ti-shopping-bag fs-5"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="flex-fill">
                                                             <div
-                                                                class="table-responsive active-projects user-tbl  dt-filter">
-                                                                <table id="assemblyTable-{{ $region->id }}">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>S/N</th>
-                                                                            <th>Assembly Name</th>
-                                                                            <th>Total Properties</th>
-                                                                            <th>Total Businesses</th>
-                                                                            <th>Total Bills (GHS)</th>
-                                                                            <th>Total Payments (GHS)</th>
-                                                                            <th>Total Receivables (GHS)</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        @foreach ($region->assemblies as $key => $assembly)
-                                                                            @php
-                                                                                $totalPropertiesCount = $assembly->properties->count();
-                                                                                $totalBusinessesCount = $assembly->businesses->count();
-                                                                                $totalBills = $assembly->bills->sum(
-                                                                                    'amount',
-                                                                                );
-                                                                                $totalBillsCount = isset($totalBills)
-                                                                                    ? number_format($totalBills, 2)
-                                                                                    : 0;
-                                                                                $totalPayments = $assembly->payments
-                                                                                    ->filter(function ($payment) {
-                                                                                        if (
-                                                                                            $payment->payment_mode ==
-                                                                                            'momo'
-                                                                                        ) {
-                                                                                            return $payment->transaction_status ==
-                                                                                                'Success';
-                                                                                        }
-
-                                                                                        return true;
-                                                                                    })
-                                                                                    ->sum('amount');
-                                                                                $totalPaymentsCount = isset(
-                                                                                    $totalPayments,
-                                                                                )
-                                                                                    ? number_format($totalPayments, 2)
-                                                                                    : 0;
-                                                                                $totalReceivables =
-                                                                                    $totalBills - $totalPayments;
-                                                                            @endphp
-
-                                                                            <tr>
-                                                                                <td>{{ $key + 1 }}</td>
-                                                                                <td>{{ $assembly->name }}</td>
-                                                                                <td>{{ $totalPropertiesCount }}</td>
-                                                                                <td>{{ $totalBusinessesCount }}</td>
-                                                                                <td>{{ $totalBillsCount }}</td>
-                                                                                <td>{{ $totalPaymentsCount }}</td>
-                                                                                <td>{{ number_format($totalReceivables, 2) }}
-                                                                                </td>
-                                                                            </tr>
-                                                                        @endforeach
-                                                                    </tbody>
-                                                                </table>
+                                                                class="d-flex align-items-center justify-content-between mb-2">
+                                                                <span class="d-block"> Yearly BoP Bill</span>
+                                                                <span
+                                                                    class="badge bg-success-transparent rounded-pill">0.25%<i
+                                                                        class="ti ti-arrow-up"></i></span>
                                                             </div>
-                                                        @else
-                                                            <p>No assemblies available for this region.</p>
-                                                        @endif
+                                                            <h4 class="fw-semibold mb-3 lh-1">GHS
+                                                                {{ $total['totalBusinessBill'] }} </h4>
+
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @elseif (\Auth::user()->access_level == 'customer')
-                <div class="col-xl-4 col-lg-12 col-sm-12">
-                    <div class="card overflow-hidden">
-                        <div class="text-center p-5 overlay-box">
-                            <h3 class="mt-3 mb-0 text-white">Property Rate</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="row text-center">
-                                <div class="col-6">
-                                    <div class="bgl-primary rounded p-3">
-                                        <h4 class="mb-0">GHS {{ $customerData['totalBillP'] }}</h4>
-                                        <small>Total Bills</small>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="bgl-primary rounded p-3">
-                                        <h4 class="mb-0">GHS {{ $customerData['totalArrearsP'] }}</h4>
-                                        <small>Arrears </small>
-                                    </div>
-                                </div>
-                                <p></p>
-                            </div>
-
-                            <div class="row text-center">
-                                <div class="col-6">
-                                    <div class="bgl-primary rounded p-3">
-                                        <h4 class="mb-0">GHS {{ $customerData['totalExpectedPaymentsP'] }}</h4>
-                                        <small>Expected Payments</small>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="bgl-primary rounded p-3">
-                                        <h4 class="mb-0">GHS {{ $customerData['yearlyPaymentsP'] }}</h4>
-                                        <small>Actual Payments</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer mt-0">
-                            <a href="#analysis-section" class="btn btn-primary btn-lg btn-block">
-                                View Detailed Analysis
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-4 col-lg-12 col-sm-12">
-                    <div class="card overflow-hidden">
-                        <div class="text-center p-5 overlay-box">
-                            <h3 class="mt-3 mb-0 text-white">Business Operating Permit</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="row text-center">
-                                <div class="col-6">
-                                    <div class="bgl-primary rounded p-3">
-                                        <h4 class="mb-0">GHS {{ $customerData['totalBillB'] }}</h4>
-                                        <small>Total Bills</small>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="bgl-primary rounded p-3">
-                                        <h4 class="mb-0">GHS {{ $customerData['totalArrearsB'] }}</h4>
-                                        <small>Arrears </small>
-                                    </div>
-                                </div>
-                                <p></p>
-                            </div>
-
-                            <div class="row text-center">
-                                <div class="col-6">
-                                    <div class="bgl-primary rounded p-3">
-                                        <h4 class="mb-0">GHS {{ $customerData['totalExpectedPaymentsB'] }}</h4>
-                                        <small>Expected Payments</small>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="bgl-primary rounded p-3">
-                                        <h4 class="mb-0">GHS {{ $customerData['yearlyPaymentsB'] }}</h4>
-                                        <small>Actual Payments</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer mt-0">
-                            <a href="#analysis-section" class="btn btn-primary btn-lg btn-block">
-                                View Detailed Analysis
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-4 col-lg-12 col-sm-12">
-                    <div class="card overflow-hidden">
-                        <div class="text-center p-5 overlay-box">
-                            <h3 class="mt-3 mb-0 text-white">Market Toll</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="row text-center">
-                                <div class="col-6">
-                                    <div class="bgl-primary rounded p-3">
-                                        <h4 class="mb-0">GHS {{ $total['totalBill'] }}</h4>
-                                        <small>Total Bills</small>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="bgl-primary rounded p-3">
-                                        <h4 class="mb-0">GHS {{ $total['totalArrears'] }}</h4>
-                                        <small>Arrears </small>
-                                    </div>
-                                </div>
-                                <p></p>
-                            </div>
-
-                            <div class="row text-center">
-                                <div class="col-6">
-                                    <div class="bgl-primary rounded p-3">
-                                        <h4 class="mb-0">GHS {{ $total['totalExpectedPayments'] }}</h4>
-                                        <small>Expected Payments</small>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="bgl-primary rounded p-3">
-                                        <h4 class="mb-0">GHS {{ $total['yearlyPayments'] }}</h4>
-                                        <small>Actual Payments</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer mt-0">
-                            <a href="#analysis-section" class="btn btn-primary btn-lg btn-block">
-                                View Detailed Analysis
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-12 active-p">
-
-                    <div class="card">
-
-                        <div class="card-header flex-wrap d-flex justify-content-between">
-                            <div>
-                                <h4 class="heading mb-0">Customer Properties</h4>
-                            </div>
-                        </div>
-
-                        <div class="card-body px-0">
-                            <div class="table-responsive active-projects user-tbl  dt-filter">
-                                <table id="user-tbl" class="table shorting">
-                                    <thead>
-                                        <tr>
-                                            <th>S/N</th>
-                                            <th>Entity Type</th>
-                                            <th>Category</th>
-                                            <th>Digital Address</th>
-                                            <th>Location</th>
-                                            <th>Street Name</th>
-                                            <th>Rated</th>
-                                            <th>Validated</th>
-                                            <th>Property Number</th>
-                                            <th>Owner Account</th>
-                                            <th>Owner Name</th>
-                                            <th>Ratable Value</th>
-                                            <th>Assembly</th>
-                                            <th>Division</th>
-                                            <th>Block</th>
-                                            <th>Zone</th>
-                                            <th>Property Use</th>
-                                            <th>Date Created</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($customerData['properties'] as $index => $property)
-                                            <tr>
-                                                <td>{{ $index + 1 }}</td>
-                                                <td>{{ $property->entityType->name ?? '' }}</td>
-                                                <td>{{ $property->entityType->category ?? '' }}</td>
-                                                <td>{{ $property->digital_address }}</td>
-                                                <td>{{ $property->location }}</td>
-                                                <td>{{ $property->street_name }}</td>
-                                                <td>{{ $property->rated }}</td>
-                                                <td>{{ $property->validated }}</td>
-                                                <td>{{ $property->property_number }}</td>
-                                                <td>{{ $property->customer->account_number ?? 'N/A' }}</td>
-                                                <td>{{ $property->customer->first_name ?? '' }}
-                                                    {{ $property->customer->last_name ?? 'N/A' }}
-                                                </td>
-                                                <td>{{ number_format($property->ratable_value, 2) }}</td>
-                                                <td>{{ $property->assembly->name ?? 'N/A' }}</td>
-                                                <td>{{ $property->division->division_name ?? 'N/A' }}</td>
-                                                <td>{{ $property->block->block_name ?? 'N/A' }}</td>
-                                                <td>{{ $property->zone->name ?? 'N/A' }}</td>
-                                                <td>{{ $property->propertyUse->name ?? 'N/A' }}</td>
-                                                <td>{{ $property->created_at }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                    <tfoot>
-                                        <th colspan="10"></th>
-                                        <th>Total (GHS)</th>
-                                        <th>{{ $customerData['total'] }}</th>
-                                        <th colspan="6"></th>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-12 active-p">
-                    <div class="card">
-
-                        <div class="card-header flex-wrap d-flex justify-content-between">
-                            <div>
-                                <h4 class="heading mb-0">Customer Businesses</h4>
-                            </div>
-                        </div>
-
-                        <div class="card-body px-0">
-                            <div class="table-responsive active-projects user-tbl2  dt-filter">
-                                <table id="user-tbl2" class="table shorting">
-                                    <thead>
-                                        <tr>
-                                            <th>S/N</th>
-                                            <th>Business Name</th>
-                                            <th>Business Type</th>
-                                            <th>Business Class</th>
-                                            <th>Location</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Business Owner</th>
-                                            <th>Assembly</th>
-                                            <th>Division</th>
-                                            <th>Block</th>
-                                            <th>Zone</th>
-                                            <th>Property Use</th>
-                                            <th>Created By</th>
-                                            <th>Date Created</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($customerData['businesses'] as $index => $business)
-                                            @php
-                                                $firstname = $business->customer->first_name ?? '';
-                                                $lastname = $business->customer->last_name ?? '';
-                                                $fullname = $firstname . ' ' . $lastname;
-                                            @endphp
-
-                                            <tr>
-                                                <td>{{ $index + 1 }}</td>
-                                                <td>{{ $business->business_name }}</td>
-                                                <td>{{ $business->businessType->name ?? '' }}</td>
-                                                <td>{{ $business->businessClass->name ?? '' }}</td>
-                                                <td>{{ $business->location }}</td>
-                                                <td>{{ $business->email }}</td>
-                                                <td>{{ $business->business_phone }}</td>
-                                                <td>{{ $fullname ?? '' }}</td>
-                                                <td>{{ $business->assembly->name ?? 'N/A' }}</td>
-                                                <td>{{ $business->division->division_name ?? 'N/A' }}</td>
-                                                <td>{{ $business->block->block_name ?? 'N/A' }}</td>
-                                                <td>{{ $business->zone->name ?? 'N/A' }}</td>
-                                                <td>{{ $business->propertyUse->name ?? 'N/A' }}</td>
-                                                <td>{{ $business->createdBy->name ?? 'N/A' }}</td>
-                                                <td>{{ $business->created_at }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-12 active-p" id="analysis-section">
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-list" role="tabpanel"
-                            aria-labelledby="pills-list-tab">
-                            <div class="card">
-
-                                <div class="card-header flex-wrap d-flex justify-content-between">
-                                    <div>
-                                        <h4 class="heading mb-0">Customer Bills</h4>
-                                    </div>
-                                </div>
-
-                                <div class="card-body px-0">
-                                    <div class="table-responsive active-projects user-tbl3  dt-filter">
-                                        <table id="user-tbl3" class="table shorting">
-                                            <thead>
-                                                <tr>
-                                                    <th>S/N</th>
-                                                    <th>Bill No</th>
-                                                    <th>Name</th>
-                                                    <th>Bill Date</th>
-                                                    <th>Bill Year</th>
-                                                    <th>Bill Type</th>
-                                                    <th>Arrears</th>
-                                                    <th>Current Amount</th>
-                                                    <th>Amount Due</th>
-                                                    <th>Created By</th>
-                                                    <th>Date Created</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($customerData['bills'] as $index => $bill)
-                                                    @php
-                                                        $billType = '';
-
-                                                        if ($bill->property_id !== null) {
-                                                            $firstname = $bill->property->customer->first_name ?? '';
-                                                            $lastname = $bill->property->customer->last_name ?? '';
-                                                            $billType = 'Property Bill';
-                                                        } else {
-                                                            $firstname = $bill->business->customer->first_name ?? '';
-                                                            $lastname = $bill->business->customer->last_name ?? '';
-                                                            $billType = 'Business Bill';
-                                                        }
-                                                        $name = $firstname . ' ' . $lastname;
-                                                    @endphp
-
-                                                    <tr class="btn-reveal-trigger">
-                                                        <td>{{ $index + 1 }}</td>
-                                                        <td>{{ $bill->bills_id }}</td>
-                                                        <td>{{ $name ?? '' }}</td>
-                                                        <td>{{ $bill->billing_date }}</td>
-                                                        <td>{{ $bill->bills_year }}</td>
-                                                        @if ($bill->property_id !== null)
-                                                            <td>
-                                                                <span class="badge light badge-success">
-                                                                    {{ $billType }}
-                                                                </span>
-                                                            </td>
-                                                        @else
-                                                            <td>
-                                                                <span class="badge light badge-warning">
-                                                                    {{ $billType }}
-                                                                </span>
-                                                            </td>
-                                                        @endif
-                                                        <td>{{ number_format($bill->arrears, 2) }}</td>
-                                                        <td>{{ number_format($bill->amount, 2) }}</td>
-                                                        <td>{{ number_format($bill->amount + $bill->arrears, 2) }}
-                                                        </td>
-                                                        <td>{{ $bill->createdBy->name ?? 'N/A' }}</td>
-                                                        <td>{{ $bill->created_at }}</td>
-                                                        <td>
-                                                            <div class="dropdown">
-                                                                <div class="btn-link" data-bs-toggle="dropdown"
-                                                                    aria-expanded="false">
-                                                                    <svg width="24" height="24"
-                                                                        viewBox="0 0 24 24" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
-                                                                            stroke="#737B8B" stroke-width="2"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round">
-                                                                        </path>
-                                                                        <path
-                                                                            d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
-                                                                            stroke="#737B8B" stroke-width="2"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round">
-                                                                        </path>
-                                                                        <path
-                                                                            d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
-                                                                            stroke="#737B8B" stroke-width="2"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round">
-                                                                        </path>
-                                                                    </svg>
-                                                                </div>
-                                                                <div class="dropdown-menu dropdown-menu-end">
-                                                                    <div class="py-2">
-                                                                        <a class="dropdown-item"
-                                                                            href=" {{ route('payments.customerCreate', $bill) }}">Make
-                                                                            Payment
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th colspan="5"></th>
-                                                    <th>Total (GHS)</th>
-                                                    <th>{{ $customerData['totalArrears'] }}</th>
-                                                    <th>{{ $customerData['totalAmount'] }}</th>
-                                                    <th>{{ $customerData['totalDue'] }}</th>
-                                                    <th colspan="3"></th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-12 active-p">
-
-                    @if (session()->has('status'))
-                        <div class="alert alert-success alert-dismissible fade show">
-                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
-                                stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                class="me-2">
-                                <polyline points="9 11 12 14 22 4"></polyline>
-                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                            </svg>
-                            <strong>{{ session('status') }}</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
-                            </button>
-                        </div>
-                    @endif
-
-                    <div class="card">
-
-                        <div class="card-header flex-wrap d-flex justify-content-between">
-                            <div>
-                                <h4 class="heading mb-0">Customer Payments</h4>
-                            </div>
-                        </div>
-
-                        <div class="card-body px-0">
-                            <div class="table-responsive active-projects user-tbl4  dt-filter">
-                                <table id="user-tbl4" class="table shorting">
-                                    <thead>
-                                        <tr>
-                                            <th>SN</th>
-                                            <th>Bills ID</th>
-                                            <th>Name</th>
-                                            <th>Amount</th>
-                                            <th>Payment Mode</th>
-                                            <th>Status</th>
-                                            <th>Assembly</th>
-                                            <th>Paid By</th>
-                                            <th>Payment Date</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($customerData['payments'] as $index => $payment)
-                                            @php
-                                                $name = '';
-                                                if ($payment->bill->property && $payment->bill->property->customer) {
-                                                    $firstname = $payment->bill->property->customer->first_name ?? '';
-                                                    $lastname = $payment->bill->property->customer->last_name ?? '';
-                                                    $name = $firstname . ' ' . $lastname;
-                                                } elseif (
-                                                    $payment->bill->business &&
-                                                    $payment->bill->business->customer
-                                                ) {
-                                                    $firstname = $payment->bill->business->customer->first_name ?? '';
-                                                    $lastname = $payment->bill->business->customer->last_name ?? '';
-                                                    $name = $firstname . ' ' . $lastname;
-                                                }
-                                            @endphp
-                                            <tr>
-                                                <td>{{ $index + 1 }}</td>
-                                                <td>{{ $payment->bills_id }}</td>
-                                                <td>{{ $name }}</td>
-                                                <td>{{ number_format($payment->amount, 2) }}</td>
-                                                <td>{{ $payment->payment_mode }}</td>
-                                                <td>{{ $payment->transaction_status }}</td>
-                                                <td>{{ $payment->assembly->name ?? 'N/A' }}</td>
-                                                <td>{{ $payment->createdBy->name ?? 'N/A' }}</td>
-                                                <td>{{ $payment->created_at }}</td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <div class="btn-link" data-bs-toggle="dropdown"
-                                                            aria-expanded="false">
-                                                            <svg width="24" height="24" viewBox="0 0 24 24"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
-                                                                    stroke="#737B8B" stroke-width="2"
-                                                                    stroke-linecap="round" stroke-linejoin="round">
-                                                                </path>
-                                                                <path
-                                                                    d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
-                                                                    stroke="#737B8B" stroke-width="2"
-                                                                    stroke-linecap="round" stroke-linejoin="round">
-                                                                </path>
-                                                                <path
-                                                                    d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
-                                                                    stroke="#737B8B" stroke-width="2"
-                                                                    stroke-linecap="round" stroke-linejoin="round">
-                                                                </path>
-                                                            </svg>
+                                        </div>
+                                        <div class="col-xl-3">
+                                            <div class="card custom-card">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-start gap-3 flex-wrap">
+                                                        <div>
+                                                            <span
+                                                                class="avatar avatar-md avatar-rounded bg-secondary shadow shadow-secondary">
+                                                                <i class="ti ti-currency-dollar fs-5"></i>
+                                                            </span>
                                                         </div>
-                                                        <div class="dropdown-menu dropdown-menu-end">
-                                                            {{-- <a class="dropdown-item"
-                                                                    href="{{ route('payments.show', $payment) }}">Make
-                                                                    Payment</a>
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('payments.fetch', $payment->bills_id) }}">View
-                                                                    Payment</a>
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('receipt.show', $payment) }}">View
-                                                                    Receipt</a>
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('payments.edit', $payment) }}">Amend
-                                                                    Bill</a> --}}
+                                                        <div class="flex-fill">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between mb-2">
+                                                                <span class="d-block">Total Property Bill </span>
+                                                                <span
+                                                                    class="badge bg-success-transparent rounded-pill">5.44%<i
+                                                                        class="ti ti-arrow-up"></i></span>
+                                                            </div>
+                                                            <h4 class="fw-semibold mb-3 lh-1"> GHS
+                                                                {{ $total['totalPropertyBill'] }}</h4>
+
                                                         </div>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                    <tfoot>
-                                        <th colspan="2"></th>
-                                        <th>Total (GHS)</th>
-                                        <th>{{ $customerData['paymentTotal'] }}</th>
-                                        <th colspan="7"></th>
-                                    </tfoot>
-                                </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3">
+                                            <div class="card custom-card">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-start gap-3 flex-wrap">
+                                                        <div>
+                                                            <span
+                                                                class="avatar avatar-md avatar-rounded bg-success shadow shadow-success">
+                                                                <i class="ti ti-box fs-5"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="flex-fill">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between mb-2">
+                                                                <span class="d-block">Yearly Revenue </span>
+                                                                <span
+                                                                    class="badge bg-danger-transparent rounded-pill">12.34%<i
+                                                                        class="ti ti-arrow-down"></i></span>
+                                                            </div>
+                                                            <span class="d-block mb-2"></span>
+                                                            <h4 class="fw-semibold mb-3 lh-1">GHS
+                                                                {{ $total['totalBill'] }}</h4>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3">
+                                            <div class="card custom-card">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-start gap-3 flex-wrap">
+                                                        <div>
+                                                            <span
+                                                                class="avatar avatar-md avatar-rounded bg-info shadow shadow-info">
+                                                                <i class="ti ti-moneybag fs-5"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="flex-fill">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between mb-2">
+                                                                <span class="d-block"> Cash Collections </span>
+                                                                <span
+                                                                    class="badge bg-success-transparent rounded-pill">2.12%<i
+                                                                        class="ti ti-arrow-up"></i></span>
+                                                            </div>
+                                                            <span class="d-block mb-2"></span>
+                                                            <h4 class="fw-semibold mb-3 lh-1"> GHS
+                                                                {{ $total['yearlyCashPayments'] }}</h4>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xxl-3 col-xl-12">
+                                    <div class="card custom-card">
+                                        <div class="card-header justify-content-between">
+                                            <div class="card-title">
+                                                Country Statistics
+                                            </div>
+                                            <a href="javascript:void(0);"
+                                                class="btn btn-light btn-wave btn-sm text-muted waves-effect waves-light">Export</a>
+                                        </div>
+                                        <div class="card-body">
+                                            <ul class="list-unstyled country-stats-list">
+                                                <li>
+                                                    <div class="d-flex align-items-center gap-3">
+                                                        <div class="lh-1">
+                                                            <span class="avatar avatar-md bg-light p-2">
+                                                                <img src="../assets/images/flags/india_flag.jpg"
+                                                                    alt="" class="rounded-circle">
+                                                            </span>
+                                                        </div>
+                                                        <div class="flex-fill">
+                                                            <div
+                                                                class="d-flex mb-2 justify-content-between align-items-center">
+                                                                <div class="d-flex align-items-center gap-2">
+                                                                    <span class="fw-semibold d-block">Overall Yearly Momo
+                                                                        Payment</span>
+                                                                </div>
+                                                                <div class="fw-medium"><span class="text-danger me-1"><i
+                                                                            class="ti ti-arrow-down align-middle"></i></span><span>GHS
+                                                                        {{ $total['yearlyMomoPayments'] }}</span>
+                                                                    (65%)</div>
+                                                            </div>
+                                                            <div class="progress progress-xs progress-animate"
+                                                                role="progressbar" aria-valuenow="65" aria-valuemin="0"
+                                                                aria-valuemax="100">
+                                                                <div class="progress-bar" style="width: 65%"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="d-flex align-items-center gap-3">
+                                                        <div class="lh-1">
+                                                            <span class="avatar avatar-md bg-light p-2">
+                                                                <img src="../assets/images/flags/russia_flag.jpg"
+                                                                    alt="" class="rounded-circle">
+                                                            </span>
+                                                        </div>
+                                                        <div class="flex-fill">
+                                                            <div
+                                                                class="d-flex mb-2 justify-content-between align-items-center">
+                                                                <div class="d-flex align-items-center gap-2">
+                                                                    <span class="fw-semibold d-block">Total Yearly
+                                                                        Payments</span>
+                                                                </div>
+                                                                <div class="fw-medium"><span class="text-success me-1"><i
+                                                                            class="ti ti-arrow-up align-middle"></i></span><span>GHS
+                                                                        {{ $total['yearlyPayments'] }}</span>
+                                                                    (55%)</div>
+                                                            </div>
+                                                            <div class="progress progress-xs progress-animate"
+                                                                role="progressbar" aria-valuenow="55" aria-valuemin="0"
+                                                                aria-valuemax="100">
+                                                                <div class="progress-bar bg-secondary" style="width: 55%">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="d-flex align-items-center gap-3">
+                                                        <div class="lh-1">
+                                                            <span class="avatar avatar-md bg-light p-2">
+                                                                <img src="../assets/images/flags/canada_flag.jpg"
+                                                                    alt="" class="rounded-circle">
+                                                            </span>
+                                                        </div>
+                                                        <div class="flex-fill">
+                                                            <div
+                                                                class="d-flex mb-2 justify-content-between align-items-center">
+                                                                <div class="d-flex align-items-center gap-2">
+                                                                    <span class="fw-semibold d-block">Total
+                                                                        Receivables</span>
+                                                                </div>
+                                                                <div class="fw-medium"><span class="text-danger me-1"><i
+                                                                            class="ti ti-arrow-down align-middle"></i></span><span>>GHS
+                                                                        {{ $total['yearlyReceivables'] }}</span>
+                                                                    (69%)</div>
+                                                            </div>
+                                                            <div class="progress progress-xs progress-animate"
+                                                                role="progressbar" aria-valuenow="69" aria-valuemin="0"
+                                                                aria-valuemax="100">
+                                                                <div class="progress-bar bg-success" style="width: 69%">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            @endif
-        </div>
+                <div class="accordion-item custom-accordion-secondary">
+                    <h2 class="accordion-header" id="customizedAccordionTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#customized-AccordionTwo" aria-expanded="false"
+                            aria-controls="customized-AccordionTwo">
+                            Operational Overview
+                        </button>
+                    </h2>
+                    <div id="customized-AccordionTwo" class="accordion-collapse collapse"
+                        aria-labelledby="customizedAccordionTwo" data-bs-parent="#customizedAccordion">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <!-- Card 1 -->
+                                <div class="col-xl-4">
+                                    <div class="card custom-card">
+                                        <div class="card-body">
+                                            <div class="progress-stacked progress-sm mb-4 mt-2 gap-1">
+                                                <div class="progress-bar rounded" role="progressbar" style="width: 45%"
+                                                    aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-secondary rounded" role="progressbar"
+                                                    style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-success rounded" role="progressbar"
+                                                    style="width: 30%" aria-valuenow="30" aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
+                                            </div>
+                                            <ul class="list-unstyled sales-traffic-list">
+                                                <li>
+                                                    <div
+                                                        class="d-flex align-items-center flex-wrap justify-content-between">
+                                                        <div class="fw-semibold">Total Properties</div>
+                                                        <div class="fw-semibold"><span
+                                                                class="text-success fs-11 fw-medium me-2 d-inline-block"><i
+                                                                    class="ti ti-arrow-up alilgn-middle me-1"></i>0.56%</span>{{ $total['totalProperties'] }}
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div
+                                                        class="d-flex align-items-center flex-wrap justify-content-between">
+                                                        <div class="fw-semibold">Valued </div>
+                                                        <div class="fw-semibold"><span
+                                                                class="text-success fs-11 fw-medium me-2 d-inline-block"><i
+                                                                    class="ti ti-arrow-up alilgn-middle me-1"></i>0.00%</span>0
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div
+                                                        class="d-flex align-items-center flex-wrap justify-content-between">
+                                                        <div class="fw-semibold">Un-Valued </div>
+                                                        <div class="fw-semibold"><span
+                                                                class="text-danger fs-11 fw-medium me-2 d-inline-block"><i
+                                                                    class="ti ti-arrow-down alilgn-middle me-1"></i>0.00%</span>0.00
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 2 -->
+                                <div class="col-xl-4">
+                                    <div class="card custom-card">
+                                        <div class="card-body">
+                                            <!-- Duplicate content from Card 1 -->
+                                            <div class="progress-stacked progress-sm mb-4 mt-2 gap-1">
+                                                <div class="progress-bar rounded" role="progressbar" style="width: 45%"
+                                                    aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-secondary rounded" role="progressbar"
+                                                    style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-success rounded" role="progressbar"
+                                                    style="width: 30%" aria-valuenow="30" aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
+                                            </div>
+                                            <ul class="list-unstyled sales-traffic-list">
+                                                <li>
+                                                    <div
+                                                        class="d-flex align-items-center flex-wrap justify-content-between">
+                                                        <div class="fw-semibold">Total Businessess</div>
+                                                        <div class="fw-semibold"><span
+                                                                class="text-success fs-11 fw-medium me-2 d-inline-block"><i
+                                                                    class="ti ti-arrow-up alilgn-middle me-1"></i>0.56%</span>{{ $total['totalBusinesses'] }}
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div
+                                                        class="d-flex align-items-center flex-wrap justify-content-between">
+                                                        <div class="fw-semibold">Validated</div>
+                                                        <div class="fw-semibold"><span
+                                                                class="text-success fs-11 fw-medium me-2 d-inline-block"><i
+                                                                    class="ti ti-arrow-up alilgn-middle me-1"></i>0.00%</span>0
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div
+                                                        class="d-flex align-items-center flex-wrap justify-content-between">
+                                                        <div class="fw-semibold">Un-Validated </div>
+                                                        <div class="fw-semibold"><span
+                                                                class="text-danger fs-11 fw-medium me-2 d-inline-block"><i
+                                                                    class="ti ti-arrow-down alilgn-middle me-1"></i>0.00%</span>0
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 3 -->
+                                <div class="col-xl-4">
+                                    <div class="card custom-card">
+                                        <div class="card-body">
+                                            <!-- Duplicate content from Card 1 -->
+                                            <div class="progress-stacked progress-sm mb-4 mt-2 gap-1">
+                                                <div class="progress-bar rounded" role="progressbar" style="width: 45%"
+                                                    aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-secondary rounded" role="progressbar"
+                                                    style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-success rounded" role="progressbar"
+                                                    style="width: 30%" aria-valuenow="30" aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
+                                            </div>
+                                            <ul class="list-unstyled sales-traffic-list">
+                                                <li>
+                                                    <div
+                                                        class="d-flex align-items-center flex-wrap justify-content-between">
+                                                        <div class="fw-semibold">Total Assemblies</div>
+                                                        <div class="fw-semibold"><span
+                                                                class="text-success fs-11 fw-medium me-2 d-inline-block"><i
+                                                                    class="ti ti-arrow-up alilgn-middle me-1"></i>0.56%</span>{{ $total['totalAssembly'] }}
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div
+                                                        class="d-flex align-items-center flex-wrap justify-content-between">
+                                                        <div class="fw-semibold">Active </div>
+                                                        <div class="fw-semibold"><span
+                                                                class="text-success fs-11 fw-medium me-2 d-inline-block"><i
+                                                                    class="ti ti-arrow-up alilgn-middle me-1"></i>0.00%</span>0
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div
+                                                        class="d-flex align-items-center flex-wrap justify-content-between">
+                                                        <div class="fw-semibold">In-Active </div>
+                                                        <div class="fw-semibold"><span
+                                                                class="text-danger fs-11 fw-medium me-2 d-inline-block"><i
+                                                                    class="ti ti-arrow-down alilgn-middle me-1"></i>0.00%</span>0
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item custom-accordion-danger">
+                    <h2 class="accordion-header" id="customizedAccordionThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#customized-AccordionThree" aria-expanded="false"
+                            aria-controls="customized-AccordionThree">
+                            Nationwide Assemblies Performance Overview
+                        </button>
+                    </h2>
+                    <div id="customized-AccordionThree" class="accordion-collapse collapse"
+                        aria-labelledby="customizedAccordionThree" data-bs-parent="#customizedAccordion">
+                        <div class="accordion-body">
+                            <!-- Default accordion -->
+                            <div class="accordion-body" id="accordion-regions">
+                                @foreach ($total['regions'] as $index => $region)
+                                    <div class="accordion-item">
+                                        <div class="accordion-header rounded-lg" id="heading{{ $index }}"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}"
+                                            aria-controls="collapse{{ $index }}" aria-expanded="false"
+                                            role="button">
+                                            <span class="accordion-header-icon"></span>
+                                            <span class="accordion-header-text">{{ $region->name }}</span>
+                                            <span class="accordion-header-indicator"></span>
+                                        </div>
+                                        <div id="collapse{{ $index }}" class="collapse"
+                                            aria-labelledby="heading{{ $index }}"
+                                            data-bs-parent="#accordion-regions">
+                                            <div class="accordion-body-text">
+                                                @if ($region->assemblies->count() > 0)
+                                                    <div class="table table-bordered text-nowrap w-100">
+                                                        <table id="file-export-{{ $region->id }}">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>S/N</th>
+                                                                    <th>Assembly Name</th>
+                                                                    <th>Total Properties</th>
+                                                                    <th>Total Businesses</th>
+                                                                    <th>Total Bills (GHS)</th>
+                                                                    <th>Total Payments (GHS)</th>
+                                                                    <th>Total Receivables (GHS)</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($region->assemblies as $key => $assembly)
+                                                                    @php
+                                                                        $totalPropertiesCount = $assembly->properties->count();
+                                                                        $totalBusinessesCount = $assembly->businesses->count();
+                                                                        $totalBills = $assembly->bills->sum('amount');
+                                                                        $totalBillsCount = isset($totalBills)
+                                                                            ? number_format($totalBills, 2)
+                                                                            : 0;
+                                                                        $totalPayments = $assembly->payments
+                                                                            ->filter(function ($payment) {
+                                                                                if ($payment->payment_mode == 'momo') {
+                                                                                    return $payment->transaction_status ==
+                                                                                        'Success';
+                                                                                }
+
+                                                                                return true;
+                                                                            })
+                                                                            ->sum('amount');
+                                                                        $totalPaymentsCount = isset($totalPayments)
+                                                                            ? number_format($totalPayments, 2)
+                                                                            : 0;
+                                                                        $totalReceivables =
+                                                                            $totalBills - $totalPayments;
+                                                                    @endphp
+
+                                                                    <tr>
+                                                                        <td>{{ $key + 1 }}</td>
+                                                                        <td>{{ $assembly->name }}</td>
+                                                                        <td>{{ $totalPropertiesCount }}</td>
+                                                                        <td>{{ $totalBusinessesCount }}</td>
+                                                                        <td>{{ $totalBillsCount }}</td>
+                                                                        <td>{{ $totalPaymentsCount }}</td>
+                                                                        <td>{{ number_format($totalReceivables, 2) }}
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                @else
+                                                    <p>No assemblies available for this region.</p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @elseif (\Auth::user()->access_level == 'customer')
+            <!-- Start::row-1 -->
+            <div class="row">
+                <div class="col-xxl-7 col-xl-12 col-lg-12">
+                    <div class="card custom-card overflow-hidden nft-main-card">
+                        <div class="card-body">
+                            <div class="row gap-3 gap-sm-0 mx-0 py-3 rounded-3">
+                                <div class="col-xxl-8 col-xl-6 col-lg-8 col-12">
+                                    <div class="p-2">
+                                        @php
+                                            $hour = date('H');
+                                            if ($hour < 12) {
+                                                $greeting = 'Good Morning';
+                                            } elseif ($hour < 18) {
+                                                $greeting = 'Good Afternoon';
+                                            } else {
+                                                $greeting = 'Good Evening';
+                                            }
+                                        @endphp
+                                        <h6 class="fw-semibold mb-3 op-9 text-fixed-white"> {{ $greeting }},
+                                            {{ Auth::user()->name }} &#128075;</h6>
+                                        {{-- <h4 class="fw-semibold mb-2  text-fixed-white">Paying your property rates helps
+                                            drive <span class="text-secondary">National development!</span> </h4> --}}
+                                        <div class="message-container">
+                                            <h4 class="fw-semibold mb-2 text-fixed-white">
+                                                <span id="message"></span>
+                                                <span class="cursor"></span>
+                                            </h4>
+                                        </div>
+
+                                        <style>
+                                            .message-container {
+                                                font-family: Arial, sans-serif;
+                                                font-size: 1.5rem;
+                                                white-space: nowrap;
+                                                overflow: hidden;
+                                                display: inline-block;
+                                                border-right: 3px solid #ccc;
+                                                /* Blinking cursor effect */
+                                                width: fit-content;
+                                                animation: blinkCursor 0.6s step-end infinite;
+                                            }
+
+                                            @keyframes blinkCursor {
+                                                50% {
+                                                    border-color: transparent;
+                                                }
+                                            }
+                                        </style>
+                                        <p class="mb-4 text-fixed-white op-7 fs-12">...
+                                        </p>
+                                        <div class="d-flex gap-2 flex-wrap">
+                                            <button class="btn btn-success btn-wave waves-effect waves-light">
+                                                View My Bills</button>
+                                            <button class="btn btn-secondary btn-wave waves-effect waves-light">
+                                                Check Payment History</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Start:: Row-3 -->
+                <div class="row">
+
+                    <div class="col-xxl-4 col-xl-6">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="custom-card card">
+                                    <div class="card-body p-0">
+                                        <div class="text-end mb-3 p-3">
+                                            <div class="avatar avatar-lg bg-secondary bg-opacity-25 avatar-rounded mb-3">
+                                                <div class="avatar avatar-md bg-secondary text-fixed-white avatar-rounded">
+                                                    <i class="ri-bar-chart-box-line fs-18"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h4 class="fw-semibold mb-1">GHS {{ $customerData['totalBillP'] }}</h4>
+                                                <span class="badge bg-success-transparent rounded-pill me-2">0.25%<i
+                                                        class="ti ti-arrow-up"></i></span>
+                                                <div class="text-muted mb-0 me-1 d-inline-block">Total BoP Bill</div>
+                                            </div>
+                                        </div>
+                                        <div id="widget-chart-5"></div>
+
+                                    </div>
+                                    <button class="btn btn-secondary-light btn-border-start">View Details</button>
+
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="custom-card card">
+                                    <div class="card-body p-0">
+                                        <div class="text-end mb-3 p-3">
+                                            <div class="avatar avatar-lg bg-success bg-opacity-25 avatar-rounded mb-3">
+                                                <div class="avatar avatar-md bg-success text-fixed-white avatar-rounded">
+                                                    <i class="ri-bar-chart-box-line fs-18"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h4 class="fw-semibold mb-1">GHS {{ $customerData['totalArrearsP'] }}</h4>
+                                                <span class="badge bg-danger-transparent rounded-pill me-2">0.25%<i
+                                                        class="ti ti-arrow-down"></i></span>
+                                                <div class="text-muted mb-0 me-1 d-inline-block">Total BoP Arrears</div>
+                                            </div>
+                                        </div>
+                                        <div id="widget-chart-6"></div>
+                                    </div>
+                                    <button class="btn btn-secondary-light btn-border-start">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-4 col-xl-6">
+                        <div class="card custom-card">
+                            <div class="card-header border-bottom border-block-end-dashed">
+                                <div>
+                                    <h6 class="mb-0">Transactions</h6>
+                                    <span class="fs-11 text-muted">Summary of Yearly transactions</span>
+                                </div>
+
+                            </div>
+                            <div class="card-body">
+                                <div class=" p-2 bg-light bg-opacity-75 rounded-3">
+                                    <div class="d-flex gap-3 justify-content-between align-items-center flex-wrap mb-3">
+                                        <div>
+                                            <span class="avatar avatar-sm bg-success-transparent avatar-rounded">
+                                                <i class="ri-arrow-left-down-line fs-18"></i>
+                                            </span>
+                                            <span class="align-center fw-medium ms-1">Amount Paid</span>
+                                        </div>
+                                        <div>
+                                            <div class="fw-semibold mb-1 d-inline-block">Property Rates</div>
+                                            <span class="text-muted mb-0 ms-1 d-inline-block"> </span>
+                                        </div>
+                                        <h6 class="fw-semibold">GHS
+                                            {{ $customerData['yearlyPaymentsP'] }}</h6>
+                                        <span class="badge bg-success rounded-pill">2.3%<i
+                                                class="ti ti-arrow-up"></i></span>
+                                    </div>
+                                    <div class="d-flex gap-3 justify-content-between align-items-center flex-wrap mb-3">
+                                        <div>
+                                            <span class="avatar avatar-sm bg-primary-transparent avatar-rounded">
+                                                <i class="ri-arrow-right-up-line fs-18"></i>
+                                            </span>
+                                            <span class="align-center fw-medium ms-1">Amount Paid</span>
+                                        </div>
+                                        <div>
+                                            <div class="fw-semibold mb-1 d-inline-block">BoP</div>
+                                            <span class="text-muted mb-0 ms-1 d-inline-block"> </span>
+                                        </div>
+                                        <h6 class="fw-semibold">GHS {{ $customerData['yearlyPaymentsB'] }}</h6>
+                                        <span class="badge bg-danger rounded-pill">-1.5%<i
+                                                class="ti ti-arrow-down"></i></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End:: Row-3 -->
+
+            </div>
+            <!--End::row-1 -->
+        @endif
+
+
     </div>
 @endsection
 
@@ -1695,7 +1603,7 @@
     <script>
         $(document).ready(function() {
             @foreach ($total['regions'] as $region)
-                $('#assemblyTable-{{ $region->id }}').DataTable({
+                $('#file-export-{{ $region->id }}').DataTable({
                     'dom': 'ZBfrltip',
                     buttons: [
 
@@ -1722,5 +1630,136 @@
                 });
             @endforeach
         });
+    </script>
+
+    <!-- Popper JS -->
+    <script src="{{ asset('assets/libs/@popperjs/core/umd/popper.min.js') }}"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Defaultmenu JS -->
+    <script src="{{ asset('assets/js/defaultmenu.js') }}"></script>
+
+    <!-- Node Waves JS-->
+    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+
+    <!-- Sticky JS -->
+    <script src="{{ asset('assets/js/sticky.js') }}"></script>
+
+    <!-- Simplebar JS -->
+    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/js/simplebar.js') }}"></script>
+
+    <!-- Auto Complete JS -->
+    <script src="{{ asset('assets/libs/@tarekraafat/autocomplete.js/autoComplete.min.js') }}"></script>
+
+    <!-- Color Picker JS -->
+    <script src="{{ asset('assets/libs/@simonwep/pickr/pickr.es5.min.js') }}"></script>
+
+
+    <!-- Apex Charts JS -->
+    <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+
+    <!-- Date & Time Picker JS -->
+    <script src="{{ asset('assets/libs/flatpickr/flatpickr.min.js') }}"></script>
+
+    <!-- Sales Dashboard -->
+    <script src="{{ asset('assets/js/sales-dashboard.js') }}"></script>
+
+    <!-- Custom JS -->
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
+
+
+    <!-- Custom-Switcher JS -->
+    <script src="{{ asset('assets/js/custom-switcher.js') }}"></script>
+    <!-- Crypto Dashboard -->
+    <script src="{{ asset('assets/js/crypto-dashboard.js') }}"></script>
+    <!-- Popper JS -->
+    <script src="{{ asset('assets/libs/@popperjs/core/umd/popper.min.js') }}"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Defaultmenu JS -->
+    <script src="{{ asset('assets/js/defaultmenu.js') }}"></script>
+
+    <!-- Node Waves JS-->
+    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+
+    <!-- Sticky JS -->
+    <script src="{{ asset('assets/js/sticky.js') }}"></script>
+
+    <!-- Simplebar JS -->
+    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/js/simplebar.js') }}"></script>
+
+    <!-- Auto Complete JS -->
+    <script src="{{ asset('assets/libs/@tarekraafat/autocomplete.js/autoComplete.min.js') }}"></script>
+
+    <!-- Color Picker JS -->
+    <script src="{{ asset('assets/libs/@simonwep/pickr/pickr.es5.min.js') }}"></script>
+
+
+    <!-- Apex Charts JS -->
+    <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+
+    <!-- Swiper JS -->
+    <script src="{{ asset('assets/libs/swiper/swiper-bundle.min.js') }}"></script>
+
+    <!-- Echarts JS -->
+    <script src="{{ asset('assets/libs/echarts/echarts.min.js') }}"></script>
+
+    <!-- Crypto Dashboard -->
+    <script src="{{ asset('assets/js/crypto-dashboard.js') }}"></script>
+
+    <!-- Custom JS -->
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
+
+
+    <!-- Custom-Switcher JS -->
+    <script src="{{ asset('assets/js/custom-switcher.js') }}"></script>
+    <!-- Swiper JS -->
+    <script src="{{ asset('assets/libs/swiper/swiper-bundle.min.js') }}"></script>
+
+    <!-- Internal Swiper JS -->
+    <script src="{{ asset('assets/js/swiper.js') }}"></script>
+
+    <script>
+        const messages = [
+            "Did You Know Paying your property rates helps drive National Development!",
+            "Your contributions build better communities and infrastructure.",
+            "Together, we create opportunities through your property rate payments.",
+            "Support local growth by fulfilling your property rate obligations.",
+            "Be a part of progress—your property rates make a difference!"
+        ];
+
+        let currentMessageIndex = 0;
+        let currentCharIndex = 0;
+        const messageElement = document.getElementById('message');
+
+        function typeMessage() {
+            if (currentCharIndex < messages[currentMessageIndex].length) {
+                messageElement.textContent += messages[currentMessageIndex].charAt(currentCharIndex);
+                currentCharIndex++;
+                setTimeout(typeMessage, 100); // Adjust typing speed here
+            } else {
+                setTimeout(eraseMessage, 2000); // Pause before erasing
+            }
+        }
+
+        function eraseMessage() {
+            if (currentCharIndex > 0) {
+                messageElement.textContent = messages[currentMessageIndex].substring(0, currentCharIndex - 1);
+                currentCharIndex--;
+                setTimeout(eraseMessage, 50); // Adjust erasing speed here
+            } else {
+                currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+                setTimeout(typeMessage, 1000); // Pause before typing the next message
+            }
+        }
+
+        // Start typing the first message
+        typeMessage();
     </script>
 @endsection

@@ -9,8 +9,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">Create Business Type</h4>
+                        <div class="card-header">
+                            <div class="card-title">Business Management / Assembly Business Types</div>
                         </div>
 
                         <div>

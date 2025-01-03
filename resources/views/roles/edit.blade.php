@@ -11,8 +11,8 @@
                 <div class="card">
 
                     <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">Edit Role</h4>
+                        <div class="card-header">
+                            <div class="card-title">Role Management /Edit Roles</div>
                         </div>
 
                         <div>

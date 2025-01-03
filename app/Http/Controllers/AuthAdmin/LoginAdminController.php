@@ -19,6 +19,11 @@ class LoginAdminController extends Controller
         return view('auth.login');
     }
 
+     public function LandingPage()
+    {
+        return view('auth.LandingPage');
+    }
+
     public function register()
     {
         $customerTypes = CustomerType::get();

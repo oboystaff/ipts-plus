@@ -25,14 +25,14 @@
                 <div class="card">
 
                     <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div>
-                            <h4 class="heading mb-0">Customers</h4>
+                        <div class="card-header">
+                            <div class="card-title">Rate Payer Management /All Rate Payers</div>
                         </div>
 
                         <div class="d-flex align-items-center">
                             @can('customers.create')
                                 <a href="{{ route('citizens.create') }}" class="btn btn-primary btn-sm ms-2">+ Create
-                                    Customer</a>
+                                    Add New Rate Payer</a>
                             @endcan
                         </div>
                     </div>
@@ -40,7 +40,7 @@
 
                     <div class="card-body px-0">
                         <div class="table-responsive active-projects user-tbl  dt-filter">
-                            <table id="user-tbl" class="table shorting">
+                            <table id="file-export" class="table table-bordered text-nowrap w-100">
                                 <thead>
                                     <tr>
                                         <th>S/N</th>
@@ -70,13 +70,12 @@
                                                     <div class="media d-flex align-items-center">
                                                         <div class="avatar avatar-sm me-2">
                                                             <img class="rounded-circle img-fluid"
-                                                                src="{{ asset('assets/images/avatar/1.png') }}"
-                                                                alt="" width="30">
+                                                                src="{{ asset('assets/images/user.png') }}" alt=""
+                                                                width="30">
                                                         </div>
-                                                        <div class="media-body">
-                                                            <h6 class="mb-0 fs--1"> {{ $citizen->first_name }}
-                                                            </h6>
-                                                        </div>
+                                                        {{ $citizen->first_name }}
+
+
                                                     </div>
                                                 </a>
                                             </td>

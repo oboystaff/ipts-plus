@@ -3,35 +3,48 @@
 
 <head>
     <link href="{{ asset('assets/src/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
+    <!-- Meta Data -->
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="keywords" content="">
-    <meta name="author" content="">
-    <meta name="robots" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="ERMS App">
-    <meta property="og:title" content="ERMS App">
-    <meta property="og:description" content="ERMS App">
-    <meta property="og:image" content="https://yeshadmin.dexignzone.com/xhtml/social-image.png">
-    <meta name="format-detection" content="telephone=no">
+    <title> IPTS - Level 10 </title>
+    <meta name="Description" content="IPTS- Level 10">
+    <meta name="Author" content="IPTS- Level 10">
+    <meta name="keywords" content="IPTS- Level 10">
 
-    <!-- PAGE TITLE HERE -->
-    <title>iTax System</title>
-    <!-- FAVICONS ICON -->
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('assets/images/level10.png') }}" type="image/x-icon">
 
-    <link href="{{ asset('assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/swiper/css/swiper-bundle.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/swiper/css/swiper-bundle.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.css') }}">
-    <link href="{{ asset('assets/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-    <link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css') }}" rel="stylesheet">
-    <link href="vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
+    <!-- Choices JS -->
+    <script src="{{ asset('assets/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
 
-    <!-- tagify-css -->
-    <link href="{{ asset('assets/vendor/tagify/dist/tagify.css') }}" rel="stylesheet">
+    <!-- Main Theme Js -->
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 
-    <!-- Style css -->
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    <!-- Bootstrap Css -->
+    <link id="style" href="{{ asset('assets/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Style Css -->
+    <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
+
+    <!-- Icons Css -->
+    <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
+
+    <!-- Node Waves Css -->
+    <link href="{{ asset('assets/libs/node-waves/waves.min.css') }}" rel="stylesheet">
+
+    <!-- Simplebar Css -->
+    <link href="{{ asset('assets/libs/simplebar/simplebar.min.css') }}" rel="stylesheet">
+
+    <!-- Color Picker Css -->
+    <link rel="stylesheet" href="{{ asset('assets/libs/flatpickr/flatpickr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/libs/@simonwep/pickr/themes/nano.min.css') }}">
+
+    <!-- Choices Css -->
+    <link rel="stylesheet" href="{{ asset('assets/libs/choices.js/public/assets/styles/choices.min.css') }}">
+
+    <!-- Auto Complete CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/libs/@tarekraafat/autocomplete.js/css/autoComplete.css') }}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     @yield('page-styles')
@@ -39,31 +52,12 @@
 
 <body>
 
-    <style>
-        .content-body1 {
-            /* Center the background image */
-            background-position: center center;
-            /* Make the background image cover the entire container */
-            background-size: cover;
-            /* Set the background image */
-            background-image: url('{{ asset('assets/images/arms.png') }}');
-            /* Apply opacity to the background image */
-            opacity: 0.5;
-            /* Adjust the opacity value as needed */
-            /* Other styles for the container */
-            /* For example, set the height of the container to fit its content */
-            min-height: 100vh;
-            /* Add other styles as needed */
-        }
-    </style>
 
     <!--*******************
         Preloader start
     ********************-->
-    <div id="preloader">
-        <div>
-            <img src="images/pre.gif" alt="">
-        </div>
+    <div id="loader">
+        <img src="{{ asset('assets/images/media/loader.svg') }}" alt="">
     </div>
     <!--*******************
         Preloader end
@@ -72,532 +66,1328 @@
     <!--**********************************
         Main wrapper start
     ***********************************-->
-    <div id="main-wrapper">
-        <!--**********************************
-            Nav header start
-        ***********************************-->
-        <div class="nav-header">
-            <a href="{{ route('dashboard.operational') }}" class="brand-logo">
+    <div class="page">
+        <!-- app-header -->
+        <header class="app-header">
 
-                {{-- <img class="brand-title" src="{{ asset('assets/images/west.png') }}" alt="Your Brand Logo"> --}}
+            <!-- Start::main-header-container -->
+            <div class="main-header-container container-fluid">
 
-            </a>
-            <div class="nav-control">
-                <div class="hamburger">
-                    <span class="line">
-                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M10.7468 5.58925C11.0722 5.26381 11.0722 4.73617 10.7468 4.41073C10.4213 4.0853 9.89369 4.0853 9.56826 4.41073L4.56826 9.41073C4.25277 9.72622 4.24174 10.2342 4.54322 10.5631L9.12655 15.5631C9.43754 15.9024 9.96468 15.9253 10.3039 15.6143C10.6432 15.3033 10.6661 14.7762 10.3551 14.4369L6.31096 10.0251L10.7468 5.58925Z"
-                                fill="#452B90" />
-                            <path opacity="0.3"
-                                d="M16.5801 5.58924C16.9056 5.26381 16.9056 4.73617 16.5801 4.41073C16.2547 4.0853 15.727 4.0853 15.4016 4.41073L10.4016 9.41073C10.0861 9.72622 10.0751 10.2342 10.3766 10.5631L14.9599 15.5631C15.2709 15.9024 15.798 15.9253 16.1373 15.6143C16.4766 15.3033 16.4995 14.7762 16.1885 14.4369L12.1443 10.0251L16.5801 5.58924Z"
-                                fill="#452B90" />
-                        </svg>
-                    </span>
-                </div>
-            </div>
-        </div>
+                <!-- Start::header-content-left -->
+                <div class="header-content-left">
 
-        <div class="header">
-            <div class="header-content">
-                <nav class="navbar navbar-expand">
-                    <div class="collapse navbar-collapse justify-content-between">
-                        <div class="header-left">
-
+                    <!-- Start::header-element -->
+                    <div class="header-element">
+                        <div class="horizontal-logo">
+                            <a href="{{ route('dashboard.operational') }}" class="header-logo">
+                                <img src="{{ asset('assets/images/level10.png') }}" alt="logo"
+                                    class="desktop-logo">
+                                <img src="{{ asset('assets/images/level10.png') }}" alt="logo" class="toggle-logo">
+                                <img src="{{ asset('assets/images/level10.png') }}" alt="logo"
+                                    class="desktop-white">
+                                <img src="{{ asset('assets/images/level10.png') }}" alt="logo"
+                                    class="toggle-white">
+                            </a>
                         </div>
-                        <div class="header-right d-flex align-items-center">
+                    </div>
+                    <!-- End::header-element -->
 
-                            <ul class="navbar-nav">
-                                <li class="nav-item dropdown notification_dropdown">
-                                    <a class="nav-link bell dz-theme-mode" href="javascript:void(0);">
-                                        <svg id="icon-light" xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1" class="svg-main-icon">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24" />
-                                                <path
-                                                    d="M12,15 C10.3431458,15 9,13.6568542 9,12 C9,10.3431458 10.3431458,9 12,9 C13.6568542,9 15,10.3431458 15,12 C15,13.6568542 13.6568542,15 12,15 Z"
-                                                    fill="#000000" fill-rule="nonzero" />
-                                                <path
-                                                    d="M19.5,10.5 L21,10.5 C21.8284271,10.5 22.5,11.1715729 22.5,12 C22.5,12.8284271 21.8284271,13.5 21,13.5 L19.5,13.5 C18.6715729,13.5 18,12.8284271 18,12 C18,11.1715729 18.6715729,10.5 19.5,10.5 Z M16.0606602,5.87132034 L17.1213203,4.81066017 C17.7071068,4.22487373 18.6568542,4.22487373 19.2426407,4.81066017 C19.8284271,5.39644661 19.8284271,6.34619408 19.2426407,6.93198052 L18.1819805,7.99264069 C17.5961941,8.57842712 16.6464466,8.57842712 16.0606602,7.99264069 C15.4748737,7.40685425 15.4748737,6.45710678 16.0606602,5.87132034 Z M16.0606602,18.1819805 C15.4748737,17.5961941 15.4748737,16.6464466 16.0606602,16.0606602 C16.6464466,15.4748737 17.5961941,15.4748737 18.1819805,16.0606602 L19.2426407,17.1213203 C19.8284271,17.7071068 19.8284271,18.6568542 19.2426407,19.2426407 C18.6568542,19.8284271 17.7071068,19.8284271 17.1213203,19.2426407 L16.0606602,18.1819805 Z M3,10.5 L4.5,10.5 C5.32842712,10.5 6,11.1715729 6,12 C6,12.8284271 5.32842712,13.5 4.5,13.5 L3,13.5 C2.17157288,13.5 1.5,12.8284271 1.5,12 C1.5,11.1715729 2.17157288,10.5 3,10.5 Z M12,1.5 C12.8284271,1.5 13.5,2.17157288 13.5,3 L13.5,4.5 C13.5,5.32842712 12.8284271,6 12,6 C11.1715729,6 10.5,5.32842712 10.5,4.5 L10.5,3 C10.5,2.17157288 11.1715729,1.5 12,1.5 Z M12,18 C12.8284271,18 13.5,18.6715729 13.5,19.5 L13.5,21 C13.5,21.8284271 12.8284271,22.5 12,22.5 C11.1715729,22.5 10.5,21.8284271 10.5,21 L10.5,19.5 C10.5,18.6715729 11.1715729,18 12,18 Z M4.81066017,4.81066017 C5.39644661,4.22487373 6.34619408,4.22487373 6.93198052,4.81066017 L7.99264069,5.87132034 C8.57842712,6.45710678 8.57842712,7.40685425 7.99264069,7.99264069 C7.40685425,8.57842712 6.45710678,8.57842712 5.87132034,7.99264069 L4.81066017,6.93198052 C4.22487373,6.34619408 4.22487373,5.39644661 4.81066017,4.81066017 Z M4.81066017,19.2426407 C4.22487373,18.6568542 4.22487373,17.7071068 4.81066017,17.1213203 L5.87132034,16.0606602 C6.45710678,15.4748737 7.40685425,15.4748737 7.99264069,16.0606602 C8.57842712,16.6464466 8.57842712,17.5961941 7.99264069,18.1819805 L6.93198052,19.2426407 C6.34619408,19.8284271 5.39644661,19.8284271 4.81066017,19.2426407 Z"
-                                                    fill="#000000" fill-rule="nonzero" opacity="0.3" />
-                                            </g>
-                                        </svg>
-                                        <svg id="icon-dark" xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1" class="svg-main-icon">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24" />
-                                                <path
-                                                    d="M12.0700837,4.0003006 C11.3895108,5.17692613 11,6.54297551 11,8 C11,12.3948932 14.5439081,15.9620623 18.9299163,15.9996994 C17.5467214,18.3910707 14.9612535,20 12,20 C7.581722,20 4,16.418278 4,12 C4,7.581722 7.581722,4 12,4 C12.0233848,4 12.0467462,4.00010034 12.0700837,4.0003006 Z"
-                                                    fill="#000000" />
-                                            </g>
-                                        </svg>
-                                    </a>
-                                </li>
+                    <!-- Start::header-element -->
+                    <div class="header-element mx-lg-0 mx-2">
+                        <a aria-label="Hide Sidebar"
+                            class="sidemenu-toggle header-link animated-arrow hor-toggle horizontal-navtoggle"
+                            data-bs-toggle="sidebar" href="javascript:void(0);"><span></span></a>
+                    </div>
+                    <!-- End::header-element -->
 
-                                <li class="nav-item ps-3">
-                                    <div class="dropdown header-profile2">
-                                        <a class="nav-link" href="javascript:void(0);" role="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            <div class="header-info2 d-flex align-items-center">
-                                                <div class="header-media">
-                                                    <img src="{{ asset('assets/images/user2.jpg') }}" alt="">
+                    <!-- Start::header-element -->
+                    {{-- <div class="header-element header-search d-lg-block d-none my-auto auto-complete-search">
+                        <!-- Start::header-link -->
+                        <input type="text" class="header-search-bar form-control rounded-pill" id="header-search"
+                            placeholder="Search for Results..." spellcheck=false autocomplete="off"
+                            autocapitalize="off">
+                        <a href="javascript:void(0);" class="header-search-icon border-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                                fill="#5f6368">
+                                <path d="M0 0h24v24H0V0z" fill="none" />
+                                <path
+                                    d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                            </svg>
+                        </a>
+                        <!-- End::header-link -->
+                    </div> --}}
+
+                    <!-- End::header-element -->
+
+                </div>
+                <!-- End::header-content-left -->
+
+                <!-- Start::header-content-right -->
+                <div class="header-content-right">
+
+                    <!-- Start::header-element -->
+                    <div class="header-element d-lg-none d-flex">
+                        <a href="javascript:void(0);" class="header-link" data-bs-toggle="modal"
+                            data-bs-target="#responsive-searchModal">
+                            <!-- Start::header-link-icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="header-link-icon" height="24px"
+                                viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                <path
+                                    d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+                            </svg>
+                            <!-- End::header-link-icon -->
+                        </a>
+                    </div>
+                    <!-- End::header-element -->
+
+                    <!-- Start::header-element -->
+
+                    <!-- End::header-element -->
+
+                    <!-- Start::header-element -->
+                    <div class="header-element header-theme-mode">
+                        <!-- Start::header-link|layout-setting -->
+                        <a href="javascript:void(0);" class="header-link layout-setting">
+                            <span class="light-layout">
+                                <!-- Start::header-link-icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="header-link-icon"
+                                    enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px"
+                                    fill="#5f6368">
+                                    <rect fill="none" height="24" width="24" />
+                                    <path
+                                        d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z" />
+                                </svg>
+                                <!-- End::header-link-icon -->
+                            </span>
+                            <span class="dark-layout">
+                                <!-- Start::header-link-icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="header-link-icon" height="24px"
+                                    viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                    <path d="M0 0h24v24H0V0z" fill="none" />
+                                    <path
+                                        d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79zM1 10.5h3v2H1zM11 .55h2V3.5h-2zm8.04 2.495l1.408 1.407-1.79 1.79-1.407-1.408zm-1.8 15.115l1.79 1.8 1.41-1.41-1.8-1.79zM20 10.5h3v2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm-1 4h2v2.95h-2zm-7.45-.96l1.41 1.41 1.79-1.8-1.41-1.41z" />
+                                </svg>
+                                <!-- End::header-link-icon -->
+                            </span>
+                        </a>
+                        <!-- End::header-link|layout-setting -->
+                    </div>
+                    <!-- End::header-element -->
+
+
+
+                    <!-- Start::header-element -->
+                    {{-- <div class="header-element notifications-dropdown dropdown">
+                        <!-- Start::header-link|dropdown-toggle -->
+                        <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside" id="messageDropdown" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="header-link-icon" height="24px"
+                                viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                <path d="M0 0h24v24H0V0z" fill="none" />
+                                <path
+                                    d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z" />
+                            </svg>
+                            <span class="header-icon-pulse bg-secondary rounded pulse pulse-secondary"></span>
+                        </a>
+                        <!-- End::header-link|dropdown-toggle -->
+                        <!-- Start::main-header-dropdown -->
+                        <div class="main-header-dropdown dropdown-menu dropdown-menu-end"
+                            data-popper-placement="none">
+                            <div class="p-3 bg-light bg-opacity-75">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <p class="mb-0 fw-semibold">Notifications</p>
+                                    <span class="badge bg-pink" id="notifiation-data">5 Unread</span>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <ul class="list-unstyled mb-0" id="header-notification-scroll">
+                                <li class="dropdown-item">
+                                    <div class="d-flex align-items-start">
+                                        <div class="pe-2">
+                                            <span
+                                                class="avatar avatar-md offline bg-primary-transparent avatar-rounded">
+                                                <img src="../assets/images/faces/1.jpg" alt="Sonia Agarwal">
+                                            </span>
+                                        </div>
+                                        <div class="flex-grow-1 d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <p class="mb-0 fw-medium"><a href="chat.html">Sonia Agarwal</a></p>
+                                                <div class="fw-normal header-notification-text text-muted">
+                                                    <span class="fw-medium fs-12 text-success">Approval</span> for the
+                                                    Insurance
                                                 </div>
+                                                <span class="text-muted header-notification-text fs-11">7 mins
+                                                    ago</span>
                                             </div>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end" style="">
-                                            <div class="card border-0 mb-0">
-                                                <div class="card-header py-2">
-                                                    <div class="products">
-                                                        <img src="{{ asset('assets/images/user2.jpg') }}"
-                                                            class="avatar avatar-md" alt="">
-                                                        <div>
-                                                            <h6>{{ auth()->user()->name ?? '' }}</h6>
-                                                            <span>{{ auth()->user()->access_level ?? '' }}</span>
-                                                            <span>{{ auth()->user()->phone ?? '' }}</span>
-                                                        </div>
-                                                    </div>
+                                            <div>
+                                                <a href="javascript:void(0);"
+                                                    class="text-muted me-1 dropdown-item-close1">
+                                                    <i class="ti ti-trash fs-16"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="dropdown-item">
+                                    <div class="d-flex align-items-start">
+                                        <div class="pe-2">
+                                            <span
+                                                class="avatar avatar-md offline bg-primary-transparent avatar-rounded">
+                                                <img src="../assets/images/faces/12.jpg" alt="Rajesh Kumar">
+                                            </span>
+                                        </div>
+                                        <div class="flex-grow-1 d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <p class="mb-0 fw-medium"><a href="chat.html">Rajesh Kumar</a></p>
+                                                <div class="fw-normal header-notification-text text-muted">
+                                                    <span class="fw-medium fs-12 text-warning">Urgent Request</span>
+                                                    for project
                                                 </div>
-                                                <div class="card-footer px-0 py-2">
-
-                                                    <!-- Logout Link -->
-                                                    <a href="{{ route('auth.logout') }}"
-                                                        class="dropdown-item ai-icon">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18"
-                                                            height="18" viewBox="0 0 24 24" fill="none"
-                                                            stroke="var(--primary)" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round">
-                                                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                                            <polyline points="16 17 21 12 16 7"></polyline>
-                                                            <line x1="21" y1="12" x2="9"
-                                                                y2="12"></line>
-                                                        </svg>
-                                                        <span class="ms-2">Logout</span>
-                                                    </a>
+                                                <span class="text-muted header-notification-text fs-11">3 hours
+                                                    ago</span>
+                                            </div>
+                                            <div>
+                                                <a href="javascript:void(0);"
+                                                    class="text-muted me-1 dropdown-item-close1">
+                                                    <i class="ti ti-trash fs-16"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="dropdown-item">
+                                    <div class="d-flex align-items-start">
+                                        <div class="pe-2">
+                                            <span
+                                                class="avatar avatar-md offline bg-success-transparent avatar-rounded">
+                                                <img src="../assets/images/faces/3.jpg" alt="Ayesha Malik">
+                                            </span>
+                                        </div>
+                                        <div class="flex-grow-1 d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <p class="mb-0 fw-medium"><a href="chat.html">Ayesha Malik</a></p>
+                                                <div class="fw-normal header-notification-text text-muted">
+                                                    <span class="fw-medium fs-12 text-info">Task Completed</span> for
+                                                    redesign
                                                 </div>
+                                                <span class="text-muted header-notification-text fs-11">2 hours
+                                                    ago</span>
+                                            </div>
+                                            <div>
+                                                <a href="javascript:void(0);"
+                                                    class="text-muted me-1 dropdown-item-close1">
+                                                    <i class="ti ti-trash fs-16"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="dropdown-item">
+                                    <div class="d-flex align-items-start">
+                                        <div class="pe-2">
+                                            <span class="avatar avatar-md online bg-danger-transparent avatar-rounded">
+                                                <img src="../assets/images/faces/14.jpg" alt="Mohan Desai">
+                                            </span>
+                                        </div>
+                                        <div class="flex-grow-1 d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <p class="mb-0 fw-medium"><a href="chat.html">Mohan Desai</a></p>
+                                                <div class="fw-normal header-notification-text text-muted">
+                                                    <span class="fw-medium fs-12 text-danger">New Message</span> about
+                                                    client meeting
+                                                </div>
+                                                <span class="text-muted header-notification-text fs-11">15 mins
+                                                    ago</span>
+                                            </div>
+                                            <div>
+                                                <a href="javascript:void(0);"
+                                                    class="text-muted me-1 dropdown-item-close1">
+                                                    <i class="ti ti-trash fs-16"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="dropdown-item">
+                                    <div class="d-flex align-items-start">
+                                        <div class="pe-2">
+                                            <span
+                                                class="avatar avatar-md offline bg-warning-transparent avatar-rounded">
+                                                <img src="../assets/images/faces/5.jpg" alt="Priya Sharma">
+                                            </span>
+                                        </div>
+                                        <div class="flex-grow-1 d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <p class="mb-0 fw-medium"><a href="chat.html">Priya Sharma</a></p>
+                                                <div class="fw-normal header-notification-text text-muted">
+                                                    <span class="fw-medium fs-12 text-warning">Meeting Reminder</span>
+                                                    scheduled for 3:00 PM
+                                                </div>
+                                                <span class="text-muted header-notification-text fs-11">30 mins
+                                                    ago</span>
+                                            </div>
+                                            <div>
+                                                <a href="javascript:void(0);"
+                                                    class="text-muted me-1 dropdown-item-close1">
+                                                    <i class="ti ti-trash fs-16"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
                             </ul>
+                            <div class="p-3 empty-header-item1 border-top">
+                                <div class="d-grid">
+                                    <a href="chat.html" class="btn btn-primary">View All</a>
+                                </div>
+                            </div>
+                            <div class="p-5 empty-item1 d-none">
+                                <div class="text-center">
+                                    <span class="avatar avatar-xl avatar-rounded bg-secondary-transparent">
+                                        <i class="ri-notification-off-line fs-2"></i>
+                                    </span>
+                                    <h6 class="fw-semibold mt-3">No New Notifications</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End::main-header-dropdown -->
+                    </div> --}}
+                    <!-- End::header-element -->
+
+                    <!-- Start::header-element -->
+                    <div class="header-element header-shortcuts-dropdown dropdown">
+                        <!-- Start::header-link|dropdown-toggle -->
+                        <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside" id="notificationDropdown" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="header-link-icon"
+                                enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px"
+                                fill="#5f6368">
+                                <g>
+                                    <rect fill="none" height="24" width="24" />
+                                </g>
+                                <g>
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M3,3v8h8V3H3z M9,9H5V5h4V9z M3,13v8h8v-8H3z M9,19H5v-4h4V19z M13,3v8h8V3H13z M19,9h-4V5h4V9z M13,13v8h8v-8H13z M19,19h-4v-4h4V19z" />
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </a>
+                        <!-- End::header-link|dropdown-toggle -->
+                        <!-- Start::main-header-dropdown -->
+                        <div class="main-header-dropdown header-shortcuts-dropdown dropdown-menu pb-0 dropdown-menu-end"
+                            aria-labelledby="notificationDropdown">
+                            <div class="p-3 bg-light bg-opacity-75">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <p class="mb-0 fw-semibold">Current Time </p>
+                                    <span class="badge bg-pink"> -
+                                        {{ \Carbon\Carbon::now()->format('l, F j, Y  ') }}</span>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider mb-0"></div>
+                            <div class="main-header-shortcuts p-3" id="header-shortcut-scroll">
+                                <div class="row g-2">
+                                    <div class="col-4">
+                                        <a href="javascript:void(0);" class="related-apps">
+                                            <div
+                                                class="text-center p-3 related-app pink bg-pink-transparent border border-pink border-opacity-10">
+                                                <span
+                                                    class="avatar avatar-md avatar-rounded bg-pink bg-opacity-10 border border-pink border-opacity-10 p-2 mb-2">
+                                                    <img src="../assets/images/apps/figma.png" alt="">
+                                                </span>
+                                                <span class="d-block fs-12">Pay Bill </span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="javascript:void(0);" class="related-apps">
+                                            <div
+                                                class="text-center p-3 related-app success bg-success-transparent border border-success border-opacity-10">
+                                                <span
+                                                    class="avatar avatar-md avatar-rounded bg-success bg-opacity-10 border border-success border-opacity-10 p-2 mb-2">
+                                                    <img src="../assets/images/apps/microsoft-powerpoint.png"
+                                                        alt="">
+                                                </span>
+                                                <span class="d-block fs-12">View Bills</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="javascript:void(0);" class="related-apps">
+                                            <div
+                                                class="text-center p-3 related-app primary bg-primary-transparent border border-primary border-opacity-10">
+                                                <span
+                                                    class="avatar avatar-md avatar-rounded bg-primary bg-opacity-10 border border-primary border-opacity-10 p-2 mb-2">
+                                                    <img src="../assets/images/apps/microsoft-word.png"
+                                                        alt="">
+                                                </span>
+                                                <span class="d-block fs-12">Dashboard</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="javascript:void(0);" class="related-apps">
+                                            <div
+                                                class="text-center p-3 related-app info bg-info-transparent border border-info border-opacity-10">
+                                                <span
+                                                    class="avatar avatar-md avatar-rounded bg-info bg-opacity-10 border border-info border-opacity-10 p-2 mb-2">
+                                                    <img src="../assets/images/apps/calender.png" alt="">
+                                                </span>
+                                                <span class="d-block fs-12">Calendar</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="javascript:void(0);" class="related-apps">
+                                            <div
+                                                class="text-center p-3 related-app secondary bg-secondary-transparent border border-secondary border-opacity-10">
+                                                <span
+                                                    class="avatar avatar-md avatar-rounded bg-secondary bg-opacity-10 border border-secondary border-opacity-10 p-2 mb-2">
+                                                    <img src="../assets/images/apps/sketch.png" alt="">
+                                                </span>
+                                                <span class="d-block fs-12">Sketch</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="javascript:void(0);" class="related-apps">
+                                            <div
+                                                class="text-center p-3 related-app danger bg-danger-transparent border border-danger border-opacity-10">
+                                                <span
+                                                    class="avatar avatar-md avatar-rounded bg-danger bg-opacity-10 border border-danger border-opacity-10 p-2 mb-2">
+                                                    <img src="../assets/images/apps/google.png" alt="">
+                                                </span>
+                                                <span class="d-block fs-12">Google</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-3 border-top">
+                                <div class="d-grid">
+                                    <a href="javascript:void(0);" class="btn btn-primary">View All</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End::main-header-dropdown -->
+                    </div>
+                    <!-- End::header-element -->
+
+                    <!-- Start::header-element -->
+                    <div class="header-element header-fullscreen">
+                        <!-- Start::header-link -->
+                        <a onclick="openFullscreen();" href="javascript:void(0);" class="header-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="full-screen-open header-link-icon"
+                                height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                <path d="M0 0h24v24H0V0z" fill="none" />
+                                <path
+                                    d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="full-screen-close header-link-icon d-none"
+                                height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                <path d="M0 0h24v24H0V0z" fill="none" />
+                                <path
+                                    d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z" />
+                            </svg>
+                        </a>
+                        <!-- End::header-link -->
+                    </div>
+                    <!-- End::header-element -->
+
+                    <!-- Start::header-element -->
+                    <div class="header-element dropdown">
+                        <!-- Start::header-link|dropdown-toggle -->
+                        <a href="javascript:void(0);" class="header-link dropdown-toggle" id="mainHeaderProfile"
+                            data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                            <span class="avatar avatar-sm avatar-rounded">
+                                <img src="{{ asset('assets/images/arms.png') }}" alt="img" class="img-fluid">
+                            </span>
+                        </a>
+                        <!-- End::header-link|dropdown-toggle -->
+                        <ul class="main-header-dropdown dropdown-menu pt-0 overflow-hidden header-profile-dropdown dropdown-menu-end"
+                            aria-labelledby="mainHeaderProfile">
+                            <li class="p-3 bg-light bg-opacity-75 border-bottom">
+                                <div class="d-flex align-items-center justify-content-between gap-4">
+                                    <div>
+                                        <p class="mb-0 fw-semibold lh-1">
+                                        <h6>{{ auth()->user()->name ?? '' }}</h6>
+                                        </p>
+                                        <span class="fs-11 text-muted">{{ auth()->user()->access_level ?? '' }}</span>
+                                    </div>
+                                    <span
+                                        class="badge bg-pink align-self-end mb-1">{{ auth()->user()->phone ?? '' }}</span>
+                                </div>
+                            </li>
+                            {{-- <li><a class="dropdown-item d-flex align-items-center" href="profile.html"><i
+                                        class="ti ti-user-circle fs-18 me-2 text-gray fw-normal"></i>My Profile</a>
+                            </li>
+                            <li><a class="dropdown-item d-flex align-items-center" href="mail.html"><i
+                                        class="ti ti-inbox fs-18 me-2 text-gray fw-normal"></i>Mail Inbox <span
+                                        class="badge bg-success ms-auto">06</span></a></li>
+                            <li><a class="dropdown-item d-flex align-items-center" href="mail-settings.html"><i
+                                        class="ti ti-adjustments-horizontal fs-18 me-2 text-gray fw-normal"></i>Account
+                                    Settings</a></li>
+
+                                    <li>
+                                <hr class="dropdown-divider">
+                            </li> --}}
+                            <li><a class="dropdown-item d-flex align-items-center"
+                                    href="{{ route('auth.logout') }}"><i
+                                        class="ti ti-logout fs-18 me-2 text-gray fw-normal"></i>Sign Out</a></li>
+                        </ul>
+                    </div>
+                    <!-- End::header-element -->
+
+                    <!-- Start::header-element -->
+                    {{-- <div class="header-element">
+                        <!-- Start::header-link|switcher-icon -->
+                        <a href="javascript:void(0);" class="header-link switcher-icon" data-bs-toggle="offcanvas"
+                            data-bs-target="#switcher-canvas">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="header-link-icon" height="24px"
+                                viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                <path d="M0 0h24v24H0V0z" fill="none" />
+                                <path
+                                    d="M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" />
+                            </svg>
+                        </a>
+                        <!-- End::header-link|switcher-icon -->
+                    </div> --}}
+                    <!-- End::header-element -->
+
+                </div>
+                <!-- End::header-content-right -->
+
+            </div>
+            <!-- End::main-header-container -->
+
+        </header>
+        <!-- /app-header -->
+        <!-- Start::app-sidebar -->
+        <aside class="app-sidebar sticky" id="sidebar">
+
+            <!-- Start::main-sidebar-header -->
+            <div class="main-sidebar-header">
+                <a href="{{ route('dashboard.operational') }}" class="header-logo">
+                    <img src="../assets/images/level10.png" alt="logo" class="desktop-logo">
+                    <img src="../assets/images/level10.png" alt="logo" class="toggle-logo">
+                    <img src="../assets/images/level10.png" alt="logo" class="desktop-white">
+                    <img src="../assets/images/level10.png" alt="logo" class="toggle-white">
+                </a>
+            </div>
+            <!-- End::main-sidebar-header -->
+
+            <!-- Start::main-sidebar -->
+            <div class="main-sidebar" id="sidebar-scroll">
+
+                <!-- Start::nav -->
+                <nav class="main-menu-container nav nav-pills flex-column sub-open">
+                    <div class="slide-left" id="slide-left">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24"
+                            viewBox="0 0 24 24">
+                            <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path>
+                        </svg>
+                    </div>
+                    <ul class="main-menu">
+                        <!-- Start::slide__category -->
+                        <li class="slide__category"><span class="category-name">Main</span></li>
+                        <!-- End::slide__category -->
+
+                        <!-- Start::slide -->
+                        <li class="slide has-sub">
+                            <a href="javascript:void(0);" class="side-menu__item">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
+                                    viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                    <path d="M0 0h24v24H0V0z" fill="none" />
+                                    <path
+                                        d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm5 15h-2v-6H9v6H7v-7.81l5-4.5 5 4.5V18z" />
+                                    <path d="M7 10.19V18h2v-6h6v6h2v-7.81l-5-4.5z" opacity=".3" />
+                                </svg>
+                                <span class="side-menu__label">Dashboards</span>
+                                <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                            </a>
+                            <ul class="slide-menu child1">
+                                @canany(['dashboards.operational'])
+                                    <li class="slide side-menu__label1">
+                                        @can('dashboards.operational')
+                                            <a href="{{ route('dashboard.operational') }}">Dashboards</a>
+                                        @endcan
+                                    </li>
+                                @endcanany
+                                @canany(['users.view', 'roles.view', 'permissions.view'])
+                                    <li class="slide">
+                                        <a href="{{ route('dashboard.operational') }}"
+                                            class="side-menu__item">Overview</a>
+                                    </li>
+                                @endcanany
+                            </ul>
+                        </li>
+                        <!-- End::slide -->
+
+                        <!-- Start::slide__category -->
+                        <li class="slide__category"><span class="category-name">User & Payment </span></li>
+                        <!-- End::slide__category -->
+
+                        <!-- Start::slide -->
+                        @canany(['users.view', 'roles.view', 'permissions.view'])
+                            <li class="slide has-sub">
+                                <a href="javascript:void(0);" class="side-menu__item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
+                                        viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                        <path d="M0 0h24v24H0V0z" fill="none" />
+                                        <path d="M13 4H6v16h12V9h-5V4zm3 14H8v-2h8v2zm0-6v2H8v-2h8z" opacity=".3" />
+                                        <path
+                                            d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
+                                    </svg>
+                                    <span class="side-menu__label">User Management</span>
+                                    <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                                </a>
+                                <ul class="slide-menu child1">
+                                    @can('users.view')
+                                        <li class="slide">
+                                            <a href="{{ route('users.index') }}" class="side-menu__item">Users</a>
+                                        </li>
+                                    @endcan
+                                    @can('roles.view')
+                                        <li class="slide">
+                                            <a href="{{ route('roles.index') }}" class="side-menu__item">Roles
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @can('permissions.view')
+                                        <li class="slide">
+                                            <a href="{{ route('permissions.index') }}" class="side-menu__item">
+                                                Permissions</a>
+                                        </li>
+                                    @endcan
+                                </ul>
+                            </li>
+                        @endcanany
+                        <!-- End::slide -->
+
+                        <!-- Start::slide -->
+                        @canany(['customer-types.view', 'customers.view'])
+                            <li class="slide has-sub">
+                                <a href="javascript:void(0);" class="side-menu__item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
+                                        viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                        <path d="M0 0h24v24H0V0z" fill="none" />
+                                        <path d="M13 4H6v16h12V9h-5V4zm3 14H8v-2h8v2zm0-6v2H8v-2h8z" opacity=".3" />
+                                        <path
+                                            d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
+                                    </svg>
+                                    <span class="side-menu__label">Rate Payer Mgnt</span>
+                                    <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                                </a>
+                                <ul class="slide-menu child1">
+                                    @can('customers.view')
+                                        <li class="slide">
+                                            <a href="{{ route('citizens.index') }}" class="side-menu__item">View Rate Payers
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @can('customer-types.view')
+                                        <li class="slide">
+                                            <a href="{{ route('customer-types.index') }}" class="side-menu__item">View
+                                                Rate Payer Types</a>
+                                        </li>
+                                    @endcan
+                                </ul>
+                            </li>
+                        @endcanany
+
+                        <!-- End::slide -->
+
+                        <!-- Start::slide -->
+                        @canany(['properties.view', 'businesses.view', 'business-classes.view', 'business-types.view'])
+
+                            <li class="slide has-sub">
+                                <a href="javascript:void(0);" class="side-menu__item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
+                                        viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                        <g fill="none">
+                                            <path d="M0 0h24v24H0V0z" />
+                                            <path d="M0 0h24v24H0V0z" opacity=".87" />
+                                        </g>
+                                        <path d="M6 20h12V10H6v10zm6-7c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"
+                                            opacity=".3" />
+                                        <path
+                                            d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z" />
+                                    </svg>
+                                    <span class="side-menu__label">Property & Business </span>
+                                    <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                                </a>
+                                <ul class="slide-menu child1">
+
+                                    @can('properties.view')
+                                        <li class="slide">
+                                            <a href="{{ route('properties.index') }}" class="side-menu__item">Property
+                                                Management</a>
+                                        </li>
+                                    @endcan
+                                    @can('businesses.view')
+                                        <li class="slide">
+                                            <a href="{{ route('businesses.index') }}" class="side-menu__item">Business
+                                                Management</a>
+                                        </li>
+                                    @endcan
+                                    @can('business-classes.view')
+                                        <li class="slide">
+                                            <a href="{{ route('business-classes.index') }} " class="side-menu__item">Business
+                                                Class</a>
+                                        </li>
+                                    @endcan
+
+                                    @can('business-types.view')
+                                        <li class="slide">
+                                            <a href="{{ route('business-types.index') }} " class="side-menu__item">Business
+                                                Type</a>
+                                        </li>
+                                    @endcan
+                                </ul>
+                            </li>
+                        @endcanany
+                        <!-- End::slide -->
+
+                        <!-- Start::slide -->
+                        @canany(['bills.view'])
+                            <li class="slide has-sub">
+                                <a href="javascript:void(0);" class="side-menu__item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
+                                        viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                        <path d="M0 0h24v24H0V0z" fill="none" />
+                                        <path d="M5 5v14h14V5H5zm4 12H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
+                                            opacity=".3" />
+                                        <path
+                                            d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
+                                    </svg>
+                                    <span class="side-menu__label">Bills Management</span>
+                                    <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                                </a>
+                                <ul class="slide-menu child1">
+                                    @can('bills.view')
+                                        <li class="slide">
+                                            <a href="{{ route('bills.fetchBill') }} " class="side-menu__item">All Bills</a>
+                                        </li>
+                                    @endcan
+                                    @can('bills.create')
+                                        <li class="slide">
+                                            <a href="{{ route('bills.index') }}" class="side-menu__item">Generate Property
+                                                Bill</a>
+                                        </li>
+                                    @endcan
+                                    @can('bills.create')
+                                        <li class="slide">
+                                            <a href="{{ route('bills.bus.index') }}" class="side-menu__item">Generate BoP
+                                                Bill</a>
+                                        </li>
+                                    @endcan
+                                </ul>
+                            </li>
+                        @endcanany
+                        <!-- End::slide -->
+
+                        @canany(['payments.view'])
+                            <!-- Start::slide__category -->
+                            <li class="slide__category"><span class="category-name">Payments and Reports</span></li>
+                            <!-- End::slide__category -->
+
+                            <!-- Start::slide -->
+                            @can('payments.view')
+                                <li class="slide has-sub">
+                                    <a href="javascript:void(0);" class="side-menu__item">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
+                                            enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
+                                            width="24px" fill="#5f6368">
+                                            <g>
+                                                <rect fill="none" height="24" width="24" />
+                                            </g>
+                                            <g>
+                                                <g>
+                                                    <rect height="4" opacity=".3" width="4" x="5" y="5" />
+                                                    <rect height="4" opacity=".3" width="4" x="5" y="15" />
+                                                    <rect height="4" opacity=".3" width="4" x="15" y="15" />
+                                                    <rect height="4" opacity=".3" width="4" x="15" y="5" />
+                                                    <path d="M3,21h8v-8H3V21z M5,15h4v4H5V15z" />
+                                                    <path d="M3,11h8V3H3V11z M5,5h4v4H5V5z" />
+                                                    <path d="M13,21h8v-8h-8V21z M15,15h4v4h-4V15z" />
+                                                    <path d="M13,3v8h8V3H13z M19,9h-4V5h4V9z" />
+                                                </g>
+                                            </g>
+                                        </svg>
+                                        <span class="side-menu__label">Manage Payment</span>
+                                        <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                                    </a>
+                                    <ul class="slide-menu child1">
+                                        <li class="slide">
+                                            <a href="{{ route('payments.index') }}" class="side-menu__item">View Payments
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endcan
+                            <!-- End::slide -->
+                        @endcanany
+
+                        <!-- Start::slide -->
+                        @canany(['reports.view'])
+                            <li class="slide has-sub">
+                                <a href="javascript:void(0);" class="side-menu__item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
+                                        viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                        <path d="M0 0h24v24H0V0z" fill="none" />
+                                        <path d="M6.26 9L12 13.47 17.74 9 12 4.53z" opacity=".3" />
+                                        <path
+                                            d="M19.37 12.8l-7.38 5.74-7.37-5.73L3 14.07l9 7 9-7zM12 2L3 9l1.63 1.27L12 16l7.36-5.73L21 9l-9-7zm0 11.47L6.26 9 12 4.53 17.74 9 12 13.47z" />
+                                    </svg>
+                                    <span class="side-menu__label">Reports</span>
+                                    <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                                </a>
+                                <ul class="slide-menu child1">
+                                    @can('reports.view')
+                                        <li class="slide">
+
+                                            <a href="{{ route('customer-reports.index') }}" class="side-menu__item">Customer
+                                                reports</a>
+                                        </li>
+                                    @endcan
+                                    @can('reports.view')
+                                        <li class="slide">
+                                            <a href="{{ route('business-reports.index') }}" class="side-menu__item">Business
+                                                reports</a>
+                                        </li>
+                                    @endcan
+                                    @can('reports.view')
+                                        <li class="slide">
+                                            <a href="{{ route('property-reports.index') }}" class="side-menu__item">Property
+                                                reports</a>
+                                        </li>
+                                    @endcan
+                                    @can('reports.view')
+                                        <li class="slide">
+                                            <a href="{{ route('bill-reports.index') }}" class="side-menu__item">Bills
+                                                reports</a>
+                                        </li>
+                                    @endcan
+                                    @can('reports.view')
+                                        <li class="slide">
+                                            <a href="{{ route('payment-reports.index') }}" class="side-menu__item">Payment
+                                                reports</a>
+                                        </li>
+                                    @endcan
+                                    @can('reports.view')
+                                        <li class="slide">
+                                            <a href=" {{ route('debtors-reports.index') }}" class="side-menu__item">Debtors
+                                                reports</a>
+                                        </li>
+                                    @endcan
+
+                                </ul>
+                            </li>
+                        @endcanany
+                        <!-- End::slide -->
+
+                        <!-- Start::slide -->
+                        @canany(['assemblies.view', 'divisions.view', 'blocks.view', 'zones.view', 'property-uses.view',
+                            'rates.view', 'agent-assignments.view', 'task-assignments.view'])
+                            <li class="slide has-sub">
+                                <a href="javascript:void(0);" class="side-menu__item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
+                                        viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                        <path d="M0 0h24v24H0V0z" fill="none" />
+                                        <path d="M6.26 9L12 13.47 17.74 9 12 4.53z" opacity=".3" />
+                                        <path
+                                            d="M19.37 12.8l-7.38 5.74-7.37-5.73L3 14.07l9 7 9-7zM12 2L3 9l1.63 1.27L12 16l7.36-5.73L21 9l-9-7zm0 11.47L6.26 9 12 4.53 17.74 9 12 13.47z" />
+                                    </svg>
+                                    <span class="side-menu__label">Assembly Setup</span>
+                                    <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                                </a>
+                                <ul class="slide-menu child1">
+                                    @can('assemblies.view')
+                                        <li class="slide">
+                                            <a href="{{ route('assembly.index') }}" class="side-menu__item">
+                                                Manage Assembly</a>
+                                        </li>
+                                    @endcan
+                                    @can('divisions.view')
+                                        <li class="slide">
+                                            <a href="{{ route('divisions.index') }}" class="side-menu__item">
+                                                Manage Division</a>
+                                        </li>
+                                    @endcan
+                                    @can('blocks.view')
+                                        <li class="slide">
+                                            <a href="{{ route('blocks.index') }}" class="side-menu__item">
+                                                Manage Block</a>
+                                        </li>
+                                    @endcan
+                                    @can('zones.view')
+                                        <li class="slide">
+                                            <a href="{{ route('zones.index') }}" class="side-menu__item">
+                                                Manage Zone</a>
+                                        </li>
+                                    @endcan
+                                    @can('property-uses.view')
+                                        <li class="slide">
+                                            <a href="{{ route('property-users.index') }}" class="side-menu__item">
+                                                Property Uses</a>
+                                        </li>
+                                    @endcan
+                                    @can('rates.view')
+                                        <li class="slide">
+                                            <a href=" {{ route('rates.index') }}" class="side-menu__item">
+                                                Manage Property Rate</a>
+                                        </li>
+
+
+
+                                        <li class="slide">
+                                            <a href=" {{ route('rates.bus.index') }}" class="side-menu__item">
+                                                Manage Bop Rate</a>
+                                        </li>
+                                    @endcan
+
+                                    @can('agent-assignments.view')
+                                        <li class="slide">
+                                            <a href=" {{ route('agent-assignments.index') }}" class="side-menu__item">
+                                                Agent Assignment</a>
+                                        </li>
+                                    @endcan
+                                    @can('task-assignments.view')
+                                        <li class="slide">
+                                            <a href=" {{ route('task-assignments.index') }}" class="side-menu__item">
+                                                Task Assignment</a>
+                                        </li>
+                                    @endcan
+
+                                </ul>
+                            </li>
+                        @endcanany
+                        <!-- End::slide -->
+
+                        <!-- Start::slide__category -->
+                        {{-- <li class="slide__category"><span class="category-name">Notifications & Assistance</span></li> --}}
+                        <!-- End::slide__category -->
+
+                        <!-- Start::slide -->
+                        {{-- <li class="slide has-sub">
+                            <a href="javascript:void(0);" class="side-menu__item">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
+                                    enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
+                                    width="24px" fill="#5f6368">
+                                    <g>
+                                        <rect fill="none" height="24" width="24" />
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <polygon opacity=".3" points="4,7 20,7 20,3.98 4,4" />
+                                            <path d="M5,20h14V9H5V20z M9,12h6v2H9V12z" opacity=".3" />
+                                            <path
+                                                d="M20,2H4C3,2,2,2.9,2,4v3.01C2,7.73,2.43,8.35,3,8.7V20c0,1.1,1.1,2,2,2h14c0.9,0,2-0.9,2-2V8.7c0.57-0.35,1-0.97,1-1.69V4 C22,2.9,21,2,20,2z M19,20H5V9h14V20z M20,7H4V4l16-0.02V7z" />
+                                            <rect height="2" width="6" x="9" y="12" />
+                                        </g>
+                                    </g>
+                                </svg>
+                                <span class="side-menu__label">Notifications</span>
+                                <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                            </a>
+                            <ul class="slide-menu child1 mega-menu">
+
+                                <li class="slide">
+                                    <a href="empty.html" class="side-menu__item">Payment Alerts</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="empty.html" class="side-menu__item">System Updates</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="empty.html" class="side-menu__item">User Reminders</a>
+                                </li>
+                            </ul>
+                        </li> --}}
+                        <!-- End::slide -->
+
+                        <!-- Start::slide -->
+                        {{-- <li class="slide has-sub">
+                            <a href="javascript:void(0);" class="side-menu__item">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
+                                    enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
+                                    width="24px" fill="#5f6368">
+                                    <g>
+                                        <rect fill="none" height="24" width="24" y="0" />
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <polygon opacity=".3" points="12.35,16.18 7.82,11.65 5.3,18.7" />
+                                            <path
+                                                d="M2,22l14-5L7,8L2,22z M12.35,16.18L5.3,18.7l2.52-7.05L12.35,16.18z" />
+                                            <path
+                                                d="M14.53,12.53l5.59-5.59c0.49-0.49,1.28-0.49,1.77,0l0.59,0.59l1.06-1.06l-0.59-0.59c-1.07-1.07-2.82-1.07-3.89,0 l-5.59,5.59L14.53,12.53z" />
+                                            <path
+                                                d="M9.47,7.47l1.06,1.06l0.59-0.59c1.07-1.07,1.07-2.82,0-3.89l-0.59-0.59L9.47,4.53l0.59,0.59c0.48,0.48,0.48,1.28,0,1.76 L9.47,7.47z" />
+                                            <path
+                                                d="M17.06,11.88l-1.59,1.59l1.06,1.06l1.59-1.59c0.49-0.49,1.28-0.49,1.77,0l1.61,1.61l1.06-1.06l-1.61-1.61 C19.87,10.81,18.13,10.81,17.06,11.88z" />
+                                            <path
+                                                d="M15.06,5.88l-3.59,3.59l1.06,1.06l3.59-3.59c1.07-1.07,1.07-2.82,0-3.89l-1.59-1.59l-1.06,1.06l1.59,1.59 C15.54,4.6,15.54,5.4,15.06,5.88z" />
+                                        </g>
+                                    </g>
+                                </svg>
+                                <span class="side-menu__label">AI Assistant</span>
+                                <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                            </a>
+                            <ul class="slide-menu child1">
+
+
+                            </ul>
+                        </li> --}}
+                        <!-- End::slide -->
+
+
+                        <!-- Start::slide__category -->
+                        {{-- <li class="slide__category"><span class="category-name">Feedback & Support</span></li> --}}
+                        <!-- End::slide__category -->
+                        @if (auth()->user()->access_level == 'customer')
+                            <!-- Start::slide__category -->
+                            {{-- <li class="slide__category"><span class="category-name">My Rate Payer Account</span></li> --}}
+                            <!-- End::slide__category -->
+
+                            <li class="slide">
+                                <a href="{{ route('dashboard.operational') }}" class="side-menu__item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
+                                        enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
+                                        width="24px" fill="#5f6368">
+                                        <g>
+                                            <rect fill="none" height="24" width="24" />
+                                        </g>
+                                        <g>
+                                            <g />
+                                            <g>
+                                                <path
+                                                    d="M6.44,9.86L7.02,5H5.05L4.04,9.36c-0.1,0.42-0.01,0.84,0.25,1.17C4.43,10.71,4.73,11,5.23,11 C5.84,11,6.36,10.51,6.44,9.86z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M9.71,11C10.45,11,11,10.41,11,9.69V5H9.04L8.49,9.52c-0.05,0.39,0.07,0.78,0.33,1.07 C9.05,10.85,9.37,11,9.71,11z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M14.22,11c0.41,0,0.72-0.15,0.96-0.41c0.25-0.29,0.37-0.68,0.33-1.07L14.96,5H13v4.69 C13,10.41,13.55,11,14.22,11z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M18.91,4.99L16.98,5l0.58,4.86c0.08,0.65,0.6,1.14,1.21,1.14c0.49,0,0.8-0.29,0.93-0.47 c0.26-0.33,0.35-0.76,0.25-1.17L18.91,4.99z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M21.9,8.89l-1.05-4.37c-0.22-0.9-1-1.52-1.91-1.52H5.05C4.15,3,3.36,3.63,3.15,4.52L2.1,8.89 c-0.24,1.02-0.02,2.06,0.62,2.88C2.8,11.88,2.91,11.96,3,12.06V19c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.94 c0.09-0.09,0.2-0.18,0.28-0.28C21.92,10.96,22.15,9.91,21.9,8.89z M13,5h1.96l0.54,4.52c0.05,0.39-0.07,0.78-0.33,1.07 C14.95,10.85,14.63,11,14.22,11C13.55,11,13,10.41,13,9.69V5z M8.49,9.52L9.04,5H11v4.69C11,10.41,10.45,11,9.71,11 c-0.34,0-0.65-0.15-0.89-0.41C8.57,10.3,8.45,9.91,8.49,9.52z M4.29,10.53c-0.26-0.33-0.35-0.76-0.25-1.17L5.05,5h1.97L6.44,9.86 C6.36,10.51,5.84,11,5.23,11C4.73,11,4.43,10.71,4.29,10.53z M19,19H5v-6.03C5.08,12.98,5.15,13,5.23,13 c0.87,0,1.66-0.36,2.24-0.95c0.6,0.6,1.4,0.95,2.31,0.95c0.87,0,1.65-0.36,2.23-0.93c0.59,0.57,1.39,0.93,2.29,0.93 c0.84,0,1.64-0.35,2.24-0.95c0.58,0.59,1.37,0.95,2.24,0.95c0.08,0,0.15-0.02,0.23-0.03V19z M19.71,10.53 C19.57,10.71,19.27,11,18.77,11c-0.61,0-1.14-0.49-1.21-1.14L16.98,5l1.93-0.01l1.05,4.37C20.06,9.78,19.97,10.21,19.71,10.53z" />
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    <span class="side-menu__label">My Account</span>
+                                </a>
+                            </li>
+
+
+                            <li class="slide">
+                                <a href="{{ route('dashboard.mybills') }}" class="side-menu__item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
+                                        enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
+                                        width="24px" fill="#5f6368">
+                                        <g>
+                                            <rect fill="none" height="24" width="24" />
+                                        </g>
+                                        <g>
+                                            <g />
+                                            <g>
+                                                <path
+                                                    d="M6.44,9.86L7.02,5H5.05L4.04,9.36c-0.1,0.42-0.01,0.84,0.25,1.17C4.43,10.71,4.73,11,5.23,11 C5.84,11,6.36,10.51,6.44,9.86z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M9.71,11C10.45,11,11,10.41,11,9.69V5H9.04L8.49,9.52c-0.05,0.39,0.07,0.78,0.33,1.07 C9.05,10.85,9.37,11,9.71,11z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M14.22,11c0.41,0,0.72-0.15,0.96-0.41c0.25-0.29,0.37-0.68,0.33-1.07L14.96,5H13v4.69 C13,10.41,13.55,11,14.22,11z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M18.91,4.99L16.98,5l0.58,4.86c0.08,0.65,0.6,1.14,1.21,1.14c0.49,0,0.8-0.29,0.93-0.47 c0.26-0.33,0.35-0.76,0.25-1.17L18.91,4.99z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M21.9,8.89l-1.05-4.37c-0.22-0.9-1-1.52-1.91-1.52H5.05C4.15,3,3.36,3.63,3.15,4.52L2.1,8.89 c-0.24,1.02-0.02,2.06,0.62,2.88C2.8,11.88,2.91,11.96,3,12.06V19c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.94 c0.09-0.09,0.2-0.18,0.28-0.28C21.92,10.96,22.15,9.91,21.9,8.89z M13,5h1.96l0.54,4.52c0.05,0.39-0.07,0.78-0.33,1.07 C14.95,10.85,14.63,11,14.22,11C13.55,11,13,10.41,13,9.69V5z M8.49,9.52L9.04,5H11v4.69C11,10.41,10.45,11,9.71,11 c-0.34,0-0.65-0.15-0.89-0.41C8.57,10.3,8.45,9.91,8.49,9.52z M4.29,10.53c-0.26-0.33-0.35-0.76-0.25-1.17L5.05,5h1.97L6.44,9.86 C6.36,10.51,5.84,11,5.23,11C4.73,11,4.43,10.71,4.29,10.53z M19,19H5v-6.03C5.08,12.98,5.15,13,5.23,13 c0.87,0,1.66-0.36,2.24-0.95c0.6,0.6,1.4,0.95,2.31,0.95c0.87,0,1.65-0.36,2.23-0.93c0.59,0.57,1.39,0.93,2.29,0.93 c0.84,0,1.64-0.35,2.24-0.95c0.58,0.59,1.37,0.95,2.24,0.95c0.08,0,0.15-0.02,0.23-0.03V19z M19.71,10.53 C19.57,10.71,19.27,11,18.77,11c-0.61,0-1.14-0.49-1.21-1.14L16.98,5l1.93-0.01l1.05,4.37C20.06,9.78,19.97,10.21,19.71,10.53z" />
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    <span class="side-menu__label">My Bills</span>
+                                </a>
+                            </li>
+
+                            <li class="slide">
+                                <a href="{{ route('dashboard.myproperties') }}" class="side-menu__item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
+                                        enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
+                                        width="24px" fill="#5f6368">
+                                        <g>
+                                            <rect fill="none" height="24" width="24" />
+                                        </g>
+                                        <g>
+                                            <g />
+                                            <g>
+                                                <path
+                                                    d="M6.44,9.86L7.02,5H5.05L4.04,9.36c-0.1,0.42-0.01,0.84,0.25,1.17C4.43,10.71,4.73,11,5.23,11 C5.84,11,6.36,10.51,6.44,9.86z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M9.71,11C10.45,11,11,10.41,11,9.69V5H9.04L8.49,9.52c-0.05,0.39,0.07,0.78,0.33,1.07 C9.05,10.85,9.37,11,9.71,11z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M14.22,11c0.41,0,0.72-0.15,0.96-0.41c0.25-0.29,0.37-0.68,0.33-1.07L14.96,5H13v4.69 C13,10.41,13.55,11,14.22,11z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M18.91,4.99L16.98,5l0.58,4.86c0.08,0.65,0.6,1.14,1.21,1.14c0.49,0,0.8-0.29,0.93-0.47 c0.26-0.33,0.35-0.76,0.25-1.17L18.91,4.99z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M21.9,8.89l-1.05-4.37c-0.22-0.9-1-1.52-1.91-1.52H5.05C4.15,3,3.36,3.63,3.15,4.52L2.1,8.89 c-0.24,1.02-0.02,2.06,0.62,2.88C2.8,11.88,2.91,11.96,3,12.06V19c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.94 c0.09-0.09,0.2-0.18,0.28-0.28C21.92,10.96,22.15,9.91,21.9,8.89z M13,5h1.96l0.54,4.52c0.05,0.39-0.07,0.78-0.33,1.07 C14.95,10.85,14.63,11,14.22,11C13.55,11,13,10.41,13,9.69V5z M8.49,9.52L9.04,5H11v4.69C11,10.41,10.45,11,9.71,11 c-0.34,0-0.65-0.15-0.89-0.41C8.57,10.3,8.45,9.91,8.49,9.52z M4.29,10.53c-0.26-0.33-0.35-0.76-0.25-1.17L5.05,5h1.97L6.44,9.86 C6.36,10.51,5.84,11,5.23,11C4.73,11,4.43,10.71,4.29,10.53z M19,19H5v-6.03C5.08,12.98,5.15,13,5.23,13 c0.87,0,1.66-0.36,2.24-0.95c0.6,0.6,1.4,0.95,2.31,0.95c0.87,0,1.65-0.36,2.23-0.93c0.59,0.57,1.39,0.93,2.29,0.93 c0.84,0,1.64-0.35,2.24-0.95c0.58,0.59,1.37,0.95,2.24,0.95c0.08,0,0.15-0.02,0.23-0.03V19z M19.71,10.53 C19.57,10.71,19.27,11,18.77,11c-0.61,0-1.14-0.49-1.21-1.14L16.98,5l1.93-0.01l1.05,4.37C20.06,9.78,19.97,10.21,19.71,10.53z" />
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    <span class="side-menu__label">My Properties</span>
+                                </a>
+                            </li>
+
+                            <li class="slide">
+                                <a href="{{ route('dashboard.mybusiness') }}" class="side-menu__item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
+                                        enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
+                                        width="24px" fill="#5f6368">
+                                        <g>
+                                            <rect fill="none" height="24" width="24" />
+                                        </g>
+                                        <g>
+                                            <g />
+                                            <g>
+                                                <path
+                                                    d="M6.44,9.86L7.02,5H5.05L4.04,9.36c-0.1,0.42-0.01,0.84,0.25,1.17C4.43,10.71,4.73,11,5.23,11 C5.84,11,6.36,10.51,6.44,9.86z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M9.71,11C10.45,11,11,10.41,11,9.69V5H9.04L8.49,9.52c-0.05,0.39,0.07,0.78,0.33,1.07 C9.05,10.85,9.37,11,9.71,11z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M14.22,11c0.41,0,0.72-0.15,0.96-0.41c0.25-0.29,0.37-0.68,0.33-1.07L14.96,5H13v4.69 C13,10.41,13.55,11,14.22,11z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M18.91,4.99L16.98,5l0.58,4.86c0.08,0.65,0.6,1.14,1.21,1.14c0.49,0,0.8-0.29,0.93-0.47 c0.26-0.33,0.35-0.76,0.25-1.17L18.91,4.99z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M21.9,8.89l-1.05-4.37c-0.22-0.9-1-1.52-1.91-1.52H5.05C4.15,3,3.36,3.63,3.15,4.52L2.1,8.89 c-0.24,1.02-0.02,2.06,0.62,2.88C2.8,11.88,2.91,11.96,3,12.06V19c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.94 c0.09-0.09,0.2-0.18,0.28-0.28C21.92,10.96,22.15,9.91,21.9,8.89z M13,5h1.96l0.54,4.52c0.05,0.39-0.07,0.78-0.33,1.07 C14.95,10.85,14.63,11,14.22,11C13.55,11,13,10.41,13,9.69V5z M8.49,9.52L9.04,5H11v4.69C11,10.41,10.45,11,9.71,11 c-0.34,0-0.65-0.15-0.89-0.41C8.57,10.3,8.45,9.91,8.49,9.52z M4.29,10.53c-0.26-0.33-0.35-0.76-0.25-1.17L5.05,5h1.97L6.44,9.86 C6.36,10.51,5.84,11,5.23,11C4.73,11,4.43,10.71,4.29,10.53z M19,19H5v-6.03C5.08,12.98,5.15,13,5.23,13 c0.87,0,1.66-0.36,2.24-0.95c0.6,0.6,1.4,0.95,2.31,0.95c0.87,0,1.65-0.36,2.23-0.93c0.59,0.57,1.39,0.93,2.29,0.93 c0.84,0,1.64-0.35,2.24-0.95c0.58,0.59,1.37,0.95,2.24,0.95c0.08,0,0.15-0.02,0.23-0.03V19z M19.71,10.53 C19.57,10.71,19.27,11,18.77,11c-0.61,0-1.14-0.49-1.21-1.14L16.98,5l1.93-0.01l1.05,4.37C20.06,9.78,19.97,10.21,19.71,10.53z" />
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    <span class="side-menu__label">My Businessess</span>
+                                </a>
+                            </li>
+
+                            <li class="slide">
+                                <a href="{{ route('dashboard.mypaymenthistory') }}" class="side-menu__item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
+                                        enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
+                                        width="24px" fill="#5f6368">
+                                        <g>
+                                            <rect fill="none" height="24" width="24" />
+                                        </g>
+                                        <g>
+                                            <g />
+                                            <g>
+                                                <path
+                                                    d="M6.44,9.86L7.02,5H5.05L4.04,9.36c-0.1,0.42-0.01,0.84,0.25,1.17C4.43,10.71,4.73,11,5.23,11 C5.84,11,6.36,10.51,6.44,9.86z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M9.71,11C10.45,11,11,10.41,11,9.69V5H9.04L8.49,9.52c-0.05,0.39,0.07,0.78,0.33,1.07 C9.05,10.85,9.37,11,9.71,11z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M14.22,11c0.41,0,0.72-0.15,0.96-0.41c0.25-0.29,0.37-0.68,0.33-1.07L14.96,5H13v4.69 C13,10.41,13.55,11,14.22,11z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M18.91,4.99L16.98,5l0.58,4.86c0.08,0.65,0.6,1.14,1.21,1.14c0.49,0,0.8-0.29,0.93-0.47 c0.26-0.33,0.35-0.76,0.25-1.17L18.91,4.99z"
+                                                    opacity=".3" />
+                                                <path
+                                                    d="M21.9,8.89l-1.05-4.37c-0.22-0.9-1-1.52-1.91-1.52H5.05C4.15,3,3.36,3.63,3.15,4.52L2.1,8.89 c-0.24,1.02-0.02,2.06,0.62,2.88C2.8,11.88,2.91,11.96,3,12.06V19c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.94 c0.09-0.09,0.2-0.18,0.28-0.28C21.92,10.96,22.15,9.91,21.9,8.89z M13,5h1.96l0.54,4.52c0.05,0.39-0.07,0.78-0.33,1.07 C14.95,10.85,14.63,11,14.22,11C13.55,11,13,10.41,13,9.69V5z M8.49,9.52L9.04,5H11v4.69C11,10.41,10.45,11,9.71,11 c-0.34,0-0.65-0.15-0.89-0.41C8.57,10.3,8.45,9.91,8.49,9.52z M4.29,10.53c-0.26-0.33-0.35-0.76-0.25-1.17L5.05,5h1.97L6.44,9.86 C6.36,10.51,5.84,11,5.23,11C4.73,11,4.43,10.71,4.29,10.53z M19,19H5v-6.03C5.08,12.98,5.15,13,5.23,13 c0.87,0,1.66-0.36,2.24-0.95c0.6,0.6,1.4,0.95,2.31,0.95c0.87,0,1.65-0.36,2.23-0.93c0.59,0.57,1.39,0.93,2.29,0.93 c0.84,0,1.64-0.35,2.24-0.95c0.58,0.59,1.37,0.95,2.24,0.95c0.08,0,0.15-0.02,0.23-0.03V19z M19.71,10.53 C19.57,10.71,19.27,11,18.77,11c-0.61,0-1.14-0.49-1.21-1.14L16.98,5l1.93-0.01l1.05,4.37C20.06,9.78,19.97,10.21,19.71,10.53z" />
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    <span class="side-menu__label">My Payment History</span>
+                                </a>
+                            </li>
+
+                            <!-- Start::slide -->
+                            {{-- <li class="slide has-sub">
+                                <a href="javascript:void(0);" class="side-menu__item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
+                                        viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                        <path d="M0 0h24v24H0V0z" fill="none" />
+                                        <path d="M5 5v14h14V5H5zm4 12H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
+                                            opacity=".3" />
+                                        <path
+                                            d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
+                                    </svg>
+                                    <span class="side-menu__label">Feedback & Support</span>
+                                    <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                                </a>
+                                <ul class="slide-menu child1">
+
+                                </ul>
+                            </li> --}}
+                            <!-- End::slide -->
+                        @endif
+
+                    </ul>
+                    <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
+                            width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path>
+                        </svg></div>
+                </nav>
+                <!-- End::nav -->
+
+            </div>
+            <!-- End::main-sidebar -->
+
+        </aside>
+        <!-- End::app-sidebar -->
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                <!-- Page Header -->
+                <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
+                    {{-- <h1 class="page-title fw-semibold fs-18 mb-0">Melchia Dashboard</h1> --}}
+                    <div class="ms-md-1 ms-0">
+                        <nav>
+                            <!-- <ol class="breadcrumb mb-0"> -->
+                            <!-- <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboards</a></li> -->
+
+                            <!-- </ol> -->
+                        </nav>
+                    </div>
+                </div>
+                <!-- Page Header Close -->
+
+
+                <!-- Start:: row-4 -->
+                @yield('page-content')
+                <!-- End:: row-4 -->
+
+
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+
+        <!-- Footer Start -->
+        <footer class="footer mt-auto py-3 bg-white text-center">
+            <div class="container">
+                <span class="text-muted">
+                    Copyright © <span id="year"></span>
+                    <a href="javascript:void(0);" class="text-dark fw-semibold"> LEVEL10 COMMUNICATIONS TECHNOLOGIES
+                        LIMITED </a>.
+
+                    All rights reserved.
+                </span>
+            </div>
+        </footer>
+        <!-- Footer End -->
+        <div class="modal fade" id="responsive-searchModal" tabindex="-1" aria-labelledby="responsive-searchModal"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <input type="text" class="form-control border-end-0" placeholder="Search Anything ..."
+                                aria-label="Search Anything ..." aria-describedby="button-addon2">
+                            <button class="btn btn-primary" type="button" id="button-addon2"><i
+                                    class="bi bi-search"></i></button>
                         </div>
                     </div>
-                </nav>
+                </div>
             </div>
         </div>
 
-
-        <div class="deznav">
-            <div style="display: flex; align-items: center; margin-top: -50px; margin-left: 20px;margin-bottom: 30px">
-                <img src="{{ asset('assets/images/arms.png') }}" class="rounded-circle" alt=""
-                    style="width: 50px; height: 50px;">
-
-                <h5 style="color: white; margin-left: 10px;">ERMS PLUS</h5>
-            </div>
-            <div class="deznav-scroll">
-                <ul class="metismenu" id="menu">
-                    @canany(['dashboards.operational'])
-                        <li><a class="has-arrow " href="javascript:void(0);">
-                                <div class="menu-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M9.13478 20.7733V17.7156C9.13478 16.9351 9.77217 16.3023 10.5584 16.3023H13.4326C13.8102 16.3023 14.1723 16.4512 14.4393 16.7163C14.7063 16.9813 14.8563 17.3408 14.8563 17.7156V20.7733C14.8539 21.0978 14.9821 21.4099 15.2124 21.6402C15.4427 21.8705 15.756 22 16.0829 22H18.0438C18.9596 22.0024 19.8388 21.6428 20.4872 21.0008C21.1356 20.3588 21.5 19.487 21.5 18.5778V9.86686C21.5 9.13246 21.1721 8.43584 20.6046 7.96467L13.934 2.67587C12.7737 1.74856 11.1111 1.7785 9.98539 2.74698L3.46701 7.96467C2.87274 8.42195 2.51755 9.12064 2.5 9.86686V18.5689C2.5 20.4639 4.04738 22 5.95617 22H7.87229C8.55123 22 9.103 21.4562 9.10792 20.7822L9.13478 20.7733Z"
-                                            fill="#90959F" />
-                                    </svg>
-                                </div>
-                                <span class="nav-text">Dashboard</span>
-                            </a>
-                            <ul>
-                                @can('dashboards.operational')
-                                    <li><a href="{{ route('dashboard.operational') }}">Operations </a></li>
-                                @endcan
-                            </ul>
-                        </li>
-                    @endcanany
-
-                    @canany(['users.view', 'roles.view', 'permissions.view'])
-                        <li>
-                            <a class="has-arrow " href="javascript:void(0);">
-                                <div class="menu-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g opacity="0.5">
-                                            <path
-                                                d="M9.34933 14.8577C5.38553 14.8577 2 15.47 2 17.9174C2 20.3666 5.364 21 9.34933 21C13.3131 21 16.6987 20.3877 16.6987 17.9404C16.6987 15.4911 13.3347 14.8577 9.34933 14.8577Z"
-                                                fill="white" />
-                                            <path opacity="0.4"
-                                                d="M9.34935 12.5248C12.049 12.5248 14.2124 10.4062 14.2124 7.76241C14.2124 5.11865 12.049 3 9.34935 3C6.65072 3 4.48633 5.11865 4.48633 7.76241C4.48633 10.4062 6.65072 12.5248 9.34935 12.5248Z"
-                                                fill="white" />
-                                            <path opacity="0.4"
-                                                d="M16.1734 7.84876C16.1734 9.19508 15.7605 10.4513 15.0364 11.4948C14.9611 11.6022 15.0276 11.7468 15.1587 11.7698C15.3407 11.7996 15.5276 11.8178 15.7184 11.8216C17.6167 11.8705 19.3202 10.6736 19.7908 8.87119C20.4885 6.19677 18.4415 3.79544 15.8339 3.79544C15.5511 3.79544 15.2801 3.82419 15.0159 3.87689C14.9797 3.88456 14.9405 3.9018 14.921 3.93247C14.8955 3.97176 14.9141 4.02254 14.9395 4.05608C15.7233 5.13217 16.1734 6.44208 16.1734 7.84876Z"
-                                                fill="white" />
-                                            <path
-                                                d="M21.7791 15.1693C21.4318 14.444 20.5932 13.9466 19.3173 13.7023C18.7155 13.5586 17.0854 13.3545 15.5697 13.3832C15.5472 13.3861 15.5345 13.4014 15.5325 13.411C15.5296 13.4263 15.5365 13.4493 15.5658 13.4656C16.2664 13.8048 18.9738 15.2805 18.6333 18.3928C18.6187 18.5289 18.7292 18.6439 18.8672 18.6247C19.5335 18.5318 21.2478 18.1705 21.7791 17.0475C22.0737 16.4534 22.0737 15.7634 21.7791 15.1693Z"
-                                                fill="white" />
-                                        </g>
-                                    </svg>
-
-                                </div>
-                                <span class="nav-text">User Management</span>
-                            </a>
-                            <ul>
-                                @can('users.view')
-                                    <li><a class="has-arrow" href="javascript:void(0);">User Accounts</a>
-                                        <ul>
-                                            <li><a href="{{ route('users.index') }}">Manage Users</a></li>
-                                        </ul>
-                                    </li>
-                                @endcan
-
-                                @can('roles.view')
-                                    <li><a class="has-arrow" href="javascript:void(0);">Roles and Permission</a>
-                                        <ul>
-                                            @can('roles.view')
-                                                <li><a href="{{ route('roles.index') }}">Manage Role</a></li>
-                                            @endcan
-
-                                            @can('permissions.view')
-                                                <li><a href="{{ route('permissions.index') }}">Manage Permission</a></li>
-                                            @endcan
-                                        </ul>
-                                    </li>
-                                @endcan
-                            </ul>
-                        </li>
-                    @endcanany
-
-                    @canany(['customer-types.view', 'customers.view'])
-                        <li>
-                            <a class="has-arrow" href="javascript:void(0);">
-                                <div class="menu-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_115_172)">
-                                            <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M12 4.25933C12.1489 4.25921 12.3 4.29247 12.4426 4.36281C12.6398 4.46014 12.7994 4.61977 12.8967 4.81698L14.9389 8.95491L19.5054 9.61846C20.0519 9.69788 20.4306 10.2053 20.3512 10.7519C20.3196 10.9695 20.2171 11.1706 20.0596 11.3242L16.7553 14.5451L17.5353 19.0931C17.6287 19.6374 17.2631 20.1544 16.7188 20.2478C16.502 20.2849 16.279 20.2496 16.0844 20.1473L12 18V4.25933Z"
-                                                fill="#4E5566" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M12 4.25933V18L7.91559 20.1473C7.42675 20.4043 6.82212 20.2163 6.56512 19.7275C6.46278 19.5328 6.42746 19.3099 6.46464 19.0931L7.24469 14.5451L3.94036 11.3242C3.54487 10.9387 3.53678 10.3055 3.92228 9.91006C4.07579 9.75258 4.27693 9.65009 4.49457 9.61846L9.06104 8.95492L11.1032 4.81699C11.2773 4.46426 11.6316 4.25961 12 4.25933Z"
-                                                fill="#90959F" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_115_172">
-                                                <rect width="24" height="24" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </div>
-                                <span class="nav-text">Customer Mgmt</span>
-                            </a>
-                            <ul>
-                                @can('customer-types.view')
-                                    <li><a href="{{ route('customer-types.index') }}">Manage Customer Types</a></li>
-                                @endcan
-
-                                @can('customers.view')
-                                    <li><a href="{{ route('citizens.index') }}">Manage Customers</a></li>
-                                @endcan
-                            </ul>
-                        </li>
-                    @endcanany
-
-                    @canany(['property-types.view', 'properties.view'])
-                        <li>
-                            <a class="has-arrow " href="javascript:void(0);">
-                                <div class="menu-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g opacity="0.5">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M15.2428 4.73756C15.2428 6.95855 17.0459 8.75902 19.2702 8.75902C19.5151 8.75782 19.7594 8.73431 20 8.68878V16.6615C20 20.0156 18.0215 22 14.6624 22H7.34636C3.97851 22 2 20.0156 2 16.6615V9.3561C2 6.00195 3.97851 4 7.34636 4H15.3131C15.2659 4.243 15.2423 4.49001 15.2428 4.73756ZM13.15 14.8966L16.0078 11.2088V11.1912C16.2525 10.8625 16.1901 10.3989 15.8671 10.1463C15.7108 10.0257 15.5122 9.97345 15.3167 10.0016C15.1211 10.0297 14.9453 10.1358 14.8295 10.2956L12.4201 13.3951L9.6766 11.2351C9.51997 11.1131 9.32071 11.0592 9.12381 11.0856C8.92691 11.1121 8.74898 11.2166 8.63019 11.3756L5.67562 15.1863C5.57177 15.3158 5.51586 15.4771 5.51734 15.6429C5.5002 15.9781 5.71187 16.2826 6.03238 16.3838C6.35288 16.485 6.70138 16.3573 6.88031 16.0732L9.35125 12.8771L12.0948 15.0283C12.2508 15.1541 12.4514 15.2111 12.6504 15.1863C12.8494 15.1615 13.0297 15.0569 13.15 14.8966Z"
-                                                fill="white" />
-                                            <circle opacity="0.4" cx="19.5" cy="4.5" r="2.5"
-                                                fill="white" />
-                                        </g>
-                                    </svg>
-                                </div>
-                                <span class="nav-text">Properties</span>
-                            </a>
-                            <ul>
-                                @can('property-types.view')
-                                    <li><a href="{{ route('business-class-types.index') }}">Property Class Type</a></li>
-                                @endcan
-
-                                @can('properties.view')
-                                    <li><a href="{{ route('properties.index') }}">Manage Property</a></li>
-                                @endcan
-                            </ul>
-                        </li>
-                    @endcanany
-
-                    @canany(['business-types.view', 'business-classes.view', 'businesses.view'])
-                        <li><a class="has-arrow " href="javascript:void(0);">
-                                <div class="menu-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g opacity="0.5">
-                                            <path opacity="0.4"
-                                                d="M11.776 21.8374C9.49292 20.4273 7.37062 18.7645 5.44789 16.8796C4.0905 15.5338 3.05386 13.8905 2.41716 12.0753C1.27953 8.53523 2.60381 4.48948 6.30111 3.2884C8.25262 2.67553 10.375 3.05175 12.007 4.29983C13.6396 3.05315 15.7614 2.67705 17.713 3.2884C21.4103 4.48948 22.7435 8.53523 21.6058 12.0753C20.9743 13.8888 19.9438 15.5319 18.5929 16.8796C16.6684 18.7625 14.5463 20.4251 12.2648 21.8374L12.0159 22L11.776 21.8374Z"
-                                                fill="white" />
-                                            <path
-                                                d="M12.0109 22L11.776 21.8374C9.49013 20.4274 7.36487 18.7647 5.43902 16.8796C4.0752 15.5356 3.03238 13.8922 2.39052 12.0753C1.26177 8.53523 2.58605 4.48948 6.28335 3.2884C8.23486 2.67553 10.3853 3.05204 12.0109 4.31057V22Z"
-                                                fill="white" />
-                                            <path
-                                                d="M18.2304 9.99922C18.0296 9.98629 17.8425 9.8859 17.7131 9.72157C17.5836 9.55723 17.5232 9.3434 17.5459 9.13016C17.5677 8.4278 17.168 7.78851 16.5517 7.53977C16.1609 7.43309 15.9243 7.00987 16.022 6.59249C16.1148 6.18182 16.4993 5.92647 16.8858 6.0189C16.9346 6.027 16.9816 6.04468 17.0244 6.07105C18.2601 6.54658 19.0601 7.82641 18.9965 9.22576C18.9944 9.43785 18.9117 9.63998 18.7673 9.78581C18.6229 9.93164 18.4291 10.0087 18.2304 9.99922Z"
-                                                fill="white" />
-                                        </g>
-                                    </svg>
-                                </div>
-                                <span class="nav-text">Businesses</span>
-                            </a>
-                            <ul>
-                                @can('business-types.view')
-                                    <li><a href="{{ route('business-types.index') }}">Business Types</a></li>
-                                @endcan
-
-                                @can('business-classes.view')
-                                    <li><a href="{{ route('business-classes.index') }}">Business Classes</a></li>
-                                @endcan
-
-                                @can('businesses.view')
-                                    <li><a href=" {{ route('businesses.index') }}">Manage Business</a></li>
-                                @endcan
-                            </ul>
-                        </li>
-                    @endcanany
-
-                    @canany(['bills.view'])
-                        <li><a class="has-arrow " href="javascript:void(0);">
-                                <div class="menu-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g opacity="0.5">
-                                            <path opacity="0.4"
-                                                d="M10.0833 15.9579H3.50777C2.67555 15.9579 2 16.6217 2 17.4393C2 18.2558 2.67555 18.9206 3.50777 18.9206H10.0833C10.9155 18.9206 11.5911 18.2558 11.5911 17.4393C11.5911 16.6217 10.9155 15.9579 10.0833 15.9579Z"
-                                                fill="white" />
-                                            <path opacity="0.4"
-                                                d="M22 6.37855C22 5.56202 21.3244 4.89832 20.4933 4.89832H13.9178C13.0856 4.89832 12.41 5.56202 12.41 6.37855C12.41 7.19617 13.0856 7.85988 13.9178 7.85988H20.4933C21.3244 7.85988 22 7.19617 22 6.37855Z"
-                                                fill="white" />
-                                            <path
-                                                d="M8.87774 6.37856C8.87774 8.24523 7.33886 9.75821 5.43887 9.75821C3.53999 9.75821 2 8.24523 2 6.37856C2 4.51298 3.53999 3 5.43887 3C7.33886 3 8.87774 4.51298 8.87774 6.37856Z"
-                                                fill="white" />
-                                            <path
-                                                d="M22 17.3992C22 19.2648 20.4611 20.7778 18.5611 20.7778C16.6622 20.7778 15.1223 19.2648 15.1223 17.3992C15.1223 15.5325 16.6622 14.0196 18.5611 14.0196C20.4611 14.0196 22 15.5325 22 17.3992Z"
-                                                fill="white" />
-                                        </g>
-                                    </svg>
-                                </div>
-                                <span class="nav-text">Bill Management</span>
-                            </a>
-                            <ul>
-                                @can('bills.create')
-                                    <li><a href="{{ route('bills.index') }}">Generate Bill (Property)</a></li>
-                                @endcan
-
-                                @can('bills.create')
-                                    <li><a href="{{ route('bills.bus.index') }}">Generate Bill (Business)</a></li>
-                                @endcan
-
-                                @can('bills.view')
-                                    <li><a href="{{ route('bills.fetchBill') }}">Manage bills</a></li>
-                                @endcan
-                            </ul>
-                        </li>
-                    @endcanany
-
-                    @canany(['payments.view'])
-                        <li><a class="has-arrow " href="javascript:void(0);">
-                                <div class="menu-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g opacity="0.5">
-                                            <path opacity="0.4"
-                                                d="M16.191 2H7.81C4.77 2 3 3.78 3 6.83V17.16C3 20.26 4.77 22 7.81 22H16.191C19.28 22 21 20.26 21 17.16V6.83C21 3.78 19.28 2 16.191 2Z"
-                                                fill="white" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M8.08002 6.64999V6.65999C7.64902 6.65999 7.30002 7.00999 7.30002 7.43999C7.30002 7.86999 7.64902 8.21999 8.08002 8.21999H11.069C11.5 8.21999 11.85 7.86999 11.85 7.42899C11.85 6.99999 11.5 6.64999 11.069 6.64999H8.08002ZM15.92 12.74H8.08002C7.64902 12.74 7.30002 12.39 7.30002 11.96C7.30002 11.53 7.64902 11.179 8.08002 11.179H15.92C16.35 11.179 16.7 11.53 16.7 11.96C16.7 12.39 16.35 12.74 15.92 12.74ZM15.92 17.31H8.08002C7.78002 17.35 7.49002 17.2 7.33002 16.95C7.17002 16.69 7.17002 16.36 7.33002 16.11C7.49002 15.85 7.78002 15.71 8.08002 15.74H15.92C16.319 15.78 16.62 16.12 16.62 16.53C16.62 16.929 16.319 17.27 15.92 17.31Z"
-                                                fill="white" />
-                                        </g>
-                                    </svg>
-                                </div>
-
-                                <span class="nav-text">Payments</span>
-                            </a>
-                            <ul>
-                                {{-- <li><a href="{{ route('payments.index') }}">Ablekuma North Quick Payment
-                                    Payment</a></li> --}}
-                                @can('payments.view')
-                                    <li><a href="{{ route('payments.index') }}">Manage Payment</a></li>
-                                @endcan
-                            </ul>
-                        </li>
-                    @endcanany
-
-                    @canany(['assemblies.view', 'divisions.view', 'blocks.view', 'zones.view', 'property-uses.view',
-                        'rates.view', 'agent-assignments.view', 'task-assignments.view'])
-                        <li><a class="has-arrow " href="javascript:void(0);">
-                                <div class="menu-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g opacity="0.5">
-                                            <path opacity="0.4"
-                                                d="M6.70555 12.8905C6.18944 12.8905 5.77163 13.3145 5.77163 13.8383L5.51416 18.4171C5.51416 19.0846 6.04783 19.625 6.70555 19.625C7.36328 19.625 7.89577 19.0846 7.89577 18.4171L7.63947 13.8383C7.63947 13.3145 7.22167 12.8905 6.70555 12.8905Z"
-                                                fill="white" />
-                                            <path
-                                                d="M7.98037 3.67345C7.98037 3.67345 7.71236 3.39789 7.54618 3.27793C7.30509 3.09264 7.00783 3 6.71173 3C6.37936 3 6.07039 3.10452 5.81877 3.30169C5.77313 3.34801 5.57886 3.5226 5.41852 3.68532C4.41204 4.6367 2.76539 7.12026 2.26215 8.42083C2.18257 8.618 2.01053 9.11685 2 9.38409C2 9.63827 2.05618 9.88294 2.17087 10.1145C2.3312 10.4044 2.58282 10.6372 2.88009 10.7642C3.08606 10.8462 3.70282 10.9733 3.71453 10.9733C4.38981 11.1016 5.48757 11.1704 6.70003 11.1704C7.85514 11.1704 8.90727 11.1016 9.59308 10.997C9.60478 10.9852 10.3702 10.8581 10.6335 10.7179C11.1133 10.4626 11.4118 9.96371 11.4118 9.43041V9.38409C11.4001 9.03608 11.1016 8.30444 11.0911 8.30444C10.5879 7.07394 9.02079 4.64858 7.98037 3.67345Z"
-                                                fill="white" />
-                                            <path opacity="0.4"
-                                                d="M17.2947 11.1096C17.8108 11.1096 18.2286 10.6856 18.2286 10.1618L18.4849 5.58296C18.4849 4.91543 17.9524 4.375 17.2947 4.375C16.637 4.375 16.1033 4.91543 16.1033 5.58296L16.3608 10.1618C16.3608 10.6856 16.7786 11.1096 17.2947 11.1096Z"
-                                                fill="white" />
-                                            <path
-                                                d="M21.8292 13.8853C21.6688 13.5955 21.4172 13.3639 21.1199 13.2356C20.914 13.1536 20.296 13.0265 20.2855 13.0265C19.6102 12.8983 18.5124 12.8294 17.3 12.8294C16.1449 12.8294 15.0928 12.8983 14.4069 13.0028C14.3952 13.0147 13.6298 13.1429 13.3665 13.2819C12.8855 13.5373 12.5883 14.0361 12.5883 14.5706V14.617C12.6 14.965 12.8972 15.6954 12.9089 15.6954C13.4122 16.926 14.9781 19.3526 16.0197 20.3265C16.0197 20.3265 16.2877 20.6021 16.4538 20.7209C16.6938 20.9074 16.991 21 17.2895 21C17.6207 21 17.9285 20.8955 18.1812 20.6983C18.2269 20.652 18.4212 20.4774 18.5815 20.3158C19.5868 19.3633 21.2346 16.8796 21.7367 15.5802C21.8175 15.3831 21.9895 14.883 22 14.617C22 14.3616 21.9438 14.1169 21.8292 13.8853Z"
-                                                fill="white" />
-                                        </g>
-                                    </svg>
-                                </div>
-                                <span class="nav-text">Assembly Mgmt </span>
-                            </a>
-                            <ul>
-                                @can('assemblies.view')
-                                    <li><a href="{{ route('assembly.index') }}">Manage Assembly</a></li>
-                                @endcan
-
-                                @can('divisions.view')
-                                    <li><a href="{{ route('divisions.index') }}">Manage Divisions</a></li>
-                                @endcan
-
-                                @can('blocks.view')
-                                    <li><a href="{{ route('blocks.index') }}">Manage Blocks</a></li>
-                                @endcan
-
-                                @can('zones.view')
-                                    <li><a href="{{ route('zones.index') }}">Manage Zones</a></li>
-                                @endcan
-
-                                @can('property-uses.view')
-                                    <li><a href="{{ route('property-users.index') }}">Property Uses</a></li>
-                                @endcan
-
-                                @can('rates.view')
-                                    <li><a href="{{ route('rates.index') }}">Manage Rates (Property)</a></li>
-                                    <li><a href="{{ route('rates.bus.index') }}">Manage Rates (Business)</a></li>
-                                @endcan
-
-                                @can('agent-assignments.view')
-                                    <li><a href="{{ route('agent-assignments.index') }}">Agent Assignment</a></li>
-                                @endcan
-
-                                @can('task-assignments.view')
-                                    <li><a href="{{ route('task-assignments.index') }}">Task Assignment</a></li>
-                                @endcan
-                            </ul>
-                        </li>
-                    @endcanany
-
-                    @canany(['reports.view'])
-                        <li><a class="has-arrow " href="javascript:void(0);">
-                                <div class="menu-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g opacity="0.5">
-                                            <path opacity="0.4"
-                                                d="M2.00018 11.0785C2.05018 13.4165 2.19018 17.4155 2.21018 17.8565C2.28118 18.7995 2.64218 19.7525 3.20418 20.4245C3.98618 21.3675 4.94918 21.7885 6.29218 21.7885C8.14818 21.7985 10.1942 21.7985 12.1812 21.7985C14.1762 21.7985 16.1122 21.7985 17.7472 21.7885C19.0712 21.7885 20.0642 21.3565 20.8362 20.4245C21.3982 19.7525 21.7592 18.7895 21.8102 17.8565C21.8302 17.4855 21.9302 13.1445 21.9902 11.0785H2.00018Z"
-                                                fill="white" />
-                                            <path
-                                                d="M11.2454 15.3842V16.6782C11.2454 17.0922 11.5814 17.4282 11.9954 17.4282C12.4094 17.4282 12.7454 17.0922 12.7454 16.6782V15.3842C12.7454 14.9702 12.4094 14.6342 11.9954 14.6342C11.5814 14.6342 11.2454 14.9702 11.2454 15.3842Z"
-                                                fill="white" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M10.2113 14.5564C10.1113 14.9194 9.7623 15.1514 9.38431 15.1014C6.8333 14.7454 4.39531 13.8404 2.33731 12.4814C2.12631 12.3434 2.00031 12.1074 2.00031 11.8554V8.3894C2.00031 6.2894 3.71231 4.5814 5.81731 4.5814H7.78431C7.97231 3.1294 9.20231 2.0004 10.7043 2.0004H13.2863C14.7873 2.0004 16.0183 3.1294 16.2063 4.5814H18.1833C20.2823 4.5814 21.9903 6.2894 21.9903 8.3894V11.8554C21.9903 12.1074 21.8633 12.3424 21.6543 12.4814C19.5923 13.8464 17.1443 14.7554 14.5763 15.1104C14.5413 15.1154 14.5073 15.1174 14.4733 15.1174C14.1343 15.1174 13.8313 14.8884 13.7463 14.5524C13.5443 13.7564 12.8213 13.1994 11.9903 13.1994C11.1483 13.1994 10.4333 13.7444 10.2113 14.5564ZM13.2863 3.5004H10.7043C10.0313 3.5004 9.46931 3.9604 9.30131 4.5814H14.6883C14.5203 3.9604 13.9583 3.5004 13.2863 3.5004Z"
-                                                fill="white" />
-                                        </g>
-                                    </svg>
-                                </div>
-                                <span class="nav-text">Reports</span>
-                            </a>
-                            <ul>
-                                @can('reports.view')
-                                    <li><a href="{{ route('customer-reports.index') }}">Customers Report</a></li>
-                                @endcan
-
-                                @can('reports.view')
-                                    <li><a href="{{ route('business-reports.index') }}">Businessess Report</a></li>
-                                @endcan
-
-                                @can('reports.view')
-                                    <li><a href="{{ route('property-reports.index') }}">Property Report</a></li>
-                                @endcan
-
-                                @can('reports.view')
-                                    <li><a href="{{ route('bill-reports.index') }}">Bills Report</a></li>
-                                @endcan
-
-                                @can('reports.view')
-                                    <li><a href="{{ route('payment-reports.index') }}">Payment Report</a></li>
-                                @endcan
-
-                                @can('reports.view')
-                                    <li><a href="{{ route('debtors-reports.index') }}">Debtors Report</a></li>
-                                @endcan
-                            </ul>
-                        </li>
-                    @endcanany
-                </ul>
-            </div>
-        </div>
-
-        <div class="content-body">
-            @yield('page-content')
-        </div>
-
-        <div class="footer">
-            <div class="copyright">
-                <p>Copyright © Developed by <a href="" target="_blank">Assets Circle Network</a>
-                    <?= date('Y') ?>
-                </p>
-            </div>
-        </div>
     </div>
 
-    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-    <script src="{{ asset('assets/src/assets/js/dashboard/dash_1.js') }}"></script>
 
-    <script src="{{ asset('assets/vendor/global/global.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/chart.js/Chart.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/apexchart/apexchart.js') }}"></script>
+    <!-- Scroll To Top -->
+    <div class="scrollToTop">
+        <span class="arrow"><i class="ri-arrow-up-s-fill fs-20"></i></span>
+    </div>
+    <div id="responsive-overlay"></div>
+    <!-- Scroll To Top -->
 
-    <!-- Dashboard 1 -->
-    <script src="{{ asset('assets/js/dashboard/dashboard-1.js') }}"></script>
-    <script src="{{ asset('assets/vendor/draggable/draggable.js') }}"></script>
-    <script src="{{ asset('assets/vendor/swiper/js/swiper-bundle.min.js') }}"></script>
-
-
-    <!-- tagify -->
-    <script src="{{ asset('assets/vendor/tagify/dist/tagify.js') }}"></script>
-
-    <script src="{{ asset('assets/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables/js/jszip.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins-init/datatables.init.js') }}"></script>
-
-    <!-- Apex Chart -->
-
-    <script src="{{ asset('assets/vendor/bootstrap-datetimepicker/js/moment.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <!-- Jquery Cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
 
-    <!-- Vectormap -->
-    <script src="{{ asset('assets/vendor/jqvmap/js/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/jqvmap/js/jquery.vmap.world.js') }}"></script>
-    <script src="{{ asset('assets/vendor/jqvmap/js/jquery.vmap.usa.js') }}"></script>
+    <!-- Popper JS -->
+    <script src="{{ asset('assets/libs/@popperjs/core/umd/popper.min.js') }}"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Defaultmenu JS -->
+    <script src="{{ asset('assets/js/defaultmenu.js') }}"></script>
+
+    <!-- Node Waves JS-->
+    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+
+    <!-- Sticky JS -->
+    <script src="{{ asset('assets/js/sticky.js') }}"></script>
+
+    <!-- Simplebar JS -->
+    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/js/simplebar.js') }}"></script>
+
+    <!-- Auto Complete JS -->
+    <script src="{{ asset('assets/libs/@tarekraafat/autocomplete.js/autoComplete.min.js') }}"></script>
+
+    <!-- Color Picker JS -->
+    <script src="{{ asset('assets/libs/@simonwep/pickr/pickr.es5.min.js') }}"></script>
+
+
+    <!-- Apex Charts JS -->
+    <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+
+    <!-- Jobs-Dashboard -->
+    <script src="{{ asset('assets/js/jobs-dashboard.js') }}"></script>
+
+    <!-- Custom JS -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>
-    <script src="{{ asset('assets/js/deznav-init.js') }}"></script>
-    <script src="{{ asset('assets/js/demo.js') }}"></script>
-    <script src="{{ asset('assets/js/styleSwitcher.js') }}"></script>
+
+
+    <!-- Custom-Switcher JS -->
+    <script src="{{ asset('assets/js/custom-switcher.js') }}"></script>
+
+    <!-- JSVector Maps MapsJS -->
+    <script src="{{ asset('assets/libs/jsvectormap/maps/world-merc.js') }}"></script>
+    <script src="{{ asset('assets/js/us-merc-en.js') }}"></script>
+    <script src="{{ asset('assets/js/russia.js') }}"></script>
+    <script src="{{ asset('assets/js/spain.js') }}"></script>
+    <script src="{{ asset('assets/js/canada.js') }}"></script>
+    <script src="{{ asset('assets/js/jsvectormap.js') }}"></script>
+
+
+    <!-- Jquery Cdn -->
+
+    <!-- Datatables Cdn -->
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.6/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <!-- Internal Datatables JS -->
+    <script src="{{ asset('assets/js/datatables.js') }}"></script>
+
+
+    <!-- Custom JS -->
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
     @yield('page-scripts')
 </body>
 

@@ -25,92 +25,93 @@
                 <div class="card">
 
                     <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div>
-                            <h4 class="heading mb-0">Propert Class Types</h4>
-                        </div>
-
-                        <div class="d-flex align-items-center">
-                            @can('property-types.create')
-                                <a href="{{ route('business-class-types.create') }}" class="btn btn-primary btn-sm ms-2">+
-                                    Create Property Type</a>
-                            @endcan
-                        </div>
+                        < <div class="card-header">
+                            <div class="card-title">Property Management / Property Class Type</div>
                     </div>
 
-                    <div class="card-body px-0">
-                        <div class="table-responsive active-projects user-tbl  dt-filter">
-                            <table id="user-tbl" class="table shorting">
-                                <thead>
+
+                    <div class="d-flex align-items-center">
+                        @can('property-types.create')
+                            <a href="{{ route('business-class-types.create') }}" class="btn btn-primary btn-sm ms-2">+
+                                Create Property Type</a>
+                        @endcan
+                    </div>
+                </div>
+
+                <div class="card-body px-0">
+                    <div class="table-responsive active-projects user-tbl  dt-filter">
+                        <table id="file-export" class="table table-bordered text-nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>S/N</th>
+                                    <th>Class Name</th>
+                                    <th>Category</th>
+                                    <th>Rate</th>
+                                    <th>Identifier</th>
+                                    <th>Extra Identifier</th>
+                                    <th>Code</th>
+                                    <th>Created By</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($businessClassTypes as $index => $businessClassType)
                                     <tr>
-                                        <th>S/N</th>
-                                        <th>Class Name</th>
-                                        <th>Category</th>
-                                        <th>Rate</th>
-                                        <th>Identifier</th>
-                                        <th>Extra Identifier</th>
-                                        <th>Code</th>
-                                        <th>Created By</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($businessClassTypes as $index => $businessClassType)
-                                        <tr>
-                                            <td>{{ $index + 1 }}</td>
-                                            <td>{{ $businessClassType->name }}</td>
-                                            <td>{{ $businessClassType->category }}</td>
-                                            <td>
-                                                <span class="badge badge-success light border-0">
-                                                    GHS {{ $businessClassType->rate }}.00
-                                                </span>
-                                            </td>
-                                            <td>{{ $businessClassType->identifier }}</td>
-                                            <td>{{ $businessClassType->extra_class_identifier }}</td>
-                                            <td>{{ $businessClassType->classcode }}</td>
-                                            <td>{{ $businessClassType->createdBy->name ?? '' }}</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <div class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <svg width="24" height="24" viewBox="0 0 24 24"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
-                                                                stroke="#737B8B" stroke-width="2" stroke-linecap="round"
-                                                                stroke-linejoin="round">
-                                                            </path>
-                                                            <path
-                                                                d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
-                                                                stroke="#737B8B" stroke-width="2" stroke-linecap="round"
-                                                                stroke-linejoin="round">
-                                                            </path>
-                                                            <path
-                                                                d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
-                                                                stroke="#737B8B" stroke-width="2" stroke-linecap="round"
-                                                                stroke-linejoin="round">
-                                                            </path>
-                                                        </svg>
-                                                    </div>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <div class="py-2">
-                                                            <a class="dropdown-item"
-                                                                href=" {{ route('business-class-types.show', $businessClassType) }}">View
-                                                            </a>
-                                                            <a class="dropdown-item"
-                                                                href=" {{ route('business-class-types.edit', $businessClassType) }}">Edit
-                                                            </a>
-                                                        </div>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $businessClassType->name }}</td>
+                                        <td>{{ $businessClassType->category }}</td>
+                                        <td>
+                                            <span class="badge badge-success light border-0">
+                                                GHS {{ $businessClassType->rate }}.00
+                                            </span>
+                                        </td>
+                                        <td>{{ $businessClassType->identifier }}</td>
+                                        <td>{{ $businessClassType->extra_class_identifier }}</td>
+                                        <td>{{ $businessClassType->classcode }}</td>
+                                        <td>{{ $businessClassType->createdBy->name ?? '' }}</td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <div class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
+                                                            stroke="#737B8B" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round">
+                                                        </path>
+                                                        <path
+                                                            d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
+                                                            stroke="#737B8B" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round">
+                                                        </path>
+                                                        <path
+                                                            d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
+                                                            stroke="#737B8B" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <div class="py-2">
+                                                        <a class="dropdown-item"
+                                                            href=" {{ route('business-class-types.show', $businessClassType) }}">View
+                                                        </a>
+                                                        <a class="dropdown-item"
+                                                            href=" {{ route('business-class-types.edit', $businessClassType) }}">Edit
+                                                        </a>
                                                     </div>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection
 

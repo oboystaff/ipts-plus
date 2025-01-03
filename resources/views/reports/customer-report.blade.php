@@ -71,7 +71,7 @@
                             <div class="card-body pt-0">
                                 <div class="table-responsive">
                                     <div id="details">
-                                        <table id="example4" class="display table" style="width: 100%">
+                                        <table id="file-export" class="table table-bordered text-nowrap w-100">
                                             <thead>
                                                 <tr>
                                                     <th>S/N</th>

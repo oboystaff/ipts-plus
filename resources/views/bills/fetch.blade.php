@@ -19,7 +19,7 @@
 
                             <div class="card-body px-0">
                                 <div class="table-responsive active-projects user-tbl  dt-filter">
-                                    <table id="user-tbl" class="table shorting">
+                                    <table id="file-export" class="table table-bordered text-nowrap w-100">
                                         <thead>
                                             <tr>
                                                 <th>S/N</th>

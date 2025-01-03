@@ -158,7 +158,8 @@ Route::group(['prefix' => 'customer-type', 'middleware' => 'auth:sanctum'], func
 
 //LOGIN MANAGEMENT
 Route::group(['prefix' => ''], function () {
-    Route::get('/', [AuthAdmin\LoginAdminController::class, 'index'])->name('auth.index');
+    Route::get('/', [AuthAdmin\LoginAdminController::class, 'LandingPage'])->name('auth.LandingPage');
+     Route::get('/index', [AuthAdmin\LoginAdminController::class, 'index'])->name('auth.index');
     Route::get('/register', [AuthAdmin\LoginAdminController::class, 'register'])->name('auth.register');
     Route::get('/activate', [CitizenController::class, 'activate'])->name('citizens.activate');
     Route::post('/activate', [CitizenController::class, 'activateCitizen'])->name('citizens.activateCitizen');
@@ -175,6 +176,10 @@ Route::group(['prefix' => ''], function () {
 //DASHBOARD
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/operational', [Dashboard\DashboardController::class, 'operational'])->name('dashboard.operational');
+    Route::get('/MyBills', [Dashboard\DashboardController::class, 'Mybills'])->name('dashboard.mybills');
+    Route::get('/myproperties', [Dashboard\DashboardController::class, 'Myproperties'])->name('dashboard.myproperties');
+    Route::get('/mybusiness', [Dashboard\DashboardController::class, 'Mybusiness'])->name('dashboard.mybusiness');
+    Route::get('/mypaymenthistory', [Dashboard\DashboardController::class, 'Mypaymenthistory'])->name('dashboard.mypaymenthistory');
 });
 
 //USER MANAGEMENT

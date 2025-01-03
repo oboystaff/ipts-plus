@@ -9,8 +9,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">Create Business Class</h4>
+                        <div class="card-header">
+                            <div class="card-title">Business Management / Create Assembly Business</div>
                         </div>
 
                         <div>
@@ -19,7 +19,8 @@
                     </div>
 
                     <div class="card-body">
-                        <form class="row g-3 needs-validation" method="POST" action="{{ route('business-classes.store') }}">
+                        <form class="row g-3 needs-validation" method="POST"
+                            action="{{ route('business-classes.store') }}">
                             @csrf
 
                             <div class="col-sm-6 mb-3">

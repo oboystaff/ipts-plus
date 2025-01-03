@@ -7,44 +7,79 @@
     <div class="container-fluid mh-auto">
         <div class="row">
 
-            <div class="col-xl-4  col-lg-6 col-sm-6">
-                <div class="widget-stat card">
-                    <div class="card-body p-4">
-                        <h4 class="card-title">Total Pending Payments </h4>
-                        <h3> GHS {{ $data['totalPendingPayments'] }}</h3>
-                        <div class="progress mb-2">
-                            <div class="progress-bar progress-animated bg-warning" style="width: 80%"></div>
+            <div class="row">
+                <div class="col-xl-4">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex gap-2 justify-content-between">
+                                <div class="d-flex flex-column justify-content-between gap-2">
+
+                                    <div id="crmchart01"></div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="avatar avatar-md bg-primary bg-opacity-25 avatar-rounded mb-2">
+                                        <div class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded">
+                                            <i class="ri-bar-chart-box-line fs-18"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="fw-semibold mb-2">GHS {{ $data['totalPendingPayments'] }}</h4>
+                                        <div class="text-muted mb-0">Total Pending Payments</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <small>Total Pending Payments</small>
                     </div>
                 </div>
+                <div class="col-xl-4">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex gap-2 justify-content-between">
+                                <div class="d-flex flex-column justify-content-between gap-2">
+
+                                    <div id="crmchart02"></div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="avatar avatar-md bg-secondary bg-opacity-25 avatar-rounded mb-2">
+                                        <div class="avatar avatar-sm bg-secondary text-fixed-white avatar-rounded">
+                                            <i class="ri-user-add-line fs-18"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="fw-semibold mb-2">GHS {{ $data['totalSuccessfulPayments'] }}</h4>
+                                        <div class="text-muted mb-0">Total Successful Payments</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div class="d-flex gap-2 justify-content-between">
+                                <div class="d-flex flex-column justify-content-between gap-2">
+
+                                    <div id="crmchart03"></div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="avatar avatar-md bg-success bg-opacity-25 avatar-rounded mb-2">
+                                        <div class="avatar avatar-sm bg-success text-fixed-white avatar-rounded">
+                                            <i class="ri-shake-hands-line fs-18"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="fw-semibold mb-2">GHS {{ $data['totalFailedPayments'] }}</h4>
+                                        <div class="text-muted mb-0">Total Failed Payments</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="col-xl-4  col-lg-6 col-sm-6">
-                <div class="widget-stat card">
-                    <div class="card-body p-4">
-                        <h4 class="card-title">Total Successful Payments </h4>
-                        <h3>GHS {{ $data['totalSuccessfulPayments'] }}</h3>
-                        <div class="progress mb-2">
-                            <div class="progress-bar progress-animated bg-success" style="width: 80%"></div>
-                        </div>
-                        <small>Total Successful Payments</small>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-4  col-lg-6 col-sm-6">
-                <div class="widget-stat card">
-                    <div class="card-body p-4">
-                        <h4 class="card-title">Total Failed Payments </h4>
-                        <h3>GHS {{ $data['totalFailedPayments'] }}</h3>
-                        <div class="progress mb-2">
-                            <div class="progress-bar progress-animated bg-danger" style="width: 80%"></div>
-                        </div>
-                        <small>Total Failed Payments</small>
-                    </div>
-                </div>
-            </div>
 
             <div class="col-xl-12 active-p">
 
@@ -65,14 +100,14 @@
                 <div class="card">
 
                     <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div>
-                            <h4 class="heading mb-0">Payment Management</h4>
+                        <div class="card-header">
+                            <div class="card-title">Payment Management</div>
                         </div>
                     </div>
 
                     <div class="card-body px-0">
-                        <div class="table-responsive active-projects user-tbl  dt-filter">
-                            <table id="user-tbl" class="table shorting">
+                        <div class="table-responsive">
+                            <table id="file-export" class="table table-bordered text-nowrap w-100">
                                 <thead>
                                     <tr>
                                         <th>SN</th>

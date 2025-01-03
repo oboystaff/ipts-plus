@@ -25,8 +25,8 @@
                 <div class="card">
 
                     <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div>
-                            <h4 class="heading mb-0">Business Operating Permit Rates</h4>
+                        <div class="card-header">
+                            <div class="card-title">Assembly Management / BoP Rate </div>
                         </div>
 
                         <div class="d-flex align-items-center">
@@ -38,8 +38,8 @@
                     </div>
 
                     <div class="card-body px-0">
-                        <div class="table-responsive active-projects user-tbl  dt-filter">
-                            <table id="user-tbl" class="table shorting">
+                        <div class="table-responsive">
+                            <table id="file-export" class="table table-bordered text-nowrap w-100">
                                 <thead>
                                     <tr>
                                         <th>S/N</th>
