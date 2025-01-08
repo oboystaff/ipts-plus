@@ -30,7 +30,8 @@ class User extends Authenticatable
         'status',
         'assembly_code',
         'division_code',
-        'role_access'
+        'role_access',
+        'gender'
     ];
 
     protected $hidden = [

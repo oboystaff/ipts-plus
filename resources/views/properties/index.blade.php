@@ -9,6 +9,184 @@
 @endsection
 
 @section('page-content')
+    <div class="card-body px-0">
+        <!-- Filters Form -->
+
+    </div>
+
+    <div class="col-xl-12">
+        <div class="card custom-card rounded-md overflow-hidden p-2">
+            <div class="card-body bg-primary bg-opacity-10 rounded-2 ps-4 medical-cards">
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <form method="GET" action="{{ route('properties.index') }}" class="mb-3">
+                            <div class="row align-items-end g-3">
+                                <!-- Entity Type -->
+                                <div class="col-md-4">
+                                    <label for="entity_type" class="form-label">Entity Type</label>
+                                    <select name="entity_type" id="entity_type" class="form-select">
+                                        <option value="">All</option>
+                                        @foreach ($data['entityTypes'] as $type)
+                                            <option value="{{ $type->id }}"
+                                                {{ request('entity_type') == $type->id ? 'selected' : '' }}>
+                                                {{ $type->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <!-- Assembly -->
+                                <div class="col-md-4">
+                                    <label for="assembly" class="form-label">Assembly</label>
+                                    <select name="assembly" id="assembly" class="form-select">
+                                        <option value="">All</option>
+                                        @foreach ($data['assemblies'] as $assembly)
+                                            <option value="{{ $assembly->id }}"
+                                                {{ request('assembly') == $assembly->id ? 'selected' : '' }}>
+                                                {{ $assembly->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <!-- Apply Filters Button -->
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-12" style="margin-left:20px;">
+        <label for="phone" style="font-size:15px;margin-bottom:20px">Rate Payer Properties On Map (<span
+                style="color:blue;font-weight:bold">Blue:</span>
+            Full Payment, <span style="color:yellow;font-weight:bold">Yellow:</span> Partial Payment, <span
+                style="color:red;font-weight:bold">Red:</span> No
+            Payment)</label>
+        <div id="map" style="height: 600px;"></div>
+    </div>
+
+    <div class="col-xl-12">
+        <div class="card custom-card rounded-md overflow-hidden p-2">
+            <div class="card-body bg-primary bg-opacity-10 rounded-2 ps-4 medical-cards">
+
+
+                <div class="row">
+                    <div class="col-xxl-9">
+                        <div class="row">
+
+                            <div class="col-xl-3">
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start gap-3 flex-wrap">
+                                            <div>
+                                                <span
+                                                    class="avatar avatar-md avatar-rounded bg-secondary shadow shadow-secondary">
+                                                    <i class="ti ti-currency-dollar fs-5"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-fill">
+                                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                                    <span class="d-block"> Valued Properties</span>
+                                                    <span
+                                                        class="badge bg-success-transparent rounded-pill">{{ $data['valuedPercentage'] }}%<i
+                                                            class="ti ti-arrow-up"></i></span>
+                                                </div>
+                                                <h4 class="fw-semibold mb-3 lh-1">{{ $data['valuedProperties'] }} </h4>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start gap-3 flex-wrap">
+                                            <div>
+                                                <span
+                                                    class="avatar avatar-md avatar-rounded bg-success shadow shadow-success">
+                                                    <i class="ti ti-box fs-5"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-fill">
+                                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                                    <span class="d-block">Un-Valued Properties </span>
+                                                    <span class="badge bg-danger-transparent rounded-pill">
+                                                        {{ $data['unvaluedPercentage'] }}%<i
+                                                            class="ti ti-arrow-down"></i></span>
+                                                </div>
+                                                <span class="d-block mb-2"></span>
+                                                <h4 class="fw-semibold mb-3 lh-1">{{ $data['unvaluedProperties'] }} </h4>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start gap-3 flex-wrap">
+                                            <div>
+                                                <span
+                                                    class="avatar avatar-md avatar-rounded bg-success shadow shadow-success">
+                                                    <i class="ti ti-box fs-5"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-fill">
+                                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                                    <span class="d-block">Rated Properties </span>
+                                                    <span
+                                                        class="badge bg-danger-transparent rounded-pill">{{ $data['ratedPercentage'] }}%<i
+                                                            class="ti ti-arrow-down"></i></span>
+                                                </div>
+                                                <span class="d-block mb-2"></span>
+                                                <h4 class="fw-semibold mb-3 lh-1"> {{ $data['ratedProperties'] }} </h4>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start gap-3 flex-wrap">
+                                            <div>
+                                                <span class="avatar avatar-md avatar-rounded bg-info shadow shadow-info">
+                                                    <i class="ti ti-moneybag fs-5"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-fill">
+                                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                                    <span class="d-block">Un-Rated Properties </span>
+                                                    <span
+                                                        class="badge bg-success-transparent rounded-pill">{{ $data['unratedPercentage'] }}%<i
+                                                            class="ti ti-arrow-up"></i></span>
+                                                </div>
+                                                <span class="d-block mb-2"></span>
+                                                <h4 class="fw-semibold mb-3 lh-1">{{ $data['unratedProperties'] }} </h4>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="container-fluid mh-auto">
         <div class="row">
             <div class="col-xl-12 active-p">
@@ -50,50 +228,65 @@
                                         <th>S/N</th>
                                         <th>Entity Type</th>
                                         <th>Category</th>
-                                        <th>Digital Address</th>
-                                        <th>Location</th>
-                                        <th>Street Name</th>
-                                        <th>Rated</th>
-                                        <th>Validated</th>
+                                        {{-- <th>Digital Address</th> --}}
+                                        {{-- <th>Location</th> --}}
+                                        {{-- <th>Street Name</th> --}}
+                                        <th>Rated?</th>
+
                                         <th>Property Number</th>
-                                        <th>Owner Account</th>
-                                        <th>Owner Name</th>
+                                        <th>Validated?</th>
+                                        {{-- <th>Owner Account</th> --}}
+                                        {{-- <th>Owner Name</th> --}}
                                         <th>Ratable Value</th>
-                                        <th>Assembly</th>
-                                        <th>Division</th>
+                                        {{-- <th>Assembly</th> --}}
+                                        {{-- <th>Division</th>
                                         <th>Block</th>
-                                        <th>Zone</th>
+                                        <th>Zone</th> --}}
                                         <th>Property Use</th>
-                                        <th>Date Created</th>
+                                        {{-- <th>Date Created</th> --}}
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($properties as $index => $property)
+                                    @foreach ($data['properties'] as $index => $property)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $property->entityType->name ?? '' }}</td>
                                             <td>{{ $property->entityType->category ?? '' }}</td>
-                                            <td>{{ $property->digital_address }}</td>
-                                            <td>{{ $property->location }}</td>
-                                            <td>{{ $property->street_name }}</td>
-                                            <td>{{ $property->rated }}</td>
-                                            <td>{{ $property->validated }}</td>
-                                            <td>{{ $property->property_number }}</td>
-                                            <td>{{ $property->customer->account_number ?? 'N/A' }}</td>
-                                            <td>{{ $property->customer->first_name ?? '' }}
-                                                {{ $property->customer->last_name ?? 'N/A' }}
+                                            {{-- <td>{{ $property->digital_address }}</td>
+                                            <td>{{ $property->location }}</td> --}}
+                                            {{-- <td>{{ $property->street_name }}</td> --}}
+                                            {{-- <td>{{ $property->validated }}</td> --}}
+                                            <td>
+                                                @if ($property->validated === 'Yes')
+                                                    <span class="badge bg-success">Yes</span>
+                                                @else
+                                                    <span class="badge bg-danger">No</span>
+                                                @endif
                                             </td>
-                                            <td>{{ number_format($property->ratable_value, 2) }}</td>
-                                            <td>{{ $property->assembly->name ?? 'N/A' }}</td>
-                                            <td>{{ $property->division->division_name ?? 'N/A' }}</td>
+                                            <td>{{ $property->property_number }}</td>
+                                            <td>
+                                                @if ($property->rated === 'Yes')
+                                                    <span class="badge bg-success">Yes</span>
+                                                @else
+                                                    <span class="badge bg-danger">No</span>
+                                                @endif
+                                            </td>
+                                            {{-- <td>{{ $property->customer->account_number ?? 'N/A' }}</td> --}}
+                                            {{-- <td>{{ $property->customer->first_name ?? '' }}
+                                                {{ $property->customer->last_name ?? 'N/A' }}
+                                            </td> --}}
+                                            <td>GHS {{ number_format($property->ratable_value, 2) }}</td>
+                                            {{-- <td>{{ $property->assembly->name ?? 'N/A' }}</td> --}}
+                                            {{-- <td>{{ $property->division->division_name ?? 'N/A' }}</td>
                                             <td>{{ $property->block->block_name ?? 'N/A' }}</td>
-                                            <td>{{ $property->zone->name ?? 'N/A' }}</td>
+                                            <td>{{ $property->zone->name ?? 'N/A' }}</td> --}}
                                             <td>{{ $property->propertyUse->name ?? 'N/A' }}</td>
-                                            <td>{{ $property->created_at }}</td>
+                                            {{-- <td>{{ $property->created_at }}</td> --}}
                                             <td>
                                                 <div class="dropdown">
-                                                    <div class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <div class="btn-link" data-bs-toggle="dropdown"
+                                                        aria-expanded="false">
                                                         <svg width="24" height="24" viewBox="0 0 24 24"
                                                             fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -128,24 +321,17 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
+                                {{-- <tfoot>
                                     <th colspan="10"></th>
                                     <th>Total (GHS)</th>
                                     <th>{{ $total }}</th>
                                     <th colspan="7"></th>
-                                </tfoot>
+                                </tfoot> --}}
                             </table>
                         </div>
                     </div>
                     <hr />
-                    <div class="col-md-12" style="margin-left:20px;">
-                        <label for="phone" style="font-size:15px;margin-bottom:20px">Customer Properties On Map (<span
-                                style="color:blue;font-weight:bold">Blue:</span>
-                            Full Payment, <span style="color:yellow;font-weight:bold">Yellow:</span> Partial Payment, <span
-                                style="color:red;font-weight:bold">Red:</span> No
-                            Payment)</label>
-                        <div id="map" style="height: 600px;"></div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -175,7 +361,7 @@
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        var properties = @json($properties);
+        var properties = @json($data['properties']);
 
         properties.forEach(function(property) {
             if (property.latitude && property.longitude) {
@@ -227,4 +413,7 @@
 
         map.fitBounds(bounds);
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 @endsection

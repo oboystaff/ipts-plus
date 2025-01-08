@@ -48,6 +48,7 @@
                                             <th>Status</th>
                                             <th>Created By</th>
                                             <th>Date Created</th>
+                                            <th> Interval Analysis</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -56,9 +57,61 @@
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
                                                 <td>{{ $customerType->name }}</td>
-                                                <td>{{ $customerType->status }}</td>
+                                                <td>
+                                                    @if ($customerType->status === 'Active')
+                                                        <span class="badge bg-success">Active</span>
+                                                    @else
+                                                        <span class="badge bg-danger">In-Active</span>
+                                                    @endif
+                                                </td>
                                                 <td>{{ $customerType->createdBy->name ?? '' }}</td>
                                                 <td>{{ $customerType->created_at }}</td>
+                                                <td>
+                                                    @php
+                                                        $createdAt = $customerType->created_at;
+                                                        $formattedDate = $createdAt->format('M d, Y');
+                                                        $timeAgo = $createdAt->diffForHumans();
+                                                        $daysAgo = $createdAt->diffInDays();
+                                                    @endphp
+
+                                                    @if ($daysAgo >= 365)
+                                                        <span class="badge bg-secondary">{{ $timeAgo }}</span>
+                                                        <div class="progress progress-xs progress-animate"
+                                                            role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                                                            aria-valuemax="100">
+                                                            <div class="progress-bar bg-secondary" style="width: 100%">
+                                                            </div>
+                                                        </div>
+                                                    @elseif($daysAgo >= 30)
+                                                        <span class="badge bg-primary">{{ $timeAgo }}</span>
+                                                        <div class="progress progress-xs progress-animate"
+                                                            role="progressbar" aria-valuenow="75" aria-valuemin="0"
+                                                            aria-valuemax="100">
+                                                            <div class="progress-bar bg-primary" style="width: 75%"></div>
+                                                        </div>
+                                                    @elseif($daysAgo >= 7)
+                                                        <span class="badge bg-danger">{{ $timeAgo }}</span>
+                                                        <div class="progress progress-xs progress-animate"
+                                                            role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                                                            aria-valuemax="100">
+                                                            <div class="progress-bar bg-danger" style="width: 50%"></div>
+                                                        </div>
+                                                    @elseif($daysAgo >= 1)
+                                                        <span class="badge bg-success">{{ $timeAgo }}</span>
+                                                        <div class="progress progress-xs progress-animate"
+                                                            role="progressbar" aria-valuenow="25" aria-valuemin="0"
+                                                            aria-valuemax="100">
+                                                            <div class="progress-bar bg-success" style="width: 25%"></div>
+                                                        </div>
+                                                    @else
+                                                        <span class="badge bg-success">Today</span>
+                                                        <div class="progress progress-xs progress-animate"
+                                                            role="progressbar" aria-valuenow="10" aria-valuemin="0"
+                                                            aria-valuemax="100">
+                                                            <div class="progress-bar bg-success" style="width: 10%"></div>
+                                                        </div>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <div class="dropdown">
                                                         <div class="btn-link" data-bs-toggle="dropdown"

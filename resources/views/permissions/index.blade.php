@@ -37,6 +37,7 @@
                                         <th>S/N</th>
                                         <th>Name</th>
                                         <th>Date Created</th>
+                                        <th>Interval Analysis</th>
                                         <th>Action</th>
 
                                     </tr>
@@ -47,6 +48,47 @@
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $role->name }}</td>
                                             <td>{{ $role->created_at->format('M d, Y') }}</td>
+                                            <td>
+                                                @php
+                                                    $createdAt = $role->created_at;
+                                                    $formattedDate = $createdAt->format('M d, Y');
+                                                    $timeAgo = $createdAt->diffForHumans();
+                                                    $daysAgo = $createdAt->diffInDays();
+                                                @endphp
+
+                                                @if ($daysAgo >= 365)
+                                                    <span class="badge bg-secondary">{{ $timeAgo }}</span>
+                                                    <div class="progress progress-xs progress-animate" role="progressbar"
+                                                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                                        <div class="progress-bar bg-secondary" style="width: 100%"></div>
+                                                    </div>
+                                                @elseif($daysAgo >= 30)
+                                                    <span class="badge bg-primary">{{ $timeAgo }}</span>
+                                                    <div class="progress progress-xs progress-animate" role="progressbar"
+                                                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                                        <div class="progress-bar bg-primary" style="width: 75%"></div>
+                                                    </div>
+                                                @elseif($daysAgo >= 7)
+                                                    <span class="badge bg-danger">{{ $timeAgo }}</span>
+                                                    <div class="progress progress-xs progress-animate" role="progressbar"
+                                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                                                        <div class="progress-bar bg-danger" style="width: 50%"></div>
+                                                    </div>
+                                                @elseif($daysAgo >= 1)
+                                                    <span class="badge bg-success">{{ $timeAgo }}</span>
+                                                    <div class="progress progress-xs progress-animate" role="progressbar"
+                                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                        <div class="progress-bar bg-success" style="width: 25%"></div>
+                                                    </div>
+                                                @else
+                                                    <span class="badge bg-success">Today</span>
+                                                    <div class="progress progress-xs progress-animate" role="progressbar"
+                                                        aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+                                                        <div class="progress-bar bg-success" style="width: 10%"></div>
+                                                    </div>
+                                                @endif
+                                            </td>
+
                                             <td>
                                                 <a href="{{ route('permissions.edit', $role) }}"
                                                     class="btn btn-sm btn-primary">Assign Privilages</a>

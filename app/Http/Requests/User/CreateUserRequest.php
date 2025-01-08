@@ -31,7 +31,8 @@ class CreateUserRequest extends FormRequest
             'status' => 'required|string',
             'assembly_code' => 'required_if:access_level,Assembly_Supervisor|nullable|string',
             'division_code' => 'required_if:access_level,Assembly_Supervisor|nullable|string',
-            'role' => 'required|string'
+            'role' => 'required|string',
+            'gender' => 'required|string'
         ];
     }
 }

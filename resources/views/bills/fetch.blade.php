@@ -4,6 +4,50 @@
 @endsection
 
 @section('page-content')
+    <div class="col-xl-12">
+        <div class="card custom-card rounded-md overflow-hidden p-2">
+            <div class="card-body bg-primary bg-opacity-10 rounded-2 ps-4 medical-cards">
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <form method="GET" action="{{ route('bills.index') }}" class="mb-3">
+                            <div class="row align-items-end g-3">
+                                <!-- Bill Duration (From Date) -->
+                                <div class="col-md-3">
+                                    <label for="from_date" class="form-label">From Date</label>
+                                    <input type="date" name="from_date" id="from_date" class="form-control"
+                                        value="{{ request('from_date') }}">
+                                </div>
+                                <!-- Bill Duration (End Date) -->
+                                <div class="col-md-3">
+                                    <label for="end_date" class="form-label">End Date</label>
+                                    <input type="date" name="end_date" id="end_date" class="form-control"
+                                        value="{{ request('end_date') }}">
+                                </div>
+                                <!-- Bill Type -->
+
+                                <!-- Arrears -->
+                                <div class="col-md-3">
+                                    <label for="arrears" class="form-label">Arrears</label>
+                                    <select name="arrears" id="arrears" class="form-select">
+                                        <option value="">All</option>
+                                        <option value="1" {{ request('arrears') == '1' ? 'selected' : '' }}>With
+                                            Arrears</option>
+                                        <option value="0" {{ request('arrears') == '0' ? 'selected' : '' }}>Without
+                                            Arrears</option>
+                                    </select>
+                                </div>
+                                <!-- Apply Filters Button -->
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <div class="container-fluid mh-auto">
         <div class="row">
             <div class="col-xl-12 active-p">

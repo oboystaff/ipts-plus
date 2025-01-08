@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> IPTS - Level 10 </title>
+    <title> IPTS- Level 10 </title>
     <meta name="Description" content="IPTS- Level 10">
     <meta name="Author" content="IPTS- Level 10">
     <meta name="keywords" content="IPTS- Level 10">
@@ -80,13 +80,10 @@
                     <div class="header-element">
                         <div class="horizontal-logo">
                             <a href="{{ route('dashboard.operational') }}" class="header-logo">
-                                <img src="{{ asset('assets/images/level10.png') }}" alt="logo"
-                                    class="desktop-logo">
-                                <img src="{{ asset('assets/images/level10.png') }}" alt="logo" class="toggle-logo">
-                                <img src="{{ asset('assets/images/level10.png') }}" alt="logo"
-                                    class="desktop-white">
-                                <img src="{{ asset('assets/images/level10.png') }}" alt="logo"
-                                    class="toggle-white">
+                                <img src="{{ asset('assets/images/arms.png') }}" alt="logo" class="desktop-logo">
+                                <img src="{{ asset('assets/images/arms.png') }}" alt="logo" class="toggle-logo">
+                                <img src="{{ asset('assets/images/arms.png') }}" alt="logo" class="desktop-white">
+                                <img src="{{ asset('assets/images/arms.png') }}" alt="logo" class="toggle-white">
                             </a>
                         </div>
                     </div>
@@ -98,26 +95,7 @@
                             class="sidemenu-toggle header-link animated-arrow hor-toggle horizontal-navtoggle"
                             data-bs-toggle="sidebar" href="javascript:void(0);"><span></span></a>
                     </div>
-                    <!-- End::header-element -->
 
-                    <!-- Start::header-element -->
-                    {{-- <div class="header-element header-search d-lg-block d-none my-auto auto-complete-search">
-                        <!-- Start::header-link -->
-                        <input type="text" class="header-search-bar form-control rounded-pill" id="header-search"
-                            placeholder="Search for Results..." spellcheck=false autocomplete="off"
-                            autocapitalize="off">
-                        <a href="javascript:void(0);" class="header-search-icon border-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
-                                fill="#5f6368">
-                                <path d="M0 0h24v24H0V0z" fill="none" />
-                                <path
-                                    d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
-                            </svg>
-                        </a>
-                        <!-- End::header-link -->
-                    </div> --}}
-
-                    <!-- End::header-element -->
 
                 </div>
                 <!-- End::header-content-left -->
@@ -177,184 +155,6 @@
 
 
                     <!-- Start::header-element -->
-                    {{-- <div class="header-element notifications-dropdown dropdown">
-                        <!-- Start::header-link|dropdown-toggle -->
-                        <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="dropdown"
-                            data-bs-auto-close="outside" id="messageDropdown" aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="header-link-icon" height="24px"
-                                viewBox="0 0 24 24" width="24px" fill="#5f6368">
-                                <path d="M0 0h24v24H0V0z" fill="none" />
-                                <path
-                                    d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z" />
-                            </svg>
-                            <span class="header-icon-pulse bg-secondary rounded pulse pulse-secondary"></span>
-                        </a>
-                        <!-- End::header-link|dropdown-toggle -->
-                        <!-- Start::main-header-dropdown -->
-                        <div class="main-header-dropdown dropdown-menu dropdown-menu-end"
-                            data-popper-placement="none">
-                            <div class="p-3 bg-light bg-opacity-75">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="mb-0 fw-semibold">Notifications</p>
-                                    <span class="badge bg-pink" id="notifiation-data">5 Unread</span>
-                                </div>
-                            </div>
-                            <div class="dropdown-divider"></div>
-                            <ul class="list-unstyled mb-0" id="header-notification-scroll">
-                                <li class="dropdown-item">
-                                    <div class="d-flex align-items-start">
-                                        <div class="pe-2">
-                                            <span
-                                                class="avatar avatar-md offline bg-primary-transparent avatar-rounded">
-                                                <img src="../assets/images/faces/1.jpg" alt="Sonia Agarwal">
-                                            </span>
-                                        </div>
-                                        <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <p class="mb-0 fw-medium"><a href="chat.html">Sonia Agarwal</a></p>
-                                                <div class="fw-normal header-notification-text text-muted">
-                                                    <span class="fw-medium fs-12 text-success">Approval</span> for the
-                                                    Insurance
-                                                </div>
-                                                <span class="text-muted header-notification-text fs-11">7 mins
-                                                    ago</span>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:void(0);"
-                                                    class="text-muted me-1 dropdown-item-close1">
-                                                    <i class="ti ti-trash fs-16"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="dropdown-item">
-                                    <div class="d-flex align-items-start">
-                                        <div class="pe-2">
-                                            <span
-                                                class="avatar avatar-md offline bg-primary-transparent avatar-rounded">
-                                                <img src="../assets/images/faces/12.jpg" alt="Rajesh Kumar">
-                                            </span>
-                                        </div>
-                                        <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <p class="mb-0 fw-medium"><a href="chat.html">Rajesh Kumar</a></p>
-                                                <div class="fw-normal header-notification-text text-muted">
-                                                    <span class="fw-medium fs-12 text-warning">Urgent Request</span>
-                                                    for project
-                                                </div>
-                                                <span class="text-muted header-notification-text fs-11">3 hours
-                                                    ago</span>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:void(0);"
-                                                    class="text-muted me-1 dropdown-item-close1">
-                                                    <i class="ti ti-trash fs-16"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="dropdown-item">
-                                    <div class="d-flex align-items-start">
-                                        <div class="pe-2">
-                                            <span
-                                                class="avatar avatar-md offline bg-success-transparent avatar-rounded">
-                                                <img src="../assets/images/faces/3.jpg" alt="Ayesha Malik">
-                                            </span>
-                                        </div>
-                                        <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <p class="mb-0 fw-medium"><a href="chat.html">Ayesha Malik</a></p>
-                                                <div class="fw-normal header-notification-text text-muted">
-                                                    <span class="fw-medium fs-12 text-info">Task Completed</span> for
-                                                    redesign
-                                                </div>
-                                                <span class="text-muted header-notification-text fs-11">2 hours
-                                                    ago</span>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:void(0);"
-                                                    class="text-muted me-1 dropdown-item-close1">
-                                                    <i class="ti ti-trash fs-16"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="dropdown-item">
-                                    <div class="d-flex align-items-start">
-                                        <div class="pe-2">
-                                            <span class="avatar avatar-md online bg-danger-transparent avatar-rounded">
-                                                <img src="../assets/images/faces/14.jpg" alt="Mohan Desai">
-                                            </span>
-                                        </div>
-                                        <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <p class="mb-0 fw-medium"><a href="chat.html">Mohan Desai</a></p>
-                                                <div class="fw-normal header-notification-text text-muted">
-                                                    <span class="fw-medium fs-12 text-danger">New Message</span> about
-                                                    client meeting
-                                                </div>
-                                                <span class="text-muted header-notification-text fs-11">15 mins
-                                                    ago</span>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:void(0);"
-                                                    class="text-muted me-1 dropdown-item-close1">
-                                                    <i class="ti ti-trash fs-16"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="dropdown-item">
-                                    <div class="d-flex align-items-start">
-                                        <div class="pe-2">
-                                            <span
-                                                class="avatar avatar-md offline bg-warning-transparent avatar-rounded">
-                                                <img src="../assets/images/faces/5.jpg" alt="Priya Sharma">
-                                            </span>
-                                        </div>
-                                        <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <p class="mb-0 fw-medium"><a href="chat.html">Priya Sharma</a></p>
-                                                <div class="fw-normal header-notification-text text-muted">
-                                                    <span class="fw-medium fs-12 text-warning">Meeting Reminder</span>
-                                                    scheduled for 3:00 PM
-                                                </div>
-                                                <span class="text-muted header-notification-text fs-11">30 mins
-                                                    ago</span>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:void(0);"
-                                                    class="text-muted me-1 dropdown-item-close1">
-                                                    <i class="ti ti-trash fs-16"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="p-3 empty-header-item1 border-top">
-                                <div class="d-grid">
-                                    <a href="chat.html" class="btn btn-primary">View All</a>
-                                </div>
-                            </div>
-                            <div class="p-5 empty-item1 d-none">
-                                <div class="text-center">
-                                    <span class="avatar avatar-xl avatar-rounded bg-secondary-transparent">
-                                        <i class="ri-notification-off-line fs-2"></i>
-                                    </span>
-                                    <h6 class="fw-semibold mt-3">No New Notifications</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End::main-header-dropdown -->
-                    </div> --}}
-                    <!-- End::header-element -->
-
-                    <!-- Start::header-element -->
                     <div class="header-element header-shortcuts-dropdown dropdown">
                         <!-- Start::header-link|dropdown-toggle -->
                         <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="dropdown"
@@ -395,7 +195,7 @@
                                                 class="text-center p-3 related-app pink bg-pink-transparent border border-pink border-opacity-10">
                                                 <span
                                                     class="avatar avatar-md avatar-rounded bg-pink bg-opacity-10 border border-pink border-opacity-10 p-2 mb-2">
-                                                    <img src="../assets/images/apps/figma.png" alt="">
+                                                    <img src="{{ asset('assets/images/arms.png') }}" alt="">
                                                 </span>
                                                 <span class="d-block fs-12">Pay Bill </span>
                                             </div>
@@ -407,8 +207,7 @@
                                                 class="text-center p-3 related-app success bg-success-transparent border border-success border-opacity-10">
                                                 <span
                                                     class="avatar avatar-md avatar-rounded bg-success bg-opacity-10 border border-success border-opacity-10 p-2 mb-2">
-                                                    <img src="../assets/images/apps/microsoft-powerpoint.png"
-                                                        alt="">
+                                                    <img src="{{ asset('assets/images/arms.png') }}" alt="">
                                                 </span>
                                                 <span class="d-block fs-12">View Bills</span>
                                             </div>
@@ -420,8 +219,7 @@
                                                 class="text-center p-3 related-app primary bg-primary-transparent border border-primary border-opacity-10">
                                                 <span
                                                     class="avatar avatar-md avatar-rounded bg-primary bg-opacity-10 border border-primary border-opacity-10 p-2 mb-2">
-                                                    <img src="../assets/images/apps/microsoft-word.png"
-                                                        alt="">
+                                                    <img src="{{ asset('assets/images/arms.png') }}" alt="">
                                                 </span>
                                                 <span class="d-block fs-12">Dashboard</span>
                                             </div>
@@ -433,9 +231,9 @@
                                                 class="text-center p-3 related-app info bg-info-transparent border border-info border-opacity-10">
                                                 <span
                                                     class="avatar avatar-md avatar-rounded bg-info bg-opacity-10 border border-info border-opacity-10 p-2 mb-2">
-                                                    <img src="../assets/images/apps/calender.png" alt="">
+                                                    <img src="{{ asset('assets/images/arms.png') }}" alt="">
                                                 </span>
-                                                <span class="d-block fs-12">Calendar</span>
+                                                <span class="d-block fs-12">Rate Payers</span>
                                             </div>
                                         </a>
                                     </div>
@@ -445,9 +243,9 @@
                                                 class="text-center p-3 related-app secondary bg-secondary-transparent border border-secondary border-opacity-10">
                                                 <span
                                                     class="avatar avatar-md avatar-rounded bg-secondary bg-opacity-10 border border-secondary border-opacity-10 p-2 mb-2">
-                                                    <img src="../assets/images/apps/sketch.png" alt="">
+                                                    <img src="{{ asset('assets/images/arms.png') }}" alt="">
                                                 </span>
-                                                <span class="d-block fs-12">Sketch</span>
+                                                <span class="d-block fs-12">Properties</span>
                                             </div>
                                         </a>
                                     </div>
@@ -457,9 +255,9 @@
                                                 class="text-center p-3 related-app danger bg-danger-transparent border border-danger border-opacity-10">
                                                 <span
                                                     class="avatar avatar-md avatar-rounded bg-danger bg-opacity-10 border border-danger border-opacity-10 p-2 mb-2">
-                                                    <img src="../assets/images/apps/google.png" alt="">
+                                                    <img src="{{ asset('assets/images/arms.png') }}" alt="">
                                                 </span>
-                                                <span class="d-block fs-12">Google</span>
+                                                <span class="d-block fs-12">Fee Fixing</span>
                                             </div>
                                         </a>
                                     </div>
@@ -467,7 +265,8 @@
                             </div>
                             <div class="p-3 border-top">
                                 <div class="d-grid">
-                                    <a href="javascript:void(0);" class="btn btn-primary">View All</a>
+                                    <a href="{{ route('dashboard.operational') }}" class="btn btn-primary">Access
+                                        Dashboard</a>
                                 </div>
                             </div>
                         </div>
@@ -502,9 +301,22 @@
                         <a href="javascript:void(0);" class="header-link dropdown-toggle" id="mainHeaderProfile"
                             data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                             <span class="avatar avatar-sm avatar-rounded">
-                                <img src="{{ asset('assets/images/arms.png') }}" alt="img" class="img-fluid">
+                                @if (auth()->user()->access_level == 'Melchia_Account_Manager')
+                                    <img src="{{ asset('assets/images/level10.png') }}" alt="img"
+                                        class="img-fluid avatar-img">
+                                @elseif(in_array(auth()->user()->access_level, ['Assembly_Agent', 'Assembly_Supervisor', 'Assembly_Administrator']))
+                                    <img src="{{ asset('assets/images/assembly.png') }}" alt="img"
+                                        class="img-fluid avatar-img">
+                                @elseif(auth()->user()->access_level == 'GRA_Administrator')
+                                    <img src="{{ asset('assets/images/arms.png') }}" alt="img"
+                                        class="img-fluid avatar-img">
+                                @else
+                                    <img src="{{ asset('assets/images/user.png') }}" alt="img"
+                                        class="img-fluid avatar-img">
+                                @endif
                             </span>
                         </a>
+
                         <!-- End::header-link|dropdown-toggle -->
                         <ul class="main-header-dropdown dropdown-menu pt-0 overflow-hidden header-profile-dropdown dropdown-menu-end"
                             aria-labelledby="mainHeaderProfile">
@@ -520,19 +332,7 @@
                                         class="badge bg-pink align-self-end mb-1">{{ auth()->user()->phone ?? '' }}</span>
                                 </div>
                             </li>
-                            {{-- <li><a class="dropdown-item d-flex align-items-center" href="profile.html"><i
-                                        class="ti ti-user-circle fs-18 me-2 text-gray fw-normal"></i>My Profile</a>
-                            </li>
-                            <li><a class="dropdown-item d-flex align-items-center" href="mail.html"><i
-                                        class="ti ti-inbox fs-18 me-2 text-gray fw-normal"></i>Mail Inbox <span
-                                        class="badge bg-success ms-auto">06</span></a></li>
-                            <li><a class="dropdown-item d-flex align-items-center" href="mail-settings.html"><i
-                                        class="ti ti-adjustments-horizontal fs-18 me-2 text-gray fw-normal"></i>Account
-                                    Settings</a></li>
 
-                                    <li>
-                                <hr class="dropdown-divider">
-                            </li> --}}
                             <li><a class="dropdown-item d-flex align-items-center"
                                     href="{{ route('auth.logout') }}"><i
                                         class="ti ti-logout fs-18 me-2 text-gray fw-normal"></i>Sign Out</a></li>
@@ -570,10 +370,10 @@
             <!-- Start::main-sidebar-header -->
             <div class="main-sidebar-header">
                 <a href="{{ route('dashboard.operational') }}" class="header-logo">
-                    <img src="../assets/images/level10.png" alt="logo" class="desktop-logo">
-                    <img src="../assets/images/level10.png" alt="logo" class="toggle-logo">
-                    <img src="../assets/images/level10.png" alt="logo" class="desktop-white">
-                    <img src="../assets/images/level10.png" alt="logo" class="toggle-white">
+                    <img src="{{ asset('assets/images/arms.png') }}" alt="logo" class="desktop-logo">
+                    <img src="{{ asset('assets/images/arms.png') }}" alt="logo" class="toggle-logo">
+                    <img src="{{ asset('assets/images/arms.png') }}" alt="logo" class="desktop-white">
+                    <img src="{{ asset('assets/images/arms.png') }}" alt="logo" class="toggle-white">
                 </a>
             </div>
             <!-- End::main-sidebar-header -->
@@ -591,7 +391,7 @@
                     </div>
                     <ul class="main-menu">
                         <!-- Start::slide__category -->
-                        <li class="slide__category"><span class="category-name">Main</span></li>
+                        <li class="slide__category"><span class="category-name">Executive Summary</span></li>
                         <!-- End::slide__category -->
 
                         <!-- Start::slide -->
@@ -625,12 +425,12 @@
                         </li>
                         <!-- End::slide -->
 
-                        <!-- Start::slide__category -->
-                        <li class="slide__category"><span class="category-name">User & Payment </span></li>
-                        <!-- End::slide__category -->
+
 
                         <!-- Start::slide -->
                         @canany(['users.view', 'roles.view', 'permissions.view'])
+                            <li class="slide__category"><span class="category-name">User & Security </span></li>
+
                             <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
@@ -668,6 +468,8 @@
 
                         <!-- Start::slide -->
                         @canany(['customer-types.view', 'customers.view'])
+                            <li class="slide__category"><span class="category-name">Rate Payer Mnaagement </span></li>
+
                             <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
@@ -701,7 +503,8 @@
 
                         <!-- Start::slide -->
                         @canany(['properties.view', 'businesses.view', 'business-classes.view', 'business-types.view'])
-
+                            <li class="slide__category"><span class="category-name">Property & Business </span>
+                            </li>
                             <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
@@ -751,6 +554,7 @@
                         <!-- End::slide -->
 
                         <!-- Start::slide -->
+                        <li class="slide__category"><span class="category-name">Bills Generation </span></li>
                         @canany(['bills.view'])
                             <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
@@ -891,6 +695,8 @@
                         <!-- Start::slide -->
                         @canany(['assemblies.view', 'divisions.view', 'blocks.view', 'zones.view', 'property-uses.view',
                             'rates.view', 'agent-assignments.view', 'task-assignments.view'])
+                            <li class="slide__category"><span class="category-name">Fee Fixing / Assembly MGT</span></li>
+
                             <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
@@ -1281,14 +1087,18 @@
         <footer class="footer mt-auto py-3 bg-white text-center">
             <div class="container">
                 <span class="text-muted">
-                    Copyright © <span id="year"></span>
-                    <a href="javascript:void(0);" class="text-dark fw-semibold"> LEVEL10 COMMUNICATIONS TECHNOLOGIES
-                        LIMITED </a>.
-
+                    Copyright © 2025<span id="year"></span>
+                    <a href="https://level10gh.com/" target="_blank">
+                        <img src="{{ asset('assets/images/level10.png') }}" alt="Level10 Communications"
+                            style="max-width: 80px; height: auto;">
+                    </a>
                     All rights reserved.
                 </span>
             </div>
         </footer>
+
+
+
         <!-- Footer End -->
         <div class="modal fade" id="responsive-searchModal" tabindex="-1" aria-labelledby="responsive-searchModal"
             aria-hidden="true">
@@ -1388,6 +1198,11 @@
 
     <!-- Custom JS -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <!-- Custom-Switcher JS -->
+    <script src="{{ asset('assets/js/custom-switcher.js') }}"></script>
+    <script src="{{ asset('assets/js/sticky.js') }}"></script>
+    <!-- Defaultmenu JS -->
+    <script src="{{ asset('assets/js/defaultmenu.js') }}"></script>
     @yield('page-scripts')
 </body>
 

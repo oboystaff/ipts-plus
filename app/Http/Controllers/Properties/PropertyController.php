@@ -26,9 +26,37 @@ class PropertyController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
+        // Fetch data for filters
+        $entityTypes = BusinessClassType::orderBy('created_at', 'DESC')->get();
+        $categories = BusinessClassType::orderBy('created_at', 'DESC')->get();
+        $assemblies = Assembly::orderBy('created_at', 'DESC')->get();
+        $divisions = Division::orderBy('created_at', 'DESC')->get();
+        $propertyUses = PropertyUser::orderBy('created_at', 'DESC')->get();
+
         $properties = Property::orderBy('created_at', 'DESC')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->when($request->filled('entity_type'), function ($query) use ($request) {
+                $query->where('entity_type', $request->entity_type);
+            })
+            ->when($request->filled('category'), function ($query) use ($request) {
+                $query->where('category', $request->category);
+            })
+            ->when($request->filled('rated'), function ($query) use ($request) {
+                $query->where('rated', $request->rated);
+            })
+            ->when($request->filled('validated'), function ($query) use ($request) {
+                $query->where('validated', $request->validated);
+            })
+            ->when($request->filled('assembly'), function ($query) use ($request) {
+                $query->where('assembly_code', $request->assembly);
+            })
+            ->when($request->filled('division'), function ($query) use ($request) {
+                $query->where('division_code', $request->division);
+            })
+            ->when($request->filled('property_use'), function ($query) use ($request) {
+                $query->where('property_use', $request->property_use);
             })
             ->with([
                 'bills' => function ($query) {
@@ -59,26 +87,38 @@ class PropertyController extends Controller
                 return $property;
             });
 
-        $customers = Citizen::query()
-            ->get();
+        // Calculate total properties
+        $totalProperties = $properties->count();
 
-        $businessClassTypes = BusinessClassType::get();
+        // Calculate totals and percentages
+        $valuedProperties = $properties->where('validated', 1)->count();
+        $unvaluedProperties = $properties->where('validated', 0)->count();
+        $ratedProperties = $properties->where('rated', 1)->count();
+        $unratedProperties = $properties->where('rated', 0)->count();
 
-        $DistrictAssemblies = Assembly::query()
-            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
-            })
-            ->get();
+        $valuedPercentage = $totalProperties > 0 ? ($valuedProperties / $totalProperties) * 100 : 0;
+        $unvaluedPercentage = $totalProperties > 0 ? ($unvaluedProperties / $totalProperties) * 100 : 0;
+        $ratedPercentage = $totalProperties > 0 ? ($ratedProperties / $totalProperties) * 100 : 0;
+        $unratedPercentage = $totalProperties > 0 ? ($unratedProperties / $totalProperties) * 100 : 0;
 
-        $total = Property::query()
-            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
-            })
-            ->sum('ratable_value');
+        $data = [
+            'properties' => $properties,
+            'entityTypes' => $entityTypes,
+            'assemblies' => $assemblies,
+            'divisions' => $divisions,
+            'propertyUses' => $propertyUses,
+            'totalProperties' => $totalProperties,
+            'valuedProperties' => $valuedProperties,
+            'unvaluedProperties' => $unvaluedProperties,
+            'ratedProperties' => $ratedProperties,
+            'unratedProperties' => $unratedProperties,
+            'valuedPercentage' => number_format($valuedPercentage, 2),
+            'unvaluedPercentage' => number_format($unvaluedPercentage, 2),
+            'ratedPercentage' => number_format($ratedPercentage, 2),
+            'unratedPercentage' => number_format($unratedPercentage, 2)
+        ];
 
-        $total = number_format($total, 2);
-
-        return view('properties.index', compact('properties', 'DistrictAssemblies', 'businessClassTypes', 'customers', 'total'));
+        return view('properties.index', compact('data'));
     }
 
     /**

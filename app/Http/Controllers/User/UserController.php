@@ -25,7 +25,7 @@ class UserController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $users = User::orderBy('created_at', 'DESC')
+        $userQuery = User::orderBy('created_at', 'DESC')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -39,10 +39,17 @@ class UserController extends Controller
             ->when($request->display == "inactive", function ($query) {
                 $query->where('access_level', 'Assembly_Agent')
                     ->where('status', 'InActive');
-            })
-            ->get();
+            });
+
+
+        $users = $userQuery->get();
 
         $roles = Role::orderBy('name', 'ASC')->get();
+
+        $totalActiveUsers = (clone $userQuery)->where('status', 'Active')->count();
+        $totalInactiveUsers = (clone $userQuery)->where('status', 'InActive')->count();
+        $totalMaleUsers = (clone $userQuery)->where('gender', 'Male')->count();
+        $totalFemaleUsers = (clone $userQuery)->where('gender', 'Female')->count();
 
         foreach ($users as $user) {
             if (stripos($user->email, 'ERMS') === 0 && strpos($user->email, '@') === false) {
@@ -50,7 +57,14 @@ class UserController extends Controller
             }
         }
 
-        return view('users.index', compact('users', 'roles'));
+        $total = [
+            'totalActiveUsers' => isset($totalActiveUsers) ? $totalActiveUsers : 0,
+            'totalInactiveUsers' => isset($totalInactiveUsers) ? $totalInactiveUsers : 0,
+            'totalMaleUsers' => isset($totalMaleUsers) ? $totalMaleUsers : 0,
+            'totalFemaleUsers' => isset($totalFemaleUsers) ? $totalFemaleUsers : 0
+        ];
+
+        return view('users.index', compact('users', 'roles', 'total'));
     }
 
     public function create(Request $request)

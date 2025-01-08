@@ -32,7 +32,8 @@ class UpdateUserRequest extends FormRequest
             'status' => 'required|string',
             'assembly_code' => 'nullable|string',
             'division_code' => 'nullable|string',
-            'role' => 'required|string'
+            'role' => 'required|string',
+            'gender' => 'required|string'
         ];
     }
 }

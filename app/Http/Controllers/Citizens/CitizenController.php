@@ -43,9 +43,90 @@ class CitizenController extends Controller
                         });
                 });
             })
+            ->when($request->filled('country_of_citizenship'), function ($query) use ($request) {
+                $query->where('country_of_citizenship', $request->country_of_citizenship);
+            })
+            ->when($request->filled('customer_type'), function ($query) use ($request) {
+                $query->where('customer_type', $request->customer_type);
+            })
+            ->when($request->filled('status'), function ($query) use ($request) {
+                $query->where('status', $request->status);
+            })
+            ->when($request->filled('gender'), function ($query) use ($request) {
+                $query->where('gender', $request->gender);
+            })
+            ->when($request->filled('from_date'), function ($query) use ($request) {
+                $query->where('created_at', '>=', $request->from_date);
+            })
+            ->when($request->filled('to_date'), function ($query) use ($request) {
+                $query->where('created_at', '<=', $request->to_date);
+            })
             ->get();
 
-        return view('citizens.index', compact('citizens'));
+        // Calculate totals for male, female, and total citizens
+        $totalCitizens = $citizens->count();
+        $male = $citizens->where('gender', 'male')->count();
+        $female = $citizens->where('gender', 'female')->count();
+
+        // Calculate percentages for gender
+        $malePercentage = $totalCitizens > 0 ? ($male / $totalCitizens) * 100 : 0;
+        $femalePercentage = $totalCitizens > 0 ? ($female / $totalCitizens) * 100 : 0;
+
+        // Calculate customer type distribution
+        $customerTypes = $citizens->groupBy('customer_type');
+        $customerTypeCounts = $customerTypes->map(function ($group) {
+            return $group->count();
+        });
+
+        // Calculate percentages for each customer type
+        $customerTypePercentages = $customerTypeCounts->map(function ($count) use ($totalCitizens) {
+            return $totalCitizens > 0 ? ($count / $totalCitizens) * 100 : 0;
+        });
+
+        // Group data for heat map
+        $genderCustomerStatus = $citizens->groupBy(['customer_type', 'gender', 'status']);
+
+        // Ensure genderCustomerStatus is iterable
+        if (!is_iterable($genderCustomerStatus)) {
+            $genderCustomerStatus = collect(); // Default to an empty Collection
+        }
+
+        // Prepare heat map data
+        $heatMapData = [];
+        foreach ($genderCustomerStatus as $customerType => $genderGroups) {
+            if (!is_iterable($genderGroups)) continue;
+
+            foreach ($genderGroups as $gender => $statusGroups) {
+                if (!is_iterable($statusGroups)) continue;
+
+                foreach ($statusGroups as $status => $count) {
+                    $heatMapData[] = [
+                        'customer_type' => $customerType,
+                        'gender' => $gender,
+                        'status' => $status,
+                        'count' => $count,
+                    ];
+                }
+            }
+        }
+
+        // Calculate total active citizens
+        $totalActive = $citizens->where('status', 'active')->count();
+        $inActive = $citizens->where('status', 'inactive')->count();
+
+        // Prepare data for the view
+        $totals = [
+            'male' => $male,
+            'female' => $female,
+            'male_percentage' => round($malePercentage, 2),
+            'female_percentage' => round($femalePercentage, 2),
+            'customer_type_counts' => $customerTypeCounts,
+            'customer_type_percentages' => $customerTypePercentages,
+            'total_active' => $totalActive,
+            'inactive' => $inActive,
+        ];
+
+        return view('citizens.index', compact('citizens', 'totals', 'heatMapData'));
     }
 
     // Show the form for creating a new resource.

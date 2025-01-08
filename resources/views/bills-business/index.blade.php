@@ -4,10 +4,57 @@
 @endsection
 
 @section('page-content')
+    <div class="col-xl-12">
+        <div class="card custom-card rounded-md overflow-hidden p-2">
+            <div class="card-body bg-primary bg-opacity-10 rounded-2 ps-4 medical-cards">
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <form method="GET" action="{{ route('bills.index') }}" class="mb-3">
+                            <div class="row align-items-end g-3">
+                                <!-- Bill Duration (From Date) -->
+                                <div class="col-md-3">
+                                    <label for="from_date" class="form-label">From Date</label>
+                                    <input type="date" name="from_date" id="from_date" class="form-control"
+                                        value="{{ request('from_date') }}">
+                                </div>
+                                <!-- Bill Duration (End Date) -->
+                                <div class="col-md-3">
+                                    <label for="end_date" class="form-label">End Date</label>
+                                    <input type="date" name="end_date" id="end_date" class="form-control"
+                                        value="{{ request('end_date') }}">
+                                </div>
+                                <!-- Bill Type -->
+
+                                <!-- Arrears -->
+                                <div class="col-md-3">
+                                    <label for="arrears" class="form-label">Arrears</label>
+                                    <select name="arrears" id="arrears" class="form-select">
+                                        <option value="">All</option>
+                                        <option value="1" {{ request('arrears') == '1' ? 'selected' : '' }}>With
+                                            Arrears</option>
+                                        <option value="0" {{ request('arrears') == '0' ? 'selected' : '' }}>Without
+                                            Arrears</option>
+                                    </select>
+                                </div>
+                                <!-- Apply Filters Button -->
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <div class="container-fluid mh-auto">
         <div class="row">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h4 class="heading mb-0">Business Bills Management </h4>
+                <div class="card-header">
+                    <div class="card-title">Bills Management / BoP Bills</div>
+                </div>
+                {{-- <h4 class="heading mb-0">Business Bills Management </h4> --}}
                 <div class="d-flex align-items-center">
                     @can('bills.create')
                         {{-- <a href="{{ route('bills.bus.create') }}" class="btn btn-primary btn-sm ms-2">+ Bulk Bills Generate </a> --}}
@@ -143,79 +190,6 @@
                 </div>
             </div>
 
-            {{-- <div class="col-xl-4 col-md-4">
-                <div class="card sale-card">
-                    <div class="card-header pb-0 border-0 align-items-baseline">
-                        <div>
-                            <span>Variance of Arrears and Current Bill </span>
-                            <h4>GHS {{ $total['totalBillVariance'] }} <i class="fa-solid fa-arrow-trend-up ms-1"></i>
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="card-body p-0 custome-tooltip">
-                        <div id="totalSale"></div>
-                    </div>
-                    <div class="card-footer border-0">
-                        <span class="tag bg-secondary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                <polyline points="17 6 23 6 23 12"></polyline>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-md-4">
-                <div class="card sale-card">
-                    <div class="card-header pb-0 border-0 align-items-baseline">
-                        <div>
-                            <span>Total Current Bill</span>
-                            <h4>GHS {{ $total['totalBill'] }} <i class="fa-solid fa-arrow-trend-down ms-1"></i>
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="card-body p-0 custome-tooltip">
-                        <div id="totalPurchase"></div>
-                    </div>
-                    <div class="card-footer border-0">
-                        <span class="tag bg-secondary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                <polyline points="17 6 23 6 23 12"></polyline>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-md-4">
-                <div class="card sale-card">
-                    <div class="card-header pb-0 border-0 align-items-baseline">
-                        <div>
-                            <span>Total Arrears
-                            </span>
-                            <h4>GHS {{ $total['totalBillArrears'] }}<i class="fa-solid fa-arrow-trend-down ms-1"></i></h4>
-                        </div>
-                    </div>
-                    <div class="card-body p-0 custome-tooltip">
-                        <div id="activeCustomers"></div>
-                    </div>
-                    <div class="card-footer border-0">
-                        <span class="tag bg-secondary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                <polyline points="17 6 23 6 23 12"></polyline>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-            </div> --}}
-
             @if (session()->has('status'))
                 <div class="alert alert-success alert-dismissible fade show">
                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
@@ -232,7 +206,8 @@
 
             <div class="col-xl-12 active-p">
                 <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab">
+                    <div class="tab-pane fade show active" id="pills-list" role="tabpanel"
+                        aria-labelledby="pills-list-tab">
 
                         <div class="card">
                             <div class="card-body px-0">
@@ -318,7 +293,7 @@
                                                 <th>{{ $total['totalArrears'] }}</th>
                                                 <th>{{ $total['totalAmount'] }}</th>
                                                 <th>{{ $total['totalDue'] }}</th>
-                                                <th colspan="2"></th>
+                                                <th colspan="3"></th>
                                             </tr>
                                         </tfoot>
                                     </table>
