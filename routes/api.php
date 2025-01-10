@@ -21,6 +21,7 @@ use App\Http\Controllers\API\BusinessClassType\EntityTypeController;
 use App\Http\Controllers\API\Block\BlockController;
 use App\Http\Controllers\API\Zone\ZoneController;
 use App\Http\Controllers\API\PropertyUse\PropertyUseController;
+use App\Http\Controllers\API\Dropdown\DropdownController;
 
 
 /*
@@ -154,4 +155,8 @@ Route::group(['prefix' => 'zone', 'middleware' => 'auth:sanctum'], function () {
 Route::group(['prefix' => 'property-use', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/{zone_id}', [PropertyUseController::class, 'index']);
     Route::get('/show/{id}', [PropertyUseController::class, 'show']);
+});
+
+Route::group(['prefix' => 'dropdown', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [DropdownController::class, 'index']);
 });
