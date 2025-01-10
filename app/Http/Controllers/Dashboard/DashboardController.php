@@ -363,7 +363,7 @@ class DashboardController extends Controller
 
         $assemblyPayments = DB::table('payments')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
+                $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
             ->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
             ->select(
@@ -385,7 +385,7 @@ class DashboardController extends Controller
 
         $topAssemblies = DB::table('bills')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
+                $query->where('bills.assembly_code', $request->user()->assembly_code);
             })
             ->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
             ->leftJoin('payments', 'bills.bills_id', '=', 'payments.bills_id')
@@ -407,7 +407,7 @@ class DashboardController extends Controller
         foreach ($topAssemblies as $assembly) {
             $monthlyBills = DB::table('bills')
                 ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                    $query->where('assembly_code', $request->user()->assembly_code);
+                    $query->where('bills.assembly_code', $request->user()->assembly_code);
                 })
                 ->leftJoin('payments', 'bills.bills_id', '=', 'payments.bills_id')
                 ->where('bills.assembly_code', $assembly->assembly_code)
@@ -434,9 +434,6 @@ class DashboardController extends Controller
         }
 
         $maleMonthlyCount = DB::table('citizens')
-            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
-            })
             ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))
             ->where('gender', 'Male')
             ->where('status', 'Active')
@@ -445,9 +442,6 @@ class DashboardController extends Controller
             ->pluck('total', 'month');
 
         $femaleMonthlyCount = DB::table('citizens')
-            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
-            })
             ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))
             ->where('gender', 'Female')
             ->where('status', 'Active')
@@ -503,7 +497,7 @@ class DashboardController extends Controller
 
         $topProperties = DB::table('payments')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
+                $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
             ->join('bills', 'payments.bills_id', '=', 'bills.bills_id')
             ->join('properties', 'bills.property_id', '=', 'properties.id')
@@ -528,7 +522,7 @@ class DashboardController extends Controller
 
         $topBusinesses = DB::table('payments')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
+                $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
             ->join('bills', 'payments.bills_id', '=', 'bills.bills_id')
             ->join('businesses', 'bills.business_id', '=', 'businesses.id')
@@ -568,7 +562,7 @@ class DashboardController extends Controller
 
         $divisionPaymentData = DB::table('payments')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
+                $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
             ->join('bills', 'payments.bills_id', '=', 'bills.bills_id')
             ->leftJoin('properties', 'bills.property_id', '=', 'properties.id')
@@ -592,7 +586,7 @@ class DashboardController extends Controller
 
         $regionPaymentData = DB::table('payments')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
+                $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
             ->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
             ->join('ghana_regions', 'assemblies.regional_code', '=', 'ghana_regions.regional_code')
@@ -614,7 +608,7 @@ class DashboardController extends Controller
 
         $regionBillData = DB::table('bills')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
+                $query->where('bills.assembly_code', $request->user()->assembly_code);
             })
             ->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
             ->join('ghana_regions', 'assemblies.regional_code', '=', 'ghana_regions.regional_code')
@@ -648,7 +642,7 @@ class DashboardController extends Controller
 
         $regionPaymentData2 = DB::table('payments')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
+                $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
             ->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
             ->join('ghana_regions', 'assemblies.regional_code', '=', 'ghana_regions.regional_code')
