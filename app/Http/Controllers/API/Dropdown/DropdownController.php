@@ -11,6 +11,7 @@ use App\Models\PropertyUser;
 use App\Models\Zone;
 use App\Models\Block;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class DropdownController extends Controller
@@ -26,8 +27,10 @@ class DropdownController extends Controller
             })
             ->get(['id', 'division_name AS name']);
 
-        $assemblies = Assembly::orderBy('created_at', 'DESC')
-            ->get(['id', 'name']);
+        $assemblies = DB::table('assemblies')
+            ->orderBy('created_at', 'DESC')
+            ->select('assembly_code AS id', 'name')
+            ->get();
 
         $citizens = Citizen::orderBy('created_at', 'DESC')
             ->get(['id', 'first_name AS name']);
