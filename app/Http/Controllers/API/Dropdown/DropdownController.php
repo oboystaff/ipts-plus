@@ -19,6 +19,7 @@ class DropdownController extends Controller
     public function index(Request $request)
     {
         $zones = Zone::orderBy('created_at', 'DESC')
+            ->with(['propertyUse'])
             ->get(['id', 'name']);
 
         $divisions = Division::orderBy('created_at', 'DESC')
