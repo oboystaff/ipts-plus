@@ -1,278 +1,229 @@
-<html lang="en" dir="ltr" data-nav-layout="horizontal" data-nav-style="menu-click" data-menu-position="fixed"
-    data-theme-mode="light">
+<!DOCTYPE html>
+<html lang="en" data-theme-mode="light">
 
 <head>
-
-    <!-- Meta Data -->
     <meta charset="UTF-8">
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>IPTS-Level 10 </title>
-    <meta name="Description" content="Level 10">
-    <meta name="Author" content="Level 10">
-
-    <!-- Favicon -->
+    <title> Create Account - IPTS</title>
     <link rel="icon" href="{{ asset('assets/images/brand-logos/favicon.ico') }}" type="image/x-icon">
 
-    <!-- Bootstrap Css -->
-    <link id="style" href="{{ asset('assets/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="{{ asset('assets/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
-    <!-- Style Css -->
-    <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
-
-    <!-- Icons Css -->
-    <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
-
-    <!-- Node Waves Css -->
-    <link href="{{ asset('assets/libs/node-waves/waves.min.css') }}" rel="stylesheet">
-
-    <!-- SwiperJS Css -->
-    <link rel="stylesheet" href="{{ asset('assets/libs/swiper/swiper-bundle.min.css') }}">
-
-    <!-- Color Picker Css -->
-    <link rel="stylesheet" href="{{ asset('assets/libs/flatpickr/flatpickr.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/libs/@simonwep/pickr/themes/nano.min.css') }}">
-
-    <!-- Choices Css -->
-    <link rel="stylesheet" href="{{ asset('assets/libs/choices.js/public/assets/styles/choices.min.css') }}">
-
-    <script>
-        if (localStorage.rixzodarktheme) {
-            document.querySelector("html").setAttribute("data-theme-mode", "dark")
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background: linear-gradient(to bottom, #0052D4, #65C7F7, #9CECFB);
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
         }
-        if (localStorage.rixzortl) {
-            document.querySelector("html").setAttribute("dir", "rtl")
-            document.querySelector("#style")?.setAttribute("href",
-                "{{ asset('assets/libs/bootstrap/css/bootstrap.rtl.min.css') }}");
+
+        .container {
+            max-width: 100%;
         }
-    </script>
 
+        .row {
+            height: 100%;
+        }
 
+        .card-left {
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            margin-right: 20px;
+            text-align: center;
+        }
+
+        .card-left img {
+            max-width: 80%;
+            height: auto;
+        }
+
+        .card-left h3 {
+            color: #fff;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .form-container {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            font-family: 'Times New Roman', serif;
+            font-size: 12px;
+        }
+
+        .form-title {
+            font-weight: bold;
+            color: #0052D4;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn-custom {
+            background: #0052D4;
+            color: #fff;
+            border-radius: 50px;
+            padding: 10px 30px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            width: auto;
+        }
+
+        .btn-custom:hover {
+            background: #003a9f;
+        }
+
+        .auth-footer {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+
+        .auth-footer a {
+            color: #0052D4;
+            text-decoration: underline;
+            margin: 0 5px;
+        }
+    </style>
 </head>
 
 <body>
-
-
-    <div class="row authentication authentication-cover-main mx-0">
-        <div class="col-xxl-5 col-xl-7">
-            <div class="row justify-content-center align-items-center h-100">
-                <div class="col-xxl-7 col-xl-9 col-lg-6 col-md-6 col-sm-8 col-12">
-                    <div class="card custom-card my-auto border authentication-cover-right">
-                        <div class="card-body p-4">
-                            <div
-                                class="text-center mb-4 bg-primary-transparent rounded border border-primary border-opacity-10 pt-2 position-relative overflow-hidden">
-                                <i class="ri-lock-2-line position-absolute lock-icon-auth"></i>
-                                <img src="{{ asset('assets/images/level10.png') }}" alt=""
-                                    class="img-fluid ms-4">
-                            </div>
-                            <form action="{{ route('citizens.frontstore') }}" method="POST">
-                                @csrf
-
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <input type="text"
-                                            class="form-control @error('first_name') is-invalid @enderror"
-                                            name="first_name" placeholder="First Name">
-
-                                        @error('first_name')
-                                            <span class="invalid-feedback" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-sm-6 mt-2 mt-sm-0">
-                                        <input type="text"
-                                            class="form-control @error('last_name') is-invalid @enderror"
-                                            name="last_name" placeholder="Last Name">
-
-                                        @error('last_name')
-                                            <span class="invalid-feedback" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="row mt-3">
-                                    <div class="col-sm-6 mt-2 mt-sm-0">
-                                        <select name="prefix"
-                                            class="form-control @error('prefix') is-invalid @enderror">
-                                            <option disabled selected>Select Prefix</option>
-                                            <option value="Mr">Mr</option>
-                                            <option value="Mrs">Mrs</option>
-                                            <option value="Miss">Miss</option>
-                                            <option value="Dr">Dr</option>
-                                        </select>
-
-                                        @error('prefix')
-                                            <span class="invalid-feedback" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-sm-6 mt-2 mt-sm-0">
-                                        <select name="gender"
-                                            class="form-control @error('gender') is-invalid @enderror">
-                                            <option value="">Select Gender</option>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                        </select>
-
-                                        @error('gender')
-                                            <span class="invalid-feedback" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="row mt-3">
-                                    <div class="col-sm-6">
-                                        <input type="date"
-                                            class="form-control @error('date_of_birth') is-invalid @enderror"
-                                            name="date_of_birth" placeholder="Date of Birth">
-
-                                        @error('date_of_birth')
-                                            <span class="invalid-feedback" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-sm-6 mt-2 mt-sm-0">
-                                        <select name="marital_status"
-                                            class="form-control @error('marital_status') is-invalid @enderror">
-                                            <option value="">Marital Status</option>
-                                            <option value="Single">Single</option>
-                                            <option value="Married">Married</option>
-                                            <option value="Divorced">Divorced</option>
-                                            <option value="Widowed">Widowed</option>
-                                        </select>
-
-                                        @error('marital_status')
-                                            <span class="invalid-feedback" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="row mt-3">
-                                    <div class="col-sm-6">
-                                        <input type="text"
-                                            class="form-control @error('telephone_number') is-invalid @enderror"
-                                            name="telephone_number" placeholder="Telephone Number">
-
-                                        @error('telephone_number')
-                                            <span class="invalid-feedback" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-sm-6 mt-2 mt-sm-0">
-                                        <select name="country_of_citizenship"
-                                            class="form-control @error('country_of_citizenship') is-invalid @enderror">
-                                            <option disabled selected>Select Country of Citizenship</option>
-                                            <option value="Ghana">Ghana</option>
-                                            <option value="Nigeria">Nigeria</option>
-                                            <option value="Togo">Togo</option>
-                                            <option value="South Africa">South Africa</option>
-                                            <option value="Burkina Faso">Burkina Faso</option>
-                                            <option value="Mali">Mali</option>
-                                        </select>
-
-                                        @error('country_of_citizenship')
-                                            <span class="invalid-feedback" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="row mt-3">
-                                    <div class="col-sm-6">
-                                        <select name="customer_type"
-                                            class="form-control @error('customer_type') is-invalid @enderror">
-                                            <option value="">Select Customer Type</option>
-                                            @foreach ($customerTypes as $customerType)
-                                                <option value="{{ $customerType->id }}">
-                                                    {{ $customerType->name }}</option>
-                                            @endforeach
-                                        </select>
-
-                                        @error('customer_type')
-                                            <span class="invalid-feedback" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <input type="text"
-                                            class="form-control @error('Ghana_card_number') is-invalid @enderror"
-                                            name="Ghana_card_number" placeholder="Ghana Card Number">
-
-                                        @error('Ghana_card_number')
-                                            <span class="invalid-feedback" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <!-- Add more form fields as needed -->
-                                <div class="row mt-3">
-                                    <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-success btn-block"
-                                            style="margin-top:20px">Create
-                                            Account</button>
-                                    </div>
-                                </div>
-                            </form>
-
-                            <div class="text-center">
-                                <p class="text-muted mt-3 mb-0">Already have an account? <a
-                                        class="text-primary fw-medium text-decoration-underline"
-                                        href=" {{ route('citizens.activate') }}">Activate Now </a></p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 card-left">
+                <img src="{{ asset('assets/images/arms.png') }}" alt="Arms">
+                <h3>Integrated Property Tax System (IPTS)</h3>
             </div>
-        </div>
-        <div class="col-xxl-7 col-xl-5 col-lg-12 d-xl-block d-none px-0">
-            <div class="authentication-cover overflow-hidden">
-                <div class="aunthentication-cover-content d-flex align-items-center justify-content-center">
-                    <div>
-                        <a href="index.html">
-                            <img src="{{ asset('assets/images/arms.png') }}" alt=""
-                                class="authentication-brand toggle-white img-fluid mb-4">
-                        </a>
-                        <h4 class="text-fixed-white mb-2 fw-medium">Welcome Back! <span
-                                class="text-secondary text-shadow">Sign In</span></h4>
-                        <h6 class="text-fixed-white mb-3 fw-medium">Access Your Account</h6>
-                        <p class="text-fixed-white mb-1 op-6">Please enter your Phone number / IPTS Access Code and
-                            password to continue.</p>
+            <div class="col-md-6 form-container">
+                <h2 class="form-title">Create Account </h2>
 
-                        <div class="d-flex mb-1 gap-2 flex-wrap flex-lg-nowrap">
+                <form action="{{ route('citizens.frontstore') }}" method="POST">
+                    @csrf
+                    <div class="row row-cols-3 g-3">
+                        <div class="col">
+                            <label for="first_name" class="form-label">First Name</label>
+                            <input type="text" class="form-control @error('first_name') is-invalid @enderror"
+                                id="first_name" name="first_name" placeholder="Enter your first name">
+                            @error('first_name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
+                        <div class="col">
+                            <label for="last_name" class="form-label">Last Name</label>
+                            <input type="text" class="form-control @error('last_name') is-invalid @enderror"
+                                id="last_name" name="last_name" placeholder="Enter your last name">
+                            @error('last_name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
+                        <div class="col">
+                            <label for="email" class="form-label">Email Address (Optional)</label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                placeholder="Enter your email address">
+                        </div>
+
+                        <div class="col">
+                            <label for="prefix" class="form-label">Prefix</label>
+                            <select class="form-select @error('prefix') is-invalid @enderror" id="prefix"
+                                name="prefix">
+                                <option disabled selected>Select Prefix</option>
+                                <option value="Mr">Mr</option>
+                                <option value="Mrs">Mrs</option>
+                                <option value="Miss">Miss</option>
+                                <option value="Dr">Dr</option>
+                            </select>
+                            @error('prefix')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col">
+                            <label for="gender" class="form-label">Gender</label>
+                            <select class="form-select @error('gender') is-invalid @enderror" id="gender"
+                                name="gender">
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            @error('gender')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col">
+                            <label for="date_of_birth" class="form-label">Date of Birth</label>
+                            <input type="date" class="form-control @error('date_of_birth') is-invalid @enderror"
+                                id="date_of_birth" name="date_of_birth">
+                            @error('date_of_birth')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col">
+                            <label for="telephone_number" class="form-label">Telephone Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text">+233</span>
+                                <input type="tel"
+                                    class="form-control @error('telephone_number') is-invalid @enderror"
+                                    id="telephone_number" name="telephone_number" placeholder="Enter Number">
+                            </div>
+                            @error('telephone_number')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col">
+                            <label for="country_of_citizenship" class="form-label">Country of Citizenship</label>
+                            <select class="form-select @error('country_of_citizenship') is-invalid @enderror"
+                                id="country_of_citizenship" name="country_of_citizenship">
+                                <option disabled selected>Select Country</option>
+                                <option value="Ghana">Ghana</option>
+                                <option value="Nigeria">Nigeria</option>
+                                <option value="Togo">Togo</option>
+                                <option value="South Africa">South Africa</option>
+                                <option value="Burkina Faso">Burkina Faso</option>
+                                <option value="Mali">Mali</option>
+                            </select>
+                            @error('country_of_citizenship')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col">
+                            <label for="telephone_number" class="form-label">. </label>
+                            <button type="submit" class="btn btn-custom w-40" style="margin-top:20px">Create
+                                Account</button>
                         </div>
                     </div>
-                </div>
+
+                    <div class="auth-footer">
+                        <p>Already have an account? <a href="{{ route('auth.index') }}">Sign In</a> or <a
+                                href="{{ route('citizens.activate') }}">Activate Account with OTP</a></p>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
-
     <!-- Bootstrap JS -->
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-    <!-- Show Password JS -->
-    <script src="{{ asset('assets/js/show-password.js') }}"></script>
-
 </body>
+
+</html>

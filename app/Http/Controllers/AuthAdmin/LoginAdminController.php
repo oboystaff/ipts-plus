@@ -19,7 +19,7 @@ class LoginAdminController extends Controller
         return view('auth.login');
     }
 
-     public function LandingPage()
+    public function LandingPage()
     {
         return view('auth.LandingPage');
     }

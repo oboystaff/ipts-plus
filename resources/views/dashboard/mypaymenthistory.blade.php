@@ -104,7 +104,7 @@
                                             <th colspan="2"></th>
                                             <th>Total (GHS)</th>
                                             <th>{{ $customerData['paymentTotal'] }}</th>
-                                            <th colspan="7"></th>
+                                            <th colspan="6"></th>
                                         </tfoot>
                                     </table>
                                 </div>

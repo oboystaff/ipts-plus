@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> IPTS- Level 10 </title>
+    <title> IPTS - Level 10 </title>
     <meta name="Description" content="IPTS- Level 10">
     <meta name="Author" content="IPTS- Level 10">
     <meta name="keywords" content="IPTS- Level 10">
@@ -391,7 +391,7 @@
                     </div>
                     <ul class="main-menu">
                         <!-- Start::slide__category -->
-                        <li class="slide__category"><span class="category-name">Executive Summary</span></li>
+                        {{-- <li class="slide__category"><span class="category-name">Executive Summary</span></li> --}}
                         <!-- End::slide__category -->
 
                         <!-- Start::slide -->
@@ -425,11 +425,9 @@
                         </li>
                         <!-- End::slide -->
 
-
-
                         <!-- Start::slide -->
                         @canany(['users.view', 'roles.view', 'permissions.view'])
-                            <li class="slide__category"><span class="category-name">User & Security </span></li>
+                            {{-- <li class="slide__category"><span class="category-name">User & Security </span></li> --}}
 
                             <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
@@ -468,7 +466,7 @@
 
                         <!-- Start::slide -->
                         @canany(['customer-types.view', 'customers.view'])
-                            <li class="slide__category"><span class="category-name">Rate Payer Mnaagement </span></li>
+                            {{-- <li class="slide__category"><span class="category-name">Rate Payer Mnaagement </span></li> --}}
 
                             <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
@@ -503,8 +501,8 @@
 
                         <!-- Start::slide -->
                         @canany(['properties.view', 'businesses.view', 'business-classes.view', 'business-types.view'])
-                            <li class="slide__category"><span class="category-name">Property & Business </span>
-                            </li>
+                            {{-- <li class="slide__category"><span class="category-name">Property & Business </span>
+                            </li> --}}
                             <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
@@ -554,8 +552,8 @@
                         <!-- End::slide -->
 
                         <!-- Start::slide -->
-                        <li class="slide__category"><span class="category-name">Bills Generation </span></li>
                         @canany(['bills.view'])
+                            {{-- <li class="slide__category"><span class="category-name">Bills Generation </span></li> --}}
                             <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
@@ -594,7 +592,7 @@
 
                         @canany(['payments.view'])
                             <!-- Start::slide__category -->
-                            <li class="slide__category"><span class="category-name">Payments and Reports</span></li>
+                            {{-- <li class="slide__category"><span class="category-name">Payments and Reports</span></li> --}}
                             <!-- End::slide__category -->
 
                             <!-- Start::slide -->
@@ -686,6 +684,27 @@
                                                 reports</a>
                                         </li>
                                     @endcan
+                                    @can('reports.view')
+                                        <li class="slide">
+                                            <a href="{{ route('service-usage-reports.index') }}"
+                                                class="side-menu__item">Service
+                                                Usage Report</a>
+                                        </li>
+                                        <li class="slide">
+                                            <a href="{{ route('agent-performance-reports.index') }}"
+                                                class="side-menu__item">Agent
+                                                Performance Report</a>
+                                        </li>
+                                        <li class="slide">
+                                            <a href="{{ route('system-peroformance-reports.index') }}"
+                                                class="side-menu__item">System Performance Report</a>
+                                        </li>
+                                        {{-- <li class="slide">
+                                            <a href="{{ route('reports.feedback') }}" class="side-menu__item">Feedback and
+                                                Satisfaction Report</a>
+                                        </li> --}}
+                                    @endcan
+
 
                                 </ul>
                             </li>
@@ -695,7 +714,7 @@
                         <!-- Start::slide -->
                         @canany(['assemblies.view', 'divisions.view', 'blocks.view', 'zones.view', 'property-uses.view',
                             'rates.view', 'agent-assignments.view', 'task-assignments.view'])
-                            <li class="slide__category"><span class="category-name">Fee Fixing / Assembly MGT</span></li>
+                            {{-- <li class="slide__category"><span class="category-name">Fee Fixing / Assembly MGT</span></li> --}}
 
                             <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
@@ -745,8 +764,6 @@
                                             <a href=" {{ route('rates.index') }}" class="side-menu__item">
                                                 Manage Property Rate</a>
                                         </li>
-
-
 
                                         <li class="slide">
                                             <a href=" {{ route('rates.bus.index') }}" class="side-menu__item">
@@ -1071,12 +1088,9 @@
                 </div>
                 <!-- Page Header Close -->
 
-
                 <!-- Start:: row-4 -->
                 @yield('page-content')
                 <!-- End:: row-4 -->
-
-
 
             </div>
         </div>
@@ -1097,8 +1111,6 @@
             </div>
         </footer>
 
-
-
         <!-- Footer End -->
         <div class="modal fade" id="responsive-searchModal" tabindex="-1" aria-labelledby="responsive-searchModal"
             aria-hidden="true">
@@ -1115,7 +1127,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
 
@@ -1195,14 +1206,17 @@
     <!-- Internal Datatables JS -->
     <script src="{{ asset('assets/js/datatables.js') }}"></script>
 
-
-    <!-- Custom JS -->
-    <script src="{{ asset('assets/js/custom.js') }}"></script>
     <!-- Custom-Switcher JS -->
     <script src="{{ asset('assets/js/custom-switcher.js') }}"></script>
     <script src="{{ asset('assets/js/sticky.js') }}"></script>
     <!-- Defaultmenu JS -->
     <script src="{{ asset('assets/js/defaultmenu.js') }}"></script>
+
+    <script src="{{ asset('assets/js/apexcharts-column.js') }}"></script>
+
+    <!-- Internal Apex Mixed Charts JS -->
+    <script src="{{ asset('assets/js/apexcharts-mixed.js') }}"></script>
+
     @yield('page-scripts')
 </body>
 

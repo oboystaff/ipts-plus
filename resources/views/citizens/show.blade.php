@@ -13,8 +13,6 @@
                         <h5 class="mb-1 fw-semibold">{{ $citizen->first_name }} {{ $citizen->last_name }} ,
                             {{ $citizen->other_name }} </h5>
                         <p class="text-muted fs-14">{{ $citizen->account_number }}</p>
-
-
                     </div>
                     <div class="card-body bg-light bg-opacity-75 text-center border-top border-block-start-dashed"
                         href ="{{ route('citizens.index') }}">

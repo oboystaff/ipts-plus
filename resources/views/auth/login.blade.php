@@ -1,150 +1,156 @@
-<html lang="en" dir="ltr" data-nav-layout="horizontal" data-nav-style="menu-click" data-menu-position="fixed"
-    data-theme-mode="light">
+<!DOCTYPE html>
+<html lang="en" data-theme-mode="light">
 
 <head>
-
-    <!-- Meta Data -->
     <meta charset="UTF-8">
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>IPTS-Level 10 </title>
-    <meta name="Description" content="Level 10">
-    <meta name="Author" content="Level 10">
-
-    <!-- Favicon -->
+    <title>Login Account- IPTS</title>
     <link rel="icon" href="{{ asset('assets/images/brand-logos/favicon.ico') }}" type="image/x-icon">
 
-    <!-- Bootstrap Css -->
-    <link id="style" href="{{ asset('assets/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="{{ asset('assets/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
-    <!-- Style Css -->
-    <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
-
-    <!-- Icons Css -->
-    <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
-
-    <!-- Node Waves Css -->
-    <link href="{{ asset('assets/libs/node-waves/waves.min.css') }}" rel="stylesheet">
-
-    <!-- SwiperJS Css -->
-    <link rel="stylesheet" href="{{ asset('assets/libs/swiper/swiper-bundle.min.css') }}">
-
-    <!-- Color Picker Css -->
-    <link rel="stylesheet" href="{{ asset('assets/libs/flatpickr/flatpickr.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/libs/@simonwep/pickr/themes/nano.min.css') }}">
-
-    <!-- Choices Css -->
-    <link rel="stylesheet" href="{{ asset('assets/libs/choices.js/public/assets/styles/choices.min.css') }}">
-
-    <script>
-        if (localStorage.rixzodarktheme) {
-            document.querySelector("html").setAttribute("data-theme-mode", "dark")
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background: linear-gradient(to bottom, #0052D4, #65C7F7, #9CECFB);
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
         }
-        if (localStorage.rixzortl) {
-            document.querySelector("html").setAttribute("dir", "rtl")
-            document.querySelector("#style")?.setAttribute("href",
-                "{{ asset('assets/libs/bootstrap/css/bootstrap.rtl.min.css') }}");
+
+        .container {
+            max-width: 100%;
         }
-    </script>
 
+        .row {
+            height: 100%;
+        }
 
+        .card-left {
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            margin-right: 20px;
+            text-align: center;
+        }
+
+        .card-left img {
+            max-width: 80%;
+            height: auto;
+        }
+
+        .card-left h3 {
+            color: #fff;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .form-container {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            font-family: 'Times New Roman', serif;
+            font-size: 12px;
+        }
+
+        .form-title {
+            font-weight: bold;
+            color: #0052D4;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn-custom {
+            background: #0052D4;
+            color: #fff;
+            border-radius: 50px;
+            padding: 10px 30px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            width: auto;
+        }
+
+        .btn-custom:hover {
+            background: #003a9f;
+        }
+
+        .auth-footer {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+
+        .auth-footer a {
+            color: #0052D4;
+            text-decoration: underline;
+            margin: 0 5px;
+        }
+    </style>
 </head>
 
 <body>
-
-
-    <div class="row authentication authentication-cover-main mx-0">
-        <div class="col-xxl-5 col-xl-7">
-            <div class="row justify-content-center align-items-center h-100">
-                <div class="col-xxl-7 col-xl-9 col-lg-6 col-md-6 col-sm-8 col-12">
-                    <div class="card custom-card my-auto border authentication-cover-right">
-                        <div class="card-body p-4">
-                            <div
-                                class="text-center mb-4 bg-primary-transparent rounded border border-primary border-opacity-10 pt-2 position-relative overflow-hidden">
-                                <i class="ri-lock-2-line position-absolute lock-icon-auth"></i>
-                                <img src="{{ asset('assets/images/level10.png') }}" alt=""
-                                    class="img-fluid ms-4">
-                            </div>
-                            <form action="{{ route('auth.login') }}" method="post">
-                                @csrf
-
-                                <div class="row gy-3">
-                                    <label for="username"><b>Phone number / IPTS Access Code</b></label>
-                                    <input type="text" class="form-control @error('username') is-invalid @enderror"
-                                        placeholder="Phone number" id="username" name="username">
-
-                                    @error('username')
-                                        <span class="invalid-feedback" role="alert">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group last mb-3">
-                                    </br>
-                                    <label for="password"><b>Password</b></label>
-                                    <input type="password"
-                                        class="form-control signin-password-input @error('password') is-invalid @enderror"
-                                        placeholder="Password" id="password" name="password">
-                                    </br>
-
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
-
-                                <!-- Buttons on the same line -->
-                                <div class="d-flex justify-content-between">
-                                    <input type="submit" value="Log In" class="btn btn-success">
-                                    <button type="button" class="btn btn-danger"
-                                        onclick="window.location='{{ route('auth.LandingPage') }}';">
-                                        Back
-                                    </button>
-                                </div>
-                            </form>
-
-                            <div class="text-center">
-                                <p class="text-muted mt-3 mb-0">Don't have an account? <a
-                                        class="text-primary fw-medium text-decoration-underline"
-                                        href="{{ route('auth.register') }}">Sign Up</a></p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 card-left">
+                <img src="{{ asset('assets/images/arms.png') }}" alt="Arms">
+                <h3>Integrated Property Tax System (IPTS)</h3>
             </div>
-        </div>
-        <div class="col-xxl-7 col-xl-5 col-lg-12 d-xl-block d-none px-0">
-            <div class="authentication-cover overflow-hidden">
-                <div class="aunthentication-cover-content d-flex align-items-center justify-content-center">
-                    <div>
-                        <a href="index.html">
-                            <img src="{{ asset('assets/images/arms.png') }}" alt=""
-                                class="authentication-brand toggle-white img-fluid mb-4">
-                        </a>
-                        <h4 class="text-fixed-white mb-2 fw-medium">Welcome Back! <span
-                                class="text-secondary text-shadow">Sign In</span></h4>
-                        <h6 class="text-fixed-white mb-3 fw-medium">Access Your Account</h6>
-                        <p class="text-fixed-white mb-1 op-6">Please enter your Phone number / IPTS Access Code and
-                            password to continue.</p>
+            <div class="col-md-6 form-container">
+                <h2 class="form-title">Login Account </h2>
 
-                        <div class="d-flex mb-1 gap-2 flex-wrap flex-lg-nowrap">
-
-
-                        </div>
+                <form action="{{ route('auth.login') }}" method="POST">
+                    @csrf
+                    <div class="mb-4">
+                        <label for="username" class="form-label">Phone Number / IPTS Access Code</label>
+                        <input type="text" class="form-control @error('username') is-invalid @enderror"
+                            id="username" name="username" placeholder="Enter your phone number or access code">
+                        @error('username')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
+
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control @error('password') is-invalid @enderror"
+                            id="password" name="password" placeholder="Enter your password">
+                        @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="text-center mb-4">
+                        <button type="submit" class="btn btn-custom w-100">Log In</button>
+                    </div>
+
+                    {{-- <div class="text-center">
+                        <button type="button" class="btn btn-danger"
+                            onclick="window.location='{{ route('auth.LandingPage') }}';">Back</button>
+                    </div> --}}
+                </form>
+                <div class="auth-footer">
+                    <p>New Here? Create Account <a href="{{ route('auth.register') }}">Create Account</a> or <a
+                            href="{{ route('citizens.activate') }}">Activate Account </a></p>
                 </div>
             </div>
         </div>
     </div>
 
-
     <!-- Bootstrap JS -->
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-    <!-- Show Password JS -->
-    <script src="{{ asset('assets/js/show-password.js') }}"></script>
-
 </body>
+
+</html>

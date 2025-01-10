@@ -1,121 +1,170 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme-mode="light">
 
 <head>
-    <link rel="stylesheet" href="{{ asset('assets/auth/css/bootstrap.min.css') }}">
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="keywords" content="">
-    <meta name="author" content="">
-    <meta name="robots" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="ERMS APP">
-    <meta property="og:title" content="ERMS APP">
-    <meta property="og:description" content="ERMS APP">
-    <meta property="og:image" content="https:/yashadmin.dexignzone.com/xhtml/social-image.png">
-    <meta name="format-detection" content="telephone=no">
+    <title>Password Reset Account - IPTS</title>
+    <link rel="icon" href="{{ asset('assets/images/brand-logos/favicon.ico') }}" type="image/x-icon">
 
-    <!-- PAGE TITLE HERE -->
-    <title>ERMS APP</title>
+    <!-- Bootstrap CSS -->
+    <link href="{{ asset('assets/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
-    <!-- FAVICONS ICON -->
-    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background: linear-gradient(to bottom, #0052D4, #65C7F7, #9CECFB);
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 100%;
+        }
+
+        .row {
+            height: 100%;
+        }
+
+        .card-left {
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            margin-right: 20px;
+            text-align: center;
+        }
+
+        .card-left img {
+            max-width: 80%;
+            height: auto;
+        }
+
+        .card-left h3 {
+            color: #fff;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .form-container {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            font-family: 'Times New Roman', serif;
+            font-size: 12px;
+        }
+
+        .form-title {
+            font-weight: bold;
+            color: #0052D4;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn-custom {
+            background: #0052D4;
+            color: #fff;
+            border-radius: 50px;
+            padding: 10px 30px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            width: auto;
+        }
+
+        .btn-custom:hover {
+            background: #003a9f;
+        }
+
+        .auth-footer {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+
+        .auth-footer a {
+            color: #0052D4;
+            text-decoration: underline;
+            margin: 0 5px;
+        }
+    </style>
 </head>
 
-<body class="vh-100"
-    style="background-image: url('{{ asset('assets/images/gh.jpeg') }}'); background-position: center; background-size: cover; background-attachment: fixed; height: 100vh;">
-    <div class="authincation
-    h-100">
-        <div class="container h-100">
-            <div class="row justify-content-center h-100 align-items-center">
-                <div class="col-md-6">
-                    <div class="authincation-content">
-                        <div class="row no-gutters">
-                            <div class="col-xl-12">
-                                <div class="auth-form">
-                                    @if (session()->has('status'))
-                                        <div class="alert alert-success alert-dismissible fade show">
-                                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
-                                                stroke-width="2" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round" class="me-2">
-                                                <polyline points="9 11 12 14 22 4"></polyline>
-                                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11">
-                                                </path>
-                                            </svg>
-                                            <strong>{{ session('status') }}</strong>
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
-                                            </button>
-                                        </div>
-                                    @endif
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 card-left">
+                <img src="{{ asset('assets/images/arms.png') }}" alt="Arms">
+                <h3>Integrated Property Tax System (IPTS)</h3>
+            </div>
+            <div class="col-md-6 form-container">
+                <h2 class="form-title"> Reset Your IPTS Account Password </h2>
 
-                                    <div class="text-center mb-3">
-                                        <img src="{{ asset('assets/images/arms.png') }}" class="rounded-circle"
-                                            alt="" style="width: 100px; height: 100px;">
-                                    </div>
-                                    <h4 class="text-center mb-4">ERMS PLUS</h4>
-                                    <form action="{{ route('auth.changePassword') }}" method="post">
-                                        @csrf
+                <div class="container">
+                    <div class="row flex-wrap">
+                        <div class="col-lg-5 card-left">
+                            <img src="{{ asset('assets/images/arms.png') }}" alt="Arms">
+                            <h3>Integrated Property Tax System (IPTS)</h3>
+                        </div>
+                        <div class="col-lg-6 form-container">
+                            <h2 class="form-title">Change Your Password</h2>
 
-                                        <div class="form-group first">
-                                            <label for="email"><b>New Password</b></label>
-                                            <input type="password"
-                                                class="form-control @error('password') is-invalid @enderror"
-                                                placeholder="New Password" id="password" name="password">
-
-                                            @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    {{ $message }}
-                                                </span>
-                                            @enderror
-                                        </div>
-
-                                        <div class="form-group last mb-3">
-                                            </br>
-                                            <label for="password"><b>Confirm Password</b></label>
-                                            <input type="password"
-                                                class="form-control @error('password_confirmation') is-invalid @enderror"
-                                                placeholder="Confirm Password" id="password_confirmation"
-                                                name="password_confirmation">
-                                            </br>
-
-                                            @error('password_confirmation')
-                                                <span class="invalid-feedback" role="alert">
-                                                    {{ $message }}
-                                                </span>
-                                            @enderror
-                                        </div>
-
-                                        <input type="submit" value="Change Password" class="btn btn-block btn-success"
-                                            style="margin-top: 20px">
-                                    </form>
+                            @if (session()->has('status'))
+                                <div class="alert alert-success alert-dismissible fade show">
+                                    <strong>{{ session('status') }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
                                 </div>
+                            @endif
+
+                            <form action="{{ route('auth.changePassword') }}" method="POST">
+                                @csrf
+                                <div class="mb-4">
+                                    <label for="password" class="form-label">New Password</label>
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                        id="password" name="password" placeholder="Enter your new password">
+                                    @error('password')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="password_confirmation" class="form-label">Confirm Password</label>
+                                    <input type="password"
+                                        class="form-control @error('password_confirmation') is-invalid @enderror"
+                                        id="password_confirmation" name="password_confirmation"
+                                        placeholder="Confirm your new password">
+                                    @error('password_confirmation')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-custom w-100">Change Password</button>
+                                </div>
+                            </form>
+                            <div class="auth-footer">
+                                <p>Already have an account? <a href="{{ route('auth.index') }}">Sign In</a> or <a
+                                        href="{{ route('auth.register') }}">Create Account </a></p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <script src="{{ asset('assets/vendor/global/global.min.js') }}"></script>
-    <script src="{{ asset('assets/js/custom.js') }}"></script>
-    <script src="{{ asset('assets/js/deznav-init.js') }}"></script>
-    <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
-        var Tawk_API = Tawk_API || {},
-            Tawk_LoadStart = new Date();
-        (function() {
-            var s1 = document.createElement("script"),
-                s0 = document.getElementsByTagName("script")[0];
-            s1.async = true;
-            s1.src = 'https://embed.tawk.to/663e4f9b9a809f19fb2fa32d/1hthme206';
-            s1.charset = 'UTF-8';
-            s1.setAttribute('crossorigin', '*');
-            s0.parentNode.insertBefore(s1, s0);
-        })();
-    </script>
+                <!-- Bootstrap JS -->
+                <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 
 </html>

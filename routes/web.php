@@ -295,6 +295,9 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function ()
     Route::get('/bill-report', [Report\BillReportController::class, 'index'])->name('bill-reports.index');
     Route::get('/payment-report', [Report\PaymentReportController::class, 'index'])->name('payment-reports.index');
     Route::get('/debtors-report', [Report\DebtorsReportController::class, 'index'])->name('debtors-reports.index');
+    Route::get('/service-usage-report', [Report\Level10ReportController::class, 'serviceUsageReport'])->name('service-usage-reports.index');
+    Route::get('/agent-performance-report', [Report\Level10ReportController::class, 'agentPerformanceReport'])->name('agent-performance-reports.index');
+    Route::get('/system-performance-report', [Report\Level10ReportController::class, 'systemPerformanceReport'])->name('system-peroformance-reports.index');
 });
 
 Route::group(['prefix' => 'agent-assignment', 'middleware' => 'auth:sanctum'], function () {

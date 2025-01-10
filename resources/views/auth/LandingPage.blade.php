@@ -1,1469 +1,1050 @@
-<html lang="en" dir="ltr" data-nav-layout="horizontal" data-nav-style="menu-click" data-menu-position="fixed"
-    data-theme-mode="light">
+<!DOCTYPE html>
+<html lang="en">
+
 
 <head>
-
-    <!-- Meta Data -->
     <meta charset="UTF-8">
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>IPTS </title>
-    <meta name="Description" content="Level 10">
-    <meta name="Author" content="Level 10">
-
-    <!-- Favicon -->
-    <link rel="icon" href="{{ asset('assets/images/level10.png') }}" type="image/x-icon">
-
-    <!-- Bootstrap Css -->
-    <link id="style" href="{{ asset('assets/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-
-    <!-- Style Css -->
-    <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
-
-    <!-- Icons Css -->
-    <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
-
-    <!-- Node Waves Css -->
-    <link href="{{ asset('assets/libs/node-waves/waves.min.css') }}" rel="stylesheet">
-
-    <!-- SwiperJS Css -->
-    <link rel="stylesheet" href="{{ asset('assets/libs/swiper/swiper-bundle.min.css') }}">
-
-    <!-- Color Picker Css -->
-    <link rel="stylesheet" href="{{ asset('assets/libs/flatpickr/flatpickr.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/libs/@simonwep/pickr/themes/nano.min.css') }}">
-
-    <!-- Choices Css -->
-    <link rel="stylesheet" href="{{ asset('assets/libs/choices.js/public/assets/styles/choices.min.css') }}">
-
-    <script>
-        if (localStorage.rixzodarktheme) {
-            document.querySelector("html").setAttribute("data-theme-mode", "dark")
-        }
-        if (localStorage.rixzortl) {
-            document.querySelector("html").setAttribute("dir", "rtl")
-            document.querySelector("#style")?.setAttribute("href",
-                "{{ asset('assets/libs/bootstrap/css/bootstrap.rtl.min.css') }}");
-        }
-    </script>
-
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPTS - Integrated Property Tax System</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/assetsfront/images/fav.png') }}">
+    <link rel="stylesheet" href="{{ asset('assets/assetsfront/css/plugins/swiper.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/assetsfront/css/plugins/fontawesome-5.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/assetsfront/css/plugins/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/assetsfront/css/plugins/unicons.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/assetsfront/css/vendor/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/assetsfront/css/style.css') }}">
 </head>
 
-<body class="landing-body">
+<body class="home-blue medium-blue onepage">
 
-    <!-- Start Switcher -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="switcher-canvas" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header border-bottom">
-            <h5 class="offcanvas-title" id="offcanvasRightLabel">Switcher</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div class="">
-                <p class="switcher-style-head">Theme Color Mode:</p>
-                <div class="row switcher-style gx-0">
-                    <div class="col-4">
-                        <div class="form-check switch-select">
-                            <label class="form-check-label" for="switcher-light-theme">
-                                Light
-                            </label>
-                            <input class="form-check-input" type="radio" name="theme-style" id="switcher-light-theme"
-                                checked>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="form-check switch-select">
-                            <label class="form-check-label" for="switcher-dark-theme">
-                                Dark
-                            </label>
-                            <input class="form-check-input" type="radio" name="theme-style" id="switcher-dark-theme">
-                        </div>
-                    </div>
+    <!-- start header area -->
+    <header class="header-two header--sticky eight">
+        <div class="main-header">
+            <div class="content">
+                <div class="header-left">
+                    <a class="thumbnail" href="index.html">
+                        <img style="height: 70%; width:70%;"
+                            src="{{ asset('assets/assetsfront/images/logo/ipts-logo.png') }}" alt="">
+                    </a>
+                    <nav class="nav-main mainmenu-nav d-none d-xl-block">
+                        <ul class="mainmenu">
+                            <li><a href="#banner">Home</a></li>
+                            <li><a href="#features">Features</a></li>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#faq">FAQs</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </nav>
                 </div>
-            </div>
-            <div class="">
-                <p class="switcher-style-head">Directions:</p>
-                <div class="row switcher-style gx-0">
-                    <div class="col-4">
-                        <div class="form-check switch-select">
-                            <label class="form-check-label" for="switcher-ltr">
-                                LTR
-                            </label>
-                            <input class="form-check-input" type="radio" name="direction" id="switcher-ltr" checked>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="form-check switch-select">
-                            <label class="form-check-label" for="switcher-rtl">
-                                RTL
-                            </label>
-                            <input class="form-check-input" type="radio" name="direction" id="switcher-rtl">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="theme-colors">
-                <p class="switcher-style-head">Theme Primary:</p>
-                <div class="d-flex align-items-center switcher-style">
-                    <div class="form-check switch-select me-3">
-                        <input class="form-check-input color-input color-primary-1" type="radio" name="theme-primary"
-                            id="switcher-primary">
-                    </div>
-                    <div class="form-check switch-select me-3">
-                        <input class="form-check-input color-input color-primary-2" type="radio" name="theme-primary"
-                            id="switcher-primary1">
-                    </div>
-                    <div class="form-check switch-select me-3">
-                        <input class="form-check-input color-input color-primary-3" type="radio"
-                            name="theme-primary" id="switcher-primary2">
-                    </div>
-                    <div class="form-check switch-select me-3">
-                        <input class="form-check-input color-input color-primary-4" type="radio"
-                            name="theme-primary" id="switcher-primary3">
-                    </div>
-                    <div class="form-check switch-select me-3">
-                        <input class="form-check-input color-input color-primary-5" type="radio"
-                            name="theme-primary" id="switcher-primary4">
-                    </div>
-                    <div class="form-check switch-select me-3 ps-0 mt-1 color-primary-light">
-                        <div class="theme-container-primary"></div>
-                        <div class="pickr-container-primary"></div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <p class="switcher-style-head">reset:</p>
-                <div class="text-center">
-                    <button id="reset-all" class="btn btn-danger mt-3">Reset</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Switcher -->
-
-    <div class="landing-page-wrapper">
-
-        <!-- app-header -->
-        <header class="app-header">
-
-            <!-- Start::main-header-container -->
-            <div class="main-header-container container-fluid">
-
-                <!-- Start::header-content-left -->
-                <div class="header-content-left">
-
-                    <!-- Start::header-element -->
-                    <div class="header-element">
-                        <div class="horizontal-logo">
-                            <a href="#" class="header-logo">
-                                <img src="{{ asset('assets/images/level10.png') }}" alt="logo"
-                                    class="toggle-logo">
-                                <img src="{{ asset('assets/images/level10.png') }}" alt="logo"
-                                    class="toggle-white">
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End::header-element -->
-
-                    <!-- Start::header-element -->
-                    <div class="header-element">
-                        <!-- Start::header-link -->
-                        <a href="javascript:void(0);" class="sidemenu-toggle header-link" data-bs-toggle="sidebar">
-                            <span class="open-toggle">
-                                <i class="ri-menu-3-line fs-20"></i>
-                            </span>
-                        </a>
-                        <!-- End::header-link -->
-                    </div>
-                    <!-- End::header-element -->
-
-                </div>
-                <!-- End::header-content-left -->
-
-                <!-- Start::header-content-right -->
-                <div class="header-content-right">
-
-                    <!-- Start::header-element -->
-                    <div class="header-element align-items-center">
-                        <!-- Start::header-link|switcher-icon -->
-                        <div class="btn-list d-lg-none d-flex">
-                            <a href="{{ route('auth.register') }}" class="btn-signup-light">
-                                Create Account
-                            </a>
-
-                        </div>
-                        <!-- End::header-link|switcher-icon -->
-                    </div>
-                    <!-- End::header-element -->
-
-                </div>
-                <!-- End::header-content-right -->
-
-            </div>
-            <!-- End::main-header-container -->
-
-        </header>
-        <!-- /app-header -->
-
-        <!-- Start::app-sidebar -->
-        <aside class="app-sidebar sticky" id="sidebar">
-
-            <div class="container-xl">
-                <!-- Start::main-sidebar -->
-                <div class="main-sidebar shadow-none">
-
-                    <!-- Start::nav -->
-                    <nav class="main-menu-container nav nav-pills sub-open">
-                        <div class="landing-logo-container">
-                            <div class="horizontal-logo">
-                                <a href="index.html" class="header-logo">
-                                    <img src="{{ asset('assets/images/level10.png') }}" alt="logo"
-                                        class="desktop-logo">
-                                    <img src="{{ asset('assets/level10.png') }}" alt="logo"
-                                        class="desktop-white">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="slide-left" id="slide-left">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24"
-                                viewBox="0 0 24 24">
-                                <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path>
+                <div class="header-right">
+                    <div class="call-area">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                fill="none">
+                                <path
+                                    d="M14.2251 11.5362C13.7279 11.5914 13.3688 12.061 13.3965 12.5858C13.4517 13.083 13.8936 13.4697 14.4461 13.4144C14.9985 13.3592 15.5509 13.5249 15.9376 13.9116C16.352 14.3259 16.5177 14.8784 16.4624 15.4308C16.4072 15.9832 16.7939 16.4252 17.2911 16.4804C17.5949 16.508 17.8711 16.3975 18.0645 16.2042C18.2026 16.0661 18.3131 15.8451 18.3407 15.6518C18.4512 14.4917 18.0645 13.3868 17.2635 12.5858C16.4901 11.8124 15.3852 11.4257 14.2251 11.5362ZM13.866 7.80729C13.3136 7.86253 12.9545 8.3321 13.0098 8.82928C13.0374 9.35409 13.507 9.71317 14.0318 9.68554C15.7443 9.51982 17.3739 10.0999 18.5617 11.2876C19.7218 12.4477 20.3294 14.105 20.1637 15.8175C20.1085 16.3147 20.4675 16.7842 20.9923 16.8119C21.2962 16.8395 21.5448 16.7566 21.7381 16.5633C21.9038 16.3975 21.9867 16.2042 22.042 15.9832C22.2905 13.7459 21.5171 11.5362 19.9151 9.93414C18.3131 8.3321 16.131 7.58632 13.866 7.80729ZM13.507 4.07841C12.9821 4.10603 12.6231 4.57559 12.6507 5.1004C12.7059 5.59758 13.1479 5.98428 13.6727 5.95666C16.4901 5.68045 19.2522 6.61957 21.2409 8.60831C23.202 10.5694 24.1688 13.3592 23.8926 16.1766C23.865 16.7014 24.2517 17.1433 24.7488 17.1986C25.0527 17.2262 25.3289 17.1157 25.5222 16.9223C25.6603 16.7842 25.7432 16.5909 25.7708 16.3423C26.1299 13.0001 24.9698 9.68554 22.5668 7.28249C20.1361 4.85181 16.8768 3.74695 13.507 4.07841ZM10.3581 15.0165C10.662 14.7679 10.8001 14.2983 10.6343 13.9116L9.22564 10.6799C9.05991 10.238 8.56273 10.017 8.14841 10.0999L5.11006 10.818C4.69574 10.9009 4.3919 11.3152 4.3919 11.7571C4.3919 19.3254 10.5515 25.485 18.1197 25.485C18.5617 25.485 18.976 25.1811 19.0588 24.7668L19.777 21.7285C19.8599 21.3141 19.6389 20.817 19.197 20.6512L15.9653 19.2425C15.5786 19.0768 15.109 19.2149 14.8604 19.5187L13.5346 21.1208C11.4353 20.1264 9.75045 18.4415 8.75608 16.3423L10.3581 15.0165Z"
+                                    fill="#0B4DF5" />
                             </svg>
                         </div>
-                        <ul class="main-menu ms-auto">
-                            <!-- Start::slide -->
-                            <li class="slide">
-                                <a class="side-menu__item" href="#home">
-                                    <span class="side-menu__label">Home</span>
-                                </a>
-                            </li>
-                            <!-- End::slide -->
-                            <!-- Start::slide -->
-                            <li class="slide">
-                                <a href="#about" class="side-menu__item">
-                                    <span class="side-menu__label">About</span>
-                                </a>
-                            </li>
-                            <!-- End::slide -->
-                            <!-- Start::slide -->
-
-                            <!-- End::slide -->
-                            <!-- Start::slide -->
-                            <li class="slide">
-                                <a href="#team" class="side-menu__item">
-                                    <span class="side-menu__label">Features</span>
-                                </a>
-                            </li>
-                            <!-- End::slide -->
-                            <!-- Start::slide -->
-
-                            <!-- End::slide -->
-                            <!-- Start::slide -->
-                            <li class="slide">
-                                <a href="#faqs" class="side-menu__item">
-                                    <span class="side-menu__label">FAQ's</span>
-                                </a>
-                            </li>
-                            <!-- End::slide -->
-                            <!-- Start::slide -->
-
-                            <!-- End::slide -->
-                            <!-- Start::slide -->
-                            <li class="slide">
-                                <a href="#contact" class="side-menu__item">
-                                    <span class="side-menu__label">Contact Us</span>
-                                </a>
-                            </li>
-                            <!-- End::slide -->
-
-                        </ul>
-                        <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg"
-                                fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
-                                <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z">
-                                </path>
-                            </svg></div>
-                        <div class="d-lg-flex d-none">
-                            <div class="btn-list d-lg-flex d-none mt-lg-2 mt-xl-0 mt-0">
-                                <a href="{{ route('auth.register') }}"
-                                    class="btn btn-wave btn-success rounded-pill btn-w-md">
-                                    Sign Up
-                                </a>
-
-                            </div>
+                        <div class="number-area">
+                            <span>Call us anytime</span>
+                            <a href="tel:123-456-7890">
+                                <h6 class="call">+233 50 050 3599</h6>
+                            </a>
                         </div>
-                    </nav>
-                    <!-- End::nav -->
-
+                    </div>
+                    <a class="rts-btn btn-primary-2 menu-block-none" href="{{ route('auth.register') }} ">Get
+                        started</a>
+                    <button id="menu-btn" class="menu rts-btn btn-primary-alta ml--20">
+                        <img class="menu-dark" src="{{ asset('assets/assetsfront/images/icon/menu.png') }}"
+                            alt="Menu-icon">
+                        <img class="menu-light" src="{{ asset('assets/assetsfront/images/icon/menu-light.png') }}"
+                            alt="Menu-icon">
+                    </button>
                 </div>
-                <!-- End::main-sidebar -->
             </div>
-
-        </aside>
-        <!-- End::app-sidebar -->
-
-        <!-- Start::app-content -->
-        <div class="main-content landing-main px-0">
-
-            <!-- Start:: Section-1 -->
-            <div class="landing-banner" id="home">
-                <section class="section main-banner-section">
-                    <div class="container main-banner-container pb-lg-0">
-                        <div class="row pt-xl-3">
-                            <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-8">
-                                <div class="banner-content">
-                                    <p class="fs-14 fw-medium text-success mb-3">
-                                        <span class="landing-section-heading text-success"><i
-                                                class="ti ti-inner-shadow-top-right-filled text-secondary me-1 fs-10"></i>Optimized
-                                            and Accessible</span>
-                                    </p>
-                                    <h6 class="landing-banner-heading mb-3 text-fixed-white">Empowering Local
-                                        Assemblies, Strengthening Communities with
-                                        <span class="fw-semibold text-warning">IPTS</span>
-                                    </h6>
-                                    <div class="fs-16 mb-5 text-fixed-white op-7">Introducing IPTS – Your Gateway to
-                                        Transparent and Efficient Revenue Management</div>
-                                    <a href="{{ route('auth.index') }}"
-                                        class="m-1 btn btn-lg rounded-pill px-4 bg-success text-fixed-white">
-                                        Login
-                                        <i class="ri-eye-line ms-2 align-middle"></i>
-                                    </a>
-                                    <a href="{{ route('auth.register') }}"
-                                        class="m-1 btn btn-lg rounded-pill px-4 btn-primary btn-wave waves-effect waves-light">
-                                        Create Account
-                                        <i class="ri-arrow-right-line ms-2 align-middle"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-4 my-auto">
-                                <div class="text-end landing-main-image landing-heading-img">
-                                    <img src="{{ asset('assets/images/media/media-72.png') }}" alt=""
-                                        class="img-fluid">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <!-- End:: Section-1 -->
-
-            <!-- Start:: Section-2 -->
-            <section class="section" id="about">
-                <div class="container position-relative">
-                    <div class="text-center">
-                        <p class="fs-14 fw-medium text-success mb-1">
-                            <span class="landing-section-heading text-success"><i
-                                    class="ti ti-inner-shadow-top-right-filled text-secondary me-1 fs-10"></i>Overview</span>
-                        </p>
-                        <h4 class="fw-semibold mb-1 mt-3">Transforming Revenue Management Across Africa</h4>
-                        <div class="row justify-content-center">
-                            <div class="col-xl-7">
-                                <p class="text-muted fs-14 mb-5 fw-normal">
-                                    IPTS is redefining how communities across Africa collect and manage revenue. By
-                                    leveraging technology and promoting transparency, it ensures efficient processes
-                                    that empower citizens and drive sustainable development.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <div
-                                class="card custom-card landing-first-cards primary border border-primary border-opacity-25 shadow-none">
-                                <div class="card-body">
-                                    <div class="mb-4">
-                                        <span
-                                            class="avatar avatar-lg bg-primary-transparent avatar-rounded border-3 border border-opacity-50 border-primary">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-primary"
-                                                width="32" height="32" fill="#000000" viewBox="0 0 256 256">
-                                                <path
-                                                    d="M64,105V40a8,8,0,0,0-16,0v65a32,32,0,0,0,0,62v49a8,8,0,0,0,16,0V167a32,32,0,0,0,0-62Zm-8,47a16,16,0,1,1,16-16A16,16,0,0,1,56,152Zm80-95V40a8,8,0,0,0-16,0V57a32,32,0,0,0,0,62v97a8,8,0,0,0,16,0V119a32,32,0,0,0,0-62Zm-8,47a16,16,0,1,1,16-16A16,16,0,0,1,128,104Zm104,64a32.06,32.06,0,0,0-24-31V40a8,8,0,0,0-16,0v97a32,32,0,0,0,0,62v17a8,8,0,0,0,16,0V199A32.06,32.06,0,0,0,232,168Zm-32,16a16,16,0,1,1,16-16A16,16,0,0,1,200,184Z">
-                                                </path>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <h6 class="fw-semibold">Real-Time Monitoring </h6>
-                                    <p class="text-muted">Track payments and revenue in real time to ensure
-                                        accountability.</p>
-                                    <a href="javascript:void(0);" class="fw-semibold text-primary">Read More<i
-                                            class="ti ti-arrow-narrow-right ms-1 fs-16 lh-1 align-middle d-inline-block rtl-icon-transform"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3">
-                            <div
-                                class="card custom-card landing-first-cards secondary border border-secondary border-opacity-25 shadow-none">
-                                <div class="card-body">
-                                    <div class="mb-4">
-                                        <span
-                                            class="avatar avatar-lg bg-secondary-transparent avatar-rounded border-3 border border-opacity-50 border-secondary">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-secondary"
-                                                width="32" height="32" fill="#000000" viewBox="0 0 256 256">
-                                                <path
-                                                    d="M64,105V40a8,8,0,0,0-16,0v65a32,32,0,0,0,0,62v49a8,8,0,0,0,16,0V167a32,32,0,0,0,0-62Zm-8,47a16,16,0,1,1,16-16A16,16,0,0,1,56,152Zm80-95V40a8,8,0,0,0-16,0V57a32,32,0,0,0,0,62v97a8,8,0,0,0,16,0V119a32,32,0,0,0,0-62Zm-8,47a16,16,0,1,1,16-16A16,16,0,0,1,128,104Zm104,64a32.06,32.06,0,0,0-24-31V40a8,8,0,0,0-16,0v97a32,32,0,0,0,0,62v17a8,8,0,0,0,16,0V199A32.06,32.06,0,0,0,232,168Zm-32,16a16,16,0,1,1,16-16A16,16,0,0,1,200,184Z">
-                                                </path>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <h6 class="fw-semibold">Ease of Payment</h6>
-                                    <p class="text-muted">Enjoy secure and convenient payment options through digital
-                                        channels or local centers.</p>
-                                    <a href="javascript:void(0);" class="fw-semibold text-secondary">Read More<i
-                                            class="ti ti-arrow-narrow-right ms-1 fs-16 lh-1 align-middle d-inline-block rtl-icon-transform"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3">
-                            <div
-                                class="card custom-card landing-first-cards success border border-success border-opacity-25 shadow-none">
-                                <div class="card-body">
-                                    <div class="mb-4">
-                                        <span
-                                            class="avatar avatar-lg bg-success-transparent avatar-rounded border-3 border border-opacity-50 border-success">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-success"
-                                                width="32" height="32" fill="#000000" viewBox="0 0 256 256">
-                                                <path
-                                                    d="M64,105V40a8,8,0,0,0-16,0v65a32,32,0,0,0,0,62v49a8,8,0,0,0,16,0V167a32,32,0,0,0,0-62Zm-8,47a16,16,0,1,1,16-16A16,16,0,0,1,56,152Zm80-95V40a8,8,0,0,0-16,0V57a32,32,0,0,0,0,62v97a8,8,0,0,0,16,0V119a32,32,0,0,0,0-62Zm-8,47a16,16,0,1,1,16-16A16,16,0,0,1,128,104Zm104,64a32.06,32.06,0,0,0-24-31V40a8,8,0,0,0-16,0v97a32,32,0,0,0,0,62v17a8,8,0,0,0,16,0V199A32.06,32.06,0,0,0,232,168Zm-32,16a16,16,0,1,1,16-16A16,16,0,0,1,200,184Z">
-                                                </path>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <h6 class="fw-semibold">User-Friendly Portal</h6>
-                                    <p class="text-muted">Navigate a simple, intuitive platform for accessing your
-                                        property and business information.
-                                    </p>
-                                    <a href="javascript:void(0);" class="fw-semibold text-success">Read More<i
-                                            class="ti ti-arrow-narrow-right ms-1 fs-16 lh-1 align-middle d-inline-block rtl-icon-transform"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3">
-                            <div
-                                class="card custom-card landing-first-cards info border border-info border-opacity-25 shadow-none">
-                                <div class="card-body">
-                                    <div class="mb-4">
-                                        <span
-                                            class="avatar avatar-lg bg-info-transparent avatar-rounded border-3 border border-opacity-50 border-info">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-info" width="32"
-                                                height="32" fill="#000000" viewBox="0 0 256 256">
-                                                <path
-                                                    d="M64,105V40a8,8,0,0,0-16,0v65a32,32,0,0,0,0,62v49a8,8,0,0,0,16,0V167a32,32,0,0,0,0-62Zm-8,47a16,16,0,1,1,16-16A16,16,0,0,1,56,152Zm80-95V40a8,8,0,0,0-16,0V57a32,32,0,0,0,0,62v97a8,8,0,0,0,16,0V119a32,32,0,0,0,0-62Zm-8,47a16,16,0,1,1,16-16A16,16,0,0,1,128,104Zm104,64a32.06,32.06,0,0,0-24-31V40a8,8,0,0,0-16,0v97a32,32,0,0,0,0,62v17a8,8,0,0,0,16,0V199A32.06,32.06,0,0,0,232,168Zm-32,16a16,16,0,1,1,16-16A16,16,0,0,1,200,184Z">
-                                                </path>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <h6 class="fw-semibold">Enhanced Transparency</h6>
-                                    <p class="text-muted">Gain confidence in how funds are managed and reinvested into
-                                        community development.
-                                    </p>
-                                    <a href="javascript:void(0);" class="fw-semibold text-info">Read More<i
-                                            class="ti ti-arrow-narrow-right ms-1 fs-16 lh-1 align-middle d-inline-block rtl-icon-transform"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- End:: Section-2 -->
-
-            <!-- Start:: Section-3 -->
-            <section class="section bg-white overflow-hidden" id="expectations">
-                <div class="container">
-                    <div class="row gx-5 mx-0 align-items-end">
-                        <div class="col-xl-5 d-none d-xl-block">
-                            <div class="home-proving-image rounded-3 border border-primary border-opacity-25">
-                                <img src="{{ asset('assets/images/media/media-80.png') }}" alt=""
-                                    class="img-fluid about-image">
-                            </div>
-                            <div class="proving-pattern-1"></div>
-                        </div>
-                        <div class="col-xl-7 my-auto">
-                            <div class="heading-section text-start mb-4">
-                                <p class="fs-14 fw-medium text-success mb-1">
-                                    <span class="landing-section-heading text-success"><i
-                                            class="ti ti-inner-shadow-top-right-filled text-secondary me-1 fs-10"></i>About
-                                        Us</span>
-                                </p>
-                                <h4 class="mt-3 fw-semibold mb-2">Our Commitment to Excellence</h4>
-                                <div class="heading-description fs-14"> </div>
-                            </div>
-                            <div class="row gy-4 mb-0">
-                                <div class="col-xl-12">
-                                    <div class="d-flex align-items-top">
-                                        <div
-                                            class="avatar avatar-lg bg-primary-transparent avatar-rounded border-3 border border-opacity-50 border-primary me-2 flex-shrink-0">
-                                            01.
-                                        </div>
-                                        <div>
-                                            <span class="fs-14">
-                                                <strong>Unwavering Transparency
-                                                    :</strong> We prioritize openness in all processes, ensuring
-                                                citizens and stakeholders have a clear understanding of how funds are
-                                                managed and utilized. Transparency fosters trust and accountability,
-                                                forming the foundation of our operations.
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-12">
-                                    <div class="d-flex align-items-top">
-                                        <div
-                                            class="avatar avatar-lg bg-secondary-transparent avatar-rounded border-3 border border-opacity-50 border-secondary me-2 flex-shrink-0">
-                                            02.
-                                        </div>
-                                        <div>
-                                            <span class="fs-14">
-                                                <strong>Innovative Solutions:</strong> By embracing cutting-edge
-                                                technology, we create efficient systems that simplify revenue collection
-                                                and management. Our solutions are designed to adapt to modern
-                                                challenges, making processes faster and more reliable.
-
-
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-12">
-                                    <div class="d-flex align-items-top">
-                                        <div
-                                            class="avatar avatar-lg bg-success-transparent avatar-rounded border-3 border border-opacity-50 border-success me-2 flex-shrink-0">
-                                            03.
-                                        </div>
-                                        <div>
-                                            <span class="fs-14">
-                                                <strong>Community-Centered Approach:</strong> Every decision we make is
-                                                aimed at improving the lives of citizens. From reinvesting funds into
-                                                infrastructure to enhancing public services, we are committed to
-                                                fostering sustainable development in every community we serve.
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-12">
-                                    <div class="d-flex align-items-top">
-                                        <div
-                                            class="avatar avatar-lg bg-info-transparent avatar-rounded border-3 border border-opacity-50 border-info me-2 flex-shrink-0">
-                                            04.
-                                        </div>
-                                        <div>
-                                            <span class="fs-14">
-                                                <strong>Exceptional User Experience:</strong> We believe in making
-                                                things easy for everyone. Our platforms are intuitive, accessible, and
-                                                tailored to meet the needs of both individuals and organizations,
-                                                ensuring a seamless experience from start to finish.
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- End:: Section-3 -->
-
-            <!-- Start:: Section-4 -->
-            <section class="section section-bg" id="services">
-                <div class="container my-4">
-                    <div class="row">
-                        <div class="col-xl-8">
-                            <div class="row">
-                                <div class="col-xl-4">
-                                    <div class="card custom-card">
-                                        <div class="card-body">
-                                            <div class="mb-3">
-                                                <div class="d-flex gap-3 align-items-center">
-                                                    <div
-                                                        class="border border-2 border-primary border-opacity-10 bg-primary-transparent rounded-4">
-                                                        <div class="p-1 bg-white rounded-circle border">
-                                                            <span class="avatar avatar-md avatar-rounded bg-primary">
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                    class="svg-white" width="32" height="32"
-                                                                    viewBox="0 0 24 24">
-                                                                    <g fill="none" stroke="currentColor"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        stroke-width="2">
-                                                                        <path
-                                                                            d="M12 17v4m3.2-16.1l-.9-.4m.9 2.6l-.9.4m2.6-4.3l-.4-.9m.4 6.5l-.4.9m3-7.4l-.4.9m.4 6.5l-.4-.9m2.6-4.3l-.9.4m.9 2.6l-.9-.4M22 13v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7M8 21h8" />
-                                                                        <circle cx="18" cy="6" r="3" />
-                                                                    </g>
-                                                                </svg>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <h5 class="fw-semibold mb-0"> Real-Time Revenue Tracking</h5>
-                                                </div>
-                                            </div>
-                                            <p class="text-muted">Monitor payments and revenue in real time, ensuring
-                                                transparency and accountability at every stage.</p>
-                                            <a href="javascript:void(0);" class="fw-semibold text-primary">Read More<i
-                                                    class="ti ti-arrow-narrow-right ms-1 fs-16 lh-1 align-middle d-inline-block rtl-icon-transform"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="card custom-card">
-                                        <div class="card-body">
-                                            <div class="mb-3">
-                                                <div class="d-flex gap-3 align-items-center">
-                                                    <div
-                                                        class="border border-2 border-info border-opacity-10 bg-info-transparent rounded-4">
-                                                        <div class="p-1 bg-white rounded-circle border">
-                                                            <span class="avatar avatar-md avatar-rounded bg-info">
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                    class="svg-info" width="32" height="32"
-                                                                    viewBox="0 0 24 24">
-                                                                    <g fill="none" stroke="currentColor"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        stroke-width="2">
-                                                                        <path d="m8 11l2 2l4-4" />
-                                                                        <circle cx="11" cy="11" r="8" />
-                                                                        <path d="m21 21l-4.3-4.3" />
-                                                                    </g>
-                                                                </svg>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <h5 class="fw-semibold mb-0">Secure and Easy Payment Options </h5>
-                                                </div>
-                                            </div>
-                                            <p class="text-muted">With multiple payment methods, including digital and
-                                                local channels, paying taxes has never been easier or more secure.</p>
-                                            <a href="javascript:void(0);" class="fw-semibold text-info">Read More<i
-                                                    class="ti ti-arrow-narrow-right ms-1 fs-16 lh-1 align-middle d-inline-block rtl-icon-transform"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4">
-                                    <div class="card custom-card mt-xl-4">
-                                        <div class="card-body">
-                                            <div class="mb-3">
-                                                <div class="d-flex gap-3 align-items-center">
-                                                    <div
-                                                        class="border border-2 border-secondary border-opacity-10 bg-secondary-transparent rounded-4">
-                                                        <div class="p-1 bg-white rounded-circle border">
-                                                            <span class="avatar avatar-md avatar-rounded bg-secondary">
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                    class="svg-secondary" width="32"
-                                                                    height="32" viewBox="0 0 24 24">
-                                                                    <g fill="none" stroke="currentColor"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        stroke-width="2">
-                                                                        <circle cx="12" cy="17" r="3" />
-                                                                        <path
-                                                                            d="M4.2 15.1A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.2m-4.3 2.2l-.9-.3m-5.6-2.2l-.9-.3m2.3 5.1l.3-.9m2.2-5.6l.3-.9m.2 7.4l-.4-1m-2.4-5.4l-.4-1m-2.1 5.3l1-.4m5.4-2.4l1-.4" />
-                                                                    </g>
-                                                                </svg>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <h5 class="fw-semibold mb-0">User-Friendly Interface </h5>
-                                                </div>
-                                            </div>
-                                            <p class="text-muted">Navigate a simple, intuitive platform to access
-                                                property assessments, make payments, and track progress effortlessly..
-                                            </p>
-                                            <a href="javascript:void(0);" class="fw-semibold text-secondary">Read
-                                                More<i
-                                                    class="ti ti-arrow-narrow-right ms-1 fs-16 lh-1 align-middle d-inline-block rtl-icon-transform"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="card custom-card">
-                                        <div class="card-body">
-                                            <div class="mb-3">
-                                                <div class="d-flex gap-3 align-items-center">
-                                                    <div
-                                                        class="border border-2 border-success border-opacity-10 bg-success-transparent rounded-4">
-                                                        <div class="p-1 bg-white rounded-circle border">
-                                                            <span class="avatar avatar-md avatar-rounded bg-success">
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                    class="svg-white" width="32" height="32"
-                                                                    viewBox="0 0 24 24">
-                                                                    <g fill="none" stroke="currentColor"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        stroke-width="2">
-                                                                        <rect width="14" height="20" x="5"
-                                                                            y="2" rx="2" ry="2" />
-                                                                        <path d="M12 18h.01" />
-                                                                    </g>
-                                                                </svg>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <h5 class="fw-semibold mb-0">Automated Notifications </h5>
-                                                </div>
-                                            </div>
-                                            <p class="text-muted">Receive timely alerts and reminders for payment
-                                                deadlines, keeping you updated and in control of your obligations.
-
-                                            </p>
-                                            <a href="javascript:void(0);" class="fw-semibold text-success">Read More<i
-                                                    class="ti ti-arrow-narrow-right ms-1 fs-16 lh-1 align-middle d-inline-block rtl-icon-transform"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4">
-                                    <div class="card custom-card mt-xl-5">
-                                        <div class="card-body">
-                                            <div class="mb-3">
-                                                <div class="d-flex gap-3 align-items-center">
-                                                    <div
-                                                        class="border border-2 border-teal border-opacity-10 bg-teal-transparent rounded-4">
-                                                        <div class="p-1 bg-white rounded-circle border">
-                                                            <span class="avatar avatar-md avatar-rounded bg-teal">
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                    class="svg-white" width="32" height="32"
-                                                                    viewBox="0 0 24 24">
-                                                                    <g fill="none" stroke="currentColor"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        stroke-width="2">
-                                                                        <circle cx="8" cy="21" r="1" />
-                                                                        <circle cx="19" cy="21" r="1" />
-                                                                        <path
-                                                                            d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
-                                                                    </g>
-                                                                </svg>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <h5 class="fw-semibold mb-0">Enhanced Data Security</h5>
-                                                </div>
-                                            </div>
-                                            <p class="text-muted">Built with state-of-the-art security features to
-                                                safeguard your personal and financial data, ensuring peace of mind.</p>
-                                            <a href="javascript:void(0);" class="fw-semibold text-teal">Read More<i
-                                                    class="ti ti-arrow-narrow-right ms-1 fs-16 lh-1 align-middle d-inline-block rtl-icon-transform"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="card custom-card">
-                                        <div class="card-body">
-                                            <div class="mb-3">
-                                                <div class="d-flex gap-3 align-items-center">
-                                                    <div
-                                                        class="border border-2 border-pink border-opacity-10 bg-pink-transparent rounded-4">
-                                                        <div class="p-1 bg-white rounded-circle border">
-                                                            <span class="avatar avatar-md avatar-rounded bg-pink">
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                    class="svg-white" width="32" height="32"
-                                                                    viewBox="0 0 24 24">
-                                                                    <path fill="none" stroke="currentColor"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        stroke-width="2"
-                                                                        d="M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6M2 12a9 9 0 0 1 8 8m-8-4a5 5 0 0 1 4 4m-4 0h.01" />
-                                                                </svg>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <h5 class="fw-semibold mb-0">Community Investment </h5>
-                                                </div>
-                                            </div>
-                                            <p class="text-muted">Every payment contributes to vital infrastructure and
-                                                services, directly benefiting the local community and driving growth.
-                                            </p>
-                                            <a href="javascript:void(0);" class="fw-semibold text-pink">Read More<i
-                                                    class="ti ti-arrow-narrow-right ms-1 fs-16 lh-1 align-middle d-inline-block rtl-icon-transform"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4">
-                            <div class="heading-section text-end mb-4">
-                                <p class="fs-14 fw-medium text-success mb-1">
-                                    <span class="landing-section-heading text-success"><i
-                                            class="ti ti-inner-shadow-top-right-filled text-secondary me-1 fs-10"></i>Our
-                                        Services</span>
-                                </p>
-                                <h4 class="mt-3 fw-semibold mb-2">Revenue Assurance </h4>
-                                <div class="heading-description fs-14 mb-3">By integrating advanced technology and
-                                    user-focused design, IPTS empowers citizens and authorities alike to participate in
-                                    transparent and efficient revenue collection.</div>
-                                <a href="{{ route('auth.register') }}"
-                                    class="btn btn-wave btn-secondary rounded-pill">
-                                    Get started Now
-                                </a>
-                            </div>
-                            <img src="{{ asset('assets/images/media/media-79.png') }}" alt=""
-                                class="img-fluid ps-5 d-none d-xl-block">
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- End:: Section-4 -->
-
-
-
-            <!-- Start:: Section-6 -->
-            <section class="section" id="team">
-                <div class="container">
-                    <div class="text-center">
-                        <p class="fs-14 fw-medium text-success mb-1">
-                            <span class="landing-section-heading text-success"><i
-                                    class="ti ti-inner-shadow-top-right-filled text-secondary me-1 fs-10"></i>Our
-                                Team</span>
-                        </p>
-                        <h4 class="fw-semibold mt-3 mb-2">Meet the Dedicated Individuals Behind Our Success</h4>
-                        <div class="row justify-content-center">
-                            <div class="col-xl-7">
-                                <p class="text-muted fs-14 mb-5 fw-normal">Our team comprises talented professionals
-                                    who are committed to excellence and passionate about driving results.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
-                            <div class="card custom-card team-member text-center">
-                                <div class="team-shape1"></div>
-                                <div class="team-shape2"></div>
-                                <div class="card-body py-4">
-                                    <div class="mb-3 lh-1 d-flex gap-2 justify-content-center">
-                                        <span class="rounded-circle p-2 bg-success bg-opacity-25 shadow-sm">
-                                            <img src="{{ asset('assets/images/faces/8.jpg') }}"
-                                                class="card-img rounded-circle" alt="Xavier Holt">
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2 fw-medium">Xavier Holt</h6>
-                                        <p class="mb-0 text-primary fw-semibold">CHIEF FINANCIAL OFFICER</p>
-                                        <hr class="bg-success border-success border-2 border-top">
-                                        <p class="text-muted fs-12 pt-1 px-2">Xavier brings over 20 years of financial
-                                            expertise to the company, ensuring our financial stability and growth.</p>
-                                        <div class="d-flex justify-content-center">
-                                            <a aria-label="anchor" href="javascript:void(0);"
-                                                class="btn btn-icon rounded-circle btn-primary btn-wave btn-sm waves-effect waves-light"><i
-                                                    class="ri-twitter-x-fill"></i></a>
-                                            <a aria-label="anchor" href="javascript:void(0);"
-                                                class="btn btn-icon rounded-circle btn-secondary btn-wave btn-sm ms-2 waves-effect waves-light"><i
-                                                    class="ri-facebook-fill"></i></a>
-                                            <a aria-label="anchor" href="javascript:void(0);"
-                                                class="btn btn-icon rounded-circle btn-success btn-wave btn-sm ms-2 waves-effect waves-light"><i
-                                                    class="ri-instagram-line"></i></a>
-                                            <a aria-label="anchor" href="javascript:void(0);"
-                                                class="btn btn-icon rounded-circle btn-info btn-wave btn-sm ms-2 waves-effect waves-light"><i
-                                                    class="ri-linkedin-fill"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
-                            <div class="card custom-card team-member text-center">
-                                <div class="team-shape1"></div>
-                                <div class="team-shape2"></div>
-                                <div class="card-body py-4">
-                                    <div class="mb-3 lh-1 d-flex gap-2 justify-content-center">
-                                        <span class="rounded-circle p-2 bg-info bg-opacity-25 shadow-sm">
-                                            <img src="{{ asset('assets/images/faces/10.jpg') }}"
-                                                class="card-img rounded-circle" alt="Mateo Cruz">
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2 fw-medium">Mateo Cruz</h6>
-                                        <p class="mb-0 text-primary fw-semibold">HEAD OF PRODUCT DEVELOPMENT</p>
-                                        <hr class="bg-success border-success border-2 border-top">
-                                        <p class="text-muted fs-12 pt-1 px-2">Mateo oversees the entire product
-                                            development lifecycle, ensuring that our solutions meet market.</p>
-                                        <div class="d-flex justify-content-center">
-                                            <a aria-label="anchor" href="javascript:void(0);"
-                                                class="btn btn-icon rounded-circle btn-primary btn-wave btn-sm waves-effect waves-light"><i
-                                                    class="ri-twitter-x-fill"></i></a>
-                                            <a aria-label="anchor" href="javascript:void(0);"
-                                                class="btn btn-icon rounded-circle btn-secondary btn-wave btn-sm ms-2 waves-effect waves-light"><i
-                                                    class="ri-facebook-fill"></i></a>
-                                            <a aria-label="anchor" href="javascript:void(0);"
-                                                class="btn btn-icon rounded-circle btn-success btn-wave btn-sm ms-2 waves-effect waves-light"><i
-                                                    class="ri-instagram-line"></i></a>
-                                            <a aria-label="anchor" href="javascript:void(0);"
-                                                class="btn btn-icon rounded-circle btn-info btn-wave btn-sm ms-2 waves-effect waves-light"><i
-                                                    class="ri-linkedin-fill"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
-                            <div class="card custom-card team-member text-center">
-                                <div class="team-shape1"></div>
-                                <div class="team-shape2"></div>
-                                <div class="card-body py-4">
-                                    <div class="mb-3 lh-1 d-flex gap-2 justify-content-center">
-                                        <span class="rounded-circle p-2 bg-secondary bg-opacity-25 shadow-sm">
-                                            <img src="{{ asset('assets/images/faces/5.jpg') }}"
-                                                class="card-img rounded-circle" alt="...">
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2 fw-medium">Ariana Wolfe</h6>
-                                        <p class="mb-0 text-primary fw-semibold">CHIEF OPERATIONS OFFICER</p>
-                                        <hr class="bg-success border-success border-2 border-top">
-                                        <p class="text-muted fs-12 pt-1 px-2">Ariana has over a decade of experience in
-                                            operational excellence and business strategies, ensuring smooth.</p>
-                                        <div class="d-flex justify-content-center">
-                                            <a aria-label="anchor" href="javascript:void(0);"
-                                                class="btn btn-icon rounded-circle btn-primary btn-wave btn-sm waves-effect waves-light"><i
-                                                    class="ri-twitter-x-fill"></i></a>
-                                            <a aria-label="anchor" href="javascript:void(0);"
-                                                class="btn btn-icon rounded-circle btn-secondary btn-wave btn-sm ms-2 waves-effect waves-light"><i
-                                                    class="ri-facebook-fill"></i></a>
-                                            <a aria-label="anchor" href="javascript:void(0);"
-                                                class="btn btn-icon rounded-circle btn-success btn-wave btn-sm ms-2 waves-effect waves-light"><i
-                                                    class="ri-instagram-line"></i></a>
-                                            <a aria-label="anchor" href="javascript:void(0);"
-                                                class="btn btn-icon rounded-circle btn-info btn-wave btn-sm ms-2 waves-effect waves-light"><i
-                                                    class="ri-linkedin-fill"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
-                            <div class="card custom-card team-member text-center">
-                                <div class="team-shape1"></div>
-                                <div class="team-shape2"></div>
-                                <div class="card-body py-4">
-                                    <div class="mb-3 lh-1 d-flex gap-2 justify-content-center">
-                                        <span class="rounded-circle p-2 bg-primary bg-opacity-25 shadow-sm">
-                                            <img src="{{ asset('assets/images/faces/7.jpg') }}"
-                                                class="card-img rounded-circle" alt="...">
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2 fw-medium">Selena Rivera</h6>
-                                        <p class="mb-0 text-primary fw-semibold">MARKETING DIRECTOR</p>
-                                        <hr class="bg-success border-success border-2 border-top">
-                                        <p class="text-muted fs-12 pt-1 px-2">Selena is an expert in digital marketing
-                                            strategies and brand building, helping our company reach a global audience.
-                                        </p>
-                                        <div class="d-flex justify-content-center">
-                                            <a aria-label="anchor" href="javascript:void(0);"
-                                                class="btn btn-icon rounded-circle btn-primary btn-wave btn-sm waves-effect waves-light"><i
-                                                    class="ri-twitter-x-fill"></i></a>
-                                            <a aria-label="anchor" href="javascript:void(0);"
-                                                class="btn btn-icon rounded-circle btn-secondary btn-wave btn-sm ms-2 waves-effect waves-light"><i
-                                                    class="ri-facebook-fill"></i></a>
-                                            <a aria-label="anchor" href="javascript:void(0);"
-                                                class="btn btn-icon rounded-circle btn-success btn-wave btn-sm ms-2 waves-effect waves-light"><i
-                                                    class="ri-instagram-line"></i></a>
-                                            <a aria-label="anchor" href="javascript:void(0);"
-                                                class="btn btn-icon rounded-circle btn-info btn-wave btn-sm ms-2 waves-effect waves-light"><i
-                                                    class="ri-linkedin-fill"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- End:: Section-6 -->
-
-
-
-            <!-- Start:: Section-8 -->
-            <section class="section" id="faqs">
-                <div class="container text-center">
-                    <p class="fs-14 fw-medium text-success mb-1">
-                        <span class="landing-section-heading text-success"><i
-                                class="ti ti-inner-shadow-top-right-filled text-secondary me-1 fs-10"></i>FAQs</span>
-                    </p>
-                    <h4 class="fw-semibold mt-3 mb-2">Common Questions and Answers</h4>
-                    <div class="row justify-content-center">
-                        <div class="col-xl-7">
-                            <p class="text-muted fs-14 mb-5 fw-normal">Weve compiled a list of the most common
-                                questions to assist you in finding the information you need.</p>
-                        </div>
-                    </div>
-                    <div class="row text-start">
-                        <div class="col-xl-12">
-                            <div class="row gy-2">
-                                <div class="col-xl-6">
-                                    <div class="accordion accordion-customicon1 faq-accordion accordion-primary accordions-items-separate"
-                                        id="accordionFAQ5">
-                                        <div class="accordion-item shadow-sm">
-                                            <h2 class="accordion-header" id="headingcustomicon2TwentyOne">
-                                                <button
-                                                    class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent"
-                                                    type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapsecustomicon2TwentyOne"
-                                                    aria-expanded="true" aria-controls="collapsecustomicon2TwentyOne">
-                                                    1. How do I update my account settings?
-                                                </button>
-                                            </h2>
-                                            <div id="collapsecustomicon2TwentyOne"
-                                                class="accordion-collapse collapse show"
-                                                aria-labelledby="headingcustomicon2TwentyOne"
-                                                data-bs-parent="#accordionFAQ5">
-                                                <div
-                                                    class="accordion-body ps-3 m-3 my-3 border-success border-3 border-start text-default bg-success bg-opacity-10">
-                                                    You can update your account settings by going to the settings page,
-                                                    where you can change your personal information, password, and
-                                                    notification preferences.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item shadow-sm">
-                                            <h2 class="accordion-header" id="headingcustomicon2TwentyTwo">
-                                                <button
-                                                    class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
-                                                    type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapsecustomicon2TwentyTwo"
-                                                    aria-expanded="false"
-                                                    aria-controls="collapsecustomicon2TwentyTwo">
-                                                    2. How can I reset my password?
-                                                </button>
-                                            </h2>
-                                            <div id="collapsecustomicon2TwentyTwo" class="accordion-collapse collapse"
-                                                aria-labelledby="headingcustomicon2TwentyTwo"
-                                                data-bs-parent="#accordionFAQ5">
-                                                <div
-                                                    class="accordion-body ps-3 m-3 my-3 border-success border-3 border-start text-default bg-success bg-opacity-10">
-                                                    To reset your password, go to the login page and click on the
-                                                    "Forgot Password" link. You will receive an email with instructions
-                                                    to reset your password.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item shadow-sm">
-                                            <h2 class="accordion-header" id="headingcustomicon2TwentyThree">
-                                                <button
-                                                    class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
-                                                    type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapsecustomicon2TwentyThree"
-                                                    aria-expanded="false"
-                                                    aria-controls="collapsecustomicon2TwentyThree">
-                                                    3. How do I change my email address?
-                                                </button>
-                                            </h2>
-                                            <div id="collapsecustomicon2TwentyThree"
-                                                class="accordion-collapse collapse"
-                                                aria-labelledby="headingcustomicon2TwentyThree"
-                                                data-bs-parent="#accordionFAQ5">
-                                                <div
-                                                    class="accordion-body ps-3 m-3 my-3 border-success border-3 border-start text-default bg-success bg-opacity-10">
-                                                    To change your email address, navigate to the account settings page,
-                                                    where you can enter a new email address and verify it through a
-                                                    confirmation email.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item shadow-sm">
-                                            <h2 class="accordion-header" id="headingcustomicon2TwentyFour">
-                                                <button
-                                                    class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
-                                                    type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapsecustomicon2TwentyFour"
-                                                    aria-expanded="false"
-                                                    aria-controls="collapsecustomicon2TwentyFour">
-                                                    4. How can I enable two-factor authentication?
-                                                </button>
-                                            </h2>
-                                            <div id="collapsecustomicon2TwentyFour"
-                                                class="accordion-collapse collapse"
-                                                aria-labelledby="headingcustomicon2TwentyFour"
-                                                data-bs-parent="#accordionFAQ5">
-                                                <div
-                                                    class="accordion-body ps-3 m-3 my-3 border-success border-3 border-start text-default bg-success bg-opacity-10">
-                                                    To enable two-factor authentication, go to your account settings and
-                                                    click on the "Security" tab. You can enable two-factor
-                                                    authentication using an authenticator app or SMS.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item shadow-sm">
-                                            <h2 class="accordion-header" id="headingcustomicon2TwentyFive">
-                                                <button
-                                                    class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
-                                                    type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapsecustomicon2TwentyFive"
-                                                    aria-expanded="false"
-                                                    aria-controls="collapsecustomicon2TwentyFive">
-                                                    5. How do I delete my account?
-                                                </button>
-                                            </h2>
-                                            <div id="collapsecustomicon2TwentyFive"
-                                                class="accordion-collapse collapse"
-                                                aria-labelledby="headingcustomicon2TwentyFive"
-                                                data-bs-parent="#accordionFAQ5">
-                                                <div
-                                                    class="accordion-body ps-3 m-3 my-3 border-success border-3 border-start text-default bg-success bg-opacity-10">
-                                                    If you want to delete your account, please visit the account
-                                                    settings page and follow the instructions under the "Delete Account"
-                                                    section. Note that this action is irreversible.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6">
-                                    <div class="accordion accordion-customicon1 faq-accordion accordion-primary accordions-items-separate"
-                                        id="accordionFAQ1">
-                                        <div class="accordion-item shadow-sm">
-                                            <h2 class="accordion-header" id="headingcustomicon2One">
-                                                <button
-                                                    class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
-                                                    type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapsecustomicon2One" aria-expanded="false"
-                                                    aria-controls="collapsecustomicon2One">
-                                                    6. How can I update my privacy settings?
-                                                </button>
-                                            </h2>
-                                            <div id="collapsecustomicon2One" class="accordion-collapse collapse"
-                                                aria-labelledby="headingcustomicon2One"
-                                                data-bs-parent="#accordionFAQ1">
-                                                <div
-                                                    class="accordion-body ps-3 m-3 my-3 border-success border-3 border-start text-default bg-success bg-opacity-10">
-                                                    To update your privacy settings, navigate to the "Privacy &
-                                                    Security" section in your account settings. Here, you can manage
-                                                    data sharing options, control who sees your profile information, and
-                                                    adjust permissions for third-party apps.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item shadow-sm">
-                                            <h2 class="accordion-header" id="headingcustomicon2Two">
-                                                <button
-                                                    class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
-                                                    type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapsecustomicon2Two" aria-expanded="false"
-                                                    aria-controls="collapsecustomicon2Two">
-                                                    7. How do I enable two-factor authentication?
-                                                </button>
-                                            </h2>
-                                            <div id="collapsecustomicon2Two" class="accordion-collapse collapse"
-                                                aria-labelledby="headingcustomicon2Two"
-                                                data-bs-parent="#accordionFAQ1">
-                                                <div
-                                                    class="accordion-body ps-3 m-3 my-3 border-success border-3 border-start text-default bg-success bg-opacity-10">
-                                                    To enable two-factor authentication, go to the "Security Settings"
-                                                    and choose the two-factor authentication option. You can set it up
-                                                    using an authenticator app or receive codes via SMS for enhanced
-                                                    account security.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item shadow-sm">
-                                            <h2 class="accordion-header" id="headingcustomicon2Three">
-                                                <button
-                                                    class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
-                                                    type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapsecustomicon2Three" aria-expanded="false"
-                                                    aria-controls="collapsecustomicon2Three">
-                                                    8. How do I manage my data sharing preferences?
-                                                </button>
-                                            </h2>
-                                            <div id="collapsecustomicon2Three"
-                                                class="accordion-collapse collapse show"
-                                                aria-labelledby="headingcustomicon2Three"
-                                                data-bs-parent="#accordionFAQ1">
-                                                <div
-                                                    class="accordion-body ps-3 m-3 my-3 border-success border-3 border-start text-default bg-success bg-opacity-10">
-                                                    You can manage your data sharing preferences by visiting the
-                                                    "Privacy Settings" page. Here, you can control how your data is
-                                                    shared with third-party services.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item shadow-sm">
-                                            <h2 class="accordion-header" id="headingcustomicon2Four">
-                                                <button
-                                                    class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
-                                                    type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapsecustomicon2Four" aria-expanded="false"
-                                                    aria-controls="collapsecustomicon2Four">
-                                                    9. How do I secure my account if I suspect unauthorized access?
-                                                </button>
-                                            </h2>
-                                            <div id="collapsecustomicon2Four" class="accordion-collapse collapse"
-                                                aria-labelledby="headingcustomicon2Four"
-                                                data-bs-parent="#accordionFAQ1">
-                                                <div
-                                                    class="accordion-body ps-3 m-3 my-3 border-success border-3 border-start text-default bg-success bg-opacity-10">
-                                                    If you suspect unauthorized access to your account, go to the
-                                                    "Security" section and review your recent activity. You can log out
-                                                    of all devices, reset your password, and enable two-factor
-                                                    authentication for added protection.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item shadow-sm">
-                                            <h2 class="accordion-header" id="headingcustomicon2Five">
-                                                <button
-                                                    class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
-                                                    type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapsecustomicon2Five" aria-expanded="false"
-                                                    aria-controls="collapsecustomicon2Five">
-                                                    10. How can I delete my personal data from the platform?
-                                                </button>
-                                            </h2>
-                                            <div id="collapsecustomicon2Five" class="accordion-collapse collapse"
-                                                aria-labelledby="headingcustomicon2Five"
-                                                data-bs-parent="#accordionFAQ1">
-                                                <div
-                                                    class="accordion-body ps-3 m-3 my-3 border-success border-3 border-start text-default bg-success bg-opacity-10">
-                                                    You can request the deletion of your personal data by navigating to
-                                                    the "Privacy Settings" page and selecting the option to delete your
-                                                    data. Note that this action is irreversible, and your data will be
-                                                    permanently removed from the platform.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- End:: Section-8 -->
-
-            <!-- Start:: Section-9 -->
-
-            <!-- End:: Section-9 -->
-
-            <!-- Start:: Section-10 -->
-            <section class="section" id="contact">
-                <div class="container text-center">
-                    <p class="fs-14 fw-medium text-success mb-1">
-                        <span class="landing-section-heading text-success"><i
-                                class="ti ti-inner-shadow-top-right-filled text-secondary me-1 fs-10"></i>Contact
-                            Us</span>
-                    </p>
-                    <h4 class="fw-semibold mt-3 mb-2">Have Questions? We're Here to Help!</h4>
-                    <div class="row justify-content-center">
-                        <div class="col-xl-9">
-                            <p class="text-muted fs-14 mb-5 fw-normal">Discover our extensive support resources! Get
-                                quick answers to your questions and find the solutions you need.</p>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center align-items-center">
-                        <div class="col-xl-9">
-                            <div class="card custom-card contactus-form contactus-form-left overflow-hidden p-4">
-                                <div class="text-start">
-                                    <div class="row pt-0 justify-content-center">
-                                        <div class="col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-12">
-                                            <div class="row gy-3 text-start">
-                                                <div class="col-xl-12">
-                                                    <label class="form-label" for="contact-address-firstname">First
-                                                        Name :</label>
-                                                    <input class="form-control rounded-pill bg-light"
-                                                        id="contact-address-firstname" placeholder="Enter Name"
-                                                        type="text">
-                                                </div>
-                                                <div class="col-xl-12">
-                                                    <label class="form-label" for="contact-address-email">Email Id
-                                                        :</label>
-                                                    <input class="form-control rounded-pill bg-light"
-                                                        id="contact-address-email" placeholder="Enter Email Id"
-                                                        type="email">
-                                                </div>
-                                                <div class="col-xl-7">
-                                                    <label class="form-label" for="contact-mail-message">Message
-                                                        :</label>
-                                                    <textarea class="form-control rounded-pill bg-light" id="contact-mail-message" rows="1"
-                                                        placeholder="Write Here.."></textarea>
-                                                </div>
-                                                <div class="col-xl-5 align-self-end">
-                                                    <button
-                                                        class="btn btn-primary btn-wave btn-w-lg waves-effect waves-light w-100 rounded-pill">Submit
-                                                        Message</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xxl-5 col-xl-6 d-none d-xl-block">
-                                            <img src="{{ asset('assets/images/media/media-78.png') }}" alt=""
-                                                class="img-fluid">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body bg-primary mt-5 rounded-3 bg-opacity-25">
-                                    <div class="row justify-content-center gy-3 gy-xl-0">
-                                        <div class="col-xl-4">
-                                            <div class="card custom-card mb-0">
-                                                <div class="card-body">
-                                                    <span class="avatar avatar-lg bg-primary avatar-rounded">
-                                                        <i class="ri-map-pin-fill fs-18 lh-1 align-middle"></i>
-                                                    </span>
-                                                    <p class="fw-semibold fs-14 mb-0"><span
-                                                            class="text-muted fw-medium fs-12">Office Location:
-                                                        </span>Accra-Ghana</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4">
-                                            <div class="card custom-card mb-0">
-                                                <div class="card-body">
-                                                    <span class="avatar avatar-lg bg-info avatar-rounded">
-                                                        <i class="ri-phone-fill fs-18 lh-1 align-middle"></i>
-                                                    </span>
-                                                    <p class="fw-semibold fs-14 mb-0"><span
-                                                            class="text-muted fw-medium fs-12">Mobile:
-                                                        </span>+233500503599</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4">
-                                            <div class="card custom-card mb-0">
-                                                <div class="card-body">
-                                                    <span class="avatar avatar-lg bg-pink avatar-rounded">
-                                                        <i class="ri-mail-fill fs-18 lh-1 align-middle"></i>
-                                                    </span>
-                                                    <p class="fw-semibold fs-14 mb-0"><span
-                                                            class="text-muted fw-medium fs-12">Mail:
-                                                        </span>info@level10gh.com</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- End:: Section-10 -->
-
-            <!-- Start:: Section-11 -->
-            <section class="section landing-footer text-fixed-white">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-6 col-12">
-                            <div class="px-4">
-                                <p class="mb-2 fw-medium fs-14 text-secondary">Subscribe :</p>
-                                <ul class="list-unstyled fw-normal landing-footer-list">
-                                    <li>
-                                        <div class="input-group p-1 border bg-white rounded-pill gap-2 mb-4">
-                                            <input type="text"
-                                                class="form-control rounded-pill border-0 bg-transparent"
-                                                placeholder="Subscribe to our news letter..">
-                                            <div class="btn btn-success rounded-pill">Subscribe</div>
-                                        </div>
-                                        <p class="mb-2 fw-medium fs-14 text-secondary">Follow Us On :</p>
-                                        <div class="mb-0">
-                                            <div class="btn-list">
-                                                <button
-                                                    class="btn btn-sm btn-icon footer-btn rounded-pill btn-wave waves-effect waves-light">
-                                                    <i class="ri-facebook-line fw-bold lh-1 align-middle"></i>
-                                                </button>
-                                                <button
-                                                    class="btn btn-sm btn-icon footer-btn rounded-pill btn-wave waves-effect waves-light">
-                                                    <i class="ri-twitter-x-line fw-bold lh-1 align-middle"></i>
-                                                </button>
-                                                <button
-                                                    class="btn btn-sm btn-icon footer-btn rounded-pill btn-wave waves-effect waves-light">
-                                                    <i class="ri-instagram-line fw-bold lh-1 align-middle"></i>
-                                                </button>
-                                                <button
-                                                    class="btn btn-sm btn-icon footer-btn rounded-pill btn-wave waves-effect waves-light">
-                                                    <i class="ri-github-line fw-bold lh-1 align-middle"></i>
-                                                </button>
-                                                <button
-                                                    class="btn btn-sm btn-icon footer-btn rounded-pill btn-wave waves-effect waves-light">
-                                                    <i class="ri-youtube-line fw-bold lh-1 align-middle"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-6 col-12">
-                            <div class="px-4">
-                                <h6 class="fw-medium fs-14 text-secondary text-decoration-underline link-offset-3">
-                                    Quick Links</h6>
-                                <ul class="list-unstyled op-8 fw-normal landing-footer-list">
-
-                                    <li>
-                                        <a href="javascript:void(0);" class="text-fixed-white">About</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" class="text-fixed-white">Features</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" class="text-fixed-white">FAQ's</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-6 col-12">
-                            <div class="px-4">
-                                <h6 class="fw-medium fs-14 text-secondary text-decoration-underline link-offset-3">
-                                    INFO</h6>
-                                <ul class="list-unstyled op-8 fw-normal landing-footer-list">
-                                    <li>
-                                        <a href="{{ route('auth.register') }}" class="text-fixed-white">Create
-                                            Account</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" class="text-fixed-white">Login </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" class="text-fixed-white">Reset Password</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6 col-12 mb-md-0 mb-3">
-                            <div class="px-4">
-                                <p class="fw-medium mb-3">
-                                    <a href="index.html"><img src="{{ asset('assets/images/level10.png') }}"
-                                            alt="" class="landing-footer-logo"></a>
-                                </p>
-                                <p class="mb-2 op-6 fw-normal">
-                                    IPTS is a transformative solution designed to streamline revenue collection and
-                                    enhance transparency for
-                                    local assemblies across Africa.
-
-                                </p>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- End:: Section-11 -->
-
-            <div class="text-center landing-main-footer py-3 text-muted">
-                <span class="text-muted fs-15">
-                    Copyright ©
-                    <span id="year"></span>
-                    <a href="https://level10gh.com/" class="text-primary fw-medium"><u>IPTS</u></a>.
-                    Managed by Level 10 </a>.
-                    All rights reserved.
-                </span>
-            </div>
-
         </div>
-        <!-- End::app-content -->
+    </header>
 
+    <div id="anywhere-home"></div>
+    <div id="side-bar" class="side-bar">
+        <button class="close-icon-menu"><i class="far fa-times"></i></button>
+        <!-- inner menu area desktop start -->
+        <div class="rts-sidebar-menu-desktop">
+            <a class="logo-1" href="index.html"><img style="width: 70%;" class="logo"
+                    src="{{ asset('assets/assetsfront/images/logo/ipts-logo-main.png') }}" alt="IPTS_logo"></a>
+            <a class="logo-2" href="index.html"><img style="width: 70%;" class="logo"
+                    src="{{ asset('assets/assetsfront/images/logo/ipts-logo-main.png') }}" alt="IPTS_logo"></a>
+            <a class="logo-3" href="index.html"><img style="width: 70%;" class="logo"
+                    src="{{ asset('assets/assetsfront/images/logo/ipts-logo-main.png') }}" alt="IPTS_logo"></a>
+            <a class="logo-4" href="index.html"><img style="width: 70%;" class="logo"
+                    src="{{ asset('assets/assetsfront/images/logo/ipts-logo-main.png') }}" alt="IPTS_logo"></a>
+            <div class="body d-none d-xl-block">
+                <p class="disc">
+                    IPTS is a transformative solution designed to streamline revenue collection and enhance transparency
+                    for local assemblies across Africa.
+                </p>
+                <div class="get-in-touch">
+                    <!-- title -->
+                    <div class="h6 title">Get In Touch</div>
+                    <!-- title End -->
+                    <div class="wrapper">
+                        <!-- single -->
+                        <div class="single">
+                            <i class="fas fa-phone-alt"></i>
+                            <a href="tel:+233500503599">+233 50 050 3599</a>
+                        </div>
+                        <!-- single ENd -->
+                        <!-- single -->
+                        <div class="single">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:info@level10gh.com">info@level10gh.com</a>
+                        </div>
+                        <!-- single ENd -->
+                        <!-- single -->
+                        <div class="single">
+                            <i class="fas fa-globe"></i>
+                            <a href="https://level10gh.com">www.level10gh.com</a>
+                        </div>
+                        <!-- single ENd -->
+                        <!-- single -->
+                        <div class="single">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <a href="https://maps.app.goo.gl/hyRt9k53TXx1LbKZA">29 Senchi Street,Airport Residential,
+                                Accra Ghana</a>
+                        </div>
+                        <!-- single ENd -->
+                    </div>
+                    <div class="social-wrapper-two menu">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <!-- <a href="#"><i class="fab fa-linkedin"></i></a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="body-mobile d-block d-xl-none">
+                <nav class="nav-main mainmenu-nav">
+                    <ul class="mainmenu">
+                        <li><a href="#banner">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="social-wrapper-two menu mobile-menu">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <!-- <a href="#"><i class="fab fa-linkedin"></i></a> -->
+                </div>
+                <a href="#" class="rts-btn btn-primary ml--20 ml_sm--5 header-one-btn quote-btnmenu">Log in</a>
+            </div>
+        </div>
+        <!-- inner menu area desktop End -->
+    </div>
+    <!-- ENd Header Area -->
+
+    <!-- rts banner area start -->
+    <div id="banner" class="rts-banner-area-two eight">
+        <div class="swiper mySwiperh3_banner">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class=" bg_banner-three bg_image rts-section-gap eight">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="banner-three-inner">
+                                        <span class="subtitle-banner">Effortless Tax Payments, Anytime, Anywhere</span>
+                                        <!-- type headline start-->
+                                        <h1 class="title cd-headline clip is-full-width">
+                                            Real-Time Monitoring
+                                        </h1>
+                                        <p class="disc">
+                                            With our Integrated Property Tax System, managing and paying your taxes has
+                                            never been easier. Enjoy secure, flexible payment options tailored for your
+                                            convenience, all from the comfort of your home or office.
+                                        </p>
+                                        <div class="button-group">
+                                            <a href="{{ route('auth.register') }} " class="rts-btn btn-primary-2">Get
+                                                Started</a>
+                                            <a href="#" class="rts-btn btn-primary-2 transparent">About
+                                                Us</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class=" bg_banner-three eight-2 bg_image rts-section-gap">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="banner-three-inner">
+                                        <span class="subtitle-banner">Revolutionizing Property Tax Collection </span>
+                                        <!-- type headline start-->
+                                        <h1 class="title cd-headline clip is-full-width">
+                                            Simplified Tax Management
+                                        </h1>
+                                        <p class="disc">
+                                            Our system brings innovation to tax administration with cutting-edge
+                                            technology, streamlined workflows, and powerful analytics. Simplify the
+                                            management of tax records and collections with a robust platform designed to
+                                            deliver efficiency and transparency.
+                                        </p>
+                                        <div class="button-group">
+                                            <a href="{{ route('auth.register') }} " class="rts-btn btn-primary-2">Get
+                                                Started</a>
+                                            <a href="#" class="rts-btn btn-primary-2 transparent">About
+                                                Us</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class=" bg_banner-three eight-3 bg_image rts-section-gap">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="banner-three-inner">
+                                        <span class="subtitle-banner">A Smarter Way to Manage Revenue</span>
+                                        <!-- type headline start-->
+                                        <h1 class="title cd-headline clip is-full-width">
+                                            Empowering Local Governments
+                                        </h1>
+                                        <p class="disc">
+                                            The Integrated Property Tax System equips local governments with tools to
+                                            maximize revenue collection, reduce inefficiencies, and ensure
+                                            accountability. Drive sustainable development with data-driven insights and
+                                            seamless processes.
+                                        </p>
+                                        <div class="button-group">
+                                            <a href="{{ route('auth.register') }} " class="rts-btn btn-primary-2">Get
+                                                Started</a>
+                                            <a href="#" class="rts-btn btn-primary-2 transparent">About
+                                                Us</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-navigation">
+            <span class="swiper-button-prev"></span>
+            <span class="swiper-button-next"></span>
+        </div>
+    </div>
+    <!-- rts banner area end -->
+
+    <!-- start service area -->
+    <div id="services" class="rts-service-areah2-im-3 eight rts-section-gap">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6">
+                    <div class="image-area">
+                        <img src="{{ asset('assets/assetsfront/images/service/h2/03.jpg') }}" alt="Service_Image">
+                        <img class="two" src="{{ asset('assets/assetsfront/images/service/h2/02.jpg') }}"
+                            alt="Service_Image">
+                        <img class="three" src="{{ asset('assets/assetsfront/images/service/h2/01.jpg') }}"
+                            alt="Service_Image">
+                        <div class="ratio-area">
+                            <h3 class="ratio">99%</h3>
+                            <span>Collection Ratio</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="service-h2-content pl--30">
+                        <div class="title-area  service-h2 service">
+                            <span>Why Choose Us</span>
+                            <h2 class="title">Transforming Revenue Management Across Africa</h2>
+                        </div>
+                        <div class="content-wrapper">
+                            <p class="disc">
+                                IPTS is redefining how communities across Africa collect and manage revenue. By
+                                leveraging technology and promoting transparency, it ensures efficient processes that
+                                empower citizens and drive sustainable development.
+                            </p>
+                            <div class="feature-one-wrapper mt--40">
+                                <div class="single-feature-one eight">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="639pt"
+                                        viewBox="-19 -19 639 639.99991" width="639pt">
+                                        <path
+                                            d="m540.5 330v-20c5.519531 0 10-4.476562 10-10v-60c0-5.523438-4.480469-10-10-10h-54l-1.9375-7.511719c-4.421875-17.179687-11.289062-33.636719-20.402344-48.859375l-4-6.691406 38.339844-38.40625c3.859375-3.867188 3.859375-10.132812 0-14l-42.46875-42.53125c-3.921875-3.738281-10.082031-3.738281-14.003906 0l-38.410156 38.410156-6.6875-4c-15.246094-9.117187-31.71875-15.984375-48.921876-20.410156l-7.507812-1.953125v-54.046875c0-5.523438-4.476562-10-10-10h-60c-5.523438 0-10 4.476562-10 10v54l-7.511719 1.941406c-17.179687 4.417969-33.636719 11.285156-48.867187 20.386719l-6.691406 4.003906-38.398438-38.332031c-3.925781-3.769531-10.125-3.769531-14.050781 0l-42.480469 42.46875c-1.867188 1.863281-2.917969 4.394531-2.917969 7.03125 0 2.640625 1.050781 5.167969 2.917969 7.03125l38.410156 38.40625-4 6.691406c-9.109375 15.222656-15.980468 31.679688-20.398437 48.859375l-1.960938 7.511719h-54.050781c-5.523438 0-10 4.476562-10 10v60c0 5.523438 4.476562 10 10 10v20c-16.566406 0-30-13.433594-30-30v-60c0-16.566406 13.433594-30 30-30h38.691406c4.125-13.828125 9.703125-27.179688 16.640625-39.828125l-27.5-27.5c-5.625-5.613281-8.785156-13.230469-8.785156-21.171875s3.160156-15.558594 8.785156-21.167969l42.5-42.5c11.839844-11.332031 30.507813-11.332031 42.347657 0l27.492187 27.488281c12.648437-6.933593 26.003906-12.5 39.828125-16.621093v-38.699219c0-16.566406 13.433594-30 30-30h60c16.566406 0 30 13.433594 30 30v38.699219c13.828125 4.121093 27.175781 9.699219 39.828125 16.632812l27.5-27.5c11.84375-11.332031 30.507813-11.332031 42.351563 0l42.492187 42.488281c5.621094 5.613282 8.777344 13.222657 8.777344 21.167969 0 7.945313-3.15625 15.5625-8.777344 21.171875l-27.5 27.5c6.933594 12.65625 12.507813 26.011719 16.636719 39.839844h38.691406c16.566406 0 30 13.433594 30 30v60c0 16.566406-13.433594 30-30 30zm0 0">
+                                        </path>
+                                        <path
+                                            d="m440.5 270h-20c0-66.273438-53.726562-120-120-120s-120 53.726562-120 120h-20c0-77.320312 62.679688-140 140-140 77.316406 0 140 62.679688 140 140zm0 0">
+                                        </path>
+                                        <path
+                                            d="m300.5 350c-33.136719 0-60-26.867188-60-60 0-33.136719 26.863281-60 60-60 33.140625 0 60 26.863281 60 60-.035156 33.125-26.875 59.964844-60 60zm0-100c-22.089844 0-40 17.910156-40 40s17.910156 40 40 40 40-17.910156 40-40-17.910156-40-40-40zm0 0">
+                                        </path>
+                                        <path
+                                            d="m470.5 390c-33.136719 0-60-26.867188-60-60 0-33.136719 26.863281-60 60-60s60 26.863281 60 60c-.035156 33.125-26.875 59.964844-60 60zm0-100c-22.089844 0-40 17.910156-40 40s17.910156 40 40 40 40-17.910156 40-40-17.910156-40-40-40zm0 0">
+                                        </path>
+                                        <path
+                                            d="m130.5 390c-33.136719 0-60-26.867188-60-60 0-33.136719 26.863281-60 60-60 33.140625 0 60 26.863281 60 60-.035156 33.125-26.875 59.964844-60 60zm0-100c-22.089844 0-40 17.910156-40 40s17.910156 40 40 40 40-17.910156 40-40-17.910156-40-40-40zm0 0">
+                                        </path>
+                                        <path
+                                            d="m561.15625 415.65625c-14.902344-10.242188-32.570312-15.707031-50.65625-15.65625h-80c-4.863281.042969-9.71875.484375-14.511719 1.316406-6.398437-10.007812-14.722656-18.640625-24.488281-25.410156-1.464844-1.105469-3.003906-2.109375-4.609375-2.996094-13.988281-8.472656-30.039063-12.933594-46.390625-12.910156h-80c-30.582031-.109375-59.078125 15.496094-75.460938 41.316406-4.804687-.832031-9.667968-1.273437-14.539062-1.316406h-80c-18.070312-.050781-35.734375 5.40625-50.628906 15.636719-24.617188 16.75-39.355469 44.589843-39.371094 74.363281v40c.035156 27.304688 15.921875 52.101562 40.722656 63.539062 9.15625 4.3125 19.160156 6.519532 29.277344 6.460938h100v-20h-90v-110h-20v108.996094c-3.765625-.753906-7.421875-1.972656-10.890625-3.617188-17.714844-8.167968-29.070313-25.875-29.109375-45.378906v-40c.023438-23.171875 11.503906-44.832031 30.660156-57.863281 11.574219-7.945313 25.296875-12.175781 39.339844-12.136719h80c1.761719 0 3.460938.1875 5.179688.304688-3.382813 9.539062-5.136719 19.578124-5.179688 29.695312v100c.035156 27.601562 22.402344 49.964844 50 50h30v-160h-20v140h-10c-16.566406 0-30-13.433594-30-30v-100c0-38.664062 31.34375-70 70-70h80c12.867188.007812 25.476562 3.570312 36.449219 10.289062 1.015625.554688 1.992187 1.179688 2.917969 1.867188 9.371093 6.417969 17.0625 14.992188 22.421874 25 5.386719 10.109375 8.210938 21.386719 8.210938 32.84375v100c0 16.566406-13.433594 30-30 30h-10v-140h-20v160h30c27.601562-.035156 49.964844-22.398438 50-50v-100c-.046875-10.117188-1.792969-20.152344-5.171875-29.695312 1.722656-.117188 3.421875-.304688 5.171875-.304688h80c14.050781-.039062 27.785156 4.203125 39.367188 12.15625 19.140624 13.039062 30.605468 34.683594 30.632812 57.84375v40c-.035156 19.574219-11.476562 37.332031-29.277344 45.457031-3.417968 1.617188-7.019531 2.804688-10.722656 3.539063v-108.996094h-20v110h-90v20h100c10.058594.0625 20.003906-2.117188 29.109375-6.382812 24.882813-11.402344 40.851563-36.246094 40.890625-63.617188v-40c-.015625-29.761719-14.742188-57.589844-39.34375-74.34375zm0 0">
+                                        </path>
+                                        <path d="m260.5 580h80v20h-80zm0 0"></path>
+                                    </svg>
+                                    <p>Tax Management</p>
+                                </div>
+                                <div class="single-feature-one eight">
+                                    <svg xmlns="http://www.w3.org/2000/svg" id="Global_Message" height="512"
+                                        viewBox="0 0 512 512" width="512">
+                                        <g>
+                                            <path
+                                                d="m232.421 424.651c-1.737-1.962-4.169-3.141-6.76-3.279-8.707-.462-13.615 10.017-7.778 16.606l4.642 5.239c-54.563-9.31-103.233-38.3-138.428-82.825-32.122-40.625-49.812-91.762-49.812-143.99 0-5.523-4.477-10-10-10s-10 4.477-10 10c0 56.71 19.221 112.252 54.122 156.393 48.696 61.588 111.449 84.16 155.1 90.82l-7.282 6.67c-6.48 5.935-2.67 16.878 6.037 17.34 2.592.138 5.131-.778 7.059-2.545l23.979-21.976c4.015-3.68 4.338-9.974.721-14.059z">
+                                            </path>
+                                            <path
+                                                d="m494.36 378.78-33.005-72.009c-3.427-7.478-9.109-13.416-16.241-17.1 8.937-23.207 13.655-48.081 13.658-73.246 0-.008.001-.016.001-.024s-.001-.017-.001-.025c-.006-45.588-15.458-90.231-43.508-125.707-37.214-47.091-92.393-74.452-151.734-75.359-1.853-.549-3.836-.549-5.698-.004-59.406.82-114.683 28.187-151.957 75.361-28.054 35.481-43.506 80.129-43.51 125.721 0 .004-.001.009-.001.013s.001.008.001.012c.002 45.594 15.454 90.245 43.509 125.727 37.29 47.174 92.763 74.644 152.211 75.37.696.015 1.407.016 2.119.016h.13l27.101 59.132c8.728 19.041 26.871 21.144 32.706 21.144 5.213 0 10.407-1.16 15.266-3.465l141.555-67.157c17.608-8.354 25.857-29.942 17.398-48.4zm-188.741 89.544-33.004-72.011c-.769-1.677-1.225-3.419-1.419-5.163l65.384 15.411-28.936 65.067c-.786-1.007-1.475-2.105-2.025-3.304zm137.555-153.22 33.005 72.009c.607 1.326 1.009 2.693 1.254 4.068l-67.482-19.242 30.493-61.002c1.096 1.223 2.02 2.619 2.73 4.167zm-90.405 74.726c-.004-.001-.009-.002-.013-.003l-70.174-16.54 136.772-64.888-32.606 65.228c0 .001 0 .001-.001.002l-9.749 19.503c-.635 1.271-1.988 1.943-3.301 1.632zm-236.87-67.661c-20.054-28.197-31.433-60.964-33.261-95.767h82.808c.815 22.33 4.363 44.306 10.587 65.567-21.252 7.381-41.407 17.504-60.134 30.2zm.003-211.533c18.725 12.694 38.878 22.816 60.131 30.198-6.224 21.253-9.771 43.228-10.587 65.568h-82.808c1.829-34.803 13.209-67.569 33.264-95.766zm289.335-.001c20.055 28.196 31.435 60.963 33.264 95.767h-84.021c-.709-22.232-4.119-44.119-10.185-65.289 21.541-7.4 41.968-17.617 60.942-30.478zm-210.072 175.511c-5.653-19.374-8.909-39.395-9.711-59.744h65.117v51.55c-18.777.718-37.338 3.464-55.406 8.194zm55.405-131.294v51.55h-65.117c.802-20.358 4.059-40.378 9.712-59.744 18.067 4.729 36.629 7.474 55.405 8.194zm74.572-7.982c5.509 19.305 8.632 39.259 9.33 59.531h-63.902v-51.551c18.477-.708 36.758-3.382 54.572-7.98zm-53.312 209.38c-.427.203-.844.42-1.26.638v-58.916c16.051.666 31.922 2.937 47.399 6.78-5.205 13.431-11.581 26.362-19.026 38.636zm65.389-45.843c5.841 1.988 11.59 4.206 17.245 6.639l-25.117 11.916c2.856-6.075 5.481-12.266 7.872-18.555zm-12.767-24.653c-17.576-4.49-35.626-7.103-53.881-7.802v-51.551h63.806c-.89 20.203-4.219 40.091-9.925 59.353zm100.843.036c-4.075.391-8.096 1.493-11.91 3.303l-35.54 16.861c-11.04-5.648-22.465-10.492-34.225-14.493 6.258-21.112 9.864-42.916 10.766-65.059h84.115c-1.087 20.693-5.55 40.666-13.206 59.388zm-154.725-150.959v-85.943c20.91 22.967 37.343 49.801 48.287 78.939-15.775 3.978-31.944 6.325-48.287 7.004zm-20 .001c-16.6-.689-33.009-3.096-49-7.182 11.174-29.165 27.849-55.973 49-78.86zm0 163.139v86.037c-21.151-22.882-37.834-49.699-49.003-78.854 15.994-4.087 32.403-6.494 49.003-7.183zm87.498-175.863c-11.542-31.229-28.908-60.049-51.061-84.845 40.657 6.145 77.897 26.341 105.743 57.675-17.07 11.414-35.395 20.518-54.682 27.17zm-104.066-84.83c-22.308 24.655-39.874 53.393-51.628 84.589-19.042-6.635-37.131-15.659-53.985-26.93 27.823-31.315 65.014-51.5 105.613-57.659zm-51.631 273.659c11.75 31.189 29.321 59.941 51.621 84.584-40.58-6.167-77.803-26.389-105.603-57.656 16.855-11.271 34.944-20.295 53.982-26.928zm174.021 100.294 12.712 2.996c1.767.418 3.539.619 5.288.619 8.536 0 16.518-4.802 20.498-12.778l5.962-11.927 67.156 19.149-140.368 66.594z">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                    <p>24/7 Support:</p>
+                                </div>
+                                <div class="button-group">
+                                    <a href="{{ route('auth.register') }} " class="rts-btn btn-primary-2">Get
+                                        Started</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- start service area End -->
+
+    <!-- cta section start -->
+    <div class="rts-cta-section-start rts-section-gap cta-bg-h2">
+        <div class="container">
+            <div class="row">
+                <div class="cta-h2-wrapper text-center">
+                    <div class="icon">
+                        <a href="#"><i class="fas fa-phone-alt"></i></a>
+                    </div>
+                    <div class="body">
+                        <p class="info">Reach out to our dedicated support team for help with property tax inquiries
+                            or system navigation. <span>(24/7 Available)</span></p>
+                        <a href="tel:+233500503599" class="number">+233 50 050 3599</a>
+                        <a href="#" class="rts-btn btn-primary-2">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- cta section end -->
+
+    <!-- Working Process section start -->
+    <div id="about" class="rts-working-process-section eight rts-section-gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="title-area">
+                        <span>About us</span>
+                        <h2 class="title">Our Commitment to Excellence</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <p class="decs">By integrating advanced technology and user-focused design, IPTS empowers
+                        citizens and authorities alike to participate in transparent and efficient revenue collection.
+                    </p>
+                </div>
+            </div>
+            <div class="rts-working-process-inner">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                        <div class="wrapper">
+                            <a href="#" class="icon">
+                                <img src="{{ asset('assets/assetsfront/images/working-step/icon/goal.svg') }}"
+                                    alt="Icon">
+                            </a>
+                            <div class="content">
+                                <h5 class="title">Transparency</h5>
+                                <p class="disc">We ensure openness in all processes, providing a clear understanding
+                                    of how funds are managed to foster trust and accountability.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                        <div class="wrapper">
+                            <a href="#" class="icon">
+                                <img src="{{ asset('assets/assetsfront/images/working-step/icon/save.svg') }}"
+                                    alt="Icon">
+                            </a>
+                            <div class="content">
+                                <h5 class="title">Innovative Solutions </h5>
+                                <p class="disc">Using cutting-edge technology, we create efficient systems for fast
+                                    and reliable revenue collection and management.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                        <div class="wrapper">
+                            <a href="#" class="icon">
+                                <img src="{{ asset('assets/assetsfront/images/working-step/icon/user.svg') }}"
+                                    alt="Icon">
+                            </a>
+                            <div class="content">
+                                <h5 class="title">Community-Centered Approach</h5>
+                                <p class="disc">CWe reinvest funds to enhance public services and infrastructure,
+                                    promoting sustainable development in every community.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                        <div class="wrapper">
+                            <a href="#" class="icon">
+                                <img src="{{ asset('assets/assetsfront/images/working-step/icon/target.svg') }}"
+                                    alt="Icon">
+                            </a>
+                            <div class="content">
+                                <h5 class="title">Exceptional User Experience</h5>
+                                <p class="disc">Our intuitive and accessible platforms deliver seamless experiences
+                                    tailored to the needs of individuals and organizations.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Working Process section end -->
+
+    <!-- rts service post area  Start-->
+    <div id="features" class="rts-service-area eight rts-section-gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="rts-title-area service text-center">
+                        <p class="pre-title">
+                            FEATURES
+                        </p>
+                        <h2 class="title">Key Features of the IPTS</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid service-main plr--120-service mt--50 plr_md--0 pl_sm--0 pr_sm--0">
+            <div class="background-service row">
+                <!-- start single Service -->
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="service-one-inner one">
+                        <div class="thumbnail">
+                            <img src="{{ asset('assets/assetsfront/images/service/icon/service-logo11.svg') }}"
+                                alt="finbiz_service">
+                        </div>
+                        <div class="service-details">
+                            <a href="#">
+                                <h5 class="title">Real-Time Revenue Tracking</h5>
+                            </a>
+                            <p class="disc">
+                                Monitor payments and revenue in real time, ensuring transparency and accountability at
+                                every stage.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end single Services -->
+                <!-- start single Service -->
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="service-one-inner two">
+                        <div class="thumbnail">
+                            <img src="{{ asset('assets/assetsfront/images/service/icon/service-logo4.svg') }}"
+                                alt="finbiz_service">
+                        </div>
+                        <div class="service-details">
+                            <a href="#">
+                                <h5 class="title">User-Friendly Interface</h5>
+                            </a>
+                            <p class="disc">
+                                Navigate a simple, intuitive platform to access property assessments, make payments, and
+                                track progress effortlessly.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end single Services -->
+                <!-- start single Service -->
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="service-one-inner three">
+                        <div class="thumbnail">
+                            <img src="{{ asset('assets/assetsfront/images/service/icon/service-logo5.svg') }}"
+                                alt="finbiz_service">
+                        </div>
+                        <div class="service-details">
+                            <a href="#">
+                                <h5 class="title">Enhanced Data Security</h5>
+                            </a>
+                            <p class="disc">
+                                Built with state-of-the-art security features to safeguard your personal and financial
+                                data, ensuring peace of mind. </p>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end single Services -->
+                <!-- start single Service -->
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="service-one-inner four">
+                        <div class="thumbnail">
+                            <img src="{{ asset('assets/assetsfront/images/service/icon/service-logo6.svg') }}"
+                                alt="finbiz_service">
+                        </div>
+                        <div class="service-details">
+                            <a href="#">
+                                <h5 class="title">Automated Notifications</h5>
+                            </a>
+                            <p class="disc">
+                                Receive timely alerts and reminders for payment deadlines, keeping you updated and in
+                                control of your obligations.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end single Services -->
+                <!-- start single Service -->
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="service-one-inner five">
+                        <div class="thumbnail">
+                            <img src="{{ asset('assets/assetsfront/images/service/icon/service-logo22.svg') }}"
+                                alt="finbiz_service">
+                        </div>
+                        <div class="service-details">
+                            <a href="#">
+                                <h5 class="title">Secure and Easy Payment Options</h5>
+                            </a>
+                            <p class="disc">
+                                With multiple payment methods, including digital and local channels, paying taxes has
+                                never been easier or more secure.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end single Services -->
+                <!-- start single Service -->
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="service-one-inner six">
+                        <div class="thumbnail">
+                            <img src="{{ asset('assets/assetsfront/images/service/icon/service-logo33.svg') }}"
+                                alt="finbiz_service">
+                        </div>
+                        <div class="service-details">
+                            <a href="#">
+                                <h5 class="title">Community Investment</h5>
+                            </a>
+                            <p class="disc">
+                                Every payment contributes to vital infrastructure and services, directly benefiting the
+                                local community and driving growth.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end single Services -->
+            </div>
+        </div>
+    </div>
+    <!-- rts service post area ENd -->
+
+    <!-- start about our company -->
+    <div id="about-us" class="rts-about-our-company-h2 eight rts-section-gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt_sm--30">
+                    <div class="title-area about-company">
+                        <span>About IPTS</span>
+                        <h2 class="title">Empowering Communities with Efficient Tax Solutions</h2>
+                    </div>
+                    <div class="about-company-wrapper">
+                        <p class="disc">
+                            The Integrated Property Tax System (IPTS) is designed to revolutionize the way property
+                            taxes are managed and collected across Africa. Our platform offers a seamless, transparent,
+                            and efficient solution for both citizens and local governments.
+                        </p>
+                        <div class="rts-tab-style-one">
+                            <div class="d-flex align-items-start contoler-company">
+                                <div class="nav flex-column nav-pills me-3 button-area" id="v-pills-tab"
+                                    role="tablist" aria-orientation="vertical">
+                                    <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill"
+                                        data-bs-target="#v-pills-home" type="button" role="tab"
+                                        aria-controls="v-pills-home" aria-selected="true">01. Transparency</button>
+                                    <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill"
+                                        data-bs-target="#v-pills-profile" type="button" role="tab"
+                                        aria-controls="v-pills-profile" aria-selected="false">02. Efficiency</button>
+                                    <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill"
+                                        data-bs-target="#v-pills-messages" type="button" role="tab"
+                                        aria-controls="v-pills-messages" aria-selected="false">03. Security</button>
+                                    <button class="nav-link" id="v-pills-manufacture-tab" data-bs-toggle="pill"
+                                        data-bs-target="#v-pills-manufacture" type="button" role="tab"
+                                        aria-controls="v-pills-manufacture" aria-selected="false">04. Community
+                                        Impact</button>
+                                </div>
+                                <div class="tab-content" id="v-pills-tabContent">
+                                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                                        aria-labelledby="v-pills-home-tab">
+                                        <!-- start tab content -->
+                                        <div class="rts-tab-content-one">
+                                            <p><img src="{{ asset('assets/assetsfront/images/faq/transparency.jpg') }}"
+                                                    alt="Transparency"></p>
+                                            <p class="disc">
+                                                IPTS ensures complete transparency in the tax collection process.
+                                                Citizens can easily track their payments and see how their contributions
+                                                are being utilized for community development.
+                                            </p>
+                                            <div class="check-area">
+                                                <i class="fas fa-check-circle"></i>
+                                                <p class="disc">
+                                                    Real-time revenue tracking for accountability.
+                                                </p>
+                                            </div>
+                                            <div class="check-area">
+                                                <i class="fas fa-check-circle"></i>
+                                                <p class="disc">
+                                                    Detailed reports and analytics for informed decision-making.
+                                                </p>
+                                            </div>
+                                            <a class="rts-btn btn-primary-2 color-h-black" href="#">Learn
+                                                More</a>
+                                        </div>
+                                        <!-- start tab content End -->
+                                    </div>
+                                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                                        aria-labelledby="v-pills-profile-tab">
+                                        <!-- start tab content -->
+                                        <div class="rts-tab-content-one">
+                                            <p><img src="{{ asset('assets/assetsfront/images/faq/efficiency.jpg') }}"
+                                                    alt="Efficiency"></p>
+                                            <p class="disc">
+                                                Our system streamlines the entire tax collection process, reducing
+                                                administrative burdens and ensuring timely payments. This efficiency
+                                                translates to better services for the community.
+                                            </p>
+                                            <div class="check-area">
+                                                <i class="fas fa-check-circle"></i>
+                                                <p class="disc">
+                                                    Automated notifications and reminders.
+                                                </p>
+                                            </div>
+                                            <div class="check-area">
+                                                <i class="fas fa-check-circle"></i>
+                                                <p class="disc">
+                                                    User-friendly interface for easy navigation.
+                                                </p>
+                                            </div>
+                                            <a class="rts-btn btn-primary-2 color-h-black" href="#">Learn
+                                                More</a>
+                                        </div>
+                                        <!-- start tab content End -->
+                                    </div>
+                                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
+                                        aria-labelledby="v-pills-messages-tab">
+                                        <!-- start tab content -->
+                                        <div class="rts-tab-content-one">
+                                            <p><img src="{{ asset('assets/assetsfront/images/faq/security.jpg') }}"
+                                                    alt="Security"></p>
+                                            <p class="disc">
+                                                Security is at the core of IPTS. We employ state-of-the-art security
+                                                measures to protect your personal and financial data, ensuring peace of
+                                                mind for all users.
+                                            </p>
+                                            <div class="check-area">
+                                                <i class="fas fa-check-circle"></i>
+                                                <p class="disc">
+                                                    Advanced encryption and data protection.
+                                                </p>
+                                            </div>
+                                            <div class="check-area">
+                                                <i class="fas fa-check-circle"></i>
+                                                <p class="disc">
+                                                    Regular security audits and updates.
+                                                </p>
+                                            </div>
+                                            <a class="rts-btn btn-primary-2 color-h-black" href="#">Learn
+                                                More</a>
+                                        </div>
+                                        <!-- start tab content End -->
+                                    </div>
+                                    <div class="tab-pane fade" id="v-pills-manufacture" role="tabpanel"
+                                        aria-labelledby="v-pills-manufacture-tab">
+                                        <!-- start tab content -->
+                                        <div class="rts-tab-content-one">
+                                            <p><img src="{{ asset('assets/assetsfront/images/faq/community.jpg') }}"
+                                                    alt="Community Impact"></p>
+                                            <p class="disc">
+                                                Every tax payment made through IPTS directly contributes to the
+                                                development of local infrastructure and public services, fostering
+                                                growth and improving the quality of life in communities.
+                                            </p>
+                                            <div class="check-area">
+                                                <i class="fas fa-check-circle"></i>
+                                                <p class="disc">
+                                                    Investment in local projects and services.
+                                                </p>
+                                            </div>
+                                            <div class="check-area">
+                                                <i class="fas fa-check-circle"></i>
+                                                <p class="disc">
+                                                    Empowering local governments with better resources.
+                                                </p>
+                                            </div>
+                                            <a class="rts-btn btn-primary-2 color-h-black" href="#">Learn
+                                                More</a>
+                                        </div>
+                                        <!-- start tab content End -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="scrollToTop">
-        <span class="arrow"><i class="ri-arrow-up-s-fill fs-20"></i></span>
+    <!-- start project with us section -->
+    <div id="contact" class="rts-project-area eight bg-project-three margin-controlerproject mt_sm--0">
+        <div class="container controler">
+            <div class="row g-0 justify-content-center">
+                <div class="col-lg-7">
+                    <!-- project area left wrapper -->
+                    <div class="title-area-project-w-in">
+                        <span class="sub">
+                            Get Started with IPTS
+                        </span>
+                        <h2 class="title">
+                            Book Your <br> Appointment <span>Today!</span>
+                        </h2>
+                        <p class="disc">
+                            Unlock the full potential of IPTS with our expert guidance and tailored solutions. Let’s
+                            begin your journey toward seamless integration and success!
+                        </p>
+                    </div>
+                    <!-- project area left wrapper end -->
+                </div>
+                <div class="col-lg-5">
+                    <div class="bg-input-project">
+                        <div class="product-form">
+                            <div id="form-messages"></div>
+                            <form id="contact-form" action="#" method="post">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <input type="text" placeholder="Your Name" name="name" required>
+                                    </div>
+                                    <div class="col-lg-6 mt_md--20 mt_sm--20">
+                                        <input type="email" placeholder="Your Email" name="email" required>
+                                    </div>
+                                    <div class="col-12 mt--20">
+                                        <input type="text" placeholder="Your Subject" name="subject">
+                                    </div>
+                                    <div class="col-12 mt--20">
+                                        <textarea placeholder="Your Comment" name="message"></textarea>
+                                    </div>
+                                    <div class="col-12 mt--35">
+                                        <button class="rts-btn btn-primary-3 color-h-black" type="submit">Get in
+                                            Touch</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="responsive-overlay"></div>
+    <!-- start project with us section End -->
 
-    <!-- Popper JS -->
-    <script src="{{ asset('assets/libs/@popperjs/core/umd/popper.min.js') }}"></script>
+    <!-- Start  FAQ  area -->
+    <section id="faq" class="faq-section py-5" id="faqs">
+        <div class="container">
+            <div class="text-center mb-4">
+                <p class="fs-14 fw-medium text-success mb-1">Frequently Asked Questions</p>
+                <h4 class="fw-semibold mt-3">Have Questions? We’ve Got Answers</h4>
+                <p class="text-muted fs-14 mb-5">Find quick answers to the most common queries.</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="accordion" id="accordionLeft">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    1. How can I update my account settings?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="faqOne"
+                                data-bs-parent="#accordionLeft">
+                                <div class="accordion-body">
+                                    To update your account settings, visit the settings page where you can change
+                                    personal details, reset your password, and modify notification preferences.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    2. How do I reset my password?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="faqTwo"
+                                data-bs-parent="#accordionLeft">
+                                <div class="accordion-body">
+                                    Simply go to the login page and click "Forgot Password." Follow the instructions
+                                    sent to your email to reset your password.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree" aria-expanded="false"
+                                    aria-controls="collapseThree">
+                                    3. How do I change my email address?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="faqThree"
+                                data-bs-parent="#accordionLeft">
+                                <div class="accordion-body">
+                                    To change your email address, go to the account settings page, enter your new email,
+                                    and confirm it through a verification email.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="accordion" id="accordionRight">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseFour" aria-expanded="false"
+                                    aria-controls="collapseFour">
+                                    4. How do I enable two-factor authentication?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="faqFour"
+                                data-bs-parent="#accordionRight">
+                                <div class="accordion-body">
+                                    To activate two-factor authentication, navigate to your account settings under the
+                                    "Security" tab and follow the prompts.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqFive">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseFive" aria-expanded="false"
+                                    aria-controls="collapseFive">
+                                    5. How can I delete my account?
+                                </button>
+                            </h2>
+                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="faqFive"
+                                data-bs-parent="#accordionRight">
+                                <div class="accordion-body">
+                                    If you'd like to delete your account, please go to your account settings and find
+                                    the "Delete Account" section. Keep in mind this action is irreversible.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqSix">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                    6. How can I update my privacy settings?
+                                </button>
+                            </h2>
+                            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="faqSix"
+                                data-bs-parent="#accordionRight">
+                                <div class="accordion-body">
+                                    You can adjust your privacy settings by visiting the "Privacy & Security" section in
+                                    your account settings.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Bootstrap JS -->
-    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-    <!-- Color Picker JS -->
-    <script src="{{ asset('assets/libs/@simonwep/pickr/pickr.es5.min.js') }}"></script>
+    <!-- start header area -->
+    <!-- footer area start -->
+    <div id="contact" class="rts-footer-area rts-section-gap footer-two footer-bg-two mt--120 mt_md--80 mt_sm--60">
+        <div class="container">
+            <div class="row">
+                <!-- single wized -->
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="footer-two-single-wized left">
+                        <h3 class="title">
+                            <span>Ready To</span> <br>
+                            Get Started?
+                        </h3>
+                        <p class="disc">
+                            Discover a smarter, simpler way to manage property taxes with IPTS. Join thousands already
+                            transforming their experience today!
+                        </p>
+                        <a class="rts-btn btn-primary-2 color-h-black" href="#">Get a Quote</a>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12 mt_sm--50">
+                    <div class="footer-two-single-wized two">
+                        <div class="wized-title-area">
+                            <h5 class="wized-title">IPTS Features</h5>
+                            <img src="{{ asset('assets/assetsfront/images/footer/under-title-2.png') }}"
+                                alt="finbiz_footer">
+                        </div>
+                        <div class="wized-2-body">
+                            <ul>
+                                <li><a href="#"><i class="fal fa-chevron-double-right"></i>Real-Time Revenue
+                                        Tracking</a></li>
+                                <li><a href="#"><i class="fal fa-chevron-double-right"></i>User-Friendly
+                                        Interface</a></li>
+                                <li><a href="#"><i class="fal fa-chevron-double-right"></i>Innovative
+                                        Solutions</a></li>
+                                <li><a href="#"><i class="fal fa-chevron-double-right"></i>Automated
+                                        Notifications</a></li>
+                                <li><a href="#"><i class="fal fa-chevron-double-right"></i>Enhanced
+                                        Data Security</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- single wized -->
+                <div class="col-xl-2 col-lg-6 col-md-6 col-sm-12 col-12 mt_sm--30 mt_md--30">
+                    <div class="footer-two-single-wized">
+                        <div class="wized-title-area">
+                            <h5 class="wized-title">Contact Us</h5>
+                            <img src="{{ asset('assets/assetsfront/images/footer/under-title-2.png') }}"
+                                alt="finbiz_footer">
+                        </div>
+                        <div class="wized-2-body">
+                            <div class="contact-info-1">
+                                <div class="icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="disc">
+                                    <span>Call Us 24/7</span>
+                                    <a href="+233500503599">+233 50 050 3599</a>
+                                </div>
+                            </div>
+                            <div class="contact-info-1">
+                                <div class="icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="disc">
+                                    <span>Work with us</span>
+                                    <a href="mailto:info@level10gh.com">info@level10gh.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- single wized -->
+                <!-- single wized -->
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="footer-two-single-wized right">
+                        <div class="wized-2-body">
+                            <div class="contact-info-1">
+                                <div class="icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="disc">
+                                    <span>Our Location</span>
+                                    <a
+                                        href="https://www.google.com/maps/dir/5.7864728,-0.1258667/29+Senchi+St,+Accra/@5.7023691,-0.235622,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0xfdf9b0fa4eb345b:0x2f32d290edf99916!2m2!1d-0.1794308!2d5.6159487?entry=tts&g_ep=EgoyMDI1MDEwMi4wIPu8ASoASAFQAw%3D%3D">
+                                        29 Senchi Street,Airport Residential, Accra Ghana <br>
+                                        United State</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- single wized -->
+            </div>
+        </div>
+    </div>
+    <!-- footer area end -->
 
-    <!-- Choices JS -->
-    <script src="{{ asset('assets/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
+    <!-- copyright-area start -->
+    <div class="rts-copy-right ptb--30">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="copyright-h-2-wrapper">
+                        <p class="disc">
+                            IPTS - Copyright {{ \Carbon\Carbon::now()->year }}. All rights reserved.
+                        </p>
+                        <div class="right">
+                            <ul>
+                                <li><a href="#">Company News</a></li>
+                                <li><a href="#">Faq</a></li>
+                                <li><a href="#contact">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- copyright-area end -->
+    <!-- ENd Header Area -->
 
-    <!-- Swiper JS -->
-    <script src="{{ asset('assets/libs/swiper/swiper-bundle.min.js') }}"></script>
 
-    <!-- Defaultmenu JS -->
-    <script src="{{ asset('assets/js/defaultmenu.js') }}"></script>
+    <!-- start loader -->
+    <div class="loader-wrapper">
+        <div class="loader">
+        </div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <!-- End loader -->
 
-    <!-- Internal Landing JS -->
-    <script src="{{ asset('assets/js/landing.js') }}"></script>
+    <!-- progress Back to top -->
+    <div class="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+    <!-- progress Back to top End -->
 
-    <!-- Node Waves JS-->
-    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
 
-    <!-- Landing Sticky JS -->
-    <script src="{{ asset('assets/js/sticky.js') }}"></script>
-
+    <!-- scripts start form hear -->
+    <script src="{{ asset('assets/assetsfront/js/vendor/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/assetsfront/js/vendor/jqueryui.js') }}"></script>
+    <script src="{{ asset('assets/assetsfront/js/vendor/waypoint.js') }}"></script>
+    <script src="{{ asset('assets/assetsfront/js/plugins/swiper.js') }}"></script>
+    <script src="{{ asset('assets/assetsfront/js/plugins/counterup.js') }}"></script>
+    <script src="{{ asset('assets/assetsfront/js/plugins/sal.min.js') }}"></script>
+    <script src="{{ asset('assets/assetsfront/js/vendor/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/assetsfront/js/vendor/waw.js') }}"></script>
+    <script src="{{ asset('assets/assetsfront/js/plugins/contact.form.js') }}"></script>
+    <!-- main Js -->
+    <script src="{{ asset('assets/assetsfront/js/main.js') }}"></script>
+    <!-- scripts end form hear -->
 </body>
+
+</html>

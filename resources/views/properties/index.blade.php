@@ -78,7 +78,7 @@
 
 
                 <div class="row">
-                    <div class="col-xxl-9">
+                    <div class="col-xxl-12">
                         <div class="row">
 
                             <div class="col-xl-3">
@@ -98,8 +98,8 @@
                                                         class="badge bg-success-transparent rounded-pill">{{ $data['valuedPercentage'] }}%<i
                                                             class="ti ti-arrow-up"></i></span>
                                                 </div>
+                                                <span class="d-block mb-2"></span>
                                                 <h4 class="fw-semibold mb-3 lh-1">{{ $data['valuedProperties'] }} </h4>
-
                                             </div>
                                         </div>
                                     </div>
@@ -124,7 +124,6 @@
                                                 </div>
                                                 <span class="d-block mb-2"></span>
                                                 <h4 class="fw-semibold mb-3 lh-1">{{ $data['unvaluedProperties'] }} </h4>
-
                                             </div>
                                         </div>
                                     </div>
