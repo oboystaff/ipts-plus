@@ -4409,6 +4409,10 @@ variables
   /* Start::Card With FullScreen */
   /* End::Card With FullScreen */
 }
+.fw-semibold {
+  font-weight: 600 !important;
+  font-size: 15px !important;
+}
 .card.custom-card .card-header {
   padding: 1rem 1.25rem;
   background-color: transparent !important;

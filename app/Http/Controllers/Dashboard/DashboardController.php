@@ -321,6 +321,9 @@ class DashboardController extends Controller
         $yearlyReceivables = $totalBill - $yearlyPayments->total;
 
         $totalAssembly = Assembly::where('status', 'Active')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
             ->count();
 
         $regions = GhanaRegion::with('assemblies')->get();

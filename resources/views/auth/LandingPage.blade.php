@@ -54,8 +54,7 @@
                             </a>
                         </div>
                     </div>
-                    <a class="rts-btn btn-primary-2 menu-block-none" href="{{ route('auth.register') }} ">Get
-                        started</a>
+                    <a class="rts-btn btn-primary-2 menu-block-none" href="{{ route('auth.index') }} ">Login</a>
                     <button id="menu-btn" class="menu rts-btn btn-primary-alta ml--20">
                         <img class="menu-dark" src="{{ asset('assets/assetsfront/images/icon/menu.png') }}"
                             alt="Menu-icon">

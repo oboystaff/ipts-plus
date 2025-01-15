@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <div>
-                            <h4 class="fw-semibold mb-2"> 211</h4>
+                            <h4 class="fw-semibold mb-2"> {{ $total['totalAssembly'] }}</h4>
                             <div class="text-muted mb-0"> Total Assemblies </div>
                         </div>
                     </div>
