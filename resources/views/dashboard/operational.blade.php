@@ -18,7 +18,6 @@
             @include('dashboard.includes.analytics')
         @elseif (\Auth::user()->access_level == 'GRA_Administrator')
             @include('dashboard.includes.gra')
-            @include('dashboard.includes.analytics')
         @elseif (\Auth::user()->access_level == 'customer')
             @include('dashboard.includes.customer')
         @endif
@@ -1764,4 +1763,21 @@
         var options1 = new ApexCharts(document.querySelector("#revenue-statistics"), options1);
         options1.render();
     </script>
+
+    {{-- <script>
+        $(document).ready(function() {
+            @foreach ($total['regions'] as $region)
+                $('#file-export-{{ $region->id }}').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'csv', 'excel', 'pdf', 'print'
+                    ],
+                    language: {
+                        searchPlaceholder: 'Search...',
+                        sSearch: '',
+                    },
+                });
+            @endforeach
+        });
+    </script> --}}
 @endsection
