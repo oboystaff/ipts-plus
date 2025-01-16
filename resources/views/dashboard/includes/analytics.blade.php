@@ -216,26 +216,6 @@
             <div class="card-body p-4">
                 <div class="d-flex gap-3 align-items-center mb-2 justify-content-between">
                     <p class="mb-0 fw-semibold">Revenue Overview</p>
-                    <div class="d-flex align-items-center lh-1">
-                        <div class="stars-main me-3 text-muted">
-                            <i class="ri-star-fill star"></i>
-                        </div>
-                        <div class="dropdown">
-                            <a href="javascript:void(0);" data-bs-toggle="dropdown"
-                                class="btn btn-sm btn-icon btn-primary-light rounded-circle" aria-expanded="false"
-                                aria-label="Task Options">
-                                <i class="bi bi-grid lh-1"></i>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                            class="ri-pencil-line me-1"></i>Edit</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                            class="ri-share-forward-line me-1"></i>Share</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                            class="ri-delete-bin-line me-1"></i>Delete</a></li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
                 <h3 class="d-inline-block me-2">{{ $total['completedPercentage'] }}%</h3><span
                     class="text-muted fs-12 align-middle">Generated Bills</span>
