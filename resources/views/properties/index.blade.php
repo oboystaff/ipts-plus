@@ -110,7 +110,7 @@
 
                                                     <div class="flex-fill">
                                                         <div class="d-flex align-items-center justify-content-between mb-2">
-                                                            <span class="d-block">Un-Valued Properties </span>
+                                                            <span class="d-block">Un-Valued </span>
                                                             <span class="badge bg-danger-transparent rounded-pill">
                                                                 {{ $data['unvaluedPercentage'] }}%<i
                                                                     class="ti ti-arrow-down"></i></span>
@@ -151,7 +151,7 @@
 
                                                     <div class="flex-fill">
                                                         <div class="d-flex align-items-center justify-content-between mb-2">
-                                                            <span class="d-block">Un-Rated Properties </span>
+                                                            <span class="d-block">Un-Rated </span>
                                                             <span
                                                                 class="badge bg-success-transparent rounded-pill">{{ $data['unratedPercentage'] }}%<i
                                                                     class="ti ti-arrow-up"></i></span>
