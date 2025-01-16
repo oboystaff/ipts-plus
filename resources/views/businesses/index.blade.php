@@ -48,16 +48,16 @@
                                         <th>Business Type</th>
                                         <th>Business Class</th>
                                         <th>Location</th>
-                                        <th>Email</th>
+                                        {{-- <th>Email</th> --}}
                                         <th>Phone</th>
                                         <th>Business Owner</th>
-                                        <th>Assembly</th>
-                                        <th>Division</th>
-                                        <th>Block</th>
-                                        <th>Zone</th>
-                                        <th>Property Use</th>
-                                        <th>Created By</th>
-                                        <th>Date Created</th>
+                                        {{-- <th>Assembly</th> --}}
+                                        {{-- <th>Division</th> --}}
+                                        {{-- <th>Block</th> --}}
+                                        {{-- <th>Zone</th> --}}
+                                        {{-- <th>Property Use</th> --}}
+                                        {{-- <th>Created By</th> --}}
+                                        {{-- <th>Date Created</th> --}}
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -75,16 +75,16 @@
                                             <td>{{ $business->businessType->name ?? '' }}</td>
                                             <td>{{ $business->businessClass->name ?? '' }}</td>
                                             <td>{{ $business->location }}</td>
-                                            <td>{{ $business->email }}</td>
+                                            {{-- <td>{{ $business->email }}</td> --}}
                                             <td>{{ $business->business_phone }}</td>
                                             <td>{{ $fullname ?? '' }}</td>
-                                            <td>{{ $business->assembly->name ?? 'N/A' }}</td>
-                                            <td>{{ $business->division->division_name ?? 'N/A' }}</td>
-                                            <td>{{ $business->block->block_name ?? 'N/A' }}</td>
-                                            <td>{{ $business->zone->name ?? 'N/A' }}</td>
-                                            <td>{{ $business->propertyUse->name ?? 'N/A' }}</td>
-                                            <td>{{ $business->createdBy->name ?? 'N/A' }}</td>
-                                            <td>{{ $business->created_at }}</td>
+                                            {{-- <td>{{ $business->assembly->name ?? 'N/A' }}</td> --}}
+                                            {{-- <td>{{ $business->division->division_name ?? 'N/A' }}</td> --}}
+                                            {{-- <td>{{ $business->block->block_name ?? 'N/A' }}</td> --}}
+                                            {{-- <td>{{ $business->zone->name ?? 'N/A' }}</td> --}}
+                                            {{-- <td>{{ $business->propertyUse->name ?? 'N/A' }}</td> --}}
+                                            {{-- <td>{{ $business->createdBy->name ?? 'N/A' }}</td> --}}
+                                            {{-- <td>{{ $business->created_at }}</td> --}}
                                             <td>
                                                 <div class="dropdown">
                                                     <div class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
