@@ -99,7 +99,7 @@
             <div class="card-body bg-primary bg-opacity-10 rounded-2 ps-4 medical-cards">
                 <div class="d-flex gap-2 align-items-center ps-2">
                     <div class="align-self-start">
-                        <div class="fw-medium mb-2">Total Revenue Collected </div>
+                        <div class="fw-medium mb-2">Total Payments </div>
                         <h4 class="fw-semibold mb-0 lh-1">{{ $total['lastMonthPayments'] }}</h4>
                     </div>
                     <div class="ms-auto text-end align-self-end">
