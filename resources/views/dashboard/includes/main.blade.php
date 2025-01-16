@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-xxl-6 col-xl-6 col-lg-6">
         <div class="card custom-card overflow-hidden nft-main-card">
-            <div class="card-body d-flex align-items-center justify-content-center" style="height: 480px">
+            <div class="card-body d-flex align-items-center justify-content-center" style="height: 460px">
                 <div class="row gap-3 gap-sm-0 mx-0 py-3 rounded-3 w-100">
                     <div class="col-xxl-8 col-xl-6 col-lg-8 col-12">
                         <div class="p-2">
@@ -506,7 +506,7 @@
 
     <div class="col-xxl-12">
         <div class="row">
-            <div class="col-xl-12">
+            {{-- <div class="col-xl-12">
                 <div class="card custom-card overflow-hidden">
                     <div class="card-header justify-content-between">
                         <div class="card-title">
@@ -543,7 +543,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-xl-12">
                 <div class="card custom-card income-card">
                     <div class="card-body p-0">
