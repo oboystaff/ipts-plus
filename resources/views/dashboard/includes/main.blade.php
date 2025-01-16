@@ -145,6 +145,101 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="row">
+    <div class="col-xxl-12">
+        <div class="row">
+            <div class="col-xl-3">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start gap-3 flex-wrap">
+                            <div>
+                                <span class="avatar avatar-md avatar-rounded bg-primary shadow shadow-primary">
+                                    <i class="ti ti-shopping-bag fs-5"></i>
+                                </span>
+                            </div>
+                            <div class="flex-fill">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <span class="d-block"> Total Revenue Collected</span>
+                                </div>
+                                <h4 class="fw-semibold mb-3 lh-1">GHS {{ $total['yearlyPayments'] }}</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start gap-3 flex-wrap">
+                            <div>
+                                <span class="avatar avatar-md avatar-rounded bg-secondary shadow shadow-secondary">
+                                    <i class="ti ti-currency-dollar fs-5"></i>
+                                </span>
+                            </div>
+                            <div class="flex-fill">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <span class="d-block">Total Revenue Growth</span>
+                                </div>
+                                <h4 class="fw-semibold mb-3 lh-1">{{ $total['newPercentage'] }}%</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start gap-3 flex-wrap">
+                            <div>
+                                <span class="avatar avatar-md avatar-rounded bg-success shadow shadow-success">
+                                    <i class="ti ti-box fs-5"></i>
+                                </span>
+                            </div>
+                            <div class="flex-fill">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <span class="d-block"> Outstanding Payments</span>
+                                </div>
+                                <span class="d-block mb-2"></span>
+                                <h4 class="fw-semibold mb-3 lh-1">GHS {{ $total['totalBill'] }}</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start gap-3 flex-wrap">
+                            <div>
+                                <span class="avatar avatar-md avatar-rounded bg-info shadow shadow-info">
+                                    <i class="ti ti-moneybag fs-5"></i>
+                                </span>
+                            </div>
+                            <div class="flex-fill">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <span class="d-block"> Top Revenue by Momo</span>
+                                </div>
+                                <span class="d-block mb-2"></span>
+                                <h4 class="fw-semibold mb-3 lh-1">36.75%</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-xl-12">
     <div class="card custom-card">
         <div class="card-header justify-content-between">
             <div class="card-title">
@@ -234,6 +329,7 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-12">
             <div class="card custom-card">
@@ -317,92 +413,97 @@
         </div>
     </div>
 
-    <div class="col-xl-3">
-        <div class="card custom-card profit-analysis-card">
-            <div class="card-body p-0">
-                <div class="p-4 pb-1">
-                    <h4 class="mb-1 d-flex align-items-center fw-semibold flex-wrap">GHS
-                        {{ $total['totalExpectedPayments'] }}<span class="text-success fw-medium fs-12 ms-2"><i
-                                class="ti ti-arrow-up align-middle me-1"></i> </span> </h4>
-                    <span class="fs-14 d-block">Expected Revenue </span>
+    <div class="row">
+        <div class="col-xl-3">
+            <div class="card custom-card profit-analysis-card">
+                <div class="card-body p-0">
+                    <div class="p-4 pb-1">
+                        <h4 class="mb-1 d-flex align-items-center fw-semibold flex-wrap">GHS
+                            {{ $total['totalExpectedPayments'] }}<span class="text-success fw-medium fs-12 ms-2"><i
+                                    class="ti ti-arrow-up align-middle me-1"></i> </span> </h4>
+                        <span class="fs-14 d-block">Expected Revenue </span>
+                    </div>
+                    <div id="profit-analysis"></div>
+                    <div id="profit-analysis1"></div>
+                    <div id="profit-analysis2"></div>
                 </div>
-                <div id="profit-analysis"></div>
-                <div id="profit-analysis1"></div>
-                <div id="profit-analysis2"></div>
             </div>
-        </div>
-        <div class="card custom-card">
-            <div class="card-header">
-                <div class="card-title">
-                    Bills And Payments
+            <div class="card custom-card" style="height: 238px">
+                <div class="card-header">
+                    <div class="card-title">
+                        Bills And Payments
 
+                    </div>
                 </div>
-            </div>
-            <div class="card-body">
-                <div class="progress-stacked progress-sm mb-4 mt-2 gap-1">
-                    <div class="progress-bar rounded" role="progressbar" style="width: 45%" aria-valuenow="45"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    <div class="progress-bar bg-secondary rounded" role="progressbar" style="width: 25%"
-                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    <div class="progress-bar bg-success rounded" role="progressbar" style="width: 30%"
-                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <ul class="list-unstyled sales-traffic-list">
-                    <li>
-                        <div class="d-flex align-items-center flex-wrap justify-content-between">
-                            <div class="fw-semibold"> Bills</div>
-                            <div class="fw-semibold"><span class="text-success fs-11 fw-medium me-2 d-inline-block"><i
-                                        class="ti ti-arrow-up alilgn-middle me-1"></i>0.56%</span>GHS
-                                {{ $total['totalBill'] }}</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="d-flex align-items-center flex-wrap justify-content-between">
-                            <div class="fw-semibold">Arrears</div>
-                            <div class="fw-semibold"><span class="text-success fs-11 fw-medium me-2 d-inline-block"><i
-                                        class="ti ti-arrow-up alilgn-middle me-1"></i>4.23%</span> GHS
-                                {{ $total['totalArrears'] }} </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="d-flex align-items-center flex-wrap justify-content-between">
-                            <div class="fw-semibold">Revenue</div>
-                            <div class="fw-semibold"><span class="text-danger fs-11 fw-medium me-2 d-inline-block"><i
-                                        class="ti ti-arrow-down alilgn-middle me-1"></i>6.88%</span>GHS
-                                {{ $total['totalExpectedPayments'] }}
+                <div class="card-body">
+                    <div class="progress-stacked progress-sm mb-4 mt-2 gap-1">
+                        <div class="progress-bar rounded" role="progressbar" style="width: 45%" aria-valuenow="45"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-secondary rounded" role="progressbar" style="width: 25%"
+                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-success rounded" role="progressbar" style="width: 30%"
+                            aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <ul class="list-unstyled sales-traffic-list">
+                        <li>
+                            <div class="d-flex align-items-center flex-wrap justify-content-between">
+                                <div class="fw-semibold"> Bills</div>
+                                <div class="fw-semibold"><span
+                                        class="text-success fs-11 fw-medium me-2 d-inline-block"><i
+                                            class="ti ti-arrow-up alilgn-middle me-1"></i>0.56%</span>GHS
+                                    {{ $total['totalBill'] }}</div>
                             </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xl-9">
-        <div class="card custom-card">
-            <div class="card-header justify-content-between">
-                <div class="card-title">
-                    BoP's Bill / Property Rate Bill & Payment Statistics
-                </div>
-                <div class="dropdown">
-                    <a href="javascript:void(0);" class="btn btn-sm btn-light btn-wave fs-12 text-muted"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        View All<i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" role="menu">
-                        <li><a class="dropdown-item" href="javascript:void(0);">Download</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);">Import</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);">Export</a></li>
+                        </li>
+                        <li>
+                            <div class="d-flex align-items-center flex-wrap justify-content-between">
+                                <div class="fw-semibold">Arrears</div>
+                                <div class="fw-semibold"><span
+                                        class="text-success fs-11 fw-medium me-2 d-inline-block"><i
+                                            class="ti ti-arrow-up alilgn-middle me-1"></i>4.23%</span> GHS
+                                    {{ $total['totalArrears'] }} </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="d-flex align-items-center flex-wrap justify-content-between">
+                                <div class="fw-semibold">Revenue</div>
+                                <div class="fw-semibold"><span
+                                        class="text-danger fs-11 fw-medium me-2 d-inline-block"><i
+                                            class="ti ti-arrow-down alilgn-middle me-1"></i>6.88%</span>GHS
+                                    {{ $total['totalExpectedPayments'] }}
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
-            <div class="card-body p-0">
-                <div id="sales-statistics1" class="p-3"></div>
+        </div>
+
+        <div class="col-xl-9">
+            <div class="card custom-card">
+                <div class="card-header justify-content-between">
+                    <div class="card-title">
+                        BoP's Bill / Property Rate Bill & Payment Statistics
+                    </div>
+                    <div class="dropdown">
+                        <a href="javascript:void(0);" class="btn btn-sm btn-light btn-wave fs-12 text-muted"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            View All<i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                            <li><a class="dropdown-item" href="javascript:void(0);">Download</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0);">Import</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0);">Export</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div id="sales-statistics1" class="p-3"></div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-xxl-3">
+    <div class="col-xxl-12">
         <div class="row">
             <div class="col-xl-12">
                 <div class="card custom-card overflow-hidden">

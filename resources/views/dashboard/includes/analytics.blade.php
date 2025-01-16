@@ -17,8 +17,7 @@
             <div class="d-flex gap-2 align-items-center flex-wrap bg-pink-transparent justify-content-between">
                 <div id="widget-chart-1"></div>
                 <div class="text-end pe-3">
-                    <span class="text-muted fw-medium fs-12">daily</span>
-                    <span class="text-success fw-semibold fs-12 mb-0 ms-1">+ 0.45%</span>
+                    <span class="text-muted fw-medium fs-12">Daily</span>
                 </div>
             </div>
         </div>
@@ -41,8 +40,7 @@
             <div class="d-flex gap-2 align-items-center flex-wrap bg-primary-transparent justify-content-between">
                 <div id="widget-chart-2"></div>
                 <div class="text-end pe-3">
-                    <span class="text-muted fw-medium fs-12">weekly</span>
-                    <span class="text-success fw-semibold fs-12 mb-0 ms-1">+ 0.45%</span>
+                    <span class="text-muted fw-medium fs-12">Weekly</span>
                 </div>
             </div>
         </div>
@@ -65,8 +63,7 @@
             <div class="d-flex gap-2 align-items-center flex-wrap bg-secondary-transparent justify-content-between">
                 <div id="widget-chart-3"></div>
                 <div class="text-end pe-3">
-                    <span class="text-muted fw-medium fs-12">monthly</span>
-                    <span class="text-success fw-semibold fs-12 mb-0 ms-1">+ 0.45%</span>
+                    <span class="text-muted fw-medium fs-12">Monthly</span>
                 </div>
             </div>
         </div>
@@ -89,8 +86,7 @@
             <div class="d-flex gap-2 align-items-center flex-wrap bg-success-transparent justify-content-between">
                 <div id="widget-chart-4"></div>
                 <div class="text-end pe-3">
-                    <span class="text-muted fw-medium fs-12">yearly</span>
-                    <span class="text-success fw-semibold fs-12 mb-0 ms-1">+ 0.45%</span>
+                    <span class="text-muted fw-medium fs-12">Yearly</span>
                 </div>
             </div>
         </div>
@@ -117,7 +113,6 @@
                             </svg>
                         </div>
                         <div>
-                            <span class="text-muted fw-medium fs-12 opacity-1">from last month</span>
                             <span class="text-danger fw-medium fs-13 mb-2">
                                 <i class="ti ti-arrow-down"></i>GHS
                             </span>
@@ -146,7 +141,6 @@
                             </svg>
                         </div>
                         <div>
-                            <span class="text-muted fw-medium fs-12 opacity-1">from last month</span>
                             <span class="text-success fw-medium fs-13 mb-2">
                                 <i class="ti ti-arrow-up"></i>GHS
                             </span>
@@ -175,7 +169,6 @@
                             </svg>
                         </div>
                         <div>
-                            <span class="text-muted fw-medium fs-12 opacity-1">from last month</span>
                             <span class="text-danger fw-medium fs-13 mb-2">
                                 <i class="ti ti-arrow-down"></i>GHS
                             </span>
@@ -206,7 +199,6 @@
                             </svg>
                         </div>
                         <div>
-                            <span class="text-muted fw-medium fs-12 opacity-1">from last month</span>
                             <span class="text-danger fw-medium fs-13 mb-2">
                                 <i class="ti ti-arrow-down"></i>GHS
                             </span>
@@ -220,27 +212,6 @@
 
 <div class="row">
     <div class="col-xxl-12">
-        <div class="card custom-card widget-card-balance">
-            <div class="card-body text-fixed-white">
-                <div class="d-flex justify-content-between gap-2 mb-3">
-                    <i class="ri-mastercard-fill fs-1 text-fixed-white op-8 "></i>
-                    <div class="text-end">
-                        <div class="op-6 fs-12">CARD NUMBER</div>
-                        <div class="fs-5 fw-medium">0000 1234 1234 25 </div>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between gap-2">
-                    <div class="">
-                        <div class="op-6 fs-12">Card Holder Name</div>
-                        <div class="fs-18 fw-medium">Ashwin Seth </div>
-                    </div>
-                    <div class="text-end">
-                        <div class="op-6 fs-12">Valid Till</div>
-                        <div class="fs-18 fw-medium">01/01</div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="card custom-card">
             <div class="card-body p-4">
                 <div class="d-flex gap-3 align-items-center mb-2 justify-content-between">
@@ -267,8 +238,7 @@
                     </div>
                 </div>
                 <h3 class="d-inline-block me-2">{{ $total['completedPercentage'] }}%</h3><span
-                    class="text-muted fs-12 align-middle">Completed
-                    Revenue</span>
+                    class="text-muted fs-12 align-middle">Generated Bills</span>
                 <div class="d-flex align-items-center mb-1 justify-content-between">
                     <div>Revenue Progress</div>
                 </div>
@@ -292,11 +262,11 @@
                             <i class="ri-file-list-3-fill fs-15 lh-1"></i>
                         </div>
                         <div class="fw-semibold mb-1">
-                            Completed
+                            Generated Bills
                         </div>
                         <span class="text-muted fs-14 fw-medium">{{ $total['completedPercentage'] }}%</span>
                         <div class="fw-semibold mt-1">
-                            {{ $total['totalCompletedBill'] }} bills
+                            {{ $total['totalCompletedBill'] }} Bills
                         </div>
                     </div>
                     <div class="text-center">
@@ -304,11 +274,11 @@
                             <i class="ri-file-list-3-fill fs-15 lh-1"></i>
                         </div>
                         <div class="fw-semibold mb-1">
-                            Upcoming
+                            Arrears
                         </div>
                         <span class="text-muted fs-14 fw-medium">{{ $total['upcomingPercentage'] }}%</span>
                         <div class="fw-semibold mt-1">
-                            {{ $total['totalUpcomingBill'] }} bills
+                            {{ $total['totalUpcomingBill'] }} Arrears On Bills
                         </div>
                     </div>
                     <div class="text-center">
@@ -316,11 +286,11 @@
                             <i class="ri-file-list-3-fill fs-15 lh-1"></i>
                         </div>
                         <div class="fw-semibold mb-1">
-                            New
+                            Payments
                         </div>
                         <span class="text-muted fs-14 fw-medium">{{ $total['newPercentage'] }}%</span>
                         <div class="fw-semibold mt-1">
-                            {{ $total['totalNewBill'] }} bills
+                            {{ $total['totalNewBill'] }} Payments On Bills
                         </div>
                     </div>
                 </div>
@@ -413,7 +383,7 @@
                 <div class="card-title">Revenue by Location Chart</div>
             </div>
             <div class="card-body">
-                <div id="column-range" style="height: 320px;"></div>
+                <div id="column-range" style="height: 418px;"></div>
             </div>
         </div>
     </div>
@@ -436,106 +406,6 @@
             </div>
             <div class="card-body">
                 <div id="collection-chart"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-xxl-12">
-        <div class="row">
-            <div class="col-xl-3">
-                <div class="card custom-card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-start gap-3 flex-wrap">
-                            <div>
-                                <span class="avatar avatar-md avatar-rounded bg-primary shadow shadow-primary">
-                                    <i class="ti ti-shopping-bag fs-5"></i>
-                                </span>
-                            </div>
-                            <div class="flex-fill">
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="d-block"> Total Revenue Collected</span>
-                                    <span class="badge bg-success-transparent rounded-pill">0.25%<i
-                                            class="ti ti-arrow-up"></i></span>
-                                </div>
-                                <h4 class="fw-semibold mb-3 lh-1">GHS {{ $total['yearlyPayments'] }}</h4>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3">
-                <div class="card custom-card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-start gap-3 flex-wrap">
-                            <div>
-                                <span class="avatar avatar-md avatar-rounded bg-secondary shadow shadow-secondary">
-                                    <i class="ti ti-currency-dollar fs-5"></i>
-                                </span>
-                            </div>
-                            <div class="flex-fill">
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="d-block">Total Revenue Growth</span>
-                                    <span class="badge bg-success-transparent rounded-pill">5.44%<i
-                                            class="ti ti-arrow-up"></i></span>
-                                </div>
-                                <h4 class="fw-semibold mb-3 lh-1">1.38%</h4>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3">
-                <div class="card custom-card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-start gap-3 flex-wrap">
-                            <div>
-                                <span class="avatar avatar-md avatar-rounded bg-success shadow shadow-success">
-                                    <i class="ti ti-box fs-5"></i>
-                                </span>
-                            </div>
-                            <div class="flex-fill">
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="d-block"> Outstanding Payments</span>
-                                    <span class="badge bg-danger-transparent rounded-pill">12.34%<i
-                                            class="ti ti-arrow-down"></i></span>
-                                </div>
-                                <span class="d-block mb-2"></span>
-                                <h4 class="fw-semibold mb-3 lh-1">GHS {{ $total['totalBill'] }}</h4>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3">
-                <div class="card custom-card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-start gap-3 flex-wrap">
-                            <div>
-                                <span class="avatar avatar-md avatar-rounded bg-info shadow shadow-info">
-                                    <i class="ti ti-moneybag fs-5"></i>
-                                </span>
-                            </div>
-                            <div class="flex-fill">
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="d-block"> Top Revenue by Momo</span>
-                                    <span class="badge bg-success-transparent rounded-pill">2.12%<i
-                                            class="ti ti-arrow-up"></i></span>
-                                </div>
-                                <span class="d-block mb-2"></span>
-                                <h4 class="fw-semibold mb-3 lh-1">36.75%</h4>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
