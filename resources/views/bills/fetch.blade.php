@@ -63,7 +63,7 @@
 
                         <div class="card-header flex-wrap d-flex justify-content-between">
                             <div>
-                                <h4 class="heading mb-0">Bills Management</h4>
+                                {{-- <h4 class="heading mb-0">Bills Management</h4> --}}
                             </div>
                         </div>
 
