@@ -1,6 +1,14 @@
 @extends('layout.base')
 
 @section('page-styles')
+    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/main.min.css" rel="stylesheet">
+
+    <style>
+        .fc-day-today {
+            background-color: #ffebcc !important;
+        }
+    </style>
 @endsection
 
 @section('page-content')
@@ -52,7 +60,6 @@
     <!-- Color Picker JS -->
     <script src="{{ asset('assets/libs/@simonwep/pickr/pickr.es5.min.js') }}"></script>
 
-
     <!-- Apex Charts JS -->
     <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 
@@ -64,7 +71,6 @@
 
     <!-- Custom JS -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>
-
 
     <!-- Custom-Switcher JS -->
     <script src="{{ asset('assets/js/custom-switcher.js') }}"></script>
@@ -119,6 +125,17 @@
 
     <!-- Internal Swiper JS -->
     <script src="{{ asset('assets/js/swiper.js') }}"></script>
+
+    <script src="{{ asset('assets/libs/moment/min/moment.min.js') }}"></script>
+
+    <script src="{{ asset('assets/libs/flatpickr/flatpickr.min.js') }}"></script>
+
+    <!-- Fullcalendar JS -->
+    <script src="{{ asset('assets/libs/fullcalendar/index.global.min.js') }}"></script>
+    <script src="{{ asset('assets/js/fullcalendar.js?t=1234') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/main.min.js"></script>
 
     <script>
         const messages = [
@@ -1638,5 +1655,113 @@
 
         var chart = new ApexCharts(document.querySelector("#sales-statistics1"), options);
         chart.render();
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: ''
+                },
+                // events: [{
+                //         title: 'Meeting with Client',
+                //         start: '2025-01-15',
+                //         end: '2025-01-16'
+                //     },
+                //     {
+                //         title: 'Project Deadline',
+                //         start: '2025-01-18'
+                //     },
+                //     {
+                //         title: 'Team Outing',
+                //         start: '2025-01-22'
+                //     }
+                // ],
+                nowIndicator: true,
+                selectable: false,
+                editable: false,
+                initialDate: new Date().toISOString().split('T')[0],
+            });
+
+            calendar.render();
+        });
+    </script>
+
+    <script>
+        const finalCut = @json($total['finalCut']);
+
+        var options1 = {
+            chart: {
+                height: 225,
+                type: 'radialBar',
+                responsive: 'true',
+                offsetX: 0,
+                offsetY: -10,
+                zoom: {
+                    enabled: false
+                }
+            },
+            grid: {
+                padding: {
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: 0
+                },
+            },
+            plotOptions: {
+                radialBar: {
+                    startAngle: -135,
+                    endAngle: 135,
+                    track: {
+                        strokeWidth: "80%",
+                    },
+                    hollow: {
+                        size: "55%"
+                    },
+                    dataLabels: {
+                        name: {
+                            fontSize: '15px',
+                            color: undefined,
+                            offsetY: 20,
+                            fontWeight: [400]
+                        },
+                        value: {
+                            offsetY: -20,
+                            fontSize: '22px',
+                            color: undefined,
+                            fontWeight: [600],
+                            formatter: function(val) {
+                                return val + "%";
+                            }
+                        }
+                    }
+                }
+            },
+            colors: ["var(--primary-color)"],
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shadeIntensity: 1,
+                    type: "horizontal",
+                    gradientToColors: ["rgb(53, 189, 170)"],
+                    opacityFrom: 1,
+                    opacityTo: 1,
+                    stops: [0, 100]
+                }
+            },
+            stroke: {
+                dashArray: 4
+            },
+            labels: ['Revenue'],
+            series: [finalCut],
+        };
+        var options1 = new ApexCharts(document.querySelector("#revenue-statistics"), options1);
+        options1.render();
     </script>
 @endsection

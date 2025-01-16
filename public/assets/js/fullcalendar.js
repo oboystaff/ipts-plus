@@ -1,10 +1,11 @@
 (function () {
     "use strict";
     //_____Calendar Events Intialization
-  
+    
     // sample calendar events data
     var curYear = moment().format('YYYY');
     var curMonth = moment().format('MM');
+
     // Calendar Event Source
     var sptCalendarEvents = {
       id: 1,
@@ -126,7 +127,6 @@
       }]
     };
   
-  
     //________ FullCalendar
     var containerEl = document.getElementById('external-events');
     new FullCalendar.Draggable(containerEl, {
@@ -139,6 +139,8 @@
         }
       }
     });
+
+    alert("Hello world");
 
     var calendarEl = document.getElementById('calendar2');
     var createEventModal = new bootstrap.Modal(document.getElementById('createEventModal'));

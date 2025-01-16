@@ -2,74 +2,7 @@
   "use strict";
 
   /* Revenue Statistics */
-  var options1 = {
-    chart: {
-      height: 225,
-      type: 'radialBar',
-      responsive: 'true',
-      offsetX: 0,
-      offsetY: -10,
-      zoom: {
-        enabled: false
-      }
-    },
-    grid: {
-      padding: {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0
-      },
-    },
-    plotOptions: {
-      radialBar: {
-        startAngle: -135,
-        endAngle: 135,
-        track: {
-          strokeWidth: "80%",
-        },
-        hollow: {
-          size: "55%"
-        },
-        dataLabels: {
-          name: {
-            fontSize: '15px',
-            color: undefined,
-            offsetY: 20,
-            fontWeight: [400]
-          },
-          value: {
-            offsetY: -20,
-            fontSize: '22px',
-            color: undefined,
-            fontWeight: [600],
-            formatter: function (val) {
-              return val + "%";
-            }
-          }
-        }
-      }
-    },
-    colors: ["var(--primary-color)"],
-    fill: {
-      type: 'gradient',
-      gradient: {
-        shadeIntensity: 1,
-        type: "horizontal",
-        gradientToColors: ["rgb(53, 189, 170)"],
-        opacityFrom: 1,
-        opacityTo: 1,
-        stops: [0, 100]
-      }
-    },
-    stroke: {
-      dashArray: 4
-    },
-    labels: ['Revenue'],
-    series: [83],
-  };
-  var options1 = new ApexCharts(document.querySelector("#revenue-statistics"), options1);
-  options1.render();
+  
   /* Revenue Statistics */
 
   /* Revenue Statistics1 */
