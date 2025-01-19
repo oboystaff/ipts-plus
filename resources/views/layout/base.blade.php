@@ -730,7 +730,7 @@
                                         </li>
                                     @endcan
                                     @can('reports.view')
-                                        <li class="slide">
+                                        {{-- <li class="slide">
                                             <a href="{{ route('agent-performance-reports.index') }}"
                                                 class="side-menu__item">Agent
                                                 Performance Report</a>
@@ -738,7 +738,7 @@
                                         <li class="slide">
                                             <a href="{{ route('system-peroformance-reports.index') }}"
                                                 class="side-menu__item">System Performance Report</a>
-                                        </li>
+                                        </li> --}}
                                         {{-- <li class="slide">
                                             <a href="{{ route('reports.feedback') }}" class="side-menu__item">Feedback and
                                                 Satisfaction Report</a>
