@@ -26,7 +26,10 @@ use App\Http\Controllers\Payment\PaymentController;
 use App\Http\Controllers\Report;
 use App\Http\Controllers\AgentAssignment\AgentAssignmentController;
 use App\Http\Controllers\TaskAssignment\TaskAssignmentController;
+use App\Http\Controllers\CustomerSupport\CustomerSupportController;
 
+
+Route::get('/faqAction', [Dashboard\DashboardController::class, 'faqAction'])->name('dashboard.faq');
 
 Route::group(['prefix' => 'payment', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [PaymentController::class, 'index'])->name('payments.index');
@@ -295,9 +298,16 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function ()
     Route::get('/bill-report', [Report\BillReportController::class, 'index'])->name('bill-reports.index');
     Route::get('/payment-report', [Report\PaymentReportController::class, 'index'])->name('payment-reports.index');
     Route::get('/debtors-report', [Report\DebtorsReportController::class, 'index'])->name('debtors-reports.index');
-    Route::get('/service-usage-report', [Report\Level10ReportController::class, 'serviceUsageReport'])->name('service-usage-reports.index');
     Route::get('/agent-performance-report', [Report\Level10ReportController::class, 'agentPerformanceReport'])->name('agent-performance-reports.index');
     Route::get('/system-performance-report', [Report\Level10ReportController::class, 'systemPerformanceReport'])->name('system-peroformance-reports.index');
+    Route::get('/payment-history-report', [Report\PaymentHistoryReportController::class, 'index'])->name('payment-history-reports.index');
+    Route::get('/support-request-report', [Report\SupportRequestReportController::class, 'index'])->name('support-request-reports.index');
+    Route::get('/tax-collection-summary-report', [Report\TaxCollectionSummaryReportController::class, 'index'])->name('tax-collection-reports.index');
+    Route::get('/revenue-property-type-report', [Report\RevenuePropertyTypeReportController::class, 'index'])->name('revenue-property-type-reports.index');
+    Route::get('/revenue-collection-efficiency-report', [Report\RevenueCollectionEfficiencyReportController::class, 'index'])->name('revenue-collection-efficiency-reports.index');
+    Route::get('/service-usage-report', [Report\ServiceUsageReport::class, 'index'])->name('service-usage-reports.index');
+    Route::get('/location-analysis-report', [Report\LocationAnalysisReportController::class, 'index'])->name('location-analysis-reports.index');
+    Route::get('/audit-trail-report', [Report\AuditTrailReportController::class, 'index'])->name('audit-trail-reports.index');
 });
 
 Route::group(['prefix' => 'agent-assignment', 'middleware' => 'auth:sanctum'], function () {
@@ -317,6 +327,15 @@ Route::group(['prefix' => 'task-assignment', 'middleware' => 'auth:sanctum'], fu
     Route::get('/{taskAssignment}/edit', [TaskAssignmentController::class, 'edit'])->name('task-assignments.edit');
     Route::post('/{taskAssignment}/update', [TaskAssignmentController::class, 'update'])->name('task-assignments.update');
     Route::get('/update/status', [TaskAssignmentController::class, 'updateStatus'])->name('task-assignments.updateStatus');
+});
+
+Route::group(['prefix' => 'customer-support', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [CustomerSupportController::class, 'index'])->name('customer-supports.index');
+    Route::get('/create', [CustomerSupportController::class, 'create'])->name('customer-supports.create');
+    Route::post('/create', [CustomerSupportController::class, 'store'])->name('customer-supports.store');
+    Route::get('/show/{customerSupport}', [CustomerSupportController::class, 'show'])->name('customer-supports.show');
+    Route::get('/edit/{customerSupport}', [CustomerSupportController::class, 'edit'])->name('customer-supports.edit');
+    Route::post('/update/{customerSupport}', [CustomerSupportController::class, 'update'])->name('customer-supports.update');
 });
 
 Route::get('/test', function () {

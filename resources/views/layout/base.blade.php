@@ -408,19 +408,13 @@
                                 <i class="ri-arrow-right-s-line side-menu__angle"></i>
                             </a>
                             <ul class="slide-menu child1">
-                                @canany(['dashboards.operational'])
-                                    <li class="slide side-menu__label1">
-                                        @can('dashboards.operational')
-                                            <a href="{{ route('dashboard.operational') }}">Dashboards</a>
-                                        @endcan
-                                    </li>
-                                @endcanany
-                                @canany(['users.view', 'roles.view', 'permissions.view'])
-                                    <li class="slide">
-                                        <a href="{{ route('dashboard.operational') }}"
-                                            class="side-menu__item">Overview</a>
-                                    </li>
-                                @endcanany
+                                <li class="slide side-menu__label1">
+                                    <a href="{{ route('dashboard.operational') }}">Dashboards</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="{{ route('dashboard.operational') }}"
+                                        class="side-menu__item">Overview</a>
+                                </li>
                             </ul>
                         </li>
                         <!-- End::slide -->
@@ -650,46 +644,92 @@
                                     @can('reports.view')
                                         <li class="slide">
 
-                                            <a href="{{ route('customer-reports.index') }}" class="side-menu__item">Customer
-                                                reports</a>
+                                            <a href="{{ route('customer-reports.index') }}" class="side-menu__item">Tax Payer
+                                                Report</a>
                                         </li>
                                     @endcan
                                     @can('reports.view')
                                         <li class="slide">
                                             <a href="{{ route('business-reports.index') }}" class="side-menu__item">Business
-                                                reports</a>
+                                                Report</a>
                                         </li>
                                     @endcan
                                     @can('reports.view')
                                         <li class="slide">
                                             <a href="{{ route('property-reports.index') }}" class="side-menu__item">Property
-                                                reports</a>
+                                                Report</a>
                                         </li>
                                     @endcan
                                     @can('reports.view')
                                         <li class="slide">
                                             <a href="{{ route('bill-reports.index') }}" class="side-menu__item">Bills
-                                                reports</a>
+                                                Report</a>
                                         </li>
                                     @endcan
                                     @can('reports.view')
                                         <li class="slide">
                                             <a href="{{ route('payment-reports.index') }}" class="side-menu__item">Payment
-                                                reports</a>
+                                                Report</a>
                                         </li>
                                     @endcan
                                     @can('reports.view')
                                         <li class="slide">
-                                            <a href=" {{ route('debtors-reports.index') }}" class="side-menu__item">Debtors
-                                                reports</a>
+                                            <a href="{{ route('payment-history-reports.index') }}"
+                                                class="side-menu__item">Payment
+                                                History Report</a>
+                                        </li>
+                                    @endcan
+                                    @can('reports.view')
+                                        <li class="slide">
+                                            <a href=" {{ route('debtors-reports.index') }}"
+                                                class="side-menu__item">Outstanding Bills
+                                                Report</a>
+                                        </li>
+                                    @endcan
+                                    @can('reports.view')
+                                        <li class="slide">
+                                            <a href=" {{ route('support-request-reports.index') }}"
+                                                class="side-menu__item">Support
+                                                Request Report</a>
+                                        </li>
+                                    @endcan
+                                    @can('reports.view')
+                                        <li class="slide">
+                                            <a href=" {{ route('tax-collection-reports.index') }}"
+                                                class="side-menu__item">Tax Collection Summary Report</a>
+                                        </li>
+                                    @endcan
+                                    @can('reports.view')
+                                        <li class="slide">
+                                            <a href=" {{ route('revenue-property-type-reports.index') }}"
+                                                class="side-menu__item">Revenue By Property Type Report</a>
+                                        </li>
+                                    @endcan
+                                    @can('reports.view')
+                                        <li class="slide">
+                                            <a href=" {{ route('revenue-collection-efficiency-reports.index') }}"
+                                                class="side-menu__item">Revenue Collection Efficiency Report</a>
                                         </li>
                                     @endcan
                                     @can('reports.view')
                                         <li class="slide">
                                             <a href="{{ route('service-usage-reports.index') }}"
-                                                class="side-menu__item">Service
-                                                Usage Report</a>
+                                                class="side-menu__item">Service Usage Report</a>
                                         </li>
+                                    @endcan
+                                    @can('reports.view')
+                                        <li class="slide">
+                                            <a href="{{ route('location-analysis-reports.index') }}"
+                                                class="side-menu__item">Location Analysis Report</a>
+                                        </li>
+                                    @endcan
+                                    @can('reports.view')
+                                        <li class="slide">
+                                            <a href="{{ route('audit-trail-reports.index') }}" class="side-menu__item">Audit
+                                                Trail Report</a>
+                                        </li>
+                                    @endcan
+                                    @can('reports.view')
                                         <li class="slide">
                                             <a href="{{ route('agent-performance-reports.index') }}"
                                                 class="side-menu__item">Agent
@@ -784,6 +824,12 @@
                                         </li>
                                     @endcan
 
+                                    @can('task-assignments.view')
+                                        <li class="slide">
+                                            <a href=" {{ route('customer-supports.index') }}" class="side-menu__item">
+                                                Customer Support</a>
+                                        </li>
+                                    @endcan
                                 </ul>
                             </li>
                         @endcanany
@@ -870,190 +916,76 @@
                         {{-- <li class="slide__category"><span class="category-name">Feedback & Support</span></li> --}}
                         <!-- End::slide__category -->
                         @if (auth()->user()->access_level == 'customer')
-                            <!-- Start::slide__category -->
-                            {{-- <li class="slide__category"><span class="category-name">My Rate Payer Account</span></li> --}}
-                            <!-- End::slide__category -->
-
-                            <li class="slide">
-                                <a href="{{ route('dashboard.operational') }}" class="side-menu__item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
-                                        enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
-                                        width="24px" fill="#5f6368">
-                                        <g>
-                                            <rect fill="none" height="24" width="24" />
-                                        </g>
-                                        <g>
-                                            <g />
-                                            <g>
-                                                <path
-                                                    d="M6.44,9.86L7.02,5H5.05L4.04,9.36c-0.1,0.42-0.01,0.84,0.25,1.17C4.43,10.71,4.73,11,5.23,11 C5.84,11,6.36,10.51,6.44,9.86z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M9.71,11C10.45,11,11,10.41,11,9.69V5H9.04L8.49,9.52c-0.05,0.39,0.07,0.78,0.33,1.07 C9.05,10.85,9.37,11,9.71,11z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M14.22,11c0.41,0,0.72-0.15,0.96-0.41c0.25-0.29,0.37-0.68,0.33-1.07L14.96,5H13v4.69 C13,10.41,13.55,11,14.22,11z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M18.91,4.99L16.98,5l0.58,4.86c0.08,0.65,0.6,1.14,1.21,1.14c0.49,0,0.8-0.29,0.93-0.47 c0.26-0.33,0.35-0.76,0.25-1.17L18.91,4.99z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M21.9,8.89l-1.05-4.37c-0.22-0.9-1-1.52-1.91-1.52H5.05C4.15,3,3.36,3.63,3.15,4.52L2.1,8.89 c-0.24,1.02-0.02,2.06,0.62,2.88C2.8,11.88,2.91,11.96,3,12.06V19c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.94 c0.09-0.09,0.2-0.18,0.28-0.28C21.92,10.96,22.15,9.91,21.9,8.89z M13,5h1.96l0.54,4.52c0.05,0.39-0.07,0.78-0.33,1.07 C14.95,10.85,14.63,11,14.22,11C13.55,11,13,10.41,13,9.69V5z M8.49,9.52L9.04,5H11v4.69C11,10.41,10.45,11,9.71,11 c-0.34,0-0.65-0.15-0.89-0.41C8.57,10.3,8.45,9.91,8.49,9.52z M4.29,10.53c-0.26-0.33-0.35-0.76-0.25-1.17L5.05,5h1.97L6.44,9.86 C6.36,10.51,5.84,11,5.23,11C4.73,11,4.43,10.71,4.29,10.53z M19,19H5v-6.03C5.08,12.98,5.15,13,5.23,13 c0.87,0,1.66-0.36,2.24-0.95c0.6,0.6,1.4,0.95,2.31,0.95c0.87,0,1.65-0.36,2.23-0.93c0.59,0.57,1.39,0.93,2.29,0.93 c0.84,0,1.64-0.35,2.24-0.95c0.58,0.59,1.37,0.95,2.24,0.95c0.08,0,0.15-0.02,0.23-0.03V19z M19.71,10.53 C19.57,10.71,19.27,11,18.77,11c-0.61,0-1.14-0.49-1.21-1.14L16.98,5l1.93-0.01l1.05,4.37C20.06,9.78,19.97,10.21,19.71,10.53z" />
-                                            </g>
-                                        </g>
-                                    </svg>
-                                    <span class="side-menu__label">My Account</span>
-                                </a>
-                            </li>
-
-
-                            <li class="slide">
-                                <a href="{{ route('dashboard.mybills') }}" class="side-menu__item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
-                                        enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
-                                        width="24px" fill="#5f6368">
-                                        <g>
-                                            <rect fill="none" height="24" width="24" />
-                                        </g>
-                                        <g>
-                                            <g />
-                                            <g>
-                                                <path
-                                                    d="M6.44,9.86L7.02,5H5.05L4.04,9.36c-0.1,0.42-0.01,0.84,0.25,1.17C4.43,10.71,4.73,11,5.23,11 C5.84,11,6.36,10.51,6.44,9.86z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M9.71,11C10.45,11,11,10.41,11,9.69V5H9.04L8.49,9.52c-0.05,0.39,0.07,0.78,0.33,1.07 C9.05,10.85,9.37,11,9.71,11z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M14.22,11c0.41,0,0.72-0.15,0.96-0.41c0.25-0.29,0.37-0.68,0.33-1.07L14.96,5H13v4.69 C13,10.41,13.55,11,14.22,11z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M18.91,4.99L16.98,5l0.58,4.86c0.08,0.65,0.6,1.14,1.21,1.14c0.49,0,0.8-0.29,0.93-0.47 c0.26-0.33,0.35-0.76,0.25-1.17L18.91,4.99z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M21.9,8.89l-1.05-4.37c-0.22-0.9-1-1.52-1.91-1.52H5.05C4.15,3,3.36,3.63,3.15,4.52L2.1,8.89 c-0.24,1.02-0.02,2.06,0.62,2.88C2.8,11.88,2.91,11.96,3,12.06V19c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.94 c0.09-0.09,0.2-0.18,0.28-0.28C21.92,10.96,22.15,9.91,21.9,8.89z M13,5h1.96l0.54,4.52c0.05,0.39-0.07,0.78-0.33,1.07 C14.95,10.85,14.63,11,14.22,11C13.55,11,13,10.41,13,9.69V5z M8.49,9.52L9.04,5H11v4.69C11,10.41,10.45,11,9.71,11 c-0.34,0-0.65-0.15-0.89-0.41C8.57,10.3,8.45,9.91,8.49,9.52z M4.29,10.53c-0.26-0.33-0.35-0.76-0.25-1.17L5.05,5h1.97L6.44,9.86 C6.36,10.51,5.84,11,5.23,11C4.73,11,4.43,10.71,4.29,10.53z M19,19H5v-6.03C5.08,12.98,5.15,13,5.23,13 c0.87,0,1.66-0.36,2.24-0.95c0.6,0.6,1.4,0.95,2.31,0.95c0.87,0,1.65-0.36,2.23-0.93c0.59,0.57,1.39,0.93,2.29,0.93 c0.84,0,1.64-0.35,2.24-0.95c0.58,0.59,1.37,0.95,2.24,0.95c0.08,0,0.15-0.02,0.23-0.03V19z M19.71,10.53 C19.57,10.71,19.27,11,18.77,11c-0.61,0-1.14-0.49-1.21-1.14L16.98,5l1.93-0.01l1.05,4.37C20.06,9.78,19.97,10.21,19.71,10.53z" />
-                                            </g>
-                                        </g>
-                                    </svg>
-                                    <span class="side-menu__label">My Bills</span>
-                                </a>
-                            </li>
-
-                            <li class="slide">
-                                <a href="{{ route('dashboard.myproperties') }}" class="side-menu__item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
-                                        enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
-                                        width="24px" fill="#5f6368">
-                                        <g>
-                                            <rect fill="none" height="24" width="24" />
-                                        </g>
-                                        <g>
-                                            <g />
-                                            <g>
-                                                <path
-                                                    d="M6.44,9.86L7.02,5H5.05L4.04,9.36c-0.1,0.42-0.01,0.84,0.25,1.17C4.43,10.71,4.73,11,5.23,11 C5.84,11,6.36,10.51,6.44,9.86z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M9.71,11C10.45,11,11,10.41,11,9.69V5H9.04L8.49,9.52c-0.05,0.39,0.07,0.78,0.33,1.07 C9.05,10.85,9.37,11,9.71,11z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M14.22,11c0.41,0,0.72-0.15,0.96-0.41c0.25-0.29,0.37-0.68,0.33-1.07L14.96,5H13v4.69 C13,10.41,13.55,11,14.22,11z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M18.91,4.99L16.98,5l0.58,4.86c0.08,0.65,0.6,1.14,1.21,1.14c0.49,0,0.8-0.29,0.93-0.47 c0.26-0.33,0.35-0.76,0.25-1.17L18.91,4.99z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M21.9,8.89l-1.05-4.37c-0.22-0.9-1-1.52-1.91-1.52H5.05C4.15,3,3.36,3.63,3.15,4.52L2.1,8.89 c-0.24,1.02-0.02,2.06,0.62,2.88C2.8,11.88,2.91,11.96,3,12.06V19c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.94 c0.09-0.09,0.2-0.18,0.28-0.28C21.92,10.96,22.15,9.91,21.9,8.89z M13,5h1.96l0.54,4.52c0.05,0.39-0.07,0.78-0.33,1.07 C14.95,10.85,14.63,11,14.22,11C13.55,11,13,10.41,13,9.69V5z M8.49,9.52L9.04,5H11v4.69C11,10.41,10.45,11,9.71,11 c-0.34,0-0.65-0.15-0.89-0.41C8.57,10.3,8.45,9.91,8.49,9.52z M4.29,10.53c-0.26-0.33-0.35-0.76-0.25-1.17L5.05,5h1.97L6.44,9.86 C6.36,10.51,5.84,11,5.23,11C4.73,11,4.43,10.71,4.29,10.53z M19,19H5v-6.03C5.08,12.98,5.15,13,5.23,13 c0.87,0,1.66-0.36,2.24-0.95c0.6,0.6,1.4,0.95,2.31,0.95c0.87,0,1.65-0.36,2.23-0.93c0.59,0.57,1.39,0.93,2.29,0.93 c0.84,0,1.64-0.35,2.24-0.95c0.58,0.59,1.37,0.95,2.24,0.95c0.08,0,0.15-0.02,0.23-0.03V19z M19.71,10.53 C19.57,10.71,19.27,11,18.77,11c-0.61,0-1.14-0.49-1.21-1.14L16.98,5l1.93-0.01l1.05,4.37C20.06,9.78,19.97,10.21,19.71,10.53z" />
-                                            </g>
-                                        </g>
-                                    </svg>
-                                    <span class="side-menu__label">My Properties</span>
-                                </a>
-                            </li>
-
-                            <li class="slide">
-                                <a href="{{ route('dashboard.mybusiness') }}" class="side-menu__item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
-                                        enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
-                                        width="24px" fill="#5f6368">
-                                        <g>
-                                            <rect fill="none" height="24" width="24" />
-                                        </g>
-                                        <g>
-                                            <g />
-                                            <g>
-                                                <path
-                                                    d="M6.44,9.86L7.02,5H5.05L4.04,9.36c-0.1,0.42-0.01,0.84,0.25,1.17C4.43,10.71,4.73,11,5.23,11 C5.84,11,6.36,10.51,6.44,9.86z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M9.71,11C10.45,11,11,10.41,11,9.69V5H9.04L8.49,9.52c-0.05,0.39,0.07,0.78,0.33,1.07 C9.05,10.85,9.37,11,9.71,11z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M14.22,11c0.41,0,0.72-0.15,0.96-0.41c0.25-0.29,0.37-0.68,0.33-1.07L14.96,5H13v4.69 C13,10.41,13.55,11,14.22,11z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M18.91,4.99L16.98,5l0.58,4.86c0.08,0.65,0.6,1.14,1.21,1.14c0.49,0,0.8-0.29,0.93-0.47 c0.26-0.33,0.35-0.76,0.25-1.17L18.91,4.99z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M21.9,8.89l-1.05-4.37c-0.22-0.9-1-1.52-1.91-1.52H5.05C4.15,3,3.36,3.63,3.15,4.52L2.1,8.89 c-0.24,1.02-0.02,2.06,0.62,2.88C2.8,11.88,2.91,11.96,3,12.06V19c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.94 c0.09-0.09,0.2-0.18,0.28-0.28C21.92,10.96,22.15,9.91,21.9,8.89z M13,5h1.96l0.54,4.52c0.05,0.39-0.07,0.78-0.33,1.07 C14.95,10.85,14.63,11,14.22,11C13.55,11,13,10.41,13,9.69V5z M8.49,9.52L9.04,5H11v4.69C11,10.41,10.45,11,9.71,11 c-0.34,0-0.65-0.15-0.89-0.41C8.57,10.3,8.45,9.91,8.49,9.52z M4.29,10.53c-0.26-0.33-0.35-0.76-0.25-1.17L5.05,5h1.97L6.44,9.86 C6.36,10.51,5.84,11,5.23,11C4.73,11,4.43,10.71,4.29,10.53z M19,19H5v-6.03C5.08,12.98,5.15,13,5.23,13 c0.87,0,1.66-0.36,2.24-0.95c0.6,0.6,1.4,0.95,2.31,0.95c0.87,0,1.65-0.36,2.23-0.93c0.59,0.57,1.39,0.93,2.29,0.93 c0.84,0,1.64-0.35,2.24-0.95c0.58,0.59,1.37,0.95,2.24,0.95c0.08,0,0.15-0.02,0.23-0.03V19z M19.71,10.53 C19.57,10.71,19.27,11,18.77,11c-0.61,0-1.14-0.49-1.21-1.14L16.98,5l1.93-0.01l1.05,4.37C20.06,9.78,19.97,10.21,19.71,10.53z" />
-                                            </g>
-                                        </g>
-                                    </svg>
-                                    <span class="side-menu__label">My Businessess</span>
-                                </a>
-                            </li>
-
-                            <li class="slide">
-                                <a href="{{ route('dashboard.mypaymenthistory') }}" class="side-menu__item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
-                                        enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
-                                        width="24px" fill="#5f6368">
-                                        <g>
-                                            <rect fill="none" height="24" width="24" />
-                                        </g>
-                                        <g>
-                                            <g />
-                                            <g>
-                                                <path
-                                                    d="M6.44,9.86L7.02,5H5.05L4.04,9.36c-0.1,0.42-0.01,0.84,0.25,1.17C4.43,10.71,4.73,11,5.23,11 C5.84,11,6.36,10.51,6.44,9.86z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M9.71,11C10.45,11,11,10.41,11,9.69V5H9.04L8.49,9.52c-0.05,0.39,0.07,0.78,0.33,1.07 C9.05,10.85,9.37,11,9.71,11z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M14.22,11c0.41,0,0.72-0.15,0.96-0.41c0.25-0.29,0.37-0.68,0.33-1.07L14.96,5H13v4.69 C13,10.41,13.55,11,14.22,11z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M18.91,4.99L16.98,5l0.58,4.86c0.08,0.65,0.6,1.14,1.21,1.14c0.49,0,0.8-0.29,0.93-0.47 c0.26-0.33,0.35-0.76,0.25-1.17L18.91,4.99z"
-                                                    opacity=".3" />
-                                                <path
-                                                    d="M21.9,8.89l-1.05-4.37c-0.22-0.9-1-1.52-1.91-1.52H5.05C4.15,3,3.36,3.63,3.15,4.52L2.1,8.89 c-0.24,1.02-0.02,2.06,0.62,2.88C2.8,11.88,2.91,11.96,3,12.06V19c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.94 c0.09-0.09,0.2-0.18,0.28-0.28C21.92,10.96,22.15,9.91,21.9,8.89z M13,5h1.96l0.54,4.52c0.05,0.39-0.07,0.78-0.33,1.07 C14.95,10.85,14.63,11,14.22,11C13.55,11,13,10.41,13,9.69V5z M8.49,9.52L9.04,5H11v4.69C11,10.41,10.45,11,9.71,11 c-0.34,0-0.65-0.15-0.89-0.41C8.57,10.3,8.45,9.91,8.49,9.52z M4.29,10.53c-0.26-0.33-0.35-0.76-0.25-1.17L5.05,5h1.97L6.44,9.86 C6.36,10.51,5.84,11,5.23,11C4.73,11,4.43,10.71,4.29,10.53z M19,19H5v-6.03C5.08,12.98,5.15,13,5.23,13 c0.87,0,1.66-0.36,2.24-0.95c0.6,0.6,1.4,0.95,2.31,0.95c0.87,0,1.65-0.36,2.23-0.93c0.59,0.57,1.39,0.93,2.29,0.93 c0.84,0,1.64-0.35,2.24-0.95c0.58,0.59,1.37,0.95,2.24,0.95c0.08,0,0.15-0.02,0.23-0.03V19z M19.71,10.53 C19.57,10.71,19.27,11,18.77,11c-0.61,0-1.14-0.49-1.21-1.14L16.98,5l1.93-0.01l1.05,4.37C20.06,9.78,19.97,10.21,19.71,10.53z" />
-                                            </g>
-                                        </g>
-                                    </svg>
-                                    <span class="side-menu__label">My Payment History</span>
-                                </a>
-                            </li>
-
-                            <!-- Start::slide -->
-                            {{-- <li class="slide has-sub">
+                            <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
                                         viewBox="0 0 24 24" width="24px" fill="#5f6368">
                                         <path d="M0 0h24v24H0V0z" fill="none" />
-                                        <path d="M5 5v14h14V5H5zm4 12H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
-                                            opacity=".3" />
+                                        <path d="M13 4H6v16h12V9h-5V4zm3 14H8v-2h8v2zm0-6v2H8v-2h8z" opacity=".3" />
                                         <path
-                                            d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
+                                            d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
                                     </svg>
-                                    <span class="side-menu__label">Feedback & Support</span>
+                                    <span class="side-menu__label">My Account</span>
                                     <i class="ri-arrow-right-s-line side-menu__angle"></i>
                                 </a>
                                 <ul class="slide-menu child1">
+                                    <li class="slide">
+                                        <a href="{{ route('dashboard.mybills') }}" class="side-menu__item">Bills</a>
+                                    </li>
+                                    <li class="slide">
+                                        <a href="{{ route('dashboard.myproperties') }}"
+                                            class="side-menu__item">Properties</a>
+                                    </li>
+                                    <li class="slide">
+                                        <a href="{{ route('dashboard.mybusiness') }}"
+                                            class="side-menu__item">Businesses</a>
+                                    </li>
+
 
                                 </ul>
-                            </li> --}}
-                            <!-- End::slide -->
+                            </li>
+
+                            <li class="slide has-sub">
+                                <a href="javascript:void(0);" class="side-menu__item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
+                                        viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                        <path d="M0 0h24v24H0V0z" fill="none" />
+                                        <path d="M13 4H6v16h12V9h-5V4zm3 14H8v-2h8v2zm0-6v2H8v-2h8z" opacity=".3" />
+                                        <path
+                                            d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
+                                    </svg>
+                                    <span class="side-menu__label">My Payments</span>
+                                    <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                                </a>
+                                <ul class="slide-menu child1">
+                                    <li class="slide">
+                                        <a href="{{ route('dashboard.mypaymenthistory') }}"
+                                            class="side-menu__item">View
+                                            Payment History</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+                            <li class="slide has-sub">
+                                <a href="javascript:void(0);" class="side-menu__item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
+                                        viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                        <path d="M0 0h24v24H0V0z" fill="none" />
+                                        <path d="M13 4H6v16h12V9h-5V4zm3 14H8v-2h8v2zm0-6v2H8v-2h8z" opacity=".3" />
+                                        <path
+                                            d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
+                                    </svg>
+                                    <span class="side-menu__label">Help & Support </span>
+                                    <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                                </a>
+                                <ul class="slide-menu child1">
+                                    <li class="slide">
+                                        <a href="{{ route('dashboard.faq') }}" class="side-menu__item">FAQ's</a>
+                                    </li>
+
+                                </ul>
+                            </li>
                         @endif
 
                     </ul>

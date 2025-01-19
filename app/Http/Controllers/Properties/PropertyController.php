@@ -11,10 +11,12 @@ use App\Models\Property;
 use App\Models\Citizen;
 use App\Models\BusinessClassType;
 use App\Models\Assembly;
+use App\Models\AuditTrail;
 use App\Models\Block;
 use App\Models\Division;
 use App\Models\Zone;
 use App\Models\PropertyUser;
+use App\Models\ServiceRequest;
 use Illuminate\Support\Facades\DB;
 
 
@@ -158,6 +160,26 @@ class PropertyController extends Controller
         if (!empty($data['customer_name'])) {
             dispatch(new SendPropertyOwnerSMS($property->load('customer')));
         }
+
+        $serviceData = [
+            'user_id' => $request->user()->id,
+            'service_used' => 'Property Registration',
+            'usage_date' => now(),
+            'service_channel' => 'Web Portal',
+            'status' => 'Completed'
+        ];
+
+        $auditTrailData = [
+            'user_id' => $request->user()->id,
+            'action_performed' => 'Property Registration',
+            'action_date' => now(),
+            'ip_address' => $request->ip(),
+            'device_used' => request()->userAgent(),
+            'remarks' => 'Success'
+        ];
+
+        ServiceRequest::create($serviceData);
+        AuditTrail::create($auditTrailData);
 
         return redirect()->route('properties.index')->with('status', 'Property created successfully!');
     }

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Payment\CreatePaymentRequest;
+use App\Models\AuditTrail;
 use Illuminate\Http\Request;
 use App\Models\Bill;
 use App\Models\Payment;
+use App\Models\ServiceRequest;
 use Illuminate\Support\Facades\DB;
 
 
@@ -199,6 +201,26 @@ class PaymentController extends Controller
 
                 $payment->update($data);
 
+                $serviceData = [
+                    'user_id' => $request->user()->id,
+                    'service_used' => 'Bill Payment',
+                    'usage_date' => now(),
+                    'service_channel' => 'Web Portal',
+                    'status' => 'Completed'
+                ];
+
+                $auditTrailData = [
+                    'user_id' => $request->user()->id,
+                    'action_performed' => 'Bill Payment',
+                    'action_date' => now(),
+                    'ip_address' => $request->ip(),
+                    'device_used' => request()->userAgent(),
+                    'remarks' => 'Success'
+                ];
+
+                ServiceRequest::create($serviceData);
+                AuditTrail::create($auditTrailData);
+
                 if ($request->user()->access_level !== 'customer') {
                     return redirect()->route('payments.index')->with(
                         'status',
@@ -219,6 +241,28 @@ class PaymentController extends Controller
                 }
             }
         } else {
+            //Cash payment
+
+            $serviceData = [
+                'user_id' => $request->user()->id,
+                'service_used' => 'Bill Payment',
+                'usage_date' => now(),
+                'service_channel' => 'Web Portal',
+                'status' => 'Completed'
+            ];
+
+            $auditTrailData = [
+                'user_id' => $request->user()->id,
+                'action_performed' => 'Bill Payment',
+                'action_date' => now(),
+                'ip_address' => $request->ip(),
+                'device_used' => request()->userAgent(),
+                'remarks' => 'Success'
+            ];
+
+            ServiceRequest::create($serviceData);
+            AuditTrail::create($auditTrailData);
+
             if ($request->user()->access_level !== 'customer') {
                 return redirect()->route('payments.index')->with('status', 'Payment processed successfully');
             } else {

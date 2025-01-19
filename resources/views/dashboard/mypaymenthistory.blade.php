@@ -14,100 +14,93 @@
             </div>
 
             <div class="col-xl-12 active-p">
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab">
+                <div class="tab-pane fade show active" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab">
 
-                        <div class="card">
-                            <div class="card-body px-0">
-                                <div class="table-responsive active-projects user-tbl  dt-filter">
-                                    <table id="file-export" class="table table-bordered text-nowrap w-100">
-                                        <thead>
+                    <div class="card">
+                        <div class="card-body px-0">
+                            <div class="table-responsive active-projects user-tbl  dt-filter">
+                                <table id="file-export" class="table table-bordered text-nowrap w-100">
+                                    <thead>
+                                        <tr>
+                                            <th>SN</th>
+                                            <th>Bill ID</th>
+                                            <th>Name</th>
+                                            <th>Amount</th>
+                                            <th>Payment Mode</th>
+                                            <th>Status</th>
+                                            <th>Assembly</th>
+                                            <th>Paid By</th>
+                                            <th>Payment Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($customerData['payments'] as $index => $payment)
+                                            @php
+                                                $name = '';
+                                                if ($payment->bill->property && $payment->bill->property->customer) {
+                                                    $firstname = $payment->bill->property->customer->first_name ?? '';
+                                                    $lastname = $payment->bill->property->customer->last_name ?? '';
+                                                    $name = $firstname . ' ' . $lastname;
+                                                } elseif (
+                                                    $payment->bill->business &&
+                                                    $payment->bill->business->customer
+                                                ) {
+                                                    $firstname = $payment->bill->business->customer->first_name ?? '';
+                                                    $lastname = $payment->bill->business->customer->last_name ?? '';
+                                                    $name = $firstname . ' ' . $lastname;
+                                                }
+                                            @endphp
                                             <tr>
-                                                <th>SN</th>
-                                                <th>Bill ID</th>
-                                                <th>Name</th>
-                                                <th>Amount</th>
-                                                <th>Payment Mode</th>
-                                                <th>Status</th>
-                                                <th>Assembly</th>
-                                                <th>Paid By</th>
-                                                <th>Payment Date</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($customerData['payments'] as $index => $payment)
-                                                @php
-                                                    $name = '';
-                                                    if (
-                                                        $payment->bill->property &&
-                                                        $payment->bill->property->customer
-                                                    ) {
-                                                        $firstname =
-                                                            $payment->bill->property->customer->first_name ?? '';
-                                                        $lastname = $payment->bill->property->customer->last_name ?? '';
-                                                        $name = $firstname . ' ' . $lastname;
-                                                    } elseif (
-                                                        $payment->bill->business &&
-                                                        $payment->bill->business->customer
-                                                    ) {
-                                                        $firstname =
-                                                            $payment->bill->business->customer->first_name ?? '';
-                                                        $lastname = $payment->bill->business->customer->last_name ?? '';
-                                                        $name = $firstname . ' ' . $lastname;
-                                                    }
-                                                @endphp
-                                                <tr>
-                                                    <td>{{ $index + 1 }}</td>
-                                                    <td>{{ $payment->bills_id }}</td>
-                                                    <td>{{ $name }}</td>
-                                                    <td>{{ number_format($payment->amount, 2) }}</td>
-                                                    <td>{{ $payment->payment_mode }}</td>
-                                                    <td>{{ $payment->transaction_status }}</td>
-                                                    <td>{{ $payment->assembly->name ?? 'N/A' }}</td>
-                                                    <td>{{ $payment->createdBy->name ?? 'N/A' }}</td>
-                                                    <td>{{ $payment->created_at }}</td>
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <div class="btn-link" data-bs-toggle="dropdown"
-                                                                aria-expanded="false">
-                                                                <svg width="24" height="24" viewBox="0 0 24 24"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
-                                                                        stroke="#737B8B" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                    </path>
-                                                                    <path
-                                                                        d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
-                                                                        stroke="#737B8B" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                    </path>
-                                                                    <path
-                                                                        d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
-                                                                        stroke="#737B8B" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                    </path>
-                                                                </svg>
-                                                            </div>
-                                                            <div class="dropdown-menu dropdown-menu-end">
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('citizens.viewPayment', $payment) }}">View
-                                                                    Payment</a>
-                                                            </div>
+                                                <td>{{ $index + 1 }}</td>
+                                                <td>{{ $payment->bills_id }}</td>
+                                                <td>{{ $name }}</td>
+                                                <td>{{ number_format($payment->amount, 2) }}</td>
+                                                <td>{{ $payment->payment_mode }}</td>
+                                                <td>{{ $payment->transaction_status }}</td>
+                                                <td>{{ $payment->assembly->name ?? 'N/A' }}</td>
+                                                <td>{{ $payment->createdBy->name ?? 'N/A' }}</td>
+                                                <td>{{ $payment->created_at }}</td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <div class="btn-link" data-bs-toggle="dropdown"
+                                                            aria-expanded="false">
+                                                            <svg width="24" height="24" viewBox="0 0 24 24"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
+                                                                    stroke="#737B8B" stroke-width="2" stroke-linecap="round"
+                                                                    stroke-linejoin="round">
+                                                                </path>
+                                                                <path
+                                                                    d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
+                                                                    stroke="#737B8B" stroke-width="2" stroke-linecap="round"
+                                                                    stroke-linejoin="round">
+                                                                </path>
+                                                                <path
+                                                                    d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
+                                                                    stroke="#737B8B" stroke-width="2" stroke-linecap="round"
+                                                                    stroke-linejoin="round">
+                                                                </path>
+                                                            </svg>
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                        <tfoot>
-                                            <th colspan="2"></th>
-                                            <th>Total (GHS)</th>
-                                            <th>{{ $customerData['paymentTotal'] }}</th>
-                                            <th colspan="6"></th>
-                                        </tfoot>
-                                    </table>
-                                </div>
+                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('citizens.viewPayment', $payment) }}">View
+                                                                Payment</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                    <tfoot>
+                                        <th colspan="2"></th>
+                                        <th>Total (GHS)</th>
+                                        <th>{{ $customerData['paymentTotal'] }}</th>
+                                        <th colspan="6"></th>
+                                    </tfoot>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -127,6 +120,20 @@
     <script src="{{ asset('assets/vendor/datatables/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/datatables/js/jszip.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins-init/datatables.init.js') }}"></script>
+
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/663e4f9b9a809f19fb2fa32d/1hthme206';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
 
     <script>
         const ctx = document.getElementById('billPaymentChart').getContext('2d');

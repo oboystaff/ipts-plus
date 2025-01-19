@@ -10,11 +10,12 @@
                 <div class="card dz-card" id="accordion-four">
                     <div class="card-header flex-wrap d-flex justify-content-between">
                         <div>
-                            <h4 class="card-title">Tax Payer Report</h4>
+                            <h4 class="card-title">Geo Location Analysis Report</h4>
                         </div>
                     </div>
 
-                    <input type="hidden" name="customer-report_url" url="{{ route('customer-reports.index') }}">
+                    <input type="hidden" name="location-analysis-report_url"
+                        url="{{ route('location-analysis-reports.index') }}">
 
                     <div class="card-body">
                         <div class="basic-form">
@@ -32,15 +33,30 @@
                                 <div id="detail_field">
                                     <div class="row">
 
-                                        <div class="col-md-6 mb-4">
+                                        {{-- <div class="col-md-6 mb-4">
+                                            <label class="form-label">Assembly</label>
+                                            <select
+                                                class="form-control form-select @error('assembly_code') is-invalid @enderror"
+                                                name="assembly_code">
+                                                <option disabled selected>Select Assembly</option>
+                                                @foreach ($assemblies as $assembly)
+                                                    <option value="{{ $assembly->assembly_code }}">
+                                                        {{ $assembly->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div> --}}
+
+                                        {{-- <div class="col-md-6 mb-4">
                                             <label class="form-label">Status</label>
                                             <select class="form-control form-select @error('status') is-invalid @enderror"
                                                 id="status" name="status">
                                                 <option disabled selected>Select Status</option>
-                                                <option value="Active">Active</option>
-                                                <option value="InActive">In Active</option>
+                                                <option value="Pending">Pending</option>
+                                                <option value="Success">Success</option>
+                                                <option value="Failed">Failed</option>
                                             </select>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
 
@@ -74,25 +90,32 @@
                                         <table id="file-export" class="table table-bordered text-nowrap w-100">
                                             <thead>
                                                 <tr>
-                                                    <th>S/N</th>
-                                                    <th>Account Number</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
-                                                    <th>Other Name</th>
-                                                    <th>Gender</th>
-                                                    <th>Date of Birth</th>
-                                                    <th>Marital Status</th>
-                                                    <th>Telephone Number</th>
-                                                    <th>Country of Citizenship</th>
-                                                    <th>Customer Type</th>
-                                                    <th>Status</th>
-                                                    <th>Ghana Card Number</th>
-                                                    <th>Created By</th>
-                                                    <th>Created Date</th>
+                                                    <th>SN</th>
+                                                    <th>Region</th>
+                                                    <th>No. of Taxpayers</th>
+                                                    <th>No. of Properties</th>
+                                                    <th>Total Billed Amount</th>
+                                                    <th>Total Collected Amount</th>
+                                                    <th>Outstanding Amount</th>
+                                                    <th>Collection Rate</th>
+                                                    <th>Average Tax Per Property</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                             </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th></th>
+                                                    <th id="title"></th>
+                                                    <th id="total_taxpayers"></th>
+                                                    <th id="total_properties"></th>
+                                                    <th id="total_billed"></th>
+                                                    <th id="total_payment"></th>
+                                                    <th id="total_outstan"></th>
+                                                    <th id="total_rate"></th>
+                                                    <th id="total_tax"></th>
+                                                </tr>
+                                            </tfoot>
                                         </table>
                                     </div>
 
@@ -129,5 +152,5 @@
 @endsection
 
 @section('page-scripts')
-    <script src="{{ asset('assets/js/report/customer-report.js?v1=5678') }}"></script>
+    <script src="{{ asset('assets/js/report/location-analysis-report.js?v1=1234') }}"></script>
 @endsection

@@ -10,11 +10,11 @@
                 <div class="card dz-card" id="accordion-four">
                     <div class="card-header flex-wrap d-flex justify-content-between">
                         <div>
-                            <h4 class="card-title">Tax Payer Report</h4>
+                            <h4 class="card-title">Tax Collection Summary Report</h4>
                         </div>
                     </div>
 
-                    <input type="hidden" name="customer-report_url" url="{{ route('customer-reports.index') }}">
+                    <input type="hidden" name="tax-collection-report_url" url="{{ route('tax-collection-reports.index') }}">
 
                     <div class="card-body">
                         <div class="basic-form">
@@ -33,12 +33,27 @@
                                     <div class="row">
 
                                         <div class="col-md-6 mb-4">
+                                            <label class="form-label">Assembly</label>
+                                            <select
+                                                class="form-control form-select @error('assembly_code') is-invalid @enderror"
+                                                name="assembly_code">
+                                                <option disabled selected>Select Assembly</option>
+                                                @foreach ($assemblies as $assembly)
+                                                    <option value="{{ $assembly->assembly_code }}">
+                                                        {{ $assembly->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-6 mb-4">
                                             <label class="form-label">Status</label>
                                             <select class="form-control form-select @error('status') is-invalid @enderror"
                                                 id="status" name="status">
                                                 <option disabled selected>Select Status</option>
-                                                <option value="Active">Active</option>
-                                                <option value="InActive">In Active</option>
+                                                <option value="Pending">Pending</option>
+                                                <option value="Success">Success</option>
+                                                <option value="Failed">Failed</option>
                                             </select>
                                         </div>
                                     </div>
@@ -74,25 +89,28 @@
                                         <table id="file-export" class="table table-bordered text-nowrap w-100">
                                             <thead>
                                                 <tr>
-                                                    <th>S/N</th>
-                                                    <th>Account Number</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
-                                                    <th>Other Name</th>
-                                                    <th>Gender</th>
-                                                    <th>Date of Birth</th>
-                                                    <th>Marital Status</th>
-                                                    <th>Telephone Number</th>
-                                                    <th>Country of Citizenship</th>
-                                                    <th>Customer Type</th>
-                                                    <th>Status</th>
-                                                    <th>Ghana Card Number</th>
-                                                    <th>Created By</th>
-                                                    <th>Created Date</th>
+                                                    <th>SN</th>
+                                                    <th>Assembly</th>
+                                                    <th>Momo</th>
+                                                    <th>Cash</th>
+                                                    <th>Total Amount</th>
+                                                    <th>Transaction No.</th>
+                                                    <th>Frequently Used</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                             </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th></th>
+                                                    <th id="title"></th>
+                                                    <th id="momo_total"></th>
+                                                    <th id="cash_total"></th>
+                                                    <th id="total_amount"></th>
+                                                    <th id="total_trans"></th>
+                                                    <th></th>
+                                                </tr>
+                                            </tfoot>
                                         </table>
                                     </div>
 
@@ -129,5 +147,5 @@
 @endsection
 
 @section('page-scripts')
-    <script src="{{ asset('assets/js/report/customer-report.js?v1=5678') }}"></script>
+    <script src="{{ asset('assets/js/report/tax-collection-summary-report.js?v1=1234') }}"></script>
 @endsection

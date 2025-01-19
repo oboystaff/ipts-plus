@@ -2832,4 +2832,9 @@ class DashboardController extends Controller
 
         return view('dashboard.mypaymenthistory', compact('total', 'chartData', 'chartData2', 'chartData3', 'customerData'));
     }
+
+    public function faqAction()
+    {
+        return view('dashboard.faq');
+    }
 }

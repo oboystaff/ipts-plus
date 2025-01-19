@@ -10,7 +10,7 @@
                 <div class="card dz-card" id="accordion-four">
                     <div class="card-header flex-wrap d-flex justify-content-between">
                         <div>
-                            <h4 class="card-title">Debtors Report</h4>
+                            <h4 class="card-title">Outstanding Bills Report</h4>
                         </div>
                     </div>
 

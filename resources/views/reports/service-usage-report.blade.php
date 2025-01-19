@@ -10,11 +10,11 @@
                 <div class="card dz-card" id="accordion-four">
                     <div class="card-header flex-wrap d-flex justify-content-between">
                         <div>
-                            <h4 class="card-title">Tax Payer Report</h4>
+                            <h4 class="card-title">Service Usage Report</h4>
                         </div>
                     </div>
 
-                    <input type="hidden" name="customer-report_url" url="{{ route('customer-reports.index') }}">
+                    <input type="hidden" name="service-usage-report_url" url="{{ route('service-usage-reports.index') }}">
 
                     <div class="card-body">
                         <div class="basic-form">
@@ -31,14 +31,13 @@
 
                                 <div id="detail_field">
                                     <div class="row">
-
                                         <div class="col-md-6 mb-4">
                                             <label class="form-label">Status</label>
                                             <select class="form-control form-select @error('status') is-invalid @enderror"
                                                 id="status" name="status">
                                                 <option disabled selected>Select Status</option>
-                                                <option value="Active">Active</option>
-                                                <option value="InActive">In Active</option>
+                                                <option value="Pending">Pending</option>
+                                                <option value="Completed">Completed</option>
                                             </select>
                                         </div>
                                     </div>
@@ -75,20 +74,12 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/N</th>
-                                                    <th>Account Number</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
-                                                    <th>Other Name</th>
-                                                    <th>Gender</th>
-                                                    <th>Date of Birth</th>
-                                                    <th>Marital Status</th>
-                                                    <th>Telephone Number</th>
-                                                    <th>Country of Citizenship</th>
-                                                    <th>Customer Type</th>
-                                                    <th>Status</th>
-                                                    <th>Ghana Card Number</th>
-                                                    <th>Created By</th>
-                                                    <th>Created Date</th>
+                                                    <th>User ID</th>
+                                                    <th>Service Used</th>
+                                                    <th>Usage Date</th>
+                                                    <th>Service Channel</th>
+                                                    <th>Number of Request</th>
+                                                    <th>Completion Rate</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -129,5 +120,5 @@
 @endsection
 
 @section('page-scripts')
-    <script src="{{ asset('assets/js/report/customer-report.js?v1=5678') }}"></script>
+    <script src="{{ asset('assets/js/report/service-usage-report.js?v1=5678') }}"></script>
 @endsection

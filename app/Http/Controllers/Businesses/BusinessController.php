@@ -17,6 +17,7 @@ use App\Models\Zone;
 use App\Models\Division;
 use App\Models\Block;
 use App\Models\PropertyUser;
+use App\Models\ServiceRequest;
 
 
 class BusinessController extends Controller
@@ -129,6 +130,16 @@ class BusinessController extends Controller
         $businessData['business_owner_id'] = $businessOwner->business_owner_id;
 
         $business = Business::create($businessData);
+
+        $serviceData = [
+            'user_id' => $businessRequest->user()->id,
+            'service_used' => 'BoP Registration',
+            'usage_date' => now(),
+            'service_channel' => 'Web Portal',
+            'status' => 'Completed'
+        ];
+
+        ServiceRequest::create($serviceData);
 
         return redirect()->route('businesses.index')->with('status', 'Business created successfully.');
     }

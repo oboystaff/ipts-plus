@@ -9,6 +9,7 @@ use App\Http\Requests\Customer\CreateCustomerRequest;
 use App\Http\Requests\Customer\UpdateCustomerRequest;
 use App\Jobs\Registration\SendRegistrationReminder;
 use App\Jobs\OTP\SendOTPSMS;
+use App\Models\AuditTrail;
 use Illuminate\Http\Request;
 use App\Models\Citizen;
 use App\Models\Bill;
@@ -18,6 +19,7 @@ use App\Models\Business;
 use App\Models\CustomerType;
 use App\Models\User;
 use App\Models\OTP;
+use App\Models\ServiceRequest;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -188,6 +190,26 @@ class CitizenController extends Controller
             }
 
             dispatch(new SendRegistrationReminder($customer));
+
+            $serviceData = [
+                'user_id' => $request->user()->id,
+                'service_used' => 'Taxpayer Registration',
+                'usage_date' => now(),
+                'service_channel' => 'Web Portal',
+                'status' => 'Completed'
+            ];
+
+            $auditTrailData = [
+                'user_id' => $request->user()->id,
+                'action_performed' => 'Taxpayer Registration',
+                'action_date' => now(),
+                'ip_address' => $request->ip(),
+                'device_used' => request()->userAgent(),
+                'remarks' => 'Success'
+            ];
+
+            ServiceRequest::create($serviceData);
+            AuditTrail::create($auditTrailData);
 
             return redirect()->route('citizens.index')->with('status', 'Assembly customer created successfully!');
         } catch (\Exception $ex) {

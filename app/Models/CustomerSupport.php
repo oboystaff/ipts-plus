@@ -25,6 +25,11 @@ class CustomerSupport extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function citizen()
+    {
+        return $this->belongsTo(Citizen::class, 'user_id', 'user_id');
+    }
+
     public function assembly()
     {
         return $this->belongsTo(Assembly::class, 'assembly_code', 'assembly_code');
