@@ -126,10 +126,7 @@
                         </form>
                     </div>
                 </div>
-
             </div>
-
-
         </div>
         <div class="row">
             <!-- Card 1 - Active Customers -->

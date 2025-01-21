@@ -56,6 +56,26 @@ $(function (e) {
             sSearch: '',
         },
     });
+
+    // $('#file-export').DataTable({
+    //     dom: 'Bfrtip',
+    //     buttons: [
+    //         'copy', 
+    //         'csv', 
+    //         'excel', 
+    //         'pdf', 
+    //         'print', 
+    //         {
+    //             extend: 'colvis',
+    //             text: 'Column Visibility', // Customize the button text (optional)
+    //             postfixButtons: ['colvisRestore'] // Optional: Add a restore button to reset visibility
+    //         }
+    //     ],
+    //     language: {
+    //         searchPlaceholder: 'Search...',
+    //         sSearch: '',
+    //     },
+    // });
     // file export datatable
 
     // delete row datatable
