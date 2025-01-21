@@ -1,7 +1,7 @@
 <div class="row mb-4">
     <div class="col-xxl-6 col-xl-6 col-lg-6">
         <div class="card custom-card overflow-hidden nft-main-card h-100">
-            <div class="card-body d-flex align-items-center justify-content-center" style="height: 100%;">
+            <div class="card-body d-flex align-items-center justify-content-center">
                 <div class="row gap-3 gap-sm-0 mx-0 py-3 rounded-3 w-100">
                     <div class="col-xxl-8 col-xl-6 col-lg-8 col-12">
                         <div class="p-2">
@@ -17,8 +17,7 @@
                             @endphp
                             <h6 class="fw-semibold mb-3 op-9 text-fixed-white"> {{ $greeting }}
                                 {{ Auth::user()->name }} ! &#128075;</h6>
-                            <h4 class="fw-semibold mb-2  text-fixed-white"> "Welcome to Your <span
-                                    class="text-secondary">
+                            <h4 class="fw-semibold mb-2  text-fixed-white"> "Welcome to Your <span class="text-secondary">
                                     IPTS</span> Dashboard!" </h4>
                             <p class="mb-4 text-fixed-white op-7 fs-12">
                                 Empowering you to manage your contributions with ease, transparency, and
