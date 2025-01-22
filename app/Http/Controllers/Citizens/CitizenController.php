@@ -112,6 +112,20 @@ class CitizenController extends Controller
             }
         }
 
+        // $heatMapData = [];
+        // foreach ($genderCustomerStatus as $customerType => $genderGroups) {
+        //     foreach ($genderGroups as $gender => $statusGroups) {
+        //         foreach ($statusGroups as $status => $groupedItems) {
+        //             $heatMapData[] = [
+        //                 'customer_type' => $customerType,
+        //                 'gender' => ucfirst(strtolower($gender)), // Normalize gender values (e.g., 'Male', 'Female')
+        //                 'status' => ucfirst(strtolower($status)), // Normalize status values (e.g., 'Active', 'Inactive')
+        //                 'count' => count($groupedItems), // Count the grouped items
+        //             ];
+        //         }
+        //     }
+        // }
+
         // Calculate total active citizens
         $totalActive = $citizens->where('status', 'active')->count();
         $inActive = $citizens->where('status', 'inactive')->count();
@@ -127,8 +141,6 @@ class CitizenController extends Controller
             'total_active' => $totalActive,
             'inactive' => $inActive,
         ];
-
-        return $genderCustomerStatus;
 
         return view('citizens.index', compact('citizens', 'totals', 'heatMapData'));
     }

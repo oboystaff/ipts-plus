@@ -478,7 +478,7 @@
             });
         });
 
-        consol.log(seriesData);
+        console.log(seriesData);
         // Chart options
         var options = {
             chart: {
