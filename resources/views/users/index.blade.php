@@ -226,6 +226,7 @@
                         @can('users.create')
                             <button type="button" class="btn btn-info btn-w-lg btn-wave w-100"
                                 onclick="window.location.href='{{ route('users.create') }}';">
+                                <i class="ri-user-add-line me-2"></i>
                                 Add New User
                             </button>
                         @endcan

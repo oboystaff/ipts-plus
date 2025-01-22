@@ -187,6 +187,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth:sanctum'], function
     Route::get('/myproperties', [Dashboard\DashboardController::class, 'Myproperties'])->name('dashboard.myproperties');
     Route::get('/mybusiness', [Dashboard\DashboardController::class, 'Mybusiness'])->name('dashboard.mybusiness');
     Route::get('/mypaymenthistory', [Dashboard\DashboardController::class, 'Mypaymenthistory'])->name('dashboard.mypaymenthistory');
+    Route::get('/property/analytics', [Dashboard\DashboardController::class, 'propertyAnalytic'])->name('dashboard.propertyAnalytic');
+    Route::get('/nationwide/overview', [Dashboard\DashboardController::class, 'overview'])->name('dashboard.overview');
+    Route::get('/payment/analytics', [Dashboard\DashboardController::class, 'paymentAnalytic'])->name('dashboard.paymentAnalytic');
+    Route::get('/bill/analytics', [Dashboard\DashboardController::class, 'billAnalytic'])->name('dashboard.billAnalytic');
 });
 
 //USER MANAGEMENT

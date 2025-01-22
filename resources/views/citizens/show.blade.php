@@ -3,7 +3,7 @@
 @section('page-content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xxl-3">
+            <div class="col-xl-4">
                 <div class="custom-card card overflow-hidden">
                     <div class="p-5 bg-primary mb-5 widget-profile-bg">
                         <img src="../assets/images/faces/14.jpg" alt=""
@@ -20,60 +20,40 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xxl-4">
-                <div class="row">
-                    <div class="col-xl-6">
-                        <div class="custom-card card">
-                            <div class="card-body p-4">
-                                <div class="d-flex gap-2 align-items-start justify-content-between">
-                                    <div>
-                                        <div class="text-muted fs-12">Upcoming Events</div>
-                                        <h6 class="fw-semibold my-1">Meeting with clients in zoom</h6>
-                                    </div>
-                                    <div class="dropdown">
-                                        <a href="javascript:void(0);" data-bs-toggle="dropdown"
-                                            class="btn btn-sm btn-icon btn-primary-light rounded-circle"
-                                            aria-expanded="false" aria-label="Task Options">
-                                            <i class="bi bi-grid lh-1"></i>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-menu-end" role="menu">
-                                            <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                        class="ri-pencil-line me-1"></i>Edit</a></li>
-                                            <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                        class="ri-share-forward-line me-1"></i>Share</a></li>
-                                            <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                        class="ri-delete-bin-line me-1"></i>Delete</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="text-primary fw-semibold mb-4 mt-2 fs-14"><i
-                                        class="ri-time-line lh-1 align-middle me-1"></i>Starts in 20mins</div>
 
+            <div class="col-xl-4">
+                <div class="custom-card card">
+                    <div class="card-body p-4">
+                        <div class="d-flex gap-2 align-items-start justify-content-between">
+                            <div>
+                                <div class="text-muted fs-12">Upcoming Events</div>
+                                <h6 class="fw-semibold my-1">Meeting with clients in zoom</h6>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="custom-card card bg-primary">
-                            <div class="card-body p-4 text-fixed-white">
-                                <div class="d-flex gap-2 align-items-start justify-content-between flex-wrap">
-                                    <i class="ti ti-cloud fs-40 text-secondary lh-1"></i>
-                                    <div class="text-end">
-                                        <h6 class="text-fixed-white">Total Amount Due</h6>
-                                        <p class="mb-0 text-fixed-white">As At
-                                            {{ \Carbon\Carbon::now()->format('l, F j, Y') }}</p>
-
-                                    </div>
-                                </div>
-                                <h2 class="mb-0 mt-2 text-fixed-white fw-semibold">GHS {{ $customerData['totalDue'] }}</h2>
-                                <p class="text-fixed-white op-7 mb-4 fs-12"> </p>
-
-                            </div>
-                        </div>
+                        <div class="text-primary fw-semibold mb-4 mt-2 fs-14"><i
+                                class="ri-time-line lh-1 align-middle me-1"></i>Starts in 20mins</div>
                     </div>
                 </div>
-
             </div>
 
+            <div class="col-xl-4">
+                <div class="custom-card card bg-primary">
+                    <div class="card-body p-4 text-fixed-white">
+                        <div class="d-flex gap-2 align-items-start justify-content-between flex-wrap">
+                            <i class="ti ti-cloud fs-40 text-secondary lh-1"></i>
+                            <div class="text-end">
+                                <h6 class="text-fixed-white">Total Amount Due</h6>
+                                <p class="mb-0 text-fixed-white">As At
+                                    {{ \Carbon\Carbon::now()->format('l, F j, Y') }}</p>
+
+                            </div>
+                        </div>
+                        <h2 class="mb-0 mt-2 text-fixed-white fw-semibold">GHS {{ $customerData['totalDue'] }}</h2>
+                        <p class="text-fixed-white op-7 mb-4 fs-12"> </p>
+
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="row">
@@ -107,7 +87,7 @@
                                             <div class="post-input">
 
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 mb-3">
                                                         <div class="form-group">
                                                             <label for="first_name">First Name</label>
                                                             <input type="text" class="form-control" id="first_name"
@@ -115,17 +95,16 @@
                                                                 readonly>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 mb-3">
                                                         <div class="form-group">
                                                             <label for="last_name">Last Name</label>
                                                             <input type="text" class="form-control" id="last_name"
-                                                                name="last_name" value="{{ $citizen->last_name }}"
-                                                                readonly>
+                                                                name="last_name" value="{{ $citizen->last_name }}" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 mb-3">
                                                         <div class="form-group">
                                                             <label for="other_name">Other Name</label>
                                                             <input type="text" class="form-control" id="other_name"
@@ -133,7 +112,7 @@
                                                                 value="{{ $citizen->other_name ?? 'N/A' }}" readonly>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 mb-3">
                                                         <div class="form-group">
                                                             <label for="gender">Gender</label>
                                                             <input type="text" class="form-control" id="gender"
@@ -143,7 +122,7 @@
                                                 </div>
 
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 mb-3">
                                                         <div class="form-group">
                                                             <label for="date_of_birth">Date of Birth</label>
                                                             <input type="text" class="form-control" id="date_of_birth"
@@ -151,7 +130,7 @@
                                                                 value="{{ $citizen->date_of_birth }}" readonly>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 mb-3">
                                                         <div class="form-group">
                                                             <label for="marital_status">Marital Status</label>
                                                             <input type="text" class="form-control"
@@ -161,7 +140,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 mb-3">
                                                         <div class="form-group">
                                                             <label for="nia_number">NIA Number</label>
                                                             <input type="text" class="form-control" id="nia_number"
@@ -169,7 +148,7 @@
                                                                 value="{{ $citizen->nia_number ?? 'N/A' }}" readonly>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 mb-3">
                                                         <div class="form-group">
                                                             <label for="account_number">Account Number</label>
                                                             <input type="text" class="form-control"
@@ -177,7 +156,7 @@
                                                                 value="{{ $citizen->account_number }}" readonly>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 mb-3">
                                                         <div class="form-group">
                                                             <label for="account_number">Customer Type</label>
                                                             <input type="text" class="form-control" id="customer_type"

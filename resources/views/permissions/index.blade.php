@@ -10,9 +10,9 @@
                             <div class="card-title">Permissions Management / All Permissions</div>
                         </div>
 
-                        <div class="d-flex align-items-center">
+                        {{-- <div class="d-flex align-items-center">
                             <a href="{{ route('roles.create') }}" class="btn btn-primary btn-sm ms-2">+ Create Role</a>
-                        </div>
+                        </div> --}}
                     </div>
 
                     @if (session()->has('status'))

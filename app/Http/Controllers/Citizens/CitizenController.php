@@ -128,6 +128,8 @@ class CitizenController extends Controller
             'inactive' => $inActive,
         ];
 
+        return $genderCustomerStatus;
+
         return view('citizens.index', compact('citizens', 'totals', 'heatMapData'));
     }
 

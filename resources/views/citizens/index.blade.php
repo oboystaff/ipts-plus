@@ -30,7 +30,6 @@
                     <div class="card-body bg-primary bg-opacity-10 rounded-2 ps-4 medical-cards">
                         <div class="d-flex gap-2 align-items-center ps-2">
                             <div class="align-self-start">
-                                <div class="fw-medium mb-2">Filter Rate Payer Types</div>
                                 <h4 class="fw-semibold mb-0 lh-1">Apply Filters</h4>
                             </div>
                             <div class="ms-auto text-end align-self-end">
@@ -210,47 +209,29 @@
         <div class="row">
             <!-- Row for Pie Chart Placeholders -->
             <div class="col-xl-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <div id="pie-chart-placeholder-1" style="width: 100%; height: 250px;">
-                            <!-- Placeholder for Pie Chart 1 -->
-                            <div class="d-flex justify-content-center align-items-center h-100">
-                                <span>
-                                    <div id="bar-gender"></div>
-                                </span>
-                            </div>
-                        </div>
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div id="bar-gender"></div>
                     </div>
                 </div>
             </div>
+
             <div class="col-xl-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <div id="pie-chart-placeholder-2" style="width: 100%; height: 250px;">
-                            <!-- Placeholder for Pie Chart 2 -->
-                            <div class="d-flex justify-content-center align-items-center h-100">
-                                <span>
-                                    <div id="donut-gradient"></div>
-                                </span>
-                            </div>
-                        </div>
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div id="donut-gradient"></div>
                     </div>
                 </div>
             </div>
+
             <div class="col-xl-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <div id="pie-chart-placeholder-3" style="width: 100%; height: 250px;">
-                            <!-- Placeholder for Pie Chart 3 -->
-                            <div class="d-flex justify-content-center align-items-center h-100">
-                                <span>
-                                    <div id="line-heatmap"></div>
-                                </span>
-                            </div>
-                        </div>
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div id="line-heatmap"></div>
                     </div>
                 </div>
             </div>
+
 
             <div class="col-xl-12 active-p">
                 @if (session()->has('status'))
@@ -409,7 +390,7 @@
             },
             title: {
                 text: 'Gender Distribution',
-                align: 'center',
+                align: 'center'
             },
         };
 
@@ -468,9 +449,12 @@
         var chart = new ApexCharts(document.querySelector("#donut-gradient"), options);
         chart.render();
     </script>
+
     <script>
         // Prepare data dynamically
         var heatMapData = @json($heatMapData);
+
+        console.log(heatMapData);
 
         // Process data into a chart-friendly format
         var seriesData = [];
@@ -494,6 +478,7 @@
             });
         });
 
+        consol.log(seriesData);
         // Chart options
         var options = {
             chart: {

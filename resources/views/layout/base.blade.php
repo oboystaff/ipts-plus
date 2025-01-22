@@ -420,7 +420,41 @@
                         <!-- End::slide -->
 
                         <!-- Start::slide -->
-                        @canany(['users.view', 'roles.view', 'permissions.view'])
+                        <!-- End::slide -->
+                        @canany(['roles.view', 'permissions.view'])
+                            <!-- End::slide -->
+                            <li class="slide has-sub">
+                                <a href="javascript:void(0);" class="side-menu__item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
+                                        viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                        <path d="M0 0h24v24H0V0z" fill="none" />
+                                        <path d="M13 4H6v16h12V9h-5V4zm3 14H8v-2h8v2zm0-6v2H8v-2h8z" opacity=".3" />
+                                        <path
+                                            d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
+                                    </svg>
+                                    <span class="side-menu__label">Roles & Permissions</span>
+                                    <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                                </a>
+                                <ul class="slide-menu child1">
+
+                                    @can('roles.view')
+                                        <li class="slide">
+                                            <a href="{{ route('roles.index') }}" class="side-menu__item">Roles
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @can('permissions.view')
+                                        <li class="slide">
+                                            <a href="{{ route('permissions.index') }}" class="side-menu__item">
+                                                Permissions</a>
+                                        </li>
+                                    @endcan
+                                </ul>
+                            </li>
+                        @endcanany
+
+                        <!-- Start::slide -->
+                        @canany(['users.view'])
                             {{-- <li class="slide__category"><span class="category-name">User & Security </span></li> --}}
 
                             <li class="slide has-sub">
@@ -439,18 +473,6 @@
                                     @can('users.view')
                                         <li class="slide">
                                             <a href="{{ route('users.index') }}" class="side-menu__item">Users</a>
-                                        </li>
-                                    @endcan
-                                    @can('roles.view')
-                                        <li class="slide">
-                                            <a href="{{ route('roles.index') }}" class="side-menu__item">Roles
-                                            </a>
-                                        </li>
-                                    @endcan
-                                    @can('permissions.view')
-                                        <li class="slide">
-                                            <a href="{{ route('permissions.index') }}" class="side-menu__item">
-                                                Permissions</a>
                                         </li>
                                     @endcan
                                 </ul>
@@ -750,6 +772,58 @@
                             </li>
                         @endcanany
                         <!-- End::slide -->
+
+                        @canany(['reports.view'])
+                            <li class="slide has-sub">
+                                <a href="javascript:void(0);" class="side-menu__item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
+                                        viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                        <path d="M0 0h24v24H0V0z" fill="none" />
+                                        <path d="M6.26 9L12 13.47 17.74 9 12 4.53z" opacity=".3" />
+                                        <path
+                                            d="M19.37 12.8l-7.38 5.74-7.37-5.73L3 14.07l9 7 9-7zM12 2L3 9l1.63 1.27L12 16l7.36-5.73L21 9l-9-7zm0 11.47L6.26 9 12 4.53 17.74 9 12 13.47z" />
+                                    </svg>
+                                    <span class="side-menu__label">Analytics</span>
+                                    <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                                </a>
+                                <ul class="slide-menu child1">
+                                    @can('reports.view')
+                                        <li class="slide">
+                                            <a href="{{ route('dashboard.propertyAnalytic') }}"
+                                                class="side-menu__item">Property</a>
+
+                                            <a href="{{ route('dashboard.billAnalytic') }}" class="side-menu__item">Bill</a>
+
+                                            <a href="{{ route('dashboard.paymentAnalytic') }}"
+                                                class="side-menu__item">Payment</a>
+                                        </li>
+                                    @endcan
+                                </ul>
+                            </li>
+                        @endcanany
+
+                        @canany(['reports.view'])
+                            <li class="slide has-sub">
+                                <a href="javascript:void(0);" class="side-menu__item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
+                                        viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                        <path d="M0 0h24v24H0V0z" fill="none" />
+                                        <path d="M6.26 9L12 13.47 17.74 9 12 4.53z" opacity=".3" />
+                                        <path
+                                            d="M19.37 12.8l-7.38 5.74-7.37-5.73L3 14.07l9 7 9-7zM12 2L3 9l1.63 1.27L12 16l7.36-5.73L21 9l-9-7zm0 11.47L6.26 9 12 4.53 17.74 9 12 13.47z" />
+                                    </svg>
+                                    <span class="side-menu__label">Nationwide Overview</span>
+                                    <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                                </a>
+                                <ul class="slide-menu child1">
+                                    @can('reports.view')
+                                        <li class="slide">
+                                            <a href="{{ route('dashboard.overview') }}" class="side-menu__item">Overview</a>
+                                        </li>
+                                    @endcan
+                                </ul>
+                            </li>
+                        @endcanany
 
                         <!-- Start::slide -->
                         @canany(['assemblies.view', 'divisions.view', 'blocks.view', 'zones.view', 'property-uses.view',

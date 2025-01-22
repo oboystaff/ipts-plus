@@ -725,6 +725,120 @@ class DashboardController extends Controller
             $finalCut = $assemblycut / 100;
         }
 
+        $totalRegionalData = DB::table('ghana_regions')
+            ->leftJoin('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
+            ->leftJoin('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
+            ->leftJoin('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
+            ->leftJoin('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
+            ->select(
+                'ghana_regions.name as region_name',
+                DB::raw('COUNT(DISTINCT properties.id) as total_properties_region'),
+                DB::raw('COALESCE(SUM(bills.amount), 0) as total_bills_region'),
+                DB::raw("
+                    SUM(
+                        CASE 
+                            WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
+                            WHEN payments.payment_mode != 'momo' THEN payments.amount
+                            ELSE 0
+                        END
+                    ) as total_payments_region
+                "),
+                DB::raw('
+                    COALESCE(SUM(bills.amount), 0) - 
+                    COALESCE(SUM(
+                        CASE 
+                            WHEN payments.payment_mode = "momo" AND payments.transaction_status = "Success" THEN payments.amount
+                            WHEN payments.payment_mode != "momo" THEN payments.amount
+                            ELSE 0
+                        END
+                    ), 0) as total_arrears_region
+                ')
+            )
+            ->groupBy('ghana_regions.name')
+            ->get();
+
+        $totalRegionalGraphData = DB::table('ghana_regions')
+            ->leftJoin('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
+            ->leftJoin('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
+            ->leftJoin('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
+            ->leftJoin('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
+            ->select(
+                'ghana_regions.name as region_name',
+                DB::raw('COALESCE(SUM(bills.amount), 0) as total_bills_region'),
+                DB::raw("
+                    SUM(
+                        CASE 
+                            WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
+                            WHEN payments.payment_mode != 'momo' THEN payments.amount
+                            ELSE 0
+                        END
+                    ) as total_payments_region
+                "),
+                DB::raw('
+                    COALESCE(SUM(bills.amount), 0) - 
+                    COALESCE(SUM(
+                        CASE 
+                            WHEN payments.payment_mode = "momo" AND payments.transaction_status = "Success" THEN payments.amount
+                            WHEN payments.payment_mode != "momo" THEN payments.amount
+                            ELSE 0
+                        END
+                    ), 0) as total_arrears_region
+                ')
+            )
+            ->groupBy('ghana_regions.name')
+            ->get();
+
+        // Prepare data for chart
+        $regionNames = [];
+        $paymentGraphData = [];
+        $billGraphData = [];
+        $arrearsGraphData = [];
+
+        foreach ($totalRegionalGraphData as $data) {
+            $regionNames[] = $data->region_name;
+            $paymentGraphData[] = (float)$data->total_payments_region;
+            $billGraphData[] = (float)$data->total_bills_region;
+            $arrearsGraphData[] = (float)$data->total_arrears_region;
+        }
+
+        $totalRegionalDonutData = DB::table('ghana_regions')
+            ->leftJoin('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
+            ->leftJoin('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
+            ->leftJoin('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
+            ->leftJoin('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
+            ->select(
+                'ghana_regions.name as region_name',
+                DB::raw('COUNT(DISTINCT properties.id) as total_properties_region'),
+                DB::raw('COALESCE(SUM(bills.amount), 0) as total_bills_region'),
+                DB::raw("
+                    SUM(
+                        CASE 
+                            WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
+                            WHEN payments.payment_mode != 'momo' THEN payments.amount
+                            ELSE 0
+                        END
+                    ) as total_payments_region
+                "),
+                DB::raw('
+                    COALESCE(SUM(bills.amount), 0) - 
+                    COALESCE(SUM(
+                        CASE 
+                            WHEN payments.payment_mode = "momo" AND payments.transaction_status = "Success" THEN payments.amount
+                            WHEN payments.payment_mode != "momo" THEN payments.amount
+                            ELSE 0
+                        END
+                    ), 0) as total_arrears_region
+                ')
+            )
+            ->groupBy('ghana_regions.name')
+            ->get();
+
+        $regionNameDonut = $totalRegionalDonutData->pluck('region_name');
+        $totalDonutProperties = $totalRegionalDonutData->pluck('total_properties_region');
+        $totalDonutBills = $totalRegionalDonutData->pluck('total_bills_region');
+        $totalDonutPayments = $totalRegionalDonutData->pluck('total_payments_region');
+        $totalDonutArrears = $totalRegionalDonutData->pluck('total_arrears_region');
+
         //Customer Data
         $customerData = [];
         if ($request->user()->access_level == 'customer') {
@@ -987,7 +1101,17 @@ class DashboardController extends Controller
             'gracut' => isset($gracut) ? number_format($gracut, 2) : 0,
             'level10cut' => isset($level10cut) ? number_format($level10cut, 2) : 0,
             'assemblycut' => isset($assemblycut) ? number_format($assemblycut, 2) : 0,
-            'finalCut' => isset($finalCut) ? number_format($finalCut, 2) : 0
+            'finalCut' => isset($finalCut) ? number_format($finalCut, 2) : 0,
+            'totalRegionalData' => isset($totalRegionalData) ? $totalRegionalData : [],
+            'regionNames' => isset($regionNames) ? $regionNames : '',
+            'paymentGraphData' => isset($paymentGraphData) ? $paymentGraphData : [],
+            'billGraphData' => isset($billGraphData) ? $billGraphData : [],
+            'arrearsGraphData' => isset($arrearsGraphData) ? $arrearsGraphData : [],
+            'regionNameDonut' => isset($regionNameDonut) ? $regionNameDonut : [],
+            'totalDonutProperties' => isset($totalDonutProperties) ? $totalDonutProperties : [],
+            'totalDonutBills' => isset($totalDonutBills) ? $totalDonutBills : [],
+            'totalDonutPayments' => isset($totalDonutPayments) ? $totalDonutPayments : [],
+            'totalDonutArrears' => isset($totalDonutArrears) ? $totalDonutArrears : []
         ];
 
         return view('dashboard.operational', compact('total', 'chartData', 'chartData2', 'chartData3', 'chartData11', 'customerData'));
@@ -2836,5 +2960,698 @@ class DashboardController extends Controller
     public function faqAction()
     {
         return view('dashboard.faq');
+    }
+
+    public function propertyAnalytic(Request $request)
+    {
+        $currentYear = Carbon::now()->year;
+        $maleMonthlyCount = DB::table('citizens')
+            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))
+            ->where('gender', 'Male')
+            ->where('status', 'Active')
+            ->whereYear('created_at', $currentYear)
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->pluck('total', 'month');
+
+        $femaleMonthlyCount = DB::table('citizens')
+            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))
+            ->where('gender', 'Female')
+            ->where('status', 'Active')
+            ->whereYear('created_at', $currentYear)
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->pluck('total', 'month');
+
+        $maleMonthlyCount = array_pad($maleMonthlyCount->toArray(), 12, 0);
+        $femaleMonthlyCount = array_pad($femaleMonthlyCount->toArray(), 12, 0);
+
+        $monthlyActiveCounts = [];
+        $monthlyInactiveCounts = [];
+        for ($month = 1; $month <= 12; $month++) {
+            $startOfMonth = Carbon::create($currentYear, $month, 1)->startOfMonth();
+            $endOfMonth = Carbon::create($currentYear, $month, 1)->endOfMonth();
+
+            $activeCount = Citizen::where('status', 'Active')
+                ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+                ->count();
+
+            $inactiveCount = Citizen::where('status', 'InActive')
+                ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+                ->count();
+
+            $monthlyActiveCounts[] = $activeCount;
+            $monthlyInactiveCounts[] = $inactiveCount;
+        }
+
+        $monthlyPropertyCounts = [];
+        $monthlyBusinessCounts = [];
+        for ($month = 1; $month <= 12; $month++) {
+            $startOfMonth = Carbon::create($currentYear, $month, 1)->startOfMonth();
+            $endOfMonth = Carbon::create($currentYear, $month, 1)->endOfMonth();
+
+            $propertyCount = Property::query()
+                ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                    $query->where('assembly_code', $request->user()->assembly_code);
+                })
+                ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                    $query->whereBetween('properties.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+                })
+                ->when($request->region !== null, function ($query) use ($request) {
+                    $query->join('assemblies', 'properties.assembly_code', '=', 'assemblies.assembly_code')
+                        ->where('assemblies.regional_code', $request->region);
+                })
+                ->whereBetween('properties.created_at', [$startOfMonth, $endOfMonth])
+                ->count();
+
+            $businessCount = Business::query()
+                ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                    $query->where('assembly_code', $request->user()->assembly_code);
+                })
+                ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                    $query->whereBetween('businesses.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+                })
+                ->when($request->region !== null, function ($query) use ($request) {
+                    $query->join('assemblies', 'businesses.assembly_code', '=', 'assemblies.assembly_code')
+                        ->where('assemblies.regional_code', $request->region);
+                })
+                ->whereBetween('businesses.created_at', [$startOfMonth, $endOfMonth])
+                ->count();
+
+            // Store the results in the arrays
+            $monthlyPropertyCounts[] = $propertyCount;
+            $monthlyBusinessCounts[] = $businessCount;
+        }
+
+        $topProperties = DB::table('payments')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('payments.assembly_code', $request->user()->assembly_code);
+            })
+            ->join('bills', 'payments.bills_id', '=', 'bills.bills_id')
+            ->join('properties', 'bills.property_id', '=', 'properties.id')
+            ->join('citizens', 'properties.customer_name', '=', 'citizens.id')
+            ->selectRaw('
+                bills.property_id as id, 
+                properties.property_number as number, 
+                citizens.first_name as owner_name, 
+                citizens.telephone_number as phone,
+                SUM(CASE 
+                    WHEN payments.payment_mode = "momo" AND payments.transaction_status = "Success" THEN payments.amount
+                    WHEN payments.payment_mode != "momo" THEN payments.amount
+                    ELSE 0 
+                END) as total_payments')
+            ->whereNotNull('bills.property_id')
+            ->whereNull('bills.business_id')
+            ->whereYear('payments.created_at', $currentYear)
+            ->groupBy('bills.property_id', 'properties.property_number', 'citizens.first_name', 'citizens.telephone_number')
+            ->orderByDesc('total_payments')
+            ->limit(10)
+            ->get();
+
+        $topBusinesses = DB::table('payments')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('payments.assembly_code', $request->user()->assembly_code);
+            })
+            ->join('bills', 'payments.bills_id', '=', 'bills.bills_id')
+            ->join('businesses', 'bills.business_id', '=', 'businesses.id')
+            ->join('citizens', 'businesses.citizen_account_number', '=', 'citizens.id')
+            ->selectRaw('
+                bills.business_id as id, 
+                businesses.bus_account_number as bus_number,
+                 citizens.first_name as owner_name, 
+                citizens.telephone_number as phone,
+                SUM(CASE 
+                    WHEN payments.payment_mode = "momo" AND payments.transaction_status = "Success" THEN payments.amount
+                    WHEN payments.payment_mode != "momo" THEN payments.amount
+                    ELSE 0 
+                END) as total_payments')
+            ->whereNotNull('bills.business_id')
+            ->whereNull('bills.property_id')
+            ->whereYear('payments.created_at', $currentYear)
+            ->groupBy('bills.business_id', 'businesses.bus_account_number', 'citizens.first_name', 'citizens.telephone_number')
+            ->orderByDesc('total_payments')
+            ->limit(10)
+            ->get();
+
+        $chartData12 = [
+            'properties' => $topProperties->map(function ($property) {
+                return [
+                    'name' => $property->number . '(P)/' . $property->owner_name . '/' . $property->phone,
+                    'data' => [$property->total_payments],
+                ];
+            }),
+            'businesses' => $topBusinesses->map(function ($business) {
+                return [
+                    'name' => $business->bus_number . '(B)/' . $business->owner_name . '/' . $business->phone,
+                    'data' => [$business->total_payments],
+                ];
+            }),
+        ];
+
+        $regions = GhanaRegion::orderBy('name', 'ASC')->get();
+
+        $total = [
+            'maleMonthlyCount' => isset($maleMonthlyCount) ? $maleMonthlyCount : 0,
+            'femaleMonthlyCount' => isset($femaleMonthlyCount) ? $femaleMonthlyCount : 0,
+            'monthlyActiveCounts' => isset($monthlyActiveCounts) ? $monthlyActiveCounts : [],
+            'monthlyInactiveCounts' => isset($monthlyInactiveCounts) ? $monthlyInactiveCounts : [],
+            'monthlyPropertyCounts' => isset($monthlyPropertyCounts) ? $monthlyPropertyCounts : [],
+            'monthlyBusinessCounts' => isset($monthlyBusinessCounts) ? $monthlyBusinessCounts : [],
+            'chartData12' => isset($chartData12) ? $chartData12 : [],
+            'regions' => isset($regions) ? $regions : []
+        ];
+
+        return view('dashboard.includes.property', compact('total'));
+    }
+
+    public function overview()
+    {
+        $regions = GhanaRegion::with('assemblies')->get();
+
+        $total = [
+            'regions' => isset($regions) ? $regions : []
+        ];
+
+        return view('dashboard.includes.overview', compact('total'));
+    }
+
+    public function paymentAnalytic(Request $request)
+    {
+        $currentYear = Carbon::now()->year;
+        $yearlyMomoPayments = Payment::where('payment_mode', 'momo')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                $query->whereBetween('payments.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+            })
+            ->when($request->region !== null, function ($query) use ($request) {
+                $query->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
+                    ->where('assemblies.regional_code', $request->region);
+            })
+            ->where('transaction_status', 'Success')
+            ->whereYear('payments.created_at', Carbon::now()->year)
+            ->sum('amount');
+
+        $totalPayments = Payment::selectRaw('SUM(amount) as total')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                $query->whereBetween('payments.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+            })
+            ->when($request->region !== null, function ($query) use ($request) {
+                $query->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
+                    ->where('assemblies.regional_code', $request->region);
+            })
+            ->when('momo', function ($query) {
+                $query->where(function ($q) {
+                    $q->where('payment_mode', '!=', 'momo')
+                        ->orWhere(function ($q2) {
+                            $q2->where('payment_mode', 'momo')
+                                ->where('transaction_status', 'Success');
+                        });
+                });
+            });
+
+        $dailyPayments = (clone $totalPayments)
+            ->whereDate('payments.created_at', Carbon::today())
+            ->first();
+
+        $weeklyPayments = (clone $totalPayments)
+            ->whereBetween('payments.created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
+            ->first();
+
+        $monthlyPayments = (clone $totalPayments)
+            ->whereMonth('payments.created_at', Carbon::now()->month)
+            ->whereYear('payments.created_at', Carbon::now()->year)
+            ->first();
+
+        $yearlyPayments = (clone $totalPayments)
+            ->whereYear('payments.created_at', Carbon::now()->year)
+            ->first();
+
+        $totalBill = Bill::query()
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                $query->whereBetween('bills.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+            })
+            ->when($request->region !== null, function ($query) use ($request) {
+                $query->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
+                    ->where('assemblies.regional_code', $request->region);
+            })
+            ->whereYear('bills.created_at', Carbon::now()->year)
+            ->sum('amount');
+
+        $yearlyReceivables = $totalBill - $yearlyPayments->total;
+
+        $year = $request->input('year', Carbon::now()->year);
+
+        $payments = DB::table('payments')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                $query->whereBetween('payments.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+            })
+            ->when($request->region !== null, function ($query) use ($request) {
+                $query->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
+                    ->where('assemblies.regional_code', $request->region);
+            })
+            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('SUM(amount) as total'))
+            ->whereYear('payments.created_at', $currentYear)
+            ->groupBy('month')
+            ->orderBy('month')
+            ->pluck('total', 'month');
+
+        $bills = DB::table('bills')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                $query->whereBetween('bills.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+            })
+            ->when($request->region !== null, function ($query) use ($request) {
+                $query->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
+                    ->where('assemblies.regional_code', $request->region);
+            })
+            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('SUM(amount) as total'))
+            ->whereYear('bills.created_at', $currentYear)
+            ->groupBy('month')
+            ->orderBy('month')
+            ->pluck('total', 'month');
+
+        $arrears = [];
+        for ($month = 1; $month <= 12; $month++) {
+            $arrears[$month] = ($bills[$month] ?? 0) - ($payments[$month] ?? 0);
+        }
+
+        $paymentData = [];
+        $billData = [];
+        $arrearsData = [];
+
+        for ($month = 1; $month <= 12; $month++) {
+            $paymentData[] = $payments[$month] ?? 0;
+            $billData[] = $bills[$month] ?? 0;
+            $arrearsData[] = $arrears[$month] ?? 0;
+        }
+
+        $assemblyPayments = DB::table('payments')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('payments.assembly_code', $request->user()->assembly_code);
+            })
+            ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                $query->whereBetween('payments.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+            })
+            ->when($request->region !== null, function ($query) use ($request) {
+                $query->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
+                    ->where('assemblies.regional_code', $request->region);
+            })
+            ->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
+            ->select(
+                'assemblies.name as assembly_name',
+                DB::raw("
+                    SUM(
+                        CASE
+                            WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
+                            WHEN payments.payment_mode != 'momo' THEN payments.amount
+                            ELSE 0
+                        END
+                    ) as total_payment
+                ")
+            )
+            ->whereYear('payments.created_at', $currentYear)
+            ->groupBy('assemblies.name')
+            ->orderBy('total_payment', 'desc')
+            ->get();
+
+        $topAssemblies = DB::table('bills')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('bills.assembly_code', $request->user()->assembly_code);
+            })
+            ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                $query->whereBetween('bills.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+            })
+            ->when($request->region !== null, function ($query) use ($request) {
+                $query->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
+                    ->where('assemblies.regional_code', $request->region);
+            })
+            ->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
+            ->leftJoin('payments', 'bills.bills_id', '=', 'payments.bills_id')
+            ->select(
+                'assemblies.name as assembly_name',
+                'bills.assembly_code',
+                DB::raw("
+                    SUM(bills.amount) as total_bill_amount
+                ")
+            )
+            ->whereYear('bills.created_at', $currentYear)
+            ->whereNull('payments.bills_id')
+            ->groupBy('bills.assembly_code', 'assemblies.name')
+            ->orderBy('total_bill_amount', 'desc')
+            ->limit(5)
+            ->get();
+
+        $chartData = [];
+        foreach ($topAssemblies as $assembly) {
+            $monthlyBills = DB::table('bills')
+                ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                    $query->where('bills.assembly_code', $request->user()->assembly_code);
+                })
+                ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                    $query->whereBetween('bills.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+                })
+                ->when($request->region !== null, function ($query) use ($request) {
+                    $query->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
+                        ->where('assemblies.regional_code', $request->region);
+                })
+                ->leftJoin('payments', 'bills.bills_id', '=', 'payments.bills_id')
+                ->where('bills.assembly_code', $assembly->assembly_code)
+                ->whereYear('bills.created_at', $currentYear)
+                ->whereNull('payments.bills_id')
+                ->select(
+                    DB::raw('MONTH(bills.created_at) as month'),
+                    DB::raw('SUM(bills.amount) as total')
+                )
+                ->groupBy('month')
+                ->get()
+                ->pluck('total', 'month')
+                ->toArray();
+
+            $data = [];
+            foreach (range(1, 12) as $month) {
+                $data[] = $monthlyBills[$month] ?? 0;
+            }
+
+            $chartData[] = [
+                'name' => $assembly->assembly_name,
+                'data' => $data,
+            ];
+        }
+
+        $divisionPaymentData = DB::table('payments')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('payments.assembly_code', $request->user()->assembly_code);
+            })
+            ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                $query->whereBetween('payments.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+            })
+            ->when($request->region !== null, function ($query) use ($request) {
+                $query->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
+                    ->where('assemblies.regional_code', $request->region);
+            })
+            ->join('bills', 'payments.bills_id', '=', 'bills.bills_id')
+            ->leftJoin('properties', 'bills.property_id', '=', 'properties.id')
+            ->leftJoin('businesses', 'bills.business_id', '=', 'businesses.id')
+            ->leftJoin('divisions', function ($join) {
+                $join->on('properties.division_id', '=', 'divisions.id')
+                    ->orOn('businesses.division_id', '=', 'divisions.id');
+            })
+            ->selectRaw('divisions.division_name as division_name, 
+                MONTH(payments.created_at) as month, 
+                SUM(CASE 
+                    WHEN payments.payment_mode = "momo" AND payments.transaction_status = "Success" THEN payments.amount
+                    WHEN payments.payment_mode != "momo" THEN payments.amount
+                    ELSE 0 
+                END) as total_payments')
+            ->whereYear('payments.created_at', $currentYear)
+            ->groupBy('divisions.division_name', 'month')
+            ->orderByDesc('total_payments')
+            ->limit(10)
+            ->get();
+
+        $regionPaymentData = DB::table('payments')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('payments.assembly_code', $request->user()->assembly_code);
+            })
+            ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                $query->whereBetween('payments.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+            })
+            ->when($request->region !== null, function ($query) use ($request) {
+                $query->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
+                    ->where('assemblies.regional_code', $request->region);
+            })
+            ->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
+            ->join('ghana_regions', 'assemblies.regional_code', '=', 'ghana_regions.regional_code')
+            ->selectRaw('
+                ghana_regions.name as region_name, 
+                MONTH(payments.created_at) as month, 
+                SUM(CASE 
+                    WHEN payments.payment_mode = "momo" AND payments.transaction_status = "Success" THEN payments.amount
+                    WHEN payments.payment_mode != "momo" THEN payments.amount
+                    ELSE 0 
+                END) as total_payments
+            ')
+            ->whereYear('payments.created_at', $currentYear)
+            ->groupBy('ghana_regions.name', 'month')
+            ->get()
+            ->keyBy(function ($item) {
+                return $item->region_name . '-' . $item->month;
+            });
+
+        $regionBillData = DB::table('bills')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('bills.assembly_code', $request->user()->assembly_code);
+            })
+            ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                $query->whereBetween('bills.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+            })
+            ->when($request->region !== null, function ($query) use ($request) {
+                $query->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
+                    ->where('assemblies.regional_code', $request->region);
+            })
+            ->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
+            ->join('ghana_regions', 'assemblies.regional_code', '=', 'ghana_regions.regional_code')
+            ->selectRaw('
+                ghana_regions.name as region_name, 
+                MONTH(bills.created_at) as month, 
+                SUM(bills.amount) as total_bills
+            ')
+            ->whereYear('bills.created_at', $currentYear)
+            ->groupBy('ghana_regions.name', 'month')
+            ->get()
+            ->keyBy(function ($item) {
+                return $item->region_name . '-' . $item->month;
+            });
+
+
+        $regionArrearsData = new Collection();
+        foreach ($regionPaymentData as $regionMonth => $payment) {
+            list($regionName, $month) = explode('-', $regionMonth);
+
+            $bills = $regionBillData->get($regionMonth);
+            $totalBills = $bills ? $bills->total_bills : 0;
+            $totalPayments = $payment->total_payments;
+
+            $regionArrearsData->push([
+                'region_name' => $regionName,
+                'month' => $month,
+                'arrears' => $totalBills - $totalPayments,
+            ]);
+        }
+
+        $regionPaymentData2 = DB::table('payments')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('payments.assembly_code', $request->user()->assembly_code);
+            })
+            ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                $query->whereBetween('payments.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+            })
+            ->when($request->region !== null, function ($query) use ($request) {
+                $query->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
+                    ->where('assemblies.regional_code', $request->region);
+            })
+            ->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
+            ->join('ghana_regions', 'assemblies.regional_code', '=', 'ghana_regions.regional_code')
+            ->selectRaw('
+                ghana_regions.name as region_name, 
+                MONTH(payments.created_at) as month,
+                payments.payment_mode, 
+                SUM(CASE 
+                    WHEN payments.payment_mode = "momo" AND payments.transaction_status = "Success" THEN payments.amount
+                    WHEN payments.payment_mode != "momo" THEN payments.amount
+                    ELSE 0 
+                END) as total_payments
+            ')
+            ->whereYear('payments.created_at', $currentYear)
+            ->groupBy('ghana_regions.name', 'payments.payment_mode', 'month')
+            ->get();
+
+        $dashBills = DB::table('bills')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                $query->whereBetween('bills.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+            })
+            ->when($request->region !== null, function ($query) use ($request) {
+                $query->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
+                    ->where('assemblies.regional_code', $request->region);
+            })
+            ->selectRaw('MONTH(created_at) as month, SUM(amount) as total_bills')
+            ->whereYear('created_at', $currentYear)
+            ->groupBy('month')
+            ->pluck('total_bills', 'month');
+
+        $dashPayments = DB::table('payments')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                $query->whereBetween('payments.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+            })
+            ->when($request->region !== null, function ($query) use ($request) {
+                $query->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
+                    ->where('assemblies.regional_code', $request->region);
+            })
+            ->selectRaw("
+                MONTH(created_at) as month, 
+                SUM(CASE 
+                    WHEN payment_mode = 'momo' AND transaction_status = 'Success' THEN amount 
+                    WHEN payment_mode != 'momo' THEN amount 
+                    ELSE 0 
+                END) as total_payments
+            ")
+            ->whereYear('created_at', $currentYear)
+            ->groupBy('month')
+            ->pluck(
+                'total_payments',
+                'month'
+            );
+
+        $dashChartData = [];
+        for ($month = 1; $month <= 12; $month++) {
+            $totalBills = $dashBills[$month] ?? 0;
+            $totalPayments = $dashPayments[$month] ?? 0;
+            $arrears = $totalBills - $totalPayments;
+
+            $dashChartData[] = [
+                'month' => $month,
+                'bills' => $totalBills,
+                'payments' => $totalPayments,
+                'arrears' => $arrears,
+            ];
+        }
+
+        $regions = GhanaRegion::orderBy('name', 'ASC')->get();
+
+        $total = [
+            'yearlyMomoPayments' => isset($yearlyMomoPayments) ? number_format($yearlyMomoPayments, 2) : 0,
+            'yearlyPayments' => isset($yearlyPayments) ? number_format($yearlyPayments->total, 2) : 0,
+            'yearlyReceivables' => isset($yearlyReceivables) ? number_format($yearlyReceivables, 2) : 0,
+            'paymentData' => isset($paymentData) ? $paymentData : 0,
+            'billData' => isset($billData) ? $billData : 0,
+            'arrearsData' => isset($arrearsData) ? $arrearsData : 0,
+            'categories' => isset($assemblyPayments) ? $assemblyPayments->pluck('assembly_name') : 'N/A',
+            'graphData' => isset($assemblyPayments) ? $assemblyPayments->pluck('total_payment') : [],
+            'chartData' => isset($chartData) ? $chartData : [],
+            'divisionPaymentData' => isset($divisionPaymentData) ? $divisionPaymentData : [],
+            'regionArrearsData' => isset($regionArrearsData) ? $regionArrearsData : [],
+            'regionPaymentData2' => isset($regionPaymentData2) ? $regionPaymentData2 : [],
+            'regions' => isset($regions) ? $regions : []
+        ];
+
+        return view('dashboard.includes.payment', compact('total'));
+    }
+
+    public function billAnalytic(Request $request)
+    {
+        //No payment bills
+        $totalCompletedBill = Bill::query()
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                $query->whereBetween('bills.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+            })
+            ->when($request->region !== null, function ($query) use ($request) {
+                $query->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
+                    ->where('assemblies.regional_code', $request->region);
+            })
+            ->whereYear('bills.created_at', Carbon::now()->year)
+            ->whereNotExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('payments')
+                    ->whereColumn('payments.bills_id', 'bills.bills_id');
+            })
+            ->count();
+
+        $totalUpcomingBill = Bill::query()
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                $query->whereBetween('bills.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+            })
+            ->when($request->region !== null, function ($query) use ($request) {
+                $query->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
+                    ->where('assemblies.regional_code', $request->region);
+            })
+            ->whereYear('bills.created_at', Carbon::now()->year)
+            ->whereExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('payments')
+                    ->whereColumn('payments.bills_id', 'bills.bills_id')
+                    ->groupBy('payments.bills_id')
+                    ->havingRaw('SUM(payments.amount) < bills.amount');
+            })
+            ->count();
+
+        $totalNewBill = Bill::query()
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
+                $query->whereBetween('bills.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+            })
+            ->when($request->region !== null, function ($query) use ($request) {
+                $query->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
+                    ->where('assemblies.regional_code', $request->region);
+            })
+            ->whereYear('bills.created_at', Carbon::now()->year)
+            ->whereExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('payments')
+                    ->whereColumn('payments.bills_id', 'bills.bills_id')
+                    ->groupBy('payments.bills_id')
+                    ->havingRaw('SUM(payments.amount) >= bills.amount');
+            })
+            ->count();
+
+        $totalBills = $totalCompletedBill + $totalUpcomingBill + $totalNewBill;
+        if ($totalBills > 0) {
+            $completedPercentage = ($totalCompletedBill / $totalBills) * 100;
+            $upcomingPercentage = ($totalUpcomingBill / $totalBills) * 100;
+            $newPercentage = ($totalNewBill / $totalBills) * 100;
+        } else {
+            $completedPercentage = $upcomingPercentage = $newPercentage = 0;
+        }
+
+        $regionalBills = DB::table('ghana_regions')
+            ->leftJoin('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
+            ->leftJoin('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
+            ->select('ghana_regions.name as region_name', DB::raw('COALESCE(SUM(bills.amount), 0) as total_bills'))
+            ->groupBy('ghana_regions.name')
+            ->orderBy('ghana_regions.name')
+            ->get();
+
+        $regions = $regionalBills->pluck('region_name')->toArray();
+        $totals = $regionalBills->pluck('total_bills')->toArray();
+
+        $regions = GhanaRegion::orderBy('name', 'ASC')->get();
+
+        $total = [
+            'totalCompletedBill' => isset($totalCompletedBill) ? $totalCompletedBill : 0,
+            'totalUpcomingBill' => isset($totalUpcomingBill) ? $totalUpcomingBill : 0,
+            'totalNewBill' => isset($totalNewBill) ? $totalNewBill : 0,
+            'completedPercentage' => isset($completedPercentage) ? round($completedPercentage, 2) : 0,
+            'upcomingPercentage' => isset($upcomingPercentage) ? round($upcomingPercentage, 2) : 0,
+            'newPercentage' => isset($newPercentage) ? round($newPercentage, 2) : 0,
+            'regions' => isset($regions) ? $regions : [],
+            'totals' => isset($totals) ? $totals : [],
+            'regionsDrop' => isset($regions) ? $regions : []
+        ];
+
+        return view('dashboard.includes.bill', compact('total'));
     }
 }

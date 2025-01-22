@@ -65,12 +65,6 @@ class CustomerSupportController extends Controller
             ->with(['user', 'assembly', 'responseBy'])
             ->get();
 
-        if (count($customerSupport) == 0) {
-            return response()->json([
-                'message' => 'Customer support not found, check customer account id'
-            ], 422);
-        }
-
         return response()->json([
             'message' => 'Get customer supports',
             'data' => $customerSupport

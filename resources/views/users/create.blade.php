@@ -1,7 +1,7 @@
 @extends('layout.base')
 
 @section('page-content')
-    <div class="col-xxl-8">
+    <div class="col-xxl-12">
         <div class="card custom-card overflow-hidden podcast-banner">
             <div class="card-body p-4">
                 <div class="row gy-3 gy-xl-0">
