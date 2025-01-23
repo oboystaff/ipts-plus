@@ -92,9 +92,10 @@
             </div>
         </div>
     </div>
-    <div class="row">
+
+    <div class="row mb-4">
         <div class="col-xxl-8 col-xl-8 col-lg-8">
-            <div class="card custom-card overflow-hidden nft-main-card">
+            <div class="card custom-card overflow-hidden nft-main-card h-100">
                 <div class="card-body">
                     <div class="row gap-3 gap-sm-0 mx-0 py-3 rounded-3">
                         <div class="col-xxl-8 col-xl-6 col-lg-8 col-12">
@@ -109,10 +110,10 @@
                                         $greeting = 'Good Evening';
                                     }
                                 @endphp
-                                <h6 class="fw-semibold mb-3 op-9 text-fixed-white"> {{ $greeting }}
-                                    {{ Auth::user()->name }} ! &#128075;</h6>
+                                <h4 class="fw-semibold mb-3 op-9 text-fixed-white"> {{ $greeting }}
+                                    {{ Auth::user()->name }} ! &#128075;</h4>
 
-                                <p class="mb-4 text-fixed-white op-7 fs-12">
+                                <p class="mb-4 text-fixed-white op-7 fs-16">
                                     Empowering you to manage your contributions with ease, transparency, and
                                     confidence.
                                     Together, we’re building stronger communities!
@@ -124,10 +125,12 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-xxl-4 col-xl-6 col-lg-4 my-auto text-end">
                             <div class="featured-nft text-end">
                                 <img src="{{ asset('assets/images/gh.png') }}" alt=""
-                                    class="img-fluid nft-cardimg rounded-3">
+                                    class="img-fluid nft-cardimg rounded-3"
+                                    style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                         </div>
                     </div>
@@ -136,17 +139,9 @@
         </div>
 
         <div class="col-xl-4">
-            <div class="card">
-                <div class="card-body text-center">
-                    <div id="pie-chart-placeholder-2" style="width: 100%; height: 250px;">
-                        <!-- Placeholder for Pie Chart 2 -->
-                        <div class="d-flex justify-content-center align-items-center h-100">
-                            <span>
-                                <div id="donut-gradient"></div>
-                                {{-- <div id="donut-regional"></div> --}}
-                            </span>
-                        </div>
-                    </div>
+            <div class="card custom-card h-100">
+                <div class="card-body">
+                    <div id="donut-gradient"></div>
                 </div>
             </div>
         </div>
@@ -174,8 +169,7 @@
                                 action="{{ route('properties.store') }}">
                                 @csrf
 
-                                <input type="hidden" name="property_use_url"
-                                    url="{{ route('rates.property-use') }}">
+                                <input type="hidden" name="property_use_url" url="{{ route('rates.property-use') }}">
                                 <input type="hidden" name="division_url" url="{{ route('ajax.division') }}">
                                 <input type="hidden" name="block_url" url="{{ route('ajax.block') }}">
 
@@ -524,7 +518,9 @@
     // Update the time every second
     setInterval(updateTime, 1000);
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Data from the controller
@@ -650,67 +646,4 @@
 
     // Start typing the first message
     typeMessage();
-</script>
-
-<script>
-    // Regional doughnut overview
-    var totalBills = @json($customerData['totalBills']).map(item => parseFloat(item));
-    var totalPayments = @json($customerData['totalPayments']).map(item => parseFloat(item));
-    var totalArrears = @json($customerData['totalArrears2']).map(item => parseFloat(item));
-
-    alert(totalBills);
-
-    // Calculate sums
-    var totalBillsSum = totalBills.reduce((acc, val) => acc + val, 0);
-    var totalPaymentsSum = totalPayments.reduce((acc, val) => acc + val, 0);
-    var totalArrearsSum = totalArrears.reduce((acc, val) => acc + val, 0);
-
-    // Options for ApexCharts Donut
-    var options = {
-        series: [
-            totalBillsSum,
-            totalPaymentsSum,
-            totalArrearsSum
-        ],
-        chart: {
-            height: 300,
-            type: "donut",
-        },
-        plotOptions: {
-            pie: {
-                startAngle: -90,
-                endAngle: 270,
-            },
-        },
-        dataLabels: {
-            enabled: true,
-            formatter: function(value, opts) {
-                return `${opts.w.globals.labels[opts.seriesIndex]}: ${value.toFixed(2)} %`;
-            },
-        },
-        fill: {
-            type: "gradient",
-        },
-        colors: ["#8b7eff", "#35bdaa", "#ffb748"],
-        title: {
-            text: "Regional Revenue Distribution",
-            align: "left",
-            style: {
-                fontSize: "13px",
-                fontWeight: "bold",
-                color: "#8c9097",
-            },
-        },
-        legend: {
-            position: "bottom",
-            formatter: function(seriesName, opts) {
-                return `${seriesName}: ${opts.w.globals.series[opts.seriesIndex].toFixed(2)} %`;
-            },
-        },
-        labels: ["Total Bills", "Total Payments", "Total Arrears"],
-    };
-
-    // Render the Donut Chart
-    var chart = new ApexCharts(document.querySelector("#donut-gradient"), options);
-    chart.render();
 </script>

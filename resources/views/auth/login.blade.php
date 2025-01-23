@@ -133,8 +133,7 @@
                                 </div>
 
                                 <input type="submit" value="Log In" class="text-white btn btn-block btn-custom"
-                                    style="margin-top: -20px">
-
+                                    style="width: 100%;">
                             </form>
 
 
