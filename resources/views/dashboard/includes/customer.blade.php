@@ -157,10 +157,10 @@
         </div> --}}
 
         <div class="modal fade" id="addtask" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title" id="mail-ComposeLabel">Link Property</h6>
+                        <h6 class="modal-title" id="mail-ComposeLabel">Link Your Property</h6>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -174,152 +174,130 @@
                                 <input type="hidden" name="block_url" url="{{ route('ajax.block') }}">
 
                                 <div class="col-sm-6 mb-3">
-                                    <div class="form-group">
-                                        <label for="entity_type">Entity Type</label>
-                                        {{-- <select class="form-control @error('entity_type') is-invalid @enderror"
-                                            id="entity_type" name="entity_type">
-                                            <option disabled selected>Select Entity Type</option>
-                                            @foreach ($businessClassTypes as $businessClassType)
-                                                <option value="{{ $businessClassType->id }}">
-                                                    {{ $businessClassType->name }} -
-                                                    {{ $businessClassType->category }} - GHS
-                                                    {{ $businessClassType->rate }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                    <label for="entity_type" class="form-label">Entity Type</label>
+                                    <select class="form-control @error('entity_type') is-invalid @enderror"
+                                        id="entity_type" name="entity_type">
+                                        <option disabled selected>Select Entity Type</option>
+                                        @foreach ($customerData['businessClassTypes'] as $businessClassType)
+                                            <option value="{{ $businessClassType->id }}">
+                                                {{ $businessClassType->name }} -
+                                                {{ $businessClassType->category }} - GHS
+                                                {{ $businessClassType->rate }}
+                                            </option>
+                                        @endforeach
+                                    </select>
 
-                                        @error('entity_type')
-                                            <span class="invalid-feedback" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror --}}
-                                    </div>
+                                    @error('entity_type')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
 
                                 <div class="col-sm-6 mb-3">
-                                    <div class="form-group">
-                                        <label for="digital_address">Digital Address</label>
-                                        <input type="text"
-                                            class="form-control @error('digital_address') is-invalid @enderror"
-                                            id="digital_address" name="digital_address"
-                                            placeholder="Digital address">
+                                    <label for="digital_address" class="form-label">Digital Address</label>
+                                    <input type="text"
+                                        class="form-control @error('digital_address') is-invalid @enderror"
+                                        id="digital_address" name="digital_address" placeholder="Digital address">
 
-                                        @error('digital_address')
-                                            <span class="invalid-feedback" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
+                                    @error('digital_address')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
 
                                 <div class="col-sm-6 mb-3">
-                                    <div class="form-group">
-                                        <label for="location">Location</label>
-                                        <input type="text"
-                                            class="form-control @error('location') is-invalid @enderror"
-                                            id="location" name="location" placeholder="Location">
+                                    <label for="location" class="form-label">Location</label>
+                                    <input type="text" class="form-control @error('location') is-invalid @enderror"
+                                        id="location" name="location" placeholder="Location">
 
-                                        @error('location')
-                                            <span class="invalid-feedback" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
+                                    @error('location')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
 
                                 <div class="col-sm-6 mb-3">
-                                    <div class="form-group">
-                                        <label for="street_name">Street Name</label>
-                                        <input type="text" class="form-control" id="street_name"
-                                            name="street_name" placeholder="Street name">
-                                    </div>
+                                    <label for="street_name" class="form-label">Street Name</label>
+                                    <input type="text" class="form-control" id="street_name" name="street_name"
+                                        placeholder="Street name">
                                 </div>
 
                                 <div class="col-sm-6 mb-3">
-                                    <div class="form-group">
-                                        <label for="rated">Rated</label>
-                                        <select class="form-control" id="rated" name="rated">
-                                            <option disabled selected>Select If Rated</option>
-                                            <option value="Yes">Yes</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
+                                    <label for="rated" class="form-label">Rated</label>
+                                    <select class="form-control" id="rated" name="rated">
+                                        <option disabled selected>Select If Rated</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
                                 </div>
 
                                 <div class="col-sm-6 mb-3">
-                                    <div class="form-group">
-                                        <label for="validated">Validated</label>
-                                        <select class="form-control" id="validated" name="validated">
-                                            <option disabled selected>Select If Validated</option>
-                                            <option value="Yes">Yes</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
+                                    <label for="validated" class="form-label">Validated</label>
+                                    <select class="form-control" id="validated" name="validated">
+                                        <option disabled selected>Select If Validated</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
                                 </div>
 
                                 <div class="col-sm-6 mb-3">
-                                    <label for="entity_type">Associate Owner</label>
-                                    {{-- <select class="form-control" id="customer_name" name="customer_name">
+                                    <label for="entity_type" class="form-label">Associate Owner</label>
+                                    <select class="form-control" id="customer_name" name="customer_name">
                                         <option disabled selected>Select Associate Owner</option>
-                                        @foreach ($customers as $customer)
+                                        @foreach ($customerData['customers'] as $customer)
                                             <option value="{{ $customer->id }}">
                                                 {{ $customer->first_name }} - {{ $customer->nia_number }} -
                                                 {{ $customer->account_number }}
                                             </option>
                                         @endforeach
-                                    </select> --}}
+                                    </select>
                                 </div>
 
                                 <div class="col-sm-6 mb-3">
-                                    <div class="form-group">
-                                        <label for="ratable_value">Ratable Value</label>
-                                        <input type="text" class="form-control" id="ratable_value"
-                                            name="ratable_value" placeholder="Ratable value">
-                                    </div>
+                                    <label for="ratable_value" class="form-label">Ratable Value</label>
+                                    <input type="text" class="form-control" id="ratable_value"
+                                        name="ratable_value" placeholder="Ratable value">
                                 </div>
 
                                 <div class="col-sm-6 mb-3">
-                                    <div class="form-group">
-                                        <label for="longitude">Longitude</label>
-                                        <input type="text" class="form-control" id="longitude" name="longitude"
-                                            placeholder="Longitude">
-                                    </div>
+                                    <label for="longitude" class="form-label">Longitude</label>
+                                    <input type="text" class="form-control" id="longitude" name="longitude"
+                                        placeholder="Longitude">
                                 </div>
 
                                 <div class="col-sm-6 mb-3">
-                                    <div class="form-group">
-                                        <label for="latitude">Latitude</label>
-                                        <input type="text" class="form-control" id="latitude" name="latitude"
-                                            placeholder="Latitude">
-                                    </div>
+                                    <label for="latitude" class="form-label">Latitude</label>
+                                    <input type="text" class="form-control" id="latitude" name="latitude"
+                                        placeholder="Latitude">
                                 </div>
 
                                 <!-- Add Assembly field here -->
                                 <div class="col-sm-6 mb-3">
-                                    <div class="form-group">
-                                        <label for="assembly">Select An Assembly Where Property is
-                                            Located</label>
-                                        {{-- <select class="form-control @error('assembly_code') is-invalid @enderror"
-                                            id="assembly" name="assembly_code">
-                                            <option disabled selected>Select Assembly</option>
-                                            @foreach ($districtAssemblies as $assembly)
-                                                <option value="{{ $assembly->assembly_code }}">{{ $assembly->name }}
-                                                    Assembly
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                    <label for="assembly" class="form-label">Select An Assembly Where Property is
+                                        Located</label>
+                                    <select class="form-control @error('assembly_code') is-invalid @enderror"
+                                        id="assembly" name="assembly_code">
+                                        <option disabled selected>Select Assembly</option>
+                                        @foreach ($customerData['districtAssemblies'] as $assembly)
+                                            <option value="{{ $assembly->assembly_code }}">{{ $assembly->name }}
+                                                Assembly
+                                            </option>
+                                        @endforeach
+                                    </select>
 
-                                        @error('assembly_code')
-                                            <span class="invalid-feedback" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror --}}
-                                    </div>
+                                    @error('assembly_code')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
 
                                 <div class="col-sm-6 mb-3">
                                     <label for="division_id" class="form-label">Property Division</label>
-                                    {{-- <select class="form-control @error('division_id') is-invalid @enderror"
+                                    <select class="form-control @error('division_id') is-invalid @enderror"
                                         id="division_id" name="division_id" required>
                                         <option disabled selected>Select Division</option>
                                     </select>
@@ -328,12 +306,12 @@
                                         <span class="invalid-feedback" role="alert">
                                             {{ $message }}
                                         </span>
-                                    @enderror --}}
+                                    @enderror
                                 </div>
 
                                 <div class="col-sm-6 mb-3">
                                     <label for="block_id" class="form-label">Property Block</label>
-                                    {{-- <select class="form-control @error('block_id') is-invalid @enderror"
+                                    <select class="form-control @error('block_id') is-invalid @enderror"
                                         id="block_id" name="block_id" required>
                                         <option disabled selected>Select Block</option>
                                     </select>
@@ -342,18 +320,18 @@
                                         <span class="invalid-feedback" role="alert">
                                             {{ $message }}
                                         </span>
-                                    @enderror --}}
+                                    @enderror
                                 </div>
 
                                 <div class="col-sm-6 mb-3">
                                     <label for="zone_id" class="form-label">Property Zone</label>
-                                    {{-- <select class="form-control @error('zone_id') is-invalid @enderror" id="zone_id"
+                                    <select class="form-control @error('zone_id') is-invalid @enderror" id="zone_id"
                                         name="zone_id" required>
                                         <option disabled selected>Select Zone</option>
-                                        @foreach ($zones as $zone)
+                                        @foreach ($customerData['zones'] as $zone)
                                             <option value="{{ $zone->id }}">{{ $zone->name }}</option>
                                         @endforeach
-                                    </select> --}}
+                                    </select>
 
                                     @error('zone_id')
                                         <span class="invalid-feedback" role="alert">
@@ -364,10 +342,10 @@
 
                                 <div class="col-sm-6 mb-3">
                                     <label for="property_use_id" class="form-label">Property use</label>
-                                    {{-- <select class="form-control @error('property_use_id') is-invalid @enderror"
+                                    <select class="form-control @error('property_use_id') is-invalid @enderror"
                                         id="property_use_id" name="property_use_id" required>
                                         <option disabled selected>Select Property Use</option>
-                                    </select> --}}
+                                    </select>
 
                                     @error('property_use_id')
                                         <span class="invalid-feedback" role="alert">
@@ -377,16 +355,13 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    <div class="col-sm-12 text-end">
+                                        <button type="submit" class="btn btn-primary"
+                                            style="width:200px">Save</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn m-0 me-2 btn-light" data-bs-dismiss="modal">Cancel</button>
-
                     </div>
                 </div>
             </div>

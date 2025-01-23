@@ -15,6 +15,8 @@ use App\Models\Citizen;
 use App\Models\GhanaRegion;
 use App\Models\User;
 use App\Models\Payment;
+use App\Models\BusinessClassType;
+use App\Models\Zone;
 use Illuminate\Support\Collection;
 
 
@@ -1129,6 +1131,13 @@ class DashboardController extends Controller
                     ->sum('amount');
 
                 $totalArrears2 = $totalBills - $totalPayments;
+
+                $businessClassTypes = BusinessClassType::get();
+                $customers = Citizen::where('user_id', $request->user()->id)
+                    ->get();
+
+                $districtAssemblies = Assembly::get();
+                $zones = Zone::get();
             } else {
                 $properties = [];
                 $businesses = [];
@@ -1157,7 +1166,11 @@ class DashboardController extends Controller
                 'propertyCount' => isset($properties) ? $properties->count() : 0,
                 'totalPayments' => isset($totalPayments) ? $totalPayments : 0,
                 'totalBills' => isset($totalBills) ? $totalBills : 0,
-                'totalArrears2' => isset($totalArrears2) ? $totalArrears2 : 0
+                'totalArrears2' => isset($totalArrears2) ? $totalArrears2 : 0,
+                'businessClassTypes' => isset($businessClassTypes) ? $businessClassTypes : [],
+                'customers' => isset($customers) ? $customers : [],
+                'districtAssemblies' => isset($districtAssemblies) ? $districtAssemblies : [],
+                'zones' => isset($zones) ? $zones : []
             ];
         }
 

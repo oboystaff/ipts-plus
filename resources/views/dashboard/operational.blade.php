@@ -43,6 +43,8 @@
     <script src="{{ asset('assets/vendor/datatables/js/jszip.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins-init/datatables.init.js') }}"></script>
 
+    <script src="{{ asset('assets/js/general.js?v1=1234') }}"></script>
+
     <!-- Popper JS -->
     <script src="{{ asset('assets/libs/@popperjs/core/umd/popper.min.js') }}"></script>
 
@@ -1023,7 +1025,7 @@
             },
             colors: ["#8b7eff", "#35bdaa", "#ffb748"],
             title: {
-                text: "Regional Revenue Distribution",
+                text: "Rate payer Financial Overview",
                 align: "left",
                 style: {
                     fontSize: "13px",
