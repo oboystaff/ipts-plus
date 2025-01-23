@@ -28,14 +28,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php
+                                            $regionTotalProperties = 0;
+                                            $regionTotalBusinesses = 0;
+                                            $regionTotalBills = 0;
+                                            $regionTotalPayments = 0;
+                                            $regionTotalReceivables = 0;
+                                        @endphp
+
                                         @foreach ($region->assemblies as $key => $assembly)
                                             @php
                                                 $totalPropertiesCount = $assembly->properties->count();
                                                 $totalBusinessesCount = $assembly->businesses->count();
                                                 $totalBills = $assembly->bills->sum('amount');
-                                                $totalBillsCount = isset($totalBills)
-                                                    ? number_format($totalBills, 2)
-                                                    : 0;
                                                 $totalPayments = $assembly->payments
                                                     ->filter(function ($payment) {
                                                         if ($payment->payment_mode == 'momo') {
@@ -44,10 +49,13 @@
                                                         return true;
                                                     })
                                                     ->sum('amount');
-                                                $totalPaymentsCount = isset($totalPayments)
-                                                    ? number_format($totalPayments, 2)
-                                                    : 0;
                                                 $totalReceivables = $totalBills - $totalPayments;
+
+                                                $regionTotalProperties += $totalPropertiesCount;
+                                                $regionTotalBusinesses += $totalBusinessesCount;
+                                                $regionTotalBills += $totalBills;
+                                                $regionTotalPayments += $totalPayments;
+                                                $regionTotalReceivables += $totalReceivables;
                                             @endphp
 
                                             <tr>
@@ -55,12 +63,22 @@
                                                 <td>{{ $assembly->name }}</td>
                                                 <td>{{ $totalPropertiesCount }}</td>
                                                 <td>{{ $totalBusinessesCount }}</td>
-                                                <td>{{ $totalBillsCount }}</td>
-                                                <td>{{ $totalPaymentsCount }}</td>
+                                                <td>{{ number_format($totalBills, 2) }}</td>
+                                                <td>{{ number_format($totalPayments, 2) }}</td>
                                                 <td>{{ number_format($totalReceivables, 2) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="2" class="text-right">Totals:</th>
+                                            <th>{{ $regionTotalProperties }}</th>
+                                            <th>{{ $regionTotalBusinesses }}</th>
+                                            <th>{{ number_format($regionTotalBills, 2) }}</th>
+                                            <th>{{ number_format($regionTotalPayments, 2) }}</th>
+                                            <th>{{ number_format($regionTotalReceivables, 2) }}</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         @else

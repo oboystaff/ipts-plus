@@ -1,5 +1,5 @@
 /*---------------------------
- CSS Index  
+ CSS Index
 ****************************
 
 1. variables
@@ -49,7 +49,7 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;display=swap");
 :root {
   --color-primary: #DF0A0A;
-  --color-primary-2: #0B4DF5;
+  --color-primary-2: #f37429;
   --color-primary-3: #F64A00;
   --color-primary-4: #5264F3;
   --color-primary-5: #B00F0F;
@@ -453,7 +453,7 @@ var {
 }
 
 /*---------------------------
-	List Style 
+	List Style
 ---------------------------*/
 ul,
 ol {
@@ -655,7 +655,7 @@ ol ul {
 }
 
 /*=========================
-    Section Separation 
+    Section Separation
 ==========================*/
 .slick-dotted.slick-slider {
   margin-bottom: 0;
@@ -9431,6 +9431,7 @@ input[type=password],
 input[type=email],
 input[type=number],
 input[type=tel],
+se
 textarea {
   font-size: var(--font-size-b2);
   font-weight: 400;
@@ -9804,7 +9805,7 @@ iframe {
 }
 
 /*===============================
-    Background Color 
+    Background Color
 =================================*/
 .bg-color-primary {
   background: var(--color-primary);
@@ -9835,7 +9836,7 @@ iframe {
 }
 
 /*===========================
-Background Image 
+Background Image
 =============================*/
 .bg_image {
   background-repeat: no-repeat;
@@ -10509,7 +10510,7 @@ textarea:-ms-input-placeholder {
 }
 
 /*=============================
-	Overlay styles 
+	Overlay styles
 ==============================*/
 [data-overlay],
 [data-black-overlay],
@@ -10613,7 +10614,7 @@ textarea:-ms-input-placeholder {
 }
 
 /*------------------------------
-    Scroll Up 
+    Scroll Up
 --------------------------------*/
 #scrollUp {
   width: 70px;
@@ -10712,7 +10713,7 @@ body {
 }
 
 /*------------------------
-    Header Sticky 
+    Header Sticky
 --------------------------*/
 .col-lg-20 {
   width: 20%;
@@ -14679,9 +14680,9 @@ Copyright (c) 2015 Daniel Eden
   opacity: 1;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-xclip 
+xclip
 
 -------------------------------- */
 .cd-headline.clip span {
@@ -15387,6 +15388,7 @@ body.sal-disabled [data-sal|=flip] {
 .main-header .nav-main ul {
   list-style: none;
   padding: 0;
+height: auto;
   margin: 0;
   display: flex;
   align-items: center;
@@ -15394,6 +15396,7 @@ body.sal-disabled [data-sal|=flip] {
 .main-header .nav-main ul li {
   margin: 0;
   margin-right: 36px;
+  height: auto;
 }
 .main-header .nav-main ul li a {
   padding: 48px 0;
@@ -15410,7 +15413,7 @@ body.sal-disabled [data-sal|=flip] {
   content: "";
   left: 0;
   bottom: 50px;
-  height: 2px;
+  height: auto;
   width: 0%;
   border-radius: 1px;
   background: var(--color-primary);
@@ -16073,7 +16076,7 @@ body.sal-disabled [data-sal|=flip] {
   border-bottom-color: var(--color-primary-2);
 }
 .home-blue.medium-blue .main-header {
-  background: #06277b;
+  background: #f37429;
 }
 .home-blue.medium-blue .main-header .nav-main ul li a {
   color: #fff;

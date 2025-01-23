@@ -205,11 +205,9 @@
             </div>
         </div>
 
-
-        <div class="row">
-            <!-- Row for Pie Chart Placeholders -->
+        <div class="row mb-4">
             <div class="col-xl-4">
-                <div class="card custom-card">
+                <div class="card custom-card h-100">
                     <div class="card-body">
                         <div id="bar-gender"></div>
                     </div>
@@ -217,7 +215,7 @@
             </div>
 
             <div class="col-xl-4">
-                <div class="card custom-card">
+                <div class="card custom-card h-100">
                     <div class="card-body">
                         <div id="donut-gradient"></div>
                     </div>
@@ -225,13 +223,16 @@
             </div>
 
             <div class="col-xl-4">
-                <div class="card custom-card">
+                <div class="card custom-card h-100">
                     <div class="card-body">
                         <div id="line-heatmap"></div>
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div class="row">
+            <!-- Row for Pie Chart Placeholders -->
 
             <div class="col-xl-12 active-p">
                 @if (session()->has('status'))

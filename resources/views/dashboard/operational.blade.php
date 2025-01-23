@@ -8,6 +8,15 @@
         .fc-day-today {
             background-color: #ffebcc !important;
         }
+
+        .equal-height-card {
+            min-height: 180px;
+            /* Ensure consistent height for all cards */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
     </style>
 @endsection
 
@@ -933,5 +942,41 @@
 
         var chart = new ApexCharts(document.querySelector("#donut-regional"), options);
         chart.render();
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.btn-group .btn');
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const displayValue = urlParams.get('display');
+
+            if (displayValue) {
+                buttons.forEach(button => {
+                    button.classList.remove('btn-primary');
+                    button.classList.add('btn-primary-light');
+
+                    if (button.href.includes(`display=${displayValue}`)) {
+                        button.classList.add('btn-primary');
+                        button.classList.remove('btn-primary-light');
+                    }
+                });
+            } else {
+                buttons[0].classList.add('btn-primary');
+                buttons[0].classList.remove('btn-primary-light');
+            }
+
+            buttons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    buttons.forEach(btn => {
+                        btn.classList.remove('btn-primary');
+                        btn.classList.add('btn-primary-light');
+                    });
+
+                    this.classList.add('btn-primary');
+                    this.classList.remove('btn-primary-light');
+                });
+            });
+        });
     </script>
 @endsection

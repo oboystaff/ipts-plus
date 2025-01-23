@@ -132,8 +132,9 @@
 
 @section('page-scripts')
     <script>
-        var regionNames = @json($total['regions']);
+        var regions = @json($total['regions']);
         var totalBills = @json($total['totals']);
+        var regionNames = regions.map(region => region.name);
 
         var options = {
             series: [{

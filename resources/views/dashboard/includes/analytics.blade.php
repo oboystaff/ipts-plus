@@ -1,4 +1,84 @@
 <div class="row">
+    <div class="col-xl-3">
+        <div class="card custom-card rounded-md overflow-hidden p-2">
+            <div class="card-body bg-primary bg-opacity-10 rounded-2 ps-4 medical-cards">
+                <div class="d-flex gap-2 align-items-center ps-2">
+                    <div class="align-self-start">
+                        <div class="fw-medium mb-2">Total Payments </div>
+                        <h4 class="fw-semibold mb-0 lh-1">{{ $total['lastMonthPayments'] }}</h4>
+                    </div>
+                    <div class="ms-auto text-end align-self-end">
+
+                        <div>
+                            <span class="text-danger fw-medium fs-13 mb-2">
+                                GHS
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3">
+        <div class="card custom-card rounded-md overflow-hidden p-2">
+            <div class="card-body bg-secondary bg-opacity-10 rounded-2 ps-4 medical-cards secondary">
+                <div class="d-flex gap-2 align-items-center ps-2">
+                    <div class="align-self-start">
+                        <div class="fw-medium mb-2">Total property tax</div>
+                        <h4 class="fw-semibold mb-0 lh-1">{{ $total['lastMonthPropertyBill'] }}</h4>
+                    </div>
+                    <div class="ms-auto text-end align-self-end">
+                        <div>
+                            <span class="text-success fw-medium fs-13 mb-2">
+                                GHS
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3">
+        <div class="card custom-card rounded-md overflow-hidden p-2">
+            <div class="card-body bg-success bg-opacity-10 rounded-2 ps-4 medical-cards success">
+                <div class="d-flex gap-2 align-items-center ps-2">
+                    <div class="align-self-start">
+                        <div class="fw-medium mb-2">Total BoP</div>
+                        <h4 class="fw-semibold mb-0 lh-1">{{ $total['lastMonthBusinessBill'] }}</h4>
+                    </div>
+                    <div class="ms-auto text-end align-self-end">
+                        <div>
+                            <span class="text-danger fw-medium fs-13 mb-2">
+                                GHS
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3">
+        <div class="card custom-card rounded-md overflow-hidden p-2">
+            <div class="card-body bg-info bg-opacity-10 rounded-2 ps-4 medical-cards info">
+                <div class="d-flex gap-2 align-items-center ps-2">
+                    <div class="align-self-start">
+                        <div class="fw-medium mb-2">Total market tolls</div>
+                        <h4 class="fw-semibold mb-0 lh-1">0.00</h4>
+                    </div>
+                    <div class="ms-auto text-end align-self-end">
+                        <div>
+                            <span class="text-danger fw-medium fs-13 mb-2">
+                                GHS
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
     <div class="col-xxl-6 col-xl-6">
         <div class="card custom-card overflow-hidden">
             <div class="card-body">
@@ -87,86 +167,6 @@
                 <div id="widget-chart-4"></div>
                 <div class="text-end pe-3">
                     <span class="text-muted fw-medium fs-12">Yearly</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-xl-3">
-        <div class="card custom-card rounded-md overflow-hidden p-2">
-            <div class="card-body bg-primary bg-opacity-10 rounded-2 ps-4 medical-cards">
-                <div class="d-flex gap-2 align-items-center ps-2">
-                    <div class="align-self-start">
-                        <div class="fw-medium mb-2">Total Payments </div>
-                        <h4 class="fw-semibold mb-0 lh-1">{{ $total['lastMonthPayments'] }}</h4>
-                    </div>
-                    <div class="ms-auto text-end align-self-end">
-
-                        <div>
-                            <span class="text-danger fw-medium fs-13 mb-2">
-                                GHS
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3">
-        <div class="card custom-card rounded-md overflow-hidden p-2">
-            <div class="card-body bg-secondary bg-opacity-10 rounded-2 ps-4 medical-cards secondary">
-                <div class="d-flex gap-2 align-items-center ps-2">
-                    <div class="align-self-start">
-                        <div class="fw-medium mb-2">Total property tax</div>
-                        <h4 class="fw-semibold mb-0 lh-1">{{ $total['lastMonthPropertyBill'] }}</h4>
-                    </div>
-                    <div class="ms-auto text-end align-self-end">
-                        <div>
-                            <span class="text-success fw-medium fs-13 mb-2">
-                                GHS
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3">
-        <div class="card custom-card rounded-md overflow-hidden p-2">
-            <div class="card-body bg-success bg-opacity-10 rounded-2 ps-4 medical-cards success">
-                <div class="d-flex gap-2 align-items-center ps-2">
-                    <div class="align-self-start">
-                        <div class="fw-medium mb-2">Total BoP</div>
-                        <h4 class="fw-semibold mb-0 lh-1">{{ $total['lastMonthBusinessBill'] }}</h4>
-                    </div>
-                    <div class="ms-auto text-end align-self-end">
-                        <div>
-                            <span class="text-danger fw-medium fs-13 mb-2">
-                                GHS
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3">
-        <div class="card custom-card rounded-md overflow-hidden p-2">
-            <div class="card-body bg-info bg-opacity-10 rounded-2 ps-4 medical-cards info">
-                <div class="d-flex gap-2 align-items-center ps-2">
-                    <div class="align-self-start">
-                        <div class="fw-medium mb-2">Total market tolls</div>
-                        <h4 class="fw-semibold mb-0 lh-1">0.00</h4>
-                    </div>
-                    <div class="ms-auto text-end align-self-end">
-                        <div>
-                            <span class="text-danger fw-medium fs-13 mb-2">
-                                GHS
-                            </span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

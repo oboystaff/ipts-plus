@@ -839,6 +839,71 @@ class DashboardController extends Controller
         $totalDonutPayments = $totalRegionalDonutData->pluck('total_payments_region');
         $totalDonutArrears = $totalRegionalDonutData->pluck('total_arrears_region');
 
+        $dashTotalBills = DB::table('bills')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->when($request->display == "daily", function ($query) {
+                $query->whereDate('created_at', [now()->format('Y-m-d')]);
+            })
+            ->when($request->display == "weekly", function ($query) {
+                $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]);
+            })
+            ->when($request->display == "monthly", function ($query) {
+                $query->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()]);
+            })
+            ->when($request->display == "yearly", function ($query) {
+                $query->whereBetween('created_at', [now()->startOfYear(), now()->endOfYear()]);
+            })
+            ->sum('amount');
+
+        $dashTotalBillCount = DB::table('bills')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->when($request->display == "daily", function ($query) {
+                $query->whereDate('created_at', [now()->format('Y-m-d')]);
+            })
+            ->when($request->display == "weekly", function ($query) {
+                $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]);
+            })
+            ->when($request->display == "monthly", function ($query) {
+                $query->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()]);
+            })
+            ->when($request->display == "yearly", function ($query) {
+                $query->whereBetween('created_at', [now()->startOfYear(), now()->endOfYear()]);
+            })
+            ->count();
+
+        $dashTotalPayments = DB::table('payments')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->when($request->display == "daily", function ($query) {
+                $query->whereDate('created_at', [now()->format('Y-m-d')]);
+            })
+            ->when($request->display == "weekly", function ($query) {
+                $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]);
+            })
+            ->when($request->display == "monthly", function ($query) {
+                $query->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()]);
+            })
+            ->when($request->display == "yearly", function ($query) {
+                $query->whereBetween('created_at', [now()->startOfYear(), now()->endOfYear()]);
+            })
+            ->when(true, function ($query) {
+                $query->where(function ($q) {
+                    $q->where('payment_mode', '!=', 'momo')
+                        ->orWhere(function ($q2) {
+                            $q2->where('payment_mode', 'momo')
+                                ->where('transaction_status', 'Success');
+                        });
+                });
+            })
+            ->sum('amount');
+
+        $dashTotalOutstanding = $dashTotalBills - $dashTotalPayments;
+
         //Customer Data
         $customerData = [];
         if ($request->user()->access_level == 'customer') {
@@ -1025,6 +1090,45 @@ class DashboardController extends Controller
 
                 $totalArrears = $bills->sum('arrears');
                 $totalAmount = $bills->sum('amount');
+
+                $totalPayments = Payment::whereHas('bill', function ($query) use ($customer) {
+                    $query->whereHas('property', function ($propertyQuery) use ($customer) {
+                        $propertyQuery->where('customer_name', $customer->id)
+                            ->whereNotNull('property_id')
+                            ->whereNull('business_id');
+                    })
+                        ->orWhereHas('business', function ($businessQuery) use ($customer) {
+                            $businessQuery->where('citizen_account_number', $customer->id)
+                                ->whereNotNull('business_id')
+                                ->whereNull('property_id');
+                        });
+                })
+                    ->selectRaw("
+                        SUM(CASE 
+                            WHEN payment_mode = 'momo' AND transaction_status = 'Success' THEN amount
+                            WHEN payment_mode != 'momo' THEN amount
+                            ELSE 0
+                        END) as total
+                    ")
+                    ->value('total');
+
+                $totalBills = Bill::where(function ($query) use ($customer) {
+                    $query->whereHas('property', function ($q) use ($customer) {
+                        $q->where('customer_name', $customer->id);
+                    })
+                        ->whereNotNull('property_id')
+                        ->whereNull('business_id');
+                })
+                    ->orWhere(function ($query) use ($customer) {
+                        $query->whereHas('business', function ($q) use ($customer) {
+                            $q->where('citizen_account_number', $customer->id);
+                        })
+                            ->whereNotNull('business_id')
+                            ->whereNull('property_id');
+                    })
+                    ->sum('amount');
+
+                $totalArrears2 = $totalBills - $totalPayments;
             } else {
                 $properties = [];
                 $businesses = [];
@@ -1050,6 +1154,10 @@ class DashboardController extends Controller
                 'totalArrearsB' => isset($totalArrearsB) ? number_format($totalArrearsB, 2) : 0,
                 'totalExpectedPaymentsB' => isset($totalExpectedPaymentsB) ? number_format($totalExpectedPaymentsB, 2) : 0,
                 'yearlyPaymentsB' => isset($yearlyPaymentsB) ? number_format($yearlyPaymentsB->total, 2) : 0,
+                'propertyCount' => isset($properties) ? $properties->count() : 0,
+                'totalPayments' => isset($totalPayments) ? $totalPayments : 0,
+                'totalBills' => isset($totalBills) ? $totalBills : 0,
+                'totalArrears2' => isset($totalArrears2) ? $totalArrears2 : 0
             ];
         }
 
@@ -1111,7 +1219,11 @@ class DashboardController extends Controller
             'totalDonutProperties' => isset($totalDonutProperties) ? $totalDonutProperties : [],
             'totalDonutBills' => isset($totalDonutBills) ? $totalDonutBills : [],
             'totalDonutPayments' => isset($totalDonutPayments) ? $totalDonutPayments : [],
-            'totalDonutArrears' => isset($totalDonutArrears) ? $totalDonutArrears : []
+            'totalDonutArrears' => isset($totalDonutArrears) ? $totalDonutArrears : [],
+            'dashTotalBills' => isset($dashTotalBills) ? number_format($dashTotalBills, 2) : 0,
+            'dashTotalBillCount' => isset($dashTotalBillCount) ? number_format($dashTotalBillCount) : 0,
+            'dashTotalPayments' => isset($dashTotalPayments) ? number_format($dashTotalPayments, 2) : 0,
+            'dashTotalOutstanding' => isset($dashTotalOutstanding) ? number_format($dashTotalOutstanding, 2) : 0
         ];
 
         return view('dashboard.operational', compact('total', 'chartData', 'chartData2', 'chartData3', 'chartData11', 'customerData'));
@@ -1647,6 +1759,9 @@ class DashboardController extends Controller
                         });
                 });
             });
+
+
+        $allPayments = $totalPayments->first();
 
         $dailyPayments = (clone $totalPayments)
             ->whereDate('created_at', Carbon::today())

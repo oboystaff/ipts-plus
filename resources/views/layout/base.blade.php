@@ -96,7 +96,11 @@
                             data-bs-toggle="sidebar" href="javascript:void(0);"><span></span></a>
                     </div>
 
-
+                    @if (auth()->user()->access_level === 'GRA_Administrator')
+                        <div style="text-align: center; margin-top: 20px;margin-left:20px">
+                            <p style="font-size: 16px;">GRA Administrator</p>
+                        </div>
+                    @endif
                 </div>
                 <!-- End::header-content-left -->
 
@@ -151,7 +155,6 @@
                         <!-- End::header-link|layout-setting -->
                     </div>
                     <!-- End::header-element -->
-
 
 
                     <!-- Start::header-element -->
@@ -456,7 +459,6 @@
                         <!-- Start::slide -->
                         @canany(['users.view'])
                             {{-- <li class="slide__category"><span class="category-name">User & Security </span></li> --}}
-
                             <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"

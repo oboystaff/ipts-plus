@@ -94,37 +94,37 @@ class CitizenController extends Controller
         }
 
         // Prepare heat map data
-        $heatMapData = [];
-        foreach ($genderCustomerStatus as $customerType => $genderGroups) {
-            if (!is_iterable($genderGroups)) continue;
-
-            foreach ($genderGroups as $gender => $statusGroups) {
-                if (!is_iterable($statusGroups)) continue;
-
-                foreach ($statusGroups as $status => $count) {
-                    $heatMapData[] = [
-                        'customer_type' => $customerType,
-                        'gender' => $gender,
-                        'status' => $status,
-                        'count' => $count,
-                    ];
-                }
-            }
-        }
-
         // $heatMapData = [];
         // foreach ($genderCustomerStatus as $customerType => $genderGroups) {
+        //     if (!is_iterable($genderGroups)) continue;
+
         //     foreach ($genderGroups as $gender => $statusGroups) {
-        //         foreach ($statusGroups as $status => $groupedItems) {
+        //         if (!is_iterable($statusGroups)) continue;
+
+        //         foreach ($statusGroups as $status => $count) {
         //             $heatMapData[] = [
         //                 'customer_type' => $customerType,
-        //                 'gender' => ucfirst(strtolower($gender)), // Normalize gender values (e.g., 'Male', 'Female')
-        //                 'status' => ucfirst(strtolower($status)), // Normalize status values (e.g., 'Active', 'Inactive')
-        //                 'count' => count($groupedItems), // Count the grouped items
+        //                 'gender' => $gender,
+        //                 'status' => $status,
+        //                 'count' => $count,
         //             ];
         //         }
         //     }
         // }
+
+        $heatMapData = [];
+        foreach ($genderCustomerStatus as $customerType => $genderGroups) {
+            foreach ($genderGroups as $gender => $statusGroups) {
+                foreach ($statusGroups as $status => $groupedItems) {
+                    $heatMapData[] = [
+                        'customer_type' => $customerType,
+                        'gender' => ucfirst(strtolower($gender)),
+                        'status' => ucfirst(strtolower($status)),
+                        'count' => count($groupedItems),
+                    ];
+                }
+            }
+        }
 
         // Calculate total active citizens
         $totalActive = $citizens->where('status', 'active')->count();

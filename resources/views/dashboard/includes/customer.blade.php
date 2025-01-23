@@ -1,169 +1,150 @@
 <div class="row">
-    <div class="col-xl-3">
-        <div class="card custom-card rounded-md overflow-hidden p-2">
-            <div class="card-body bg-primary bg-opacity-10 rounded-2 ps-4 medical-cards">
-                <div class="d-flex gap-2 align-items-center ps-2">
-                    <div class="align-self-start">
-                        <div class="fw-medium mb-2"> Current Bill</div>
-                        <h4 class="fw-semibold mb-0 lh-1">GHS {{ $customerData['totalArrearsP'] }}</h4>
-                    </div>
-                    <div class="ms-auto text-end align-self-end">
-                        <div class="avatar avatar-md avatar-rounded bg-primary shadow shadow-primary mb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                class="svg-icon-med text-fixed-white" fill="currentColor" viewBox="0 0 256 256">
-                                <path d="M136,108A52,52,0,1,1,84,56,52,52,0,0,1,136,108Z" opacity="0.2"></path>
-                                <path
-                                    d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,98.7a8,8,0,0,1-11.07-2.33A79.83,79.83,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,55.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,206.7Z">
-                                </path>
-                            </svg>
-                        </div>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3">
-        <div class="card custom-card rounded-md overflow-hidden p-2">
-            <div class="card-body bg-secondary bg-opacity-10 rounded-2 ps-4 medical-cards secondary">
-                <div class="d-flex gap-2 align-items-center ps-2">
-                    <div class="align-self-start">
-                        <div class="fw-medium mb-2">Last Payment </div>
-                        <h4 class="fw-semibold mb-0 lh-1">GHS {{ $customerData['yearlyPaymentsP'] }} </h4>
-                    </div>
-                    <div class="ms-auto text-end align-self-end">
-                        <div class="avatar avatar-md avatar-rounded bg-secondary shadow shadow-secondary mb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                class="svg-icon-med text-fixed-white" fill="currentColor" viewBox="0 0 256 256">
-                                <path d="M240,160a32,32,0,1,1-32-32A32,32,0,0,1,240,160Z" opacity="0.2"></path>
-                                <path
-                                    d="M220,160a12,12,0,1,1-12-12A12,12,0,0,1,220,160Zm-4.55,39.29A48.08,48.08,0,0,1,168,240H144a48.05,48.05,0,0,1-48-48V151.49A64,64,0,0,1,40,88V40a8,8,0,0,1,8-8H72a8,8,0,0,1,0,16H56V88a48,48,0,0,0,48.64,48c26.11-.34,47.36-22.25,47.36-48.83V48H136a8,8,0,0,1,0-16h24a8,8,0,0,1,8,8V87.17c0,32.84-24.53,60.29-56,64.31V192a32,32,0,0,0,32,32h24a32.06,32.06,0,0,0,31.22-25,40,40,0,1,1,16.23.27ZM232,160a24,24,0,1,0-24,24A24,24,0,0,0,232,160Z">
-                                </path>
-                            </svg>
+    <div class="row position-relative">
+        <div class="col-xl-3">
+            <div class="card custom-card rounded-md overflow-hidden p-2">
+                <div class="card-body bg-primary bg-opacity-10 rounded-2 ps-4 medical-cards">
+                    <div class="d-flex gap-2 align-items-center ps-2">
+                        <div class="align-self-start">
+                            <div class="fw-medium mb-2"> Current Bill</div>
+                            <h4 class="fw-semibold mb-0 lh-1">GHS {{ $customerData['totalArrearsP'] }}</h4>
                         </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3">
-        <div class="card custom-card rounded-md overflow-hidden p-2">
-            <div class="card-body bg-secondary bg-opacity-10 rounded-2 ps-4 medical-cards secondary">
-                <div class="d-flex gap-2 align-items-center ps-2">
-                    <div class="align-self-start">
-                        <div class="fw-medium mb-2">Arrears </div>
-                        <h4 class="fw-semibold mb-0 lh-1">GHS {{ $customerData['totalArrearsP'] }} </h4>
-                    </div>
-                    <div class="ms-auto text-end align-self-end">
-                        <div class="avatar avatar-md avatar-rounded bg-secondary shadow shadow-secondary mb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                class="svg-icon-med text-fixed-white" fill="currentColor" viewBox="0 0 256 256">
-                                <path d="M240,160a32,32,0,1,1-32-32A32,32,0,0,1,240,160Z" opacity="0.2"></path>
-                                <path
-                                    d="M220,160a12,12,0,1,1-12-12A12,12,0,0,1,220,160Zm-4.55,39.29A48.08,48.08,0,0,1,168,240H144a48.05,48.05,0,0,1-48-48V151.49A64,64,0,0,1,40,88V40a8,8,0,0,1,8-8H72a8,8,0,0,1,0,16H56V88a48,48,0,0,0,48.64,48c26.11-.34,47.36-22.25,47.36-48.83V48H136a8,8,0,0,1,0-16h24a8,8,0,0,1,8,8V87.17c0,32.84-24.53,60.29-56,64.31V192a32,32,0,0,0,32,32h24a32.06,32.06,0,0,0,31.22-25,40,40,0,1,1,16.23.27ZM232,160a24,24,0,1,0-24,24A24,24,0,0,0,232,160Z">
-                                </path>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3">
-        <div class="card custom-card rounded-md overflow-hidden p-2">
-            <div class="card-body bg-secondary bg-opacity-10 rounded-2 ps-4 medical-cards secondary">
-                <div class="d-flex gap-2 align-items-center ps-2">
-                    <div class="align-self-start">
-                        <div class="fw-medium mb-2">Current Time</div>
-                        <h4 class="fw-semibold mb-0 lh-1" id="currentTime">Loading...</h4>
-                    </div>
-                    <div class="ms-auto text-end align-self-end">
-                        <div class="avatar avatar-md avatar-rounded bg-secondary shadow shadow-secondary mb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                class="svg-icon-med text-fixed-white" fill="currentColor" viewBox="0 0 256 256">
-                                <path d="M240,160a32,32,0,1,1-32-32A32,32,0,0,1,240,160Z" opacity="0.2"></path>
-                                <path
-                                    d="M220,160a12,12,0,1,1-12-12A12,12,0,0,1,220,160Zm-4.55,39.29A48.08,48.08,0,0,1,168,240H144a48.05,48.05,0,0,1-48-48V151.49A64,64,0,0,1,40,88V40a8,8,0,0,1,8-8H72a8,8,0,0,1,0,16H56V88a48,48,0,0,0,48.64,48c26.11-.34,47.36-22.25,47.36-48.83V48H136a8,8,0,0,1,0-16h24a8,8,0,0,1,8,8V87.17c0,32.84-24.53,60.29-56,64.31V192a32,32,0,0,0,32,32h24a32.06,32.06,0,0,0,31.22-25,40,40,0,1,1,16.23.27ZM232,160a24,24,0,1,0-24,24A24,24,0,0,0,232,160Z">
-                                </path>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Start:: Row-3 -->
-<div class="row mb-4">
-    <div class="col-xl-6">
-        <div class="card custom-card overflow-hidden nft-main-card h-100">
-            <div class="card-body">
-                <div class="row gap-3 gap-sm-0 mx-0 py-3 rounded-3">
-                    <div class="col-xxl-12 col-xl-12 col-lg-12 col-12">
-                        <div class="p-2">
-                            @php
-                                $hour = date('H');
-                                if ($hour < 12) {
-                                    $greeting = 'Good Morning';
-                                } elseif ($hour < 18) {
-                                    $greeting = 'Good Afternoon';
-                                } else {
-                                    $greeting = 'Good Evening';
-                                }
-                            @endphp
-                            <h6 class="fw-semibold mb-3 op-9 text-fixed-white"> {{ $greeting }},
-                                {{ Auth::user()->name }} &#128075;</h6>
-                            {{-- <h4 class="fw-semibold mb-2  text-fixed-white">Paying your property rates helps
-                                            drive <span class="text-secondary">National development!</span> </h4> --}}
-                            <div class="message-container">
-                                <h4 class="fw-semibold mb-2 text-fixed-white">
-                                    <span id="message"></span>
-                                    <span class="cursor"></span>
-                                </h4>
+                        <div class="ms-auto text-end align-self-end">
+                            <div class="avatar avatar-md avatar-rounded bg-primary shadow shadow-primary mb-2">
+                                <!-- SVG Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                    class="svg-icon-med text-fixed-white" fill="currentColor" viewBox="0 0 256 256">
+                                    <path d="M136,108A52,52,0,1,1,84,56,52,52,0,0,1,136,108Z" opacity="0.2"></path>
+                                    <path
+                                        d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,98.7a8,8,0,0,1-11.07-2.33A79.83,79.83,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,55.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,206.7Z">
+                                    </path>
+                                </svg>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                            <style>
-                                .message-container {
-                                    font-family: Arial, sans-serif;
-                                    font-size: 1.5rem;
-                                    white-space: nowrap;
-                                    overflow: hidden;
-                                    display: inline-block;
-                                    border-right: 3px solid #ccc;
-                                    /* Blinking cursor effect */
-                                    width: fit-content;
-                                    animation: blinkCursor 0.6s step-end infinite;
-                                }
+        <!-- Card 2: Last Payment -->
+        <div class="col-xl-3">
+            <div class="card custom-card rounded-md overflow-hidden p-2">
+                <div class="card-body bg-secondary bg-opacity-10 rounded-2 ps-4 medical-cards secondary">
+                    <div class="d-flex gap-2 align-items-center ps-2">
+                        <div class="align-self-start">
+                            <div class="fw-medium mb-2">Last Payment</div>
+                            <h4 class="fw-semibold mb-0 lh-1">GHS {{ $customerData['yearlyPaymentsP'] }}</h4>
+                        </div>
+                        <div class="ms-auto text-end align-self-end">
+                            <div class="avatar avatar-md avatar-rounded bg-secondary shadow shadow-secondary mb-2">
+                                <!-- SVG Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                    class="svg-icon-med text-fixed-white" fill="currentColor" viewBox="0 0 256 256">
+                                    <path d="M240,160a32,32,0,1,1-32-32A32,32,0,0,1,240,160Z" opacity="0.2"></path>
+                                    <path
+                                        d="M220,160a12,12,0,1,1-12-12A12,12,0,0,1,220,160Zm-4.55,39.29A48.08,48.08,0,0,1,168,240H144a48.05,48.05,0,0,1-48-48V151.49A64,64,0,0,1,40,88V40a8,8,0,0,1,8-8H72a8,8,0,0,1,0,16H56V88a48,48,0,0,0,48.64,48c26.11-.34,47.36-22.25,47.36-48.83V48H136a8,8,0,0,1,0-16h24a8,8,0,0,1,8,8V87.17c0,32.84-24.53,60.29-56,64.31V192a32,32,0,0,0,32,32h24a32.06,32.06,0,0,0,31.22-25,40,40,0,1,1,16.23.27ZM232,160a24,24,0,1,0-24,24A24,24,0,0,0,232,160Z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                                @keyframes blinkCursor {
-                                    50% {
-                                        border-color: transparent;
+        <!-- Card 3: Arrears -->
+        <div class="col-xl-3">
+            <div class="card custom-card rounded-md overflow-hidden p-2">
+                <div class="card-body bg-danger bg-opacity-10 rounded-2 ps-4 medical-cards danger">
+                    <div class="d-flex gap-2 align-items-center ps-2">
+                        <div class="align-self-start">
+                            <div class="fw-medium mb-2"> Balance</div>
+                            <h4 class="fw-semibold mb-0 lh-1">GHS {{ $customerData['totalArrearsP'] }}</h4>
+                        </div>
+                        <div class="ms-auto text-end align-self-end">
+                            <div class="avatar avatar-md avatar-rounded bg-secondary shadow shadow-secondary mb-2">
+                                <!-- SVG Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                    class="svg-icon-med text-fixed-white" fill="currentColor" viewBox="0 0 256 256">
+                                    <path d="M240,160a32,32,0,1,1-32-32A32,32,0,0,1,240,160Z" opacity="0.2"></path>
+                                    <path
+                                        d="M220,160a12,12,0,1,1-12-12A12,12,0,0,1,220,160Zm-4.55,39.29A48.08,48.08,0,0,1,168,240H144a48.05,48.05,0,0,1-48-48V151.49A64,64,0,0,1,40,88V40a8,8,0,0,1,8-8H72a8,8,0,0,1,0,16H56V88a48,48,0,0,0,48.64,48c26.11-.34,47.36-22.25,47.36-48.83V48H136a8,8,0,0,1,0-16h24a8,8,0,0,1,8,8V87.17c0,32.84-24.53,60.29-56,64.31V192a32,32,0,0,0,32,32h24a32.06,32.06,0,0,0,31.22-25,40,40,0,1,1,16.23.27ZM232,160a24,24,0,1,0-24,24A24,24,0,0,0,232,160Z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4: All Properties -->
+        <div class="col-xl-3">
+            <div class="card custom-card rounded-md overflow-hidden p-2">
+                <div class="card-body bg-success bg-opacity-10 rounded-2 ps-4 medical-cards success">
+                    <div class="d-flex gap-2 align-items-center ps-2">
+                        <div class="align-self-start">
+                            <div class="fw-medium mb-2">All Properties</div>
+                            <h4 class="fw-semibold mb-0 lh-1">{{ $customerData['propertyCount'] }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xxl-8 col-xl-8 col-lg-8">
+            <div class="card custom-card overflow-hidden nft-main-card">
+                <div class="card-body">
+                    <div class="row gap-3 gap-sm-0 mx-0 py-3 rounded-3">
+                        <div class="col-xxl-8 col-xl-6 col-lg-8 col-12">
+                            <div class="p-2">
+                                @php
+                                    $hour = date('H');
+                                    if ($hour < 12) {
+                                        $greeting = 'Good Morning';
+                                    } elseif ($hour < 18) {
+                                        $greeting = 'Good Afternoon';
+                                    } else {
+                                        $greeting = 'Good Evening';
                                     }
-                                }
-                            </style>
-                            <p class="mb-4 text-fixed-white op-7 fs-12">Use these convenient channels to pay
-                                your property rates:</p>
-                            <ul class="mb-4 text-fixed-white op-7 fs-12">
-                                <li>Dial our USSD code to pay quickly and easily.</li>
-                                <li>Download the mobile app from the App Store or Google Play for seamless
-                                    payments.</li>
-                                <li>Visit our web portal at <a href="https://www.app.melchia.com"
-                                        class="text-secondary">www.app.melchia.com</a>.</li>
-                                <li>Ask your Agent for your Payment receipts Always </li>
-                                <li>Use the mobile app to track your payment history and receipts.</li>
-                                <li>Contact our support team for assistance with any payment issues.</li>
-                            </ul>
+                                @endphp
+                                <h6 class="fw-semibold mb-3 op-9 text-fixed-white"> {{ $greeting }}
+                                    {{ Auth::user()->name }} ! &#128075;</h6>
 
+                                <p class="mb-4 text-fixed-white op-7 fs-12">
+                                    Empowering you to manage your contributions with ease, transparency, and
+                                    confidence.
+                                    Together, we’re building stronger communities!
+                                </p>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <span class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                        data-bs-target="#addtask"> <i class="fe fe-plus"></i> Link Property </span>
 
-                            <div class="d-flex gap-2 flex-wrap">
-                                <button class="btn btn-success btn-wave waves-effect waves-light">
-                                    Pay Bills</button>
-                                <button class="btn btn-secondary btn-wave waves-effect waves-light">
-                                    Check Arrears</button>
+                                </div>
                             </div>
+                        </div>
+                        <div class="col-xxl-4 col-xl-6 col-lg-4 my-auto text-end">
+                            <div class="featured-nft text-end">
+                                <img src="{{ asset('assets/images/gh.png') }}" alt=""
+                                    class="img-fluid nft-cardimg rounded-3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div id="pie-chart-placeholder-2" style="width: 100%; height: 250px;">
+                        <!-- Placeholder for Pie Chart 2 -->
+                        <div class="d-flex justify-content-center align-items-center h-100">
+                            <span>
+                                <div id="donut-gradient"></div>
+                                {{-- <div id="donut-regional"></div> --}}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -171,26 +152,348 @@
         </div>
     </div>
 
-    <div class="col-xxl-6 col-xl-6 col-lg-6">
-        <div class="card custom-card h-100">
-            <div class="card-body">
-                <div id='calendar'></div>
+
+    <!-- Add "Add Me" Button Above the Table -->
+    <div class="card mb-4">
+        {{-- <div class="card-body d-flex justify-content-between align-items-center">
+            <!-- "Add Me" Button -->
+            <span class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addtask"> <i
+                    class="fe fe-plus"></i> Link Property </span>
+        </div> --}}
+
+        <div class="modal fade" id="addtask" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="mail-ComposeLabel">Link Property</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row gy-2">
+                            <form class="row g-3 needs-validation" method="POST"
+                                action="{{ route('properties.store') }}">
+                                @csrf
+
+                                <input type="hidden" name="property_use_url"
+                                    url="{{ route('rates.property-use') }}">
+                                <input type="hidden" name="division_url" url="{{ route('ajax.division') }}">
+                                <input type="hidden" name="block_url" url="{{ route('ajax.block') }}">
+
+                                <div class="col-sm-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="entity_type">Entity Type</label>
+                                        {{-- <select class="form-control @error('entity_type') is-invalid @enderror"
+                                            id="entity_type" name="entity_type">
+                                            <option disabled selected>Select Entity Type</option>
+                                            @foreach ($businessClassTypes as $businessClassType)
+                                                <option value="{{ $businessClassType->id }}">
+                                                    {{ $businessClassType->name }} -
+                                                    {{ $businessClassType->category }} - GHS
+                                                    {{ $businessClassType->rate }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+
+                                        @error('entity_type')
+                                            <span class="invalid-feedback" role="alert">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror --}}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="digital_address">Digital Address</label>
+                                        <input type="text"
+                                            class="form-control @error('digital_address') is-invalid @enderror"
+                                            id="digital_address" name="digital_address"
+                                            placeholder="Digital address">
+
+                                        @error('digital_address')
+                                            <span class="invalid-feedback" role="alert">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="location">Location</label>
+                                        <input type="text"
+                                            class="form-control @error('location') is-invalid @enderror"
+                                            id="location" name="location" placeholder="Location">
+
+                                        @error('location')
+                                            <span class="invalid-feedback" role="alert">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="street_name">Street Name</label>
+                                        <input type="text" class="form-control" id="street_name"
+                                            name="street_name" placeholder="Street name">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="rated">Rated</label>
+                                        <select class="form-control" id="rated" name="rated">
+                                            <option disabled selected>Select If Rated</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="validated">Validated</label>
+                                        <select class="form-control" id="validated" name="validated">
+                                            <option disabled selected>Select If Validated</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-3">
+                                    <label for="entity_type">Associate Owner</label>
+                                    {{-- <select class="form-control" id="customer_name" name="customer_name">
+                                        <option disabled selected>Select Associate Owner</option>
+                                        @foreach ($customers as $customer)
+                                            <option value="{{ $customer->id }}">
+                                                {{ $customer->first_name }} - {{ $customer->nia_number }} -
+                                                {{ $customer->account_number }}
+                                            </option>
+                                        @endforeach
+                                    </select> --}}
+                                </div>
+
+                                <div class="col-sm-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="ratable_value">Ratable Value</label>
+                                        <input type="text" class="form-control" id="ratable_value"
+                                            name="ratable_value" placeholder="Ratable value">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="longitude">Longitude</label>
+                                        <input type="text" class="form-control" id="longitude" name="longitude"
+                                            placeholder="Longitude">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="latitude">Latitude</label>
+                                        <input type="text" class="form-control" id="latitude" name="latitude"
+                                            placeholder="Latitude">
+                                    </div>
+                                </div>
+
+                                <!-- Add Assembly field here -->
+                                <div class="col-sm-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="assembly">Select An Assembly Where Property is
+                                            Located</label>
+                                        {{-- <select class="form-control @error('assembly_code') is-invalid @enderror"
+                                            id="assembly" name="assembly_code">
+                                            <option disabled selected>Select Assembly</option>
+                                            @foreach ($districtAssemblies as $assembly)
+                                                <option value="{{ $assembly->assembly_code }}">{{ $assembly->name }}
+                                                    Assembly
+                                                </option>
+                                            @endforeach
+                                        </select>
+
+                                        @error('assembly_code')
+                                            <span class="invalid-feedback" role="alert">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror --}}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-3">
+                                    <label for="division_id" class="form-label">Property Division</label>
+                                    {{-- <select class="form-control @error('division_id') is-invalid @enderror"
+                                        id="division_id" name="division_id" required>
+                                        <option disabled selected>Select Division</option>
+                                    </select>
+
+                                    @error('division_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror --}}
+                                </div>
+
+                                <div class="col-sm-6 mb-3">
+                                    <label for="block_id" class="form-label">Property Block</label>
+                                    {{-- <select class="form-control @error('block_id') is-invalid @enderror"
+                                        id="block_id" name="block_id" required>
+                                        <option disabled selected>Select Block</option>
+                                    </select>
+
+                                    @error('block_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror --}}
+                                </div>
+
+                                <div class="col-sm-6 mb-3">
+                                    <label for="zone_id" class="form-label">Property Zone</label>
+                                    {{-- <select class="form-control @error('zone_id') is-invalid @enderror" id="zone_id"
+                                        name="zone_id" required>
+                                        <option disabled selected>Select Zone</option>
+                                        @foreach ($zones as $zone)
+                                            <option value="{{ $zone->id }}">{{ $zone->name }}</option>
+                                        @endforeach
+                                    </select> --}}
+
+                                    @error('zone_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-sm-6 mb-3">
+                                    <label for="property_use_id" class="form-label">Property use</label>
+                                    {{-- <select class="form-control @error('property_use_id') is-invalid @enderror"
+                                        id="property_use_id" name="property_use_id" required>
+                                        <option disabled selected>Select Property Use</option>
+                                    </select> --}}
+
+                                    @error('property_use_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-12">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn m-0 me-2 btn-light" data-bs-dismiss="modal">Cancel</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">My Recent Bills</div>
+        </div>
+        <div class="card-body px-0">
+            <div class="table-responsive active-projects user-tbl dt-filter">
+                <table id="file-export" class="table table-bordered text-nowrap w-100">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Bill No</th>
+                            <th>Name</th>
+                            <th>Arrears</th>
+                            <th>Current Amount</th>
+                            <th>Amount Due</th>
+                            <th>Created By</th>
+                            <th>Date Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($customerData['bills'] as $index => $bill)
+                            @php
+                                $billType = '';
+
+                                if ($bill->property_id !== null) {
+                                    $firstname = $bill->property->customer->first_name ?? '';
+                                    $lastname = $bill->property->customer->last_name ?? '';
+                                    $billType = 'Property Bill';
+                                } else {
+                                    $firstname = $bill->business->customer->first_name ?? '';
+                                    $lastname = $bill->business->customer->last_name ?? '';
+                                    $billType = 'Business Bill';
+                                }
+                                $name = $firstname . ' ' . $lastname;
+                            @endphp
+
+                            <tr class="btn-reveal-trigger">
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $bill->bills_id }}</td>
+                                <td>{{ $name ?? '' }}</td>
+                                <td>{{ number_format($bill->arrears, 2) }}</td>
+                                <td>{{ number_format($bill->amount, 2) }}</td>
+                                <td>{{ number_format($bill->amount + $bill->arrears, 2) }}</td>
+                                <td>{{ $bill->createdBy->name ?? 'N/A' }}</td>
+                                <td>{{ $bill->created_at }}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <div class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
+                                                    stroke="#737B8B" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round"></path>
+                                                <path
+                                                    d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
+                                                    stroke="#737B8B" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round"></path>
+                                                <path
+                                                    d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
+                                                    stroke="#737B8B" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <div class="py-2">
+                                                <a class="dropdown-item"
+                                                    href="{{ route('citizens.viewBill', $bill) }}">View Bill</a>
+                                                <a class="dropdown-item"
+                                                    href="{{ route('payments.customerCreate', $bill) }}">Make
+                                                    Payment</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="2"></th>
+                            <th>Total (GHS)</th>
+                            <th>{{ $customerData['totalArrears'] }}</th>
+                            <th>{{ $customerData['totalAmount'] }}</th>
+                            <th>{{ $customerData['totalDue'] }}</th>
+                            <th colspan="3"></th>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
     </div>
 </div>
-
-
-<div class="col-xl-12">
-    <div class="card custom-card rounded-md overflow-hidden p-2">
-        <div class="card-body bg-secondary bg-opacity-10 rounded-2 ps-4 medical-cards secondary">
-            <div class="chart-container" style="position: relative; height:400px; width:100%;">
-                <canvas id="summaryChart"></canvas>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <script type="text/javascript">
     var Tawk_API = Tawk_API || {},
@@ -222,7 +525,6 @@
     setInterval(updateTime, 1000);
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Data from the controller
@@ -310,4 +612,105 @@
             }
         });
     });
+</script>
+
+<script>
+    const messages = [
+        "Did You Know Paying your property rates helps drive National Development!",
+        "Your contributions build better communities and infrastructure.",
+        "Together, we create opportunities through your property rate payments.",
+        "Support local growth by fulfilling your property rate obligations.",
+        "Be a part of progress—your property rates make a difference!"
+    ];
+
+    let currentMessageIndex = 0;
+    let currentCharIndex = 0;
+    const messageElement = document.getElementById('message');
+
+    function typeMessage() {
+        if (currentCharIndex < messages[currentMessageIndex].length) {
+            messageElement.textContent += messages[currentMessageIndex].charAt(currentCharIndex);
+            currentCharIndex++;
+            setTimeout(typeMessage, 100); // Adjust typing speed here
+        } else {
+            setTimeout(eraseMessage, 2000); // Pause before erasing
+        }
+    }
+
+    function eraseMessage() {
+        if (currentCharIndex > 0) {
+            messageElement.textContent = messages[currentMessageIndex].substring(0, currentCharIndex - 1);
+            currentCharIndex--;
+            setTimeout(eraseMessage, 50); // Adjust erasing speed here
+        } else {
+            currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+            setTimeout(typeMessage, 1000); // Pause before typing the next message
+        }
+    }
+
+    // Start typing the first message
+    typeMessage();
+</script>
+
+<script>
+    // Regional doughnut overview
+    var totalBills = @json($customerData['totalBills']).map(item => parseFloat(item));
+    var totalPayments = @json($customerData['totalPayments']).map(item => parseFloat(item));
+    var totalArrears = @json($customerData['totalArrears2']).map(item => parseFloat(item));
+
+    alert(totalBills);
+
+    // Calculate sums
+    var totalBillsSum = totalBills.reduce((acc, val) => acc + val, 0);
+    var totalPaymentsSum = totalPayments.reduce((acc, val) => acc + val, 0);
+    var totalArrearsSum = totalArrears.reduce((acc, val) => acc + val, 0);
+
+    // Options for ApexCharts Donut
+    var options = {
+        series: [
+            totalBillsSum,
+            totalPaymentsSum,
+            totalArrearsSum
+        ],
+        chart: {
+            height: 300,
+            type: "donut",
+        },
+        plotOptions: {
+            pie: {
+                startAngle: -90,
+                endAngle: 270,
+            },
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function(value, opts) {
+                return `${opts.w.globals.labels[opts.seriesIndex]}: ${value.toFixed(2)} %`;
+            },
+        },
+        fill: {
+            type: "gradient",
+        },
+        colors: ["#8b7eff", "#35bdaa", "#ffb748"],
+        title: {
+            text: "Regional Revenue Distribution",
+            align: "left",
+            style: {
+                fontSize: "13px",
+                fontWeight: "bold",
+                color: "#8c9097",
+            },
+        },
+        legend: {
+            position: "bottom",
+            formatter: function(seriesName, opts) {
+                return `${seriesName}: ${opts.w.globals.series[opts.seriesIndex].toFixed(2)} %`;
+            },
+        },
+        labels: ["Total Bills", "Total Payments", "Total Arrears"],
+    };
+
+    // Render the Donut Chart
+    var chart = new ApexCharts(document.querySelector("#donut-gradient"), options);
+    chart.render();
 </script>
