@@ -1034,7 +1034,7 @@
     <script src="{{ asset('assets/assetsfront/js/vendor/waw.js') }}"></script>
     <script src="{{ asset('assets/assetsfront/js/plugins/contact.form.js') }}"></script>
     <!-- main Js -->
-    <script src="{{ asset('assets/assetsfront/js/main.js') }}"></script>
+    <script src="{{ asset('assets/assetsfront/js/main.js?t=1234') }}"></script>
     <!-- scripts end form hear -->
 </body>
 
