@@ -1,5 +1,18 @@
-<div class="row">
+@if (session()->has('status'))
+    <div class="alert alert-success alert-dismissible fade show">
+        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+            stroke-linecap="round" stroke-linejoin="round" class="me-2">
+            <polyline points="9 11 12 14 22 4"></polyline>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+        </svg>
+        <strong>{{ session('status') }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i
+                    class="fa-solid fa-xmark"></i></span>
+        </button>
+    </div>
+@endif
 
+<div class="row">
     <div class="row position-relative">
         <div class="col-xl-3">
             <div class="card custom-card rounded-md overflow-hidden p-2">
@@ -161,15 +174,17 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h6 class="modal-title" id="mail-ComposeLabel">Link Your Property</h6>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row gy-2">
                             <form class="row g-3 needs-validation" method="POST"
-                                action="{{ route('properties.store') }}">
+                                action="{{ route('properties.ratePayer') }}">
                                 @csrf
 
-                                <input type="hidden" name="property_use_url" url="{{ route('rates.property-use') }}">
+                                <input type="hidden" name="property_use_url"
+                                    url="{{ route('rates.property-use') }}">
                                 <input type="hidden" name="division_url" url="{{ route('ajax.division') }}">
                                 <input type="hidden" name="block_url" url="{{ route('ajax.block') }}">
 

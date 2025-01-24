@@ -184,6 +184,41 @@ class PropertyController extends Controller
         return redirect()->route('properties.index')->with('status', 'Property created successfully!');
     }
 
+    public function ratePayerStore(CreatePropertyRequest $request)
+    {
+        $data = $request->validated();
+        $data['created_by'] = $request->user()->id;
+        $data['property_number'] = $this->generateUniquePropertyNumber($data['assembly_code'], $data['division_id'], $data['block_id']);
+
+        $property = Property::create($data);
+
+        if (!empty($data['customer_name'])) {
+            dispatch(new SendPropertyOwnerSMS($property->load('customer')));
+        }
+
+        $serviceData = [
+            'user_id' => $request->user()->id,
+            'service_used' => 'Property Registration',
+            'usage_date' => now(),
+            'service_channel' => 'Web Portal',
+            'status' => 'Completed'
+        ];
+
+        $auditTrailData = [
+            'user_id' => $request->user()->id,
+            'action_performed' => 'Property Registration',
+            'action_date' => now(),
+            'ip_address' => $request->ip(),
+            'device_used' => request()->userAgent(),
+            'remarks' => 'Success'
+        ];
+
+        ServiceRequest::create($serviceData);
+        AuditTrail::create($auditTrailData);
+
+        return redirect()->back()->with('status', 'Property linked successfully!');
+    }
+
     public function getDetails(Property $property)
     {
         return response()->json($property);

@@ -83,6 +83,7 @@ Route::group(['prefix' => 'property', 'middleware' => 'auth:sanctum'], function 
     Route::get('/', [PropertyController::class, 'index'])->name('properties.index');
     Route::get('/create', [PropertyController::class, 'create'])->name('properties.create');
     Route::post('/', [PropertyController::class, 'store'])->name('properties.store');
+    Route::post('/ratepayer', [PropertyController::class, 'ratePayerStore'])->name('properties.ratePayer');
     Route::get('/{property}', [PropertyController::class, 'show'])->name('properties.show');
     Route::get('/{property}/edit', [PropertyController::class, 'edit'])->name('properties.edit');
     Route::post('/{property}', [PropertyController::class, 'update'])->name('properties.update');
