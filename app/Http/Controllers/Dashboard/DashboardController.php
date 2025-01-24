@@ -1163,7 +1163,7 @@ class DashboardController extends Controller
                 'totalArrearsB' => isset($totalArrearsB) ? number_format($totalArrearsB, 2) : 0,
                 'totalExpectedPaymentsB' => isset($totalExpectedPaymentsB) ? number_format($totalExpectedPaymentsB, 2) : 0,
                 'yearlyPaymentsB' => isset($yearlyPaymentsB) ? number_format($yearlyPaymentsB->total, 2) : 0,
-                'propertyCount' => isset($properties) ? $properties->count() : 0,
+                'propertyCount' => isset($properties) ? count($properties) : 0,
                 'totalPayments' => isset($totalPayments) ? $totalPayments : 0,
                 'totalBills' => isset($totalBills) ? $totalBills : 0,
                 'totalArrears2' => isset($totalArrears2) ? $totalArrears2 : 0,
