@@ -1,125 +1,101 @@
 <!DOCTYPE html>
-<html lang="en" data-theme-mode="light">
+<html lang="en" dir="ltr" data-nav-layout="vertical" data-vertical-style="overlay" data-theme-mode="light"
+    data-header-styles="light" data-menu-styles="light" data-toggled="close">
 
 <head>
+
+    <!-- Meta Data -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Password Reset Account - IPTS</title>
+    <title>Reset Password - IPTS </title>
+    <meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template">
+    <meta name="Author" content="Spruko Technologies Private Limited">
+    <meta name="keywords"
+        content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
+
+    <!-- Favicon -->
     <link rel="icon" href="{{ asset('assets/images/brand-logos/favicon.ico') }}" type="image/x-icon">
 
-    <!-- Bootstrap CSS -->
-    <link href="{{ asset('assets/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Main Theme Js -->
+    <script src="{{ asset('assets/js/authentication-main.js') }}"></script>
 
-    <!-- Custom Styles -->
-    <style>
-        body {
-            background: linear-gradient(to bottom, #0052D4, #65C7F7, #9CECFB);
-            font-family: 'Poppins', sans-serif;
-            color: #fff;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0;
-        }
+    <!-- Bootstrap Css -->
+    <link id="style" href="{{ asset('assets/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
-        .container {
-            max-width: 100%;
-        }
+    <!-- Style Css -->
+    <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
 
-        .row {
-            height: 100%;
-        }
-
-        .card-left {
-            background: transparent;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            margin-right: 20px;
-            text-align: center;
-        }
-
-        .card-left img {
-            max-width: 80%;
-            height: auto;
-        }
-
-        .card-left h3 {
-            color: #fff;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-
-        .form-container {
-            background: #ffffff;
-            border-radius: 10px;
-            padding: 30px;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            font-family: 'Times New Roman', serif;
-            font-size: 12px;
-        }
-
-        .form-title {
-            font-weight: bold;
-            color: #0052D4;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .btn-custom {
-            background: #0052D4;
-            color: #fff;
-            border-radius: 50px;
-            padding: 10px 30px;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            width: auto;
-        }
-
-        .btn-custom:hover {
-            background: #003a9f;
-        }
-
-        .auth-footer {
-            text-align: center;
-            font-size: 12px;
-            margin-top: 20px;
-        }
-
-        .auth-footer a {
-            color: #0052D4;
-            text-decoration: underline;
-            margin: 0 5px;
-        }
-    </style>
+    <!-- Icons Css -->
+    <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-5 card-left">
-                <img src="{{ asset('assets/images/arms.png') }}" alt="Arms">
-                <h3>Integrated Property Tax System (IPTS)</h3>
-            </div>
-            <div class="col-md-6 form-container">
-                <h2 class="form-title"> Reset Your IPTS Account Password </h2>
+    <style>
+        .btn-custom {
+            background-color: #f37429;
+            border-color: #f37429;
+        }
 
-                <div class="container">
-                    <div class="row flex-wrap">
-                        <div class="col-lg-5 card-left">
-                            <img src="{{ asset('assets/images/arms.png') }}" alt="Arms">
-                            <h3>Integrated Property Tax System (IPTS)</h3>
-                        </div>
-                        <div class="col-lg-6 form-container">
-                            <h2 class="form-title">Change Your Password</h2>
+        .btn-custom:hover {
+            background-color: #e2631d;
+            border-color: #e2631d;
+        }
+
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            /* To avoid scrolling */
+        }
+
+        .authentication-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* background-image: url('{{ asset('assetsfront/images/banner/ipts1.jpg') }}'),
+                url('{{ asset('assetsfront/images/banner/ipts4.jpg') }}'),
+                url('{{ asset('assetsfront/images/banner/ipts5.jpg') }}'),
+                url('{{ asset('assetsfront/images/banner/ipts1.jpg') }}'); */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            animation: slideBackground 20s linear infinite;
+            opacity: 1;
+        }
+
+        @keyframes slideBackground {
+            0% {
+                background-image: url("{{ asset('assets/assetsfront/images/banner/ipts4.jpg') }}");
+            }
+
+            25% {
+                background-image: url("{{ asset('assets/assetsfront/images/banner/ipts5.jpg') }}");
+            }
+
+            50% {
+                background-image: url("{{ asset('assets/assetsfront/images/banner/ipts3.jpg') }}");
+            }
+
+            75% {
+                background-image: url("{{ asset('assets/assetsfront/images/banner/ipts1.jpg') }}");
+            }
+
+            100% {
+                background-image: url("{{ asset('assets/assetsfront/images/banner/ipts3.jpg') }}");
+            }
+        }
+    </style>
+
+    <div class="authentication-background">
+        <div class="container-lg">
+            <div class="row justify-content-center authentication authentication-basic align-items-center h-100">
+                <div class="col-xxl-4 col-lg-6 col-md-8 col-12"> <!-- Adjusted width classes -->
+                    <div class="card custom-card my-4 border">
+                        <div class="card-body">
 
                             @if (session()->has('status'))
                                 <div class="alert alert-success alert-dismissible fade show">
@@ -129,42 +105,72 @@
                                 </div>
                             @endif
 
-                            <form action="{{ route('auth.changePassword') }}" method="POST">
+                            <!-- Registration Form -->
+                            <div class="mb-4 text-center">
+                                <h5 class="mb-3">Reset Your IPTS Account Password</h5>
+                                <p class="text-muted">Please fill in the details to reset your password.</p>
+                            </div>
+                            <form action="{{ route('auth.changePassword') }}" method="post">
                                 @csrf
-                                <div class="mb-4">
-                                    <label for="password" class="form-label">New Password</label>
+
+                                <div class="form-group first mb-4">
+                                    <label for="password" class="form-label"><b>New Password</b></label>
                                     <input type="password" class="form-control @error('password') is-invalid @enderror"
                                         id="password" name="password" placeholder="Enter your new password">
+
                                     @error('password')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
-                                <div class="mb-4">
-                                    <label for="password_confirmation" class="form-label">Confirm Password</label>
+                                <div class="form-group last mb-4">
+                                    <label for="password_confirmation" class="form-label"><b>Confirm
+                                            Password</b></label>
                                     <input type="password"
                                         class="form-control @error('password_confirmation') is-invalid @enderror"
                                         id="password_confirmation" name="password_confirmation"
                                         placeholder="Confirm your new password">
+
                                     @error('password_confirmation')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-custom w-100">Change Password</button>
-                                </div>
+                                <input type="submit" value="Change Password"
+                                    class="text-white btn btn-block btn-custom" style="width: 100%;">
                             </form>
-                            <div class="auth-footer">
-                                <p>Already have an account? <a href="{{ route('auth.index') }}">Sign In</a> or <a
-                                        href="{{ route('auth.register') }}">Create Account </a></p>
+
+                            <div class="mt-3 text-center">
+                                <p>Already have an account? <a href="{{ route('auth.index') }}"
+                                        style="color: #f37429;">Sign In</a> or <a href="{{ route('auth.register') }}"
+                                        style="color: #f37429;">Create Account </a></p>
                             </div>
                         </div>
+
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
-                <!-- Bootstrap JS -->
-                <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Show Password JS -->
+    <script src="../assets/js/show-password.js"></script>
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/663e4f9b9a809f19fb2fa32d/1hthme206';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
 </body>
 
 </html>

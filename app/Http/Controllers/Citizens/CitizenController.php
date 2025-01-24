@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Activate\ActivateCitizenRequest;
 use App\Http\Requests\Activate\ResendOTPRequest;
 use App\Http\Requests\Customer\CreateCustomerRequest;
+use App\Http\Requests\Customer\CreateCustomerRequestFront;
 use App\Http\Requests\Customer\UpdateCustomerRequest;
 use App\Jobs\Registration\SendRegistrationReminder;
 use App\Jobs\OTP\SendOTPSMS;
@@ -94,23 +95,6 @@ class CitizenController extends Controller
         }
 
         // Prepare heat map data
-        // $heatMapData = [];
-        // foreach ($genderCustomerStatus as $customerType => $genderGroups) {
-        //     if (!is_iterable($genderGroups)) continue;
-
-        //     foreach ($genderGroups as $gender => $statusGroups) {
-        //         if (!is_iterable($statusGroups)) continue;
-
-        //         foreach ($statusGroups as $status => $count) {
-        //             $heatMapData[] = [
-        //                 'customer_type' => $customerType,
-        //                 'gender' => $gender,
-        //                 'status' => $status,
-        //                 'count' => $count,
-        //             ];
-        //         }
-        //     }
-        // }
 
         $heatMapData = [];
         foreach ($genderCustomerStatus as $customerType => $genderGroups) {
@@ -171,7 +155,7 @@ class CitizenController extends Controller
 
             // Generate unique account number
             do {
-                $accountNumber = 'ERMS' . $randomNumbers;
+                $accountNumber = 'IPTS' . $randomNumbers;
             } while (Citizen::where('account_number', $accountNumber)->exists());
 
             $data['account_number'] = $accountNumber;
@@ -188,6 +172,7 @@ class CitizenController extends Controller
             ];
 
             $user = User::where('phone', $data['telephone_number'])->first();
+
             if (!empty($user)) {
                 return redirect()->route('citizens.create')->with('error', 'Phone number for user account already exist!');
             }
@@ -231,7 +216,7 @@ class CitizenController extends Controller
         }
     }
 
-    public function frontstore(CreateCustomerRequest $request)
+    public function frontstore(CreateCustomerRequestFront $request)
     {
         try {
             $data = $request->validated();
@@ -243,16 +228,22 @@ class CitizenController extends Controller
 
             // Generate unique account number
             do {
-                $accountNumber = 'ERMS' . $randomNumbers;
+                $accountNumber = 'IPTS' . $randomNumbers;
             } while (Citizen::where('account_number', $accountNumber)->exists());
 
             $data['account_number'] = $accountNumber;
             $data['created_by'] = $request->user()->id ?? 'customer';
             $data['status'] = 'InActive';
 
+            if ($request->input('registration_type') === 'organization') {
+                $data['first_name'] = $data['org_first_name'];
+                $data['last_name'] = $data['org_last_name'];
+                $data['telephone_number'] = $data['org_telephone_number'];
+            }
+
             $userLoginData = [
                 'name' => $data['first_name'] . ' ' . $data['last_name'],
-                'email' => $data['account_number'],
+                'email' => isset($data['email']) ? $data['email'] : $data['account_number'],
                 'phone' => $data['telephone_number'],
                 'password' => Hash::make(env('DEFAULT_PASSWORD')),
                 'access_level' => 'customer',
@@ -260,8 +251,9 @@ class CitizenController extends Controller
             ];
 
             $user = User::where('phone', $data['telephone_number'])->first();
+
             if (!empty($user)) {
-                return redirect()->route('citizens.create')->with('error', 'Phone number for user account already exist!');
+                return redirect()->route('auth.register')->with('error', 'Phone number for user account already exist!');
             }
 
             $userData = User::create($userLoginData);

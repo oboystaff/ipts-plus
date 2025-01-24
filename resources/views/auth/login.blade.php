@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> IPTS </title>
+    <title>Login - IPTS </title>
     <meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template">
     <meta name="Author" content="Spruko Technologies Private Limited">
     <meta name="keywords"
@@ -107,7 +107,7 @@
                                 @csrf
 
                                 <div class="form-group first">
-                                    <label for="email"><b>Phone number</b></label>
+                                    <label for="email" class="form-label"><b>Phone number</b></label>
                                     <input type="text" class="form-control @error('username') is-invalid @enderror"
                                         placeholder="Phone number" id="username" name="username">
 
@@ -120,7 +120,7 @@
 
                                 <div class="form-group last mb-3">
                                     </br>
-                                    <label for="password"><b>Password</b></label>
+                                    <label for="password" class="form-label"><b>Password</b></label>
                                     <input type="password" class="form-control @error('password') is-invalid @enderror"
                                         placeholder="Password" id="password" name="password">
                                     </br>

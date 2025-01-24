@@ -23,7 +23,15 @@ class Citizen extends Model
         'status',
         'Ghana_card_number',
         'created_by',
-        'user_id'
+        'user_id',
+        'id_type',
+        'id_number',
+        'business_name',
+        'email',
+        'date_of_commencement',
+        'security_question',
+        'security_answer',
+        'tin_number'
     ];
 
     public function customerType()
