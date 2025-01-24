@@ -70,7 +70,8 @@ variables
 /*Lobster*/
 :root {
   --body-bg-rgb:	245, 246, 250;
-  --primary-rgb:	139, 126, 255;
+  /* --primary-rgb:	139, 126, 255; */
+  --primary-rgb: 243, 116, 41;
   --secondary-rgb:	255, 183, 72;
   --warning-rgb:	255, 192, 65;
   --info-rgb:	46, 142, 247;
