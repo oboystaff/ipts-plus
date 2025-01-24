@@ -982,68 +982,70 @@
         });
     </script>
 
-    <script>
-        // Customer doughnut
-        var totalBills = @json($customerData['totalBills']);
-        var totalPayments = @json($customerData['totalPayments']);
-        var totalArrears = @json($customerData['totalArrears2']);
+    @if (\Auth::user()->access_level == 'customer')
+        <script>
+            // Customer doughnut
+            var totalBills = @json($customerData['totalBills']);
+            var totalPayments = @json($customerData['totalPayments']);
+            var totalArrears = @json($customerData['totalArrears2']);
 
-        totalBills = [parseFloat(totalBills) || 0];
-        totalPayments = [parseFloat(totalPayments) || 0];
-        totalArrears = [parseFloat(totalArrears) || 0];
+            totalBills = [parseFloat(totalBills) || 0];
+            totalPayments = [parseFloat(totalPayments) || 0];
+            totalArrears = [parseFloat(totalArrears) || 0];
 
-        // Calculate sums
-        var totalBillsSum = totalBills.reduce((acc, val) => acc + val, 0);
-        var totalPaymentsSum = totalPayments.reduce((acc, val) => acc + val, 0);
-        var totalArrearsSum = totalArrears.reduce((acc, val) => acc + val, 0);
+            // Calculate sums
+            var totalBillsSum = totalBills.reduce((acc, val) => acc + val, 0);
+            var totalPaymentsSum = totalPayments.reduce((acc, val) => acc + val, 0);
+            var totalArrearsSum = totalArrears.reduce((acc, val) => acc + val, 0);
 
-        // Options for ApexCharts Donut
-        var options = {
-            series: [
-                totalBillsSum,
-                totalPaymentsSum,
-                totalArrearsSum
-            ],
-            chart: {
-                height: 300,
-                type: "donut",
-            },
-            plotOptions: {
-                pie: {
-                    startAngle: -90,
-                    endAngle: 270,
+            // Options for ApexCharts Donut
+            var options = {
+                series: [
+                    totalBillsSum,
+                    totalPaymentsSum,
+                    totalArrearsSum
+                ],
+                chart: {
+                    height: 300,
+                    type: "donut",
                 },
-            },
-            dataLabels: {
-                enabled: true,
-                formatter: function(value, opts) {
-                    return `${opts.w.globals.labels[opts.seriesIndex]}: ${value.toFixed(2)} %`;
+                plotOptions: {
+                    pie: {
+                        startAngle: -90,
+                        endAngle: 270,
+                    },
                 },
-            },
-            fill: {
-                type: "gradient",
-            },
-            colors: ["#8b7eff", "#35bdaa", "#ffb748"],
-            title: {
-                text: "Rate payer Financial Overview",
-                align: "left",
-                style: {
-                    fontSize: "13px",
-                    fontWeight: "bold",
-                    color: "#8c9097",
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(value, opts) {
+                        return `${opts.w.globals.labels[opts.seriesIndex]}: ${value.toFixed(2)} %`;
+                    },
                 },
-            },
-            legend: {
-                position: "bottom",
-                formatter: function(seriesName, opts) {
-                    return `${seriesName}: ${opts.w.globals.series[opts.seriesIndex].toFixed(2)} %`;
+                fill: {
+                    type: "gradient",
                 },
-            },
-            labels: ["Total Bills", "Total Payments", "Total Arrears"],
-        };
+                colors: ["#8b7eff", "#35bdaa", "#ffb748"],
+                title: {
+                    text: "Rate payer Financial Overview",
+                    align: "left",
+                    style: {
+                        fontSize: "13px",
+                        fontWeight: "bold",
+                        color: "#8c9097",
+                    },
+                },
+                legend: {
+                    position: "bottom",
+                    formatter: function(seriesName, opts) {
+                        return `${seriesName}: ${opts.w.globals.series[opts.seriesIndex].toFixed(2)} %`;
+                    },
+                },
+                labels: ["Total Bills", "Total Payments", "Total Arrears"],
+            };
 
-        // Render the Donut Chart
-        var chart = new ApexCharts(document.querySelector("#donut-gradient"), options);
-        chart.render();
-    </script>
+            // Render the Donut Chart
+            var chart = new ApexCharts(document.querySelector("#donut-gradient"), options);
+            chart.render();
+        </script>
+    @endif
 @endsection
