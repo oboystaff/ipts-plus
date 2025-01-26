@@ -99,6 +99,9 @@ class PermissionSeeder extends Seeder
             ['name' => 'task-assignments.view'],
             ['name' => 'task-assignments.create'],
             ['name' => 'task-assignments.update'],
+
+            ['name' => 'analytics.view'],
+            ['name' => 'nationwide.view']
         ];
 
         $time_stamp = Carbon::now()->toDateTimeString();

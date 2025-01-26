@@ -775,7 +775,7 @@
                         @endcanany
                         <!-- End::slide -->
 
-                        @canany(['reports.view'])
+                        @canany(['analytics.view'])
                             <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
@@ -789,7 +789,7 @@
                                     <i class="ri-arrow-right-s-line side-menu__angle"></i>
                                 </a>
                                 <ul class="slide-menu child1">
-                                    @can('reports.view')
+                                    @can('analytics.view')
                                         <li class="slide">
                                             <a href="{{ route('dashboard.propertyAnalytic') }}"
                                                 class="side-menu__item">Property</a>
@@ -804,7 +804,7 @@
                             </li>
                         @endcanany
 
-                        @canany(['reports.view'])
+                        @canany(['nationwide.view'])
                             <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
@@ -818,7 +818,7 @@
                                     <i class="ri-arrow-right-s-line side-menu__angle"></i>
                                 </a>
                                 <ul class="slide-menu child1">
-                                    @can('reports.view')
+                                    @can('nationwide.view')
                                         <li class="slide">
                                             <a href="{{ route('dashboard.overview') }}" class="side-menu__item">Overview</a>
                                         </li>

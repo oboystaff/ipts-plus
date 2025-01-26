@@ -840,6 +840,56 @@
                                 <hr />
                             </div>
 
+                            <div class="check_group">
+                                <div class="row">
+                                    <div class="col-md-3 text-center">
+                                        <h5>@lang('role.analytics')</h5>
+                                    </div>
+
+                                    <div class="col-md-2 text-center">
+                                        <label class="d-block" for="chk-ani">
+                                            <input class="form-check-input check_all" id="chk-ani " type="checkbox">
+                                            @lang('role.select_all')
+                                        </label>
+
+                                    </div>
+                                    <div class="col-md-7 col-md-offset-1">
+                                        <label for="chk-ani">
+                                            <input class="form-check-input" name="permissions[]" id="chk-ani"
+                                                value="@lang('analytics.view')"
+                                                @if (in_array('analytics.view', $role_permissions)) checked @endif type="checkbox">
+                                            @lang('role.analytics.view')
+                                        </label>
+                                    </div>
+                                </div>
+                                <hr />
+                            </div>
+
+                            <div class="check_group">
+                                <div class="row">
+                                    <div class="col-md-3 text-center">
+                                        <h5>@lang('role.nationwide')</h5>
+                                    </div>
+
+                                    <div class="col-md-2 text-center">
+                                        <label class="d-block" for="chk-ani">
+                                            <input class="form-check-input check_all" id="chk-ani " type="checkbox">
+                                            @lang('role.select_all')
+                                        </label>
+
+                                    </div>
+                                    <div class="col-md-7 col-md-offset-1">
+                                        <label for="chk-ani">
+                                            <input class="form-check-input" name="permissions[]" id="chk-ani"
+                                                value="@lang('nationwide.view')"
+                                                @if (in_array('nationwide.view', $role_permissions)) checked @endif type="checkbox">
+                                            @lang('role.nationwide.view')
+                                        </label>
+                                    </div>
+                                </div>
+                                <hr />
+                            </div>
+
 
                             <div class="col-12">
                                 <button class="btn btn-primary" type="submit">Update Permission</button>

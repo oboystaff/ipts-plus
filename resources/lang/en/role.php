@@ -39,6 +39,8 @@ return [
     'cash-retirements' => 'Cash Retirements',
     'reports' => 'Reports',
     'dashboards' => 'Dashboard',
+    'analytics' => 'Analytics',
+    'nationwide' => 'Nationwide Overview',
 
     //user
     'users.view' => 'View user',
@@ -151,4 +153,7 @@ return [
     //dashboard
     'dashboards.operational' => 'Operational Dashboard',
     'dashboards.financial' => 'Financial Dashboard',
+
+    'analytics.view' => 'View Analytics',
+    'nationwide.view' => 'View Nationwide Overview'
 ];
