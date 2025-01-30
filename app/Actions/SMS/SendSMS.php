@@ -2,40 +2,29 @@
 
 namespace App\Actions\SMS;
 
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+
 class SendSMS
 {
 
-    public static function sendSMS($phone, $msg)
+    public static function sendSMS($msisdn, $msg)
     {
         try {
-            $encodedMsg = urlencode($msg);
+            //CALL THE API
+            $key = env("SMS_API_KEY");
+            $senderid = env("SENDER_ID");
+            $API_URL = "https://txtconnect.net/dev/api/sms/send";
+            $body = array("to" => $msisdn, "from" => $senderid, "unicode" => 0, "sms" => $msg);
 
-            $url = 'https://apps.mnotify.net/smsapi?key=HdtmmlE3XEu1XUJocrtfLWMi5&to=' . $phone . '&msg=' . $encodedMsg . '&sender_id=ERMS';
-            //$url = 'https://sms.hubtel.com/v1/messages/send?clientsecret=xxxxxxxx&clientid=xxxxxxxx&from=Hubtel&to=0244xxxxxx&content=Helloworld';
+            $resp = Http::withToken($key)->post($API_URL, $body)->json();
 
-            return self::fireSMS($url);
+            //Log::info($resp);
+            return $resp;
         } catch (\Exception $ex) {
             return response()->json([
                 'message' => 'Unable to deliver sms to customer ' . $ex->getMessage(),
             ], 422);
         }
-    }
-
-    public static function fireSMS($url)
-    {
-        $ch = curl_init();
-        $headers = [];
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-        // curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-        $result = curl_exec($ch);
-        $result = json_decode($result, true);
-        curl_close($ch);
-
-        //Log::info($result);
-        return $result;
     }
 }

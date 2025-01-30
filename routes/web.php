@@ -347,6 +347,7 @@ Route::get('/test', function () {
     $phone = '0248593031';
     $msg = 'Hello world from hubtel gateway';
 
+    //$result = \App\Actions\SMS\SendSMS::sendSMS($phone, $msg);
     $result = \App\Actions\SMS\SendSMS::sendSMS($phone, $msg);
 
     return $result;

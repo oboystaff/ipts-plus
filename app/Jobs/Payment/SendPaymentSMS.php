@@ -29,7 +29,7 @@ class SendPaymentSMS implements ShouldQueue
      */
     public function handle(): void
     {
-        $msg = "Thank you for paying your  property Rate of GHS " . $this->payment->amount_paid . " to Ablekuma North Municipal ";
+        $msg = "Thank you for paying your property Rate of GHS " . $this->payment->amount_paid . " to Ablekuma North Municipal ";
         $msg .= "Assembly. You still have a balance of GHS " . $this->payment->invoice->Balance . " to pay to complete your bill for the ";
         $msg .= "year " . date("Y") . ".";
 
