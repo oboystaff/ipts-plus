@@ -54,19 +54,20 @@ class CustomerController extends Controller
         ];
 
         $user = User::where('phone', $data['telephone_number'])->first();
+        $userData = [];
 
-        if (!empty($user)) {
-            return response()->json([
-                'message' => 'Phone number for user account already exist!'
-            ], 422);
+        if (empty($user)) {
+            $userData = User::create($userLoginData);
+        } else {
+            $userData = $user;
         }
 
-        $userData = User::create($userLoginData);
         $role = Role::where('name', 'like', '%customer%')->first();
 
         if ($role) {
             $userData->roles()->sync($role->id);
         }
+
         $data['user_id'] = $userData->id;
 
         if (!empty($userData)) {
@@ -109,19 +110,20 @@ class CustomerController extends Controller
         ];
 
         $user = User::where('phone', $data['telephone_number'])->first();
+        $userData = [];
 
-        if (!empty($user)) {
-            return response()->json([
-                'message' => 'Phone number for user account already exist!'
-            ], 422);
+        if (empty($user)) {
+            $userData = User::create($userLoginData);
+        } else {
+            $userData = $user;
         }
 
-        $userData = User::create($userLoginData);
         $role = Role::where('name', 'like', '%customer%')->first();
 
         if ($role) {
             $userData->roles()->sync($role->id);
         }
+
         $data['user_id'] = $userData->id;
 
         if (!empty($userData)) {
