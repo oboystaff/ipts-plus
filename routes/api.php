@@ -22,6 +22,7 @@ use App\Http\Controllers\API\Block\BlockController;
 use App\Http\Controllers\API\Zone\ZoneController;
 use App\Http\Controllers\API\PropertyUse\PropertyUseController;
 use App\Http\Controllers\API\Dropdown\DropdownController;
+use App\Http\Controllers\API\Statement\StatementController;
 
 
 /*
@@ -159,4 +160,9 @@ Route::group(['prefix' => 'property-use', 'middleware' => 'auth:sanctum'], funct
 
 Route::group(['prefix' => 'dropdown', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [DropdownController::class, 'index']);
+});
+
+Route::group(['prefix' => 'statement', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('/bill', [StatementController::class, 'billStatement']);
+    Route::post('/payment', [StatementController::class, 'paymentStatement']);
 });
