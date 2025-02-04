@@ -20,7 +20,6 @@ class StatementController extends Controller
     {
         $message = "";
         $customer = Citizen::where('user_id', $request->input('user_id'))
-            ->orWhere('id', $request->input('user_id'))
             ->first();
 
         if (empty($customer)) {
@@ -78,7 +77,6 @@ class StatementController extends Controller
     {
         $message = "";
         $customer = Citizen::where('user_id', $request->input('user_id'))
-            ->orWhere('id', $request->input('user_id'))
             ->first();
 
         if (empty($customer)) {
