@@ -728,10 +728,10 @@ class DashboardController extends Controller
         }
 
         $totalRegionalData = DB::table('ghana_regions')
-            ->leftJoin('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
-            ->leftJoin('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
-            ->leftJoin('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
-            ->leftJoin('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
+            ->join('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
+            ->join('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
+            ->join('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
+            ->join('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
             ->select(
                 'ghana_regions.name as region_name',
                 DB::raw('COUNT(DISTINCT properties.id) as total_properties_region'),
@@ -760,10 +760,10 @@ class DashboardController extends Controller
             ->get();
 
         $totalRegionalGraphData = DB::table('ghana_regions')
-            ->leftJoin('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
-            ->leftJoin('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
-            ->leftJoin('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
-            ->leftJoin('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
+            ->join('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
+            ->join('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
+            ->join('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
+            ->join('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
             ->select(
                 'ghana_regions.name as region_name',
                 DB::raw('COALESCE(SUM(bills.amount), 0) as total_bills_region'),
@@ -804,10 +804,10 @@ class DashboardController extends Controller
         }
 
         $totalRegionalDonutData = DB::table('ghana_regions')
-            ->leftJoin('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
-            ->leftJoin('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
-            ->leftJoin('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
-            ->leftJoin('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
+            ->join('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
+            ->join('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
+            ->join('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
+            ->join('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
             ->select(
                 'ghana_regions.name as region_name',
                 DB::raw('COUNT(DISTINCT properties.id) as total_properties_region'),
