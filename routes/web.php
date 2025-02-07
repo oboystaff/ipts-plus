@@ -192,6 +192,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth:sanctum'], function
     Route::get('/nationwide/overview', [Dashboard\DashboardController::class, 'overview'])->name('dashboard.overview');
     Route::get('/payment/analytics', [Dashboard\DashboardController::class, 'paymentAnalytic'])->name('dashboard.paymentAnalytic');
     Route::get('/bill/analytics', [Dashboard\DashboardController::class, 'billAnalytic'])->name('dashboard.billAnalytic');
+    Route::get('/fetch-regional-data', [Dashboard\DashboardController::class, 'fetchRegionalData'])->name('fetch.regional.data');
+    Route::get('/fetch-regional-graph-data', [Dashboard\DashboardController::class, 'fetchRegionalGraphData'])->name('fetch.regional.graph.data');
+    Route::get('/fetch-regional-donut-data', [Dashboard\DashboardController::class, 'fetchRegionalDonutData'])->name('fetch.regional.donut.data');
 });
 
 //USER MANAGEMENT
@@ -341,14 +344,4 @@ Route::group(['prefix' => 'customer-support', 'middleware' => 'auth:sanctum'], f
     Route::get('/show/{customerSupport}', [CustomerSupportController::class, 'show'])->name('customer-supports.show');
     Route::get('/edit/{customerSupport}', [CustomerSupportController::class, 'edit'])->name('customer-supports.edit');
     Route::post('/update/{customerSupport}', [CustomerSupportController::class, 'update'])->name('customer-supports.update');
-});
-
-Route::get('/test', function () {
-    $phone = '0248593031';
-    $msg = 'Hello world from hubtel gateway';
-
-    //$result = \App\Actions\SMS\SendSMS::sendSMS($phone, $msg);
-    $result = \App\Actions\SMS\SendSMS::sendSMS($phone, $msg);
-
-    return $result;
 });

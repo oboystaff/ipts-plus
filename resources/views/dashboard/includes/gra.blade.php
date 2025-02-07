@@ -7,6 +7,9 @@
                 <div class="card-title">Regional Revenue Trends Chart</div>
             </div>
             <div class="card-body">
+                <div id="chart-loader" class="text-center">
+                    <span class="spinner-border text-primary" role="status"></span> Loading...
+                </div>
                 <div id="column-basic2"></div>
             </div>
         </div>
@@ -18,6 +21,9 @@
                 <div class="card-title">Regional Overview Chart</div>
             </div>
             <div class="card-body">
+                <div id="donut-loader" style="text-align: center; display: none;">
+                    <span>Loading...</span>
+                </div>
                 <div id="donut-regional"></div>
             </div>
         </div>
@@ -320,50 +326,13 @@
 
 <div class="row">
     <div class="col-xxl-12">
-        @foreach (array_chunk($total['totalRegionalData']->toArray(), 4) as $regionRow)
-            <div class="row mb-4">
-                @foreach ($regionRow as $region)
-                    <div class="col-xl-3">
-                        <div class="card custom-card shadow-lg border-0">
-                            <div class="card-body p-4">
-                                <div class="d-flex align-items-start gap-3 flex-wrap">
-                                    <!-- Region Header with Icon -->
-                                    <div class="flex-fill">
-                                        <div class="d-flex align-items-center justify-content-between mb-3">
-                                            <h5 class="fw-bold text-primary d-flex align-items-center gap-2">
-                                                <i class="ri-map-pin-line fs-10"></i> {{ $region->region_name }}
-                                            </h5>
-                                        </div>
-
-                                        <!-- Property Information -->
-                                        <div class="mb-2 d-flex justify-content-between">
-                                            <span class="fw-semibold text-muted">Properties:</span>
-                                            <span
-                                                class="fw-bold text-dark">{{ $region->total_properties_region ?? '0.00' }}</span>
-                                        </div>
-
-                                        <!-- Bills Information -->
-                                        <div class="mb-2 d-flex justify-content-between">
-                                            <span class="fw-semibold text-muted">Payments:</span>
-                                            <span class="fw-bold text-success">
-                                                GHS {{ number_format($region->total_payments_region, 2) ?? '0.00' }}
-                                            </span>
-                                        </div>
-
-                                        <!-- Payments Information -->
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-semibold text-muted">Outstanding:</span>
-                                            <span class="fw-bold text-danger">
-                                                GHS {{ number_format($region->total_arrears_region, 2) ?? '0.00' }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+        <div id="regional-data-container">
+            <div class="text-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <p>Loading data...</p>
             </div>
-        @endforeach
+        </div>
     </div>
 </div>

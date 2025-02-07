@@ -584,89 +584,130 @@
     </script>
 
     <script>
-        // Regional revenue trends chart
-        var paymentData = @json($total['paymentGraphData']);
-        var billData = @json($total['billGraphData']);
-        var arrearsData = @json($total['arrearsGraphData']);
-        var regionNames = @json($total['regionNames']);
+        $(document).ready(function() {
+            console.log("Document Ready. Fetching data...");
+            fetchRegionalGraphData();
+        });
 
-        var options = {
-            series: [{
-                name: 'Payment',
-                data: paymentData
-            }, {
-                name: 'Bill',
-                data: billData
-            }, {
-                name: 'Arrears',
-                data: arrearsData
-            }],
-            chart: {
-                type: 'bar',
-                height: 320
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                    columnWidth: '80%',
-                    endingShape: 'rounded'
+        function fetchRegionalGraphData() {
+            $.ajax({
+                url: "{{ route('fetch.regional.graph.data') }}",
+                method: "GET",
+                dataType: "json",
+                beforeSend: function() {
+                    console.log("Fetching data...");
+                    $("#chart-loader").show();
+                    $("#column-basic2").hide();
                 },
-            },
-            grid: {
-                borderColor: '#f2f5f7',
-            },
-            dataLabels: {
-                enabled: false
-            },
-            colors: ["#8b7eff", "#35bdaa", "#ffb748"],
-            stroke: {
-                show: true,
-                width: 2,
-                colors: ['transparent']
-            },
-            xaxis: {
-                categories: regionNames,
-                labels: {
-                    show: true,
-                    style: {
-                        colors: "#8c9097",
-                        fontSize: '11px',
-                        fontWeight: 600,
-                        cssClass: 'apexcharts-xaxis-label',
-                    },
-                }
-            },
-            yaxis: {
-                title: {
-                    text: 'GHS (thousands)',
-                    style: {
-                        color: "#8c9097",
+                success: function(response) {
+                    console.log("Fetched Data:", response);
+
+                    if (!Array.isArray(response) || response.length === 0) {
+                        console.error("Invalid or empty data");
+                        return;
                     }
+
+                    var regionNames = response.map(data => data.region_name || "Unknown");
+                    var paymentGraphData = response.map(data => Number(data.total_payments_region) || 0);
+                    var billGraphData = response.map(data => Number(data.total_bills_region) || 0);
+                    var arrearsGraphData = response.map(data => Number(data.total_arrears_region) || 0);
+
+                    console.log("Regions:", regionNames);
+                    console.log("Payments:", paymentGraphData);
+                    console.log("Bills:", billGraphData);
+                    console.log("Arrears:", arrearsGraphData);
+
+                    if (regionNames.length === 0) {
+                        console.error("No regions found.");
+                        return;
+                    }
+
+                    setTimeout(function() {
+                        console.log("Rendering chart...");
+                        renderRegionalChart(regionNames, paymentGraphData, billGraphData,
+                            arrearsGraphData);
+                    }, 500);
                 },
-                labels: {
-                    show: true,
-                    style: {
-                        colors: "#8c9097",
-                        fontSize: '11px',
-                        fontWeight: 600,
-                        cssClass: 'apexcharts-xaxis-label',
-                    },
+                error: function(xhr, status, error) {
+                    console.error("Error:", xhr.responseText);
+                    $("#column-basic2").html('<div class="alert alert-danger">Failed to load data.</div>');
+                },
+                complete: function() {
+                    $("#chart-loader").hide();
+                    $("#column-basic2").show();
                 }
-            },
-            fill: {
-                opacity: 1
-            },
-            tooltip: {
-                y: {
-                    formatter: function(val) {
-                        return "GHS " + val + " thousands"
-                    }
-                }
+            });
+        }
+
+        var chart = null;
+
+        function renderRegionalChart(regionNames, paymentData, billData, arrearsData) {
+            console.log("Rendering chart...");
+            console.log("Container:", document.querySelector("#column-basic2"));
+
+            if (!document.querySelector("#column-basic2")) {
+                console.error("Chart container not found.");
+                return;
             }
-        };
 
-        var chart = new ApexCharts(document.querySelector("#column-basic2"), options);
-        chart.render();
+            var options = {
+                series: [{
+                        name: 'Payment',
+                        data: paymentData
+                    },
+                    {
+                        name: 'Bill',
+                        data: billData
+                    },
+                    {
+                        name: 'Arrears',
+                        data: arrearsData
+                    }
+                ],
+                chart: {
+                    type: 'bar',
+                    height: 320
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '70%',
+                        endingShape: 'rounded'
+                    }
+                },
+                grid: {
+                    borderColor: '#f2f5f7'
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                colors: ["#8b7eff", "#35bdaa", "#ffb748"],
+                stroke: {
+                    show: true,
+                    width: 2,
+                    colors: ['transparent']
+                },
+                xaxis: {
+                    categories: regionNames
+                },
+                yaxis: {
+                    title: {
+                        text: 'GHS (thousands)'
+                    }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(val) {
+                            return "GHS " + val + " thousands";
+                        }
+                    }
+                }
+            };
+
+            console.log("Chart options:", options);
+            chart = new ApexCharts(document.querySelector("#column-basic2"), options);
+            chart.render();
+        }
     </script>
 
     <script>
@@ -884,66 +925,98 @@
     </script>
 
     <script>
-        // Regional doughnut overview
-        var regionNames = @json($total['regionNameDonut']);
-        var totalBills = @json($total['totalDonutBills']).map(item => parseFloat(item));
-        var totalPayments = @json($total['totalDonutPayments']).map(item => parseFloat(item));
-        var totalArrears = @json($total['totalDonutArrears']).map(item => parseFloat(item));
-        var totalProperties = @json($total['totalDonutProperties']).map(item => parseFloat(item));
+        $(document).ready(function() {
+            fetchRegionalDonutData();
+        });
 
-        // Calculate sums
-        var totalBillsSum = totalBills.reduce((acc, val) => acc + val, 0);
-        var totalPaymentsSum = totalPayments.reduce((acc, val) => acc + val, 0);
-        var totalArrearsSum = totalArrears.reduce((acc, val) => acc + val, 0);
-        var totalPropertiesSum = totalProperties.reduce((acc, val) => acc + val, 0);
+        function fetchRegionalDonutData() {
+            $("#donut-loader").show();
 
-        var options = {
-            series: [
-                totalBillsSum,
-                totalPaymentsSum,
-                totalArrearsSum,
-                totalPropertiesSum
-            ],
-            chart: {
-                height: 300,
-                type: "donut",
-            },
-            plotOptions: {
-                pie: {
-                    startAngle: -90,
-                    endAngle: 270,
-                },
-            },
-            dataLabels: {
-                enabled: true,
-                formatter: function(value, opts) {
-                    return `${opts.w.globals.labels[opts.seriesIndex]}: ${value.toFixed(2)} %`;
-                },
-            },
-            fill: {
-                type: "gradient",
-            },
-            colors: ["#8b7eff", "#35bdaa", "#ffb748", "#49b6f5"],
-            title: {
-                text: "Regional Revenue Distribution",
-                align: "left",
-                style: {
-                    fontSize: "13px",
-                    fontWeight: "bold",
-                    color: "#8c9097",
-                },
-            },
-            legend: {
-                position: "bottom",
-                formatter: function(seriesName, opts) {
-                    return `${seriesName}: ${opts.w.globals.series[opts.seriesIndex].toFixed(2)} %`;
-                },
-            },
-            labels: ["Total Bills", "Total Payments", "Total Arrears", "Total Properties"],
-        };
+            $.ajax({
+                url: "{{ route('fetch.regional.donut.data') }}",
+                method: "GET",
+                dataType: "json",
+                success: function(response) {
+                    var regionNames = [];
+                    var totalBills = [];
+                    var totalPayments = [];
+                    var totalArrears = [];
+                    var totalProperties = [];
 
-        var chart = new ApexCharts(document.querySelector("#donut-regional"), options);
-        chart.render();
+                    response.forEach(function(data) {
+                        regionNames.push(data.region_name);
+                        totalBills.push(parseFloat(data.total_bills_region));
+                        totalPayments.push(parseFloat(data.total_payments_region));
+                        totalArrears.push(parseFloat(data.total_arrears_region));
+                        totalProperties.push(parseFloat(data.total_properties_region));
+                    });
+
+                    renderRegionalDonutChart(totalBills, totalPayments, totalArrears, totalProperties);
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                    $("#donut-regional").html('<div class="alert alert-danger">Failed to load data.</div>');
+                },
+                complete: function() {
+                    $("#donut-loader").hide();
+                }
+            });
+        }
+
+        function renderRegionalDonutChart(totalBills, totalPayments, totalArrears, totalProperties) {
+            var totalBillsSum = totalBills.reduce((acc, val) => acc + val, 0);
+            var totalPaymentsSum = totalPayments.reduce((acc, val) => acc + val, 0);
+            var totalArrearsSum = totalArrears.reduce((acc, val) => acc + val, 0);
+            var totalPropertiesSum = totalProperties.reduce((acc, val) => acc + val, 0);
+
+            var options = {
+                series: [
+                    totalBillsSum,
+                    totalPaymentsSum,
+                    totalArrearsSum,
+                    totalPropertiesSum
+                ],
+                chart: {
+                    height: 300,
+                    type: "donut",
+                },
+                plotOptions: {
+                    pie: {
+                        startAngle: -90,
+                        endAngle: 270,
+                    },
+                },
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(value, opts) {
+                        return `${opts.w.globals.labels[opts.seriesIndex]}: ${value.toFixed(2)} %`;
+                    },
+                },
+                fill: {
+                    type: "gradient",
+                },
+                colors: ["#8b7eff", "#35bdaa", "#ffb748", "#49b6f5"],
+                title: {
+                    text: "Regional Revenue Distribution",
+                    align: "left",
+                    style: {
+                        fontSize: "13px",
+                        fontWeight: "bold",
+                        color: "#8c9097",
+                    },
+                },
+                legend: {
+                    position: "bottom",
+                    formatter: function(seriesName, opts) {
+                        return `${seriesName}: ${opts.w.globals.series[opts.seriesIndex].toFixed(2)} %`;
+                    },
+                },
+                labels: ["Total Bills", "Total Payments", "Total Arrears", "Total Properties"],
+            };
+
+            var chart = new ApexCharts(document.querySelector("#donut-regional"), options);
+            chart.render();
+        }
     </script>
 
     <script>
@@ -1048,4 +1121,78 @@
             chart.render();
         </script>
     @endif
+
+    <script>
+        $(document).ready(function() {
+            fetchRegionalData();
+        });
+
+        function fetchRegionalData() {
+            $.ajax({
+                url: "{{ route('fetch.regional.data') }}",
+                method: "GET",
+                dataType: "json",
+                success: function(response) {
+                    renderRegionalData(response.data);
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                    $("#regional-data-container").html(
+                        '<div class="alert alert-danger">Error: ' + error + '</div>'
+                    );
+                }
+            });
+        }
+
+        function renderRegionalData(data) {
+            let html = '';
+            if (data.length === 0) {
+                html = '<div class="alert alert-warning">No data available.</div>';
+            } else {
+                data.forEach((region, index) => {
+                    if (index % 4 === 0) {
+                        html += '<div class="row mb-4">';
+                    }
+                    html += `
+                    <div class="col-xl-3">
+                        <div class="card custom-card shadow-lg border-0">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-start gap-3 flex-wrap">
+                                    <div class="flex-fill">
+                                        <div class="d-flex align-items-center justify-content-between mb-3">
+                                            <h5 class="fw-bold text-primary d-flex align-items-center gap-2">
+                                                <i class="ri-map-pin-line fs-10"></i> ${region.region_name}
+                                            </h5>
+                                        </div>
+                                        <div class="mb-2 d-flex justify-content-between">
+                                            <span class="fw-semibold text-muted">Properties:</span>
+                                            <span class="fw-bold text-dark">${region.total_properties_region ?? '0.00'}</span>
+                                        </div>
+                                        <div class="mb-2 d-flex justify-content-between">
+                                            <span class="fw-semibold text-muted">Payments:</span>
+                                            <span class="fw-bold text-success">
+                                                GHS ${parseFloat(region.total_payments_region ?? 0).toFixed(2)}
+                                            </span>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-semibold text-muted">Outstanding:</span>
+                                            <span class="fw-bold text-danger">
+                                                GHS ${parseFloat(region.total_arrears_region ?? 0).toFixed(2)}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                    if ((index + 1) % 4 === 0) {
+                        html += '</div>';
+                    }
+                });
+            }
+
+            $("#regional-data-container").html(html);
+        }
+    </script>
 @endsection

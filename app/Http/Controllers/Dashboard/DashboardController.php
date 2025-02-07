@@ -727,120 +727,6 @@ class DashboardController extends Controller
             $finalCut = $assemblycut / 100;
         }
 
-        $totalRegionalData = DB::table('ghana_regions')
-            ->join('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
-            ->join('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
-            ->join('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
-            ->join('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
-            ->select(
-                'ghana_regions.name as region_name',
-                DB::raw('COUNT(DISTINCT properties.id) as total_properties_region'),
-                DB::raw('COALESCE(SUM(bills.amount), 0) as total_bills_region'),
-                DB::raw("
-                    SUM(
-                        CASE 
-                            WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
-                            WHEN payments.payment_mode != 'momo' THEN payments.amount
-                            ELSE 0
-                        END
-                    ) as total_payments_region
-                "),
-                DB::raw('
-                    COALESCE(SUM(bills.amount), 0) - 
-                    COALESCE(SUM(
-                        CASE 
-                            WHEN payments.payment_mode = "momo" AND payments.transaction_status = "Success" THEN payments.amount
-                            WHEN payments.payment_mode != "momo" THEN payments.amount
-                            ELSE 0
-                        END
-                    ), 0) as total_arrears_region
-                ')
-            )
-            ->groupBy('ghana_regions.name')
-            ->get();
-
-        $totalRegionalGraphData = DB::table('ghana_regions')
-            ->join('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
-            ->join('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
-            ->join('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
-            ->join('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
-            ->select(
-                'ghana_regions.name as region_name',
-                DB::raw('COALESCE(SUM(bills.amount), 0) as total_bills_region'),
-                DB::raw("
-                    SUM(
-                        CASE 
-                            WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
-                            WHEN payments.payment_mode != 'momo' THEN payments.amount
-                            ELSE 0
-                        END
-                    ) as total_payments_region
-                "),
-                DB::raw('
-                    COALESCE(SUM(bills.amount), 0) - 
-                    COALESCE(SUM(
-                        CASE 
-                            WHEN payments.payment_mode = "momo" AND payments.transaction_status = "Success" THEN payments.amount
-                            WHEN payments.payment_mode != "momo" THEN payments.amount
-                            ELSE 0
-                        END
-                    ), 0) as total_arrears_region
-                ')
-            )
-            ->groupBy('ghana_regions.name')
-            ->get();
-
-        // Prepare data for chart
-        $regionNames = [];
-        $paymentGraphData = [];
-        $billGraphData = [];
-        $arrearsGraphData = [];
-
-        foreach ($totalRegionalGraphData as $data) {
-            $regionNames[] = $data->region_name;
-            $paymentGraphData[] = (float)$data->total_payments_region;
-            $billGraphData[] = (float)$data->total_bills_region;
-            $arrearsGraphData[] = (float)$data->total_arrears_region;
-        }
-
-        $totalRegionalDonutData = DB::table('ghana_regions')
-            ->join('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
-            ->join('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
-            ->join('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
-            ->join('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
-            ->select(
-                'ghana_regions.name as region_name',
-                DB::raw('COUNT(DISTINCT properties.id) as total_properties_region'),
-                DB::raw('COALESCE(SUM(bills.amount), 0) as total_bills_region'),
-                DB::raw("
-                    SUM(
-                        CASE 
-                            WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
-                            WHEN payments.payment_mode != 'momo' THEN payments.amount
-                            ELSE 0
-                        END
-                    ) as total_payments_region
-                "),
-                DB::raw('
-                    COALESCE(SUM(bills.amount), 0) - 
-                    COALESCE(SUM(
-                        CASE 
-                            WHEN payments.payment_mode = "momo" AND payments.transaction_status = "Success" THEN payments.amount
-                            WHEN payments.payment_mode != "momo" THEN payments.amount
-                            ELSE 0
-                        END
-                    ), 0) as total_arrears_region
-                ')
-            )
-            ->groupBy('ghana_regions.name')
-            ->get();
-
-        $regionNameDonut = $totalRegionalDonutData->pluck('region_name');
-        $totalDonutProperties = $totalRegionalDonutData->pluck('total_properties_region');
-        $totalDonutBills = $totalRegionalDonutData->pluck('total_bills_region');
-        $totalDonutPayments = $totalRegionalDonutData->pluck('total_payments_region');
-        $totalDonutArrears = $totalRegionalDonutData->pluck('total_arrears_region');
-
         $dashTotalBills = DB::table('bills')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
@@ -1223,16 +1109,6 @@ class DashboardController extends Controller
             'level10cut' => isset($level10cut) ? number_format($level10cut, 2) : 0,
             'assemblycut' => isset($assemblycut) ? number_format($assemblycut, 2) : 0,
             'finalCut' => isset($finalCut) ? number_format($finalCut, 2) : 0,
-            'totalRegionalData' => isset($totalRegionalData) ? $totalRegionalData : [],
-            'regionNames' => isset($regionNames) ? $regionNames : '',
-            'paymentGraphData' => isset($paymentGraphData) ? $paymentGraphData : [],
-            'billGraphData' => isset($billGraphData) ? $billGraphData : [],
-            'arrearsGraphData' => isset($arrearsGraphData) ? $arrearsGraphData : [],
-            'regionNameDonut' => isset($regionNameDonut) ? $regionNameDonut : [],
-            'totalDonutProperties' => isset($totalDonutProperties) ? $totalDonutProperties : [],
-            'totalDonutBills' => isset($totalDonutBills) ? $totalDonutBills : [],
-            'totalDonutPayments' => isset($totalDonutPayments) ? $totalDonutPayments : [],
-            'totalDonutArrears' => isset($totalDonutArrears) ? $totalDonutArrears : [],
             'dashTotalBills' => isset($dashTotalBills) ? number_format($dashTotalBills, 2) : 0,
             'dashTotalBillCount' => isset($dashTotalBillCount) ? number_format($dashTotalBillCount) : 0,
             'dashTotalPayments' => isset($dashTotalPayments) ? number_format($dashTotalPayments, 2) : 0,
@@ -3781,5 +3657,115 @@ class DashboardController extends Controller
         ];
 
         return view('dashboard.includes.bill', compact('total'));
+    }
+
+    public function fetchRegionalData()
+    {
+        $totalRegionalData = DB::table('ghana_regions')
+            ->join('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
+            ->join('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
+            ->join('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
+            ->join('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
+            ->select(
+                'ghana_regions.name as region_name',
+                DB::raw('COUNT(DISTINCT properties.id) as total_properties_region'),
+                DB::raw('COALESCE(SUM(bills.amount), 0) as total_bills_region'),
+                DB::raw("
+                SUM(
+                    CASE 
+                        WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
+                        WHEN payments.payment_mode != 'momo' THEN payments.amount
+                        ELSE 0
+                    END
+                ) as total_payments_region
+            "),
+                DB::raw('
+                COALESCE(SUM(bills.amount), 0) - 
+                COALESCE(SUM(
+                    CASE 
+                        WHEN payments.payment_mode = "momo" AND payments.transaction_status = "Success" THEN payments.amount
+                        WHEN payments.payment_mode != "momo" THEN payments.amount
+                        ELSE 0
+                    END
+                ), 0) as total_arrears_region
+            ')
+            )
+            ->groupBy('ghana_regions.name')
+            ->get();
+
+        return response()->json(['data' => $totalRegionalData]);
+    }
+
+    public function fetchRegionalGraphData()
+    {
+        $totalRegionalGraphData = DB::table('ghana_regions')
+            ->join('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
+            ->join('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
+            ->join('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
+            ->join('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
+            ->select(
+                'ghana_regions.name as region_name',
+                DB::raw('COALESCE(SUM(bills.amount), 0) as total_bills_region'),
+                DB::raw("
+                SUM(
+                    CASE 
+                        WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
+                        WHEN payments.payment_mode != 'momo' THEN payments.amount
+                        ELSE 0
+                    END
+                ) as total_payments_region
+            "),
+                DB::raw('
+                COALESCE(SUM(bills.amount), 0) - 
+                COALESCE(SUM(
+                    CASE 
+                        WHEN payments.payment_mode = "momo" AND payments.transaction_status = "Success" THEN payments.amount
+                        WHEN payments.payment_mode != "momo" THEN payments.amount
+                        ELSE 0
+                    END
+                ), 0) as total_arrears_region
+            ')
+            )
+            ->groupBy('ghana_regions.name')
+            ->get();
+
+        return response()->json($totalRegionalGraphData);
+    }
+
+    public function fetchRegionalDonutData()
+    {
+        $totalRegionalDonutData = DB::table('ghana_regions')
+            ->join('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
+            ->join('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
+            ->leftJoin('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
+            ->leftJoin('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
+            ->select(
+                'ghana_regions.name as region_name',
+                DB::raw('COUNT(DISTINCT properties.id) as total_properties_region'),
+                DB::raw('COALESCE(SUM(bills.amount), 0) as total_bills_region'),
+                DB::raw("
+                SUM(
+                    CASE 
+                        WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
+                        WHEN payments.payment_mode != 'momo' THEN payments.amount
+                        ELSE 0
+                    END
+                ) as total_payments_region
+            "),
+                DB::raw('
+                COALESCE(SUM(bills.amount), 0) - 
+                COALESCE(SUM(
+                    CASE 
+                        WHEN payments.payment_mode = "momo" AND payments.transaction_status = "Success" THEN payments.amount
+                        WHEN payments.payment_mode != "momo" THEN payments.amount
+                        ELSE 0
+                    END
+                ), 0) as total_arrears_region
+            ')
+            )
+            ->groupBy('ghana_regions.name')
+            ->get();
+
+        return response()->json($totalRegionalDonutData);
     }
 }
