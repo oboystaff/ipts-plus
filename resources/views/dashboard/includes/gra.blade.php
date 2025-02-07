@@ -7,9 +7,13 @@
                 <div class="card-title">Regional Revenue Trends Chart</div>
             </div>
             <div class="card-body">
-                <div id="chart-loader" class="text-center">
-                    <span class="spinner-border text-primary" role="status"></span> Loading...
+                <div class="text-center">
+                    <div id="chart-loader" class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p id="f_load">Loading data...</p>
                 </div>
+
                 <div id="column-basic2"></div>
             </div>
         </div>
@@ -21,9 +25,13 @@
                 <div class="card-title">Regional Overview Chart</div>
             </div>
             <div class="card-body">
-                <div id="donut-loader" style="text-align: center; display: none;">
-                    <span>Loading...</span>
+                <div class="text-center">
+                    <div id="donut-loader" class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p id="s_load">Loading data...</p>
                 </div>
+
                 <div id="donut-regional"></div>
             </div>
         </div>

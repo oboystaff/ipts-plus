@@ -634,6 +634,7 @@
                 },
                 complete: function() {
                     $("#chart-loader").hide();
+                    $("#f_load").hide();
                     $("#column-basic2").show();
                 }
             });
@@ -959,6 +960,7 @@
                 },
                 complete: function() {
                     $("#donut-loader").hide();
+                    $("#s_load").hide();
                 }
             });
         }
