@@ -3662,33 +3662,33 @@ class DashboardController extends Controller
     public function fetchRegionalData()
     {
         $totalRegionalData = DB::table('ghana_regions')
-            ->join('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
-            ->join('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
-            ->join('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
-            ->join('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
+            ->leftJoin('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
+            ->leftJoin('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
+            ->leftJoin('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
+            ->leftJoin('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
             ->select(
                 'ghana_regions.name as region_name',
                 DB::raw('COUNT(DISTINCT properties.id) as total_properties_region'),
                 DB::raw('COALESCE(SUM(bills.amount), 0) as total_bills_region'),
                 DB::raw("
-                SUM(
-                    CASE 
-                        WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
-                        WHEN payments.payment_mode != 'momo' THEN payments.amount
-                        ELSE 0
-                    END
-                ) as total_payments_region
-            "),
-                DB::raw('
-                COALESCE(SUM(bills.amount), 0) - 
-                COALESCE(SUM(
-                    CASE 
-                        WHEN payments.payment_mode = "momo" AND payments.transaction_status = "Success" THEN payments.amount
-                        WHEN payments.payment_mode != "momo" THEN payments.amount
-                        ELSE 0
-                    END
-                ), 0) as total_arrears_region
-            ')
+                    COALESCE(SUM(
+                        CASE 
+                            WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
+                            WHEN payments.payment_mode != 'momo' THEN payments.amount
+                            ELSE 0
+                        END
+                    ), 0) as total_payments_region
+                "),
+                DB::raw("
+                    COALESCE(SUM(bills.amount), 0) - 
+                    COALESCE(SUM(
+                        CASE 
+                            WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
+                            WHEN payments.payment_mode != 'momo' THEN payments.amount
+                            ELSE 0
+                        END
+                    ), 0) as total_arrears_region
+                ")
             )
             ->groupBy('ghana_regions.name')
             ->get();
@@ -3699,32 +3699,32 @@ class DashboardController extends Controller
     public function fetchRegionalGraphData()
     {
         $totalRegionalGraphData = DB::table('ghana_regions')
-            ->join('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
-            ->join('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
-            ->join('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
-            ->join('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
+            ->leftJoin('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
+            ->leftJoin('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
+            ->leftJoin('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
+            ->leftJoin('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
             ->select(
                 'ghana_regions.name as region_name',
                 DB::raw('COALESCE(SUM(bills.amount), 0) as total_bills_region'),
                 DB::raw("
-                SUM(
-                    CASE 
-                        WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
-                        WHEN payments.payment_mode != 'momo' THEN payments.amount
-                        ELSE 0
-                    END
-                ) as total_payments_region
-            "),
-                DB::raw('
-                COALESCE(SUM(bills.amount), 0) - 
-                COALESCE(SUM(
-                    CASE 
-                        WHEN payments.payment_mode = "momo" AND payments.transaction_status = "Success" THEN payments.amount
-                        WHEN payments.payment_mode != "momo" THEN payments.amount
-                        ELSE 0
-                    END
-                ), 0) as total_arrears_region
-            ')
+                    COALESCE(SUM(
+                        CASE 
+                            WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
+                            WHEN payments.payment_mode != 'momo' THEN payments.amount
+                            ELSE 0
+                        END
+                    ), 0) as total_payments_region
+                "),
+                DB::raw("
+                    COALESCE(SUM(bills.amount), 0) - 
+                    COALESCE(SUM(
+                        CASE 
+                            WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
+                            WHEN payments.payment_mode != 'momo' THEN payments.amount
+                            ELSE 0
+                        END
+                    ), 0) as total_arrears_region
+                ")
             )
             ->groupBy('ghana_regions.name')
             ->get();
@@ -3735,8 +3735,8 @@ class DashboardController extends Controller
     public function fetchRegionalDonutData()
     {
         $totalRegionalDonutData = DB::table('ghana_regions')
-            ->join('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
-            ->join('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
+            ->leftJoin('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
+            ->leftJoin('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
             ->leftJoin('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
             ->leftJoin('payments', 'assemblies.assembly_code', '=', 'payments.assembly_code')
             ->select(
@@ -3744,24 +3744,24 @@ class DashboardController extends Controller
                 DB::raw('COUNT(DISTINCT properties.id) as total_properties_region'),
                 DB::raw('COALESCE(SUM(bills.amount), 0) as total_bills_region'),
                 DB::raw("
-                SUM(
-                    CASE 
-                        WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
-                        WHEN payments.payment_mode != 'momo' THEN payments.amount
-                        ELSE 0
-                    END
-                ) as total_payments_region
-            "),
-                DB::raw('
-                COALESCE(SUM(bills.amount), 0) - 
-                COALESCE(SUM(
-                    CASE 
-                        WHEN payments.payment_mode = "momo" AND payments.transaction_status = "Success" THEN payments.amount
-                        WHEN payments.payment_mode != "momo" THEN payments.amount
-                        ELSE 0
-                    END
-                ), 0) as total_arrears_region
-            ')
+                    COALESCE(SUM(
+                        CASE 
+                            WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
+                            WHEN payments.payment_mode != 'momo' THEN payments.amount
+                            ELSE 0
+                        END
+                    ), 0) as total_payments_region
+                "),
+                DB::raw("
+                    COALESCE(SUM(bills.amount), 0) - 
+                    COALESCE(SUM(
+                        CASE 
+                            WHEN payments.payment_mode = 'momo' AND payments.transaction_status = 'Success' THEN payments.amount
+                            WHEN payments.payment_mode != 'momo' THEN payments.amount
+                            ELSE 0
+                        END
+                    ), 0) as total_arrears_region
+                ")
             )
             ->groupBy('ghana_regions.name')
             ->get();
