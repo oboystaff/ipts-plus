@@ -169,7 +169,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="4"></th>
+                                            <th colspan="5"></th>
                                             <th>Total (GHS)</th>
                                             <th>{{ $total['totalArrears'] }}</th>
                                             <th>{{ $total['totalAmount'] }}</th>
