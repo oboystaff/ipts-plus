@@ -5,11 +5,15 @@ namespace App\Http\Controllers\Rate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BusRate\CreateBusRateRequest;
 use App\Http\Requests\BusRate\UpdateBusRateRequest;
+use App\Http\Requests\Import\ImportBusinessRateRequest;
+use App\Imports\BusinessRate\BusinessRateImport;
 use App\Models\BOPRate;
 use App\Models\Assembly;
 use App\Models\Zone;
 use App\Models\PropertyUser;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Response;
 
 
 class BusRateController extends Controller
@@ -85,5 +89,38 @@ class BusRateController extends Controller
         $rate->update(($request->validated()));
 
         return redirect()->route('rates.bus.index')->with('status', 'Business operating permit rate updated successfully!');
+    }
+
+    public function import()
+    {
+        return view('bop-rates.import');
+    }
+
+    public function importData(ImportBusinessRateRequest $request)
+    {
+        try {
+            $data = $request->validated();
+            $createdBy = $request->user()->id;
+
+            $import = (new BusinessRateImport($createdBy));
+            $import->import($request->file('file'));
+
+            return redirect()->route('rates.bus.index')->with('status', 'BOP rate data uploaded successfully.');
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $exception) {
+            throw ValidationException::withMessages([
+                'file' => collect($exception->errors())->flatten()->toArray(),
+            ]);
+        }
+    }
+
+    public function downloadTemplate()
+    {
+        $filePath = public_path('assets/templates/bop_rate_template.xlsx');
+
+        if (!file_exists($filePath)) {
+            return response()->json(['error' => 'File not found'], 404);
+        }
+
+        return Response::download($filePath, 'bop_rate_template.xlsx');
     }
 }

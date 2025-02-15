@@ -8,6 +8,8 @@ use App\Http\Requests\Activate\ResendOTPRequest;
 use App\Http\Requests\Customer\CreateCustomerRequest;
 use App\Http\Requests\Customer\CreateCustomerRequestFront;
 use App\Http\Requests\Customer\UpdateCustomerRequest;
+use App\Http\Requests\Import\ImportCustomerRequest;
+use App\Imports\Customer\CustomersImport;
 use App\Jobs\Registration\SendRegistrationReminder;
 use App\Jobs\OTP\SendOTPSMS;
 use App\Models\AuditTrail;
@@ -23,6 +25,8 @@ use App\Models\OTP;
 use App\Models\ServiceRequest;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Response;
 
 
 class CitizenController extends Controller
@@ -155,7 +159,7 @@ class CitizenController extends Controller
 
             // Generate unique account number
             do {
-                $accountNumber = 'IPTS' . $randomNumbers;
+                $accountNumber = 'IPRS' . $randomNumbers;
             } while (Citizen::where('account_number', $accountNumber)->exists());
 
             $data['account_number'] = $accountNumber;
@@ -228,7 +232,7 @@ class CitizenController extends Controller
 
             // Generate unique account number
             do {
-                $accountNumber = 'IPTS' . $randomNumbers;
+                $accountNumber = 'IPRS' . $randomNumbers;
             } while (Citizen::where('account_number', $accountNumber)->exists());
 
             $data['account_number'] = $accountNumber;
@@ -357,6 +361,13 @@ class CitizenController extends Controller
                             ->whereNull('property_id');
                     });
             })
+            ->where(function ($query) {
+                $query->where('payment_mode', 'momo')
+                    ->where('transaction_status', 'Success')
+                    ->orWhere(function ($q) {
+                        $q->where('payment_mode', '!=', 'momo');
+                    });
+            })
             ->get();
 
         $properties = Property::orderBy('created_at', 'DESC')
@@ -432,5 +443,38 @@ class CitizenController extends Controller
     public function viewPayment(Payment $payment)
     {
         return view('dashboard.index-payment', compact('payment'));
+    }
+
+    public function import()
+    {
+        return view('citizens.import');
+    }
+
+    public function importData(ImportCustomerRequest $request)
+    {
+        try {
+            $data = $request->validated();
+            $createdBy = $request->user()->id;
+
+            $import = (new CustomersImport($createdBy));
+            $import->import($request->file('file'));
+
+            return redirect()->route('citizens.index')->with('status', 'Rate payer data uploaded successfully.');
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $exception) {
+            throw ValidationException::withMessages([
+                'file' => collect($exception->errors())->flatten()->toArray(),
+            ]);
+        }
+    }
+
+    public function downloadTemplate()
+    {
+        $filePath = public_path('assets/templates/rate_payer_template.xlsx');
+
+        if (!file_exists($filePath)) {
+            return response()->json(['error' => 'File not found'], 404);
+        }
+
+        return Response::download($filePath, 'rate_payer_template.xlsx');
     }
 }

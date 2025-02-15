@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Properties;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Import\ImportPropertyRequest;
 use App\Http\Requests\Property\CreatePropertyRequest;
 use App\Http\Requests\Property\UpdatePropertyRequest;
+use App\Imports\Property\PropertiesImport;
 use App\Jobs\Property\SendPropertyOwnerSMS;
 use Illuminate\Http\Request;
 use App\Models\Property;
@@ -17,7 +19,12 @@ use App\Models\Division;
 use App\Models\Zone;
 use App\Models\PropertyUser;
 use App\Models\ServiceRequest;
+use App\Models\Bill;
+use App\Models\Payment;
+use App\Models\Business;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Response;
 
 
 class PropertyController extends Controller
@@ -281,7 +288,55 @@ class PropertyController extends Controller
      */
     public function show(Property $property)
     {
-        return view('properties.show', compact('property'));
+        $citizen = Citizen::where('id', $property->customer->id)->first();
+
+        $bills = Bill::orderBy('created_at', 'DESC')
+            ->with(['property'])
+            ->whereHas('property', function ($query) use ($citizen, $property) {
+                $query->where('customer_name', $citizen->id)
+                    ->where('property_id', $property->id);
+            })
+            ->whereNotNull('property_id')
+            ->whereNull('business_id')
+            ->get();
+
+        $payments = Payment::orderBy('created_at', 'DESC')
+            ->whereHas('bill', function ($query) use ($property) {
+                $query->whereNotNull('property_id')
+                    ->where('property_id', $property->id);
+            })
+            ->when(function ($query) {
+                $query->where('payment_mode', 'momo')
+                    ->where('transaction_status', 'Success');
+            }, function ($query) {
+                $query->where('payment_mode', '!=', 'momo');
+            })
+            ->get();
+
+        $properties = Property::orderBy('created_at', 'DESC')
+            ->where('customer_name', $citizen->id)
+            ->get();
+
+        $businesses = Business::orderBy('created_at', 'DESC')
+            ->where('citizen_account_number', $citizen->id)
+            ->get();
+
+        $totalArrears = $bills->sum('arrears');
+        $totalAmount = $bills->sum('amount');
+
+        $customerData = [
+            'properties' => isset($properties) ? $properties : [],
+            'businesses' => isset($businesses) ? $businesses : [],
+            'total' => isset($properties) ? number_format(collect($properties)->sum('ratable_value'), 2) : 0,
+            'bills' => isset($bills) ? $bills : [],
+            'payments' => isset($payments) ? $payments : [],
+            'totalArrears' => isset($totalArrears) ? number_format($totalArrears, 2) : 0,
+            'totalAmount' => isset($totalAmount) ? number_format($totalAmount, 2) : 0,
+            'totalDue' => isset($totalArrears) && isset($totalAmount) ? number_format($totalArrears + $totalAmount, 2) : 0,
+            'paymentTotal' => isset($payments) ? number_format(collect($payments)->sum('amount'), 2) : 0
+        ];
+
+        return view('properties.show', compact('property', 'customerData'));
     }
 
     /**
@@ -384,5 +439,38 @@ class PropertyController extends Controller
         return response()->json([
             'message' => $blocks
         ]);
+    }
+
+    public function import()
+    {
+        return view('properties.import');
+    }
+
+    public function importData(ImportPropertyRequest $request)
+    {
+        try {
+            $data = $request->validated();
+            $createdBy = $request->user()->id;
+
+            $import = (new PropertiesImport($createdBy));
+            $import->import($request->file('file'));
+
+            return redirect()->route('properties.index')->with('status', 'Customer property data uploaded successfully.');
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $exception) {
+            throw ValidationException::withMessages([
+                'file' => collect($exception->errors())->flatten()->toArray(),
+            ]);
+        }
+    }
+
+    public function downloadTemplate()
+    {
+        $filePath = public_path('assets/templates/property_template.xlsx');
+
+        if (!file_exists($filePath)) {
+            return response()->json(['error' => 'File not found'], 404);
+        }
+
+        return Response::download($filePath, 'property_template.xlsx');
     }
 }

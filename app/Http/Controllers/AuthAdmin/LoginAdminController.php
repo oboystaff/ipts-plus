@@ -5,11 +5,16 @@ namespace App\Http\Controllers\AuthAdmin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ChangePasswordRequest;
 use App\Http\Requests\Auth\LoginAdminRequest;
+use App\Http\Requests\ChangePassword\ChangePasswordRequest as ChangePasswordChangePasswordRequest;
+use App\Http\Requests\ChangePassword\SendOTPRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CustomerType;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Jobs\OTP\SendPasswordChangeOTPSMS;
+use App\Models\OTP;
 
 
 class LoginAdminController extends Controller
@@ -99,6 +104,47 @@ class LoginAdminController extends Controller
         $user = $request->user();
 
         $user->update($data);
+
+        return redirect()->route('auth.index')->with('status', 'Password changed successfully');
+    }
+
+    public function sendOTP()
+    {
+        return view('auth.change-password-otp');
+    }
+
+    public function sendUserOTP(SendOTPRequest $request)
+    {
+        $user = User::where('phone', $request->phone)->first();
+
+        if (empty($user)) {
+            return redirect()->route('auth.sendOTP')->with('error', 'Phone number does not exist for any of the account!');
+        }
+
+        if ($user) {
+            dispatch(new SendPasswordChangeOTPSMS($user));
+        }
+
+        return redirect()->route('auth.changePasswordFront')->with('status', 'OTP for password reset sent successfully');
+    }
+
+    public function changePasswordFront()
+    {
+        return view('auth.change-password-front');
+    }
+
+    public function changePasswordFrontWa(ChangePasswordChangePasswordRequest $request)
+    {
+        $data = $request->validated();
+        $data['password'] = Hash::make($data['password']);
+
+        $otp = OTP::where('code', $data['code'])->first();
+
+        if ($otp) {
+            $user = User::where('id', $otp->citizen_id)->first();
+            $user->update($data);
+            OTP::where('citizen_id', $user->id)->delete();
+        }
 
         return redirect()->route('auth.index')->with('status', 'Password changed successfully');
     }

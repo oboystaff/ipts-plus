@@ -3,13 +3,18 @@
 namespace App\Http\Controllers\Rate;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Import\ImportPropertyRateRequest;
 use App\Http\Requests\Rate\CreateRateRequest;
 use App\Http\Requests\Rate\UpdateRateRequest;
+use App\Imports\PropertyRate\PropertyRateImport;
 use App\Models\Rate;
 use App\Models\Zone;
 use App\Models\Assembly;
 use App\Models\PropertyUser;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Response;
+
 
 class RateController extends Controller
 {
@@ -93,5 +98,38 @@ class RateController extends Controller
         return response()->json([
             'message' => $propertyUse
         ]);
+    }
+
+    public function import()
+    {
+        return view('rates.import');
+    }
+
+    public function importData(ImportPropertyRateRequest $request)
+    {
+        try {
+            $data = $request->validated();
+            $createdBy = $request->user()->id;
+
+            $import = (new PropertyRateImport($createdBy));
+            $import->import($request->file('file'));
+
+            return redirect()->route('rates.index')->with('status', 'Property rate data uploaded successfully.');
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $exception) {
+            throw ValidationException::withMessages([
+                'file' => collect($exception->errors())->flatten()->toArray(),
+            ]);
+        }
+    }
+
+    public function downloadTemplate()
+    {
+        $filePath = public_path('assets/templates/property_rates_template.xlsx');
+
+        if (!file_exists($filePath)) {
+            return response()->json(['error' => 'File not found'], 404);
+        }
+
+        return Response::download($filePath, 'property_rates_template.xlsx');
     }
 }

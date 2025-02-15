@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Login - IPTS </title>
+    <title>Reset Password - IPRS </title>
     <meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template">
     <meta name="Author" content="Spruko Technologies Private Limited">
     <meta name="keywords"
@@ -28,8 +28,6 @@
 
     <!-- Icons Css -->
     <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
-
-
 </head>
 
 <body>
@@ -106,55 +104,59 @@
                                         aria-label="Close"></button>
                                 </div>
                             @endif
+
                             <!-- Registration Form -->
                             <div class="mb-4 text-center">
-                                <h4 class="mb-3">Login</h4>
-                                <p class="text-muted">Please fill in the details to Login.</p>
+                                <h5 class="mb-3">Reset Your IPRS Account Password</h5>
+                                <p class="text-muted">Please fill in the details to reset your password.</p>
                             </div>
-                            <form action="{{ route('auth.login') }}" method="post">
+                            <form action="{{ route('auth.changePasswordFrontWa') }}" method="post">
                                 @csrf
 
-                                <div class="form-group first">
-                                    <label for="email" class="form-label"><b>Phone number</b></label>
-                                    <input type="text" class="form-control @error('username') is-invalid @enderror"
-                                        placeholder="Phone number" id="username" name="username">
+                                <div class="form-group first mb-4">
+                                    <label for="code" class="form-label"><b>New OTP</b></label>
+                                    <input type="text" class="form-control @error('code') is-invalid @enderror"
+                                        id="code" name="code" placeholder="Enter your new OTP">
 
-                                    @error('username')
-                                        <span class="invalid-feedback" role="alert">
-                                            {{ $message }}
-                                        </span>
+                                    @error('code')
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
-                                <div class="form-group last mb-3">
-                                    </br>
-                                    <label for="password" class="form-label"><b>Password</b></label>
+                                <div class="form-group first mb-4">
+                                    <label for="password" class="form-label"><b>New Password</b></label>
                                     <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                        placeholder="Password" id="password" name="password">
-                                    </br>
+                                        id="password" name="password" placeholder="Enter your new password">
 
                                     @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            {{ $message }}
-                                        </span>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
-                                <input type="submit" value="Log In" class="text-white btn btn-block btn-custom"
-                                    style="width: 100%;">
+                                <div class="form-group last mb-4">
+                                    <label for="password_confirmation" class="form-label"><b>Confirm
+                                            Password</b></label>
+                                    <input type="password"
+                                        class="form-control @error('password_confirmation') is-invalid @enderror"
+                                        id="password_confirmation" name="password_confirmation"
+                                        placeholder="Confirm your new password">
+
+                                    @error('password_confirmation')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <input type="submit" value="Change Password"
+                                    class="text-white btn btn-block btn-custom" style="width: 100%;">
                             </form>
 
-
-                            <!-- Registration Link -->
                             <div class="mt-3 text-center">
-                                <p>Don't have an account? <a href="{{ route('auth.register') }}"
-                                        style="color: #f37429;">Click here to
-                                        register.</a></p>
-                                <p>Forget Password? <a class="text-primary" href="{{ route('auth.sendOTP') }}"
-                                        style="color: #f37429;">Reset
-                                        Password Here </a></p>
+                                <p>Already have an account? <a href="{{ route('auth.index') }}"
+                                        style="color: #f37429;">Sign In</a> or <a href="{{ route('auth.sendOTP') }}"
+                                        style="color: #f37429;">Resend OTP </a></p>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

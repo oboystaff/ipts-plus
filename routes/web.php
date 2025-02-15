@@ -27,7 +27,7 @@ use App\Http\Controllers\Report;
 use App\Http\Controllers\AgentAssignment\AgentAssignmentController;
 use App\Http\Controllers\TaskAssignment\TaskAssignmentController;
 use App\Http\Controllers\CustomerSupport\CustomerSupportController;
-
+use App\Models\Citizen;
 
 Route::get('/faqAction', [Dashboard\DashboardController::class, 'faqAction'])->name('dashboard.faq');
 
@@ -93,6 +93,9 @@ Route::group(['prefix' => 'property', 'middleware' => 'auth:sanctum'], function 
     Route::post('/assign-citizen', [PropertyController::class, 'assignCitizen'])->name('properties.assignCitizen');
     Route::get('/{property}', [PropertyController::class, 'show'])->name('properties.show');
     Route::post('/block/data', [PropertyController::class, 'block'])->name('ajax.block');
+    Route::get('/import/data', [PropertyController::class, 'import'])->name('properties.import');
+    Route::post('/import/data', [PropertyController::class, 'importData'])->name('properties.importData');
+    Route::get('/template/data', [PropertyController::class, 'downloadTemplate'])->name('properties.downloadTemplate');
 });
 
 
@@ -152,6 +155,9 @@ Route::group(['prefix' => 'citizen', 'middleware' => 'auth:sanctum'], function (
     Route::get('/view/property/{property}', [CitizenController::class, 'viewProperty'])->name('citizens.viewProperty');
     Route::get('/view/business/{business}', [CitizenController::class, 'viewBusiness'])->name('citizens.viewBusiness');
     Route::get('/view/payment/{payment}', [CitizenController::class, 'viewPayment'])->name('citizens.viewPayment');
+    Route::get('/import/data', [CitizenController::class, 'import'])->name('citizens.import');
+    Route::post('/import/data', [CitizenController::class, 'importData'])->name('citizens.importData');
+    Route::get('/template/data', [CitizenController::class, 'downloadTemplate'])->name('citizens.downloadTemplate');
 });
 
 // Route for Customer Types
@@ -178,6 +184,10 @@ Route::group(['prefix' => ''], function () {
     Route::get('/logout', [AuthAdmin\LoginAdminController::class, 'logout'])->name('auth.logout');
     Route::get('/change/password', [AuthAdmin\LoginAdminController::class, 'change'])->name('auth.change');
     Route::post('/change/password', [AuthAdmin\LoginAdminController::class, 'changePassword'])->name('auth.changePassword');
+    Route::get('/change/password/front', [AuthAdmin\LoginAdminController::class, 'changePasswordFront'])->name('auth.changePasswordFront');
+    Route::post('/change/password/front', [AuthAdmin\LoginAdminController::class, 'changePasswordFrontWa'])->name('auth.changePasswordFrontWa');
+    Route::get('/send/otp', [AuthAdmin\LoginAdminController::class, 'sendOTP'])->name('auth.sendOTP');
+    Route::post('/send/otp', [AuthAdmin\LoginAdminController::class, 'sendUserOTP'])->name('auth.sendUserOTP');
 });
 
 
@@ -288,6 +298,9 @@ Route::group(['prefix' => 'rate', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/{rate}/edit', [RateController::class, 'edit'])->name('rates.edit');
     Route::post('/{rate}/update', [RateController::class, 'update'])->name('rates.update');
     Route::post('/property-use', [RateController::class, 'propertyUse'])->name('rates.property-use');
+    Route::get('/import/data', [RateController::class, 'import'])->name('rates.import');
+    Route::post('/import/data', [RateController::class, 'importData'])->name('rates.importData');
+    Route::get('/template', [RateController::class, 'downloadTemplate'])->name('rates.downloadTemplate');
 });
 
 Route::group(['prefix' => 'bus-rate', 'middleware' => 'auth:sanctum'], function () {
@@ -297,6 +310,9 @@ Route::group(['prefix' => 'bus-rate', 'middleware' => 'auth:sanctum'], function 
     Route::get('/{rate}/show', [BusRateController::class, 'show'])->name('rates.bus.show');
     Route::get('/{rate}/edit', [BusRateController::class, 'edit'])->name('rates.bus.edit');
     Route::post('/{rate}/update', [BusRateController::class, 'update'])->name('rates.bus.update');
+    Route::get('/import/data', [BusRateController::class, 'import'])->name('rates.bus.import');
+    Route::post('/import/data', [BusRateController::class, 'importData'])->name('rates.bus.importData');
+    Route::get('/template', [BusRateController::class, 'downloadTemplate'])->name('rates.bus.downloadTemplate');
 });
 
 Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function () {
@@ -344,4 +360,11 @@ Route::group(['prefix' => 'customer-support', 'middleware' => 'auth:sanctum'], f
     Route::get('/show/{customerSupport}', [CustomerSupportController::class, 'show'])->name('customer-supports.show');
     Route::get('/edit/{customerSupport}', [CustomerSupportController::class, 'edit'])->name('customer-supports.edit');
     Route::post('/update/{customerSupport}', [CustomerSupportController::class, 'update'])->name('customer-supports.update');
+});
+
+Route::get('/test', function () {
+    //$payment = \App\Actions\Payment\MakePayment::acceptPayment();
+    $sms = \App\Actions\SMS\SendSMS::sendSMS('0248593031', 'Hello world');
+
+    return $sms;
 });

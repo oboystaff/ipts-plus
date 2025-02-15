@@ -57,6 +57,39 @@ $(function (e) {
         },
     });
 
+    $('#file-export2').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        language: {
+            searchPlaceholder: 'Search...',
+            sSearch: '',
+        },
+    });
+
+    $('#file-export3').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        language: {
+            searchPlaceholder: 'Search...',
+            sSearch: '',
+        },
+    });
+
+    $('#file-export4').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        language: {
+            searchPlaceholder: 'Search...',
+            sSearch: '',
+        },
+    });
+
     // $('#file-export').DataTable({
     //     dom: 'Bfrtip',
     //     buttons: [

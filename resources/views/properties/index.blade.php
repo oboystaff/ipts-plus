@@ -205,6 +205,11 @@
                                 <a href="{{ route('properties.create') }}" class="btn btn-primary btn-sm ms-2">+ Create
                                     Customer Property</a>
                             @endcan
+
+                            @can('properties.create')
+                                <a href="{{ route('properties.import') }}" class="btn btn-success btn-sm ms-2">+ Upload Bulk
+                                    Customer Property</a>
+                            @endcan
                         </div>
                     </div>
 
@@ -239,8 +244,8 @@
                                     @foreach ($data['properties'] as $index => $property)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            <td>{{ $property->entityType->name ?? '' }}</td>
-                                            <td>{{ $property->entityType->category ?? '' }}</td>
+                                            <td>{{ $property->entityType->name ?? 'N/A' }}</td>
+                                            <td>{{ $property->entityType->category ?? 'N/A' }}</td>
                                             {{-- <td>{{ $property->digital_address }}</td>
                                             <td>{{ $property->location }}</td> --}}
                                             {{-- <td>{{ $property->street_name }}</td> --}}
@@ -252,7 +257,6 @@
                                                     <span class="badge bg-danger">No</span>
                                                 @endif
                                             </td> --}}
-                                            <td>{{ $property->property_number }}</td>
                                             <td>
                                                 @if ($property->rated === 'Yes')
                                                     <span class="badge bg-success">Yes</span>
@@ -260,6 +264,7 @@
                                                     <span class="badge bg-danger">No</span>
                                                 @endif
                                             </td>
+                                            <td>{{ $property->property_number }}</td>
                                             {{-- <td>{{ $property->customer->account_number ?? 'N/A' }}</td> --}}
                                             {{-- <td>{{ $property->customer->first_name ?? '' }}
                                                 {{ $property->customer->last_name ?? 'N/A' }}

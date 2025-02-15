@@ -254,7 +254,12 @@
                         <div class="card-title">Rate Payer Management / All Rate Payers</div>
                         <div class="d-flex align-items-center">
                             @can('customers.create')
-                                <a href="{{ route('citizens.create') }}" class="btn btn-primary btn-sm ms-2">+ Create Add New
+                                <a href="{{ route('citizens.create') }}" class="btn btn-primary btn-sm ms-2">+ Add New
+                                    Rate Payer</a>
+                            @endcan
+
+                            @can('customers.create')
+                                <a href="{{ route('citizens.import') }}" class="btn btn-success btn-sm ms-2">+ Upload Bulk
                                     Rate Payer</a>
                             @endcan
                         </div>

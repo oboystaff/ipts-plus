@@ -31,8 +31,13 @@
 
                         <div class="d-flex align-items-center">
                             @can('rates.create')
-                                <a href="{{ route('rates.bus.create') }}" class="btn btn-primary btn-sm ms-2">+ Create
+                                <a href="{{ route('rates.bus.create') }}" class="btn btn-primary btn-sm ms-2">+ Create BOP
                                     Rate</a>
+                            @endcan
+
+                            @can('rates.create')
+                                <a href="{{ route('rates.bus.import') }}" class="btn btn-success btn-sm ms-2">+ Upload Bulk
+                                    BOP Rate</a>
                             @endcan
                         </div>
                     </div>

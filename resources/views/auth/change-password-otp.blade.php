@@ -98,62 +98,62 @@
                 <div class="col-xxl-4 col-lg-6 col-md-8 col-12"> <!-- Adjusted width classes -->
                     <div class="card custom-card my-4 border">
                         <div class="card-body">
+                            <!-- Registration Form -->
+                            <div class="mb-4 text-center">
+                                <h4 class="mb-3">Send OTP</h4>
+                                <p class="text-muted">Please fill in the details to reset password.</p>
+                            </div>
 
                             @if (session()->has('status'))
                                 <div class="alert alert-success alert-dismissible fade show">
+                                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+                                        stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                        class="me-2">
+                                        <polyline points="9 11 12 14 22 4"></polyline>
+                                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11">
+                                        </path>
+                                    </svg>
                                     <strong>{{ session('status') }}</strong>
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
+                                        aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
+                                    </button>
                                 </div>
                             @endif
-                            <!-- Registration Form -->
-                            <div class="mb-4 text-center">
-                                <h4 class="mb-3">Login</h4>
-                                <p class="text-muted">Please fill in the details to Login.</p>
-                            </div>
-                            <form action="{{ route('auth.login') }}" method="post">
+
+                            @if (session()->has('error'))
+                                <div class="alert alert-danger alert-dismissible fade show">
+                                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+                                        stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                        class="me-2">
+                                        <polyline points="9 11 12 14 22 4"></polyline>
+                                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11">
+                                        </path>
+                                    </svg>
+                                    <strong>{{ session('error') }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
+                                    </button>
+                                </div>
+                            @endif
+
+                            <form action="{{ route('auth.sendUserOTP') }}" method="post">
                                 @csrf
 
-                                <div class="form-group first">
-                                    <label for="email" class="form-label"><b>Phone number</b></label>
-                                    <input type="text" class="form-control @error('username') is-invalid @enderror"
-                                        placeholder="Phone number" id="username" name="username">
+                                <div class="form-group first mb-4">
+                                    <label for="email" class="form-label"><b>Account Phone number</b></label>
+                                    <input type="text" class="form-control @error('phone') is-invalid @enderror"
+                                        placeholder="Account Phone number" id="phone" name="phone">
 
-                                    @error('username')
+                                    @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             {{ $message }}
                                         </span>
                                     @enderror
                                 </div>
 
-                                <div class="form-group last mb-3">
-                                    </br>
-                                    <label for="password" class="form-label"><b>Password</b></label>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                        placeholder="Password" id="password" name="password">
-                                    </br>
-
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
-
-                                <input type="submit" value="Log In" class="text-white btn btn-block btn-custom"
+                                <input type="submit" value="Send OTP" class="text-white btn btn-block btn-custom"
                                     style="width: 100%;">
                             </form>
-
-
-                            <!-- Registration Link -->
-                            <div class="mt-3 text-center">
-                                <p>Don't have an account? <a href="{{ route('auth.register') }}"
-                                        style="color: #f37429;">Click here to
-                                        register.</a></p>
-                                <p>Forget Password? <a class="text-primary" href="{{ route('auth.sendOTP') }}"
-                                        style="color: #f37429;">Reset
-                                        Password Here </a></p>
-                            </div>
                         </div>
                     </div>
                 </div>

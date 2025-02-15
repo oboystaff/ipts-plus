@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> IPTS - Level 10 </title>
+    <title> IPRS - Level 10 </title>
     <meta name="Description" content="IPTS- Level 10">
     <meta name="Author" content="IPTS- Level 10">
     <meta name="keywords" content="IPTS- Level 10">
@@ -1211,7 +1211,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
     <!-- Internal Datatables JS -->
-    <script src="{{ asset('assets/js/datatables.js') }}"></script>
+    <script src="{{ asset('assets/js/datatables.js?t=' . time()) }}"></script>
 
     <!-- Custom-Switcher JS -->
     <script src="{{ asset('assets/js/custom-switcher.js') }}"></script>
