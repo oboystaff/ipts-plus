@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPTS - Integrated Property Tax System</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assetsfront/images/fav.png') }}">
+    <title>IPRS - Integrated Property Tax System</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/assetsfront/images/fav.png') }}">
     <link rel="stylesheet" href="{{ asset('assets/assetsfront/css/plugins/swiper.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/assetsfront/css/plugins/fontawesome-5.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/assetsfront/css/plugins/animate.min.css') }}">
@@ -57,16 +57,16 @@
         <!-- inner menu area desktop start -->
         <div class="rts-sidebar-menu-desktop">
             <a class="logo-1" href="#"><img style="width: 70%;" class="logo"
-                    src="{{ asset('assets/assetsfront/images/logo/ipts-logo-main.png') }}" alt="IPTS_logo"></a>
+                    src="{{ asset('assets/assetsfront/images/logo/ipts-logo-main.png') }}" alt="IPRS_logo"></a>
             <a class="logo-2" href="#"><img style="width: 70%;" class="logo"
-                    src="{{ asset('assets/assetsfront/images/logo/ipts-logo-main.png') }}" alt="IPTS_logo"></a>
+                    src="{{ asset('assets/assetsfront/images/logo/ipts-logo-main.png') }}" alt="IPRS_logo"></a>
             <a class="logo-3" href="#"><img style="width: 70%;" class="logo"
-                    src="{{ asset('assets/assetsfront/images/logo/ipts-logo-main.png') }}" alt="IPTS_logo"></a>
+                    src="{{ asset('assets/assetsfront/images/logo/ipts-logo-main.png') }}" alt="IPRS_logo"></a>
             <a class="logo-4" href="#"><img style="width: 70%;" class="logo"
-                    src="{{ asset('assets/assetsfront/images/logo/ipts-logo-main.png') }}" alt="IPTS_logo"></a>
+                    src="{{ asset('assets/assetsfront/images/logo/ipts-logo-main.png') }}" alt="IPRS_logo"></a>
             <div class="body d-none d-xl-block">
                 <p class="disc">
-                    IPTS is a transformative solution designed to streamline revenue collection and enhance transparency
+                    IPRS is a transformative solution designed to streamline revenue collection and enhance transparency
                     for local assemblies across Africa.
                 </p>
                 <div class="get-in-touch">
@@ -125,7 +125,8 @@
                     <a href="#"><i class="fab fa-whatsapp"></i></a>
                     <!-- <a href="#"><i class="fab fa-linkedin"></i></a> -->
                 </div>
-                <a href="#" class="rts-btn btn-primary ml--20 ml_sm--5 header-one-btn quote-btnmenu">Log in</a>
+                <a href="{{ route('auth.index') }}"
+                    class="rts-btn btn-primary ml--20 ml_sm--5 header-one-btn quote-btnmenu">Log in</a>
             </div>
         </div>
         <!-- inner menu area desktop End -->
@@ -204,6 +205,163 @@
                                         <span class="subtitle-banner">A Smarter Way to Manage Revenue</span>
                                         <!-- type headline start-->
                                         <h1 class="title cd-headline clip is-full-width">
+                                            Smarter Local Revenue
+                                        </h1>
+                                        <p class="disc">
+                                            The Integrated Property Tax System equips local governments with tools to
+                                            maximize revenue collection, reduce inefficiencies, and ensure
+                                            accountability. Drive sustainable development with data-driven insights and
+                                            seamless processes.
+                                        </p>
+                                        <div class="button-group">
+                                            <a href="{{ route('auth.register') }} " class="rts-btn btn-primary-2">
+                                                Sign Up</a>
+                                            <a href="{{ route('auth.index') }}"
+                                                class="rts-btn btn-primary-2 transparent">Sign In
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class=" bg_banner-three eight-4 bg_image rts-section-gap">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="banner-three-inner">
+                                        <span class="subtitle-banner">A Smarter Way to Manage Revenue</span>
+                                        <!-- type headline start-->
+                                        <h1 class="title cd-headline clip is-full-width">
+                                            Effortless Revenue Mobilization
+                                        </h1>
+                                        <p class="disc">
+                                            The Integrated Property Tax System equips local governments with tools to
+                                            maximize revenue collection, reduce inefficiencies, and ensure
+                                            accountability. Drive sustainable development with data-driven insights and
+                                            seamless processes.
+                                        </p>
+                                        <div class="button-group">
+                                            <a href="{{ route('auth.register') }} " class="rts-btn btn-primary-2">
+                                                Sign Up</a>
+                                            <a href="{{ route('auth.index') }}"
+                                                class="rts-btn btn-primary-2 transparent">Sign In
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="swiper-slide">
+                    <div class=" bg_banner-three eight-5 bg_image rts-section-gap">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="banner-three-inner">
+                                        <span class="subtitle-banner">A Smarter Way to Manage Revenue</span>
+                                        <!-- type headline start-->
+                                        <h1 class="title cd-headline clip is-full-width">
+                                            Digital Revenue Growth
+                                        </h1>
+                                        <p class="disc">
+                                            The Integrated Property Tax System equips local governments with tools to
+                                            maximize revenue collection, reduce inefficiencies, and ensure
+                                            accountability. Drive sustainable development with data-driven insights and
+                                            seamless processes.
+                                        </p>
+                                        <div class="button-group">
+                                            <a href="{{ route('auth.register') }} " class="rts-btn btn-primary-2">
+                                                Sign Up</a>
+                                            <a href="{{ route('auth.index') }}"
+                                                class="rts-btn btn-primary-2 transparent">Sign In
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+
+                    <div class=" bg_banner-three eight-6 bg_image rts-section-gap">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="banner-three-inner">
+                                        <span class="subtitle-banner">A Smarter Way to Manage Revenue</span>
+                                        <!-- type headline start-->
+                                        <h1 class="title cd-headline clip is-full-width">
+                                            Optimize Local Finances
+                                        </h1>
+                                        <p class="disc">
+                                            The Integrated Property Tax System equips local governments with tools to
+                                            maximize revenue collection, reduce inefficiencies, and ensure
+                                            accountability. Drive sustainable development with data-driven insights and
+                                            seamless processes.
+                                        </p>
+                                        <div class="button-group">
+                                            <a href="{{ route('auth.register') }} " class="rts-btn btn-primary-2">
+                                                Sign Up</a>
+                                            <a href="{{ route('auth.index') }}"
+                                                class="rts-btn btn-primary-2 transparent">Sign In
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class=" bg_banner-three eight-7 bg_image rts-section-gap">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="banner-three-inner">
+                                        <span class="subtitle-banner">A Smarter Way to Manage Revenue</span>
+                                        <!-- type headline start-->
+                                        <h1 class="title cd-headline clip is-full-width">
+                                            Seamless Revenue Collection
+                                        </h1>
+                                        <p class="disc">
+                                            The Integrated Property Tax System equips local governments with tools to
+                                            maximize revenue collection, reduce inefficiencies, and ensure
+                                            accountability. Drive sustainable development with data-driven insights and
+                                            seamless processes.
+                                        </p>
+                                        <div class="button-group">
+                                            <a href="{{ route('auth.register') }} " class="rts-btn btn-primary-2">
+                                                Sign Up</a>
+                                            <a href="{{ route('auth.index') }}"
+                                                class="rts-btn btn-primary-2 transparent">Sign In
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+
+                    <div class=" bg_banner-three eight-8 bg_image rts-section-gap">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="banner-three-inner">
+                                        <span class="subtitle-banner">A Smarter Way to Manage Revenue</span>
+                                        <!-- type headline start-->
+                                        <h1 class="title cd-headline clip is-full-width">
                                             Empowering Local Governments
                                         </h1>
                                         <p class="disc">
@@ -225,6 +383,71 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="swiper-slide">
+                    <div class=" bg_banner-three eight-9 bg_image rts-section-gap">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="banner-three-inner">
+                                        <span class="subtitle-banner">A Smarter Way to Manage Revenue</span>
+                                        <!-- type headline start-->
+                                        <h1 class="title cd-headline clip is-full-width">
+                                            Empowering Local Governments
+                                        </h1>
+                                        <p class="disc">
+                                            The Integrated Property Tax System equips local governments with tools to
+                                            maximize revenue collection, reduce inefficiencies, and ensure
+                                            accountability. Drive sustainable development with data-driven insights and
+                                            seamless processes.
+                                        </p>
+                                        <div class="button-group">
+                                            <a href="{{ route('auth.register') }} " class="rts-btn btn-primary-2">
+                                                Sign Up</a>
+                                            <a href="{{ route('auth.index') }}"
+                                                class="rts-btn btn-primary-2 transparent">Sign In
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="swiper-slide">
+                    <div class=" bg_banner-three eight-10 bg_image rts-section-gap">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="banner-three-inner">
+                                        <span class="subtitle-banner">A Smarter Way to Manage Revenue</span>
+                                        <!-- type headline start-->
+                                        <h1 class="title cd-headline clip is-full-width">
+                                            Empowering Local Governments
+                                        </h1>
+                                        <p class="disc">
+                                            The Integrated Property Tax System equips local governments with tools to
+                                            maximize revenue collection, reduce inefficiencies, and ensure
+                                            accountability. Drive sustainable development with data-driven insights and
+                                            seamless processes.
+                                        </p>
+                                        <div class="button-group">
+                                            <a href="{{ route('auth.register') }} " class="rts-btn btn-primary-2">
+                                                Sign Up</a>
+                                            <a href="{{ route('auth.index') }}"
+                                                class="rts-btn btn-primary-2 transparent">Sign In
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </div>
         <div class="swiper-navigation">
@@ -259,7 +482,7 @@
                         </div>
                         <div class="content-wrapper">
                             <p class="disc">
-                                IPTS is redefining how communities across Africa collect and manage revenue. By
+                                IPRS is redefining how communities across Africa collect and manage revenue. By
                                 leveraging technology and promoting transparency, it ensures efficient processes that
                                 empower citizens and drive sustainable development.
                             </p>
@@ -347,7 +570,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <p class="decs">By integrating advanced technology and user-focused design, IPTS empowers
+                    <p class="decs">By integrating advanced technology and user-focused design, IPRS empowers
                         citizens and authorities alike to participate in transparent and efficient revenue collection.
                     </p>
                 </div>
@@ -425,7 +648,7 @@
                         <p class="pre-title">
                             FEATURES
                         </p>
-                        <h2 class="title">Key Features of the IPTS</h2>
+                        <h2 class="title">Key Features of the IPRS</h2>
                     </div>
                 </div>
             </div>
@@ -562,12 +785,12 @@
             <div class="row">
                 <div class="col-12 mt_sm--30">
                     <div class="title-area about-company">
-                        <span>About IPTS</span>
+                        <span>About IPRS</span>
                         <h2 class="title">Empowering Communities with Efficient Tax Solutions</h2>
                     </div>
                     <div class="about-company-wrapper">
                         <p class="disc">
-                            The Integrated Property Tax System (IPTS) is designed to revolutionize the way property
+                            The Integrated Property Tax System (IPRS) is designed to revolutionize the way property
                             taxes are managed and collected across Africa. Our platform offers a seamless, transparent,
                             and efficient solution for both citizens and local governments.
                         </p>
@@ -594,10 +817,10 @@
                                         aria-labelledby="v-pills-home-tab">
                                         <!-- start tab content -->
                                         <div class="rts-tab-content-one">
-                                            {{-- <p><img src="{{ asset('assets/assetsfront/images/faq/transparency.jpg') }}"
-                                                    alt="Transparency"></p> --}}
+                                            <p><img src="{{ asset('assets/assetsfront/images/faq/transparency.jpg') }}"
+                                                    alt="Transparency"></p>
                                             <p class="disc">
-                                                IPTS ensures complete transparency in the tax collection process.
+                                                IPRS ensures complete transparency in the tax collection process.
                                                 Citizens can easily track their payments and see how their contributions
                                                 are being utilized for community development.
                                             </p>
@@ -654,7 +877,7 @@
                                             <p><img src="{{ asset('assets/assetsfront/images/faq/security.jpg') }}"
                                                     alt="Security"></p>
                                             <p class="disc">
-                                                Security is at the core of IPTS. We employ state-of-the-art security
+                                                Security is at the core of IPRS. We employ state-of-the-art security
                                                 measures to protect your personal and financial data, ensuring peace of
                                                 mind for all users.
                                             </p>
@@ -683,7 +906,7 @@
                                             <p><img src="{{ asset('assets/assetsfront/images/faq/community.jpg') }}"
                                                     alt="Community Impact"></p>
                                             <p class="disc">
-                                                Every tax payment made through IPTS directly contributes to the
+                                                Every tax payment made through IPRS directly contributes to the
                                                 development of local infrastructure and public services, fostering
                                                 growth and improving the quality of life in communities.
                                             </p>
@@ -723,13 +946,13 @@
                     <!-- project area left wrapper -->
                     <div class="title-area-project-w-in">
                         <span class="sub">
-                            Get Started with IPTS
+                            Get Started with IPRS
                         </span>
                         <h2 class="title">
                             Sign Up<br> <span>Today!</span>
                         </h2>
                         <p class="disc">
-                            Unlock the full potential of IPTS with our expert guidance and tailored solutions. Let’s
+                            Unlock the full potential of IPRS with our expert guidance and tailored solutions. Let’s
                             begin your journey toward seamless integration and success!
                         </p>
                     </div>
@@ -895,7 +1118,7 @@
                             Get Started?
                         </h3>
                         <p class="disc">
-                            Discover a smarter, simpler way to manage property taxes with IPTS. Join thousands already
+                            Discover a smarter, simpler way to manage property taxes with IPRS. Join thousands already
                             transforming their experience today!
                         </p>
                         <a class="rts-btn btn-primary-2 color-h-black" href="{{ route('auth.register') }}">Sign
@@ -905,7 +1128,7 @@
                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12 mt_sm--50">
                     <div class="footer-two-single-wized two">
                         <div class="wized-title-area">
-                            <h5 class="wized-title">IPTS Features</h5>
+                            <h5 class="wized-title">IPRS Features</h5>
                             <img src="{{ asset('assets/assetsfront/images/footer/under-title-2.png') }}"
                                 alt="finbiz_footer">
                         </div>
@@ -988,12 +1211,11 @@
                 <div class="col-lg-12">
                     <div class="copyright-h-2-wrapper">
                         <p class="disc">
-                            IPTS - Copyright 2025. All rights reserved.
+                            IPRS - Copyright 2025. All rights reserved.
                         </p>
                         <div class="right">
                             <ul>
                                 <li><a href="https://level10gh.com/">Powered By Level 10 </a></li>
-
                             </ul>
                         </div>
                     </div>
@@ -1034,8 +1256,10 @@
     <script src="{{ asset('assets/assetsfront/js/vendor/waw.js') }}"></script>
     <script src="{{ asset('assets/assetsfront/js/plugins/contact.form.js') }}"></script>
     <!-- main Js -->
-    <script src="{{ asset('assets/assetsfront/js/main.js?t=1234') }}"></script>
+    <script src="{{ asset('assets/assetsfront/js/main.js') }}"></script>
     <!-- scripts end form hear -->
 </body>
+
+
 
 </html>

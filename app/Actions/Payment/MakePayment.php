@@ -18,13 +18,10 @@ class MakePayment
 
             $merchantID = "TTM-00010135";
             $transactionID = str_pad(mt_rand(1, 999999999999), 12, '0', STR_PAD_LEFT);
-            $amount = str_pad(100, 12, '0', STR_PAD_LEFT);
             $callback_url = route('payments.callback');
 
-            // $base64Credentials = base64_encode("$apiUsername:$apiKey");
             $base64Credentials = base64_encode("$apiUsernameProd:$apiKeyProd");
 
-            // $url = "https://test.theteller.net/v1.1/transaction/process";
             $url = "https://prod2.theteller.net/process/transaction/async";
 
             $headers = [
@@ -43,7 +40,7 @@ class MakePayment
                 "callback_url" => $callback_url,
                 "subscriber_number" => '233248593031',
                 "r-switch" => 'MTN',
-                "reference" => "Dealboxx subscription",
+                "reference" => "Rate payer bill payment",
                 "merchant_data" => json_encode([]),
             ];
 
