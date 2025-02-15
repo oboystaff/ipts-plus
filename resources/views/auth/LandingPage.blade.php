@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('assets/assetsfront/css/plugins/animate.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/assetsfront/css/plugins/unicons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/assetsfront/css/vendor/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/assetsfront/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/assetsfront/css/style.css?t=' . time()) }}">
 </head>
 
 <body class="home-blue medium-blue onepage">
