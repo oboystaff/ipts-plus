@@ -24,7 +24,6 @@ use App\Http\Controllers\API\PropertyUse\PropertyUseController;
 use App\Http\Controllers\API\Dropdown\DropdownController;
 use App\Http\Controllers\API\Statement\StatementController;
 
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -40,7 +39,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/payment/callback', [PaymentTempController::class, 'paymentCallback'])->name('payments.callback');
+Route::post('/payment/callback', [PaymentController::class, 'paymentCallback'])->name('payments.callback');
 
 Route::post('/login', [LoginController::class, 'index']);
 Route::post('/send/otp', [LoginController::class, 'sendOTP']);

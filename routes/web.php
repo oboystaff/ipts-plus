@@ -363,8 +363,7 @@ Route::group(['prefix' => 'customer-support', 'middleware' => 'auth:sanctum'], f
 });
 
 Route::get('/test', function () {
-    //$payment = \App\Actions\Payment\MakePayment::acceptPayment();
-    $sms = \App\Actions\SMS\SendSMS::sendSMS('0248593031', 'Hello world');
+    $payment = \App\Actions\Payment\MakePayment::acceptPayment();
 
-    return $sms;
+    return $payment;
 });

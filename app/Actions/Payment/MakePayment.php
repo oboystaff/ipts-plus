@@ -10,33 +10,46 @@ class MakePayment
     public static function acceptPayment()
     {
         try {
+            $apiUsernameProd = "level679ceeb70a0e9";
+            $apiKeyProd = "MjkzMjM5M2M0MmFjNjM3ZGEzZDhiNjdiOTU3NmNiMTE=";
+
             $apiUsername = "level679ceeb70a0e9";
             $apiKey = "NjI5YzM5ODA1NzNmNDU4OGQ5MWNjMzdhYzFhNTI0YmU=";
+
             $merchantID = "TTM-00010135";
             $transactionID = str_pad(mt_rand(1, 999999999999), 12, '0', STR_PAD_LEFT);
             $amount = str_pad(100, 12, '0', STR_PAD_LEFT);
+            $callback_url = route('payments.callback');
 
-            $base64Credentials = base64_encode("$apiUsername:$apiKey");
+            // $base64Credentials = base64_encode("$apiUsername:$apiKey");
+            $base64Credentials = base64_encode("$apiUsernameProd:$apiKeyProd");
 
-            $url = "https://test.theteller.net/v1.1/transaction/process";
+            // $url = "https://test.theteller.net/v1.1/transaction/process";
+            $url = "https://prod2.theteller.net/process/transaction/async";
 
             $headers = [
                 'Content-Type' => 'application/json',
                 'Authorization' => "Basic $base64Credentials",
                 'Cache-Control' => 'no-cache',
+                "request-id" =>  $transactionID
             ];
 
-            $body = [
-                "amount" => $amount,
+            $payload = [
+                "amount" =>  0.1,
                 "processing_code" => "000200",
-                "transaction_id" => $transactionID,
-                "desc" => "Mobile Money Payment Test",
+                "transaction_id" => (string) $transactionID,
+                "desc" => "Rate payer bill payment",
                 "merchant_id" => $merchantID,
-                "subscriber_number" => "233248593031",
-                "r-switch" => "MTN"
+                "callback_url" => $callback_url,
+                "subscriber_number" => '233248593031',
+                "r-switch" => 'MTN',
+                "reference" => "Dealboxx subscription",
+                "merchant_data" => json_encode([]),
             ];
 
-            $response = Http::withHeaders($headers)->post($url, $body);
+            $response = Http::withHeaders($headers)->post($url, $payload)->json();
+
+            return $response;
 
             if ($response->successful()) {
                 return $response->json();
