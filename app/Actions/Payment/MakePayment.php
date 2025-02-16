@@ -39,8 +39,8 @@ class MakePayment
                 "desc" => "Rate payer bill payment",
                 "merchant_id" => $merchantID,
                 "callback_url" => $callback_url,
-                "subscriber_number" => '233574612234',
-                "r-switch" => 'TGO',
+                "subscriber_number" => '233248593031',
+                "r-switch" => 'MTN',
                 "reference" => "Rate payer bill payment",
                 "merchant_data" => json_encode([]),
             ];
