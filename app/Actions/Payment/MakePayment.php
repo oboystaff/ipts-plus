@@ -21,6 +21,8 @@ class MakePayment
             $amount = str_pad(100, 12, '0', STR_PAD_LEFT);
             $callback_url = route('payments.callback');
 
+            //MTN r-switch is MTN, AIRTELTIGO r-switch is TGO, TELECEL r-switch is VDF
+
             $base64Credentials = base64_encode("$apiUsernameProd:$apiKeyProd");
 
             $url = "https://prod2.theteller.net/process/transaction/async";
@@ -39,8 +41,8 @@ class MakePayment
                 "desc" => "Rate payer bill payment",
                 "merchant_id" => $merchantID,
                 "callback_url" => $callback_url,
-                "subscriber_number" => '233248593031',
-                "r-switch" => 'MTN',
+                "subscriber_number" => '233509391471',
+                "r-switch" => 'VDF',
                 "reference" => "Rate payer bill payment",
                 "merchant_data" => json_encode([]),
             ];
