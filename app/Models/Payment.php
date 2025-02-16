@@ -16,6 +16,7 @@ class Payment extends Model
         'phone',
         'transaction_status',
         'transaction_id',
+        'req_transaction_id',
         'amount',
         'prompt',
         'assembly_code',
