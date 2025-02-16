@@ -7,21 +7,17 @@ use Illuminate\Support\Str;
 
 class MakePayment
 {
-    public static function acceptPayment()
+    public static function acceptPayment($amount, $transactionId, $subscriberNumber, $network)
     {
         try {
             $apiUsernameProd = "level679ceeb70a0e9";
             $apiKeyProd = "MjkzMjM5M2M0MmFjNjM3ZGEzZDhiNjdiOTU3NmNiMTE=";
 
-            $apiUsername = "level679ceeb70a0e9";
-            $apiKey = "NjI5YzM5ODA1NzNmNDU4OGQ5MWNjMzdhYzFhNTI0YmU=";
+            // $apiUsername = "level679ceeb70a0e9";
+            // $apiKey = "NjI5YzM5ODA1NzNmNDU4OGQ5MWNjMzdhYzFhNTI0YmU=";
 
             $merchantID = "TTM-00010135";
-            $transactionID = str_pad(mt_rand(1, 999999999999), 12, '0', STR_PAD_LEFT);
-            $amount = str_pad(100, 12, '0', STR_PAD_LEFT);
             $callback_url = route('payments.callback');
-
-            //MTN r-switch is MTN, AIRTELTIGO r-switch is TGO, TELECEL r-switch is VDF
 
             $base64Credentials = base64_encode("$apiUsernameProd:$apiKeyProd");
 
@@ -31,18 +27,18 @@ class MakePayment
                 'Content-Type' => 'application/json',
                 'Authorization' => "Basic $base64Credentials",
                 'Cache-Control' => 'no-cache',
-                "request-id" =>  $transactionID
+                "request-id" =>  $transactionId
             ];
 
             $payload = [
-                "amount" =>  0.1,
+                "amount" =>  $amount,
                 "processing_code" => "000200",
-                "transaction_id" => (string) $transactionID,
+                "transaction_id" => (string) $transactionId,
                 "desc" => "Rate payer bill payment",
                 "merchant_id" => $merchantID,
                 "callback_url" => $callback_url,
-                "subscriber_number" => '233509391471',
-                "r-switch" => 'VDF',
+                "subscriber_number" => $subscriberNumber,
+                "r-switch" => $network,
                 "reference" => "Rate payer bill payment",
                 "merchant_data" => json_encode([]),
             ];
@@ -50,16 +46,6 @@ class MakePayment
             $response = Http::withHeaders($headers)->post($url, $payload)->json();
 
             return $response;
-
-            if ($response->successful()) {
-                return $response->json();
-            } else {
-                return [
-                    'status' => 'error',
-                    'message' => 'Transaction failed',
-                    'error' => $response->body()
-                ];
-            }
         } catch (\Exception $ex) {
             return $ex->getMessage();
         }

@@ -39,7 +39,7 @@
                                 <label for="paid_by">Amount: (<span style="color:green;font-weight:bold">Current Bill: GHS
                                         {{ $amountDue ?? 0 }}</span>)</label>
                                 <input type="text" class="form-control @error('amount') is-invalid @enderror"
-                                    id="amount" name="amount">
+                                    id="amount" name="amount" placeholder="Bill amount">
 
                                 @error('amount')
                                     <span class="invalid-feedback" role="alert">
@@ -67,7 +67,7 @@
                             <div class="form-group col-md-6 mb-4 phone">
                                 <label for="phone">Payer Phone:</label>
                                 <input type="text" class="form-control @error('phone') is-invalid @enderror"
-                                    id="phone" name="phone">
+                                    id="phone" name="phone" placeholder="Rate payer phone number">
 
                                 @error('phone')
                                     <span class="invalid-feedback" role="alert">
@@ -82,8 +82,8 @@
                                     name="network">
                                     <option disabled selected>Select Payment Network</option>
                                     <option value="MTN">MTN</option>
-                                    <option value="AIRTELTIGO">AIRTEL TIGO</option>
-                                    <option value="VODAFONE">VODAFONE</option>
+                                    <option value="TGO">AIRTEL TIGO</option>
+                                    <option value="VDF">VODAFONE</option>
                                 </select>
 
                                 @error('network')
