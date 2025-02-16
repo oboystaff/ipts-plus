@@ -183,13 +183,13 @@ class PaymentController extends Controller
 
             $response = MakePayment::acceptPayment($amount, $transactionId, $subscriberNumber, $network);
 
-            return $response;
-
-            if ($body['status'] === 'OK') {
+            if ($response['code'] === '000') {
 
                 $data = [
-                    'transaction_id' => $body['transactionid'],
-                    'prompt' => $body['reason']
+                    'transaction_id' => $response['transaction_id'],
+                    'req_transaction_id' => $response['req_transaction_id'],
+                    'prompt' => $response['reason'],
+                    'prompt_txt' => 'respond to the prompt on your phone'
                 ];
 
                 $payment->update($data);
@@ -217,12 +217,12 @@ class PaymentController extends Controller
                 if ($request->user()->access_level !== 'customer') {
                     return redirect()->route('payments.index')->with(
                         'status',
-                        'Payment processed successfully. Kindly ' . $data['prompt']
+                        'Payment processed successfully. Kindly ' . $data['prompt_txt']
                     );
                 } else {
                     return redirect()->route('dashboard.operational')->with(
                         'status',
-                        'Payment processed successfully. Kindly ' . $data['prompt']
+                        'Payment processed successfully. Kindly ' . $data['prompt_txt']
                     );
                 }
             } else {
