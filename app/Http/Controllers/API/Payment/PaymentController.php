@@ -174,15 +174,7 @@ class PaymentController extends Controller
         // Log the full request for debugging
         \Log::info('Payment Callback Received:', $request->all());
 
-        $validated = $request->validate([
-            'transaction_id' => 'required|string',
-            'status' => 'required|string',
-            'amount' => 'required|numeric',
-            'reference' => 'nullable|string',
-            'r-switch' => 'nullable|string',
-        ]);
-
-        $payment = Payment::where('transaction_id', $validated['transaction_id'])->first();
+        $payment = Payment::where('transaction_id', $request->transaction_id)->first();
 
         if (!$payment) {
             return response()->json(['error' => 'Payment not found'], 404);
@@ -190,14 +182,7 @@ class PaymentController extends Controller
 
         // Update the payment record based on the status
         $payment->update([
-            'status' => $validated['status'],
-            'transaction_response' => json_encode($request->all()),
+            'status' => ucfirst($request->status)
         ]);
-
-        if ($validated['status'] === 'Success') {
-            return response()->json(['message' => 'Payment successful', 'data' => $payment], 200);
-        } else {
-            return response()->json(['message' => 'Payment failed', 'data' => $payment], 400);
-        }
     }
 }
