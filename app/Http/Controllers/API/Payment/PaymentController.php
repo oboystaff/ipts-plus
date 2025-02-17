@@ -7,6 +7,9 @@ use App\Http\Requests\API\Payment\CreatePaymentRequest;
 use App\Models\Payment;
 use App\Models\Citizen;
 use Illuminate\Http\Request;
+use App\Actions\Payment\MakePayment;
+use App\Models\AuditTrail;
+use App\Models\ServiceRequest;
 
 
 class PaymentController extends Controller
@@ -28,12 +31,17 @@ class PaymentController extends Controller
 
     public function makePayment(CreatePaymentRequest $request)
     {
+        do {
+            $transactionID = str_pad(mt_rand(1, 999999999999), 12, '0', STR_PAD_LEFT);
+        } while (Payment::where('transaction_id', $transactionID)->exists());
+
         $paymentData = [
             'bills_id' => $request->input('bills_id'),
             'amount' => $request->input('amount'),
             'payment_mode' => $request->input('payment_mode'),
             'phone' => $request->input('phone'),
             'network' => $request->input('network'),
+            'transaction_id' => $request->input('payment_mode') == 'momo' ? $transactionID : null,
             'transaction_status' => $request->input('payment_mode') == 'momo' ? 'Pending' : 'Success',
             'assembly_code' => $request->input('assembly_code'),
             'created_by' => $request->user()->id ?? null
@@ -42,43 +50,50 @@ class PaymentController extends Controller
         $payment = Payment::create($paymentData);
 
         if ($request->input('payment_mode') == 'momo') {
-            $client = new \GuzzleHttp\Client();
+            $amount = $payment->amount;
+            $transactionId = $payment->transaction_id;
+            $subscriberNumber = $payment->phone;
+            $network = $payment->network;
 
-            $apiKey = '$2a$10$YKxaeD8IwH1SoCa0VrCHwuKXAELu8h2HFd8AsyPBs4k1YBovs2UhS';
-            $apiId = '1647';
+            if (substr($subscriberNumber, 0, 1) === '0') {
+                $subscriberNumber = '233' . substr($subscriberNumber, 1);
+            }
 
-            $response = $client->post('https://api.reddeonline.com/v1/receive', [
-                'headers' => [
-                    'ApiKey' => $apiKey,
-                    'Accept' => 'application/json',
-                    'Content-Type' => 'application/json',
-                    'Cache-Control' => 'no-cache'
-                ],
-                'json' => [
-                    'amount' => $request->input('amount'),
-                    'appid' => $apiId,
-                    'clientreference' => '123456',
-                    'clienttransid' => 'test2025donlinetest',
-                    'description' => 'Yearly Bill Payment',
-                    'nickname' => 'Yearly Bill Payment',
-                    'paymentoption' => $request->input('network'),
-                    'walletnumber' => $request->input('phone')
-                ]
-            ]);
+            $response = MakePayment::acceptPayment($amount, $transactionId, $subscriberNumber, $network);
 
-            $body = json_decode($response->getBody(), true);
-
-            if ($body['status'] === 'OK') {
+            if ($response['code'] === '000') {
 
                 $data = [
-                    'transaction_id' => $body['transactionid'],
-                    'prompt' => $body['reason']
+                    'transaction_id' => $response['transaction_id'],
+                    'req_transaction_id' => $response['req_transaction_id'],
+                    'prompt' => $response['reason'],
+                    'prompt_txt' => 'respond to the prompt on your phone'
                 ];
 
                 $payment->update($data);
 
+                $serviceData = [
+                    'user_id' => $request->user()->id,
+                    'service_used' => 'Bill Payment',
+                    'usage_date' => now(),
+                    'service_channel' => 'Web Portal',
+                    'status' => 'Completed'
+                ];
+
+                $auditTrailData = [
+                    'user_id' => $request->user()->id,
+                    'action_performed' => 'Bill Payment',
+                    'action_date' => now(),
+                    'ip_address' => $request->ip(),
+                    'device_used' => request()->userAgent(),
+                    'remarks' => 'Success'
+                ];
+
+                ServiceRequest::create($serviceData);
+                AuditTrail::create($auditTrailData);
+
                 return response()->json([
-                    'message' => 'Payment processed successfully. Kindly ' . $data['prompt'],
+                    'message' => 'Payment processed successfully. Kindly ' . $data['prompt_txt'],
                     'data' => $payment
                 ]);
             } else {

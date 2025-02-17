@@ -13,9 +13,6 @@ class MakePayment
             $apiUsernameProd = "level679ceeb70a0e9";
             $apiKeyProd = "MjkzMjM5M2M0MmFjNjM3ZGEzZDhiNjdiOTU3NmNiMTE=";
 
-            // $apiUsername = "level679ceeb70a0e9";
-            // $apiKey = "NjI5YzM5ODA1NzNmNDU4OGQ5MWNjMzdhYzFhNTI0YmU=";
-
             $merchantID = "TTM-00010135";
             $callback_url = route('payments.callback');
 
