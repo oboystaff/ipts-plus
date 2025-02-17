@@ -40,6 +40,8 @@ class MakePayment
                 "merchant_data" => json_encode([]),
             ];
 
+            \Log::info('Payment Payload:', $payload);
+
             $response = Http::withHeaders($headers)->post($url, $payload)->json();
 
             return $response;
