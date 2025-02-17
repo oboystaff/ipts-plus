@@ -26,7 +26,7 @@ class CreatePaymentRequest extends FormRequest
             'payment_mode' => ['required', 'string'],
             'amount' => ['required', 'numeric'],
             'phone' => ['required_if:payment_mode,momo', 'nullable', 'string'],
-            'network' => ['required_if:payment_mode,momo', 'nullable', 'string'],
+            'network' => ['required_if:payment_mode,momo', 'nullable', 'string', 'in:MTN,TGO,VDF'],
         ];
     }
 }
