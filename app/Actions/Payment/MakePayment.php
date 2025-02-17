@@ -36,7 +36,7 @@ class MakePayment
                 "callback_url" => $callback_url,
                 "subscriber_number" => $subscriberNumber,
                 "r-switch" => $network,
-                "reference" => "Rate payer bill payment",
+                "reference" => "Bill Payment",
                 "merchant_data" => json_encode([]),
             ];
 
