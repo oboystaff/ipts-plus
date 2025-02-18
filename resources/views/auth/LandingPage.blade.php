@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPRS - Integrated Property Tax System</title>
+    <title>IPRS - Integrated Property Rate System</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/assetsfront/images/fav.png') }}">
     <link rel="stylesheet" href="{{ asset('assets/assetsfront/css/plugins/swiper.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/assetsfront/css/plugins/fontawesome-5.css') }}">
@@ -613,7 +613,7 @@
                             </a>
                             <div class="content">
                                 <h5 class="title">Community-Centered Approach</h5>
-                                <p class="disc">CWe reinvest funds to enhance public services and infrastructure,
+                                <p class="disc">We reinvest funds to enhance public services and infrastructure,
                                     promoting sustainable development in every community.
                                 </p>
                             </div>
@@ -790,7 +790,7 @@
                     </div>
                     <div class="about-company-wrapper">
                         <p class="disc">
-                            The Integrated Property Tax System (IPRS) is designed to revolutionize the way property
+                            The Integrated Property Rate System (IPRS) is designed to revolutionize the way property
                             taxes are managed and collected across Africa. Our platform offers a seamless, transparent,
                             and efficient solution for both citizens and local governments.
                         </p>
