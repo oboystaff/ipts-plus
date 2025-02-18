@@ -505,7 +505,7 @@
 
     <div class="col-xxl-12">
         <div class="row">
-            {{-- <div class="col-xl-12">
+            <div class="col-xl-12">
                 <div class="card custom-card overflow-hidden">
                     <div class="card-header justify-content-between">
                         <div class="card-title">
@@ -542,7 +542,7 @@
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
             <div class="col-xl-12">
                 <div class="card custom-card income-card">
                     <div class="card-body p-0">
