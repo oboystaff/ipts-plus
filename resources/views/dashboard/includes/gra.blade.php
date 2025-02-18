@@ -1,5 +1,88 @@
 @include('dashboard.includes.analytics')
 
+<div class="col-xxl-12">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card custom-card overflow-hidden">
+                <div class="card-header justify-content-between">
+                    <div class="card-title">
+                        Revenue Statistics
+                    </div>
+
+                </div>
+                <div class="card-body text-center p-0">
+                    <div id="revenue-statistics1"></div>
+                    <div class="revenue-statistics">
+                        <div id="revenue-statistics"></div>
+                        <div class="chart-circle-value"></div>
+                    </div>
+
+                    @php
+                        // Define the totals
+                    @endphp
+                    <div class="row justify-content-center mt-4 p-3 gx-xl-1 gx-xxl-3">
+                        <div class="col col-xl-4 border-end border-inline-end-dashed">
+                            <span class="d-block text-muted mb-1 fs-12">Assembly Fund - (70%)</span>
+                            <span class="fw-semibold h6 mb-0 text-center">GHS {{ $total['assemblycut'] }}
+                                <i class="ti ti-arrow-up text-success"></i></span>
+                        </div>
+                        <div class="col col-xl-4 border-end border-inline-end-dashed">
+                            <span class="d-block text-muted mb-1 fs-12">GRA - (15%)</span>
+                            <span class="fw-semibold h6 mb-0 text-center">GHS {{ $total['gracut'] }}
+                                <i class="ti ti-arrow-down text-danger"></i></span>
+                        </div>
+                        <div class="col col-xl-4">
+                            <span class="d-block text-muted mb-1 fs-12">Level 10 - (15%)</span>
+                            <span class="fw-semibold h6 mb-0 text-center">GHS
+                                {{ $total['level10cut'] }}<i class="ti ti-arrow-up text-success"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12">
+            <div class="card custom-card income-card">
+                <div class="card-body p-0">
+                    <div class="d-flex align-items-center flex-wrap gap-2 lh-1 p-3">
+                        <div class="circle-content">
+                            <div id="income"></div>
+                            <i class='bx bx-wallet fs-5 text-success'></i>
+                        </div>
+                        <div class="d-flex flex-column flex-fill">
+                            <span class="fw-semibold h6 mb-2">GHS {{ $total['totalBusinessBill'] }}</span>
+                            <p class="fs-13 mb-0">Total Revenue Generated For BoP</p>
+                        </div>
+                        <div class="text-end">
+                            <span>This Month -AS AT
+                                {{ \Carbon\Carbon::now()->format('l, F j, Y h:i A') }}</span>
+                        </div>
+                    </div>
+                    <div id="income-chart"></div>
+                </div>
+            </div>
+            <div class="card custom-card expense-card">
+                <div class="card-body p-0">
+                    <div class="d-flex align-items-center flex-wrap gap-2 lh-1 p-3">
+                        <div class="circle-content">
+                            <div id="expense"></div>
+                            <i class='bx bx-dollar-circle fs-5 text-secondary'></i>
+                        </div>
+                        <div class="d-flex flex-column flex-fill">
+                            <span class="fw-semibold h6 mb-2">GHS {{ $total['totalPropertyBill'] }}</span>
+                            <p class="fs-13 mb-0">Total Revenue Generated For Property Rate </p>
+                        </div>
+                        <div class="text-end">
+                            <span>This Month AS AT-
+                                {{ \Carbon\Carbon::now()->format('l, F j, Y h:i A') }}</span>
+                        </div>
+                    </div>
+                    <div id="expenditure-chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row mb-4">
     <div class="col-xl-8">
         <div class="card custom-card h-100">
