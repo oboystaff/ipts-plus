@@ -143,13 +143,14 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="banner-three-inner">
-                                        <span class="subtitle-banner">Effortless Tax Payments, Anytime, Anywhere</span>
+                                        <span class="subtitle-banner">Effortless Rate Payments, Anytime,
+                                            Anywhere</span>
                                         <!-- type headline start-->
                                         <h1 class="title cd-headline clip is-full-width">
                                             Real-Time Monitoring
                                         </h1>
                                         <p class="disc">
-                                            With our Integrated Property Tax System, managing and paying your taxes has
+                                            With our Integrated Property Rate System, managing and paying your rates has
                                             never been easier. Enjoy secure, flexible payment options tailored for your
                                             convenience, all from the comfort of your home or office.
                                         </p>
@@ -172,15 +173,16 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="banner-three-inner">
-                                        <span class="subtitle-banner">Revolutionizing Property Tax Collection </span>
+                                        <span class="subtitle-banner">Revolutionizing Property Rate Collection </span>
                                         <!-- type headline start-->
                                         <h1 class="title cd-headline clip is-full-width">
-                                            Simplified Tax Management
+                                            Simplified Rate Management
                                         </h1>
                                         <p class="disc">
-                                            Our system brings innovation to tax administration with cutting-edge
+                                            Our system brings innovation to rate administration with cutting-edge
                                             technology, streamlined workflows, and powerful analytics. Simplify the
-                                            management of tax records and collections with a robust platform designed to
+                                            management of rate records and collections with a robust platform designed
+                                            to
                                             deliver efficiency and transparency.
                                         </p>
                                         <div class="button-group">
@@ -208,7 +210,7 @@
                                             Smarter Local Revenue
                                         </h1>
                                         <p class="disc">
-                                            The Integrated Property Tax System equips local governments with tools to
+                                            The Integrated Property Rate System equips local governments with tools to
                                             maximize revenue collection, reduce inefficiencies, and ensure
                                             accountability. Drive sustainable development with data-driven insights and
                                             seamless processes.
@@ -239,7 +241,7 @@
                                             Effortless Revenue Mobilization
                                         </h1>
                                         <p class="disc">
-                                            The Integrated Property Tax System equips local governments with tools to
+                                            The Integrated Property Rate System equips local governments with tools to
                                             maximize revenue collection, reduce inefficiencies, and ensure
                                             accountability. Drive sustainable development with data-driven insights and
                                             seamless processes.
@@ -270,7 +272,7 @@
                                             Digital Revenue Growth
                                         </h1>
                                         <p class="disc">
-                                            The Integrated Property Tax System equips local governments with tools to
+                                            The Integrated Property Rate System equips local governments with tools to
                                             maximize revenue collection, reduce inefficiencies, and ensure
                                             accountability. Drive sustainable development with data-driven insights and
                                             seamless processes.
@@ -302,7 +304,7 @@
                                             Optimize Local Finances
                                         </h1>
                                         <p class="disc">
-                                            The Integrated Property Tax System equips local governments with tools to
+                                            The Integrated Property Rate System equips local governments with tools to
                                             maximize revenue collection, reduce inefficiencies, and ensure
                                             accountability. Drive sustainable development with data-driven insights and
                                             seamless processes.
@@ -333,7 +335,7 @@
                                             Seamless Revenue Collection
                                         </h1>
                                         <p class="disc">
-                                            The Integrated Property Tax System equips local governments with tools to
+                                            The Integrated Property Rate System equips local governments with tools to
                                             maximize revenue collection, reduce inefficiencies, and ensure
                                             accountability. Drive sustainable development with data-driven insights and
                                             seamless processes.
@@ -365,7 +367,7 @@
                                             Empowering Local Governments
                                         </h1>
                                         <p class="disc">
-                                            The Integrated Property Tax System equips local governments with tools to
+                                            The Integrated Property Rate System equips local governments with tools to
                                             maximize revenue collection, reduce inefficiencies, and ensure
                                             accountability. Drive sustainable development with data-driven insights and
                                             seamless processes.
@@ -396,7 +398,7 @@
                                             Empowering Local Governments
                                         </h1>
                                         <p class="disc">
-                                            The Integrated Property Tax System equips local governments with tools to
+                                            The Integrated Property Rate System equips local governments with tools to
                                             maximize revenue collection, reduce inefficiencies, and ensure
                                             accountability. Drive sustainable development with data-driven insights and
                                             seamless processes.
@@ -428,7 +430,7 @@
                                             Empowering Local Governments
                                         </h1>
                                         <p class="disc">
-                                            The Integrated Property Tax System equips local governments with tools to
+                                            The Integrated Property Rate System equips local governments with tools to
                                             maximize revenue collection, reduce inefficiencies, and ensure
                                             accountability. Drive sustainable development with data-driven insights and
                                             seamless processes.
@@ -510,7 +512,7 @@
                                         </path>
                                         <path d="m260.5 580h80v20h-80zm0 0"></path>
                                     </svg>
-                                    <p>Tax Management</p>
+                                    <p>Rate Management</p>
                                 </div>
                                 <div class="single-feature-one eight">
                                     <svg xmlns="http://www.w3.org/2000/svg" id="Global_Message" height="512"
@@ -548,7 +550,7 @@
                         <a href="#"><i class="fas fa-phone-alt"></i></a>
                     </div>
                     <div class="body">
-                        <p class="info">Reach out to our dedicated support team for help with property tax inquiries
+                        <p class="info">Reach out to our dedicated support team for help with property rate inquiries
                             or system navigation. <span>(24/7 Available)</span></p>
                         <a href="tel:+233500503599" class="number">+233 50 050 3599</a>
                         <a href="#" class="rts-btn btn-primary-2">Contact Us</a>
@@ -746,7 +748,7 @@
                                 <h5 class="title">Secure and Easy Payment Options</h5>
                             </a>
                             <p class="disc">
-                                With multiple payment methods, including digital and local channels, paying taxes has
+                                With multiple payment methods, including digital and local channels, paying rates has
                                 never been easier or more secure.
                             </p>
 
@@ -786,12 +788,12 @@
                 <div class="col-12 mt_sm--30">
                     <div class="title-area about-company">
                         <span>About IPRS</span>
-                        <h2 class="title">Empowering Communities with Efficient Tax Solutions</h2>
+                        <h2 class="title">Empowering Communities with Efficient Rate Solutions</h2>
                     </div>
                     <div class="about-company-wrapper">
                         <p class="disc">
                             The Integrated Property Rate System (IPRS) is designed to revolutionize the way property
-                            taxes are managed and collected across Africa. Our platform offers a seamless, transparent,
+                            rates are managed and collected across Africa. Our platform offers a seamless, transparent,
                             and efficient solution for both citizens and local governments.
                         </p>
                         <div class="rts-tab-style-one">
@@ -820,7 +822,7 @@
                                             <p><img src="{{ asset('assets/assetsfront/images/faq/transparency.jpg') }}"
                                                     alt="Transparency"></p>
                                             <p class="disc">
-                                                IPRS ensures complete transparency in the tax collection process.
+                                                IPRS ensures complete transparency in the rate collection process.
                                                 Citizens can easily track their payments and see how their contributions
                                                 are being utilized for community development.
                                             </p>
@@ -849,7 +851,7 @@
                                             <p><img src="{{ asset('assets/assetsfront/images/faq/efficiency.jpg') }}"
                                                     alt="Efficiency"></p>
                                             <p class="disc">
-                                                Our system streamlines the entire tax collection process, reducing
+                                                Our system streamlines the entire rate collection process, reducing
                                                 administrative burdens and ensuring timely payments. This efficiency
                                                 translates to better services for the community.
                                             </p>
@@ -906,7 +908,7 @@
                                             <p><img src="{{ asset('assets/assetsfront/images/faq/community.jpg') }}"
                                                     alt="Community Impact"></p>
                                             <p class="disc">
-                                                Every tax payment made through IPRS directly contributes to the
+                                                Every rate payment made through IPRS directly contributes to the
                                                 development of local infrastructure and public services, fostering
                                                 growth and improving the quality of life in communities.
                                             </p>
@@ -1118,7 +1120,7 @@
                             Get Started?
                         </h3>
                         <p class="disc">
-                            Discover a smarter, simpler way to manage property taxes with IPRS. Join thousands already
+                            Discover a smarter, simpler way to manage property rates with IPRS. Join thousands already
                             transforming their experience today!
                         </p>
                         <a class="rts-btn btn-primary-2 color-h-black" href="{{ route('auth.register') }}">Sign
