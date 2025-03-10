@@ -53,7 +53,7 @@
                                 <select class="form-control @error('payment_mode') is-invalid @enderror" id="payment_mode"
                                     name="payment_mode">
                                     <option disabled selected>Select Payment Mode</option>
-                                    <option value="cash">Cash</option>
+                                    {{-- <option value="cash">Cash</option> --}}
                                     <option value="momo">Momo</option>
                                 </select>
 

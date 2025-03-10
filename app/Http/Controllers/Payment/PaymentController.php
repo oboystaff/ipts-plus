@@ -163,7 +163,7 @@ class PaymentController extends Controller
             'payment_mode' => $request->input('payment_mode'),
             'phone' => $request->input('phone'),
             'network' => $request->input('network'),
-            'transaction_id' => $request->input('payment_mode') == 'momo' ? $transactionID : null,
+            // 'transaction_id' => $request->input('payment_mode') == 'momo' ? $transactionID : null,
             'transaction_status' => $request->input('payment_mode') == 'momo' ? 'Pending' : 'Success',
             'assembly_code' => $request->input('assembly_code'),
             'created_by' => $request->user()->id ?? null
@@ -173,23 +173,16 @@ class PaymentController extends Controller
 
         if ($request->input('payment_mode') == 'momo') {
             $amount = $payment->amount;
-            $transactionId = $payment->transaction_id;
-            $subscriberNumber = $payment->phone;
+            $phone = $payment->phone;
             $network = $payment->network;
 
-            if (substr($subscriberNumber, 0, 1) === '0') {
-                $subscriberNumber = '233' . substr($subscriberNumber, 1);
-            }
+            $response = MakePayment::acceptPayment($amount, $phone, $network);
 
-            $response = MakePayment::acceptPayment($amount, $transactionId, $subscriberNumber, $network);
-
-            if ($response['code'] === '000') {
+            if ($response['status'] === 'OK') {
 
                 $data = [
-                    'transaction_id' => $response['transaction_id'],
-                    'req_transaction_id' => $response['req_transaction_id'],
-                    'prompt' => $response['reason'],
-                    'prompt_txt' => 'respond to the prompt on your phone'
+                    'transaction_id' => $response['transactionid'],
+                    'prompt' => $response['reason']
                 ];
 
                 $payment->update($data);
@@ -217,12 +210,12 @@ class PaymentController extends Controller
                 if ($request->user()->access_level !== 'customer') {
                     return redirect()->route('payments.index')->with(
                         'status',
-                        'Payment processed successfully. Kindly ' . $data['prompt_txt']
+                        'Payment processed successfully. Kindly ' . $data['prompt']
                     );
                 } else {
                     return redirect()->route('dashboard.operational')->with(
                         'status',
-                        'Payment processed successfully. Kindly ' . $data['prompt_txt']
+                        'Payment processed successfully. Kindly ' . $data['prompt']
                     );
                 }
             } else {

@@ -194,7 +194,6 @@
     </div>
 
 
-
     <script>
         document.getElementById('access_level').addEventListener('change', function() {
             var assemblyField = document.getElementById('assembly_code_field');

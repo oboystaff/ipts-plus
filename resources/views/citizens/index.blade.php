@@ -76,7 +76,6 @@
                                         </option>
                                         <option value="Inactive" {{ request('status') == 'Inactive' ? 'selected' : '' }}>
                                             Inactive</option>
-
                                     </select>
                                 </div>
 

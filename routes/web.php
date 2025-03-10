@@ -361,3 +361,9 @@ Route::group(['prefix' => 'customer-support', 'middleware' => 'auth:sanctum'], f
     Route::get('/edit/{customerSupport}', [CustomerSupportController::class, 'edit'])->name('customer-supports.edit');
     Route::post('/update/{customerSupport}', [CustomerSupportController::class, 'update'])->name('customer-supports.update');
 });
+
+Route::get('/test', function () {
+    $payment = \App\Actions\Payment\MakePayment::acceptPayment("1", "0248593031", "MTN");
+
+    return $payment;
+});

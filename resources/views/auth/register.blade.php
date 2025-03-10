@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> IPTS </title>
+    <title>IPRS</title>
     <meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template">
     <meta name="Author" content="Spruko Technologies Private Limited">
     <meta name="keywords"
@@ -187,14 +187,16 @@
                                                 name="date_of_commencement" class="form-control">
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                            <label for="org-first-name" class="form-label">First Name</label>
+                                            <label for="org-first-name" class="form-label">Contact Person's First
+                                                Name</label>
                                             <input type="text" id="org-first-name" name="org_first_name"
                                                 class="form-control">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4 mb-3">
-                                            <label for="org-last-name" class="form-label">Last Name</label>
+                                            <label for="org-last-name" class="form-label">Contact Person's Last
+                                                Name</label>
                                             <input type="text" id="org-last-name" name="org_last_name"
                                                 class="form-control">
                                         </div>
@@ -233,7 +235,7 @@
                                     </div>
 
                                     <div class="col-md-12 mb-3">
-                                        <label for="tin_number" class="form-label">TIN Number</label>
+                                        <label for="tin_number" class="form-label">TIN (Tax ID Number)</label>
                                         <input type="text" id="tin_number" name="tin_number"
                                             class="form-control">
                                     </div>
@@ -299,8 +301,6 @@
             toggleFields();
         });
     </script>
-
-
 </body>
 
 </html>
