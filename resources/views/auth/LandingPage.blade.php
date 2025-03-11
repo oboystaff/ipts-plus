@@ -25,7 +25,7 @@
                 <div class="header-left">
                     <a class="thumbnail" href="#">
                         <img style="height: 30%; width:30%;"
-                            src="{{ asset('assets/assetsfront/images/logo/ipts-logo.png') }}" alt="">
+                            src="{{ asset('assets/assetsfront/images/logo/ipts-logo-new.png') }}" alt="">
                     </a>
                     <nav class="nav-main mainmenu-nav d-none d-xl-block">
                         <ul class="mainmenu">
