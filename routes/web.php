@@ -40,6 +40,7 @@ Route::group(['prefix' => 'payment', 'middleware' => 'auth:sanctum'], function (
     Route::get('/{payment}/receipt', [PaymentController::class, 'receipt'])->name('payments.receipt');
     Route::get('/{payment}/edit', [PaymentController::class, 'edit'])->name('payments.edit');
     Route::post('/{payment}/update', [PaymentController::class, 'update'])->name('payments.update');
+    Route::post('/make/payment', [PaymentController::class, 'makePayment'])->name('payments.makePayment');
 });
 
 // route for bils

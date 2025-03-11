@@ -1,6 +1,7 @@
 @extends('layout.base')
 
 @section('page-styles')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Include any additional styles needed for the payment form -->
 @endsection
 @php

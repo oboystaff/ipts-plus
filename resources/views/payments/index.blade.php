@@ -1,6 +1,7 @@
 @extends('layout.base')
 
 @section('page-styles')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection
 
 @section('page-content')
@@ -203,6 +204,47 @@
                                 class="fa-solid fa-xmark"></i></span>
                     </button>
                 </div>
+            @endif
+
+            @if (session('status_1'))
+                <script>
+                    Swal.fire({
+                        title: "Success!",
+                        text: "{{ session('status_1') }}",
+                        icon: "success",
+                        confirmButtonText: "OK"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            let urlParams = new URLSearchParams(window.location.search);
+                            let paymentId = urlParams.get("payment_id");
+
+                            if (!paymentId) {
+                                console.error("Payment ID not found in URL");
+                                return;
+                            }
+
+                            // Make an AJAX request to execute the controller
+                            fetch("{{ route('payments.makePayment') }}", {
+                                    method: "POST",
+                                    headers: {
+                                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                                        "Content-Type": "application/json"
+                                    },
+                                    body: JSON.stringify({
+                                        payment_id: paymentId
+                                    }) // Pass payment_id
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log(data);
+
+                                    // Reload the page to display the session message
+                                    window.location.reload();
+                                })
+                                .catch(error => console.error("Error:", error));
+                        }
+                    });
+                </script>
             @endif
 
             <div class="card">

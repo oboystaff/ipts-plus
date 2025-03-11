@@ -11,6 +11,7 @@ use App\Models\Payment;
 use App\Models\ServiceRequest;
 use Illuminate\Support\Facades\DB;
 use App\Actions\Payment\MakePayment;
+use App\Jobs\Payment\SendPaymentSMS;
 
 
 class PaymentController extends Controller
@@ -207,9 +208,10 @@ class PaymentController extends Controller
                 ServiceRequest::create($serviceData);
                 AuditTrail::create($auditTrailData);
 
+
                 if ($request->user()->access_level !== 'customer') {
-                    return redirect()->route('payments.index')->with(
-                        'status',
+                    return redirect()->route('payments.index', ['payment_id' => $payment->id])->with(
+                        'status_1',
                         'Payment processed successfully. Kindly ' . $data['prompt']
                     );
                 } else {
@@ -270,4 +272,20 @@ class PaymentController extends Controller
     public function edit() {}
 
     public function update() {}
+
+    public function makePayment(Request $request)
+    {
+        $paymentId = $request->input('payment_id');
+
+        $payment = Payment::where('id', $paymentId)->first();
+
+        $payment->update(['transaction_status' => 'Success']);
+
+        //Send SMS
+        dispatch(new SendPaymentSMS($payment));
+
+        session()->flash('status', 'Payment made successfully');
+
+        return response()->json(['message' => 'Payment made successfully']);
+    }
 }
