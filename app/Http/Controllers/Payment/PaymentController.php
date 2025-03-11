@@ -215,8 +215,8 @@ class PaymentController extends Controller
                         'Payment processed successfully. Kindly ' . $data['prompt']
                     );
                 } else {
-                    return redirect()->route('dashboard.operational')->with(
-                        'status',
+                    return redirect()->route('dashboard.operational', ['payment_id' => $payment->id])->with(
+                        'status_1',
                         'Payment processed successfully. Kindly ' . $data['prompt']
                     );
                 }

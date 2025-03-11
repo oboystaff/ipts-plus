@@ -50,6 +50,7 @@
 
     <!-- Bootstrap JS -->
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Defaultmenu JS -->
     <script src="{{ asset('assets/js/defaultmenu.js') }}"></script>

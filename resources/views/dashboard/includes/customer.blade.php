@@ -12,6 +12,7 @@
     </div>
 @endif
 
+
 <div class="row">
     <div class="col-xl-3">
         <div class="card custom-card rounded-md overflow-hidden p-2">
@@ -629,3 +630,46 @@
     // Start typing the first message
     typeMessage();
 </script>
+
+@if (session('status_1'))
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Swal.fire({
+                title: "Success!",
+                text: "{{ session('status_1') }}",
+                icon: "success",
+                confirmButtonText: "OK"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let urlParams = new URLSearchParams(window.location.search);
+                    let paymentId = urlParams.get("payment_id");
+
+                    if (!paymentId) {
+                        console.error("Payment ID not found in URL");
+                        return;
+                    }
+
+                    // Make an AJAX request to execute the controller
+                    fetch("{{ route('payments.makePayment') }}", {
+                            method: "POST",
+                            headers: {
+                                "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                payment_id: paymentId
+                            }) // Pass payment_id
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+
+                            // Reload the page to display the session message
+                            window.location.reload();
+                        })
+                        .catch(error => console.error("Error:", error));
+                }
+            });
+        });
+    </script>
+@endif
