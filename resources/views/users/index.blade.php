@@ -161,8 +161,8 @@
                                                 Assembly Supervisor
                                             @elseif (empty($user->access_level))
                                                 Melchia Supper User
-                                            @elseif ($user->access_level == 'GRA_Administrator')
-                                                GRA Administrator
+                                            @elseif ($user->access_level == 'GOG_Administrator')
+                                                GOG Administrator
                                             @else
                                                 {{ $user->access_level }}
                                             @endif

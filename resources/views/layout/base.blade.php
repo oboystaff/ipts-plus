@@ -97,7 +97,7 @@
                             data-bs-toggle="sidebar" href="javascript:void(0);"><span></span></a>
                     </div>
 
-                    @if (auth()->user()->access_level === 'GRA_Administrator')
+                    @if (auth()->user()->access_level === 'GOG_Administrator')
                         <div style="text-align: center; margin-top: 20px;margin-left:20px">
                             <p style="font-size: 16px;">GRA Administrator</p>
                         </div>
@@ -305,13 +305,13 @@
                         <a href="javascript:void(0);" class="header-link dropdown-toggle" id="mainHeaderProfile"
                             data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                             <span class="avatar avatar-sm avatar-rounded">
-                                @if (auth()->user()->access_level == 'Melchia_Account_Manager')
+                                @if (auth()->user()->access_level == 'Super_User')
                                     <img src="{{ asset('assets/images/level10.png') }}" alt="img"
                                         class="img-fluid avatar-img">
                                 @elseif(in_array(auth()->user()->access_level, ['Assembly_Agent', 'Assembly_Supervisor', 'Assembly_Administrator']))
                                     <img src="{{ asset('assets/images/assembly.png') }}" alt="img"
                                         class="img-fluid avatar-img">
-                                @elseif(auth()->user()->access_level == 'GRA_Administrator')
+                                @elseif(auth()->user()->access_level == 'GOG_Administrator')
                                     <img src="{{ asset('assets/images/arms.png') }}" alt="img"
                                         class="img-fluid avatar-img">
                                 @else

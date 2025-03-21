@@ -22,10 +22,10 @@
 
 @section('page-content')
     <div class="container-fluid">
-        @if (\Auth::user()->access_level !== 'customer' && \Auth::user()->access_level !== 'GRA_Administrator')
+        @if (\Auth::user()->access_level !== 'customer' && \Auth::user()->access_level !== 'GOG_Administrator')
             @include('dashboard.includes.main')
             @include('dashboard.includes.analytics')
-        @elseif (\Auth::user()->access_level == 'GRA_Administrator')
+        @elseif (\Auth::user()->access_level == 'GOG_Administrator')
             @include('dashboard.includes.gra')
         @elseif (\Auth::user()->access_level == 'customer')
             @include('dashboard.includes.customer')
@@ -833,7 +833,9 @@
     </script>
 
     <script>
-        const finalCut = @json($total['finalCut']);
+        const finalCut = @json($total['yearlyPayments']);
+
+        console.log(finalCut);
 
         var options1 = {
             chart: {
@@ -877,7 +879,7 @@
                             color: undefined,
                             fontWeight: [600],
                             formatter: function(val) {
-                                return val + "%";
+                                return val;
                             }
                         }
                     }

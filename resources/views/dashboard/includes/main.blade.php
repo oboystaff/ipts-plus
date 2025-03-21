@@ -230,8 +230,7 @@
                             </div>
                             <div class="flex-fill">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="d-block"> Top Revenue by Momo</span>
-
+                                    <span class="d-block"> Revenue Paid by Momo</span>
                                 </div>
                                 <span class="d-block mb-2"></span>
                                 <h4 class="fw-semibold mb-3 lh-1">36.75%</h4>
@@ -286,7 +285,7 @@
                             </span>
                         </div>
                         <div>
-                            <a href="javascript:void(0);" class="fw-semibold">This Weeks Payment </a>
+                            <a href="javascript:void(0);" class="fw-semibold">This Week's Payment </a>
                             <p class="text-muted mb-2">As At ,
                                 {{ \Carbon\Carbon::now()->format('l, F j, Y ') }}
                             </p>
@@ -305,7 +304,7 @@
                             </span>
                         </div>
                         <div>
-                            <a href="javascript:void(0);" class="fw-semibold">This Months Payment </a>
+                            <a href="javascript:void(0);" class="fw-semibold">This Month's Payment </a>
                             <p class="text-muted mb-2">As At ,
                                 {{ \Carbon\Carbon::now()->format('l, F j, Y ') }}
                             </p>
@@ -324,7 +323,7 @@
                             </span>
                         </div>
                         <div>
-                            <a href="javascript:void(0);" class="fw-semibold">This Years Payment</a>
+                            <a href="javascript:void(0);" class="fw-semibold">This Year's Payment</a>
                             <p class="text-muted mb-2">As At ,
                                 {{ \Carbon\Carbon::now()->format('l, F j, Y ') }}
                             </p>
@@ -387,7 +386,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col flex-fill">
+                        {{-- <div class="col flex-fill">
                             <div class="d-flex align-items-center bg-info-transparent rounded-pill p-2 pe-5">
                                 <div class="me-2">
                                     <span class="avatar avatar-md avatar-rounded bg-info p-2">
@@ -399,7 +398,7 @@
                                     <span class="text-muted">{{ $total['totalBusinesses'] }}</span>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col flex-fill">
                             <div class="d-flex align-items-center bg-pink-transparent rounded-pill p-2 pe-5">
                                 <div class="me-2">
@@ -482,7 +481,7 @@
             <div class="card custom-card">
                 <div class="card-header justify-content-between">
                     <div class="card-title">
-                        BoP's Bill / Property Rate Bill & Payment Statistics
+                        Payment Statistics
                     </div>
                     <div class="dropdown">
                         <a href="javascript:void(0);" class="btn btn-sm btn-light btn-wave fs-12 text-muted"
@@ -520,23 +519,23 @@
                             <div class="chart-circle-value"></div>
                         </div>
 
-                        @php
-                            // Define the totals
-                        @endphp
                         <div class="row justify-content-center mt-4 p-3 gx-xl-1 gx-xxl-3">
                             <div class="col col-xl-4 border-end border-inline-end-dashed">
-                                <span class="d-block text-muted mb-1 fs-12">Assembly Fund - (70%)</span>
-                                <span class="fw-semibold h6 mb-0 text-center">GHS {{ $total['assemblycut'] }}
-                                    <i class="ti ti-arrow-up text-success"></i></span>
+                                <span class="d-block text-muted mb-1 fs-16">Assembly Fund - (70%)</span>
+                                <span class="fw-semibold mb-0 text-center" style="font-size: 20px !important;">
+                                    GHS {{ $total['assemblycut'] }}
+                                    <i class="ti ti-arrow-up text-success"></i>
+                                </span>
                             </div>
                             <div class="col col-xl-4 border-end border-inline-end-dashed">
-                                <span class="d-block text-muted mb-1 fs-12">GRA - (15%)</span>
-                                <span class="fw-semibold h6 mb-0 text-center">GHS {{ $total['gracut'] }}
+                                <span class="d-block text-muted mb-1 fs-16">GOG Fund - (15%)</span>
+                                <span class="fw-semibold mb-0 text-center" style="font-size: 20px !important;">GHS
+                                    {{ $total['gogcut'] }}
                                     <i class="ti ti-arrow-down text-danger"></i></span>
                             </div>
                             <div class="col col-xl-4">
-                                <span class="d-block text-muted mb-1 fs-12">Level 10 - (15%)</span>
-                                <span class="fw-semibold h6 mb-0 text-center">GHS
+                                <span class="d-block text-muted mb-1 fs-16">Level 10 Fund - (15%)</span>
+                                <span class="fw-semibold mb-0 text-center" style="font-size: 20px !important;">GHS
                                     {{ $total['level10cut'] }}<i class="ti ti-arrow-up text-success"></i></span>
                             </div>
                         </div>

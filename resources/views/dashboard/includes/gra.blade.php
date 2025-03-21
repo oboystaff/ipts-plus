@@ -17,23 +17,22 @@
                         <div class="chart-circle-value"></div>
                     </div>
 
-                    @php
-                        // Define the totals
-                    @endphp
                     <div class="row justify-content-center mt-4 p-3 gx-xl-1 gx-xxl-3">
                         <div class="col col-xl-4 border-end border-inline-end-dashed">
-                            <span class="d-block text-muted mb-1 fs-12">Assembly Fund - (70%)</span>
-                            <span class="fw-semibold h6 mb-0 text-center">GHS {{ $total['assemblycut'] }}
+                            <span class="d-block text-muted mb-1 fs-16">Assembly Fund - (70%)</span>
+                            <span class="fw-semibold mb-0 text-center" style="font-size: 20px !important;">GHS
+                                {{ $total['assemblycut'] }}
                                 <i class="ti ti-arrow-up text-success"></i></span>
                         </div>
                         <div class="col col-xl-4 border-end border-inline-end-dashed">
-                            <span class="d-block text-muted mb-1 fs-12">GRA - (15%)</span>
-                            <span class="fw-semibold h6 mb-0 text-center">GHS {{ $total['gracut'] }}
+                            <span class="d-block text-muted mb-1 fs-16">GRA - (15%)</span>
+                            <span class="fw-semibold mb-0 text-center" style="font-size: 20px !important;">GHS
+                                {{ $total['gogcut'] }}
                                 <i class="ti ti-arrow-down text-danger"></i></span>
                         </div>
                         <div class="col col-xl-4">
-                            <span class="d-block text-muted mb-1 fs-12">Level 10 - (15%)</span>
-                            <span class="fw-semibold h6 mb-0 text-center">GHS
+                            <span class="d-block text-muted mb-1 fs-16">Level 10 - (15%)</span>
+                            <span class="fw-semibold mb-0 text-center" style="font-size: 20px !important;">GHS
                                 {{ $total['level10cut'] }}<i class="ti ti-arrow-up text-success"></i></span>
                         </div>
                     </div>
@@ -352,7 +351,7 @@
                             <span class="fs-6 fw-bold text-uppercase mb-3" style="color: #4e73df;">
                                 Total Payments Made
                             </span>
-                            <h3 class="fw-normal lh-1 mb-0 text-dark">GHS {{ $total['dashTotalPayments'] }}</h3>
+                            <h5 class="fw-normal lh-1 mb-0 text-dark">GHS {{ $total['dashTotalPayments'] }}</h5>
                         </div>
                         <div class="horizontal-line"
                             style="position: absolute; bottom: 0; left: 0; width: 100%; height: 5px; background-color: #4e73df;">
@@ -369,7 +368,7 @@
                             <span class="fs-6 fw-bold text-uppercase mb-3" style="color: #1cc88a;">
                                 Total Bill Amount
                             </span>
-                            <h3 class="fw-normal lh-1 mb-0 text-dark">GHS {{ $total['dashTotalBills'] }}</h3>
+                            <h5 class="fw-normal lh-1 mb-0 text-dark">GHS {{ $total['dashTotalBills'] }}</h5>
                         </div>
                         <div class="horizontal-line"
                             style="position: absolute; bottom: 0; left: 0; width: 100%; height: 5px; background-color: #1cc88a;">
@@ -386,7 +385,7 @@
                             <span class="fs-6 fw-bold text-uppercase mb-3" style="color: #dc1212;">
                                 Total Outstanding Payments
                             </span>
-                            <h3 class="fw-normal lh-1 mb-0 text-dark">GHS {{ $total['dashTotalOutstanding'] }}</h3>
+                            <h5 class="fw-normal lh-1 mb-0 text-dark">GHS {{ $total['dashTotalOutstanding'] }}</h5>
                         </div>
                         <div class="horizontal-line"
                             style="position: absolute; bottom: 0; left: 0; width: 100%; height: 5px; background-color: #dc1212;">
@@ -403,7 +402,7 @@
                             <span class="fs-6 fw-bold text-uppercase mb-3" style="color: #36b9cc;">
                                 Total Bill Count
                             </span>
-                            <h3 class="fw-normal lh-1 mb-0 text-dark">{{ $total['dashTotalBillCount'] }}</h3>
+                            <h5 class="fw-normal lh-1 mb-0 text-dark">{{ $total['dashTotalBillCount'] }}</h5>
                         </div>
                         <div class="horizontal-line"
                             style="position: absolute; bottom: 0; left: 0; width: 100%; height: 5px; background-color: #36b9cc;">

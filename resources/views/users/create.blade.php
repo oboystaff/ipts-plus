@@ -123,11 +123,11 @@
                                     <option value="Assembly_Supervisor">Assembly Supervisor</option>
                                     <option value="Assembly_Agent">Assembly Agent</option>
                                 @else
-                                    <option value="Melchia_Account_Manager">Melchia Account Manager</option>
+                                    <option value="Super_User">Super User</option>
                                     <option value="Assembly_Administrator">Assembly Administrator</option>
                                     <option value="Assembly_Supervisor">Assembly Supervisor</option>
                                     <option value="Assembly_Agent">Assembly Agent</option>
-                                    <option value="GRA_Administrator">GRA Administrator</option>
+                                    <option value="GOG_Administrator">GOG Administrator</option>
                                 @endif
                             </select>
                             @error('access_level')

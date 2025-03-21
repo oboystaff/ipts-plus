@@ -711,18 +711,18 @@ class DashboardController extends Controller
         $totalPropertyBill = (float) $totalPropertyBill;
 
         // Calculate the summation
-        $totalSum = $totalBusinessBill + $totalPropertyBill;
+        $totalSum = $yearlyPayments->total ?? 0;
 
         // Define the cuts
-        $gracut = $totalSum * 1.5; // 15%
-        $level10cut = $totalSum * 1.5; // 15%
-        $assemblycut = $totalSum * 7.0; // 70%
+        $gogcut = $totalSum * 0.15; // 15%
+        $level10cut = $totalSum * 0.15; // 15%
+        $assemblycut = $totalSum * 0.7; // 70%
         $finalCut = 0;
 
-        if ($request->user()->access_level === 'Melchia_Account_Manager') {
+        if ($request->user()->access_level === 'Super_User') {
             $finalCut = $level10cut / 100;
-        } elseif ($request->user()->access_level === 'GRA_Administrator') {
-            $finalCut = $gracut / 100;
+        } elseif ($request->user()->access_level === 'GOG_Administrator') {
+            $finalCut = $gogcut / 100;
         } elseif ($request->user()->access_level === 'Assembly_Administrator') {
             $finalCut = $assemblycut / 100;
         }
@@ -1105,7 +1105,7 @@ class DashboardController extends Controller
             'regionArrearsData' => isset($regionArrearsData) ? $regionArrearsData : [],
             'regionPaymentData2' => isset($regionPaymentData2) ? $regionPaymentData2 : [],
             'dashChartData' => isset($dashChartData) ? $dashChartData : [],
-            'gracut' => isset($gracut) ? number_format($gracut, 2) : 0,
+            'gogcut' => isset($gogcut) ? number_format($gogcut, 2) : 0,
             'level10cut' => isset($level10cut) ? number_format($level10cut, 2) : 0,
             'assemblycut' => isset($assemblycut) ? number_format($assemblycut, 2) : 0,
             'finalCut' => isset($finalCut) ? number_format($finalCut, 2) : 0,

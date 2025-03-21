@@ -255,9 +255,9 @@
                                         Customer
                                     </option>
                                 @else
-                                    <option value="Melchia_Account_Manager"
-                                        {{ old('access_level', $user->access_level) == 'Melchia_Account_Manager' ? 'selected' : '' }}>
-                                        Melchia Account Manager
+                                    <option value="Super_User"
+                                        {{ old('access_level', $user->access_level) == 'Super_User' ? 'selected' : '' }}>
+                                        Super User
                                     </option>
                                     <option value="Assembly_Administrator"
                                         {{ old('access_level', $user->access_level) == 'Assembly_Administrator' ? 'selected' : '' }}>
@@ -271,8 +271,8 @@
                                         {{ old('access_level', $user->access_level) == 'Assembly_Agent' ? 'selected' : '' }}>
                                         Assembly Agent
                                     </option>
-                                    <option value="GRA_Administrator"
-                                        {{ old('access_level', $user->access_level) == 'GRA_Administrator' ? 'selected' : '' }}>
+                                    <option value="GOG_Administrator"
+                                        {{ old('access_level', $user->access_level) == 'GOG_Administrator' ? 'selected' : '' }}>
                                         GRA Administrator
                                     </option>
                                     <option value="customer"
