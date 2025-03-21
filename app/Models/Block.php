@@ -9,8 +9,6 @@ class Block extends Model
 {
     use HasFactory;
 
-    use HasFactory;
-
     protected $table = 'blocks';
 
     protected $fillable = [

@@ -27,7 +27,8 @@ use App\Http\Controllers\Report;
 use App\Http\Controllers\AgentAssignment\AgentAssignmentController;
 use App\Http\Controllers\TaskAssignment\TaskAssignmentController;
 use App\Http\Controllers\CustomerSupport\CustomerSupportController;
-use App\Models\Citizen;
+use App\Http\Controllers\Building\BuildingController;
+
 
 Route::get('/faqAction', [Dashboard\DashboardController::class, 'faqAction'])->name('dashboard.faq');
 
@@ -362,6 +363,18 @@ Route::group(['prefix' => 'customer-support', 'middleware' => 'auth:sanctum'], f
     Route::get('/edit/{customerSupport}', [CustomerSupportController::class, 'edit'])->name('customer-supports.edit');
     Route::post('/update/{customerSupport}', [CustomerSupportController::class, 'update'])->name('customer-supports.update');
 });
+
+Route::group(['prefix' => 'building', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [BuildingController::class, 'index'])->name('buildings.index');
+    Route::get('/create', [BuildingController::class, 'create'])->name('buildings.create');
+    Route::post('/create', [BuildingController::class, 'store'])->name('buildings.store');
+    Route::get('/polygons', [BuildingController::class, 'polygons'])->name('buildings.polygons');
+    Route::get('/map', [BuildingController::class, 'map'])->name('buildings.map');
+    Route::get('/import', [BuildingController::class, 'importBlock'])->name('buildings.importBlock');
+    Route::post('/import', [BuildingController::class, 'importBlockStore'])->name('buildings.importBlockStore');
+    Route::get('/allocations/{id}', [BuildingController::class, 'allocations'])->name('buildings.allocations');
+});
+
 
 Route::get('/test', function () {
     $payment = \App\Actions\Payment\MakePayment::acceptPayment("1", "0248593031", "MTN");

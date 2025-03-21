@@ -22,7 +22,8 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
     <!-- Bootstrap Css -->
-    <link id="style" href="{{ asset('assets/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/libs/bootstrap/css/bootstrap-select.min.css') }}" rel="stylesheet">
 
     <!-- Style Css -->
     <link href="{{ asset('assets/css/styles.css?t=' . time()) }}" rel="stylesheet">
@@ -863,6 +864,12 @@
                                                 Manage Block</a>
                                         </li>
                                     @endcan
+                                    @can('blocks.view')
+                                        <li class="slide">
+                                            <a href="{{ route('buildings.index') }}" class="side-menu__item">
+                                                Manage Building</a>
+                                        </li>
+                                    @endcan
                                     @can('zones.view')
                                         <li class="slide">
                                             <a href="{{ route('zones.index') }}" class="side-menu__item">
@@ -1154,6 +1161,7 @@
 
     <!-- Bootstrap JS -->
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap-select.min.js') }}"></script>
 
     <!-- Defaultmenu JS -->
     <script src="{{ asset('assets/js/defaultmenu.js') }}"></script>
@@ -1223,6 +1231,9 @@
 
     <!-- Internal Apex Mixed Charts JS -->
     <script src="{{ asset('assets/js/apexcharts-mixed.js') }}"></script>
+
+    <!-- Internal Choices JS -->
+    <script src="{{ asset('assets/js/choices.js') }}"></script>
 
     @yield('page-scripts')
 </body>

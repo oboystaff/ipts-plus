@@ -168,7 +168,7 @@ class PaymentController extends Controller
         // Log the full request for debugging
         \Log::info('Payment Callback Received:', $request->all());
 
-        $payment = Payment::where('transaction_id', $request->transaction_id)->first();
+        $payment = Payment::where('transaction_id', $request->transactionid)->first();
 
         if (!$payment) {
             return response()->json(['error' => 'Payment not found'], 404);

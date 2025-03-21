@@ -210,13 +210,13 @@ class PaymentController extends Controller
 
 
                 if ($request->user()->access_level !== 'customer') {
-                    return redirect()->route('payments.index', ['payment_id' => $payment->id])->with(
-                        'status_1',
+                    return redirect()->route('payments.index')->with(
+                        'status',
                         'Payment processed successfully. Kindly ' . $data['prompt']
                     );
                 } else {
-                    return redirect()->route('dashboard.operational', ['payment_id' => $payment->id])->with(
-                        'status_1',
+                    return redirect()->route('dashboard.operational')->with(
+                        'status',
                         'Payment processed successfully. Kindly ' . $data['prompt']
                     );
                 }
