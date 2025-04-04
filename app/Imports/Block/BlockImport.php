@@ -29,10 +29,12 @@ class BlockImport implements ToModel, SkipsEmptyRows, WithHeadingRow, WithValida
     {
         $name = "ABNMA" . "/" . $row['block_number'] ?? null;
         $polygon = $row['multipolygon'] ?? null;
+        $block_number = $row['block_number'] ?? null;
 
         if (!empty($name) && !empty($polygon)) {
             return new PolygonBlock([
                 'name' => $name,
+                'block_number' => $block_number,
                 'boundary' => $this->convertWKTtoGeoJSON($polygon),
             ]);
         }

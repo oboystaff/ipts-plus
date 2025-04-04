@@ -76,9 +76,10 @@ var IMap = function () {
                         let geoJSON = IMap.parseGeoJSON(block.boundary);
                         if (!geoJSON) return;
 
+                        console.log(block);
                         let feature = {
                             type: "Feature",
-                            properties: { id: block.id, name: block.name, type: "Block", colr_blck: "#FFCC99", electoral: "N/A" },
+                            properties: { id: block.id, name: block.name, block_no: block.block_number, type: "Block", colr_blck: "#FFCC99", electoral: "N/A" },
                             geometry: geoJSON
                         };
                         geoJSONFeatures.push(feature);
@@ -129,8 +130,14 @@ var IMap = function () {
             return [[bb[1], bb[0]], [bb[3], bb[2]]];
         },
         blockInfoTable: function (blocks) {
+            alert(JSON.stringify(blocks));
             var tblBody = $("#job-body");
             tblBody.empty();
+
+            if (!Array.isArray(blocks)) {
+                blocks = [blocks];
+            }
+
             $.each(blocks, function (index, block) {
                 // Create a hidden element
                 tblBody.append('<tr><td>' + block.jobName + '</td><td>' + block.block + '</td><td>' + block.assignedTo + '</td></tr>')

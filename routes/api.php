@@ -123,6 +123,7 @@ Route::group(['prefix' => 'property', 'middleware' => 'auth:sanctum'], function 
     Route::get('/customer/{id}', [PropertyController::class, 'customerProperty']);
     Route::post('/create', [PropertyController::class, 'store']);
     Route::post('/update/{id}', [PropertyController::class, 'update']);
+    Route::get('/nearby-properties/{latitude}/{longitude}', [PropertyController::class, 'getNearbyProperties']);
 });
 
 Route::group(['prefix' => 'business', 'middleware' => 'auth:sanctum'], function () {

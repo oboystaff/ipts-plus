@@ -11,6 +11,7 @@ use App\Models\Division;
 use App\Models\Block;
 use Illuminate\Http\Request;
 use App\Jobs\Property\SendPropertyOwnerSMS;
+use Illuminate\Support\Facades\DB;
 
 
 class PropertyController extends Controller
@@ -33,6 +34,8 @@ class PropertyController extends Controller
     public function show($id)
     {
         $property = Property::where('id', $id)
+            ->orWhere('property_number', $id)
+            ->orWhere('digital_address', $id)
             ->with(['customer', 'entityType', 'assembly', 'zone', 'division', 'block'])
             ->first();
 
@@ -151,5 +154,26 @@ class PropertyController extends Controller
         }
 
         return $propertyNumber;
+    }
+
+    public function getNearbyProperties($latitude, $longitude)
+    {
+        $radius = 25; // km
+
+        $properties = Property::with(['customer', 'entityType', 'assembly', 'zone', 'division', 'block'])
+            ->select('*')
+            ->selectRaw(
+                '6371 * ACOS(COS(RADIANS(?)) * COS(RADIANS(latitude)) * COS(RADIANS(?) - RADIANS(longitude)) + SIN(RADIANS(?)) * SIN(RADIANS(latitude))) AS distance',
+                [$latitude, $longitude, $latitude]
+            )
+            ->having('distance', '<=', $radius)
+            ->orderBy('distance', 'asc')
+            ->get();
+
+
+        return response()->json([
+            'message' => 'Get nearby properites',
+            'data' => $properties
+        ]);
     }
 }

@@ -75,14 +75,17 @@ class BuildingController extends Controller
 
     public function polygons()
     {
-        $blocks = PolygonBlock::select('id', 'name', 'boundary')->get()->map(function ($block) {
+        //Blocks
+        $blocks = PolygonBlock::select('id', 'name', 'boundary', 'block_number')->get()->map(function ($block) {
             return [
                 'id' => $block->id,
                 'name' => $block->name,
+                'block_number' => $block->block_number,
                 'boundary' => json_decode($block->boundary),
             ];
         });
 
+        //Buildings
         $buildings = Building::select('id', 'name', 'boundary', 'block_id')->get()->map(function ($building) {
             return [
                 'id' => $building->id,

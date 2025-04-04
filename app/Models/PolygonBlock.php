@@ -11,7 +11,7 @@ class PolygonBlock extends Model
 
     protected $table = 'polygon_blocks';
 
-    protected $fillable = ['name', 'boundary'];
+    protected $fillable = ['name', 'block_number', 'boundary'];
 
     protected $casts = [
         'boundary' => 'string',
