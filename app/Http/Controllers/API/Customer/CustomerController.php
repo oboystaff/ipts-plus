@@ -162,8 +162,8 @@ class CustomerController extends Controller
             ->where(function ($query) use ($id) {
                 $query->where('user_id', $id)
                     ->orWhere('account_number', $id)
-                    ->orWhere('first_name', $id)
-                    ->orWhere('last_name', $id)
+                    ->orWhere('first_name', 'like', "%$id%")
+                    ->orWhere('last_name', 'like', "%$id%")
                     ->orWhere('telephone_number', $id)
                     ->orWhere('ghana_card_number', $id);
             })->get();
