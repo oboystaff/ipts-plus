@@ -141,9 +141,9 @@ class CustomerController extends Controller
     public function show($id)
     {
         $customer = Citizen::where('user_id', $id)
-            ->first();
+            ->get();
 
-        if (empty($customer)) {
+        if (count($customer) == 0) {
             return response()->json([
                 'message' => 'Customer not found'
             ], 422);
