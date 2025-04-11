@@ -44,29 +44,9 @@
 
                             <input type="hidden" id="supervisor" name="supervisor" value="{{ $assembly->supervisor }}">
                             <input type="hidden" name="geo_coordinate" id="geo_coordinate">
+                            <input type="hidden" name="assembly_url" url="{{ route('assembly.fetch') }}">
 
-                            <div class="col-md-6 mb-3">
-                                <label for="name">Assembly Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    id="name" name="name" value="{{ $assembly->name }}" required>
-
-                                @error('name')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="assembly_code">Assembly Code</label>
-                                <input type="text" class="form-control @error('assembly_code') is-invalid @enderror"
-                                    id="assembly_code" name="assembly_code" value="{{ $assembly->assembly_code }}"
-                                    required>
-
-                                @error('assembly_code')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-4 col-md-6">
+                            <div class="mb-3 col-md-6">
                                 <label for="role_access" class="form-label">Regional Name</label>
                                 <select class="form-control @error('regional_code') is-invalid @enderror" id="regional_code"
                                     name="regional_code" required>
@@ -84,7 +64,35 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="status">Status</label>
+                                <label for="name" class="form-label">Assembly Name</label>
+                                <select class="form-control @error('name') is-invalid @enderror" id="name"
+                                    name="name" required>
+                                    <option value="">Select Assembly Name</option>
+                                    @foreach ($mmdas as $mmda)
+                                        <option code="{{ $mmda->assembly_code }}" value="{{ $mmda->assembly_name }}"
+                                            {{ old('name', $assembly->name ?? '') == $mmda->assembly_name ? 'selected' : '' }}>
+                                            {{ $mmda->assembly_name }}</option>
+                                    @endforeach
+                                </select>
+
+                                @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="assembly_code" class="form-label">Assembly Code</label>
+                                <input type="text" class="form-control @error('assembly_code') is-invalid @enderror"
+                                    id="assembly_code" name="assembly_code" value="{{ $assembly->assembly_code }}"
+                                    readonly>
+
+                                @error('assembly_code')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="status" class="form-label">Status</label>
                                 <select class="form-control @error('status') is-invalid @enderror" id="status"
                                     name="status">
                                     <option disabled selected>Select Status</option>
@@ -100,10 +108,10 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="supervisor">Supervisor</label>
+                                <label for="supervisor" class="form-label">Assembly Admin</label>
                                 <div class="autocomplete">
                                     <input type="text" class="form-control @error('supervisor_id') is-invalid @enderror"
-                                        placeholder="Enter Assembly Supervisor" id="supervisor_id" name="supervisor_id"
+                                        placeholder="Enter Assembly Admin" id="supervisor_id" name="supervisor_id"
                                         value="{{ $assembly->assemblySupervisor->name ?? '' }}">
                                 </div>
 
@@ -112,8 +120,8 @@
                                 @enderror
                             </div>
 
-                            <div class="mb-4 col-md-6">
-                                <label class="form-label">Address</label>
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label" class="form-label">Address</label>
                                 <div class="autocomplete">
                                     <input type="text" class="form-control @error('address') is-invalid @enderror"
                                         placeholder="Enter Assembly Address" id="address" name="address"
@@ -125,8 +133,8 @@
                                 @enderror
                             </div>
 
-                            <div class="mb-4 col-md-6">
-                                <label class="form-label">Phone Number</label>
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label" class="form-label">Phone Number</label>
                                 <div class="autocomplete">
                                     <input type="text" class="form-control @error('phone') is-invalid @enderror"
                                         placeholder="Enter Assembly Phone" id="phone" name="phone"
@@ -320,6 +328,8 @@
     <script src="{{ asset('assets/app/map/StyleFactory.js') }}"></script>
     <script src="{{ asset('assets/app/map/MapTileProvider.js') }}"></script>
     <script src="{{ asset('assets/app/map/MapController.js?v=' . \Illuminate\Support\Str::random(5)) }}"></script>
+    <script src="{{ asset('assets/js/general.js?v=' . time()) }}"></script>
+
 
     <script>
         $(document).ready(function() {

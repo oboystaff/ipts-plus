@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Assembly;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class CreateAssemblyRequest extends FormRequest
 {
@@ -23,7 +22,7 @@ class CreateAssemblyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', Rule::unique('assemblies', 'name')],
+            'name' => ['required', 'string', 'unique:assemblies,name'],
             'assembly_code' => ['required', 'string'],
             'regional_code' => ['required', 'string', 'exists:ghana_regions,regional_code'],
             'supervisor' => ['required', 'string', 'exists:users,id'],

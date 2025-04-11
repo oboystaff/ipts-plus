@@ -293,7 +293,13 @@
                                         <td>{{ $payment->payment_mode }}</td>
                                         <td>{{ $payment->transaction_status }}</td>
                                         <td>{{ $payment->assembly->name ?? 'N/A' }}</td>
-                                        <td>{{ $payment->createdBy->name ?? 'N/A' }}</td>
+                                        <td>
+                                            @if ($payment->createdBy->access_level === 'Assembly_Agent')
+                                                {{ $payment->createdBy->name ?? 'N/A' }} (Agent)
+                                            @else
+                                                {{ $payment->createdBy->name ?? 'N/A' }}
+                                            @endif
+                                        </td>
                                         <td>{{ $payment->created_at }}</td>
                                         <td>
                                             <div class="dropdown">

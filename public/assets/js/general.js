@@ -39,6 +39,19 @@ $(document).ready(function () {
         });
     }
 
+    if ($('select[name="regional_code"]').length > 0) {
+        $('select[name="regional_code"]').change(function() {
+            assembly($(this).val());
+        });
+    }
+
+    if ($('select[name="regional_code"]').length > 0) {
+        $('select[name="name"]').on('change', function () {
+            let code = $(this).find(':selected').attr('code');
+            $('input[name="assembly_code"]').val(code);
+        });
+    }
+
     function propertyUser(zone_id) {
         var url = $("input[name='property_use_url']").attr("url");
         var formData = new FormData();
@@ -114,10 +127,10 @@ $(document).ready(function () {
         });
     }
 
-    function district(branch_id) {
-        var url = $("input[name='district_url']").attr("url");
+    function assembly(regional_code) {
+        var url = $("input[name='assembly_url']").attr("url");
         var formData = new FormData();
-        formData.append("branch_id", branch_id);
+        formData.append("regional_code", regional_code);
 
         $.ajax({
             url: url,
@@ -130,11 +143,15 @@ $(document).ready(function () {
                 // $("#send").prop("disabled", true);
             },
             success: function (response) {
-                $("select[name='district_id']").html("");
-                $("select[name='district_id']").append("<option value=''>Select District</option>");
+                $("select[name='name']").html("");
+                $("select[name='name']").append("<option value=''>Select Assembly</option>");
                 for (var i = 0; i < response.message.length; i++) {
-                    $("select[name='district_id']").append("<option value=" + response.message[i].id + ">" +
-                        response.message[i].name + "</option>");
+
+                    $("select[name='name']").append(
+                        "<option code='" + response.message[i].assembly_code + "' value='" + response.message[i].assembly_name + "'>" +
+                        response.message[i].assembly_name +
+                        "</option>"
+                    );
                 }
             },
             error: function (error) {
@@ -143,7 +160,7 @@ $(document).ready(function () {
         });
     }
 
-    function community(district_id) {
+    function assembly_code(district_id) {
         var url = $("input[name='community_url']").attr("url");
         var formData = new FormData();
         formData.append("district_id", district_id);

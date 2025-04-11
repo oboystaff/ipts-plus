@@ -95,14 +95,28 @@ class TaskAssignmentController extends Controller
         $blockData = [];
         foreach ($data['block_data'] as $blockId) {
             $blockData[] = [
-                'block_id' => $blockId,
                 'status' => 'Pending',
+                'block_id' => $blockId,
             ];
         }
 
-        $data['block_data'] = $blockData;
+        $assignments = [];
+        foreach ($data['task'] as $task) {
+            foreach ($data['block_data'] as $blockId) {
+                $assignments[] = [
+                    'supervisor_id' => $data['supervisor_id'],
+                    'agent_id' => $data['agent_id'],
+                    'assembly_code' => $data['assembly_code'],
+                    'task' => $task,
+                    'block_data' => json_encode($blockData),
+                    'created_by' => $data['created_by'],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }
+        }
 
-        TaskAssignment::create($data);
+        TaskAssignment::insert($assignments);
 
         return redirect()->route('task-assignments.index')->with('status', 'Task assignment created successfully.');
     }

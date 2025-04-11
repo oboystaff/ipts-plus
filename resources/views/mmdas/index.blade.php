@@ -23,16 +23,20 @@
                 @endif
 
                 <div class="card">
-
                     <div class="card-header flex-wrap d-flex justify-content-between">
                         <div class="card-header">
-                            <div class="card-title">Assembly Management / Task Assignments</div>
+                            <div class="card-title">MMDAs</div>
                         </div>
 
                         <div class="d-flex align-items-center">
-                            @can('task-assignments.create')
-                                <a href="{{ route('task-assignments.create') }}" class="btn btn-primary btn-sm ms-2">+ Assign
-                                    Task</a>
+                            @can('divisions.create')
+                                <a href="{{ route('mmdas.create') }}" class="btn btn-primary btn-sm ms-2">+ Create
+                                    MMDA</a>
+                            @endcan
+
+                            @can('divisions.create')
+                                <a href="{{ route('mmdas.import') }}" class="btn btn-success btn-sm ms-2">+ Upload Bulk
+                                    MMDAs</a>
                             @endcan
                         </div>
                     </div>
@@ -43,25 +47,25 @@
                                 <thead>
                                     <tr>
                                         <th>S/N</th>
-                                        <th>Supervisor Name</th>
-                                        <th>Agent Name</th>
+                                        <th>Region</th>
+                                        <th>Assembly Code</th>
                                         <th>Assembly Name</th>
-                                        <th>Task</th>
-                                        <th>Assigned By</th>
+                                        <th>Assembly Category</th>
+                                        <th>Created By</th>
                                         <th>Date Created</th>
-                                        <th>Action</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($taskAssignments as $index => $taskAssignment)
+                                    @foreach ($mmdas as $index => $mmda)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            <td>{{ $taskAssignment->supervisor->name ?? '' }}</td>
-                                            <td>{{ $taskAssignment->agent->name ?? '' }}</td>
-                                            <td>{{ $taskAssignment->assembly->name ?? '' }}</td>
-                                            <td>{{ $taskAssignment->task }}</td>
-                                            <td>{{ $taskAssignment->createdBy->name ?? '' }}</td>
-                                            <td>{{ $taskAssignment->created_at }}</td>
+                                            <td>{{ $mmda->region->name ?? '' }}</td>
+                                            <td>{{ $mmda->assembly_code }}</td>
+                                            <td>{{ $mmda->assembly_name }}</td>
+                                            <td>{{ $mmda->assembly_category }}</td>
+                                            <td>{{ $mmda->createdBy->name ?? '' }}</td>
+                                            <td>{{ $mmda->created_at }}</td>
                                             <td>
                                                 <div class="dropdown">
                                                     <div class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -87,10 +91,10 @@
                                                     <div class="dropdown-menu dropdown-menu-end">
                                                         <div class="py-2">
                                                             <a class="dropdown-item"
-                                                                href=" {{ route('task-assignments.show', $taskAssignment->id) }}">View
+                                                                href=" {{ route('mmdas.show', $mmda) }}">View
                                                             </a>
                                                             <a class="dropdown-item"
-                                                                href=" {{ route('task-assignments.edit', $taskAssignment->id) }}">Edit
+                                                                href=" {{ route('mmdas.edit', $mmda) }}">Edit
                                                             </a>
                                                         </div>
                                                     </div>
@@ -108,5 +112,13 @@
     </div>
 @endsection
 
+
 @section('page-scripts')
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+
+    <script src="{{ asset('assets/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/datatables/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/datatables/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/datatables/js/jszip.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins-init/datatables.init.js') }}"></script>
 @endsection

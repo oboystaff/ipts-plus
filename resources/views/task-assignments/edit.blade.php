@@ -67,9 +67,8 @@
 
                                     <div class="col-sm-6 mb-3">
                                         <label for="block_data" class="form-label">Block</label>
-                                        <select multiple
-                                            class="default-select form-control wide @error('block_data') is-invalid @enderror"
-                                            id="block_data" name="block_data[]" required>
+                                        <select multiple class="form-control @error('block_data') is-invalid @enderror"
+                                            id="choices-multiple-default" name="block_data[]" required>
                                             @foreach ($blockss as $block)
                                                 <option value="{{ $block->id }}"
                                                     @if (collect($taskAssignment->block_data ?? [])->contains('block_id', $block->id)) selected @endif>

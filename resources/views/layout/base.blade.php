@@ -755,22 +755,11 @@
                                         </li>
                                     @endcan
                                     @can('reports.view')
-                                        {{-- <li class="slide">
-                                            <a href="{{ route('agent-performance-reports.index') }}"
-                                                class="side-menu__item">Agent
-                                                Performance Report</a>
-                                        </li>
                                         <li class="slide">
-                                            <a href="{{ route('system-peroformance-reports.index') }}"
-                                                class="side-menu__item">System Performance Report</a>
-                                        </li> --}}
-                                        {{-- <li class="slide">
-                                            <a href="{{ route('reports.feedback') }}" class="side-menu__item">Feedback and
-                                                Satisfaction Report</a>
-                                        </li> --}}
+                                            <a href="{{ route('job-allocation-reports.index') }}" class="side-menu__item">Job
+                                                Allocation Report</a>
+                                        </li>
                                     @endcan
-
-
                                 </ul>
                             </li>
                         @endcanany
@@ -830,7 +819,7 @@
 
                         <!-- Start::slide -->
                         @canany(['assemblies.view', 'divisions.view', 'blocks.view', 'zones.view', 'property-uses.view',
-                            'rates.view', 'agent-assignments.view', 'task-assignments.view'])
+                            'rates.view'])
                             {{-- <li class="slide__category"><span class="category-name">Fee Fixing / Assembly MGT</span></li> --}}
 
                             <li class="slide has-sub">
@@ -848,6 +837,12 @@
                                 <ul class="slide-menu child1">
                                     @can('assemblies.view')
                                         <li class="slide">
+                                            <a href="{{ route('mmdas.index') }}" class="side-menu__item">
+                                                Manage MMDA</a>
+                                        </li>
+                                    @endcan
+                                    @can('assemblies.view')
+                                        <li class="slide">
                                             <a href="{{ route('assembly.index') }}" class="side-menu__item">
                                                 Manage Assembly</a>
                                         </li>
@@ -862,12 +857,6 @@
                                         <li class="slide">
                                             <a href="{{ route('blocks.index') }}" class="side-menu__item">
                                                 Manage Block</a>
-                                        </li>
-                                    @endcan
-                                    @can('blocks.view')
-                                        <li class="slide">
-                                            <a href="{{ route('buildings.index') }}" class="side-menu__item">
-                                                Manage Building</a>
                                         </li>
                                     @endcan
                                     @can('zones.view')
@@ -893,11 +882,31 @@
                                                 Manage Bop Rate</a>
                                         </li>
                                     @endcan
+                                </ul>
+                            </li>
+                        @endcanany
+                        <!-- End::slide -->
 
-                                    @can('agent-assignments.view')
+                        @canany(['agent-assignments.view', 'task-assignments.view', 'blocks.view'])
+                            {{-- <li class="slide__category"><span class="category-name">Fee Fixing / Assembly MGT</span></li> --}}
+
+                            <li class="slide has-sub">
+                                <a href="javascript:void(0);" class="side-menu__item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
+                                        viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                        <path d="M0 0h24v24H0V0z" fill="none" />
+                                        <path d="M6.26 9L12 13.47 17.74 9 12 4.53z" opacity=".3" />
+                                        <path
+                                            d="M19.37 12.8l-7.38 5.74-7.37-5.73L3 14.07l9 7 9-7zM12 2L3 9l1.63 1.27L12 16l7.36-5.73L21 9l-9-7zm0 11.47L6.26 9 12 4.53 17.74 9 12 13.47z" />
+                                    </svg>
+                                    <span class="side-menu__label">Operations</span>
+                                    <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                                </a>
+                                <ul class="slide-menu child1">
+                                    @can('blocks.view')
                                         <li class="slide">
-                                            <a href=" {{ route('agent-assignments.index') }}" class="side-menu__item">
-                                                Agent Assignment</a>
+                                            <a href="{{ route('buildings.index') }}" class="side-menu__item">
+                                                Manage Building</a>
                                         </li>
                                     @endcan
                                     @can('task-assignments.view')
@@ -906,7 +915,12 @@
                                                 Task Assignment</a>
                                         </li>
                                     @endcan
-
+                                    @can('agent-assignments.view')
+                                        <li class="slide">
+                                            <a href=" {{ route('agent-assignments.index') }}" class="side-menu__item">
+                                                Agent Assignment</a>
+                                        </li>
+                                    @endcan
                                     @can('task-assignments.view')
                                         <li class="slide">
                                             <a href=" {{ route('customer-supports.index') }}" class="side-menu__item">
@@ -916,7 +930,6 @@
                                 </ul>
                             </li>
                         @endcanany
-                        <!-- End::slide -->
 
                         <!-- Start::slide__category -->
                         {{-- <li class="slide__category"><span class="category-name">Notifications & Assistance</span></li> --}}

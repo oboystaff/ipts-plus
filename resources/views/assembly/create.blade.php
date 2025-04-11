@@ -45,28 +45,7 @@
 
                             <input type="hidden" id="supervisor" name="supervisor">
                             <input type="hidden" name="geo_coordinate" id="geo_coordinate">
-
-                            <div class="mb-4 col-md-6">
-                                <label class="form-label">Assembly Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    placeholder="Enter Role Name" name="name" required>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="mb-4 col-md-6">
-                                <label class="form-label">Assembly Code</label>
-                                <input type="text" class="form-control @error('assembly_code') is-invalid @enderror"
-                                    placeholder="Enter Assembly Code" name="assembly_code" required>
-
-                                @error('assembly_code')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <input type="hidden" name="assembly_url" url="{{ route('assembly.fetch') }}">
 
                             <div class="mb-4 col-md-6">
                                 <label for="role_access" class="form-label">Regional Name</label>
@@ -84,11 +63,34 @@
                             </div>
 
                             <div class="mb-4 col-md-6">
-                                <label class="form-label">Supervisor</label>
+                                <label class="form-label">Assembly Name</label>
+                                <select class="form-control @error('name') is-invalid @enderror" id="name"
+                                    name="name" required>
+
+                                </select>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="mb-4 col-md-6">
+                                <label class="form-label">Assembly Code</label>
+                                <input type="text" class="form-control @error('assembly_code') is-invalid @enderror"
+                                    placeholder="Enter Assembly Code" name="assembly_code" readonly>
+
+                                @error('assembly_code')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-4 col-md-6">
+                                <label class="form-label">Assembly Admin</label>
                                 <div class="autocomplete">
                                     <input type="text" class="form-control @error('supervisor_id') is-invalid @enderror"
-                                        placeholder="Enter Assembly Supervisor" id="supervisor_id" name="supervisor_id"
-                                        required>
+                                        placeholder="Enter Assembly Admin" id="supervisor_id" name="supervisor_id" required>
                                 </div>
 
                                 @error('supervisor_id')
@@ -277,6 +279,7 @@
     <script src="{{ asset('assets/app/map/MapTileProvider.js') }}"></script>
     <script src="{{ asset('assets/app/map/MapController.js?v=' . \Illuminate\Support\Str::random(5)) }}"></script>
     <script src="{{ asset('assets/app/assemblies/boundary.js?v=' . \Illuminate\Support\Str::random(5)) }}"></script>
+    <script src="{{ asset('assets/js/general.js?v=' . time()) }}"></script>
 
     <script>
         $(document).ready(function() {

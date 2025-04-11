@@ -2,6 +2,16 @@
 
 @section('page-styles')
     <link href="{{ asset('assets/css/bootstrap-duallistbox.css') }}" rel="stylesheet">
+    <!-- Choices JS -->
+    <script src="{{ asset('assets/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
+    <!-- Choices Css -->
+    <link rel="stylesheet" href="{{ asset('assets/libs/choices.js/public/assets/styles/choices.min.css') }}">
+    <style>
+        #choices-multiple-default+.choices .choices__inner {
+            background-color: #ffe4e1 !important;
+            /* light pink to test */
+        }
+    </style>
 @endsection
 
 @section('page-content')
@@ -81,9 +91,8 @@
 
                                         <div class="col-sm-6 mb-3">
                                             <label for="block_data" class="form-label">Block</label>
-                                            <select multiple
-                                                class="default-select form-control wide @error('block_data') is-invalid @enderror"
-                                                id="block_data" name="block_data[]" required>
+                                            <select multiple class="form-control @error('block_data') is-invalid @enderror"
+                                                id="choices-multiple-default" name="block_data[]" required>
                                                 @foreach ($blocks as $block)
                                                     <option value="{{ $block->id }}">{{ $block->block_name }}</option>
                                                 @endforeach
@@ -114,16 +123,29 @@
                                         </div>
 
                                         <div class="col-sm-6 mb-3">
-                                            <label for="task" class="form-label">Task</label>
-                                            <select class="form-control @error('task') is-invalid @enderror" name="task">
-                                                <option value="">Select Task</option>
-                                                <option value="Payment Collection">Payment Collection</option>
-                                                <option value="Bill Distribution">Bill Distribution</option>
-                                                <option value="Data Collection">Data Collection</option>
-                                            </select>
+                                            <label class="form-label">Select Task(s)</label>
+
+                                            <div class="form-check">
+                                                <input class="form-check-input @error('task') is-invalid @enderror"
+                                                    type="checkbox" name="task[]" value="Payment Collection"
+                                                    id="task1">
+                                                <label class="form-check-label" for="task1">Payment Collection</label>
+                                            </div>
+
+                                            <div class="form-check">
+                                                <input class="form-check-input @error('task') is-invalid @enderror"
+                                                    type="checkbox" name="task[]" value="Bill Distribution" id="task2">
+                                                <label class="form-check-label" for="task2">Bill Distribution</label>
+                                            </div>
+
+                                            <div class="form-check">
+                                                <input class="form-check-input @error('task') is-invalid @enderror"
+                                                    type="checkbox" name="task[]" value="Data Collection" id="task3">
+                                                <label class="form-check-label" for="task3">Data Collection</label>
+                                            </div>
 
                                             @error('task')
-                                                <span class="invalid-feedback" role="alert">
+                                                <span class="invalid-feedback d-block" role="alert">
                                                     {{ $message }}
                                                 </span>
                                             @enderror
@@ -144,4 +166,6 @@
 @endsection
 
 @section('page-scripts')
+    <!-- Internal Choices JS -->
+    <script src="{{ asset('assets/js/choices.js') }}"></script>
 @endsection

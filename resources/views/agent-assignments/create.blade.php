@@ -69,13 +69,18 @@
                                     </div>
 
                                     <div class="col-sm-12 mb-3">
-                                        <label for="agent_id" class="form-label">Agents</label>
-                                        <select class="form-control @error('agent_id') is-invalid @enderror"
-                                            name="agent_id[]" multiple style="height:300px;">
-                                            @foreach ($agents as $agent)
-                                                <option value="{{ $agent->id }}">{{ $agent->name }}</option>
-                                            @endforeach
-                                        </select>
+                                        <label for="agent_id" class="form-label">Select Agent(s)</label>
+
+                                        @foreach ($agents as $agent)
+                                            <div class="form-check">
+                                                <input class="form-check-input @error('agent_id') is-invalid @enderror"
+                                                    type="checkbox" name="agent_id[]" value="{{ $agent->id }}"
+                                                    id="agent_{{ $agent->id }}">
+                                                <label class="form-check-label" for="agent_{{ $agent->id }}">
+                                                    {{ $agent->name }}
+                                                </label>
+                                            </div>
+                                        @endforeach
 
                                         @error('agent_id')
                                             <span class="invalid-feedback" role="alert">
@@ -83,7 +88,6 @@
                                             </span>
                                         @enderror
                                     </div>
-
                                 </div>
 
                                 <div class="d-flex justify-content-end">

@@ -28,6 +28,8 @@ use App\Http\Controllers\AgentAssignment\AgentAssignmentController;
 use App\Http\Controllers\TaskAssignment\TaskAssignmentController;
 use App\Http\Controllers\CustomerSupport\CustomerSupportController;
 use App\Http\Controllers\Building\BuildingController;
+use App\Http\Controllers\Mmda\MmdaController;
+
 
 
 Route::get('/faqAction', [Dashboard\DashboardController::class, 'faqAction'])->name('dashboard.faq');
@@ -248,6 +250,7 @@ Route::group(['prefix' => 'assembly', 'middleware' => 'auth:sanctum'], function 
     Route::post('/{assembly}', [AssemblyController::class, 'update'])->name('assembly.update');
     Route::delete('/{assembly}', [AssemblyController::class, 'destroy'])->name('assembly.destroy');
     Route::get('/{assembly}', [AssemblyController::class, 'show'])->name('assembly.show');
+    Route::post('/fetch/data', [AssemblyController::class, 'fetchAssembly'])->name('assembly.fetch');
 });
 
 // Division Routes
@@ -334,6 +337,7 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function ()
     Route::get('/service-usage-report', [Report\ServiceUsageReport::class, 'index'])->name('service-usage-reports.index');
     Route::get('/location-analysis-report', [Report\LocationAnalysisReportController::class, 'index'])->name('location-analysis-reports.index');
     Route::get('/audit-trail-report', [Report\AuditTrailReportController::class, 'index'])->name('audit-trail-reports.index');
+    Route::get('/job-allocation-report', [Report\JobAllocationReportController::class, 'index'])->name('job-allocation-reports.index');
 });
 
 Route::group(['prefix' => 'agent-assignment', 'middleware' => 'auth:sanctum'], function () {
@@ -373,6 +377,17 @@ Route::group(['prefix' => 'building', 'middleware' => 'auth:sanctum'], function 
     Route::get('/import', [BuildingController::class, 'importBlock'])->name('buildings.importBlock');
     Route::post('/import', [BuildingController::class, 'importBlockStore'])->name('buildings.importBlockStore');
     Route::get('/allocations/{id}', [BuildingController::class, 'allocations'])->name('buildings.allocations');
+});
+
+Route::group(['prefix' => 'mmda', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [MmdaController::class, 'index'])->name('mmdas.index');
+    Route::get('/create', [MmdaController::class, 'create'])->name('mmdas.create');
+    Route::post('/create', [MmdaController::class, 'store'])->name('mmdas.store');
+    Route::get('/show/{mmda}', [MmdaController::class, 'show'])->name('mmdas.show');
+    Route::get('/edit/{mmda}', [MmdaController::class, 'edit'])->name('mmdas.edit');
+    Route::post('/update/{mmda}', [MmdaController::class, 'update'])->name('mmdas.update');
+    Route::get('/import/data', [MmdaController::class, 'import'])->name('mmdas.import');
+    Route::post('/import/data', [MmdaController::class, 'importData'])->name('mmdas.importData');
 });
 
 

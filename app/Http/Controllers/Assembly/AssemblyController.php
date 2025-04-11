@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Assembly;
 use App\Models\GhanaRegion;
 use App\Models\InvoiceLayoutTemplate;
+use App\Models\Mmda;
 use App\Models\User;
 use Illuminate\Support\Facades\File as FileDelete;
 
@@ -101,7 +102,9 @@ class AssemblyController extends Controller
             ->where('status', 'Active')
             ->get();
 
-        return view('assembly.edit', compact('assembly', 'invoiceLayoutTemplates', 'supervisors', 'regions'));
+        $mmdas = Mmda::orderBy('assembly_name', 'ASC')->get();
+
+        return view('assembly.edit', compact('assembly', 'invoiceLayoutTemplates', 'supervisors', 'regions', 'mmdas'));
     }
 
     public function show(Assembly $assembly)
@@ -145,5 +148,16 @@ class AssemblyController extends Controller
 
         return redirect()->route('assembly.index')
             ->with('success', 'Assembly deleted successfully.');
+    }
+
+    public function fetchAssembly(Request $request)
+    {
+        $region = GhanaRegion::where('regional_code', $request->regional_code)->first();
+
+        $assemblies = Mmda::where('region_id', $region->id)->get();
+
+        return response()->json([
+            'message' => $assemblies
+        ]);
     }
 }

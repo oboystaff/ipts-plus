@@ -37,9 +37,9 @@ class PropertyController extends Controller
             ->orWhere('property_number', $id)
             ->orWhere('digital_address', $id)
             ->with(['customer', 'entityType', 'assembly', 'zone', 'division', 'block'])
-            ->first();
+            ->get();
 
-        if (empty($property)) {
+        if (count($property) == 0) {
             return response()->json([
                 'message' => 'Customer property not found'
             ], 422);
