@@ -142,7 +142,31 @@ class CustomerController extends Controller
     {
         $customer = Citizen::where('user_id', $id)
             ->orWhere('account_number', $id)
-            ->get();
+            ->first();
+
+        if (empty($customer)) {
+            return response()->json([
+                'message' => 'Customer not found'
+            ], 422);
+        }
+
+        return response()->json([
+            'message' => 'Get particular customer',
+            'data' => $customer
+        ]);
+    }
+
+    public function multipleParam($id)
+    {
+        $customer = Citizen::with(['user', 'properties'])
+            ->where(function ($query) use ($id) {
+                $query->where('user_id', $id)
+                    ->orWhere('account_number', $id)
+                    ->orWhere('first_name', $id)
+                    ->orWhere('last_name', $id)
+                    ->orWhere('telephone_number', $id)
+                    ->orWhere('ghana_card_number', $id);
+            })->get();
 
         if (count($customer) == 0) {
             return response()->json([

@@ -71,6 +71,7 @@ Route::group(['prefix' => 'division', 'middleware' => 'auth:sanctum'], function 
 Route::group(['prefix' => 'customer', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [CustomerController::class, 'index']);
     Route::get('/show/{id}', [CustomerController::class, 'show']);
+    Route::get('/fetch/{id}', [CustomerController::class, 'multipleParam']);
     Route::post('/create', [CustomerController::class, 'store']);
     Route::post('/update/{id}', [CustomerController::class, 'update']);
 });
