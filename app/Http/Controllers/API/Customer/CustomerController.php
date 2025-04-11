@@ -141,6 +141,7 @@ class CustomerController extends Controller
     public function show($id)
     {
         $customer = Citizen::where('user_id', $id)
+            ->orWhere('account_number', $id)
             ->get();
 
         if (count($customer) == 0) {
