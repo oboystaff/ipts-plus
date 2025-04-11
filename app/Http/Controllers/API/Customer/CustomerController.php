@@ -158,6 +158,7 @@ class CustomerController extends Controller
     public function update(UpdateCustomerRequest $request, $id)
     {
         $customer = Citizen::where('user_id', $id)
+            ->orWhere('account_number', $id)
             ->first();
 
         if (empty($customer)) {
