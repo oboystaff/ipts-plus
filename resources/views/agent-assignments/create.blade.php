@@ -6,18 +6,31 @@
 
 @section('page-content')
     <div class="container-fluid mh-auto">
+        <div class="card">
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-user-settings-line me-2"></i> Agents Assignments
+                        </h4>
+                        <p class="mb-0 text-muted fs-14">
+                            Easily add agents and manage assignments in one section.
+                        </p>
+                    </div>
+
+                    @can('agent-assignments.create')
+                        <a href="{{ route('agent-assignments.index') }}" class="btn btn-primary">
+                            <i class="ri-arrow-go-back-line"></i> Back
+                        </a>
+                    @endcan
+                </div>
+
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-6 col-lg-12">
                 <div class="card">
-                    <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">Assign Agents to Supervisor</h4>
-                        </div>
 
-                        <div>
-                            <a href="{{ route('agent-assignments.index') }}" class="btn btn-primary btn-sm ms-2">Back</a>
-                        </div>
-                    </div>
 
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -88,6 +101,7 @@
                                             </span>
                                         @enderror
                                     </div>
+
                                 </div>
 
                                 <div class="d-flex justify-content-end">

@@ -56,6 +56,11 @@ class User extends Authenticatable
         return $this->belongsTo(Division::class, 'division_code', 'division_code');
     }
 
+    public function region()
+    {
+        return $this->belongsTo(GhanaRegion::class, 'regional_code', 'regional_code');
+    }
+
     public function roleName()
     {
         return $this->belongsTo(Role::class, 'role_access');

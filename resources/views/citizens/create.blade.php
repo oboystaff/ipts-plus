@@ -5,19 +5,33 @@
 
 @section('page-content')
     <div class="container-fluid">
+        <div class="card">
+
+            <!-- HEADER SECTION -->
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-user-settings-line me-2"></i> Rate Payer - Management
+                        </h4>
+
+                        <p class="mb-0 text-muted fs-14">
+                            You are About to Add A New Rate Payer Record from your
+                            central database repository.
+                        </p>
+
+                    </div>
+
+                    <a href="{{ route('citizens.index') }}" class="btn btn-sm btn-primary">
+                        <i class="fa fa-arrow-left me-1"></i> Back
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">Create Assembly Customer</h4>
-                        </div>
-
-                        <div>
-                            <a href="{{ route('citizens.index') }}" class="btn btn-primary btn-sm ms-2">Back</a>
-                        </div>
-                    </div>
-
 
                     <div class="card-body">
                         <form class="row g-3 needs-validation" method="POST" action="{{ route('citizens.store') }}">
@@ -39,7 +53,7 @@
                             @endif
 
                             <div class="col-md-6 mb-3">
-                                <label for="first_name">First Name</label>
+                                <label for="first_name" class="form-label">First Name</label>
                                 <input type="text" class="form-control @error('first_name') is-invalid @enderror"
                                     name="first_name" placeholder="First Name">
 
@@ -51,7 +65,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="last_name">Last Name</label>
+                                <label for="last_name" class="form-label">Last Name</label>
                                 <input type="text" class="form-control @error('last_name') is-invalid @enderror"
                                     name="last_name" placeholder="Last Name">
 
@@ -63,7 +77,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="other_name">Prefix</label>
+                                <label for="other_name" class="form-label">Prefix</label>
                                 <select name="prefix" class="form-control @error('prefix') is-invalid @enderror">
                                     <option disabled selected>Select Prefix</option>
                                     <option value="Mr">Mr</option>
@@ -80,7 +94,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="gender">Gender</label>
+                                <label for="gender" class="form-label">Gender</label>
                                 <select name="gender" class="form-control @error('gender') is-invalid @enderror">
                                     <option disabled selected>Select Gender</option>
                                     <option value="Male">Male</option>
@@ -95,7 +109,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="dob">Date of Birth</label>
+                                <label for="dob" class="form-label">Date of Birth</label>
                                 <input type="date" class="form-control @error('date_of_birth') is-invalid @enderror"
                                     name="date_of_birth" placeholder="Date of Birth">
 
@@ -107,7 +121,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="marital_status">Marital Status</label>
+                                <label for="marital_status" class="form-label">Marital Status</label>
                                 <select name="marital_status"
                                     class="form-control @error('marital_status') is-invalid @enderror">
                                     <option disabled selected>Select Marital Status</option>
@@ -125,7 +139,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="telephone_number">Telephone Number</label>
+                                <label for="telephone_number" class="form-label">Telephone Number</label>
                                 <input type="text" class="form-control @error('telephone_number') is-invalid @enderror"
                                     name="telephone_number" placeholder="Telephone Number">
 
@@ -137,7 +151,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="country_of_citizenship">Country of Citizenship</label>
+                                <label for="country_of_citizenship" class="form-label">Country of Citizenship</label>
                                 <select name="country_of_citizenship"
                                     class="form-control @error('country_of_citizenship') is-invalid @enderror">
                                     <option disabled selected>Select Country of Citizenship</option>
@@ -157,7 +171,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="customer_type">Customer Type</label>
+                                <label for="customer_type" class="form-label">Customer Type</label>
                                 <select name="customer_type"
                                     class="form-control @error('customer_type') is-invalid @enderror">
                                     <option disabled selected>Select Customer Type</option>
@@ -174,7 +188,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="ghana_card_number">Ghana Card Number</label>
+                                <label for="ghana_card_number" class="form-label">Ghana Card Number</label>
                                 <input type="text" class="form-control" name="Ghana_card_number"
                                     placeholder="Ghana Card Number">
                             </div>

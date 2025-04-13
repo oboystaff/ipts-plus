@@ -1,10 +1,40 @@
 @extends('layout.base')
 
 @section('page-styles')
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 @endsection
 
 @section('page-content')
     <div class="container-fluid mh-auto">
+        <div class="card">
+
+            <!-- HEADER SECTION -->
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-community-line me-2"></i> Division Settings
+                        </h4>
+
+
+
+
+                        <p class="mb-0 text-muted fs-14">
+                            You are Viewing all Division Record from your
+                            central database repository.
+                        </p>
+
+                    </div>
+                    @can('divisions.create')
+                        <a href="{{ route('divisions.create') }}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-plus me-1"></i> Create New Division
+                        </a>
+                    @endcan
+
+
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-xl-12 active-p">
 
@@ -23,18 +53,7 @@
                 @endif
 
                 <div class="card">
-                    <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div class="card-header">
-                            <div class="card-title">Assembly Management / Division</div>
-                        </div>
 
-                        <div class="d-flex align-items-center">
-                            @can('divisions.create')
-                                <a href="{{ route('divisions.create') }}" class="btn btn-primary btn-sm ms-2">+ Create
-                                    Assembly Division</a>
-                            @endcan
-                        </div>
-                    </div>
 
                     <div class="card-body px-0">
                         <div class="table-responsive">

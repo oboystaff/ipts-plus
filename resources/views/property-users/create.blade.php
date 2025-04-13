@@ -5,37 +5,52 @@
 
 @section('page-content')
     <div class="container-fluid">
+        <div class="card">
+            <!-- HEADER SECTION -->
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-home-gear-line"></i> Use Type Settings
+                        </h4>
+
+                        <p class="mb-0 text-muted fs-14">
+                            You are viewing A Property Use Type Record from your
+                            central database repository.
+                        </p>
+                    </div>
+                    @can('property-uses.create')
+                        <a href="{{ route('property-users.index') }}" class="btn btn-sm btn-primary">
+                            <i class="ri-arrow-go-back-line"></i> Back
+                        </a>
+                    @endcan
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">Create Property Use</h4>
-                        </div>
-
-                        <div>
-                            <a href="{{ route('property-users.index') }}" class="btn btn-primary btn-sm ms-2">Back</a>
-                        </div>
-                    </div>
-
-                    <div class="card-body">
-                        <form class="row g-3 needs-validation" method="POST" action="{{ route('property-users.store') }}">
-                            @csrf
 
 
-                            <div class="col-md-6 mb-3">
-                                <label for="block_code">Property Use Name</label>
+
+                    <form class="row g-3 needs-validation" method="POST" action="{{ route('property-users.store') }}">
+                        @csrf
+
+                        <!-- Property Use Name -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Property Use Name</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    id="name" name="name" placeholder="Property use name" required>
-
+                                    id="name" name="name" placeholder="Enter property use name" required>
                                 @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        {{ $message }}
-                                    </span>
+                                    <span class="invalid-feedback d-block" role="alert">{{ $message }}</span>
                                 @enderror
                             </div>
+                        </div>
 
-                            <div class="col-sm-6 mb-3">
+                        <!-- Zone Dropdown -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
                                 <label for="zone_id" class="form-label">Zone</label>
                                 <select class="form-control @error('zone_id') is-invalid @enderror" id="zone_id"
                                     name="zone_id" required>
@@ -44,19 +59,20 @@
                                         <option value="{{ $zone->id }}">{{ $zone->name }}</option>
                                     @endforeach
                                 </select>
-
                                 @error('zone_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        {{ $message }}
-                                    </span>
+                                    <span class="invalid-feedback d-block" role="alert">{{ $message }}</span>
                                 @enderror
                             </div>
+                        </div>
 
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
-                        </form>
-                    </div>
+                        <!-- Submit Button -->
+                        <div class="col-12 text-end">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+
+
+
                 </div>
             </div>
         </div>

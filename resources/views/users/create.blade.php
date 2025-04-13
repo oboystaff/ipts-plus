@@ -2,28 +2,23 @@
 
 @section('page-content')
     <div class="col-xxl-12">
-        <div class="card custom-card overflow-hidden podcast-banner">
-            <div class="card-body p-4">
-                <div class="row gy-3 gy-xl-0">
-                    <div class="col-lg-10 my-auto">
-                        <h5 class="fw-semibold text-fixed-white">
-                            You Are About to Create a <span class="text-secondary">User</span> in the System
-                        </h5>
-                        <p class="fw-medium mb-4 pb-1 text-fixed-white op-7">Any actions performed here are logged for audit
-                            purposes to ensure full accountability and traceability of all activities.</p>
-                        <div class="btn-list">
-                            <button type="button" id="proceedButton" class="btn btn-success shadow">
-                                <i class="ri-user-add-line me-2 fs-20 lh-1 align-middle"></i>
-                                Time Spent: <span id="timeSpent">00:00:00</span>
-                            </button>
-                        </div>
+        <div class="card">
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-shield-user-line me-2"></i> User Management
+                        </h4>
+                        <p class="mb-0 text-muted fs-14">
+                            Easily Add Users In One Section.
+                        </p>
                     </div>
-                    <div class="col-lg-2">
-                        <div class="podcast-img text-end">
-                            <img src="{{ asset('assets/images/podcast/11.jpg') }}" class="img-fluid rounded-3"
-                                alt="">
-                        </div>
-                    </div>
+
+                    @can('users.create')
+                        <a href="{{ route('users.index') }}" class="btn btn-primary">
+                            <i class="ri-arrow-go-back-line"></i> Back
+                        </a>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -31,12 +26,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header flex-wrap d-flex justify-content-between">
-                    <div class="card-title">User Management / Create User</div>
-                    <div>
-                        <a href="{{ route('users.index') }}" class="btn btn-danger btn-sm ms-2">Back</a>
-                    </div>
-                </div>
+
 
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -54,6 +44,7 @@
                         @csrf
 
                         <input type="hidden" name="assembly_url" url="{{ route('assembly.fetch') }}">
+
                         <!-- Form Fields -->
                         <div class="col-md-4">
                             <label class="form-label">Full Name</label>
@@ -173,7 +164,7 @@
                             </select>
                         </div>
 
-                        <div class="col-md-4" style="display: none;">
+                        <div class="col-md-4" id="division_code_field" style="display: none;">
                             <label class="form-label">Division</label>
                             <select class="form-control" name="division_code">
                                 <option value="">Select Division</option>

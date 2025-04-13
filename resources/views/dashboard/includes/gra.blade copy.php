@@ -349,7 +349,7 @@
                     <div class="card-body position-relative">
                         <div class="d-flex flex-column">
                             <span class="fs-6 fw-bold text-uppercase mb-3" style="color: #4e73df;">
-                                Payments Made
+                                Total Payments Made
                             </span>
                             <h5 class="fw-normal lh-1 mb-0 text-dark">GHS {{ $total['dashTotalPayments'] }}</h5>
                         </div>
@@ -366,7 +366,7 @@
                     <div class="card-body position-relative">
                         <div class="d-flex flex-column">
                             <span class="fs-6 fw-bold text-uppercase mb-3" style="color: #1cc88a;">
-                                Bill Amount
+                                Total Bill Amount
                             </span>
                             <h5 class="fw-normal lh-1 mb-0 text-dark">GHS {{ $total['dashTotalBills'] }}</h5>
                         </div>
@@ -383,7 +383,7 @@
                     <div class="card-body position-relative">
                         <div class="d-flex flex-column">
                             <span class="fs-6 fw-bold text-uppercase mb-3" style="color: #dc1212;">
-                                Outstanding Payments
+                                Total Outstanding Payments
                             </span>
                             <h5 class="fw-normal lh-1 mb-0 text-dark">GHS {{ $total['dashTotalOutstanding'] }}</h5>
                         </div>
@@ -400,7 +400,7 @@
                     <div class="card-body position-relative">
                         <div class="d-flex flex-column">
                             <span class="fs-6 fw-bold text-uppercase mb-3" style="color: #36b9cc;">
-                                Bill Count
+                                Total Bill Count
                             </span>
                             <h5 class="fw-normal lh-1 mb-0 text-dark">{{ $total['dashTotalBillCount'] }}</h5>
                         </div>
@@ -410,22 +410,11 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-xxl-12">
-                <div id="regional-data-container">
-                    <div class="text-center">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                        <p>Loading data...</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
 
-{{-- <div class="row">
+<div class="row">
     <div class="col-xxl-12">
         <div id="regional-data-container">
             <div class="text-center">
@@ -436,4 +425,4 @@
             </div>
         </div>
     </div>
-</div> --}}
+</div>

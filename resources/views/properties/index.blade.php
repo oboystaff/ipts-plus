@@ -9,175 +9,99 @@
 @endsection
 
 @section('page-content')
-    <div class="card-body px-0">
-        <!-- Filters Form -->
+    <div class="container-fluid">
+        <div class="card">
+            <!-- HEADER SECTION -->
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-building-line me-2"></i> Property Management
+                        </h4>
 
-    </div>
 
-    <div class="container-fluid mh-auto">
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="card custom-card rounded-md overflow-hidden p-2">
-                    <div class="card-body bg-primary bg-opacity-10 rounded-2 ps-4 medical-cards">
-                        <div class="row">
-                            <div class="col-xxl-12">
-                                <form method="GET" action="{{ route('properties.index') }}" class="mb-3">
-                                    <div class="row align-items-end g-3">
-                                        <!-- Entity Type -->
-                                        <div class="col-md-4">
-                                            <label for="entity_type" class="form-label">Entity Type</label>
-                                            <select name="entity_type" id="entity_type" class="form-select">
-                                                <option value="">All</option>
-                                                @foreach ($data['entityTypes'] as $type)
-                                                    <option value="{{ $type->id }}"
-                                                        {{ request('entity_type') == $type->id ? 'selected' : '' }}>
-                                                        {{ $type->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                        <p class="mb-0 text-muted fs-14">
+                            You are Viewing all Properties Record from your
+                            central database repository.
+                        </p>
 
-                                        <!-- Assembly -->
-                                        <div class="col-md-4">
-                                            <label for="assembly" class="form-label">Assembly</label>
-                                            <select name="assembly" id="assembly" class="form-select">
-                                                <option value="">All</option>
-                                                @foreach ($data['assemblies'] as $assembly)
-                                                    <option value="{{ $assembly->id }}"
-                                                        {{ request('assembly') == $assembly->id ? 'selected' : '' }}>
-                                                        {{ $assembly->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-
-                                        <!-- Apply Filters Button -->
-                                        <div class="col-md-4">
-                                            <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
                     </div>
+                    @can('properties.create')
+                        <div class="d-flex gap-2">
+                            <a href="{{ route('properties.create') }}" class="btn btn-sm btn-primary">
+                                <i class="fa fa-plus me-1"></i> Add Property
+                            </a>
+                            <a href="{{ route('properties.import') }}" class="btn btn-sm btn-success">
+                                <i class="fa fa-upload me-1"></i> Import Properties
+                            </a>
+                        </div>
+                    @endcan
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-md-12" style="margin-left:20px;margin-bottom:50px">
-        <label for="phone" style="font-size:15px;margin-bottom:20px">Rate Payer Properties On Map (<span
-                style="color:blue;font-weight:bold">Blue:</span>
-            Full Payment, <span style="color:yellow;font-weight:bold">Yellow:</span> Partial Payment, <span
-                style="color:red;font-weight:bold">Red:</span> No
-            Payment)</label>
-        <div id="map" style="height: 600px;"></div>
-    </div>
-
-    <div class="container-fluid mh-auto">
         <div class="row">
-            <div class="col-xl-12">
-                <div class="card custom-card rounded-md overflow-hidden p-2">
-                    <div class="card-body bg-primary bg-opacity-10 rounded-2 ps-4 medical-cards">
-                        <div class="row">
-                            <div class="col-xxl-12">
-                                <div class="row">
-
-                                    <div class="col-xl-3">
-                                        <div class="card custom-card">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-start gap-3 flex-wrap">
-
-                                                    <div class="flex-fill">
-                                                        <div class="d-flex align-items-center justify-content-between mb-2">
-                                                            <span class="d-block"> Valued Properties</span>
-                                                            <span
-                                                                class="badge bg-success-transparent rounded-pill">{{ $data['valuedPercentage'] }}%<i
-                                                                    class="ti ti-arrow-up"></i></span>
-                                                        </div>
-                                                        <span class="d-block mb-2"></span>
-                                                        <h4 class="fw-semibold mb-3 lh-1">{{ $data['valuedProperties'] }}
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-xxl-12">
+                            <form method="GET" action="{{ route('properties.index') }}" class="mb-3">
+                                <div class="row align-items-end g-3">
+                                    <!-- Entity Type -->
+                                    <div class="col-md-4">
+                                        <label for="entity_type" class="form-label">Entity Type</label>
+                                        <select name="entity_type" id="entity_type" class="form-select">
+                                            <option value="">All</option>
+                                            @foreach ($data['entityTypes'] as $type)
+                                                <option value="{{ $type->id }}"
+                                                    {{ request('entity_type') == $type->id ? 'selected' : '' }}>
+                                                    {{ $type->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    <div class="col-xl-3">
-                                        <div class="card custom-card">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-start gap-3 flex-wrap">
 
-                                                    <div class="flex-fill">
-                                                        <div class="d-flex align-items-center justify-content-between mb-2">
-                                                            <span class="d-block">Un-Valued </span>
-                                                            <span class="badge bg-danger-transparent rounded-pill">
-                                                                {{ $data['unvaluedPercentage'] }}%<i
-                                                                    class="ti ti-arrow-down"></i></span>
-                                                        </div>
-                                                        <span class="d-block mb-2"></span>
-                                                        <h4 class="fw-semibold mb-3 lh-1">{{ $data['unvaluedProperties'] }}
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <!-- Assembly -->
+                                    <div class="col-md-4">
+                                        <label for="assembly" class="form-label">Assembly</label>
+                                        <select name="assembly" id="assembly" class="form-select">
+                                            <option value="">All</option>
+                                            @foreach ($data['assemblies'] as $assembly)
+                                                <option value="{{ $assembly->id }}"
+                                                    {{ request('assembly') == $assembly->id ? 'selected' : '' }}>
+                                                    {{ $assembly->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    <div class="col-xl-3">
-                                        <div class="card custom-card">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-start gap-3 flex-wrap">
 
-                                                    <div class="flex-fill">
-                                                        <div class="d-flex align-items-center justify-content-between mb-2">
-                                                            <span class="d-block">Rated Properties </span>
-                                                            <span
-                                                                class="badge bg-danger-transparent rounded-pill">{{ $data['ratedPercentage'] }}%<i
-                                                                    class="ti ti-arrow-down"></i></span>
-                                                        </div>
-                                                        <span class="d-block mb-2"></span>
-                                                        <h4 class="fw-semibold mb-3 lh-1"> {{ $data['ratedProperties'] }}
-                                                        </h4>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3">
-                                        <div class="card custom-card">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-start gap-3 flex-wrap">
-
-                                                    <div class="flex-fill">
-                                                        <div class="d-flex align-items-center justify-content-between mb-2">
-                                                            <span class="d-block">Un-Rated </span>
-                                                            <span
-                                                                class="badge bg-success-transparent rounded-pill">{{ $data['unratedPercentage'] }}%<i
-                                                                    class="ti ti-arrow-up"></i></span>
-                                                        </div>
-                                                        <span class="d-block mb-2"></span>
-                                                        <h4 class="fw-semibold mb-3 lh-1">{{ $data['unratedProperties'] }}
-                                                        </h4>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <!-- Apply Filters Button -->
+                                    <div class="col-md-4">
+                                        <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="col-md-12 mb-5 ml-3">
+            <label for="map" class="mb-3 d-block" style="font-size: 16px;">
+                Rate Payer Properties On Map (
+                <span style="color: blue; font-weight: bold;">Blue:</span> Full Payment,
+                <span style="color: yellow; font-weight: bold;">Yellow:</span> Partial Payment,
+                <span style="color: red; font-weight: bold;">Red:</span> No Payment)
+            </label>
+        </div>
+        <div class="card">
+            <div id="map" class="shadow rounded" style="height: 600px;"></div>
+        </div>
 
 
-    <div class="container-fluid mh-auto">
-        <div class="row">
-            <div class="col-xl-12 active-p">
+        <div class="container-fluid mh-auto">
+            <div class="row">
 
                 @if (session()->has('status'))
                     <div class="alert alert-success alert-dismissible fade show">
@@ -194,134 +118,112 @@
                 @endif
 
                 <div class="card">
+                    <div class="table-responsive active-projects user-tbl  dt-filter">
+                        <table id="file-export" class="table table-bordered text-nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>S/N</th>
+                                    <th>Entity Type</th>
+                                    <th>Category</th>
+                                    {{-- <th>Digital Address</th> --}}
+                                    {{-- <th>Location</th> --}}
+                                    {{-- <th>Street Name</th> --}}
+                                    <th>Rated?</th>
 
-                    <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div class="card-header">
-                            {{-- <div class="card-title">Property Management / Rate Payers Properties</div> --}}
-                        </div>
-
-                        <div class="d-flex align-items-center">
-                            @can('properties.create')
-                                <a href="{{ route('properties.create') }}" class="btn btn-primary btn-sm ms-2">+ Create
-                                    Customer Property</a>
-                            @endcan
-
-                            @can('properties.create')
-                                <a href="{{ route('properties.import') }}" class="btn btn-success btn-sm ms-2">+ Upload Bulk
-                                    Customer Property</a>
-                            @endcan
-                        </div>
-                    </div>
-
-                    <div class="card-body px-0">
-                        <div class="table-responsive active-projects user-tbl  dt-filter">
-                            <table id="file-export" class="table table-bordered text-nowrap w-100">
-                                <thead>
-                                    <tr>
-                                        <th>S/N</th>
-                                        <th>Entity Type</th>
-                                        <th>Category</th>
-                                        {{-- <th>Digital Address</th> --}}
-                                        {{-- <th>Location</th> --}}
-                                        {{-- <th>Street Name</th> --}}
-                                        <th>Rated?</th>
-
-                                        <th>Property Number</th>
-                                        {{-- <th>Validated?</th> --}}
-                                        {{-- <th>Owner Account</th> --}}
-                                        {{-- <th>Owner Name</th> --}}
-                                        {{-- <th>Ratable Value</th> --}}
-                                        {{-- <th>Assembly</th> --}}
-                                        {{-- <th>Division</th>
+                                    <th>Property Number</th>
+                                    {{-- <th>Validated?</th> --}}
+                                    {{-- <th>Owner Account</th> --}}
+                                    {{-- <th>Owner Name</th> --}}
+                                    {{-- <th>Ratable Value</th> --}}
+                                    {{-- <th>Assembly</th> --}}
+                                    {{-- <th>Division</th>
                                         <th>Block</th>
                                         <th>Zone</th> --}}
-                                        <th>Property Use</th>
-                                        {{-- <th>Date Created</th> --}}
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($data['properties'] as $index => $property)
-                                        <tr>
-                                            <td>{{ $index + 1 }}</td>
-                                            <td>{{ $property->entityType->name ?? 'N/A' }}</td>
-                                            <td>{{ $property->entityType->category ?? 'N/A' }}</td>
-                                            {{-- <td>{{ $property->digital_address }}</td>
+                                    <th>Property Use</th>
+                                    {{-- <th>Date Created</th> --}}
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($data['properties'] as $index => $property)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $property->entityType->name ?? 'N/A' }}</td>
+                                        <td>{{ $property->entityType->category ?? 'N/A' }}</td>
+                                        {{-- <td>{{ $property->digital_address }}</td>
                                             <td>{{ $property->location }}</td> --}}
-                                            {{-- <td>{{ $property->street_name }}</td> --}}
-                                            {{-- <td>{{ $property->validated }}</td> --}}
-                                            {{-- <td>
+                                        {{-- <td>{{ $property->street_name }}</td> --}}
+                                        {{-- <td>{{ $property->validated }}</td> --}}
+                                        {{-- <td>
                                                 @if ($property->validated === 'Yes')
                                                     <span class="badge bg-success">Yes</span>
                                                 @else
                                                     <span class="badge bg-danger">No</span>
                                                 @endif
                                             </td> --}}
-                                            <td>
-                                                @if ($property->rated === 'Yes')
-                                                    <span class="badge bg-success">Yes</span>
-                                                @else
-                                                    <span class="badge bg-danger">No</span>
-                                                @endif
-                                            </td>
-                                            <td>{{ $property->property_number }}</td>
-                                            {{-- <td>{{ $property->customer->account_number ?? 'N/A' }}</td> --}}
-                                            {{-- <td>{{ $property->customer->first_name ?? '' }}
+                                        <td>
+                                            @if ($property->rated === 'Yes')
+                                                <span class="badge bg-success">Yes</span>
+                                            @else
+                                                <span class="badge bg-danger">No</span>
+                                            @endif
+                                        </td>
+                                        <td>{{ $property->property_number }}</td>
+                                        {{-- <td>{{ $property->customer->account_number ?? 'N/A' }}</td> --}}
+                                        {{-- <td>{{ $property->customer->first_name ?? '' }}
                                                 {{ $property->customer->last_name ?? 'N/A' }}
                                             </td> --}}
-                                            {{-- <td>GHS {{ number_format($property->ratable_value, 2) }}</td> --}}
-                                            {{-- <td>{{ $property->assembly->name ?? 'N/A' }}</td> --}}
-                                            {{-- <td>{{ $property->division->division_name ?? 'N/A' }}</td>
+                                        {{-- <td>GHS {{ number_format($property->ratable_value, 2) }}</td> --}}
+                                        {{-- <td>{{ $property->assembly->name ?? 'N/A' }}</td> --}}
+                                        {{-- <td>{{ $property->division->division_name ?? 'N/A' }}</td>
                                             <td>{{ $property->block->block_name ?? 'N/A' }}</td>
                                             <td>{{ $property->zone->name ?? 'N/A' }}</td> --}}
-                                            <td>{{ $property->propertyUse->name ?? 'N/A' }}</td>
-                                            {{-- <td>{{ $property->created_at }}</td> --}}
-                                            <td>
-                                                <div class="dropdown">
-                                                    <div class="btn-link" data-bs-toggle="dropdown"
-                                                        aria-expanded="false">
-                                                        <svg width="24" height="24" viewBox="0 0 24 24"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
-                                                                stroke="#737B8B" stroke-width="2" stroke-linecap="round"
-                                                                stroke-linejoin="round">
-                                                            </path>
-                                                            <path
-                                                                d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
-                                                                stroke="#737B8B" stroke-width="2" stroke-linecap="round"
-                                                                stroke-linejoin="round">
-                                                            </path>
-                                                            <path
-                                                                d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
-                                                                stroke="#737B8B" stroke-width="2" stroke-linecap="round"
-                                                                stroke-linejoin="round">
-                                                            </path>
-                                                        </svg>
-                                                    </div>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <div class="py-2">
-                                                            <a class="dropdown-item"
-                                                                href=" {{ route('properties.show', $property) }}">View
-                                                            </a>
-                                                            <a class="dropdown-item"
-                                                                href=" {{ route('properties.edit', $property) }}">Edit
-                                                            </a>
-                                                        </div>
+                                        <td>{{ $property->propertyUse->name ?? 'N/A' }}</td>
+                                        {{-- <td>{{ $property->created_at }}</td> --}}
+                                        <td>
+                                            <div class="dropdown">
+                                                <div class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
+                                                            stroke="#737B8B" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round">
+                                                        </path>
+                                                        <path
+                                                            d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
+                                                            stroke="#737B8B" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round">
+                                                        </path>
+                                                        <path
+                                                            d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
+                                                            stroke="#737B8B" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <div class="py-2">
+                                                        <a class="dropdown-item"
+                                                            href=" {{ route('properties.show', $property) }}">View
+                                                        </a>
+                                                        <a class="dropdown-item"
+                                                            href=" {{ route('properties.edit', $property) }}">Edit
+                                                        </a>
                                                     </div>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                                {{-- <tfoot>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                            {{-- <tfoot>
                                     <th colspan="10"></th>
                                     <th>Total (GHS)</th>
                                     <th>{{ $total }}</th>
                                     <th colspan="7"></th>
                                 </tfoot> --}}
-                            </table>
-                        </div>
+                        </table>
                     </div>
                     <hr />
 

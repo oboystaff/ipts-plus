@@ -5,6 +5,29 @@
 
 @section('page-content')
     <div class="container-fluid mh-auto">
+        <div class="card">
+            <!-- HEADER SECTION -->
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-wallet-3-line me-2"></i> Bills Management
+                        </h4>
+
+                        <p class="mb-0 text-muted fs-14">
+                            You are viewing all generated bills record in your
+                            central database repository.
+                        </p>
+                    </div>
+
+                    <a href="{{ route('bills.fetchBill') }}" class="btn btn-sm btn-primary">
+                        <i class="ri-arrow-go-back-line"></i> Back
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
         <div class="col-xl-12">
             <div class="card custom-card rounded-md overflow-hidden p-2">
                 <div class="card-body bg-primary bg-opacity-10 rounded-2 ps-4 medical-cards">
@@ -90,7 +113,7 @@
                         {{-- <a href="{{ route('bills.blockCreate') }}" class="btn btn-primary btn-sm ms-2">+ Blocks Bill Generate
                         </a> --}}...
                         <button class="btn btn-primary btn-wave">
-                            <a href="{{ route('bills.divisionCreate') }}" class="text-white text-decoration-none">
+                            <a href="{{ route('bills.blockCreate') }}" class="text-white text-decoration-none">
                                 <i class="ri-share-forward-line me-1 rtl-icon-transform lh-1 d-inline-block"></i> Block Bills
                             </a>
                         </button>

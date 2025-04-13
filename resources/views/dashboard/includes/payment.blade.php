@@ -4,6 +4,31 @@
 @endsection
 
 @section('page-content')
+    <div class="card">
+        <!-- HEADER SECTION -->
+        <div class="card-body border-bottom pb-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                    <h4 class="fw-bold text-primary mb-1">
+                        <i class="ri-file-chart-line me-2"></i> Payments Analysis Overview
+                    </h4>
+
+
+                    <p class="mb-0 text-muted fs-14">
+                        Gain valuable insights through charts on Revenue Trends, Top Performing Assemblies by Cash Flow
+                        (GHS), Outstanding Payments, Revenue by Location, Regional Arrears, and Collection Efficiency.
+                    </p>
+
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
     <div class="col-xl-12">
         <div class="card custom-card rounded-md overflow-hidden p-2">
             <div class="card-body bg-primary bg-opacity-10 rounded-2 ps-4 medical-cards">

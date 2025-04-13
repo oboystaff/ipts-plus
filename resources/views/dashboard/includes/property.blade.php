@@ -4,6 +4,29 @@
 @endsection
 
 @section('page-content')
+    <div class="card">
+        <!-- HEADER SECTION -->
+        <div class="card-body border-bottom pb-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                    <h4 class="fw-bold text-primary mb-1">
+                        <i class="ri-file-chart-line me-2"></i> Properties Analysis Overview
+                    </h4>
+
+
+                    <p class="mb-0 text-muted fs-14">
+                        Get insights into Total Registered Rate Payers, Active vs. Inactive Rate Payers, Property
+                        Registration Trends, and Top Contributing Properties.
+                    </p>
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
     <div class="col-xl-12">
         <div class="card custom-card rounded-md overflow-hidden p-2">
             <div class="card-body bg-primary bg-opacity-10 rounded-2 ps-4 medical-cards">
@@ -74,7 +97,7 @@
         <div class="col-xl-6">
             <div class="card custom-card h-100">
                 <div class="card-header">
-                    <div class="card-title">Property/Business Registration Trend</div>
+                    <div class="card-title">Properties Registration Trend</div>
                 </div>
                 <div class="card-body">
                     <div id="column-rotated-labels"></div>
@@ -85,7 +108,7 @@
         <div class="col-xl-6">
             <div class="card custom-card h-100">
                 <div class="card-header">
-                    <div class="card-title">Top Contributing Properties/Businesses</div>
+                    <div class="card-title">Top Contributing Properties</div>
                 </div>
                 <div class="card-body">
                     <div id="column-negative"></div>

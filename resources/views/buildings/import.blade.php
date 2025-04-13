@@ -7,21 +7,39 @@
 
 @section('page-content')
     <div class="container-fluid">
+        <div class="card">
+            <!-- HEADER SECTION -->
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-stack-line me-2"></i> Blocks Settings
+                        </h4>
+
+                        <p class="mb-0 text-muted fs-14">
+                            You are Importing Blocks within Divisions Record to your
+                            central database repository.
+                        </p>
+                    </div>
+                    @can('blocks.create')
+                        <div class="d-flex gap-2">
+                            <a href="{{ route('properties.downloadTemplate') }}" class="btn btn-success btn-sm ms-2">
+                                <i class="ri-download-2-line me-1"></i> Download Sample
+                            </a>
+
+                            <a href="{{ route('buildings.index') }}" class="btn btn-primary btn-sm ms-2">
+                                <i class="ri-arrow-go-back-line"></i> Back
+                            </a>
+                        </div>
+                    @endcan
+                </div>
+            </div>
+
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">Import Assembly Blocks</h4>
-                        </div>
 
-                        <div>
-                            <a href="{{ route('properties.downloadTemplate') }}"
-                                class="btn btn-success btn-sm ms-2">Download Blocks Template</a>
-
-                            <a href="{{ route('buildings.index') }}" class="btn btn-primary btn-sm ms-2">Back</a>
-                        </div>
-                    </div>
 
 
                     <div class="card-body">
@@ -55,7 +73,7 @@
                             @endif
 
                             <div class="col-md-12 mb-3">
-                                <label for="first_name" class="mb-3">Upload Assembly Blocks Excel File</label>
+                                <label for="first_name" class="mb-3">Upload Assembly Blocks Excel File Here</label>
                                 <input class="file" id="file" name="file" type="file" data-show-upload="false"
                                     data-theme="fa" data-max-file-count="" data-max-total-file-count=""
                                     data-initial-preview-as-data="true" , data-initial-preview=""

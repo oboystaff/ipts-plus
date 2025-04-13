@@ -6,39 +6,35 @@
                     <div class="col-xxl-8 col-xl-6 col-lg-8 col-12">
                         <div class="p-2">
                             @php
-                                $hour = date('H');
-                                if ($hour < 12) {
-                                    $greeting = 'Good Morning';
-                                } elseif ($hour < 18) {
-                                    $greeting = 'Good Afternoon';
-                                } else {
-                                    $greeting = 'Good Evening';
-                                }
+                                $hour = now()->format('H');
+                                $greeting =
+                                    $hour < 12 ? 'Good Morning' : ($hour < 18 ? 'Good Afternoon' : 'Good Evening');
                             @endphp
-                            <h6 class="fw-semibold mb-3 op-9 text-fixed-white"> {{ $greeting }}
-                                {{ Auth::user()->name }} ! &#128075;</h6>
-                            <h4 class="fw-semibold mb-2  text-fixed-white"> "Welcome to Your <span class="text-secondary">
-                                    IPTS</span> Dashboard!" </h4>
+                            <h6 class="fw-semibold mb-3 op-9 text-fixed-white">
+                                {{ $greeting }} {{ Auth::user()->name }}! 👋
+                            </h6>
+                            <h4 class="fw-semibold mb-2 text-fixed-white">
+                                Welcome to Your <span class="text-secondary">IPTS</span> Dashboard!
+                            </h4>
                             <p class="mb-4 text-fixed-white op-7 fs-12">
-                                Empowering you to manage your contributions with ease, transparency, and
-                                confidence.
+                                Empowering you to manage your contributions with ease, transparency, and confidence.
                                 Together, we’re building stronger communities!
                             </p>
                             <div class="d-flex gap-2 flex-wrap">
-                                <button class="btn btn-success btn-wave waves-effect waves-light"
-                                    onclick="window.location.href='{{ route('bills.fetchBill', ['display' => 'property']) }}'">
+                                <a href="{{ route('bills.fetchBill', ['display' => 'property']) }}"
+                                    class="btn btn-success btn-wave waves-effect waves-light">
                                     View BoP Bills
-                                </button>
-                                <button class="btn btn-secondary btn-wave waves-effect waves-light"
-                                    onclick="window.location.href='{{ route('businesses.index', ['display' => 'active']) }}'">
+                                </a>
+                                <a href="{{ route('businesses.index', ['display' => 'active']) }}"
+                                    class="btn btn-secondary btn-wave waves-effect waves-light">
                                     View Property Bills
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xxl-4 col-xl-6 col-lg-4 my-auto text-end">
+                    <div class="col-xxl-4 col-xl-6 col-lg-4 d-none d-lg-block my-auto text-end">
                         <div class="featured-nft text-end">
-                            <img src="{{ asset('assets/images/gh.png') }}" alt=""
+                            <img src="{{ asset('assets/images/gh.png') }}" alt="Ghana Map"
                                 class="img-fluid nft-cardimg rounded-3">
                         </div>
                     </div>
@@ -50,11 +46,12 @@
     <div class="col-xxl-6 col-xl-6 col-lg-6">
         <div class="card custom-card h-100">
             <div class="card-body">
-                <div id='calendar'></div>
+                <div id="calendar"></div>
             </div>
         </div>
     </div>
 </div>
+
 
 <div class="row">
     <div class="col-xl-3">
@@ -501,48 +498,62 @@
             </div>
         </div>
     </div>
-
     <div class="col-xxl-12">
         <div class="row">
+            <!-- Revenue Statistics Card -->
             <div class="col-xl-12">
                 <div class="card custom-card overflow-hidden">
                     <div class="card-header justify-content-between">
                         <div class="card-title">
                             Revenue Statistics
                         </div>
-
                     </div>
                     <div class="card-body text-center p-0">
                         <div id="revenue-statistics1"></div>
+
                         <div class="revenue-statistics">
                             <div id="revenue-statistics"></div>
                             <div class="chart-circle-value"></div>
                         </div>
 
                         <div class="row justify-content-center mt-4 p-3 gx-xl-1 gx-xxl-3">
+                            <!-- Assembly Fund -->
                             <div class="col col-xl-4 border-end border-inline-end-dashed">
                                 <span class="d-block text-muted mb-1 fs-16">Assembly Fund - (70%)</span>
                                 <span class="fw-semibold mb-0 text-center" style="font-size: 20px !important;">
-                                    GHS {{ $total['assemblycut'] }}
+                                    GHS
+                                    {{ is_numeric($total['assemblycut'] ?? null) ? number_format($total['assemblycut'], 2) : '0.00' }}
                                     <i class="ti ti-arrow-up text-success"></i>
                                 </span>
                             </div>
+
+                            <!-- GOG Fund -->
                             <div class="col col-xl-4 border-end border-inline-end-dashed">
                                 <span class="d-block text-muted mb-1 fs-16">GOG Fund - (15%)</span>
-                                <span class="fw-semibold mb-0 text-center" style="font-size: 20px !important;">GHS
-                                    {{ $total['gogcut'] }}
-                                    <i class="ti ti-arrow-down text-danger"></i></span>
+                                <span class="fw-semibold mb-0 text-center" style="font-size: 20px !important;">
+                                    GHS
+                                    {{ is_numeric($total['gogcut'] ?? null) ? number_format($total['gogcut'], 2) : '0.00' }}
+                                    <i class="ti ti-arrow-down text-danger"></i>
+                                </span>
                             </div>
+
+                            <!-- Level 10 Fund -->
                             <div class="col col-xl-4">
                                 <span class="d-block text-muted mb-1 fs-16">Level 10 Fund - (15%)</span>
-                                <span class="fw-semibold mb-0 text-center" style="font-size: 20px !important;">GHS
-                                    {{ $total['level10cut'] }}<i class="ti ti-arrow-up text-success"></i></span>
+                                <span class="fw-semibold mb-0 text-center" style="font-size: 20px !important;">
+                                    GHS
+                                    {{ is_numeric($total['level10cut'] ?? null) ? number_format($total['level10cut'], 2) : '0.00' }}
+                                    <i class="ti ti-arrow-up text-success"></i>
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Revenue Cards -->
             <div class="col-xl-12">
+                <!-- BoP Revenue -->
                 <div class="card custom-card income-card">
                     <div class="card-body p-0">
                         <div class="d-flex align-items-center flex-wrap gap-2 lh-1 p-3">
@@ -551,17 +562,21 @@
                                 <i class='bx bx-wallet fs-5 text-success'></i>
                             </div>
                             <div class="d-flex flex-column flex-fill">
-                                <span class="fw-semibold h6 mb-2">GHS {{ $total['totalBusinessBill'] }}</span>
+                                <span class="fw-semibold h6 mb-2">
+                                    GHS
+                                    {{ is_numeric($total['totalBusinessBill'] ?? null) ? number_format($total['totalBusinessBill'], 2) : '0.00' }}
+                                </span>
                                 <p class="fs-13 mb-0">Total Revenue Generated For BoP</p>
                             </div>
                             <div class="text-end">
-                                <span>This Month -AS AT
-                                    {{ \Carbon\Carbon::now()->format('l, F j, Y h:i A') }}</span>
+                                <span>This Month - AS AT {{ now()->format('l, F j, Y h:i A') }}</span>
                             </div>
                         </div>
                         <div id="income-chart"></div>
                     </div>
                 </div>
+
+                <!-- Property Rate Revenue -->
                 <div class="card custom-card expense-card">
                     <div class="card-body p-0">
                         <div class="d-flex align-items-center flex-wrap gap-2 lh-1 p-3">
@@ -570,12 +585,14 @@
                                 <i class='bx bx-dollar-circle fs-5 text-secondary'></i>
                             </div>
                             <div class="d-flex flex-column flex-fill">
-                                <span class="fw-semibold h6 mb-2">GHS {{ $total['totalPropertyBill'] }}</span>
-                                <p class="fs-13 mb-0">Total Revenue Generated For Property Rate </p>
+                                <span class="fw-semibold h6 mb-2">
+                                    GHS
+                                    {{ is_numeric($total['totalPropertyBill'] ?? null) ? number_format($total['totalPropertyBill'], 2) : '0.00' }}
+                                </span>
+                                <p class="fs-13 mb-0">Total Revenue Generated For Property Rate</p>
                             </div>
                             <div class="text-end">
-                                <span>This Month AS AT-
-                                    {{ \Carbon\Carbon::now()->format('l, F j, Y h:i A') }}</span>
+                                <span>This Month - AS AT {{ now()->format('l, F j, Y h:i A') }}</span>
                             </div>
                         </div>
                         <div id="expenditure-chart"></div>
@@ -584,6 +601,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 <div class="col-xl-12 col-md-12">

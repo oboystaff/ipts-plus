@@ -6,6 +6,29 @@
 
 @section('page-content')
     <div class="container-fluid mh-auto">
+        <div class="card">
+            <!-- HEADER SECTION -->
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-wallet-3-line me-2"></i> Payments Management
+                        </h4>
+
+                        <p class="mb-0 text-muted fs-14">
+                            You are Viewing All Payment on A generated bills record in your
+                            central database repository.
+                        </p>
+                    </div>
+
+                    {{-- <a href="{{ route('bills.fetchBill') }}" class="btn btn-sm btn-primary">
+                        <i class="ri-arrow-go-back-line"></i> Back
+                    </a> --}}
+
+                </div>
+            </div>
+
+        </div>
         <div class="col-xl-12">
             <div class="card custom-card rounded-md overflow-hidden p-2">
                 <div class="card-body bg-primary bg-opacity-10 rounded-2 ps-4 medical-cards">
@@ -79,7 +102,7 @@
         </div>
 
         <!-- Filter Section -->
-        <div class="container mt-5">
+        {{-- <div class="container mt-5">
             <!-- Filter Form -->
 
             <div class="row">
@@ -112,7 +135,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <!-- Payment Data Cards Section -->
         <div class="row">
@@ -248,11 +271,6 @@
             @endif
 
             <div class="card">
-                <div class="card-header flex-wrap d-flex justify-content-between">
-                    <div class="card-header">
-                        <div class="card-title">Payment Management</div>
-                    </div>
-                </div>
 
                 <div class="card-body px-0">
                     <div class="table-responsive">
@@ -293,13 +311,7 @@
                                         <td>{{ $payment->payment_mode }}</td>
                                         <td>{{ $payment->transaction_status }}</td>
                                         <td>{{ $payment->assembly->name ?? 'N/A' }}</td>
-                                        <td>
-                                            @if ($payment->createdBy->access_level === 'Assembly_Agent')
-                                                {{ $payment->createdBy->name ?? 'N/A' }} (Agent)
-                                            @else
-                                                {{ $payment->createdBy->name ?? 'N/A' }}
-                                            @endif
-                                        </td>
+                                        <td>{{ $payment->createdBy->name ?? 'N/A' }}</td>
                                         <td>{{ $payment->created_at }}</td>
                                         <td>
                                             <div class="dropdown">

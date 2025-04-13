@@ -5,6 +5,27 @@
 
 @section('page-content')
     <div class="container-fluid mh-auto">
+        <div class="card">
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-user-settings-line me-2"></i> Agents Assignments
+                        </h4>
+                        <p class="mb-0 text-muted fs-14">
+                            Easily add agents and manage assignments in one section.
+                        </p>
+                    </div>
+
+                    @can('agent-assignments.create')
+                        <a href="{{ route('agent-assignments.create') }}" class="btn btn-primary">
+                            <i class="ri-user-add-line me-1"></i> Add Agents
+                        </a>
+                    @endcan
+                </div>
+
+            </div>
+        </div>
         <div class="row">
             <div class="col-xl-12 active-p">
 
@@ -23,19 +44,6 @@
                 @endif
 
                 <div class="card">
-
-                    <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div class="card-header">
-                            <div class="card-title">Assembly Management / Agent Assignment</div>
-                        </div>
-
-                        <div class="d-flex align-items-center">
-                            @can('agent-assignments.create')
-                                <a href="{{ route('agent-assignments.create') }}" class="btn btn-primary btn-sm ms-2">+ Assign
-                                    Agent</a>
-                            @endcan
-                        </div>
-                    </div>
 
                     <div class="card-body px-0">
                         <div class="table-responsive">

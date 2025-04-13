@@ -296,38 +296,45 @@ class PropertyController extends Controller
      */
     public function show(Property $property)
     {
-        $citizen = Citizen::where('id', $property->customer->id)->first();
+        $citizen = Citizen::find(optional($property->customer)->id);
 
-        $bills = Bill::orderBy('created_at', 'DESC')
-            ->with(['property'])
-            ->whereHas('property', function ($query) use ($citizen, $property) {
-                $query->where('customer_name', $citizen->id)
-                    ->where('property_id', $property->id);
-            })
-            ->whereNotNull('property_id')
-            ->whereNull('business_id')
-            ->get();
+        if ($citizen && $property) {
+            $bills = Bill::orderBy('created_at', 'DESC')
+                ->with(['property'])
+                ->whereHas('property', function ($query) use ($citizen, $property) {
+                    $query->where('customer_name', $citizen->id)
+                        ->where('property_id', $property->id);
+                })
+                ->whereNotNull('property_id')
+                ->whereNull('business_id')
+                ->get();
 
-        $payments = Payment::orderBy('created_at', 'DESC')
-            ->whereHas('bill', function ($query) use ($property) {
-                $query->whereNotNull('property_id')
-                    ->where('property_id', $property->id);
-            })
-            ->when(function ($query) {
-                $query->where('payment_mode', 'momo')
-                    ->where('transaction_status', 'Success');
-            }, function ($query) {
-                $query->where('payment_mode', '!=', 'momo');
-            })
-            ->get();
+            $payments = Payment::orderBy('created_at', 'DESC')
+                ->whereHas('bill', function ($query) use ($property) {
+                    $query->whereNotNull('property_id')
+                        ->where('property_id', $property->id);
+                })
+                ->when(function ($query) {
+                    $query->where('payment_mode', 'momo')
+                        ->where('transaction_status', 'Success');
+                }, function ($query) {
+                    $query->where('payment_mode', '!=', 'momo');
+                })
+                ->get();
 
-        $properties = Property::orderBy('created_at', 'DESC')
-            ->where('customer_name', $citizen->id)
-            ->get();
+            $properties = Property::orderBy('created_at', 'DESC')
+                ->where('customer_name', $citizen->id)
+                ->get();
 
-        $businesses = Business::orderBy('created_at', 'DESC')
-            ->where('citizen_account_number', $citizen->id)
-            ->get();
+            $businesses = Business::orderBy('created_at', 'DESC')
+                ->where('citizen_account_number', $citizen->id)
+                ->get();
+        } else {
+            $bills = collect();
+            $payments = collect();
+            $properties = collect();
+            $businesses = collect();
+        }
 
         $totalArrears = $bills->sum('arrears');
         $totalAmount = $bills->sum('amount');

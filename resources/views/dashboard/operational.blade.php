@@ -5,31 +5,43 @@
     <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/main.min.css" rel="stylesheet">
 
     <style>
-        .fc-day-today {
-            background-color: #ffebcc !important;
-        }
-
         .equal-height-card {
             min-height: 180px;
-            /* Ensure consistent height for all cards */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 1rem;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .equal-height-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
     </style>
 @endsection
 
 @section('page-content')
     <div class="container-fluid">
-        @if (\Auth::user()->access_level !== 'customer' && \Auth::user()->access_level !== 'GOG_Administrator')
-            @include('dashboard.includes.main')
-            @include('dashboard.includes.analytics')
-        @elseif (\Auth::user()->access_level == 'GOG_Administrator')
-            @include('dashboard.includes.gra')
-        @elseif (\Auth::user()->access_level == 'customer')
-            @include('dashboard.includes.customer')
-        @endif
+        @php
+            $level = \Auth::user()->access_level;
+        @endphp
+
+        @switch($level)
+            @case('customer')
+                @include('dashboard.includes.customer')
+            @break
+
+            @case('GOG_Administrator')
+                @include('dashboard.includes.gra')
+            @break
+
+            @default
+                @include('dashboard.includes.main')
+                @include('dashboard.includes.analytics')
+        @endswitch
     </div>
 @endsection
 
@@ -1149,7 +1161,41 @@
             });
         }
 
+        // ✅ GHS formatter
+        function formatGHS(value) {
+            value = parseFloat(value || 0);
+
+            if (value >= 1_000_000) {
+                return `GHS ${ (value / 1_000_000).toFixed(2) }M`;
+            } else if (value >= 1_000) {
+                return `GHS ${ (value / 1_000).toFixed(2) }K`;
+            } else {
+                return `GHS ${ value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }`;
+            }
+        }
+
         function renderRegionalData(data) {
+            // Helper to format currency with GHS, K, M
+            function formatGHS(value) {
+                value = parseFloat(value || 0);
+                if (value >= 1_000_000) {
+                    return `GHS ${ (value / 1_000_000).toFixed(2) }M`;
+                } else if (value >= 1_000) {
+                    return `GHS ${ (value / 1_000).toFixed(2) }K`;
+                } else {
+                    return `GHS ${ value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }`;
+                }
+            }
+
+            // Helper to format plain numbers with commas
+            function formatNumber(value) {
+                value = parseFloat(value || 0);
+                return value.toLocaleString(undefined, {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                });
+            }
+
             let html = '';
             if (data.length === 0) {
                 html = '<div class="alert alert-warning">No data available.</div>';
@@ -1158,39 +1204,45 @@
                     if (index % 4 === 0) {
                         html += '<div class="row mb-4">';
                     }
+
                     html += `
-                    <div class="col-xl-3">
-                        <div class="card custom-card shadow-lg border-0">
-                            <div class="card-body p-4">
-                                <div class="d-flex align-items-start gap-3 flex-wrap">
-                                    <div class="flex-fill">
-                                        <div class="d-flex align-items-center justify-content-between mb-3">
-                                            <h5 class="fw-bold text-primary d-flex align-items-center gap-2">
-                                                <i class="ri-map-pin-line fs-10"></i> ${region.region_name}
-                                            </h5>
-                                        </div>
-                                        <div class="mb-2 d-flex justify-content-between">
-                                            <span class="fw-semibold text-muted">Properties:</span>
-                                            <span class="fw-bold text-dark">${region.total_properties_region ?? '0.00'}</span>
-                                        </div>
-                                        <div class="mb-2 d-flex justify-content-between">
-                                            <span class="fw-semibold text-muted">Payments:</span>
-                                            <span class="fw-bold text-success">
-                                                GHS ${parseFloat(region.total_payments_region ?? 0).toFixed(2)}
-                                            </span>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-semibold text-muted">Outstanding:</span>
-                                            <span class="fw-bold text-danger">
-                                                GHS ${parseFloat(region.total_arrears_region ?? 0).toFixed(2)}
-                                            </span>
-                                        </div>
-                                    </div>
+                <div class="col-xl-3">
+                    <div class="card custom-card shadow-lg border-0 h-100">
+                        <div class="card-body p-4">
+                            <div class="d-flex flex-column gap-3">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <h5 class="fw-bold text-primary d-flex align-items-center gap-2 mb-0" style="font-size: 14px; word-break: break-word;">
+                                        <i class="ri-map-pin-line fs-10"></i>
+                                        <span class="text-truncate d-inline-block" style="max-width: 180px;">${region.region_name}</span>
+                                    </h5>
+                                </div>
+
+                                <div class="d-flex flex-column">
+                                    <span class="fw-semibold text-muted">Properties:</span>
+                                    <span class="fw-bold text-dark text-end" style="min-width: 80px; word-break: break-word;">
+                                        ${formatNumber(region.total_properties_region)}
+                                    </span>
+                                </div>
+
+                                <div class="d-flex flex-column">
+                                    <span class="fw-semibold text-muted">Payments:</span>
+                                    <span class="fw-bold text-success text-end" style="min-width: 80px; word-break: break-word;">
+                                        ${formatGHS(region.total_payments_region)}
+                                    </span>
+                                </div>
+
+                                <div class="d-flex flex-column">
+                                    <span class="fw-semibold text-muted">Outstanding:</span>
+                                    <span class="fw-bold text-danger text-end" style="min-width: 80px; word-break: break-word;">
+                                        ${formatGHS(region.total_arrears_region)}
+                                    </span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                `;
+                </div>
+            `;
+
                     if ((index + 1) % 4 === 0) {
                         html += '</div>';
                     }

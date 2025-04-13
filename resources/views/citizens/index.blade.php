@@ -7,6 +7,35 @@
 @section('page-content')
     <div class="container-fluid mh-auto">
         <div class="card-body">
+            <div class="col-md-12 active-p">
+                <div class="card">
+
+                    <!-- HEADER SECTION -->
+                    <div class="card-body border-bottom pb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <h4 class="fw-bold text-primary mb-1">
+                                    <i class="ri-user-settings-line me-2"></i> Rate Payer Management
+                                </h4>
+                                <p class="mb-0 text-muted fs-14">
+                                    You are viewing all Rate Payers from your central database repository.
+                                </p>
+                            </div>
+
+                            @can('customers.create')
+                                <div class="d-flex gap-2">
+                                    <a href="{{ route('citizens.create') }}" class="btn btn-sm btn-primary">
+                                        <i class="fa fa-plus me-1"></i> Add new Rate Payer
+                                    </a>
+                                    <a href="{{ route('citizens.import') }}" class="btn btn-sm btn-success">
+                                        <i class="fa fa-plus me-1"></i> Bulk Import of Rate Payers
+                                    </a>
+                                </div>
+                            @endcan
+                        </div>
+                    </div>
+                </div>
+            </div>
             @php
                 use App\Models\CustomerType;
 
@@ -21,7 +50,6 @@
                     'United Kingdom',
                     'Canada',
                     'India',
-                    // Add more countries as needed
                 ];
             @endphp
 
@@ -126,83 +154,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <!-- Card 1 - Active Customers -->
-            <div class="col-xl-3">
-                <div class="card custom-card rounded-md overflow-hidden p-2">
-                    <div class="card-body bg-primary bg-opacity-10 rounded-2 ps-4 medical-cards">
-                        <div class="d-flex gap-2 align-items-center ps-2">
-                            <div class="align-self-start">
-                                <div class="fw-medium mb-2">Active Rate Payers</div>
-                                <h4 class="fw-semibold mb-0 lh-1">{{ $totals['total_active'] }}</h4>
-                            </div>
-                            <div class="ms-auto text-end align-self-end">
-                                <div class="avatar avatar-md avatar-rounded bg-primary shadow shadow-primary mb-2">
-                                    <!-- SVG Icon here -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Card 2 - In-Active Customers -->
-            <div class="col-xl-3">
-                <div class="card custom-card rounded-md overflow-hidden p-2">
-                    <div class="card-body bg-secondary bg-opacity-10 rounded-2 ps-4 medical-cards secondary">
-                        <div class="d-flex gap-2 align-items-center ps-2">
-                            <div class="align-self-start">
-                                <div class="fw-medium mb-2">In-Active Rate Payers</div>
-                                <h4 class="fw-semibold mb-0 lh-1">{{ $totals['inactive'] }}</h4>
-                            </div>
-                            <div class="ms-auto text-end align-self-end">
-                                <div class="avatar avatar-md avatar-rounded bg-secondary shadow shadow-secondary mb-2">
-                                    <!-- SVG Icon here -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 3 - Male Customers -->
-            <div class="col-xl-3">
-                <div class="card custom-card rounded-md overflow-hidden p-2">
-                    <div class="card-body bg-success bg-opacity-10 rounded-2 ps-4 medical-cards success">
-                        <div class="d-flex gap-2 align-items-center ps-2">
-                            <div class="align-self-start">
-                                <div class="fw-medium mb-2">Male Rate Payers</div>
-                                <h4 class="fw-semibold mb-0 lh-1">{{ $totals['male'] }}</h4>
-                            </div>
-                            <div class="ms-auto text-end align-self-end">
-                                <div class="avatar avatar-md avatar-rounded bg-success shadow shadow-success mb-2">
-                                    <!-- SVG Icon here -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 4 - Female Customers -->
-            <div class="col-xl-3">
-                <div class="card custom-card rounded-md overflow-hidden p-2">
-                    <div class="card-body bg-info bg-opacity-10 rounded-2 ps-4 medical-cards info">
-                        <div class="d-flex gap-2 align-items-center ps-2">
-                            <div class="align-self-start">
-                                <div class="fw-medium mb-2">Female Rate Payers</div>
-                                <h4 class="fw-semibold mb-0 lh-1">{{ $totals['male'] }}</h4>
-                            </div>
-                            <div class="ms-auto text-end align-self-end">
-                                <div class="avatar avatar-md avatar-rounded bg-info shadow shadow-info mb-2">
-                                    <!-- SVG Icon here -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="row mb-4">
             <div class="col-xl-4">
@@ -249,21 +201,6 @@
                 @endif
 
                 <div class="card">
-                    <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div class="card-title">Rate Payer Management / All Rate Payers</div>
-                        <div class="d-flex align-items-center">
-                            @can('customers.create')
-                                <a href="{{ route('citizens.create') }}" class="btn btn-primary btn-sm ms-2">+ Add New
-                                    Rate Payer</a>
-                            @endcan
-
-                            @can('customers.create')
-                                <a href="{{ route('citizens.import') }}" class="btn btn-success btn-sm ms-2">+ Upload Bulk
-                                    Rate Payer</a>
-                            @endcan
-                        </div>
-                    </div>
-
                     <div class="card-body px-0">
                         <div class="table-responsive active-projects user-tbl dt-filter">
                             <table id="file-export" class="table table-bordered text-nowrap w-100">
@@ -332,10 +269,10 @@
                                                         <div class="py-2">
                                                             <a class="dropdown-item"
                                                                 href="{{ route('citizens.show', $citizen->id) }}">View
-                                                                Customer</a>
+                                                                Rate Payer Record</a>
                                                             <a class="dropdown-item"
                                                                 href="{{ route('citizens.edit', $citizen->id) }}">Edit
-                                                                Customer</a>
+                                                                Rate Payer Record</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -349,8 +286,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 @endsection
 

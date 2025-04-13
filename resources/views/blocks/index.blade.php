@@ -5,6 +5,30 @@
 
 @section('page-content')
     <div class="container-fluid mh-auto">
+        <div class="card">
+
+            <!-- HEADER SECTION -->
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-building-4-line me-2"></i> Blocks Settings
+                        </h4>
+
+                        <p class="mb-0 text-muted fs-14">
+                            You are viewing Blocks within Divisions Record from your
+                            central database repository.
+                        </p>
+                    </div>
+                    @can('blocks.create')
+                        <a href="{{ route('blocks.create') }}" class="btn btn-sm btn-primary">
+                            <i class="ri-add-line me-1"></i> Add Block
+                        </a>
+                    @endcan
+                </div>
+            </div>
+
+        </div>
         <div class="row">
             <div class="col-xl-12 active-p">
 
@@ -23,20 +47,6 @@
                 @endif
 
                 <div class="card">
-
-                    <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div class="card-header">
-                            <div class="card-title">Assembly Management / Blocks</div>
-                        </div>
-
-                        <div class="d-flex align-items-center">
-                            @can('blocks.create')
-                                <a href="{{ route('blocks.create') }}" class="btn btn-primary btn-sm ms-2">+ Create
-                                    Assembly Blocks</a>
-                            @endcan
-                        </div>
-                    </div>
-
                     <div class="card-body px-0">
                         <div class="table-responsive">
                             <table id="file-export" class="table table-bordered text-nowrap w-100">

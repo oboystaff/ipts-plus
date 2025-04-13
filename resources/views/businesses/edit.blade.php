@@ -5,18 +5,33 @@
 
 @section('page-content')
     <div class="container-fluid">
+        <div class="card">
+
+            <!-- HEADER SECTION -->
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-building-line me-2"></i> Business Management
+                        </h4>
+
+                        <p class="mb-0 text-muted fs-14">
+                            You are Editing A Business Record from your
+                            central database repository.
+                        </p>
+
+                    </div>
+                    @can('businesses.create')
+                        <a href="{{ route('businesses.index') }}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-arrow-left me-1"></i> Back
+                        </a>
+                    @endcan
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div class="card-header">
-                            <div class="card-title">Business Management / Edit Assembly Business </div>
-                        </div>
-
-                        <div>
-                            <a href="{{ route('businesses.index') }}" class="btn btn-primary btn-sm ms-2">Back</a>
-                        </div>
-                    </div>
 
                     <div class="card-body">
                         <form class="row g-3 needs-validation" method="POST"
@@ -29,7 +44,7 @@
                             <input type="hidden" name="block_url" url="{{ route('ajax.block') }}">
 
                             <div class="col-sm-6 mb-3">
-                                <label for="business_type">Business Type</label>
+                                <label for="business_type" class="form-label">Business Type</label>
                                 <select class="form-control @error('business_type') is-invalid @enderror" id="business_type"
                                     name="business_type" required>
                                     <option disabled selected>Select Business Type</option>
@@ -48,7 +63,7 @@
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="business_class">Business Class</label>
+                                <label for="business_class" class="form-label">Business Class</label>
                                 <select class="form-control @error('business_class') is-invalid @enderror"
                                     id="business_class" name="business_class" required>
                                     <option disabled selected>Select Business Class</option>
@@ -62,99 +77,100 @@
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="business_name">Business Name</label>
+                                <label for="business_name" class="form-label">Business Name</label>
                                 <input type="text" class="form-control" name="business_name" placeholder="Business Name"
                                     value="{{ $business->business_name }}">
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="location">Location</label>
+                                <label for="location" class="form-label">Location</label>
                                 <input type="text" class="form-control" name="location" placeholder="Location"
                                     value="{{ $business->location }}">
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="email">Email</label>
+                                <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control" name="email" placeholder="Email"
                                     value="{{ $business->email }}">
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="street_name">Street Name</label>
+                                <label for="street_name" class="form-label">Street Name</label>
                                 <input type="text" class="form-control" name="street_name" placeholder="Street Name"
                                     value="{{ $business->street_name }}">
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="digital_address">Digital Address</label>
+                                <label for="digital_address" class="form-label">Digital Address</label>
                                 <input type="text" class="form-control" name="digital_address"
                                     placeholder="Digital Address" value="{{ $business->digital_address }}">
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="house_number">House Number</label>
+                                <label for="house_number" class="form-label">House Number</label>
                                 <input type="text" class="form-control" name="house_number" placeholder="House Number"
                                     value="{{ $business->house_number }}">
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="business_phone">Business Phone</label>
+                                <label for="business_phone" class="form-label">Business Phone</label>
                                 <input type="text" class="form-control" name="business_phone"
                                     placeholder="Business Phone" value="{{ $business->business_phone }}">
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="permit_number">Permit Number</label>
-                                <input type="text" class="form-control" name="permit_number" placeholder="Permit Number"
-                                    value="{{ $business->permit_number }}">
+                                <label for="permit_number" class="form-label">Permit Number</label>
+                                <input type="text" class="form-control" name="permit_number"
+                                    placeholder="Permit Number" value="{{ $business->permit_number }}">
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="business_validation_code">Business Validation Code</label>
+                                <label for="business_validation_code" class="form-label">Business Validation Code</label>
                                 <input type="text" class="form-control" name="business_validation_code"
                                     placeholder="Business Validation Code"
                                     value="{{ $business->business_validation_code }}">
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="registration_number">Registration Number</label>
+                                <label for="registration_number" class="form-label">Registration Number</label>
                                 <input type="text" class="form-control" name="registration_number"
                                     placeholder="Registration Number" value="{{ $business->registration_number }}">
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="business_address">Business Address</label>
+                                <label for="business_address" class="form-label">Business Address</label>
                                 <input type="text" class="form-control" name="business_address"
                                     placeholder="Business Address" value="{{ $business->business_address }}">
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="business_contact">Business Contact</label>
+                                <label for="business_contact" class="form-label">Business Contact</label>
                                 <input type="text" class="form-control" name="business_contact"
                                     placeholder="Business Contact" value="{{ $business->business_contact }}">
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="nature_of_business">Nature of Business</label>
+                                <label for="nature_of_business" class="form-label">Nature of Business</label>
                                 <input type="text" class="form-control" name="nature_of_business"
                                     placeholder="Nature of Business" value="{{ $business->nature_of_business }}">
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="tax_identification_number">Tax Identification Number</label>
+                                <label for="tax_identification_number" class="form-label">Tax Identification
+                                    Number</label>
                                 <input type="text" class="form-control" name="tax_identification_number"
                                     placeholder="Tax Identification Number"
                                     value="{{ $business->tax_identification_number }}">
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="establishment_date">Establishment Date</label>
+                                <label for="establishment_date" class="form-label">Establishment Date</label>
                                 <input type="date" class="form-control" name="establishment_date"
                                     placeholder="Establishment Date" value="{{ $business->establishment_date }}">
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="citizen_account_number">Citizen Account Number</label>
+                                <label for="citizen_account_number" class="form-label">Citizen Account Number</label>
                                 <select class="form-control" id="citizen_account_number" name="citizen_account_number">
                                     <option disabled selected>Select Citizen Account Number</option>
                                     @foreach ($customers as $customer)
@@ -168,14 +184,14 @@
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="bus_account_number">Business Account Number</label>
+                                <label for="bus_account_number" class="form-label">Business Account Number</label>
                                 <input type="text" class="form-control" name="bus_account_number"
                                     placeholder="Business Account Number" value="{{ $business->bus_account_number }}">
                             </div>
 
                             <div class="col-sm-6 mb-3">
                                 <div class="form-group">
-                                    <label for="assembly">Select An Assembly Where Business is
+                                    <label for="assembly" class="form-label">Select An Assembly Where Business is
                                         Located</label>
                                     <select class="form-control @error('assembly_code') is-invalid @enderror"
                                         id="assembly" name="assembly_code">
@@ -274,7 +290,7 @@
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="status_of_business">Status of Business</label>
+                                <label for="status_of_business" class="form-label">Status of Business</label>
                                 <select class="form-control @error('status_of_business') is-invalid @enderror"
                                     id="status_of_business" name="status_of_business" required>
                                     <option disabled selected>Select Status of business</option>

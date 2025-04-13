@@ -14,18 +14,32 @@
 
 @section('page-content')
     <div class="container-fluid">
+        <div class="card">
+            <!-- HEADER SECTION -->
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-settings-5-line me-2"></i> Assembly Setup - Configurations
+                        </h4>
+
+                        <p class="mb-0 text-muted fs-14">
+                            Create your assembly here.
+                        </p>
+                    </div>
+                    @can('assemblies.create')
+                        <div>
+                            <a href="{{ route('assembly.index') }}" class="btn btn-primary btn-sm ms-2">
+                                <i class="ri-arrow-go-back-line"></i> Back
+                            </a>
+                        </div>
+                    @endcan
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">Create Assembly</h4>
-                        </div>
-
-                        <div>
-                            <a href="{{ route('assembly.index') }}" class="btn btn-primary btn-sm ms-2">Back</a>
-                        </div>
-                    </div>
 
                     @if ($errors->any())
                         <div class="alert alert-danger mt-2">

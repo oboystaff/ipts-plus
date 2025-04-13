@@ -13,18 +13,31 @@
     @endphp
 
     <div class="container-fluid">
+        <div class="card">
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-customer-service-2-line"></i>Support Section
+                        </h4>
+                        <p class="mb-0 text-muted fs-14">
+                            Easily manage Supports Records in one section.
+                        </p>
+                    </div>
+
+
+                    <a href="{{ route('customer-supports.index') }}" class="btn btn-primary">
+                        <i class="ri-arrow-go-back-line"></i> Back
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">View Customer Support</h4>
-                        </div>
 
-                        <div>
-                            <a href="{{ route('customer-supports.index') }}" class="btn btn-primary btn-sm ms-2">Back</a>
-                        </div>
-                    </div>
 
                     <div class="card-body">
                         <form class="row g-3 needs-validation" method="POST"

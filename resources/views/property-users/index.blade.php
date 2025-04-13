@@ -5,6 +5,28 @@
 
 @section('page-content')
     <div class="container-fluid mh-auto">
+        <div class="card">
+            <!-- HEADER SECTION -->
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-home-gear-line"></i> Use Type Settings
+                        </h4>
+
+                        <p class="mb-0 text-muted fs-14">
+                            You are viewing All Property Use Type Record from your
+                            central database repository.
+                        </p>
+                    </div>
+                    @can('property-uses.create')
+                        <a href="{{ route('property-users.create') }}" class="btn btn-sm btn-primary">
+                            <i class="ri-add-line"></i> Create Property Use Type
+                        </a>
+                    @endcan
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-xl-12 active-p">
 
@@ -23,19 +45,6 @@
                 @endif
 
                 <div class="card">
-
-                    <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div class="card-header">
-                            <div class="card-title">Assembly Management / Property Use</div>
-                        </div>
-
-                        <div class="d-flex align-items-center">
-                            @can('property-uses.create')
-                                <a href="{{ route('property-users.create') }}" class="btn btn-primary btn-sm ms-2">+ Create
-                                    Property Use</a>
-                            @endcan
-                        </div>
-                    </div>
 
                     <div class="card-body px-0">
                         <div class="table-responsive">

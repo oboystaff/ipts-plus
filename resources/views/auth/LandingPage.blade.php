@@ -567,15 +567,16 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="title-area">
-                        <span>About us</span>
-                        <h2 class="title">Our Commitment to Excellence</h2>
+                        <span>Seamless Automation</span>
+                        <h2 class="title">Our Commitment to Revenue Assurance</h2>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <p class="decs">By integrating advanced technology and user-focused design, IPRS empowers
-                        citizens and authorities alike to participate in transparent and efficient revenue collection.
-                    </p>
+                    <p class="decs">Through intelligent automation and real-time monitoring, IPRS ensures accurate,
+                        transparent, and secure revenue collection, strengthening accountability between citizens and
+                        authorities.</p>
                 </div>
+
             </div>
             <div class="rts-working-process-inner">
                 <div class="row">
@@ -587,10 +588,10 @@
                             </a>
                             <div class="content">
                                 <h5 class="title">Transparency</h5>
-                                <p class="disc">We ensure openness in all processes, providing a clear understanding
-                                    of how funds are managed to foster trust and accountability.
-                                </p>
+                                <p class="disc">We promote transparency in fund management to build trust and
+                                    accountability.</p>
                             </div>
+
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
@@ -600,11 +601,11 @@
                                     alt="Icon">
                             </a>
                             <div class="content">
-                                <h5 class="title">Innovative Solutions </h5>
-                                <p class="disc">Using cutting-edge technology, we create efficient systems for fast
-                                    and reliable revenue collection and management.
-                                </p>
+                                <h5 class="title">Innovation</h5>
+                                <p class="disc">We use modern technology to ensure fast, efficient revenue collection
+                                    .</p>
                             </div>
+
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
@@ -614,11 +615,11 @@
                                     alt="Icon">
                             </a>
                             <div class="content">
-                                <h5 class="title">Community-Centered Approach</h5>
-                                <p class="disc">We reinvest funds to enhance public services and infrastructure,
-                                    promoting sustainable development in every community.
-                                </p>
+                                <h5 class="title">Investment</h5>
+                                <p class="disc">We reinvest funds to
+                                    promoting sustainable development in every community.</p>
                             </div>
+
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
@@ -628,11 +629,11 @@
                                     alt="Icon">
                             </a>
                             <div class="content">
-                                <h5 class="title">Exceptional User Experience</h5>
-                                <p class="disc">Our intuitive and accessible platforms deliver seamless experiences
-                                    tailored to the needs of individuals and organizations.
-                                </p>
+                                <h5 class="title">Experience</h5>
+                                <p class="disc">We offer platforms to deliver seamless experiences
+                                    tailored to the organizational needs .</p>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -640,295 +641,577 @@
         </div>
     </div>
     <!-- Working Process section end -->
-
-    <!-- rts service post area  Start-->
-    <div id="features" class="rts-service-area eight rts-section-gap">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="rts-title-area service text-center">
-                        <p class="pre-title">
-                            FEATURES
-                        </p>
-                        <h2 class="title">Key Features of the IPRS</h2>
-                    </div>
+    <!-- Start:: Section-8 -->
+    <div id="faq" class="rts-working-process-section eight rts-section-gap">
+        <div class="container text-center">
+            <p class="fs-14 fw-medium text-success mb-1">
+                <span class="landing-section-heading text-success"><i
+                        class="ti ti-inner-shadow-top-right-filled text-secondary me-1 fs-10"></i>FAQs</span>
+            </p>
+            <h4 class="fw-semibold mt-3 mb-2">Common Questions and Answers</h4>
+            <div class="row justify-content-center">
+                <div class="col-xl-7">
+                    <p class="text-muted fs-14 mb-5 fw-normal">Weve compiled a list of the most common
+                        questions to assist you in finding the information you need.</p>
                 </div>
             </div>
-        </div>
-        <div class="container-fluid service-main plr--120-service mt--50 plr_md--0 pl_sm--0 pr_sm--0">
-            <div class="background-service row">
-                <!-- start single Service -->
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="service-one-inner one">
-                        <div class="thumbnail">
-                            <img src="{{ asset('assets/assetsfront/images/service/icon/service-logo11.svg') }}"
-                                alt="finbiz_service">
-                        </div>
-                        <div class="service-details">
-                            <a href="#">
-                                <h5 class="title">Real-Time Revenue Tracking</h5>
-                            </a>
-                            <p class="disc">
-                                Monitor payments and revenue in real time, ensuring transparency and accountability at
-                                every stage.
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- end single Services -->
-                <!-- start single Service -->
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="service-one-inner two">
-                        <div class="thumbnail">
-                            <img src="{{ asset('assets/assetsfront/images/service/icon/service-logo4.svg') }}"
-                                alt="finbiz_service">
-                        </div>
-                        <div class="service-details">
-                            <a href="#">
-                                <h5 class="title">User-Friendly Interface</h5>
-                            </a>
-                            <p class="disc">
-                                Navigate a simple, intuitive platform to access property assessments, make payments, and
-                                track progress effortlessly.
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- end single Services -->
-                <!-- start single Service -->
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="service-one-inner three">
-                        <div class="thumbnail">
-                            <img src="{{ asset('assets/assetsfront/images/service/icon/service-logo5.svg') }}"
-                                alt="finbiz_service">
-                        </div>
-                        <div class="service-details">
-                            <a href="#">
-                                <h5 class="title">Enhanced Data Security</h5>
-                            </a>
-                            <p class="disc">
-                                Built with state-of-the-art security features to safeguard your personal and financial
-                                data, ensuring peace of mind. </p>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- end single Services -->
-                <!-- start single Service -->
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="service-one-inner four">
-                        <div class="thumbnail">
-                            <img src="{{ asset('assets/assetsfront/images/service/icon/service-logo6.svg') }}"
-                                alt="finbiz_service">
-                        </div>
-                        <div class="service-details">
-                            <a href="#">
-                                <h5 class="title">Automated Notifications</h5>
-                            </a>
-                            <p class="disc">
-                                Receive timely alerts and reminders for payment deadlines, keeping you updated and in
-                                control of your obligations.
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- end single Services -->
-                <!-- start single Service -->
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="service-one-inner five">
-                        <div class="thumbnail">
-                            <img src="{{ asset('assets/assetsfront/images/service/icon/service-logo22.svg') }}"
-                                alt="finbiz_service">
-                        </div>
-                        <div class="service-details">
-                            <a href="#">
-                                <h5 class="title">Secure and Easy Payment Options</h5>
-                            </a>
-                            <p class="disc">
-                                With multiple payment methods, including digital and local channels, paying rates has
-                                never been easier or more secure.
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- end single Services -->
-                <!-- start single Service -->
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="service-one-inner six">
-                        <div class="thumbnail">
-                            <img src="{{ asset('assets/assetsfront/images/service/icon/service-logo33.svg') }}"
-                                alt="finbiz_service">
-                        </div>
-                        <div class="service-details">
-                            <a href="#">
-                                <h5 class="title">Community Investment</h5>
-                            </a>
-                            <p class="disc">
-                                Every payment contributes to vital infrastructure and services, directly benefiting the
-                                local community and driving growth.
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- end single Services -->
-            </div>
-        </div>
-    </div>
-    <!-- rts service post area ENd -->
-
-    <!-- start about our company -->
-    <div id="about-us" class="rts-about-our-company-h2 eight rts-section-gap">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 mt_sm--30">
-                    <div class="title-area about-company">
-                        <span>About IPRS</span>
-                        <h2 class="title">Empowering Communities with Efficient Rate Solutions</h2>
-                    </div>
-                    <div class="about-company-wrapper">
-                        <p class="disc">
-                            The Integrated Property Rate System (IPRS) is designed to revolutionize the way property
-                            rates are managed and collected across Africa. Our platform offers a seamless, transparent,
-                            and efficient solution for both citizens and local governments.
-                        </p>
-                        <div class="rts-tab-style-one">
-                            <div class="d-flex align-items-start contoler-company">
-                                <div class="nav flex-column nav-pills me-3 button-area" id="v-pills-tab"
-                                    role="tablist" aria-orientation="vertical">
-                                    <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill"
-                                        data-bs-target="#v-pills-home" type="button" role="tab"
-                                        aria-controls="v-pills-home" aria-selected="true">01. Transparency</button>
-                                    <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill"
-                                        data-bs-target="#v-pills-profile" type="button" role="tab"
-                                        aria-controls="v-pills-profile" aria-selected="false">02. Efficiency</button>
-                                    <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill"
-                                        data-bs-target="#v-pills-messages" type="button" role="tab"
-                                        aria-controls="v-pills-messages" aria-selected="false">03. Security</button>
-                                    <button class="nav-link" id="v-pills-manufacture-tab" data-bs-toggle="pill"
-                                        data-bs-target="#v-pills-manufacture" type="button" role="tab"
-                                        aria-controls="v-pills-manufacture" aria-selected="false">04. Community
-                                        Impact</button>
-                                </div>
-                                <div class="tab-content" id="v-pills-tabContent">
-                                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
-                                        aria-labelledby="v-pills-home-tab">
-                                        <!-- start tab content -->
-                                        <div class="rts-tab-content-one">
-                                            <p><img src="{{ asset('assets/assetsfront/images/faq/transparency.jpg') }}"
-                                                    alt="Transparency"></p>
-                                            <p class="disc">
-                                                IPRS ensures complete transparency in the rate collection process.
-                                                Citizens can easily track their payments and see how their contributions
-                                                are being utilized for community development.
-                                            </p>
-                                            <div class="check-area">
-                                                <i class="fas fa-check-circle"></i>
-                                                <p class="disc">
-                                                    Real-time revenue tracking for accountability.
-                                                </p>
-                                            </div>
-                                            <div class="check-area">
-                                                <i class="fas fa-check-circle"></i>
-                                                <p class="disc">
-                                                    Detailed reports and analytics for informed decision-making.
-                                                </p>
-                                            </div>
-                                            <a class="rts-btn btn-primary-2 color-h-black"
-                                                href="{{ route('auth.register') }}">Sign Up
-                                            </a>
+            <div class="row text-start">
+                <div class="col-xl-12">
+                    <div class="row gy-2">
+                        <div class="col-xl-6">
+                            <div class="accordion accordion-customicon1 faq-accordion accordion-primary accordions-items-separate"
+                                id="accordionFAQ5">
+                                <!-- FAQ 1 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingGen1">
+                                        <button class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseGen1"
+                                            aria-expanded="true" aria-controls="collapseGen1">
+                                            <p> What is the Property Rate Collection Platform?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseGen1" class="accordion-collapse collapse show"
+                                        aria-labelledby="headingGen1" data-bs-parent="#accordionFAQ-General">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            The platform is a digital system designed by the Government of Ghana to
+                                            streamline property rate collection, manage taxpayer information and ensure
+                                            easy access to payment services.
                                         </div>
-                                        <!-- start tab content End -->
                                     </div>
-                                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
-                                        aria-labelledby="v-pills-profile-tab">
-                                        <!-- start tab content -->
-                                        <div class="rts-tab-content-one">
-                                            <p><img src="{{ asset('assets/assetsfront/images/faq/efficiency.jpg') }}"
-                                                    alt="Efficiency"></p>
-                                            <p class="disc">
-                                                Our system streamlines the entire rate collection process, reducing
-                                                administrative burdens and ensuring timely payments. This efficiency
-                                                translates to better services for the community.
-                                            </p>
-                                            <div class="check-area">
-                                                <i class="fas fa-check-circle"></i>
-                                                <p class="disc">
-                                                    Automated notifications and reminders.
-                                                </p>
-                                            </div>
-                                            <div class="check-area">
-                                                <i class="fas fa-check-circle"></i>
-                                                <p class="disc">
-                                                    User-friendly interface for easy navigation.
-                                                </p>
-                                            </div>
-                                            <a class="rts-btn btn-primary-2 color-h-black" href="">
-                                                Sign Up</a>
+                                </div>
+                                <!-- FAQ 8 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingProp8">
+                                        <button class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseProp8"
+                                            aria-expanded="false" aria-controls="collapseProp8">
+                                            <p> How do I add my property to the platform?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseProp8" class="accordion-collapse collapse"
+                                        aria-labelledby="headingProp8" data-bs-parent="#accordionFAQ-Property">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+
+
+                                            • Log in to your account.<br>
+                                            • Select "Add Property."<br>
+                                            • Enter your property details, such as location, size and valuation
+                                            information.<br>
+                                            • Upload supporting documents.
                                         </div>
-                                        <!-- start tab content End -->
                                     </div>
-                                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
-                                        aria-labelledby="v-pills-messages-tab">
-                                        <!-- start tab content -->
-                                        <div class="rts-tab-content-one">
-                                            <p><img src="{{ asset('assets/assetsfront/images/faq/security.jpg') }}"
-                                                    alt="Security"></p>
-                                            <p class="disc">
-                                                Security is at the core of IPRS. We employ state-of-the-art security
-                                                measures to protect your personal and financial data, ensuring peace of
-                                                mind for all users.
-                                            </p>
-                                            <div class="check-area">
-                                                <i class="fas fa-check-circle"></i>
-                                                <p class="disc">
-                                                    Advanced encryption and data protection.
-                                                </p>
-                                            </div>
-                                            <div class="check-area">
-                                                <i class="fas fa-check-circle"></i>
-                                                <p class="disc">
-                                                    Regular security audits and updates.
-                                                </p>
-                                            </div>
-                                            <a class="rts-btn btn-primary-2 color-h-black"
-                                                href="{{ route('auth.register') }}">Sign Up
-                                            </a>
+                                </div>
+
+
+                                <!-- FAQ 2 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingGen2">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseGen2"
+                                            aria-expanded="false" aria-controls="collapseGen2">
+                                            <p> Who is required to pay property rates?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseGen2" class="accordion-collapse collapse"
+                                        aria-labelledby="headingGen2" data-bs-parent="#accordionFAQ-General">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            Property owners, including residential, commercial and industrial property
+                                            holders are required to pay property rates.
                                         </div>
-                                        <!-- start tab content End -->
                                     </div>
-                                    <div class="tab-pane fade" id="v-pills-manufacture" role="tabpanel"
-                                        aria-labelledby="v-pills-manufacture-tab">
-                                        <!-- start tab content -->
-                                        <div class="rts-tab-content-one">
-                                            <p><img src="{{ asset('assets/assetsfront/images/faq/community.jpg') }}"
-                                                    alt="Community Impact"></p>
-                                            <p class="disc">
-                                                Every rate payment made through IPRS directly contributes to the
-                                                development of local infrastructure and public services, fostering
-                                                growth and improving the quality of life in communities.
-                                            </p>
-                                            <div class="check-area">
-                                                <i class="fas fa-check-circle"></i>
-                                                <p class="disc">
-                                                    Investment in local projects and services.
-                                                </p>
-                                            </div>
-                                            <div class="check-area">
-                                                <i class="fas fa-check-circle"></i>
-                                                <p class="disc">
-                                                    Empowering local governments with better resources.
-                                                </p>
-                                            </div>
-                                            <a class="rts-btn btn-primary-2 color-h-black"
-                                                href="{{ route('auth.register') }}">
-                                                Sign Up</a>
+                                </div>
+
+                                <!-- FAQ 3 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingGen3">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseGen3"
+                                            aria-expanded="false" aria-controls="collapseGen3">
+                                            <p>Why do I need to pay property rates?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseGen3" class="accordion-collapse collapse"
+                                        aria-labelledby="headingGen3" data-bs-parent="#accordionFAQ-General">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            Property rates contribute to local development, including infrastructure,
+                                            healthcare, education and other community services.
                                         </div>
-                                        <!-- start tab content End -->
+                                    </div>
+                                </div>
+
+                                <!-- FAQ 4 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingGen4">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseGen4"
+                                            aria-expanded="false" aria-controls="collapseGen4">
+                                            <p>How do I access the Property Rate Collection Platform?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseGen4" class="accordion-collapse collapse"
+                                        aria-labelledby="headingGen4" data-bs-parent="#accordionFAQ-General">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            You can access the platform via the mobile app, USSD code or web portal.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ 5 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingGen5">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseGen5"
+                                            aria-expanded="false" aria-controls="collapseGen5">
+                                            <p> How do I create an account / register on the platform?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseGen5" class="accordion-collapse collapse"
+                                        aria-labelledby="headingGen5" data-bs-parent="#accordionFAQ-General">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            • Visit the web portal or mobile app.<br>
+                                            • Select "Create Account."<br>
+                                            • Enter your details such as phone number and email.<br>
+                                            • Verify your account through a code sent to your phone/email.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ 6 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingGen6">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseGen6"
+                                            aria-expanded="false" aria-controls="collapseGen6">
+                                            <p>What documents do I need to register?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseGen6" class="accordion-collapse collapse"
+                                        aria-labelledby="headingGen6" data-bs-parent="#accordionFAQ-General">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            You need your valid national ID, property documents and contact details.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ 23 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingSupport23">
+                                        <button class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent"
+                                            type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseSupport23" aria-expanded="false"
+                                            aria-controls="collapseSupport23">
+                                            <p> Can I request a bill statement?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseSupport23" class="accordion-collapse collapse"
+                                        aria-labelledby="headingSupport23" data-bs-parent="#accordionFAQ-Support2">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            Yes, you can request a bill statement under the "Billing" section of your
+                                            account.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ 25 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingAgent25">
+                                        <button class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent"
+                                            type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseAgent25" aria-expanded="false"
+                                            aria-controls="collapseAgent25">
+                                            <p>Who are the data collection agents?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseAgent25" class="accordion-collapse collapse"
+                                        aria-labelledby="headingAgent25" data-bs-parent="#accordionFAQ-Agents1">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            They are authorized personnel assigned by the government to collect and
+                                            verify property details.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ 26 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingAgent26">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseAgent26" aria-expanded="false"
+                                            aria-controls="collapseAgent26">
+                                            <p>How do I know if an agent is legitimate?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseAgent26" class="accordion-collapse collapse"
+                                        aria-labelledby="headingAgent26" data-bs-parent="#accordionFAQ-Agents1">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            All agents carry government-issued IDs and authorization letters. You can
+                                            also verify their
+                                            credentials on the platform.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ 24 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingSupport24">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseSupport24" aria-expanded="false"
+                                            aria-controls="collapseSupport24">
+                                            <p>What should I do if I notice errors in my bill?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseSupport24" class="accordion-collapse collapse"
+                                        aria-labelledby="headingSupport24" data-bs-parent="#accordionFAQ-Support2">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            Submit a complaint through the "Support" section, detailing the errors for
+                                            correction.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ 31 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingGIS31">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseGIS31"
+                                            aria-expanded="false" aria-controls="collapseGIS31">
+                                            <p>What if the map doesn’t show my property?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseGIS31" class="accordion-collapse collapse"
+                                        aria-labelledby="headingGIS31" data-bs-parent="#accordionFAQ-GIS">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            Contact support to investigate and update the property database accordingly.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ 7 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingGen7">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseGen7"
+                                            aria-expanded="false" aria-controls="collapseGen7">
+                                            <p> Can I register multiple properties under one account?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseGen7" class="accordion-collapse collapse"
+                                        aria-labelledby="headingGen7" data-bs-parent="#accordionFAQ-General">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            Yes, you can register multiple properties under your account using the "Add
+                                            Property" feature.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="accordion accordion-customicon1 faq-accordion accordion-primary accordions-items-separate"
+                                id="accordionFAQ1">
+                                <!-- FAQ 30 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingGIS30">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseGIS30"
+                                            aria-expanded="false" aria-controls="collapseGIS30">
+                                            <p>How do I locate my property using GIS?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseGIS30" class="accordion-collapse collapse"
+                                        aria-labelledby="headingGIS30" data-bs-parent="#accordionFAQ-GIS">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            Enter your property ID or coordinates in the GIS search bar to locate your
+                                            property.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ 9 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingProp9">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseProp9"
+                                            aria-expanded="false" aria-controls="collapseProp9">
+                                            <p>How do I find my property on the map?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseProp9" class="accordion-collapse collapse"
+                                        aria-labelledby="headingProp9" data-bs-parent="#accordionFAQ-Property">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            Use the platform’s GIS map feature. Enter your property ID or location to
+                                            locate it on the map.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ 10 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingProp10">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseProp10"
+                                            aria-expanded="false" aria-controls="collapseProp10">
+                                            <p>What should I do if my property is not listed?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseProp10" class="accordion-collapse collapse"
+                                        aria-labelledby="headingProp10" data-bs-parent="#accordionFAQ-Property">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            Register your property using the "Add Property" option or contact the
+                                            support center for assistance.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ 12 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingBill12">
+                                        <button class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseBill12"
+                                            aria-expanded="false" aria-controls="collapseBill12">
+                                            <p>How do I check how much I owe?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseBill12" class="accordion-collapse collapse"
+                                        aria-labelledby="headingBill12" data-bs-parent="#accordionFAQ-Billing1">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            Log in to your account and navigate to the "Billing" section to view your
+                                            outstanding property rate
+                                            bills.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ 13 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingBill13">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseBill13"
+                                            aria-expanded="false" aria-controls="collapseBill13">
+                                            <p>How do I pay my property rate?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseBill13" class="accordion-collapse collapse"
+                                        aria-labelledby="headingBill13" data-bs-parent="#accordionFAQ-Billing1">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            1. Access the payment section on the platform.<br>
+                                            2. Choose your preferred payment method (mobile money, online card payment,
+                                            bank).<br>
+                                            3. Confirm payment and download your receipt.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ 14 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingBill14">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseBill14"
+                                            aria-expanded="false" aria-controls="collapseBill14">
+                                            <p>Can I pay for multiple properties at once?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseBill14" class="accordion-collapse collapse"
+                                        aria-labelledby="headingBill14" data-bs-parent="#accordionFAQ-Billing1">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            Yes, you can select multiple properties in the payment section and pay the
+                                            total amount due.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ 15 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingBill15">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseBill15"
+                                            aria-expanded="false" aria-controls="collapseBill15">
+                                            <p>What payment methods are supported?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseBill15" class="accordion-collapse collapse"
+                                        aria-labelledby="headingBill15" data-bs-parent="#accordionFAQ-Billing1">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            Supported methods include mobile money, credit/debit cards, bank transfers
+                                            and cash payments at
+                                            designated banks.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ 16 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingBill16">
+                                        <button class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseBill16"
+                                            aria-expanded="false" aria-controls="collapseBill16">
+                                            <p>How do I get a receipt after payment?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseBill16" class="accordion-collapse collapse"
+                                        aria-labelledby="headingBill16" data-bs-parent="#accordionFAQ-Billing2">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            Receipts are automatically generated after payment. You can download them
+                                            from the "Payment History"
+                                            section. In addition, you will receive an SMS and email notification on any
+                                            payments made.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ 17 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingBill17">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseBill17"
+                                            aria-expanded="false" aria-controls="collapseBill17">
+                                            <p>What happens if I miss a payment deadline?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseBill17" class="accordion-collapse collapse"
+                                        aria-labelledby="headingBill17" data-bs-parent="#accordionFAQ-Billing2">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            Late payments will incur penalties. Ensure you pay on time to avoid extra
+                                            charges.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ 18 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingBill18">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseBill18"
+                                            aria-expanded="false" aria-controls="collapseBill18">
+                                            <p>Can I set up recurring payments?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseBill18" class="accordion-collapse collapse"
+                                        aria-labelledby="headingBill18" data-bs-parent="#accordionFAQ-Billing2">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            Yes, you can schedule recurring payments for convenience.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ 20 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingSupport20">
+                                        <button class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent"
+                                            type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseSupport20" aria-expanded="false"
+                                            aria-controls="collapseSupport20">
+                                            <p>How do I log a complaint?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseSupport20" class="accordion-collapse collapse"
+                                        aria-labelledby="headingSupport20" data-bs-parent="#accordionFAQ-Support1">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            Use the "Support" section on the platform to submit a ticket describing your
+                                            issue.
+                                            You will receive a reference number and SMS notification as well.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ 21 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingSupport21">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseSupport21" aria-expanded="false"
+                                            aria-controls="collapseSupport21">
+                                            <p>How do I contact customer support?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseSupport21" class="accordion-collapse collapse"
+                                        aria-labelledby="headingSupport21" data-bs-parent="#accordionFAQ-Support1">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            You can reach support via the hotline, email or live chat on the platform.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ 29 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingGIS29">
+                                        <button class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseGIS29"
+                                            aria-expanded="false" aria-controls="collapseGIS29">
+                                            <p>What is the GIS feature on the platform?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseGIS29" class="accordion-collapse collapse"
+                                        aria-labelledby="headingGIS29" data-bs-parent="#accordionFAQ-GIS">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            The GIS feature visually maps properties and displays payment statuses,
+                                            property locations, and
+                                            valuations.
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <!-- FAQ 22 -->
+                                <div class="accordion-item shadow-sm">
+                                    <h2 class="accordion-header" id="headingSupport22">
+                                        <button
+                                            class="accordion-button fs-14 fw-medium pt-3 pb-2 bg-transparent collapsed"
+                                            type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseSupport22" aria-expanded="false"
+                                            aria-controls="collapseSupport22">
+                                            <p> What should I do if my payment doesn’t reflect?</p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseSupport22" class="accordion-collapse collapse"
+                                        aria-labelledby="headingSupport22" data-bs-parent="#accordionFAQ-Support1">
+                                        <div class="accordion-body ps-3 m-3 my-3 border-white border-3 border-start text-default"
+                                            style="background-color: #f374291a;">
+                                            Contact support with your payment reference and transaction number for
+                                            assistance.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -936,330 +1219,445 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-
-    <!-- start project with us section -->
-    <div id="contact" class="rts-project-area eight bg-project-three margin-controlerproject mt_sm--0">
-        <div class="container controler">
-            <div class="row g-0 justify-content-center">
-                <div class="col-lg-7">
-                    <!-- project area left wrapper -->
-                    <div class="title-area-project-w-in">
-                        <span class="sub">
-                            Get Started with IPRS
-                        </span>
-                        <h2 class="title">
-                            Sign Up<br> <span>Today!</span>
-                        </h2>
-                        <p class="disc">
-                            Unlock the full potential of IPRS with our expert guidance and tailored solutions. Let’s
-                            begin your journey toward seamless integration and success!
-                        </p>
-                    </div>
-                    <!-- project area left wrapper end -->
-                </div>
-                <div class="col-lg-5">
-                    <div class="bg-input-project">
-                        <div class="product-form">
-                            <div id="form-messages"></div>
-                            <form id="contact-form" action="#" method="post">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <input type="text" placeholder="Your Name" name="name" required>
-                                    </div>
-                                    <div class="col-lg-6 mt_md--20 mt_sm--20">
-                                        <input type="email" placeholder="Your Email" name="email" required>
-                                    </div>
-                                    <div class="col-12 mt--20">
-                                        <input type="text" placeholder="Your Subject" name="subject">
-                                    </div>
-                                    <div class="col-12 mt--20">
-                                        <textarea placeholder="Your Comment" name="message"></textarea>
-                                    </div>
-                                    <div class="col-12 mt--35">
-                                        <button class="rts-btn btn-primary-3 color-h-black" type="submit">Get in
-                                            Touch</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- start project with us section End -->
-
-    <!-- Start  FAQ  area -->
-    <section id="faq" class="faq-section py-5" id="faqs">
-        <div class="container">
-            <div class="text-center mb-4">
-                <p class="fs-14 fw-medium text-success mb-1">Frequently Asked Questions</p>
-                <h4 class="fw-semibold mt-3">Have Questions? We’ve Got Answers</h4>
-                <p class="text-muted fs-14 mb-5">Find quick answers to the most common queries.</p>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="accordion" id="accordionLeft">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="faqOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    1. How can I update my account settings?
-                                </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="faqOne"
-                                data-bs-parent="#accordionLeft">
-                                <div class="accordion-body">
-                                    To update your account settings, visit the settings page where you can change
-                                    personal details, reset your password, and modify notification preferences.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="faqTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    2. How do I reset my password?
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="faqTwo"
-                                data-bs-parent="#accordionLeft">
-                                <div class="accordion-body">
-                                    Simply go to the login page and click "Forgot Password." Follow the instructions
-                                    sent to your email to reset your password.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="faqThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseThree" aria-expanded="false"
-                                    aria-controls="collapseThree">
-                                    3. How do I change my email address?
-                                </button>
-                            </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="faqThree"
-                                data-bs-parent="#accordionLeft">
-                                <div class="accordion-body">
-                                    To change your email address, go to the account settings page, enter your new email,
-                                    and confirm it through a verification email.
-                                </div>
+            <!-- End:: Section-8 -->
+            <!-- rts service post area  Start-->
+            <div id="features" class="rts-service-area eight rts-section-gap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="rts-title-area service text-center">
+                                <p class="pre-title">
+                                    FEATURES
+                                </p>
+                                <h2 class="title">Key Features of the IPRS</h2>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="accordion" id="accordionRight">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="faqFour">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseFour" aria-expanded="false"
-                                    aria-controls="collapseFour">
-                                    4. How do I enable two-factor authentication?
-                                </button>
-                            </h2>
-                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="faqFour"
-                                data-bs-parent="#accordionRight">
-                                <div class="accordion-body">
-                                    To activate two-factor authentication, navigate to your account settings under the
-                                    "Security" tab and follow the prompts.
+                <div class="container-fluid service-main plr--120-service mt--50 plr_md--0 pl_sm--0 pr_sm--0">
+                    <div class="background-service row">
+                        <!-- Feature 1 -->
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="service-one-inner one">
+                                <div class="thumbnail">
+                                    <img src="{{ asset('assets/assetsfront/images/service/icon/service-logo11.svg') }}"
+                                        alt="finbiz_service">
+                                </div>
+                                <div class="service-details">
+                                    <a href="#">
+                                        <h5 class="title">Revenue Tracking</h5>
+                                    </a>
+                                    <p class="disc">Track collections in real time for full financial visibility.</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="faqFive">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseFive" aria-expanded="false"
-                                    aria-controls="collapseFive">
-                                    5. How can I delete my account?
-                                </button>
-                            </h2>
-                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="faqFive"
-                                data-bs-parent="#accordionRight">
-                                <div class="accordion-body">
-                                    If you'd like to delete your account, please go to your account settings and find
-                                    the "Delete Account" section. Keep in mind this action is irreversible.
+                        <!-- Feature 2 -->
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="service-one-inner two">
+                                <div class="thumbnail">
+                                    <img src="{{ asset('assets/assetsfront/images/service/icon/service-logo4.svg') }}"
+                                        alt="finbiz_service">
+                                </div>
+                                <div class="service-details">
+                                    <a href="#">
+                                        <h5 class="title">Intuitive Interface</h5>
+                                    </a>
+                                    <p class="disc">Easy-to-use platform for both citizens and authorities.</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="faqSix">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                    6. How can I update my privacy settings?
-                                </button>
-                            </h2>
-                            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="faqSix"
-                                data-bs-parent="#accordionRight">
-                                <div class="accordion-body">
-                                    You can adjust your privacy settings by visiting the "Privacy & Security" section in
-                                    your account settings.
+                        <!-- Feature 3 -->
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="service-one-inner three">
+                                <div class="thumbnail">
+                                    <img src="{{ asset('assets/assetsfront/images/service/icon/service-logo5.svg') }}"
+                                        alt="finbiz_service">
+                                </div>
+                                <div class="service-details">
+                                    <a href="#">
+                                        <h5 class="title">Data Security</h5>
+                                    </a>
+                                    <p class="disc">Advanced encryption keeps your data protected.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Feature 4 -->
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="service-one-inner four">
+                                <div class="thumbnail">
+                                    <img src="{{ asset('assets/assetsfront/images/service/icon/service-logo6.svg') }}"
+                                        alt="finbiz_service">
+                                </div>
+                                <div class="service-details">
+                                    <a href="#">
+                                        <h5 class="title">Smart Notifications</h5>
+                                    </a>
+                                    <p class="disc">Get alerts on deadlines and important updates instantly.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Feature 5 -->
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="service-one-inner five">
+                                <div class="thumbnail">
+                                    <img src="{{ asset('assets/assetsfront/images/service/icon/service-logo22.svg') }}"
+                                        alt="finbiz_service">
+                                </div>
+                                <div class="service-details">
+                                    <a href="#">
+                                        <h5 class="title">Flexible Payments</h5>
+                                    </a>
+                                    <p class="disc">Multiple secure channels for convenient payments.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Feature 6 -->
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="service-one-inner six">
+                                <div class="thumbnail">
+                                    <img src="{{ asset('assets/assetsfront/images/service/icon/service-logo33.svg') }}"
+                                        alt="finbiz_service">
+                                </div>
+                                <div class="service-details">
+                                    <a href="#">
+                                        <h5 class="title">Local Impact</h5>
+                                    </a>
+                                    <p class="disc">Funds directly support community development projects.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
+            <!-- rts service post area ENd -->
 
-    <!-- start header area -->
-    <!-- footer area start -->
-    <div id="contact" class="rts-footer-area rts-section-gap footer-two footer-bg-two mt--120 mt_md--80 mt_sm--60">
-        <div class="container">
-            <div class="row">
-                <!-- single wized -->
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="footer-two-single-wized left">
-                        <h3 class="title">
-                            <span>Ready To</span> <br>
-                            Get Started?
-                        </h3>
-                        <p class="disc">
-                            Discover a smarter, simpler way to manage property rates with IPRS. Join thousands already
-                            transforming their experience today!
-                        </p>
-                        <a class="rts-btn btn-primary-2 color-h-black" href="{{ route('auth.register') }}">Sign
-                            Up</a>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12 mt_sm--50">
-                    <div class="footer-two-single-wized two">
-                        <div class="wized-title-area">
-                            <h5 class="wized-title">IPRS Features</h5>
-                            <img src="{{ asset('assets/assetsfront/images/footer/under-title-2.png') }}"
-                                alt="finbiz_footer">
-                        </div>
-                        <div class="wized-2-body">
-                            <ul>
-                                <li><a href="#"><i class="fal fa-chevron-double-right"></i>Real-Time Revenue
-                                        Tracking</a></li>
-                                <li><a href="#"><i class="fal fa-chevron-double-right"></i>User-Friendly
-                                        Interface</a></li>
-                                <li><a href="#"><i class="fal fa-chevron-double-right"></i>Innovative
-                                        Solutions</a></li>
-                                <li><a href="#"><i class="fal fa-chevron-double-right"></i>Automated
-                                        Notifications</a></li>
-                                <li><a href="#"><i class="fal fa-chevron-double-right"></i>Enhanced
-                                        Data Security</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- single wized -->
-                <div class="col-xl-2 col-lg-6 col-md-6 col-sm-12 col-12 mt_sm--30 mt_md--30">
-                    <div class="footer-two-single-wized">
-                        <div class="wized-title-area">
-                            <h5 class="wized-title">Contact Us</h5>
-                            <img src="{{ asset('assets/assetsfront/images/footer/under-title-2.png') }}"
-                                alt="finbiz_footer">
-                        </div>
-                        <div class="wized-2-body">
-                            <div class="contact-info-1">
-                                <div class="icon">
-                                    <i class="fas fa-phone-alt"></i>
-                                </div>
-                                <div class="disc">
-                                    <span>Call Us 24/7</span>
-                                    <a href="+233500503599">+233 50 050 3599</a>
+            <!-- start about our company -->
+            <div id="about-us" class="rts-about-our-company-h2 eight rts-section-gap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 mt_sm--30">
+                            <div class="title-area about-company">
+                                <span>About IPRS</span>
+                                <h2 class="title">Empowering Communities with Efficient Rate Solutions</h2>
+                            </div>
+                            <div class="about-company-wrapper">
+                                <p class="disc">
+                                    The Integrated Property Rate System (IPRS) is designed to revolutionize the way
+                                    property
+                                    rates are managed and collected across Africa. Our platform offers a seamless,
+                                    transparent,
+                                    and efficient solution for both citizens and local governments.
+                                </p>
+                                <div class="rts-tab-style-one">
+                                    <div class="d-flex align-items-start contoler-company">
+                                        <div class="nav flex-column nav-pills me-3 button-area" id="v-pills-tab"
+                                            role="tablist" aria-orientation="vertical">
+                                            <button class="nav-link active" id="v-pills-home-tab"
+                                                data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button"
+                                                role="tab" aria-controls="v-pills-home" aria-selected="true">01.
+                                                Transparency</button>
+                                            <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill"
+                                                data-bs-target="#v-pills-profile" type="button" role="tab"
+                                                aria-controls="v-pills-profile" aria-selected="false">02.
+                                                Efficiency</button>
+                                            <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill"
+                                                data-bs-target="#v-pills-messages" type="button" role="tab"
+                                                aria-controls="v-pills-messages" aria-selected="false">03.
+                                                Security</button>
+                                            <button class="nav-link" id="v-pills-manufacture-tab"
+                                                data-bs-toggle="pill" data-bs-target="#v-pills-manufacture"
+                                                type="button" role="tab" aria-controls="v-pills-manufacture"
+                                                aria-selected="false">04. Community
+                                                Impact</button>
+                                        </div>
+                                        <div class="tab-content" id="v-pills-tabContent">
+                                            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                                                aria-labelledby="v-pills-home-tab">
+                                                <!-- start tab content -->
+                                                <div class="rts-tab-content-one">
+
+                                                    <p class="disc">
+                                                        IPRS ensures complete transparency in the rate collection
+                                                        process.
+                                                        Citizens can easily track their payments and see how their
+                                                        contributions
+                                                        are being utilized for community development.
+                                                    </p>
+                                                    <div class="check-area">
+                                                        <i class="fas fa-check-circle"></i>
+                                                        <p class="disc">
+                                                            Real-time revenue tracking for accountability.
+                                                        </p>
+                                                    </div>
+                                                    <div class="check-area">
+                                                        <i class="fas fa-check-circle"></i>
+                                                        <p class="disc">
+                                                            Detailed reports and analytics for informed decision-making.
+                                                        </p>
+                                                    </div>
+                                                    <a class="rts-btn btn-primary-2 color-h-black"
+                                                        href="{{ route('auth.register') }}">Sign Up
+                                                    </a>
+                                                </div>
+                                                <!-- start tab content End -->
+                                            </div>
+                                            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                                                aria-labelledby="v-pills-profile-tab">
+                                                <!-- start tab content -->
+                                                <div class="rts-tab-content-one">
+
+                                                    <p class="disc">
+                                                        Our system streamlines the entire rate collection process,
+                                                        reducing
+                                                        administrative burdens and ensuring timely payments. This
+                                                        efficiency
+                                                        translates to better services for the community.
+                                                    </p>
+                                                    <div class="check-area">
+                                                        <i class="fas fa-check-circle"></i>
+                                                        <p class="disc">
+                                                            Automated notifications and reminders.
+                                                        </p>
+                                                    </div>
+                                                    <div class="check-area">
+                                                        <i class="fas fa-check-circle"></i>
+                                                        <p class="disc">
+                                                            User-friendly interface for easy navigation.
+                                                        </p>
+                                                    </div>
+                                                    <a class="rts-btn btn-primary-2 color-h-black" href="">
+                                                        Sign Up</a>
+                                                </div>
+                                                <!-- start tab content End -->
+                                            </div>
+                                            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
+                                                aria-labelledby="v-pills-messages-tab">
+                                                <!-- start tab content -->
+                                                <div class="rts-tab-content-one">
+
+                                                    <p class="disc">
+                                                        Security is at the core of IPRS. We employ state-of-the-art
+                                                        security
+                                                        measures to protect your personal and financial data, ensuring
+                                                        peace of
+                                                        mind for all users.
+                                                    </p>
+                                                    <div class="check-area">
+                                                        <i class="fas fa-check-circle"></i>
+                                                        <p class="disc">
+                                                            Advanced encryption and data protection.
+                                                        </p>
+                                                    </div>
+                                                    <div class="check-area">
+                                                        <i class="fas fa-check-circle"></i>
+                                                        <p class="disc">
+                                                            Regular security audits and updates.
+                                                        </p>
+                                                    </div>
+                                                    <a class="rts-btn btn-primary-2 color-h-black"
+                                                        href="{{ route('auth.register') }}">Sign Up
+                                                    </a>
+                                                </div>
+                                                <!-- start tab content End -->
+                                            </div>
+                                            <div class="tab-pane fade" id="v-pills-manufacture" role="tabpanel"
+                                                aria-labelledby="v-pills-manufacture-tab">
+                                                <!-- start tab content -->
+                                                <div class="rts-tab-content-one">
+
+                                                    <p class="disc">
+                                                        Every rate payment made through IPRS directly contributes to the
+                                                        development of local infrastructure and public services,
+                                                        fostering
+                                                        growth and improving the quality of life in communities.
+                                                    </p>
+                                                    <div class="check-area">
+                                                        <i class="fas fa-check-circle"></i>
+                                                        <p class="disc">
+                                                            Investment in local projects and services.
+                                                        </p>
+                                                    </div>
+                                                    <div class="check-area">
+                                                        <i class="fas fa-check-circle"></i>
+                                                        <p class="disc">
+                                                            Empowering local governments with better resources.
+                                                        </p>
+                                                    </div>
+                                                    <a class="rts-btn btn-primary-2 color-h-black"
+                                                        href="{{ route('auth.register') }}">
+                                                        Sign Up</a>
+                                                </div>
+                                                <!-- start tab content End -->
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="contact-info-1">
-                                <div class="icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div class="disc">
-                                    <span>Work with us</span>
-                                    <a href="mailto:info@level10gh.com">info@level10gh.com</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- single wized -->
-                <!-- single wized -->
-                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="footer-two-single-wized right">
-                        <div class="wized-2-body">
-                            <div class="contact-info-1">
-                                <div class="icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div class="disc">
-                                    <span>Our Location</span>
-                                    <a
-                                        href="https://www.google.com/maps/dir/5.7864728,-0.1258667/29+Senchi+St,+Accra/@5.7023691,-0.235622,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0xfdf9b0fa4eb345b:0x2f32d290edf99916!2m2!1d-0.1794308!2d5.6159487?entry=tts&g_ep=EgoyMDI1MDEwMi4wIPu8ASoASAFQAw%3D%3D">
-                                        29 Senchi Street,Airport Residential, Accra Ghana <br>
-                                        United State</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- single wized -->
             </div>
-        </div>
-    </div>
-    <!-- footer area end -->
 
-    <!-- copyright-area start -->
-    <div class="rts-copy-right ptb--30">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="copyright-h-2-wrapper">
-                        <p class="disc">
-                            IPRS - Copyright 2025. All rights reserved.
-                        </p>
-                        <div class="right">
-                            <ul>
-                                <li><a href="https://level10gh.com/">Powered By Level 10 </a></li>
-                            </ul>
+
+            <!-- start header area -->
+            <!-- footer area start -->
+            <div id="contact"
+                class="rts-footer-area rts-section-gap footer-two footer-bg-two mt--120 mt_md--80 mt_sm--60">
+                <div class="container">
+                    <div class="row">
+                        <!-- single wized -->
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="footer-two-single-wized left">
+                                <h3 class="title">
+                                    <span>Ready To</span> <br>
+                                    Get Started?
+                                </h3>
+                                <p class="disc">
+                                    Discover a smarter, simpler way to manage property rates with IPRS. Join thousands
+                                    already
+                                    transforming their experience today!
+                                </p>
+                                <a class="rts-btn btn-primary-2 color-h-black"
+                                    href="{{ route('auth.register') }}">Sign
+                                    Up</a>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12 mt_sm--50">
+                            <div class="footer-two-single-wized two">
+                                <div class="wized-title-area">
+                                    <h5 class="wized-title">IPRS Features</h5>
+                                    <img src="{{ asset('assets/assetsfront/images/footer/under-title-2.png') }}"
+                                        alt="finbiz_footer">
+                                </div>
+                                <div class="wized-2-body">
+                                    <ul>
+                                        <li><a href="#"><i class="fal fa-chevron-double-right"></i>Real-Time
+                                                Revenue
+                                                Tracking</a></li>
+                                        <li><a href="#"><i class="fal fa-chevron-double-right"></i>User-Friendly
+                                                Interface</a></li>
+                                        <li><a href="#"><i class="fal fa-chevron-double-right"></i>Innovative
+                                                Solutions</a></li>
+                                        <li><a href="#"><i class="fal fa-chevron-double-right"></i>Automated
+                                                Notifications</a></li>
+                                        <li><a href="#"><i class="fal fa-chevron-double-right"></i>Enhanced
+                                                Data Security</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- single wized -->
+                        <div class="col-xl-2 col-lg-6 col-md-6 col-sm-12 col-12 mt_sm--30 mt_md--30">
+                            <div class="footer-two-single-wized">
+                                <div class="wized-title-area">
+                                    <h5 class="wized-title">Contact Us</h5>
+                                    <img src="{{ asset('assets/assetsfront/images/footer/under-title-2.png') }}"
+                                        alt="finbiz_footer">
+                                </div>
+                                <div class="wized-2-body">
+                                    <div class="contact-info-1">
+                                        <div class="icon">
+                                            <i class="fas fa-phone-alt"></i>
+                                        </div>
+                                        <div class="disc">
+                                            <span>Call Us 24/7</span>
+                                            <a href="+233500503599">+233 50 050 3599</a>
+                                        </div>
+                                    </div>
+                                    <div class="contact-info-1">
+                                        <div class="icon">
+                                            <i class="fas fa-envelope"></i>
+                                        </div>
+                                        <div class="disc">
+                                            <span>Work with us</span>
+                                            <a href="mailto:info@level10gh.com">info@level10gh.com</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- single wized -->
+                        <!-- single wized -->
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="footer-two-single-wized right">
+                                <div class="wized-2-body">
+                                    <div class="contact-info-1">
+                                        <div class="icon">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                        </div>
+                                        <div class="disc">
+                                            <span>Our Location</span>
+                                            <a
+                                                href="https://www.google.com/maps/dir/5.7864728,-0.1258667/29+Senchi+St,+Accra/@5.7023691,-0.235622,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0xfdf9b0fa4eb345b:0x2f32d290edf99916!2m2!1d-0.1794308!2d5.6159487?entry=tts&g_ep=EgoyMDI1MDEwMi4wIPu8ASoASAFQAw%3D%3D">
+                                                29 Senchi Street,Airport Residential, Accra Ghana <br>
+                                                United State</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- single wized -->
+                    </div>
+                </div>
+            </div>
+            <!-- footer area end -->
+
+            <!-- copyright-area start -->
+            <div class="rts-copy-right ptb--30">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="copyright-h-2-wrapper">
+                                <p class="disc">
+                                    IPRS - Copyright 2025. All rights reserved.
+                                </p>
+                                <div class="right">
+                                    <ul>
+                                        <li><a href="https://level10gh.com/">Powered By Level 10 </a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- copyright-area end -->
-    <!-- ENd Header Area -->
+            <!-- copyright-area end -->
+            <!-- ENd Header Area -->
 
 
-    <!-- start loader -->
-    <div class="loader-wrapper">
-        <div class="loader">
-        </div>
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
-    </div>
-    <!-- End loader -->
+            <!-- start loader -->
+            <div class="loader-wrapper">
+                <div class="loader">
+                </div>
+                <div class="loader-section section-left"></div>
+                <div class="loader-section section-right"></div>
+            </div>
+            <!-- End loader -->
 
-    <!-- progress Back to top -->
-    <div class="progress-wrap">
-        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
-        </svg>
-    </div>
-    <!-- progress Back to top End -->
+            <!-- progress Back to top -->
+            <div class="progress-wrap">
+                <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                    <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+                </svg>
+            </div>
+            <!-- progress Back to top End -->
 
 
-    <!-- scripts start form hear -->
-    <script src="{{ asset('assets/assetsfront/js/vendor/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/assetsfront/js/vendor/jqueryui.js') }}"></script>
-    <script src="{{ asset('assets/assetsfront/js/vendor/waypoint.js') }}"></script>
-    <script src="{{ asset('assets/assetsfront/js/plugins/swiper.js') }}"></script>
-    <script src="{{ asset('assets/assetsfront/js/plugins/counterup.js') }}"></script>
-    <script src="{{ asset('assets/assetsfront/js/plugins/sal.min.js') }}"></script>
-    <script src="{{ asset('assets/assetsfront/js/vendor/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/assetsfront/js/vendor/waw.js') }}"></script>
-    <script src="{{ asset('assets/assetsfront/js/plugins/contact.form.js') }}"></script>
-    <!-- main Js -->
-    <script src="{{ asset('assets/assetsfront/js/main.js') }}"></script>
-    <!-- scripts end form hear -->
+            <!-- scripts start form hear -->
+            <script src="{{ asset('assets/assetsfront/js/vendor/jquery.min.js') }}"></script>
+            <script src="{{ asset('assets/assetsfront/js/vendor/jqueryui.js') }}"></script>
+            <script src="{{ asset('assets/assetsfront/js/vendor/waypoint.js') }}"></script>
+            <script src="{{ asset('assets/assetsfront/js/plugins/swiper.js') }}"></script>
+            <script src="{{ asset('assets/assetsfront/js/plugins/counterup.js') }}"></script>
+            <script src="{{ asset('assets/assetsfront/js/plugins/sal.min.js') }}"></script>
+            <script src="{{ asset('assets/assetsfront/js/vendor/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('assets/assetsfront/js/vendor/waw.js') }}"></script>
+            <script src="{{ asset('assets/assetsfront/js/plugins/contact.form.js') }}"></script>
+            <!-- main Js -->
+            <script src="{{ asset('assets/assetsfront/js/main.js') }}"></script>
+            <!-- scripts end form hear -->
 </body>
 
 

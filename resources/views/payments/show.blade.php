@@ -17,18 +17,33 @@
 @endphp
 
 @section('page-content')
+    <div class="card">
+        <!-- HEADER SECTION -->
+        <div class="card-body border-bottom pb-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                    <h4 class="fw-bold text-primary mb-1">
+                        <i class="ri-wallet-3-line me-2"></i> Payment Record Details
+                    </h4>
+
+                    <p class="mb-0 text-muted fs-14">
+                        You are Viewing A Payment on A generated bill record in your
+                        central database repository.
+                    </p>
+                </div>
+
+                <a href="{{ route('payments.index') }}" class="btn btn-sm btn-primary">
+                    <i class="ri-arrow-go-back-line"></i> Back
+                </a>
+
+            </div>
+        </div>
+
+    </div>
     <div class="row">
         <div class="container-fluid mh-auto">
             <div class="card">
-                <div class="card-header flex-wrap d-flex justify-content-between">
-                    <div>
-                        <h4 class="card-title">View Payment Record</h4>
-                    </div>
 
-                    <div>
-                        <a href="{{ route('payments.index') }}" class="btn btn-primary btn-sm ms-2">Back</a>
-                    </div>
-                </div>
                 <div class="card-body">
                     <form action="{{ route('payments.store') }}" method="POST">
                         @csrf
@@ -86,6 +101,19 @@
                                 <label for="network">Payment Network:</label>
                                 <input type="text" class="form-control @error('network') is-invalid @enderror"
                                     id="network" name="network" value="{{ $payment->network ?? 'N/A' }}" readonly>
+
+                                @error('network')
+                                    <span class="invalid-feedback" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-md-6 mb-4 network">
+                                <label for="network">Payment Status:</label>
+                                <input type="text" class="form-control @error('network') is-invalid @enderror"
+                                    id="network" name="network" value="{{ $payment->transaction_status ?? 'N/A' }}"
+                                    readonly>
 
                                 @error('network')
                                     <span class="invalid-feedback" role="alert">

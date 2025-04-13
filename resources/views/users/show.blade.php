@@ -98,94 +98,96 @@
 
 @section('page-content')
     <div class="container-fluid">
+        <!-- Wrap columns with a row for proper Bootstrap grid usage -->
+        <div class="row">
+            <div class="col-xl-12 active-p">
+                <div class="card">
+                    <div class="card-body border-bottom pb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <h4 class="fw-bold text-primary mb-1">
+                                    <i class="ri-shield-user-line me-2"></i> User Management
+                                </h4>
+                                <p class="mb-0 text-muted fs-14">
+                                    Hey there, you are viewing the profile for <strong>{{ $user->name }}</strong>
 
-        <div class="p-xl-12 p-2 z-1">
-            <div class="p-4 bg-black-transparent rounded-3 border border-opacity-10 border-white">
-                <div class="d-flex gap-3 align-items-center flex-wrap">
-                    <div>
-                        <img src="{{ asset('assets/images/profileuser.png') }}" alt=""
-                            class="img-fluid rounded-circle p-2 bg-success bg-opacity-25 shadow user-img">
-                    </div>
-                    <div class="user-info">
-                        <h4 class="text-fixed-white mb-1" style="font-size: 1rem;">Full Name: {{ $user->name }}
-                        </h4>
-                        <p class="mb-1 op-6 fs-12" style="font-size: 0.875rem;"><i
-                                class="ri-mail-fill lh-1 align-middle me-2 d-inline-block"></i>E-Mail:{{ $user->email }}
-                        </p>
-
-                    </div>
-
-                    <div class="ms-auto align-self-end pb-2 user-stats d-flex gap-3">
-                        <!-- Access Level -->
-                        <div class="stat-box text-center">
-                            <p class="mb-0 op-7 fs-14">Access Level</p>
-                            <button class="btn btn-teal-light btn-border-down">{{ $user->access_level }}</button>
-                        </div>
-
-                        <!-- Role -->
-                        <div class="stat-box text-center">
-                            <p class="mb-0 op-7 fs-14">Role</p>
-                            <button
-                                class="btn btn-secondary-light btn-border-start">{{ $user->roleName->name ?? 'N/A' }}</button>
-                        </div>
-
-                        <!-- Status -->
-                        <div class="stat-box text-center">
-                            <p class="mb-0 op-7 fs-14">Status</p>
-                            <button class="btn btn-purple-light btn-border-end">{{ $user->status }}</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-md-12">
-            <div class="inner-profile-card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <div class="card-title">User Management /You Are Viewing Information for {{ $user->name }}</div>
-                    <a href="{{ route('users.index') }}" class="btn btn-danger btn-sm ms-2">Back</a>
-                </div>
-
-                <div class="card-body">
-                    <div class="row g-3 needs-validation">
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">Phone</label>
-                            <input type="text" class="form-control" value="{{ $user->phone }}" readonly>
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">Date Of Joining</label>
-                            <div class="d-flex align-items-center">
-                                <input type="text" class="form-control" value="{{ $user->created_at->format('Y-m-d') }}"
-                                    readonly>
-                                <span class="text-secondary ms-2">{{ $user->created_at->diffForHumans() }}</span>
+                                </p>
                             </div>
 
+                            @can('users.create')
+                                <a href="{{ route('users.index') }}" class="btn btn-primary">
+                                    <i class="fa fa-plus me-1"></i> Back to User Management
+                                </a>
+                            @endcan
                         </div>
+                    </div>
+                </div>
 
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">Gender</label>
-                            <input type="text" class="form-control"
-                                value="{{ !empty($user->gender) ? $user->gender : 'N/A' }}" readonly>
-                        </div>
+                <!-- Inner Profile Card -->
+                <div class="col-md-12">
+                    <div class="card">
 
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">Assembly Code</label>
-                            <input type="text" class="form-control"
-                                value="{{ $user->assembly->assembly_code ?? 'N/A' }}" readonly>
-                        </div>
+                        <div class="card-body">
+                            <div class="row g-3 needs-validation">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" value="{{ $user->name }}" readonly>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">E-mail</label>
+                                    <input type="text" class="form-control" value="{{ $user->email }}" readonly>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Phone</label>
+                                    <input type="text" class="form-control" value="{{ $user->phone }}" readonly>
+                                </div>
 
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">Division Code</label>
-                            <input type="text" class="form-control"
-                                value="{{ $user->division->division_name ?? 'N/A' }}" readonly>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Date Of Joining</label>
+                                    <div class="d-flex align-items-center">
+                                        <input type="text" class="form-control"
+                                            value="{{ $user->created_at->format('Y-m-d') }}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Gender</label>
+                                    <input type="text" class="form-control"
+                                        value="{{ !empty($user->gender) ? $user->gender : 'N/A' }}" readonly>
+                                </div>
+
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Assembly Code</label>
+                                    <input type="text" class="form-control"
+                                        value="{{ $user->assembly->assembly_code ?? 'N/A' }}" readonly>
+                                </div>
+
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Region</label>
+                                    <input type="text" class="form-control" value="{{ $user->region->name ?? 'N/A' }}"
+                                        readonly>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Access Level Identification</label>
+                                    <input type="text" class="form-control" value="{{ $user->access_level ?? 'N/A' }}"
+                                        readonly>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Role Identification</label>
+                                    <input type="text" class="form-control" value="{{ $user->roleName->name ?? 'N/A' }}"
+                                        readonly>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">User Status</label>
+                                    <input type="text" class="form-control" value="{{ $user->status ?? 'N/A' }}"
+                                        readonly>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection
 

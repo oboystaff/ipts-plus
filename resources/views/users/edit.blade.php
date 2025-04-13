@@ -97,74 +97,38 @@
 @endsection
 
 @section('page-content')
-    <div class="container-fluid">
-
-        <div class="p-xl-12 p-2 z-1 position-relative">
-            <div class="p-4 bg-black-transparent rounded-3 border border-opacity-10 border-white">
-                <div class="d-flex gap-3 align-items-center flex-wrap">
+    <div class="col-xxl-12">
+        <div class="card">
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
                     <div>
-                        <img src="{{ asset('assets/images/profileuser.png') }}" alt=""
-                            class="img-fluid rounded-circle p-2 bg-success bg-opacity-25 shadow user-img">
-                    </div>
-                    <div class="user-info">
-                        <h4 class="text-fixed-white mb-1" style="font-size: 1rem;">Full Name: {{ $user->name }}
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-shield-user-line me-2"></i> User Management
                         </h4>
-                        <p class="mb-1 op-6 fs-12" style="font-size: 0.875rem;"><i
-                                class="ri-mail-fill lh-1 align-middle me-2 d-inline-block"></i>E-Mail:{{ $user->email }}
+                        <p class="mb-0 text-muted fs-14">
+                            Hey there, you are viewing the profile for <strong>{{ $user->name }}</strong>
                         </p>
                     </div>
 
-                    <div class="ms-auto align-self-end pb-2 user-stats d-flex gap-3">
-                        <!-- Access Level -->
-                        <div class="stat-box text-center">
-                            <p class="mb-0 op-7 fs-14">Access Level</p>
-                            <button class="btn btn-teal-light btn-border-down">{{ $user->access_level }}</button>
-                        </div>
-
-                        <!-- Role -->
-                        <div class="stat-box text-center">
-                            <p class="mb-0 op-7 fs-14">Role</p>
-                            <button
-                                class="btn btn-secondary-light btn-border-start">{{ $user->roleName->name ?? 'N/A' }}</button>
-                        </div>
-
-                        <!-- Status -->
-                        <div class="stat-box text-center">
-                            <p class="mb-0 op-7 fs-14">Status</p>
-                            <button class="btn btn-purple-light btn-border-end">{{ $user->status }}</button>
-                        </div>
-                        <!-- Notification button fixed at the bottom left -->
-
-                    </div>
-
+                    @can('users.create')
+                        <a href="{{ route('users.index') }}" class="btn btn-primary">
+                            <i class="fa fa-plus me-1"></i> Back to User Management
+                        </a>
+                    @endcan
                 </div>
-
-
             </div>
         </div>
+    </div>
 
-
-
-
+    <div class="row">
         <div class="col-md-12">
-            <div class="inner-profile-card">
-                <div class="card-header d-flex justify-content-between align-items-center position-relative">
-                    <div class="card-title">
-                    </div>
-
-                    <!-- Notification button fixed at the bottom left -->
-                    <button type="button" class="btn btn-primary my-1 position-absolute bottom-0 start-0">
-                        Last Updated Date: <span class="badge ms-2 bg-secondary">{{ old('name', $user->updated_at) }}</span>
-                    </button>
-
-                    <!-- Back button on the right -->
-                    <a href="{{ route('users.index') }}" class="btn btn-danger btn-sm ms-2">Back</a>
-                </div>
-
+            <div class="card">
 
                 <div class="card-body">
                     <form class="row g-3 needs-validation" method="POST" action="{{ route('users.update', $user->id) }}">
                         @csrf
+
+                        <input type="hidden" name="assembly_url" url="{{ route('assembly.fetch') }}">
 
                         <!-- First Row -->
                         <div class="mb-3 col-md-4">
@@ -222,9 +186,11 @@
                                 required>
                                 <option value="">Select User Gender</option>
                                 <option value="Male"
-                                    {{ old('gender', $user->gender ?? '') == 'Male' ? 'selected' : '' }}>Male</option>
+                                    {{ old('gender', $user->gender ?? '') == 'Male' ? 'selected' : '' }}>
+                                    Male</option>
                                 <option value="Female"
-                                    {{ old('gender', $user->gender ?? '') == 'Female' ? 'selected' : '' }}>Female</option>
+                                    {{ old('gender', $user->gender ?? '') == 'Female' ? 'selected' : '' }}>
+                                    Female</option>
                             </select>
 
                             @error('gender')
@@ -290,8 +256,7 @@
                         <!-- Third Row -->
                         <div class="mb-3 col-md-4">
                             <label for="role" class="form-label">Role</label>
-                            <select class="form-control @error('role') is-invalid @enderror" id="role"
-                                name="role">
+                            <select class="form-control @error('role') is-invalid @enderror" id="role" name="role">
                                 <option value="">Select User Role</option>
                                 @foreach ($roles as $role)
                                     <option value="{{ $role->id }}"
@@ -352,7 +317,8 @@
                                 <option value="Active" {{ old('status', $user->status) == 'Active' ? 'selected' : '' }}>
                                     Active</option>
                                 <option value="InActive"
-                                    {{ old('status', $user->status) == 'InActive' ? 'selected' : '' }}>In Active</option>
+                                    {{ old('status', $user->status) == 'InActive' ? 'selected' : '' }}>In
+                                    Active</option>
                             </select>
                             @error('status')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -369,9 +335,8 @@
             </div>
         </div>
     </div>
-    </div>
 @endsection
 
 @section('page-scripts')
-    <!-- Additional scripts or JavaScript libraries -->
+    <script src="{{ asset('assets/js/user.js?v=' . time()) }}"></script>
 @endsection

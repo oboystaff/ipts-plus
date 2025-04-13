@@ -2,18 +2,28 @@
 
 @section('page-content')
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="custom-card card overflow-hidden">
-                    <div class="p-5 bg-primary mb-5 widget-profile-bg">
-                        <img src="../assets/images/faces/14.jpg" alt=""
-                            class="img-fluid rounded-circle widget-profile shadow">
+        <div class="card">
+
+            <!-- HEADER SECTION -->
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-user-settings-line me-2"></i> Rate Payer Management
+                        </h4>
+
+                        <p class="mb-0 text-muted fs-14">
+                            You are viewing the Record of -{{ $citizen->account_number }} from your
+                            central database repository.
+                        </p>
+
                     </div>
-                    <div class="card-body text-center mt-2">
-                        <h5 class="mb-1 fw-semibold">{{ $citizen->first_name }} {{ $citizen->last_name }} ,
-                            {{ $citizen->other_name }} </h5>
-                        <p class="text-muted fs-14">{{ $citizen->account_number }}</p>
-                    </div>
+                    @can('customers.create')
+                        <a href="{{ route('citizens.index') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus me-1"></i>
+                            Back to Rate Payer Management
+                        </a>
+                    @endcan
+
                 </div>
             </div>
         </div>
@@ -51,7 +61,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <div class="form-group">
-                                                            <label for="first_name">First Name</label>
+                                                            <label for="first_name" class="form-label">First Name</label>
                                                             <input type="text" class="form-control" id="first_name"
                                                                 name="first_name" value="{{ $citizen->first_name }}"
                                                                 readonly>
@@ -59,7 +69,7 @@
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <div class="form-group">
-                                                            <label for="last_name">Last Name</label>
+                                                            <label for="last_name" class="form-label">Last Name</label>
                                                             <input type="text" class="form-control" id="last_name"
                                                                 name="last_name" value="{{ $citizen->last_name }}" readonly>
                                                         </div>
@@ -68,7 +78,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <div class="form-group">
-                                                            <label for="other_name">Other Name</label>
+                                                            <label for="other_name" class="form-label">Other Name</label>
                                                             <input type="text" class="form-control" id="other_name"
                                                                 name="other_name"
                                                                 value="{{ $citizen->other_name ?? 'N/A' }}" readonly>
@@ -76,7 +86,7 @@
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <div class="form-group">
-                                                            <label for="gender">Gender</label>
+                                                            <label for="gender" class="form-label">Gender</label>
                                                             <input type="text" class="form-control" id="gender"
                                                                 name="gender" value="{{ $citizen->gender }}" readonly>
                                                         </div>
@@ -86,7 +96,8 @@
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <div class="form-group">
-                                                            <label for="date_of_birth">Date of Birth</label>
+                                                            <label for="date_of_birth" class="form-label">Date of
+                                                                Birth</label>
                                                             <input type="text" class="form-control" id="date_of_birth"
                                                                 name="date_of_birth" value="{{ $citizen->date_of_birth }}"
                                                                 readonly>
@@ -94,7 +105,8 @@
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <div class="form-group">
-                                                            <label for="marital_status">Marital Status</label>
+                                                            <label for="marital_status" class="form-label">Marital
+                                                                Status</label>
                                                             <input type="text" class="form-control" id="marital_status"
                                                                 name="marital_status" value="{{ $citizen->marital_status }}"
                                                                 readonly>
@@ -104,7 +116,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <div class="form-group">
-                                                            <label for="nia_number">NIA Number</label>
+                                                            <label for="nia_number" class="form-label">NIA Number</label>
                                                             <input type="text" class="form-control" id="nia_number"
                                                                 name="nia_number"
                                                                 value="{{ $citizen->nia_number ?? 'N/A' }}" readonly>
@@ -112,7 +124,8 @@
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <div class="form-group">
-                                                            <label for="account_number">Account Number</label>
+                                                            <label for="account_number" class="form-label">Account
+                                                                Number</label>
                                                             <input type="text" class="form-control"
                                                                 id="account_number" name="account_number"
                                                                 value="{{ $citizen->account_number }}" readonly>
@@ -120,7 +133,8 @@
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <div class="form-group">
-                                                            <label for="account_number">Customer Type</label>
+                                                            <label for="account_number" class="form-label">Customer
+                                                                Type</label>
                                                             <input type="text" class="form-control" id="customer_type"
                                                                 name="customer_type"
                                                                 value="{{ $citizen->customerType->name ?? 'N/A' }}"
@@ -136,9 +150,9 @@
                                     <div id="about-me" class="tab-pane fade">
                                         <div class="pt-3">
                                             <div class="table-responsive active-projects">
-                                                <div class="card-header">
+                                                {{-- <div class="card-header">
                                                     <div class="card-title">Bill Generation History</div>
-                                                </div>
+                                                </div> --}}
                                                 <table id="file-export" class="table table-bordered text-nowrap w-100">
                                                     <thead>
                                                         <tr>
@@ -264,9 +278,9 @@
                                     <div id="profile-settings" class="tab-pane fade">
                                         <div class="pt-3">
                                             <div class="table-responsive active-projects">
-                                                <div class="card-header">
+                                                {{-- <div class="card-header">
                                                     <div class="card-title">Payment History</div>
-                                                </div>
+                                                </div> --}}
                                                 <table id="file-export2" class="table table-bordered text-nowrap w-100">
                                                     <thead>
                                                         <tr>
@@ -375,9 +389,9 @@
                                     <div id="property" class="tab-pane fade">
                                         <div class="pt-3">
                                             <div class="table-responsive active-projects">
-                                                <div class="card-header">
+                                                {{-- <div class="card-header">
                                                     <div class="card-title">Property Information</div>
-                                                </div>
+                                                </div> --}}
                                                 <table id="file-export3" class="table table-bordered text-nowrap w-100">
                                                     <thead>
                                                         <tr>
@@ -446,9 +460,9 @@
                                     <div id="business" class="tab-pane fade">
                                         <div class="pt-3">
                                             <div class="table-responsive active-projects">
-                                                <div class="card-header">
+                                                {{-- <div class="card-header">
                                                     <div class="card-title">Business Information</div>
-                                                </div>
+                                                </div> --}}
                                                 <table id="file-export4" class="table table-bordered text-nowrap w-100">
                                                     <thead>
                                                         <tr>

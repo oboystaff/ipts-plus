@@ -5,16 +5,29 @@
 
 @section('page-content')
     <div class="container-fluid">
+        <div class="card">
+            <!-- HEADER SECTION -->
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-file-chart-line me-2"></i> Support Request Report
+                        </h4>
+                        <p class="mb-0 text-muted fs-14">
+                            You are Generating Support Request Report from your
+                            central database repository.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="card dz-card" id="accordion-four">
-                    <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">Support Request Report</h4>
-                        </div>
-                    </div>
 
-                    <input type="hidden" name="support-request-report_url" url="{{ route('support-request-reports.index') }}">
+
+                    <input type="hidden" name="support-request-report_url"
+                        url="{{ route('support-request-reports.index') }}">
 
                     <div class="card-body">
                         <div class="basic-form">

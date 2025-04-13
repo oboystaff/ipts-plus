@@ -11,18 +11,33 @@
 @endphp
 
 @section('page-content')
+    <div class="card">
+        <!-- HEADER SECTION -->
+        <div class="card-body border-bottom pb-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                    <h4 class="fw-bold text-primary mb-1">
+                        <i class="ri-wallet-3-line me-2"></i> Back Office Payment Inititation
+                    </h4>
+
+                    <p class="mb-0 text-muted fs-14">
+                        You are Initiating Payment on A generated bills record in your
+                        central database repository.
+                    </p>
+                </div>
+
+                <a href="{{ route('bills.fetchBill') }}" class="btn btn-sm btn-primary">
+                    <i class="ri-arrow-go-back-line"></i> Back
+                </a>
+
+            </div>
+        </div>
+
+    </div>
     <div class="row">
         <div class="container-fluid mh-auto">
             <div class="card">
-                <div class="card-header flex-wrap d-flex justify-content-between">
-                    <div>
-                        <h4 class="card-title">Submit Payment Record</h4>
-                    </div>
 
-                    <div>
-                        <a href="{{ route('bills.fetchBill') }}" class="btn btn-primary btn-sm ms-2">Back</a>
-                    </div>
-                </div>
                 <div class="card-body">
                     <form action="{{ route('payments.store') }}" method="POST">
                         @csrf
@@ -31,13 +46,14 @@
 
                         <div class="row">
                             <div class="form-group col-md-6 mb-4">
-                                <label for="bills_id">Bill No.:</label>
+                                <label for="bills_id" class="form-label">Bill No.:</label>
                                 <input type="text" class="form-control" id="bills_id" name="bills_id"
                                     value="{{ $bill->bills_id ?? '' }}" readonly>
                             </div>
 
                             <div class="form-group col-md-6 mb-4">
-                                <label for="paid_by">Amount: (<span style="color:green;font-weight:bold">Current Bill: GHS
+                                <label for="paid_by" class="form-label">Amount: (<span
+                                        style="color:green;font-weight:bold">Current Bill: GHS
                                         {{ $amountDue ?? 0 }}</span>)</label>
                                 <input type="text" class="form-control @error('amount') is-invalid @enderror"
                                     id="amount" name="amount" placeholder="Bill amount">
@@ -50,7 +66,7 @@
                             </div>
 
                             <div class="form-group col-md-6 mb-4">
-                                <label for="payment_mode">Select Payment Mode:</label>
+                                <label for="payment_mode" class="form-label">Select Payment Mode:</label>
                                 <select class="form-control @error('payment_mode') is-invalid @enderror" id="payment_mode"
                                     name="payment_mode">
                                     <option disabled selected>Select Payment Mode</option>
@@ -66,7 +82,7 @@
                             </div>
 
                             <div class="form-group col-md-6 mb-4 phone">
-                                <label for="phone">Payer Phone:</label>
+                                <label for="phone" class="form-label">Payer Phone:</label>
                                 <input type="text" class="form-control @error('phone') is-invalid @enderror"
                                     id="phone" name="phone" placeholder="Rate payer phone number">
 
@@ -78,7 +94,7 @@
                             </div>
 
                             <div class="form-group col-md-6 mb-4 network">
-                                <label for="network">Select Payment Network:</label>
+                                <label for="network" class="form-label">Select Payment Network:</label>
                                 <select class="form-control @error('network') is-invalid @enderror" id="network"
                                     name="network">
                                     <option disabled selected>Select Payment Network</option>
