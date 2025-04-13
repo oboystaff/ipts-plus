@@ -15,9 +15,18 @@ use Illuminate\Validation\ValidationException;
 
 class MmdaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $mmdas = Mmda::orderBy('created_at', 'DESC')->get();
+        $mmdas = Mmda::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
 
         return view('mmdas.index', compact('mmdas'));
     }

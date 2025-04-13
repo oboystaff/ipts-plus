@@ -34,6 +34,11 @@ class DashboardController extends Controller
         }
 
         $totalBusinesses = Business::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -41,6 +46,11 @@ class DashboardController extends Controller
             ->count();
 
         $totalProperties = Property::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -48,6 +58,11 @@ class DashboardController extends Controller
 
         $currentYear = Carbon::now()->year;
         $totalBusinessBill = Bill::whereNotNull('business_id')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -56,6 +71,11 @@ class DashboardController extends Controller
             ->sum('amount');
 
         $lastMonthBusinessBill = Bill::whereNotNull('business_id')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -67,6 +87,11 @@ class DashboardController extends Controller
             ->sum('amount');
 
         $totalPropertyBill = Bill::whereNotNull('property_id')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -75,6 +100,11 @@ class DashboardController extends Controller
             ->sum('amount');
 
         $lastMonthPropertyBill = Bill::whereNotNull('property_id')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -86,12 +116,22 @@ class DashboardController extends Controller
             ->sum('amount');
 
         $totalAssemblyAgents = User::where('access_level', 'Assembly_Agent')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
             ->count();
 
         $totalActiveAssemblyAgents = User::where('access_level', 'Assembly_Agent')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -99,6 +139,11 @@ class DashboardController extends Controller
             ->count();
 
         $totalInactiveAssemblyAgents = User::where('access_level', 'Assembly_Agent')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -106,6 +151,11 @@ class DashboardController extends Controller
             ->count();
 
         $totalPayments = Payment::selectRaw('SUM(amount) as total')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -152,6 +202,11 @@ class DashboardController extends Controller
             DB::raw('MONTH(created_at) as month')
         )
             ->whereYear('created_at', $year)
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -168,6 +223,11 @@ class DashboardController extends Controller
             DB::raw('MONTH(created_at) as month')
         )
             ->whereYear('created_at', $year)
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -208,6 +268,11 @@ class DashboardController extends Controller
         ];
 
         $totalBill = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -216,6 +281,11 @@ class DashboardController extends Controller
 
         //No payment bills
         $totalCompletedBill = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -228,6 +298,11 @@ class DashboardController extends Controller
             ->count();
 
         $totalUpcomingBill = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -242,6 +317,11 @@ class DashboardController extends Controller
             ->count();
 
         $totalNewBill = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -265,6 +345,11 @@ class DashboardController extends Controller
         }
 
         $totalArrears = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -272,6 +357,11 @@ class DashboardController extends Controller
             ->sum('arrears');
 
         $totalExpectedPayments = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -323,6 +413,9 @@ class DashboardController extends Controller
         $yearlyReceivables = $totalBill - $yearlyPayments->total;
 
         $totalAssembly = Assembly::where('status', 'Active')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -332,21 +425,29 @@ class DashboardController extends Controller
 
         //Grapha Data
         $payments = DB::table('payments')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
-            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('SUM(amount) as total'))
-            ->whereYear('created_at', $currentYear)
+            ->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
+            ->select(DB::raw('MONTH(payments.created_at) as month'), DB::raw('SUM(amount) as total'))
+            ->whereYear('payments.created_at', $currentYear)
             ->groupBy('month')
             ->orderBy('month')
             ->pluck('total', 'month');
 
         $bills = DB::table('bills')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
-            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('SUM(amount) as total'))
-            ->whereYear('created_at', $currentYear)
+            ->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
+            ->select(DB::raw('MONTH(bills.created_at) as month'), DB::raw('SUM(amount) as total'))
+            ->whereYear('bills.created_at', $currentYear)
             ->groupBy('month')
             ->orderBy('month')
             ->pluck('total', 'month');
@@ -367,6 +468,9 @@ class DashboardController extends Controller
         }
 
         $assemblyPayments = DB::table('payments')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
@@ -389,6 +493,9 @@ class DashboardController extends Controller
             ->get();
 
         $topAssemblies = DB::table('bills')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('bills.assembly_code', $request->user()->assembly_code);
             })
@@ -411,9 +518,13 @@ class DashboardController extends Controller
         $chartData11 = [];
         foreach ($topAssemblies as $assembly) {
             $monthlyBills = DB::table('bills')
+                ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                    $query->where('assemblies.regional_code', $request->user()->regional_code);
+                })
                 ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                     $query->where('bills.assembly_code', $request->user()->assembly_code);
                 })
+                ->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
                 ->leftJoin('payments', 'bills.bills_id', '=', 'payments.bills_id')
                 ->where('bills.assembly_code', $assembly->assembly_code)
                 ->whereYear('bills.created_at', $currentYear)
@@ -501,9 +612,13 @@ class DashboardController extends Controller
         }
 
         $topProperties = DB::table('payments')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
+            ->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
             ->join('bills', 'payments.bills_id', '=', 'bills.bills_id')
             ->join('properties', 'bills.property_id', '=', 'properties.id')
             ->join('citizens', 'properties.customer_name', '=', 'citizens.id')
@@ -526,9 +641,13 @@ class DashboardController extends Controller
             ->get();
 
         $topBusinesses = DB::table('payments')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
+            ->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
             ->join('bills', 'payments.bills_id', '=', 'bills.bills_id')
             ->join('businesses', 'bills.business_id', '=', 'businesses.id')
             ->join('citizens', 'businesses.citizen_account_number', '=', 'citizens.id')
@@ -566,9 +685,13 @@ class DashboardController extends Controller
         ];
 
         $divisionPaymentData = DB::table('payments')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
+            ->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
             ->join('bills', 'payments.bills_id', '=', 'bills.bills_id')
             ->leftJoin('properties', 'bills.property_id', '=', 'properties.id')
             ->leftJoin('businesses', 'bills.business_id', '=', 'businesses.id')
@@ -590,6 +713,9 @@ class DashboardController extends Controller
             ->get();
 
         $regionPaymentData = DB::table('payments')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
@@ -612,6 +738,9 @@ class DashboardController extends Controller
             });
 
         $regionBillData = DB::table('bills')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('bills.assembly_code', $request->user()->assembly_code);
             })
@@ -646,6 +775,9 @@ class DashboardController extends Controller
         }
 
         $regionPaymentData2 = DB::table('payments')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
@@ -666,27 +798,35 @@ class DashboardController extends Controller
             ->get();
 
         $dashBills = DB::table('bills')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
-            ->selectRaw('MONTH(created_at) as month, SUM(amount) as total_bills')
-            ->whereYear('created_at', $currentYear)
+            ->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
+            ->selectRaw('MONTH(bills.created_at) as month, SUM(amount) as total_bills')
+            ->whereYear('bills.created_at', $currentYear)
             ->groupBy('month')
             ->pluck('total_bills', 'month');
 
         $dashPayments = DB::table('payments')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
+            ->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
             ->selectRaw("
-                MONTH(created_at) as month, 
+                MONTH(payments.created_at) as month, 
                 SUM(CASE 
                     WHEN payment_mode = 'momo' AND transaction_status = 'Success' THEN amount 
                     WHEN payment_mode != 'momo' THEN amount 
                     ELSE 0 
                 END) as total_payments
             ")
-            ->whereYear('created_at', $currentYear)
+            ->whereYear('payments.created_at', $currentYear)
             ->groupBy('month')
             ->pluck(
                 'total_payments',
@@ -728,56 +868,67 @@ class DashboardController extends Controller
         }
 
         $dashTotalBills = DB::table('bills')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
+                $query->where('bills.assembly_code', $request->user()->assembly_code);
             })
             ->when($request->display == "daily", function ($query) {
-                $query->whereDate('created_at', [now()->format('Y-m-d')]);
+                $query->whereDate('bills.created_at', [now()->format('Y-m-d')]);
             })
             ->when($request->display == "weekly", function ($query) {
-                $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]);
+                $query->whereBetween('bills.created_at', [now()->startOfWeek(), now()->endOfWeek()]);
             })
             ->when($request->display == "monthly", function ($query) {
-                $query->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()]);
+                $query->whereBetween('bills.created_at', [now()->startOfMonth(), now()->endOfMonth()]);
             })
             ->when($request->display == "yearly", function ($query) {
-                $query->whereBetween('created_at', [now()->startOfYear(), now()->endOfYear()]);
+                $query->whereBetween('bills.created_at', [now()->startOfYear(), now()->endOfYear()]);
             })
+            ->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
             ->sum('amount');
 
         $dashTotalBillCount = DB::table('bills')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
+                $query->where('bills.assembly_code', $request->user()->assembly_code);
             })
             ->when($request->display == "daily", function ($query) {
-                $query->whereDate('created_at', [now()->format('Y-m-d')]);
+                $query->whereDate('bills.created_at', [now()->format('Y-m-d')]);
             })
             ->when($request->display == "weekly", function ($query) {
-                $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]);
+                $query->whereBetween('bills.created_at', [now()->startOfWeek(), now()->endOfWeek()]);
             })
             ->when($request->display == "monthly", function ($query) {
-                $query->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()]);
+                $query->whereBetween('bills.created_at', [now()->startOfMonth(), now()->endOfMonth()]);
             })
             ->when($request->display == "yearly", function ($query) {
-                $query->whereBetween('created_at', [now()->startOfYear(), now()->endOfYear()]);
+                $query->whereBetween('bills.created_at', [now()->startOfYear(), now()->endOfYear()]);
             })
+            ->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
             ->count();
 
         $dashTotalPayments = DB::table('payments')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
+                $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
             ->when($request->display == "daily", function ($query) {
-                $query->whereDate('created_at', [now()->format('Y-m-d')]);
+                $query->whereDate('payments.created_at', [now()->format('Y-m-d')]);
             })
             ->when($request->display == "weekly", function ($query) {
-                $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]);
+                $query->whereBetween('payments.created_at', [now()->startOfWeek(), now()->endOfWeek()]);
             })
             ->when($request->display == "monthly", function ($query) {
-                $query->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()]);
+                $query->whereBetween('payments.created_at', [now()->startOfMonth(), now()->endOfMonth()]);
             })
             ->when($request->display == "yearly", function ($query) {
-                $query->whereBetween('created_at', [now()->startOfYear(), now()->endOfYear()]);
+                $query->whereBetween('payments.created_at', [now()->startOfYear(), now()->endOfYear()]);
             })
             ->when(true, function ($query) {
                 $query->where(function ($q) {
@@ -788,6 +939,7 @@ class DashboardController extends Controller
                         });
                 });
             })
+            ->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
             ->sum('amount');
 
         $dashTotalOutstanding = $dashTotalBills - $dashTotalPayments;
@@ -841,6 +993,11 @@ class DashboardController extends Controller
 
 
                 $totalBillP = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -855,6 +1012,11 @@ class DashboardController extends Controller
                     ->sum('amount');
 
                 $totalBillB = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -869,6 +1031,11 @@ class DashboardController extends Controller
                     ->sum('amount');
 
                 $totalArrearsP = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -883,6 +1050,11 @@ class DashboardController extends Controller
                     ->sum('arrears');
 
                 $totalArrearsB = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -897,6 +1069,11 @@ class DashboardController extends Controller
                     ->sum('arrears');
 
                 $totalExpectedPaymentsP = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -912,6 +1089,11 @@ class DashboardController extends Controller
                     ->value('expectedPayment');
 
                 $totalExpectedPaymentsB = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -927,6 +1109,11 @@ class DashboardController extends Controller
                     ->value('expectedPayment');
 
                 $totalPaymentsP = Payment::selectRaw('SUM(amount) as total')
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -948,6 +1135,11 @@ class DashboardController extends Controller
                     });
 
                 $totalPaymentsB = Payment::selectRaw('SUM(amount) as total')
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -1126,6 +1318,11 @@ class DashboardController extends Controller
         }
 
         $totalBusinesses = Business::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1133,6 +1330,11 @@ class DashboardController extends Controller
             ->count();
 
         $totalProperties = Property::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1140,6 +1342,11 @@ class DashboardController extends Controller
 
         $currentYear = Carbon::now()->year;
         $totalBusinessBill = Bill::whereNotNull('business_id')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1148,6 +1355,11 @@ class DashboardController extends Controller
             ->sum('amount');
 
         $totalPropertyBill = Bill::whereNotNull('property_id')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1156,12 +1368,22 @@ class DashboardController extends Controller
             ->sum('amount');
 
         $totalAssemblyAgents = User::where('access_level', 'Assembly_Agent')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
             ->count();
 
         $totalActiveAssemblyAgents = User::where('access_level', 'Assembly_Agent')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1169,6 +1391,11 @@ class DashboardController extends Controller
             ->count();
 
         $totalInactiveAssemblyAgents = User::where('access_level', 'Assembly_Agent')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1176,6 +1403,11 @@ class DashboardController extends Controller
             ->count();
 
         $totalPayments = Payment::selectRaw('SUM(amount) as total')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1214,6 +1446,11 @@ class DashboardController extends Controller
             DB::raw('MONTH(created_at) as month')
         )
             ->whereYear('created_at', $year)
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1230,6 +1467,11 @@ class DashboardController extends Controller
             DB::raw('MONTH(created_at) as month')
         )
             ->whereYear('created_at', $year)
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1270,6 +1512,11 @@ class DashboardController extends Controller
         ];
 
         $totalBill = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1277,6 +1524,11 @@ class DashboardController extends Controller
             ->sum('amount');
 
         $totalArrears = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1284,6 +1536,11 @@ class DashboardController extends Controller
             ->sum('arrears');
 
         $totalExpectedPayments = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1388,6 +1645,11 @@ class DashboardController extends Controller
 
 
                 $totalBillP = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -1402,6 +1664,11 @@ class DashboardController extends Controller
                     ->sum('amount');
 
                 $totalBillB = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -1416,6 +1683,11 @@ class DashboardController extends Controller
                     ->sum('amount');
 
                 $totalArrearsP = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -1430,6 +1702,11 @@ class DashboardController extends Controller
                     ->sum('arrears');
 
                 $totalArrearsB = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -1444,6 +1721,11 @@ class DashboardController extends Controller
                     ->sum('arrears');
 
                 $totalExpectedPaymentsP = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -1459,6 +1741,11 @@ class DashboardController extends Controller
                     ->value('expectedPayment');
 
                 $totalExpectedPaymentsB = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -1474,6 +1761,11 @@ class DashboardController extends Controller
                     ->value('expectedPayment');
 
                 $totalPaymentsP = Payment::selectRaw('SUM(amount) as total')
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -1495,6 +1787,11 @@ class DashboardController extends Controller
                     });
 
                 $totalPaymentsB = Payment::selectRaw('SUM(amount) as total')
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -1586,6 +1883,11 @@ class DashboardController extends Controller
         }
 
         $totalBusinesses = Business::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1593,6 +1895,11 @@ class DashboardController extends Controller
             ->count();
 
         $totalProperties = Property::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1600,6 +1907,11 @@ class DashboardController extends Controller
 
         $currentYear = Carbon::now()->year;
         $totalBusinessBill = Bill::whereNotNull('business_id')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1608,6 +1920,11 @@ class DashboardController extends Controller
             ->sum('amount');
 
         $totalPropertyBill = Bill::whereNotNull('property_id')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1616,12 +1933,18 @@ class DashboardController extends Controller
             ->sum('amount');
 
         $totalAssemblyAgents = User::where('access_level', 'Assembly_Agent')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
             ->count();
 
         $totalActiveAssemblyAgents = User::where('access_level', 'Assembly_Agent')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1629,6 +1952,9 @@ class DashboardController extends Controller
             ->count();
 
         $totalInactiveAssemblyAgents = User::where('access_level', 'Assembly_Agent')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1636,6 +1962,11 @@ class DashboardController extends Controller
             ->count();
 
         $totalPayments = Payment::selectRaw('SUM(amount) as total')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1677,6 +2008,11 @@ class DashboardController extends Controller
             DB::raw('MONTH(created_at) as month')
         )
             ->whereYear('created_at', $year)
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1693,6 +2029,11 @@ class DashboardController extends Controller
             DB::raw('MONTH(created_at) as month')
         )
             ->whereYear('created_at', $year)
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1733,6 +2074,11 @@ class DashboardController extends Controller
         ];
 
         $totalBill = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1740,6 +2086,11 @@ class DashboardController extends Controller
             ->sum('amount');
 
         $totalArrears = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1747,6 +2098,11 @@ class DashboardController extends Controller
             ->sum('arrears');
 
         $totalExpectedPayments = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -1851,6 +2207,11 @@ class DashboardController extends Controller
 
 
                 $totalBillP = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -1865,6 +2226,11 @@ class DashboardController extends Controller
                     ->sum('amount');
 
                 $totalBillB = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -1879,6 +2245,11 @@ class DashboardController extends Controller
                     ->sum('amount');
 
                 $totalArrearsP = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -1893,6 +2264,11 @@ class DashboardController extends Controller
                     ->sum('arrears');
 
                 $totalArrearsB = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -1907,6 +2283,11 @@ class DashboardController extends Controller
                     ->sum('arrears');
 
                 $totalExpectedPaymentsP = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -1922,6 +2303,11 @@ class DashboardController extends Controller
                     ->value('expectedPayment');
 
                 $totalExpectedPaymentsB = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -1937,6 +2323,11 @@ class DashboardController extends Controller
                     ->value('expectedPayment');
 
                 $totalPaymentsP = Payment::selectRaw('SUM(amount) as total')
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -1958,6 +2349,11 @@ class DashboardController extends Controller
                     });
 
                 $totalPaymentsB = Payment::selectRaw('SUM(amount) as total')
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -2049,6 +2445,11 @@ class DashboardController extends Controller
         }
 
         $totalBusinesses = Business::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2056,6 +2457,11 @@ class DashboardController extends Controller
             ->count();
 
         $totalProperties = Property::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2063,6 +2469,11 @@ class DashboardController extends Controller
 
         $currentYear = Carbon::now()->year;
         $totalBusinessBill = Bill::whereNotNull('business_id')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2071,6 +2482,11 @@ class DashboardController extends Controller
             ->sum('amount');
 
         $totalPropertyBill = Bill::whereNotNull('property_id')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2079,12 +2495,18 @@ class DashboardController extends Controller
             ->sum('amount');
 
         $totalAssemblyAgents = User::where('access_level', 'Assembly_Agent')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
             ->count();
 
         $totalActiveAssemblyAgents = User::where('access_level', 'Assembly_Agent')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2092,6 +2514,9 @@ class DashboardController extends Controller
             ->count();
 
         $totalInactiveAssemblyAgents = User::where('access_level', 'Assembly_Agent')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2099,6 +2524,11 @@ class DashboardController extends Controller
             ->count();
 
         $totalPayments = Payment::selectRaw('SUM(amount) as total')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2137,6 +2567,11 @@ class DashboardController extends Controller
             DB::raw('MONTH(created_at) as month')
         )
             ->whereYear('created_at', $year)
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2153,6 +2588,11 @@ class DashboardController extends Controller
             DB::raw('MONTH(created_at) as month')
         )
             ->whereYear('created_at', $year)
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2193,6 +2633,11 @@ class DashboardController extends Controller
         ];
 
         $totalBill = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2200,6 +2645,11 @@ class DashboardController extends Controller
             ->sum('amount');
 
         $totalArrears = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2207,6 +2657,11 @@ class DashboardController extends Controller
             ->sum('arrears');
 
         $totalExpectedPayments = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2311,6 +2766,11 @@ class DashboardController extends Controller
 
 
                 $totalBillP = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -2325,6 +2785,11 @@ class DashboardController extends Controller
                     ->sum('amount');
 
                 $totalBillB = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -2339,6 +2804,11 @@ class DashboardController extends Controller
                     ->sum('amount');
 
                 $totalArrearsP = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -2353,6 +2823,11 @@ class DashboardController extends Controller
                     ->sum('arrears');
 
                 $totalArrearsB = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -2367,6 +2842,11 @@ class DashboardController extends Controller
                     ->sum('arrears');
 
                 $totalExpectedPaymentsP = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -2382,6 +2862,11 @@ class DashboardController extends Controller
                     ->value('expectedPayment');
 
                 $totalExpectedPaymentsB = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -2397,6 +2882,11 @@ class DashboardController extends Controller
                     ->value('expectedPayment');
 
                 $totalPaymentsP = Payment::selectRaw('SUM(amount) as total')
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -2418,6 +2908,11 @@ class DashboardController extends Controller
                     });
 
                 $totalPaymentsB = Payment::selectRaw('SUM(amount) as total')
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -2509,6 +3004,11 @@ class DashboardController extends Controller
         }
 
         $totalBusinesses = Business::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2516,6 +3016,11 @@ class DashboardController extends Controller
             ->count();
 
         $totalProperties = Property::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2523,6 +3028,11 @@ class DashboardController extends Controller
 
         $currentYear = Carbon::now()->year;
         $totalBusinessBill = Bill::whereNotNull('business_id')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2531,6 +3041,11 @@ class DashboardController extends Controller
             ->sum('amount');
 
         $totalPropertyBill = Bill::whereNotNull('property_id')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2539,12 +3054,18 @@ class DashboardController extends Controller
             ->sum('amount');
 
         $totalAssemblyAgents = User::where('access_level', 'Assembly_Agent')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
             ->count();
 
         $totalActiveAssemblyAgents = User::where('access_level', 'Assembly_Agent')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2552,6 +3073,9 @@ class DashboardController extends Controller
             ->count();
 
         $totalInactiveAssemblyAgents = User::where('access_level', 'Assembly_Agent')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2559,6 +3083,11 @@ class DashboardController extends Controller
             ->count();
 
         $totalPayments = Payment::selectRaw('SUM(amount) as total')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2597,6 +3126,11 @@ class DashboardController extends Controller
             DB::raw('MONTH(created_at) as month')
         )
             ->whereYear('created_at', $year)
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2613,6 +3147,11 @@ class DashboardController extends Controller
             DB::raw('MONTH(created_at) as month')
         )
             ->whereYear('created_at', $year)
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2653,6 +3192,11 @@ class DashboardController extends Controller
         ];
 
         $totalBill = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2660,6 +3204,11 @@ class DashboardController extends Controller
             ->sum('amount');
 
         $totalArrears = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2667,6 +3216,11 @@ class DashboardController extends Controller
             ->sum('arrears');
 
         $totalExpectedPayments = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -2771,6 +3325,11 @@ class DashboardController extends Controller
 
 
                 $totalBillP = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -2785,6 +3344,11 @@ class DashboardController extends Controller
                     ->sum('amount');
 
                 $totalBillB = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -2799,6 +3363,11 @@ class DashboardController extends Controller
                     ->sum('amount');
 
                 $totalArrearsP = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -2813,6 +3382,11 @@ class DashboardController extends Controller
                     ->sum('arrears');
 
                 $totalArrearsB = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -2827,6 +3401,11 @@ class DashboardController extends Controller
                     ->sum('arrears');
 
                 $totalExpectedPaymentsP = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -2842,6 +3421,11 @@ class DashboardController extends Controller
                     ->value('expectedPayment');
 
                 $totalExpectedPaymentsB = Bill::query()
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -2857,6 +3441,11 @@ class DashboardController extends Controller
                     ->value('expectedPayment');
 
                 $totalPaymentsP = Payment::selectRaw('SUM(amount) as total')
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -2878,6 +3467,11 @@ class DashboardController extends Controller
                     });
 
                 $totalPaymentsB = Payment::selectRaw('SUM(amount) as total')
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
                     ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                         $query->where('assembly_code', $request->user()->assembly_code);
                     })
@@ -3013,6 +3607,11 @@ class DashboardController extends Controller
             $endOfMonth = Carbon::create($currentYear, $month, 1)->endOfMonth();
 
             $propertyCount = Property::query()
+                ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                    $query->whereHas('assembly', function ($q) use ($request) {
+                        $q->where('regional_code', $request->user()->regional_code);
+                    });
+                })
                 ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                     $query->where('assembly_code', $request->user()->assembly_code);
                 })
@@ -3027,6 +3626,11 @@ class DashboardController extends Controller
                 ->count();
 
             $businessCount = Business::query()
+                ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                    $query->whereHas('assembly', function ($q) use ($request) {
+                        $q->where('regional_code', $request->user()->regional_code);
+                    });
+                })
                 ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                     $query->where('assembly_code', $request->user()->assembly_code);
                 })
@@ -3046,12 +3650,16 @@ class DashboardController extends Controller
         }
 
         $topProperties = DB::table('payments')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
             ->join('bills', 'payments.bills_id', '=', 'bills.bills_id')
             ->join('properties', 'bills.property_id', '=', 'properties.id')
             ->join('citizens', 'properties.customer_name', '=', 'citizens.id')
+            ->join('assemblies', 'properties.assembly_code', '=', 'assemblies.assembly_code')
             ->selectRaw('
                 bills.property_id as id, 
                 properties.property_number as number, 
@@ -3071,12 +3679,16 @@ class DashboardController extends Controller
             ->get();
 
         $topBusinesses = DB::table('payments')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
             ->join('bills', 'payments.bills_id', '=', 'bills.bills_id')
             ->join('businesses', 'bills.business_id', '=', 'businesses.id')
             ->join('citizens', 'businesses.citizen_account_number', '=', 'citizens.id')
+            ->join('assemblies', 'businesses.assembly_code', '=', 'assemblies.assembly_code')
             ->selectRaw('
                 bills.business_id as id, 
                 businesses.bus_account_number as bus_number,
@@ -3110,7 +3722,11 @@ class DashboardController extends Controller
             }),
         ];
 
-        $regions = GhanaRegion::orderBy('name', 'ASC')->get();
+        $regions = GhanaRegion::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
+            ->get();
 
         $total = [
             'maleMonthlyCount' => isset($maleMonthlyCount) ? $maleMonthlyCount : 0,
@@ -3126,9 +3742,13 @@ class DashboardController extends Controller
         return view('dashboard.includes.property', compact('total'));
     }
 
-    public function overview()
+    public function overview(Request $request)
     {
-        $regions = GhanaRegion::with('assemblies')->get();
+        $regions = GhanaRegion::with('assemblies')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
+            ->get();
 
         $total = [
             'regions' => isset($regions) ? $regions : []
@@ -3141,6 +3761,11 @@ class DashboardController extends Controller
     {
         $currentYear = Carbon::now()->year;
         $yearlyMomoPayments = Payment::where('payment_mode', 'momo')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -3156,6 +3781,11 @@ class DashboardController extends Controller
             ->sum('amount');
 
         $totalPayments = Payment::selectRaw('SUM(amount) as total')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -3194,6 +3824,11 @@ class DashboardController extends Controller
             ->first();
 
         $totalBill = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -3212,6 +3847,9 @@ class DashboardController extends Controller
         $year = $request->input('year', Carbon::now()->year);
 
         $payments = DB::table('payments')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -3222,13 +3860,17 @@ class DashboardController extends Controller
                 $query->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
                     ->where('assemblies.regional_code', $request->region);
             })
-            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('SUM(amount) as total'))
+            ->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
+            ->select(DB::raw('MONTH(payments.created_at) as month'), DB::raw('SUM(amount) as total'))
             ->whereYear('payments.created_at', $currentYear)
             ->groupBy('month')
             ->orderBy('month')
             ->pluck('total', 'month');
 
         $bills = DB::table('bills')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -3239,7 +3881,8 @@ class DashboardController extends Controller
                 $query->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
                     ->where('assemblies.regional_code', $request->region);
             })
-            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('SUM(amount) as total'))
+            ->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
+            ->select(DB::raw('MONTH(bills.created_at) as month'), DB::raw('SUM(amount) as total'))
             ->whereYear('bills.created_at', $currentYear)
             ->groupBy('month')
             ->orderBy('month')
@@ -3261,6 +3904,9 @@ class DashboardController extends Controller
         }
 
         $assemblyPayments = DB::table('payments')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
@@ -3290,6 +3936,9 @@ class DashboardController extends Controller
             ->get();
 
         $topAssemblies = DB::table('bills')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('bills.assembly_code', $request->user()->assembly_code);
             })
@@ -3319,6 +3968,9 @@ class DashboardController extends Controller
         $chartData = [];
         foreach ($topAssemblies as $assembly) {
             $monthlyBills = DB::table('bills')
+                ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                    $query->where('assemblies.regional_code', $request->user()->regional_code);
+                })
                 ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                     $query->where('bills.assembly_code', $request->user()->assembly_code);
                 })
@@ -3329,6 +3981,7 @@ class DashboardController extends Controller
                     $query->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
                         ->where('assemblies.regional_code', $request->region);
                 })
+                ->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
                 ->leftJoin('payments', 'bills.bills_id', '=', 'payments.bills_id')
                 ->where('bills.assembly_code', $assembly->assembly_code)
                 ->whereYear('bills.created_at', $currentYear)
@@ -3354,6 +4007,9 @@ class DashboardController extends Controller
         }
 
         $divisionPaymentData = DB::table('payments')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
@@ -3365,6 +4021,7 @@ class DashboardController extends Controller
                     ->where('assemblies.regional_code', $request->region);
             })
             ->join('bills', 'payments.bills_id', '=', 'bills.bills_id')
+            ->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
             ->leftJoin('properties', 'bills.property_id', '=', 'properties.id')
             ->leftJoin('businesses', 'bills.business_id', '=', 'businesses.id')
             ->leftJoin('divisions', function ($join) {
@@ -3385,6 +4042,9 @@ class DashboardController extends Controller
             ->get();
 
         $regionPaymentData = DB::table('payments')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
@@ -3414,6 +4074,9 @@ class DashboardController extends Controller
             });
 
         $regionBillData = DB::table('bills')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('bills.assembly_code', $request->user()->assembly_code);
             })
@@ -3455,6 +4118,9 @@ class DashboardController extends Controller
         }
 
         $regionPaymentData2 = DB::table('payments')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
@@ -3482,8 +4148,11 @@ class DashboardController extends Controller
             ->get();
 
         $dashBills = DB::table('bills')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
+                $query->where('bills.assembly_code', $request->user()->assembly_code);
             })
             ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
                 $query->whereBetween('bills.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
@@ -3492,14 +4161,18 @@ class DashboardController extends Controller
                 $query->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
                     ->where('assemblies.regional_code', $request->region);
             })
-            ->selectRaw('MONTH(created_at) as month, SUM(amount) as total_bills')
-            ->whereYear('created_at', $currentYear)
+            ->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
+            ->selectRaw('MONTH(bills.created_at) as month, SUM(amount) as total_bills')
+            ->whereYear('bills.created_at', $currentYear)
             ->groupBy('month')
             ->pluck('total_bills', 'month');
 
         $dashPayments = DB::table('payments')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
+                $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
             ->when(($request->from_date !== null) && $request->end_date !== null, function ($query) use ($request) {
                 $query->whereBetween('payments.created_at', [$request->from_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
@@ -3508,15 +4181,16 @@ class DashboardController extends Controller
                 $query->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
                     ->where('assemblies.regional_code', $request->region);
             })
+            ->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
             ->selectRaw("
-                MONTH(created_at) as month, 
+                MONTH(payments.created_at) as month, 
                 SUM(CASE 
                     WHEN payment_mode = 'momo' AND transaction_status = 'Success' THEN amount 
                     WHEN payment_mode != 'momo' THEN amount 
                     ELSE 0 
                 END) as total_payments
             ")
-            ->whereYear('created_at', $currentYear)
+            ->whereYear('payments.created_at', $currentYear)
             ->groupBy('month')
             ->pluck(
                 'total_payments',
@@ -3537,7 +4211,11 @@ class DashboardController extends Controller
             ];
         }
 
-        $regions = GhanaRegion::orderBy('name', 'ASC')->get();
+        $regions = GhanaRegion::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
+            ->get();
 
         $total = [
             'yearlyMomoPayments' => isset($yearlyMomoPayments) ? number_format($yearlyMomoPayments, 2) : 0,
@@ -3562,6 +4240,11 @@ class DashboardController extends Controller
     {
         //No payment bills
         $totalCompletedBill = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -3581,6 +4264,11 @@ class DashboardController extends Controller
             ->count();
 
         $totalUpcomingBill = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -3602,6 +4290,11 @@ class DashboardController extends Controller
             ->count();
 
         $totalNewBill = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -3632,6 +4325,9 @@ class DashboardController extends Controller
         }
 
         $regionalBills = DB::table('ghana_regions')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->leftJoin('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
             ->leftJoin('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
             ->select('ghana_regions.name as region_name', DB::raw('COALESCE(SUM(bills.amount), 0) as total_bills'))
@@ -3642,7 +4338,11 @@ class DashboardController extends Controller
         $regions = $regionalBills->pluck('region_name')->toArray();
         $totals = $regionalBills->pluck('total_bills')->toArray();
 
-        $regions = GhanaRegion::orderBy('name', 'ASC')->get();
+        $regionsDrop = GhanaRegion::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
+            ->get();
 
         $total = [
             'totalCompletedBill' => isset($totalCompletedBill) ? $totalCompletedBill : 0,
@@ -3653,15 +4353,18 @@ class DashboardController extends Controller
             'newPercentage' => isset($newPercentage) ? round($newPercentage, 2) : 0,
             'regions' => isset($regions) ? $regions : [],
             'totals' => isset($totals) ? $totals : [],
-            'regionsDrop' => isset($regions) ? $regions : []
+            'regionsDrop' => isset($regionsDrop) ? $regionsDrop : []
         ];
 
         return view('dashboard.includes.bill', compact('total'));
     }
 
-    public function fetchRegionalData()
+    public function fetchRegionalData(Request $request)
     {
         $totalRegionalData = DB::table('ghana_regions')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->leftJoin('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
             ->leftJoin('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
             ->leftJoin('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
@@ -3696,9 +4399,12 @@ class DashboardController extends Controller
         return response()->json(['data' => $totalRegionalData]);
     }
 
-    public function fetchRegionalGraphData()
+    public function fetchRegionalGraphData(Request $request)
     {
         $totalRegionalGraphData = DB::table('ghana_regions')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->leftJoin('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
             ->leftJoin('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
             ->leftJoin('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')
@@ -3732,9 +4438,12 @@ class DashboardController extends Controller
         return response()->json($totalRegionalGraphData);
     }
 
-    public function fetchRegionalDonutData()
+    public function fetchRegionalDonutData(Request $request)
     {
         $totalRegionalDonutData = DB::table('ghana_regions')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('assemblies.regional_code', $request->user()->regional_code);
+            })
             ->leftJoin('assemblies', 'ghana_regions.regional_code', '=', 'assemblies.regional_code')
             ->leftJoin('properties', 'assemblies.assembly_code', '=', 'properties.assembly_code')
             ->leftJoin('bills', 'assemblies.assembly_code', '=', 'bills.assembly_code')

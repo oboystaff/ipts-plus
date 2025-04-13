@@ -43,6 +43,11 @@ class PropertyController extends Controller
         $propertyUses = PropertyUser::orderBy('created_at', 'DESC')->get();
 
         $properties = Property::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -146,6 +151,9 @@ class PropertyController extends Controller
             ->get();
 
         $districtAssemblies = Assembly::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -356,6 +364,9 @@ class PropertyController extends Controller
             ->get();
 
         $districtAssemblies = Assembly::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })

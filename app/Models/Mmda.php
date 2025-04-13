@@ -18,6 +18,11 @@ class Mmda extends Model
         return $this->belongsTo(GhanaRegion::class, 'region_id');
     }
 
+    public function assembly()
+    {
+        return $this->belongsTo(Assembly::class, 'assembly_code', 'assembly_code');
+    }
+
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');

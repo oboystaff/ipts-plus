@@ -21,6 +21,11 @@ class TaskAssignmentController extends Controller
         }
 
         $taskAssignments = TaskAssignment::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -48,6 +53,9 @@ class TaskAssignmentController extends Controller
 
         $loggedInSupervisorId = $request->user()->id;
         $agents = User::where('access_level', 'Assembly_Agent')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -60,6 +68,9 @@ class TaskAssignmentController extends Controller
             ->get();
 
         $supervisor = User::where('access_level', 'Assembly_Supervisor')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -68,6 +79,7 @@ class TaskAssignmentController extends Controller
             ->first();
 
         $division = Division::where('division_code', $request->user()->division_code)->first();
+
         if ($division) {
             $blocks = Block::orderBy('block_name', 'ASC')
                 ->where('division_code', $division->id)
@@ -159,6 +171,9 @@ class TaskAssignmentController extends Controller
 
         $loggedInSupervisorId = $request->user()->id;
         $agents = User::where('access_level', 'Assembly_Agent')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -171,6 +186,9 @@ class TaskAssignmentController extends Controller
             ->get();
 
         $supervisor = User::where('access_level', 'Assembly_Supervisor')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })

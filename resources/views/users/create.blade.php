@@ -52,6 +52,8 @@
                     <form id="userForm" class="row g-3 needs-validation" method="POST" action="{{ route('users.store') }}"
                         novalidate>
                         @csrf
+
+                        <input type="hidden" name="assembly_url" url="{{ route('assembly.fetch') }}">
                         <!-- Form Fields -->
                         <div class="col-md-4">
                             <label class="form-label">Full Name</label>
@@ -151,19 +153,27 @@
                             @enderror
                         </div>
 
-                        <div class="col-md-4" id="assembly_code_field" style="display: none;">
-                            <label class="form-label">Assembly</label>
-                            <select class="form-control" name="assembly_code">
-                                <option value="">Select Assembly</option>
-                                @foreach ($assemblies as $assembly)
-                                    <option value="{{ $assembly->assembly_code }}"
-                                        {{ old('assembly_code') == $assembly->assembly_code ? 'selected' : '' }}>
-                                        {{ $assembly->name }}</option>
+                        <div class="col-md-4">
+                            <label class="form-label">Region</label>
+                            <select class="form-control" name="regional_code">
+                                <option disabled selected>Select Region</option>
+                                @foreach ($regions as $region)
+                                    <option value="{{ $region->regional_code }}"
+                                        {{ old('regional_code') == $region->regional_code ? 'selected' : '' }}>
+                                        {{ $region->name }}</option>
                                 @endforeach
                             </select>
                         </div>
 
-                        <div class="col-md-4" id="division_code_field" style="display: none;">
+                        <div class="col-md-4">
+                            <label class="form-label">Assembly</label>
+                            <select class="form-control" name="assembly_code">
+                                <option disabled selected>Select Assembly</option>
+
+                            </select>
+                        </div>
+
+                        <div class="col-md-4" style="display: none;">
                             <label class="form-label">Division</label>
                             <select class="form-control" name="division_code">
                                 <option value="">Select Division</option>
@@ -192,7 +202,10 @@
             </div>
         </div>
     </div>
+@endsection
 
+@section('page-scripts')
+    <script src="{{ asset('assets/js/user.js?v=' . time()) }}"></script>
 
     <script>
         document.getElementById('access_level').addEventListener('change', function() {
@@ -210,28 +223,24 @@
             }
         });
     </script>
+
     <script>
-        // Track time spent on the page
-        let startTime = new Date().getTime(); // Time when the page loads
+        let startTime = new Date().getTime();
 
         function formatTime(seconds) {
-            // Calculate hours, minutes, and seconds
-            let hours = Math.floor(seconds / 3600); // Get the number of hours
-            let minutes = Math.floor((seconds % 3600) / 60); // Get the number of minutes
-            let sec = seconds % 60; // Get the remaining seconds
+            let hours = Math.floor(seconds / 3600);
+            let minutes = Math.floor((seconds % 3600) / 60);
+            let sec = seconds % 60;
 
-            // Pad hours, minutes, and seconds with leading zero if needed
             return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
         }
 
         function updateTimeSpent() {
-            let currentTime = new Date().getTime(); // Get the current time
-            let elapsedTime = Math.floor((currentTime - startTime) / 1000); // Calculate elapsed time in seconds
-            document.getElementById('timeSpent').textContent = formatTime(
-                elapsedTime); // Update the button text with formatted time
+            let currentTime = new Date().getTime();
+            let elapsedTime = Math.floor((currentTime - startTime) / 1000);
+            document.getElementById('timeSpent').textContent = formatTime(elapsedTime);
         }
 
-        // Update time every second
         setInterval(updateTimeSpent, 1000);
     </script>
 @endsection

@@ -160,10 +160,10 @@ $(document).ready(function () {
         });
     }
 
-    function assembly_code(district_id) {
-        var url = $("input[name='community_url']").attr("url");
+    function userAssembly(regional_code) {
+        var url = $("input[name='assembly_url']").attr("url");
         var formData = new FormData();
-        formData.append("district_id", district_id);
+        formData.append("regional_code", regional_code);
 
         $.ajax({
             url: url,
@@ -176,11 +176,13 @@ $(document).ready(function () {
                 // $("#send").prop("disabled", true);
             },
             success: function (response) {
-                $("select[name='community_id']").html("");
-                $("select[name='community_id']").append("<option value=''>Select Community</option>");
+                $("select[name='name']").html("");
+                $("select[name='name']").append("<option value=''>Select Assembly</option>");
                 for (var i = 0; i < response.message.length; i++) {
-                    $("select[name='community_id']").append("<option value=" + response.message[i].id + ">" +
-                        response.message[i].name + "</option>");
+
+                    $("select[name='name']").append(
+                        "<option value='" + response.message[i].assembly_code + "'>" + response.message[i].assembly_name + "</option>"
+                    );
                 }
             },
             error: function (error) {

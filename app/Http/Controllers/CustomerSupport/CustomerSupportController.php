@@ -12,6 +12,11 @@ class CustomerSupportController extends Controller
     public function index(Request $request)
     {
         $customerSupports = CustomerSupport::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })

@@ -27,6 +27,11 @@ class BillsManagementController extends Controller
         }
 
         $bills = Bill::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -37,6 +42,11 @@ class BillsManagementController extends Controller
         $totalAmount = $bills->sum('amount');
 
         $totalExpectedPayments = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -46,6 +56,11 @@ class BillsManagementController extends Controller
             ->value('expectedPayment');
 
         $totalPayments = Payment::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -63,6 +78,11 @@ class BillsManagementController extends Controller
         $paymentPercentage = $totalExpectedPayments > 0 ? ($totalPayments / $totalExpectedPayments) * 100 : 0;
 
         $totalBill = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -72,6 +92,11 @@ class BillsManagementController extends Controller
             ->sum('amount');
 
         $totalBillArrears = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -108,6 +133,11 @@ class BillsManagementController extends Controller
         }
 
         $bills = Bill::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -144,6 +174,11 @@ class BillsManagementController extends Controller
 
         $total = 0;
         $properties = Property::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -156,6 +191,9 @@ class BillsManagementController extends Controller
             ->get();
 
         $assemblies = Assembly::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -240,6 +278,11 @@ class BillsManagementController extends Controller
 
         $total = 0;
         $properties = Property::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -252,6 +295,9 @@ class BillsManagementController extends Controller
             ->get();
 
         $assemblies = Assembly::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -265,6 +311,11 @@ class BillsManagementController extends Controller
     public function singleStore(CreateSingleBillRequest $request)
     {
         Property::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when($request->assembly_code, function ($query) use ($request) {
                 $query->where('assembly_code', $request->assembly_code);
             })
@@ -337,6 +388,11 @@ class BillsManagementController extends Controller
 
         $total = 0;
         $properties = Property::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -433,6 +489,11 @@ class BillsManagementController extends Controller
 
         $total = 0;
         $properties = Property::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -445,6 +506,11 @@ class BillsManagementController extends Controller
             ->get();
 
         $blocks = Block::orderBy('block_name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })

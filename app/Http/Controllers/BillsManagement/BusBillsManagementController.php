@@ -29,6 +29,11 @@ class BusBillsManagementController extends Controller
         }
 
         $bills = Bill::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -45,6 +50,11 @@ class BusBillsManagementController extends Controller
         $totalAmount = $bills->sum('amount');
 
         $totalExpectedPayments = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -54,6 +64,11 @@ class BusBillsManagementController extends Controller
             ->value('expectedPayment');
 
         $totalPayments = Payment::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -71,6 +86,11 @@ class BusBillsManagementController extends Controller
         $paymentPercentage = $totalExpectedPayments > 0 ? ($totalPayments / $totalExpectedPayments) * 100 : 0;
 
         $totalBill = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -80,6 +100,11 @@ class BusBillsManagementController extends Controller
             ->sum('amount');
 
         $totalBillArrears = Bill::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -126,6 +151,11 @@ class BusBillsManagementController extends Controller
 
         $total = 0;
         $businesses = Business::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -138,6 +168,9 @@ class BusBillsManagementController extends Controller
             ->get();
 
         $assemblies = Assembly::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -151,6 +184,11 @@ class BusBillsManagementController extends Controller
     public function store(CreateBulkBillRequest $request)
     {
         Business::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when($request->assembly_code, function ($query) use ($request) {
                 $query->where('assembly_code', $request->assembly_code);
             })
@@ -220,6 +258,11 @@ class BusBillsManagementController extends Controller
 
         $total = 0;
         $businesses = Business::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -232,6 +275,9 @@ class BusBillsManagementController extends Controller
             ->get();
 
         $assemblies = Assembly::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -245,6 +291,11 @@ class BusBillsManagementController extends Controller
     public function singleStore(CreateSingleBillRequest $request)
     {
         Business::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when($request->assembly_code, function ($query) use ($request) {
                 $query->where('assembly_code', $request->assembly_code);
             })
@@ -315,6 +366,11 @@ class BusBillsManagementController extends Controller
 
         $total = 0;
         $businesses = Business::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -327,6 +383,11 @@ class BusBillsManagementController extends Controller
             ->get();
 
         $divisions = Division::orderBy('division_name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -409,6 +470,11 @@ class BusBillsManagementController extends Controller
 
         $total = 0;
         $businesses = Business::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -421,6 +487,11 @@ class BusBillsManagementController extends Controller
             ->get();
 
         $blocks = Block::orderBy('block_name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })

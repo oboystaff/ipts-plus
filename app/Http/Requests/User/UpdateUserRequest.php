@@ -30,8 +30,9 @@ class UpdateUserRequest extends FormRequest
             'phone' => 'required|string|max:15|unique:users,phone,' . $user->id,
             'access_level' => 'required|string',
             'status' => 'required|string',
-            'assembly_code' => 'nullable|string',
-            'division_code' => 'nullable|string',
+            'regional_code' => 'nullable|string|exists:ghana_regions,regional_code',
+            'assembly_code' => 'nullable|string|string|exists:assemblies,assembly_code',
+            'division_code' => 'nullable|string|string|exists:divisions,division_code',
             'role' => 'required|string',
             'gender' => 'required|string'
         ];

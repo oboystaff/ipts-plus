@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Assembly;
 use App\Models\Division;
+use App\Models\GhanaRegion;
 
 class UserController extends Controller
 {
@@ -26,6 +27,9 @@ class UserController extends Controller
         }
 
         $userQuery = User::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -85,9 +89,15 @@ class UserController extends Controller
             })
             ->get();
 
+        $regions = GhanaRegion::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
+            ->get();
+
         $roles = Role::orderBy('name', 'ASC')->get();
 
-        return view('users.create', compact('assemblies', 'divisions', 'roles'));
+        return view('users.create', compact('assemblies', 'divisions', 'roles', 'regions'));
     }
 
     public function store(CreateUserRequest $request)
@@ -120,12 +130,19 @@ class UserController extends Controller
         $assemblies = Assembly::get();
         $divisions = Division::get();
 
+        $regions = GhanaRegion::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
+            ->get();
+
         return view('users.edit')->with([
             'user' => $user,
             'roles' => $roles,
             'assemblies' => $assemblies,
             'divisions' => $divisions,
             'userRole' => $user->roles()->pluck('id')->toArray(),
+            'regions' => $regions
         ]);
     }
 

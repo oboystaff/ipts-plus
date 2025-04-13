@@ -28,6 +28,7 @@ class User extends Authenticatable
         'phone',
         'access_level',
         'status',
+        'regional_code',
         'assembly_code',
         'division_code',
         'role_access',

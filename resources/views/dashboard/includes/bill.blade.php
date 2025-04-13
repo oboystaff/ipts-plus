@@ -132,7 +132,7 @@
 
 @section('page-scripts')
     <script>
-        var regions = @json($total['regions']);
+        var regions = @json($total['regionsDrop']);
         var totalBills = @json($total['totals']);
         var regionNames = regions.map(region => region.name);
 

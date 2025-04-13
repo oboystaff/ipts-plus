@@ -306,6 +306,18 @@
                         </div>
 
                         @if ($user->access_level !== 'customer')
+                            <div class="col-md-4">
+                                <label class="form-label">Region</label>
+                                <select class="form-control" name="regional_code">
+                                    <option disabled selected>Select Region</option>
+                                    @foreach ($regions as $region)
+                                        <option value="{{ $region->regional_code }}"
+                                            {{ old('regional_code', $user->regional_code) == $region->regional_code ? 'selected' : '' }}>
+                                            {{ $region->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <div class="mb-3 col-md-4">
                                 <label for="assembly_code" class="form-label">Assembly Code</label>
                                 <select class="form-control" name="assembly_code">
@@ -319,7 +331,7 @@
                                 </select>
                             </div>
 
-                            <div class="mb-3 col-md-4">
+                            <div class="mb-3 col-md-4" style="display: none">
                                 <label for="division_code" class="form-label">Division Code</label>
                                 <select class="form-control" name="division_code">
                                     <option value="">Select Division</option>

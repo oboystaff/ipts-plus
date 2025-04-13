@@ -29,10 +29,13 @@ class CreateUserRequest extends FormRequest
             'phone' => 'required|string|max:15|unique:users,phone',
             'access_level' => 'required|string',
             'status' => 'required|string',
-            'assembly_code' => 'required_if:access_level,Assembly_Supervisor|nullable|string',
-            'division_code' => 'required_if:access_level,Assembly_Supervisor|nullable|string',
+            'regional_code' => 'nullable|string|exists:ghana_regions,regional_code',
+            'assembly_code' => 'nullable|string|exists:assemblies,assembly_code',
+            'division_code' => 'nullable|string|exists:divisions,division_code',
             'role' => 'required|string',
-            'gender' => 'required|string'
+            'gender' => 'required|string',
+            // 'assembly_code' => 'required_if:access_level,Assembly_Supervisor|nullable|string',
+            // 'division_code' => 'required_if:access_level,Assembly_Supervisor|nullable|string',
         ];
     }
 }

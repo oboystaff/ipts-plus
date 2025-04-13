@@ -19,6 +19,9 @@ class DebtorsReportController extends Controller
             }
 
             $assemblies = Assembly::orderBy('name', 'ASC')
+                ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                    $query->where('regional_code', $request->user()->regional_code);
+                })
                 ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                     $query->where('assembly_code', $request->user()->assembly_code);
                 })
@@ -30,6 +33,11 @@ class DebtorsReportController extends Controller
                     $data = Bill::orderBy('created_at', 'DESC')
                         ->when(($request->filled('from_date') && $request->filled('to_date')), function ($query) use ($request) {
                             $query->whereBetween('created_at', [$request->from_date . ' 00:00:00', $request->to_date . ' 23:59:59']);
+                        })
+                        ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                            $query->whereHas('assembly', function ($q) use ($request) {
+                                $q->where('regional_code', $request->user()->regional_code);
+                            });
                         })
                         ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                             $query->where('assembly_code', $request->user()->assembly_code);

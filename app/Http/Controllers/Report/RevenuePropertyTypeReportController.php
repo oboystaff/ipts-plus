@@ -18,6 +18,9 @@ class RevenuePropertyTypeReportController extends Controller
             }
 
             $assemblies = Assembly::orderBy('name', 'ASC')
+                ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                    $query->where('regional_code', $request->user()->regional_code);
+                })
                 ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                     $query->where('assembly_code', $request->user()->assembly_code);
                 })
@@ -45,6 +48,11 @@ class RevenuePropertyTypeReportController extends Controller
                                 $request->from_date . ' 00:00:00',
                                 $request->to_date . ' 23:59:59',
                             ]);
+                        })
+                        ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                            $query->whereHas('assembly', function ($q) use ($request) {
+                                $q->where('regional_code', $request->user()->regional_code);
+                            });
                         })
                         ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                             $query->where('payments.assembly_code', $request->user()->assembly_code);
