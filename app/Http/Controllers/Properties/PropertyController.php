@@ -147,7 +147,9 @@ class PropertyController extends Controller
         }
 
         $businessClassTypes = BusinessClassType::get();
-        $customers = Citizen::query()
+
+        $customers = Citizen::orderBy('created_at')->select('id', 'first_name')
+            ->where('status', 'Active')
             ->get();
 
         $districtAssemblies = Assembly::orderBy('name', 'ASC')
@@ -367,7 +369,9 @@ class PropertyController extends Controller
         }
 
         $businessClassTypes = BusinessClassType::get();
-        $customers = Citizen::query()
+
+        $customers = Citizen::orderBy('created_at')->select('id', 'first_name')
+            ->where('status', 'Active')
             ->get();
 
         $districtAssemblies = Assembly::orderBy('name', 'ASC')

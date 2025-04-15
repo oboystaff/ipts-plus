@@ -46,11 +46,20 @@ class AssemblyController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $regions = GhanaRegion::get();
+        $regions = GhanaRegion::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
+            ->get();
+
         $supervisors = User::select('id', 'name')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
+            ->where('status', 'Active')
             ->get();
 
         return view('assembly.create')->with([
@@ -93,12 +102,15 @@ class AssemblyController extends Controller
 
         $invoiceLayoutTemplates = InvoiceLayoutTemplate::get();
         $regions = GhanaRegion::orderBy('created_at', 'DESC')
-            // ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-            //     $query->where('regional_code', $request->user()->assembly_code);
-            // })
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->get();
 
         $supervisors = User::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
