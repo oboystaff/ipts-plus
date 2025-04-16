@@ -148,9 +148,15 @@ class PropertyController extends Controller
 
         $businessClassTypes = BusinessClassType::get();
 
-        $customers = Citizen::orderBy('created_at')->select('id', 'first_name')
+        $customers = Citizen::orderBy('created_at')->select('id', 'first_name', 'account_number')
             ->where('status', 'Active')
-            ->get();
+            ->get()
+            ->map(function ($customer) {
+                return [
+                    'id' => $customer->id,
+                    'first_name' => $customer->first_name . " - " . $customer->account_number,
+                ];
+            });
 
         $districtAssemblies = Assembly::orderBy('name', 'ASC')
             ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
@@ -370,9 +376,15 @@ class PropertyController extends Controller
 
         $businessClassTypes = BusinessClassType::get();
 
-        $customers = Citizen::orderBy('created_at')->select('id', 'first_name')
+        $customers = Citizen::orderBy('created_at')->select('id', 'first_name', 'account_number')
             ->where('status', 'Active')
-            ->get();
+            ->get()
+            ->map(function ($customer) {
+                return [
+                    'id' => $customer->id,
+                    'first_name' => $customer->first_name . " - " . $customer->account_number,
+                ];
+            });
 
         $districtAssemblies = Assembly::orderBy('name', 'ASC')
             ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
