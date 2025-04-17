@@ -53,7 +53,7 @@
 
 <body>
 
-
+    @php use Illuminate\Support\Str; @endphp
     <!--*******************
         Preloader start
     ********************-->
@@ -330,7 +330,9 @@
                                         <p class="mb-0 fw-semibold lh-1">
                                         <h6>{{ auth()->user()->name ?? '' }}</h6>
                                         </p>
-                                        <span class="fs-11 text-muted">{{ auth()->user()->access_level ?? '' }}</span>
+                                        <span class="fs-11 text-muted">
+                                            {{ Str::of(auth()->user()->access_level ?? '')->replace('_', ' ')->title() }}
+                                        </span>
                                     </div>
                                     <span
                                         class="badge bg-pink align-self-end mb-1">{{ auth()->user()->phone ?? '' }}</span>
@@ -535,36 +537,35 @@
                                         <path
                                             d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z" />
                                     </svg>
-                                    <span class="side-menu__label">Property & Business </span>
+                                    <span class="side-menu__label">Property MGNT </span>
                                     <i class="ri-arrow-right-s-line side-menu__angle"></i>
                                 </a>
                                 <ul class="slide-menu child1">
 
                                     @can('properties.view')
                                         <li class="slide">
-                                            <a href="{{ route('properties.index') }}" class="side-menu__item">Property
-                                                Management</a>
+                                            <a href="{{ route('properties.index') }}" class="side-menu__item">Properties </a>
                                         </li>
                                     @endcan
-                                    @can('businesses.view')
+                                    {{-- @can('businesses.view')
                                         <li class="slide">
                                             <a href="{{ route('businesses.index') }}" class="side-menu__item">Business
                                                 Management</a>
                                         </li>
-                                    @endcan
-                                    @can('business-classes.view')
+                                    @endcan --}}
+                                    {{-- @can('business-classes.view')
                                         <li class="slide">
                                             <a href="{{ route('business-classes.index') }} " class="side-menu__item">Business
                                                 Class</a>
                                         </li>
-                                    @endcan
+                                    @endcan --}}
 
-                                    @can('business-types.view')
+                                    {{-- @can('business-types.view')
                                         <li class="slide">
                                             <a href="{{ route('business-types.index') }} " class="side-menu__item">Business
                                                 Type</a>
                                         </li>
-                                    @endcan
+                                    @endcan --}}
                                 </ul>
                             </li>
                         @endcanany
@@ -598,12 +599,12 @@
                                                 Bill</a>
                                         </li>
                                     @endcan
-                                    @can('bills.create')
+                                    {{-- @can('bills.create')
                                         <li class="slide">
                                             <a href="{{ route('bills.bus.index') }}" class="side-menu__item">Generate BoP
                                                 Bill</a>
                                         </li>
-                                    @endcan
+                                    @endcan --}}
                                 </ul>
                             </li>
                         @endcanany
@@ -673,12 +674,12 @@
                                                 Report</a>
                                         </li>
                                     @endcan
-                                    @can('reports.view')
+                                    {{-- @can('reports.view')
                                         <li class="slide">
                                             <a href="{{ route('business-reports.index') }}" class="side-menu__item">Business
                                                 Report</a>
                                         </li>
-                                    @endcan
+                                    @endcan --}}
                                     @can('reports.view')
                                         <li class="slide">
                                             <a href="{{ route('property-reports.index') }}" class="side-menu__item">Property
@@ -853,12 +854,12 @@
                                                 Manage Division</a>
                                         </li>
                                     @endcan
-                                    @can('blocks.view')
+                                    {{-- @can('blocks.view')
                                         <li class="slide">
                                             <a href="{{ route('blocks.index') }}" class="side-menu__item">
                                                 Manage Block</a>
                                         </li>
-                                    @endcan
+                                    @endcan --}}
                                     @can('zones.view')
                                         <li class="slide">
                                             <a href="{{ route('zones.index') }}" class="side-menu__item">
@@ -877,10 +878,10 @@
                                                 Manage Property Rate</a>
                                         </li>
 
-                                        <li class="slide">
+                                        {{-- <li class="slide">
                                             <a href=" {{ route('rates.bus.index') }}" class="side-menu__item">
                                                 Manage Bop Rate</a>
-                                        </li>
+                                        </li> --}}
                                     @endcan
                                 </ul>
                             </li>
@@ -906,7 +907,7 @@
                                     @can('blocks.view')
                                         <li class="slide">
                                             <a href="{{ route('buildings.index') }}" class="side-menu__item">
-                                                Manage Building</a>
+                                                Manage Block</a>
                                         </li>
                                     @endcan
                                     @can('task-assignments.view')
