@@ -471,7 +471,7 @@
                                         <path
                                             d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
                                     </svg>
-                                    <span class="side-menu__label">User Management</span>
+                                    <span class="side-menu__label">User Mgnt</span>
                                     <i class="ri-arrow-right-s-line side-menu__angle"></i>
                                 </a>
                                 <ul class="slide-menu child1">
@@ -537,7 +537,7 @@
                                         <path
                                             d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z" />
                                     </svg>
-                                    <span class="side-menu__label">Property MGNT </span>
+                                    <span class="side-menu__label">Property Mgnt </span>
                                     <i class="ri-arrow-right-s-line side-menu__angle"></i>
                                 </a>
                                 <ul class="slide-menu child1">
@@ -584,7 +584,7 @@
                                         <path
                                             d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
                                     </svg>
-                                    <span class="side-menu__label">Bills Management</span>
+                                    <span class="side-menu__label">Bills Mgnt</span>
                                     <i class="ri-arrow-right-s-line side-menu__angle"></i>
                                 </a>
                                 <ul class="slide-menu child1">
@@ -638,7 +638,7 @@
                                                 </g>
                                             </g>
                                         </svg>
-                                        <span class="side-menu__label">Manage Payment</span>
+                                        <span class="side-menu__label">Payment Mgnt</span>
                                         <i class="ri-arrow-right-s-line side-menu__angle"></i>
                                     </a>
                                     <ul class="slide-menu child1">
