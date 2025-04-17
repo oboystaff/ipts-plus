@@ -13,19 +13,13 @@
                         <i class="ri-file-chart-line me-2"></i> Properties Analysis Overview
                     </h4>
 
-
                     <p class="mb-0 text-muted fs-14">
                         Get insights into Total Registered Rate Payers, Active vs. Inactive Rate Payers, Property
                         Registration Trends, and Top Contributing Properties.
                     </p>
-
                 </div>
-
-
-
             </div>
         </div>
-
     </div>
     <div class="col-xl-12">
         <div class="card custom-card rounded-md overflow-hidden p-2">
