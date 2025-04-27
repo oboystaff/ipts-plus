@@ -167,7 +167,13 @@
                                         <div class="col-md-4 mb-3">
                                             <label for="Phone" class="form-label">Phone</label>
                                             <input type="text" id="Phone" name="telephone_number"
-                                                class="form-control">
+                                                class="form-control @error('telephone_number') is-invalid @enderror">
+
+                                            @error('telephone_number')
+                                                <span class="invalid-feedback" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -203,7 +209,13 @@
                                         <div class="col-md-4 mb-3">
                                             <label for="phone" class="form-label">Phone</label>
                                             <input type="tel" id="phone" name="org_telephone_number"
-                                                class="form-control">
+                                                class="form-control @error('org_telephone_number') is-invalid @enderror">
+
+                                            @error('org_telephone_number')
+                                                <span class="invalid-feedback" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="email" class="form-label">Email</label>
