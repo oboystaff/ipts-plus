@@ -222,6 +222,7 @@ class CitizenController extends Controller
 
     public function frontstore(CreateCustomerRequestFront $request)
     {
+        return "Hello world";
         try {
             $data = $request->validated();
 

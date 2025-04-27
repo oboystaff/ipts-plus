@@ -429,7 +429,7 @@ class DashboardController extends Controller
                 $query->where('assemblies.regional_code', $request->user()->regional_code);
             })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
+                $query->where('payments.assembly_code', $request->user()->assembly_code);
             })
             ->join('assemblies', 'payments.assembly_code', '=', 'assemblies.assembly_code')
             ->select(DB::raw('MONTH(payments.created_at) as month'), DB::raw('SUM(amount) as total'))
@@ -443,7 +443,7 @@ class DashboardController extends Controller
                 $query->where('assemblies.regional_code', $request->user()->regional_code);
             })
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
-                $query->where('assembly_code', $request->user()->assembly_code);
+                $query->where('bills.assembly_code', $request->user()->assembly_code);
             })
             ->join('assemblies', 'bills.assembly_code', '=', 'assemblies.assembly_code')
             ->select(DB::raw('MONTH(bills.created_at) as month'), DB::raw('SUM(amount) as total'))
