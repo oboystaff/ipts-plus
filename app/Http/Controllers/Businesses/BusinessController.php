@@ -79,7 +79,14 @@ class BusinessController extends Controller
             })
             ->get();
 
-        $zones = Zone::orderBy('name', 'ASC')->get();
+        $zones = Zone::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
 
         return view('businesses.create', compact('businessTypes', 'customers', 'assemblies', 'zones'));
     }
@@ -201,8 +208,24 @@ class BusinessController extends Controller
             })
             ->get();
 
-        $zones = Zone::orderBy('name', 'ASC')->get();
+        $zones = Zone::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
+
         $propertyUses = PropertyUser::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
             ->where('zone_id', $business->zone_id)
             ->get();
 

@@ -22,7 +22,8 @@ class Assembly extends Model
         'invoice_layout',
         'status',
         'address',
-        'phone'
+        'phone',
+        'assembly_category'
     ];
 
     public function region()

@@ -33,15 +33,21 @@ $(document).ready(function () {
         });
     }
 
+    if ($('input[name="minimum_rate"]').length > 0) {
+        $('select[name="assembly_code"]').change(function() {
+            zone($(this).val());
+        });
+    }
+
     if ($('select[name="bin_type_id"]').length > 0 && $('input[name="rate"]').length > 0) {
         $(document).on('change', 'select[name^="bin_data"][name$="[bin_type_id]"]', function () {
             customerBin($(this).val(), this);
         });
     }
 
-    if ($('select[name="regional_code"]').length > 0) {
-        $('select[name="regional_code"]').change(function() {
-            assembly($(this).val());
+    if ($('select[name="regional"]').length > 0) {
+        $('select[name="regional"]').change(function() {
+            $("input[name='regional_code']").val($(this).val());
         });
     }
 
@@ -68,6 +74,32 @@ $(document).ready(function () {
                 $("select[name='property_use_id']").append("<option value=''>Select Property Use</option>");
                 for (var i = 0; i < response.message.length; i++) {
                     $("select[name='property_use_id']").append("<option value=" + response.message[i].id + ">" +
+                        response.message[i].name + "</option>");
+                }
+            },
+            error: function (error) {
+                //alert(error.statusText + error.responseText);
+            },
+        });
+    }
+
+    function zone(assembly_code) {
+        var url = $("input[name='zone_url']").attr("url");
+        var formData = new FormData();
+        formData.append("assembly_code", assembly_code);
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                $("select[name='zone_id']").html("");
+                $("select[name='zone_id']").append("<option value=''>Select Zone</option>");
+
+                for (var i = 0; i < response.message.length; i++) {
+                    $("select[name='zone_id']").append("<option value=" + response.message[i].id + ">" +
                         response.message[i].name + "</option>");
                 }
             },

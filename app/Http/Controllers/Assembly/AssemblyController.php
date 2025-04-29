@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Assembly;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Assembly\CreateAssemblyRequest;
 use App\Http\Requests\Assembly\UpdateAssemblyRequest;
+use App\Http\Requests\Import\ImportAssemblyRequest;
+use App\Imports\Assembly\AssemblyImport;
 use Illuminate\Http\Request;
 use App\Models\Assembly;
 use App\Models\GhanaRegion;
@@ -12,6 +14,7 @@ use App\Models\InvoiceLayoutTemplate;
 use App\Models\Mmda;
 use App\Models\User;
 use Illuminate\Support\Facades\File as FileDelete;
+use Illuminate\Validation\ValidationException;
 
 
 class AssemblyController extends Controller
@@ -20,7 +23,7 @@ class AssemblyController extends Controller
     {
         $this->middleware(['auth:sanctum']);
     }
-    // Index method to fetch all assemblies
+
     public function index(Request $request)
     {
         if (!auth()->user()->can('assemblies.view')) {
@@ -39,7 +42,6 @@ class AssemblyController extends Controller
         return view('assembly.index', compact('assemblies'));
     }
 
-    // Show the form for creating a new assembly
     public function create(Request $request)
     {
         if (!auth()->user()->can('assemblies.create')) {
@@ -52,7 +54,7 @@ class AssemblyController extends Controller
             })
             ->get();
 
-        $supervisors = User::select('id', 'name')
+        $supervisors = User::select('id', 'name', 'phone')
             ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
                 $query->where('regional_code', $request->user()->regional_code);
             })
@@ -60,7 +62,13 @@ class AssemblyController extends Controller
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
             ->where('status', 'Active')
-            ->get();
+            ->get()
+            ->map(function ($supervisor) {
+                return [
+                    'id' => $supervisor->id,
+                    'name' => $supervisor->name . " - " . $supervisor->phone,
+                ];
+            });
 
         return view('assembly.create')->with([
             'regions' => $regions,
@@ -68,7 +76,6 @@ class AssemblyController extends Controller
         ]);
     }
 
-    // Store a newly created assembly in the database
     public function store(CreateAssemblyRequest $request)
     {
         try {
@@ -93,14 +100,12 @@ class AssemblyController extends Controller
         }
     }
 
-    // Show the form for editing the specified assembly
     public function edit(Request $request, Assembly $assembly)
     {
         if (!auth()->user()->can('assemblies.update')) {
             abort(403, 'Unauthorized action.');
         }
 
-        $invoiceLayoutTemplates = InvoiceLayoutTemplate::get();
         $regions = GhanaRegion::orderBy('created_at', 'DESC')
             ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
                 $query->where('regional_code', $request->user()->regional_code);
@@ -115,11 +120,16 @@ class AssemblyController extends Controller
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
             ->where('status', 'Active')
-            ->get();
+            ->get()
+            ->map(function ($supervisor) {
+                return [
+                    'id' => $supervisor->id,
+                    'name' => $supervisor->name . " - " . $supervisor->phone,
+                ];
+            });
 
-        $mmdas = Mmda::orderBy('assembly_name', 'ASC')->get();
 
-        return view('assembly.edit', compact('assembly', 'invoiceLayoutTemplates', 'supervisors', 'regions', 'mmdas'));
+        return view('assembly.edit', compact('assembly', 'supervisors', 'regions'));
     }
 
     public function show(Assembly $assembly)
@@ -174,5 +184,27 @@ class AssemblyController extends Controller
         return response()->json([
             'message' => $assemblies
         ]);
+    }
+
+    public function import()
+    {
+        return view('assembly.import');
+    }
+
+    public function importData(ImportAssemblyRequest $request)
+    {
+        try {
+            $data = $request->validated();
+            $createdBy = $request->user()->id;
+
+            $import = (new AssemblyImport($createdBy));
+            $import->import($request->file('file'));
+
+            return redirect()->route('assembly.index')->with('status', 'Assembly data uploaded successfully.');
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $exception) {
+            throw ValidationException::withMessages([
+                'file' => collect($exception->errors())->flatten()->toArray(),
+            ]);
+        }
     }
 }

@@ -8,9 +8,12 @@ use Illuminate\Http\Request;
 
 class ZoneController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $data = Zone::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
             ->get();
 
         return response()->json([

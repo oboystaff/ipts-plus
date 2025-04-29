@@ -339,9 +339,21 @@
                                 </div>
                             </li>
 
-                            <li><a class="dropdown-item d-flex align-items-center"
+                            @if (auth()->user()->access_level === 'customer')
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center"
+                                        href="{{ route('dashboard.myprofile') }}">
+                                        <i class="ti ti-user fs-18 me-2 text-gray fw-normal"></i>Profile
+                                    </a>
+                                </li>
+                            @endif
+
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center"
                                     href="{{ route('auth.logout') }}"><i
-                                        class="ti ti-logout fs-18 me-2 text-gray fw-normal"></i>Sign Out</a></li>
+                                        class="ti ti-logout fs-18 me-2 text-gray fw-normal"></i>Sign Out
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <!-- End::header-element -->
@@ -767,55 +779,61 @@
                         <!-- End::slide -->
 
                         @canany(['analytics.view'])
-                            <li class="slide has-sub">
-                                <a href="javascript:void(0);" class="side-menu__item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
-                                        viewBox="0 0 24 24" width="24px" fill="#5f6368">
-                                        <path d="M0 0h24v24H0V0z" fill="none" />
-                                        <path d="M6.26 9L12 13.47 17.74 9 12 4.53z" opacity=".3" />
-                                        <path
-                                            d="M19.37 12.8l-7.38 5.74-7.37-5.73L3 14.07l9 7 9-7zM12 2L3 9l1.63 1.27L12 16l7.36-5.73L21 9l-9-7zm0 11.47L6.26 9 12 4.53 17.74 9 12 13.47z" />
-                                    </svg>
-                                    <span class="side-menu__label">Analytics</span>
-                                    <i class="ri-arrow-right-s-line side-menu__angle"></i>
-                                </a>
-                                <ul class="slide-menu child1">
-                                    @can('analytics.view')
-                                        <li class="slide">
-                                            <a href="{{ route('dashboard.propertyAnalytic') }}"
-                                                class="side-menu__item">Property</a>
+                            @if (auth()->user()->access_level === 'Super_User' || auth()->user()->access_level === 'GOG_Administrator')
+                                <li class="slide has-sub">
+                                    <a href="javascript:void(0);" class="side-menu__item">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
+                                            viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                            <path d="M0 0h24v24H0V0z" fill="none" />
+                                            <path d="M6.26 9L12 13.47 17.74 9 12 4.53z" opacity=".3" />
+                                            <path
+                                                d="M19.37 12.8l-7.38 5.74-7.37-5.73L3 14.07l9 7 9-7zM12 2L3 9l1.63 1.27L12 16l7.36-5.73L21 9l-9-7zm0 11.47L6.26 9 12 4.53 17.74 9 12 13.47z" />
+                                        </svg>
+                                        <span class="side-menu__label">Analytics</span>
+                                        <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                                    </a>
+                                    <ul class="slide-menu child1">
+                                        @can('analytics.view')
+                                            <li class="slide">
+                                                <a href="{{ route('dashboard.propertyAnalytic') }}"
+                                                    class="side-menu__item">Property</a>
 
-                                            <a href="{{ route('dashboard.billAnalytic') }}" class="side-menu__item">Bill</a>
+                                                <a href="{{ route('dashboard.billAnalytic') }}"
+                                                    class="side-menu__item">Bill</a>
 
-                                            <a href="{{ route('dashboard.paymentAnalytic') }}"
-                                                class="side-menu__item">Payment</a>
-                                        </li>
-                                    @endcan
-                                </ul>
-                            </li>
+                                                <a href="{{ route('dashboard.paymentAnalytic') }}"
+                                                    class="side-menu__item">Payment</a>
+                                            </li>
+                                        @endcan
+                                    </ul>
+                                </li>
+                            @endif
                         @endcanany
 
                         @canany(['nationwide.view'])
-                            <li class="slide has-sub">
-                                <a href="javascript:void(0);" class="side-menu__item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
-                                        viewBox="0 0 24 24" width="24px" fill="#5f6368">
-                                        <path d="M0 0h24v24H0V0z" fill="none" />
-                                        <path d="M6.26 9L12 13.47 17.74 9 12 4.53z" opacity=".3" />
-                                        <path
-                                            d="M19.37 12.8l-7.38 5.74-7.37-5.73L3 14.07l9 7 9-7zM12 2L3 9l1.63 1.27L12 16l7.36-5.73L21 9l-9-7zm0 11.47L6.26 9 12 4.53 17.74 9 12 13.47z" />
-                                    </svg>
-                                    <span class="side-menu__label">Nationwide Overview</span>
-                                    <i class="ri-arrow-right-s-line side-menu__angle"></i>
-                                </a>
-                                <ul class="slide-menu child1">
-                                    @can('nationwide.view')
-                                        <li class="slide">
-                                            <a href="{{ route('dashboard.overview') }}" class="side-menu__item">Overview</a>
-                                        </li>
-                                    @endcan
-                                </ul>
-                            </li>
+                            @if (!Str::contains(auth()->user()->access_level, 'Assembly'))
+                                <li class="slide has-sub">
+                                    <a href="javascript:void(0);" class="side-menu__item">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
+                                            viewBox="0 0 24 24" width="24px" fill="#5f6368">
+                                            <path d="M0 0h24v24H0V0z" fill="none" />
+                                            <path d="M6.26 9L12 13.47 17.74 9 12 4.53z" opacity=".3" />
+                                            <path
+                                                d="M19.37 12.8l-7.38 5.74-7.37-5.73L3 14.07l9 7 9-7zM12 2L3 9l1.63 1.27L12 16l7.36-5.73L21 9l-9-7zm0 11.47L6.26 9 12 4.53 17.74 9 12 13.47z" />
+                                        </svg>
+                                        <span class="side-menu__label">Nationwide Overview</span>
+                                        <i class="ri-arrow-right-s-line side-menu__angle"></i>
+                                    </a>
+                                    <ul class="slide-menu child1">
+                                        @can('nationwide.view')
+                                            <li class="slide">
+                                                <a href="{{ route('dashboard.overview') }}"
+                                                    class="side-menu__item">Overview</a>
+                                            </li>
+                                        @endcan
+                                    </ul>
+                                </li>
+                            @endif
                         @endcanany
 
                         <!-- Start::slide -->
@@ -837,10 +855,10 @@
                                 </a>
                                 <ul class="slide-menu child1">
                                     @can('assemblies.view')
-                                        <li class="slide">
+                                        {{-- <li class="slide">
                                             <a href="{{ route('mmdas.index') }}" class="side-menu__item">
                                                 Manage MMDA</a>
-                                        </li>
+                                        </li> --}}
                                     @endcan
                                     @can('assemblies.view')
                                         <li class="slide">
@@ -1033,12 +1051,10 @@
                                         <a href="{{ route('dashboard.myproperties') }}"
                                             class="side-menu__item">Properties</a>
                                     </li>
-                                    <li class="slide">
+                                    {{-- <li class="slide">
                                         <a href="{{ route('dashboard.mybusiness') }}"
                                             class="side-menu__item">Businesses</a>
-                                    </li>
-
-
+                                    </li> --}}
                                 </ul>
                             </li>
 

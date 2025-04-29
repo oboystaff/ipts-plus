@@ -9,11 +9,16 @@ class Zone extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'created_by'];
+    protected $fillable = ['name', 'assembly_code', 'created_by'];
 
     public function propertyUse()
     {
         return $this->hasMany(PropertyUser::class, 'zone_id');
+    }
+
+    public function assembly()
+    {
+        return $this->belongsTo(Assembly::class, 'assembly_code', 'assembly_code');
     }
 
     public function createdBy()

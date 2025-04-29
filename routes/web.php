@@ -199,6 +199,8 @@ Route::group(['prefix' => ''], function () {
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/operational', [Dashboard\DashboardController::class, 'operational'])->name('dashboard.operational');
     Route::get('/MyBills', [Dashboard\DashboardController::class, 'Mybills'])->name('dashboard.mybills');
+    Route::get('/myprofile', [Dashboard\DashboardController::class, 'myProfile'])->name('dashboard.myprofile');
+    Route::post('/myprofile/{citizen}', [Dashboard\DashboardController::class, 'updateMyProfile'])->name('dashboard.updateMyProfile');
     Route::get('/myproperties', [Dashboard\DashboardController::class, 'Myproperties'])->name('dashboard.myproperties');
     Route::get('/mybusiness', [Dashboard\DashboardController::class, 'Mybusiness'])->name('dashboard.mybusiness');
     Route::get('/mypaymenthistory', [Dashboard\DashboardController::class, 'Mypaymenthistory'])->name('dashboard.mypaymenthistory');
@@ -251,6 +253,8 @@ Route::group(['prefix' => 'assembly', 'middleware' => 'auth:sanctum'], function 
     Route::delete('/{assembly}', [AssemblyController::class, 'destroy'])->name('assembly.destroy');
     Route::get('/{assembly}', [AssemblyController::class, 'show'])->name('assembly.show');
     Route::post('/fetch/data', [AssemblyController::class, 'fetchAssembly'])->name('assembly.fetch');
+    Route::get('/import/data', [AssemblyController::class, 'import'])->name('assembly.import');
+    Route::post('/import/data', [AssemblyController::class, 'importData'])->name('assembly.importData');
 });
 
 // Division Routes
@@ -303,6 +307,7 @@ Route::group(['prefix' => 'rate', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/{rate}/edit', [RateController::class, 'edit'])->name('rates.edit');
     Route::post('/{rate}/update', [RateController::class, 'update'])->name('rates.update');
     Route::post('/property-use', [RateController::class, 'propertyUse'])->name('rates.property-use');
+    Route::post('/zone/data', [RateController::class, 'zone'])->name('rates.zone');
     Route::get('/import/data', [RateController::class, 'import'])->name('rates.import');
     Route::post('/import/data', [RateController::class, 'importData'])->name('rates.importData');
     Route::get('/template', [RateController::class, 'downloadTemplate'])->name('rates.downloadTemplate');

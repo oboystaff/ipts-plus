@@ -27,10 +27,12 @@ class CreatePropertyUserRequest extends FormRequest
                 'required',
                 'string',
                 Rule::unique('property_users')->where(function ($query) {
-                    return $query->where('zone_id', $this->zone_id);
+                    return $query->where('zone_id', $this->zone_id)
+                        ->where('assembly_code', $this->assembly_code);
                 })
             ],
-            'zone_id' => ['required', 'string', 'exists:zones,id']
+            'zone_id' => ['required', 'string', 'exists:zones,id'],
+            'assembly_code' => ['required', 'string', 'exists:assemblies,assembly_code']
         ];
     }
 }

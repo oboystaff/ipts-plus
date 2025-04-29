@@ -54,6 +54,7 @@
                                         <th>S/N</th>
                                         <th>Property Use Name</th>
                                         <th>Zone Name</th>
+                                        <th>Assembly Code</th>
                                         <th>Created By</th>
                                         <th>Date Created</th>
                                         <th>Actions</th>
@@ -65,6 +66,7 @@
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $propertyUser->name }}</td>
                                             <td>{{ $propertyUser->zone->name ?? '' }}</td>
+                                            <td>{{ $propertyUser->assembly_code ?? 'N/A' }}</td>
                                             <td>{{ $propertyUser->createdBy->name ?? '' }}</td>
                                             <td>{{ $propertyUser->created_at }}</td>
                                             <td>

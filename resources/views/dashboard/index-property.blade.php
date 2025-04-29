@@ -5,18 +5,32 @@
 
 @section('page-content')
     <div class="container-fluid">
+        <div class="card">
+
+            <!-- HEADER SECTION -->
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-user-settings-line me-2"></i> Rate Payer - Management
+                        </h4>
+
+                        <p class="mb-0 text-muted fs-14">
+                            You are Viewing Rate Payer Property Record from your
+                            central database repository.
+                        </p>
+                    </div>
+
+                    <a href="{{ route('dashboard.myproperties') }}" class="btn btn-sm btn-primary">
+                        <i class="fa fa-arrow-left me-1"></i> Back
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div class="card-header">
-                            <div class="card-title">Property Management / View Assembly Property</div>
-                        </div>
-
-                        <div>
-                            <a href="{{ route('dashboard.myproperties') }}" class="btn btn-primary btn-sm ms-2">Back</a>
-                        </div>
-                    </div>
 
                     <div class="card-body">
                         <form class="row g-3 needs-validation" method="POST"
@@ -25,7 +39,7 @@
 
                             <div class="col-sm-6 mb-3">
                                 <div class="form-group">
-                                    <label for="entity_type">Entity Type</label>
+                                    <label for="entity_type" class="form-label">Entity Type</label>
                                     <input type="text" class="form-control @error('entity_type') is-invalid @enderror"
                                         id="entity_type" name="entity_type" placeholder="Digital address"
                                         value="{{ $property->entityType->name ?? '' }}" readonly>
@@ -40,7 +54,7 @@
 
                             <div class="col-sm-6 mb-3">
                                 <div class="form-group">
-                                    <label for="digital_address">Digital Address</label>
+                                    <label for="digital_address" class="form-label">Digital Address</label>
                                     <input type="text"
                                         class="form-control @error('digital_address') is-invalid @enderror"
                                         id="digital_address" name="digital_address" placeholder="Digital address"
@@ -56,7 +70,7 @@
 
                             <div class="col-sm-6 mb-3">
                                 <div class="form-group">
-                                    <label for="location">Location</label>
+                                    <label for="location" class="form-label">Location</label>
                                     <input type="text" class="form-control @error('location') is-invalid @enderror"
                                         id="location" name="location" placeholder="Location"
                                         value="{{ $property->location }}" readonly>
@@ -71,7 +85,7 @@
 
                             <div class="col-sm-6 mb-3">
                                 <div class="form-group">
-                                    <label for="street_name">Street Name</label>
+                                    <label for="street_name" class="form-label">Street Name</label>
                                     <input type="text" class="form-control" id="street_name" name="street_name"
                                         placeholder="Street name" value="{{ $property->street_name }}" readonly>
                                 </div>
@@ -79,7 +93,7 @@
 
                             <div class="col-sm-6 mb-3">
                                 <div class="form-group">
-                                    <label for="rated">Rated</label>
+                                    <label for="rated" class="form-label">Rated</label>
                                     <input type="text" class="form-control" id="rated" name="rated"
                                         placeholder="Street name" value="{{ $property->rated }}" readonly>
                                 </div>
@@ -87,14 +101,14 @@
 
                             <div class="col-sm-6 mb-3">
                                 <div class="form-group">
-                                    <label for="validated">Validated</label>
+                                    <label for="validated" class="form-label">Validated</label>
                                     <input type="text" class="form-control" id="validated" name="validated"
                                         placeholder="Street name" value="{{ $property->validated }}" readonly>
                                 </div>
                             </div>
 
                             <div class="col-sm-6 mb-3">
-                                <label for="entity_type">Associate Owner</label>
+                                <label for="entity_type" class="form-label">Associate Owner</label>
                                 <input type="text" class="form-control" id="customer_name" name="customer_name"
                                     placeholder="Street name"
                                     value="{{ $property->customer->first_name ?? '' }} {{ $property->customer->last_name ?? '' }}"
@@ -103,7 +117,7 @@
 
                             <div class="col-sm-6 mb-3">
                                 <div class="form-group">
-                                    <label for="ratable_value">Ratable Value</label>
+                                    <label for="ratable_value" class="form-label">Ratable Value</label>
                                     <input type="text" class="form-control" id="ratable_value" name="ratable_value"
                                         placeholder="Ratable value" value="{{ $property->ratable_value }}" readonly>
                                 </div>
@@ -111,7 +125,7 @@
 
                             <div class="col-sm-6 mb-3">
                                 <div class="form-group">
-                                    <label for="longitude">Longitude</label>
+                                    <label for="longitude" class="form-label">Longitude</label>
                                     <input type="text" class="form-control" id="longitude" name="longitude"
                                         placeholder="Longitude" value="{{ $property->longitude }}" readonly>
                                 </div>
@@ -119,7 +133,7 @@
 
                             <div class="col-sm-6 mb-3">
                                 <div class="form-group">
-                                    <label for="latitude">Latitude</label>
+                                    <label for="latitude" class="form-label">Latitude</label>
                                     <input type="text" class="form-control" id="latitude" name="latitude"
                                         placeholder="Latitude" value="{{ $property->latitude }}" readonly>
                                 </div>
@@ -127,7 +141,7 @@
 
                             <div class="col-sm-6 mb-3">
                                 <div class="form-group">
-                                    <label for="latitude">Property Number</label>
+                                    <label for="latitude" class="form-label">Property Number</label>
                                     <input type="text" class="form-control" id="latitude" name="latitude"
                                         placeholder="Latitude" value="{{ $property->property_number }}" readonly>
                                 </div>
@@ -135,7 +149,7 @@
 
                             <div class="col-sm-6 mb-3">
                                 <div class="form-group">
-                                    <label for="latitude">Division</label>
+                                    <label for="latitude" class="form-label">Division</label>
                                     <input type="text" class="form-control" id="latitude" name="latitude"
                                         placeholder="Latitude" value="{{ $property->division->division_name ?? 'N/A' }}"
                                         readonly>
@@ -144,7 +158,7 @@
 
                             <div class="col-sm-6 mb-3">
                                 <div class="form-group">
-                                    <label for="latitude">Block</label>
+                                    <label for="latitude" class="form-label">Block</label>
                                     <input type="text" class="form-control" id="latitude" name="latitude"
                                         placeholder="Latitude" value="{{ $property->block->block_name ?? 'N/A' }}"
                                         readonly>
@@ -153,7 +167,7 @@
 
                             <div class="col-sm-6 mb-3">
                                 <div class="form-group">
-                                    <label for="latitude">Zone</label>
+                                    <label for="latitude" class="form-label">Zone</label>
                                     <input type="text" class="form-control" id="latitude" name="latitude"
                                         placeholder="Latitude" value="{{ $property->zone->name ?? 'N/A' }}" readonly>
                                 </div>
@@ -161,7 +175,7 @@
 
                             <div class="col-sm-6 mb-3">
                                 <div class="form-group">
-                                    <label for="latitude">Property Use</label>
+                                    <label for="latitude" class="form-label">Property Use</label>
                                     <input type="text" class="form-control" id="latitude" name="latitude"
                                         placeholder="Latitude" value="{{ $property->propertyUse->name ?? 'N/A' }}"
                                         readonly>
@@ -171,7 +185,7 @@
                             <!-- Add Assembly field here -->
                             <div class="col-sm-6 mb-3">
                                 <div class="form-group">
-                                    <label for="assembly">Assembly Property</label>
+                                    <label for="assembly" class="form-label">Assembly Property</label>
                                     <input type="text" class="form-control" id="assembly_code" name="assembly_code"
                                         placeholder="Assembly_code" value="{{ $property->assembly->name ?? '' }}"
                                         readonly>

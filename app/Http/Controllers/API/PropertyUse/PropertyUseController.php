@@ -9,9 +9,12 @@ use Illuminate\Http\Request;
 
 class PropertyUseController extends Controller
 {
-    public function index($zone_id)
+    public function index(Request $request, $zone_id)
     {
         $data = PropertyUser::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
             ->with(['zone'])
             ->where('zone_id', $zone_id)
             ->get();

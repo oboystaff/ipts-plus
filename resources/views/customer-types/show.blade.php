@@ -42,7 +42,7 @@
                     @csrf
 
                     <div class="col-md-6 mb-3">
-                        <label for="block_code">Customer Type Name</label>
+                        <label for="block_code" class="form-label">Customer Type Name</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
                             name="name" placeholder="Enter customer type name" value="{{ $customerType->name }}"
                             readonly>
@@ -55,7 +55,7 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="status">Status</label>
+                        <label for="status" class="form-label">Status</label>
                         <input type="text" class="form-control @error('status') is-invalid @enderror" id="status"
                             name="status" placeholder="Enter status" value="{{ $customerType->status }}" readonly>
 

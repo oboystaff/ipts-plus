@@ -20,25 +20,39 @@
     @endphp
 
     <div class="container-fluid">
+        <div class="card">
+
+            <!-- HEADER SECTION -->
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-user-settings-line me-2"></i> Rate Payer - Management
+                        </h4>
+
+                        <p class="mb-0 text-muted fs-14">
+                            You are Viewing Rate Payer Bill Record from your
+                            central database repository.
+                        </p>
+                    </div>
+
+                    <a href="{{ route('dashboard.mybills') }}" class="btn btn-sm btn-primary">
+                        <i class="fa fa-arrow-left me-1"></i> Back
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header flex-wrap d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">View Customer Bill</h4>
-                        </div>
-
-                        <div>
-                            <a href="{{ route('dashboard.mybills') }}" class="btn btn-primary btn-sm ms-2">Back</a>
-                        </div>
-                    </div>
 
                     <div class="card-body">
                         <form class="row g-3 needs-validation" method="POST" action="{{ route('blocks.store') }}">
                             @csrf
 
                             <div class="col-md-6 mb-3">
-                                <label for="block_code">Bill No.</label>
+                                <label for="block_code" class="form-label">Bill No.</label>
                                 <input type="text" class="form-control @error('block_code') is-invalid @enderror"
                                     id="block_code" name="block_code" placeholder="Enter block code"
                                     value="{{ $bill->bills_id }}" readonly>
@@ -51,7 +65,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="block_name">Owner Name</label>
+                                <label for="block_name" class="form-label">Owner Name</label>
                                 <input type="text" class="form-control @error('block_name') is-invalid @enderror"
                                     id="block_name" name="block_name" placeholder="Enter block name"
                                     value="{{ $name }}" readonly>
@@ -64,7 +78,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="block_name">Bill Date</label>
+                                <label for="block_name" class="form-label">Bill Date</label>
                                 <input type="text" class="form-control @error('block_name') is-invalid @enderror"
                                     id="block_name" name="block_name" placeholder="Enter block name"
                                     value="{{ $bill->billing_date }}" readonly>
@@ -77,7 +91,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="block_name">Bill Year</label>
+                                <label for="block_name" class="form-label">Bill Year</label>
                                 <input type="text" class="form-control @error('block_name') is-invalid @enderror"
                                     id="block_name" name="block_name" placeholder="Enter block name"
                                     value="{{ $bill->bills_year }}" readonly>
@@ -90,7 +104,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="block_name">Bill Type</label>
+                                <label for="block_name" class="form-label">Bill Type</label>
                                 <input type="text" class="form-control @error('block_name') is-invalid @enderror"
                                     id="block_name" name="block_name" placeholder="Enter block name"
                                     value="{{ $billType }}" readonly>
@@ -103,7 +117,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="block_name">Arrears (GHS)</label>
+                                <label for="block_name" class="form-label">Arrears (GHS)</label>
                                 <input type="text" class="form-control @error('block_name') is-invalid @enderror"
                                     id="block_name" name="block_name" placeholder="Enter block name"
                                     value="{{ number_format($bill->arrears, 2) }}" readonly>
@@ -116,7 +130,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="block_name">Current Amount</label>
+                                <label for="block_name" class="form-label">Current Amount</label>
                                 <input type="text" class="form-control @error('block_name') is-invalid @enderror"
                                     id="block_name" name="block_name" placeholder="Enter block name"
                                     value="{{ number_format($bill->amount, 2) }}" readonly>
@@ -129,7 +143,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="block_name">Amount Due</label>
+                                <label for="block_name" class="form-label">Amount Due</label>
                                 <input type="text" class="form-control @error('block_name') is-invalid @enderror"
                                     id="block_name" name="block_name" placeholder="Enter block name"
                                     value="{{ number_format($bill->amount + $bill->arrears, 2) }}" readonly>

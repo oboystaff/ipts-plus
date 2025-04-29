@@ -23,13 +23,13 @@
 
                         </div>
                         @can('customer-types.create')
-                            <a href="{{ route('customer-types.create') }}" class="btn btn-sm btn-primary"><i
-                                    class="fa fa-plus me-1"></i>
-                                Create New
-                            </a>
+                            @if (auth()->user()->access_level === 'Super_User')
+                                <a href="{{ route('customer-types.create') }}" class="btn btn-sm btn-primary"><i
+                                        class="fa fa-plus me-1"></i>
+                                    Create New
+                                </a>
+                            @endif
                         @endcan
-
-
                     </div>
                 </div>
             </div>

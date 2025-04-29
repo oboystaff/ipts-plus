@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Zone;
+namespace App\Http\Requests\Import;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class CreateZoneRequest extends FormRequest
+class ImportAssemblyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +22,7 @@ class CreateZoneRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [
-                'required',
-                'string',
-                Rule::unique('zones')->where(function ($query) {
-                    return $query->where('assembly_code', $this->assembly_code);
-                }),
-            ],
-            'assembly_code' => ['required', 'string', 'exists:assemblies,assembly_code']
+            'file' => ['required', 'file', 'mimes:xls,xlsx,csv']
         ];
     }
 }

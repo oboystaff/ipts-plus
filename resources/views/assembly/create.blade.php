@@ -61,27 +61,11 @@
                             <input type="hidden" name="geo_coordinate" id="geo_coordinate">
                             <input type="hidden" name="assembly_url" url="{{ route('assembly.fetch') }}">
 
-                            <div class="mb-4 col-md-6">
-                                <label for="role_access" class="form-label">Regional Name</label>
-                                <select class="form-control @error('regional_code') is-invalid @enderror" id="regional_code"
-                                    name="regional_code" required>
-                                    <option value="">Select Region Name</option>
-                                    @foreach ($regions as $region)
-                                        <option value="{{ $region->regional_code }}">{{ $region->name }}</option>
-                                    @endforeach
-                                </select>
-
-                                @error('regional_code')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
 
                             <div class="mb-4 col-md-6">
                                 <label class="form-label">Assembly Name</label>
-                                <select class="form-control @error('name') is-invalid @enderror" id="name"
-                                    name="name" required>
-
-                                </select>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                    id="name" name="name" placeholder="Enter Assembly Name">
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -93,9 +77,34 @@
                             <div class="mb-4 col-md-6">
                                 <label class="form-label">Assembly Code</label>
                                 <input type="text" class="form-control @error('assembly_code') is-invalid @enderror"
-                                    placeholder="Enter Assembly Code" name="assembly_code" readonly>
+                                    placeholder="Enter Assembly Code" name="assembly_code">
 
                                 @error('assembly_code')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-4 col-md-6">
+                                <label for="role_access" class="form-label">Regional Name</label>
+                                <select class="form-control @error('regional') is-invalid @enderror" id="regional"
+                                    name="regional">
+                                    <option value="">Select Region Name</option>
+                                    @foreach ($regions as $region)
+                                        <option value="{{ $region->regional_code }}">{{ $region->name }}</option>
+                                    @endforeach
+                                </select>
+
+                                @error('regional')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-4 col-md-6">
+                                <label class="form-label">Region Code</label>
+                                <input type="text" class="form-control @error('regional_code') is-invalid @enderror"
+                                    placeholder="Enter Region Code" name="regional_code" readonly>
+
+                                @error('regional_code')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -109,6 +118,23 @@
 
                                 @error('supervisor_id')
                                     <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="assembly_category" class="form-label">Assembly Category</label>
+                                <select class="form-control @error('assembly_category') is-invalid @enderror"
+                                    id="assembly_category" name="assembly_category" required>
+                                    <option disabled selected>Select Assembly Category</option>
+                                    <option value="Municipal">Municipal</option>
+                                    <option value="Metropolitan">Metropolitan</option>
+                                    <option value="District">District</option>
+                                </select>
+
+                                @error('assembly_category')
+                                    <span class="invalid-feedback" role="alert">
+                                        {{ $message }}
+                                    </span>
                                 @enderror
                             </div>
 
@@ -138,141 +164,22 @@
 
                             <div class="mb-4 col-md-12">
                                 <label for="message">Upload Assembly Logo</label>
-                                <input class="file" id="logo" name="logo" type="file" data-show-upload="false"
-                                    data-theme="fa" data-max-file-count="" data-max-total-file-count=""
-                                    data-initial-preview-as-data="true" , data-initial-preview=""
-                                    data-initial-preview-config="" data-required="false" data-overwrite-initial="false"
-                                    data-max-file-size="15000" data-browse-label="Browse"
+                                <input class="file" id="logo" name="logo" type="file"
+                                    data-show-upload="false" data-theme="fa" data-max-file-count=""
+                                    data-max-total-file-count="" data-initial-preview-as-data="true" ,
+                                    data-initial-preview="" data-initial-preview-config="" data-required="false"
+                                    data-overwrite-initial="false" data-max-file-size="15000" data-browse-label="Browse"
                                     data-browse-icon="<i class='fa fa-folder-open'></i>" />
                             </div>
 
-                            <div class="mb-4 col-md-12">
-                                <label class="form-label">Assembly Invoice Template (Click to view templates)</label>
-
-                                <div class="row" style="margin-bottom:40px">
-                                    <div class="mb-4 col-md-4">
-                                        <div class="template-container">
-                                            <input type="radio" name="invoice_layout" class="template-radio"
-                                                id="template1-radio" value="target001.png">
-                                            <a href="javascript:;" class="flex text-primary template"
-                                                data-bs-toggle="modal" data-bs-target="#template1-preview">
-                                                Template 1</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-4 col-md-4">
-                                        <div class="template-container">
-                                            <input type="radio" name="invoice_layout" class="template-radio"
-                                                id="template2-radio" value="target001.png">
-                                            <a href="javascript:;" class="flex text-primary template"
-                                                data-bs-toggle="modal" data-bs-target="#template2-preview">
-                                                Template 2</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-4 col-md-4">
-                                        <div class="template-container">
-                                            <input type="radio" name="invoice_layout" class="template-radio"
-                                                id="template3-radio" value="target001.png">
-                                            <a href="javascript:;" class="flex text-primary template"
-                                                data-bs-toggle="modal" data-bs-target="#template3-preview">
-                                                Template 3</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-4 col-md-12">
-                                        <label class="form-label">Select Assembly Boundary</label>
-                                        <div class="map-header" id="app-map-container"
-                                            style="width:100%; height:500px; position:relative; margin:0; padding:0;">
-
-                                            <div class="map-header-layer" id="map"
-                                                style="width:100%; height:100%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary">Save</button>
-                                </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="modal fade" id="template1-preview">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Assembly Invoice Template (Template 1)</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal">
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="mb-4 col-md-6">
-                                <img src="{{ asset('assets/images/template/target001.png') }}" width="720"
-                                    height="450" style="border-radius: 10px;">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="template2-preview">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Assembly Invoice Template (Template 2)</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal">
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="mb-4 col-md-6">
-                                <div class="mb-4 col-md-6">
-                                    <img src="{{ asset('assets/images/template/target001.png') }}" width="720"
-                                        height="450" style="border-radius: 10px;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="template3-preview">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Assembly Invoice Template (Template 3)</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal">
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="mb-4 col-md-6">
-                                <div class="mb-4 col-md-6">
-                                    <img src="{{ asset('assets/images/template/target001.png') }}" width="720"
-                                        height="450" style="border-radius: 10px;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 @endsection
 

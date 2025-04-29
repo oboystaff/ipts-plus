@@ -39,8 +39,28 @@ class PropertyController extends Controller
         $entityTypes = BusinessClassType::orderBy('created_at', 'DESC')->get();
         $categories = BusinessClassType::orderBy('created_at', 'DESC')->get();
         $assemblies = Assembly::orderBy('created_at', 'DESC')->get();
-        $divisions = Division::orderBy('created_at', 'DESC')->get();
-        $propertyUses = PropertyUser::orderBy('created_at', 'DESC')->get();
+
+        $divisions = Division::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
+
+        $propertyUses = PropertyUser::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
 
         $properties = Property::orderBy('created_at', 'DESC')
             ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
@@ -167,7 +187,16 @@ class PropertyController extends Controller
             })
             ->get();
 
-        $zones = Zone::orderBy('name', 'ASC')->get();
+        $zones = Zone::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
 
         return view('properties.create', compact('businessClassTypes', 'customers', 'districtAssemblies', 'zones'));
     }
@@ -407,8 +436,26 @@ class PropertyController extends Controller
             })
             ->get();
 
-        $zones = Zone::orderBy('name', 'ASC')->get();
+        $zones = Zone::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
+
         $propertyUsers = PropertyUser::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
             ->where('zone_id', $property->zone_id)
             ->get();
 

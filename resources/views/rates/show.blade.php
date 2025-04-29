@@ -78,7 +78,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="block_code">Property Rate</label>
+                                <label for="block_code" class="form-label">Property Rate</label>
                                 <input type="text" class="form-control @error('rate') is-invalid @enderror"
                                     id="rate" name="rate" placeholder="Property rate" value="{{ $rate->rate }}"
                                     readonly>
@@ -91,7 +91,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="block_code">Property Minimum Rate</label>
+                                <label for="block_code" class="form-label">Property Minimum Rate</label>
                                 <input type="text" class="form-control @error('minimum_rate') is-invalid @enderror"
                                     id="minimum_rate" name="minimum_rate" placeholder="Property minimum rate"
                                     value="{{ $rate->minimum_rate }}" readonly>

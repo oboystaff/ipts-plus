@@ -95,7 +95,15 @@ class UserController extends Controller
             })
             ->get();
 
-        $roles = Role::orderBy('name', 'ASC')->get();
+        if ($request->user()->access_level === "Super_User") {
+            $roles = Role::query()
+                ->orderBy('name', 'ASC')
+                ->get();
+        } else {
+            $roles = Role::whereRaw('LOWER(name) NOT IN (?, ?, ?)', ['administrator', 'gra', 'gog'])
+                ->orderBy('name', 'ASC')
+                ->get();
+        }
 
         return view('users.create', compact('assemblies', 'divisions', 'roles', 'regions'));
     }
@@ -126,9 +134,27 @@ class UserController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $roles = Role::orderBy('name', 'ASC')->get();
-        $assemblies = Assembly::get();
-        $divisions = Division::get();
+        if ($request->user()->access_level === "Super_User") {
+            $roles = Role::query()
+                ->orderBy('name', 'ASC')
+                ->get();
+        } else {
+            $roles = Role::whereRaw('LOWER(name) NOT IN (?, ?, ?)', ['administrator', 'gra', 'gog'])
+                ->orderBy('name', 'ASC')
+                ->get();
+        }
+
+        $assemblies = Assembly::query()
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
+
+        $divisions = Division::query()
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
 
         $regions = GhanaRegion::orderBy('name', 'ASC')
             ->when(!empty($request->user()->regional_code), function ($query) use ($request) {

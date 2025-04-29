@@ -116,7 +116,7 @@
 
                             @can('users.create')
                                 <a href="{{ route('users.index') }}" class="btn btn-primary">
-                                    <i class="fa fa-plus me-1"></i> Back to User Management
+                                    <i class="ri-arrow-go-back-line"></i> Back
                                 </a>
                             @endcan
                         </div>

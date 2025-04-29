@@ -15,9 +15,6 @@
                             <i class="ri-community-line me-2"></i> Division Settings
                         </h4>
 
-
-
-
                         <p class="mb-0 text-muted fs-14">
                             You are Adding A New Division Record to your
                             central database repository.
@@ -29,8 +26,6 @@
                             <i class="fa fa-arrow-left me-1"></i> Back
                         </a>
                     @endcan
-
-
                 </div>
             </div>
         </div>

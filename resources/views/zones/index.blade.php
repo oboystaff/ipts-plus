@@ -53,6 +53,7 @@
                             <tr>
                                 <th>S/N</th>
                                 <th>Zone Name</th>
+                                <th>Assembly Code</th>
                                 <th>Created By</th>
                                 <th>Date Created</th>
                                 <th>Actions</th>
@@ -63,6 +64,7 @@
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $zone->name }}</td>
+                                    <td>{{ $zone->assembly_code }}</td>
                                     <td>{{ $zone->createdBy->name ?? '' }}</td>
                                     <td>{{ $zone->created_at }}</td>
                                     <td>

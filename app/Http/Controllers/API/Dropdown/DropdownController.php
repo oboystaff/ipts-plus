@@ -19,6 +19,9 @@ class DropdownController extends Controller
     public function index(Request $request)
     {
         $zones = Zone::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
             ->with(['propertyUse'])
             ->get(['id', 'name']);
 
@@ -46,6 +49,9 @@ class DropdownController extends Controller
             ->get(['id', 'name']);
 
         $propertyUses = PropertyUser::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
             ->get(['id', 'name']);
 
         $responseData = [

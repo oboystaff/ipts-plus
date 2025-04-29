@@ -31,6 +31,7 @@ class UpdateAssemblyRequest extends FormRequest
             'status' => ['nullable', 'string'],
             'geo_reference_area' => ['nullable', 'string'],
             'address' => ['nullable', 'string'],
+            'assembly_category' => ['required', 'string', 'in:Municipal,Metropolitan,District'],
             'phone' => ['nullable', 'string'],
             'geo_coordinate' => ['nullable', 'string']
         ];

@@ -19,7 +19,6 @@
                             You are About to Add A New Rate Payer Record from your
                             central database repository.
                         </p>
-
                     </div>
 
                     <a href="{{ route('citizens.index') }}" class="btn btn-sm btn-primary">

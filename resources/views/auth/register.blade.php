@@ -95,9 +95,10 @@
     <div class="authentication-background">
         <div class="container-lg">
             <form action="{{ route('citizens.frontstore') }}" method="POST">
-                @csrf <!-- This is for CSRF protection if you're using Laravel -->
+                @csrf
+
                 <div class="row justify-content-center authentication authentication-basic align-items-center h-100">
-                    <div class="col-xxl-8 col-lg-8 col-md-8 col-8"> <!-- Adjusted width classes -->
+                    <div class="col-xxl-8 col-lg-8 col-md-8 col-8">
                         <div class="card custom-card my-4 border">
                             <div class="card-body">
                                 <!-- Registration Form -->
@@ -125,25 +126,34 @@
                                 <!-- Registration Type Selector -->
                                 <div class="mb-3">
                                     <label for="registration-type" class="form-label">Registration Type</label>
-                                    <select class="form-select" id="registration-type" name="registration_type">
+                                    <select class="form-select @error('registration_type') is-invalid @enderror"
+                                        id="registration-type" name="registration_type">
                                         <option value="">Select Registration Type</option>
-                                        <option value="individual">Individual Rate Payer</option>
+                                        <option value="individual" selected>Individual Rate Payer</option>
                                         <option value="organization">Organization</option>
                                     </select>
+
+                                    @error('registration_type')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
 
                                 <!-- Individual Rate Payer Fields -->
-                                <div id="individual-fields" class="d-none">
+                                <div id="individual-fields">
                                     <div class="row">
                                         <div class="col-md-4 mb-3">
                                             <label for="first-name" class="form-label">First Name</label>
                                             <input type="text" id="first-name" name="first_name"
                                                 class="form-control">
                                         </div>
+
                                         <div class="col-md-4 mb-3">
                                             <label for="last-name" class="form-label">Last Name</label>
                                             <input type="text" id="last-name" name="last_name" class="form-control">
                                         </div>
+
                                         <div class="col-md-4 mb-3">
                                             <label for="id-type" class="form-label">ID Type</label>
                                             <select class="form-select" id="id-type" name="id_type">
@@ -157,6 +167,7 @@
                                             </select>
                                         </div>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-md-4 mb-3">
                                             <label for="id-number" class="form-label">ID Number</label>
@@ -175,6 +186,34 @@
                                                 </span>
                                             @enderror
                                         </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <label for="password" class="form-label">Password</label>
+                                            <input type="password" id="password" name="password"
+                                                class="form-control @error('password') is-invalid @enderror">
+
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-md-4 mb-3">
+                                            <label for="password" class="form-label">Confirm Password</label>
+                                            <input type="password" id="password_confirmation"
+                                                name="password_confirmation"
+                                                class="form-control @error('password_confirmation') is-invalid @enderror">
+
+                                            @error('password_confirmation')
+                                                <span class="invalid-feedback" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
 
@@ -186,12 +225,14 @@
                                             <input type="text" id="business-name" name="business_name"
                                                 class="form-control">
                                         </div>
+
                                         <div class="col-md-4 mb-3">
                                             <label for="date-of-commencement" class="form-label">
                                                 Commencement</label>
                                             <input type="date" id="date-of-commencement"
                                                 name="date_of_commencement" class="form-control">
                                         </div>
+
                                         <div class="col-md-4 mb-3">
                                             <label for="org-first-name" class="form-label">Contact Person's First
                                                 Name</label>
@@ -199,6 +240,7 @@
                                                 class="form-control">
                                         </div>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-md-4 mb-3">
                                             <label for="org-last-name" class="form-label">Contact Person's Last
@@ -206,6 +248,7 @@
                                             <input type="text" id="org-last-name" name="org_last_name"
                                                 class="form-control">
                                         </div>
+
                                         <div class="col-md-4 mb-3">
                                             <label for="phone" class="form-label">Phone</label>
                                             <input type="tel" id="phone" name="org_telephone_number"
@@ -217,6 +260,7 @@
                                                 </span>
                                             @enderror
                                         </div>
+
                                         <div class="col-md-4 mb-3">
                                             <label for="email" class="form-label">Email</label>
                                             <input type="email" id="email" name="email"
@@ -246,10 +290,37 @@
                                             class="form-control" placeholder="Enter your answer">
                                     </div>
 
-                                    <div class="col-md-12 mb-3">
-                                        <label for="tin_number" class="form-label">TIN (Tax ID Number)</label>
-                                        <input type="text" id="tin_number" name="tin_number"
-                                            class="form-control">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="tin_number" class="form-label">TIN (Tax ID Number)</label>
+                                            <input type="text" id="tin_number" name="tin_number"
+                                                class="form-control">
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <label for="password" class="form-label">Password</label>
+                                            <input type="password" id="org_password" name="org_password"
+                                                class="form-control @error('org_password') is-invalid @enderror">
+
+                                            @error('org_password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <label for="password" class="form-label">Confirm Password</label>
+                                            <input type="password" id="org_password_confirmation"
+                                                name="org_password_confirmation"
+                                                class="form-control @error('org_password_confirmation') is-invalid @enderror">
+
+                                            @error('org_password_confirmation')
+                                                <span class="invalid-feedback" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
 
@@ -280,37 +351,46 @@
     <script src="{{ asset('assets/js/show-password.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Get the Registration Type dropdown and sections
             const registrationTypeSelect = document.getElementById('registration-type');
             const individualFields = document.getElementById('individual-fields');
             const organizationFields = document.getElementById('organization-fields');
             const registerButton = document.getElementById('register-button');
 
-            // Function to handle displaying fields based on the registration type
-            function toggleFields() {
-                const selectedType = registrationTypeSelect.value;
+            function toggleFields(selectedType = null) {
+                if (!selectedType) {
+                    selectedType = registrationTypeSelect.value;
+                }
 
-                // Show or hide fields based on the selected type
                 if (selectedType === 'individual') {
                     individualFields.classList.remove('d-none');
                     organizationFields.classList.add('d-none');
                     registerButton.classList.remove('d-none');
+                    registrationTypeSelect.value = 'individual';
                 } else if (selectedType === 'organization') {
                     organizationFields.classList.remove('d-none');
                     individualFields.classList.add('d-none');
                     registerButton.classList.remove('d-none');
-                } else {
-                    individualFields.classList.add('d-none');
-                    organizationFields.classList.add('d-none');
-                    registerButton.classList.add('d-none');
+                    registrationTypeSelect.value = 'organization';
                 }
+
+                const currentUrl = new URL(window.location.href);
+                currentUrl.searchParams.set('registration_type', selectedType);
+                window.history.replaceState({}, '', currentUrl);
             }
 
-            // Run the toggleFields function when the Registration Type changes
-            registrationTypeSelect.addEventListener('change', toggleFields);
+            // On page load
+            const urlParams = new URLSearchParams(window.location.search);
+            const registrationTypeFromUrl = urlParams.get('registration_type');
 
-            // Initial run to ensure correct fields are shown on page load
-            toggleFields();
+            if (registrationTypeFromUrl === 'individual' || registrationTypeFromUrl === 'organization') {
+                toggleFields(registrationTypeFromUrl);
+            } else {
+                toggleFields('individual');
+            }
+
+            registrationTypeSelect.addEventListener('change', function() {
+                toggleFields();
+            });
         });
     </script>
 </body>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\API\Customer\UpdateCustomerRequest;
 use App\Models\Assembly;
 use App\Models\Business;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ use App\Models\GhanaRegion;
 use App\Models\User;
 use App\Models\Payment;
 use App\Models\BusinessClassType;
+use App\Models\CustomerType;
 use App\Models\Zone;
 use Illuminate\Support\Collection;
 
@@ -1215,7 +1217,16 @@ class DashboardController extends Controller
                     ->get();
 
                 $districtAssemblies = Assembly::get();
-                $zones = Zone::get();
+                $zones = Zone::orderBy('name', 'ASC')
+                    ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                        $query->whereHas('assembly', function ($q) use ($request) {
+                            $q->where('regional_code', $request->user()->regional_code);
+                        });
+                    })
+                    ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                        $query->where('assembly_code', $request->user()->assembly_code);
+                    })
+                    ->get();
             } else {
                 $properties = [];
                 $businesses = [];
@@ -4476,5 +4487,20 @@ class DashboardController extends Controller
             ->get();
 
         return response()->json($totalRegionalDonutData);
+    }
+
+    public function myProfile(Request $request)
+    {
+        $citizen = Citizen::where('user_id', $request->user()->id)->first();
+        $customerTypes = CustomerType::orderBy('created_at', 'DESC')->get();
+
+        return view('dashboard.myprofile', compact('citizen', 'customerTypes'));
+    }
+
+    public function updateMyProfile(UpdateCustomerRequest $request, Citizen $citizen)
+    {
+        $citizen->update($request->validated());
+
+        return redirect()->route('dashboard.operational')->with('status', 'Rate payer updated successfully!');
     }
 }

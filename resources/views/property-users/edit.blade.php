@@ -31,7 +31,6 @@
             <div class="col-md-12">
                 <div class="card">
 
-
                     <div class="card-body">
                         <form class="row g-3 needs-validation" method="POST"
                             action="{{ route('property-users.update', $propertyUser) }}">
@@ -39,7 +38,7 @@
 
 
                             <div class="col-md-6 mb-3">
-                                <label for="block_code">Property Use Name</label>
+                                <label for="block_code" class="form-label">Property Use Name</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
                                     id="name" name="name" placeholder="Property use name"
                                     value="{{ $propertyUser->name }}">
@@ -64,6 +63,27 @@
                                 </select>
 
                                 @error('zone_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="assembly_code" class="form-label">Assembly Code</label>
+                                <select class="form-control @error('assembly_code') is-invalid @enderror" id="assembly_code"
+                                    name="assembly_code" required>
+                                    <option disabled selected>Select Assembly</option>
+                                    @foreach ($assemblies as $assembly)
+                                        <option value="{{ $assembly->assembly_code }}"
+                                            {{ old('assembly_code', $zone->assembly_code) == $assembly->assembly_code ? 'selected' : '' }}>
+                                            {{ $assembly->name }}
+                                            ({{ $assembly->assembly_code }})
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('assembly_code')
                                     <span class="invalid-feedback" role="alert">
                                         {{ $message }}
                                     </span>

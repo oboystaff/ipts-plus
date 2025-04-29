@@ -37,11 +37,15 @@
                             <a href="{{ route('assembly.create') }}" class="btn btn-primary btn-sm ms-2">
                                 <i class="ri-building-line me-1"></i> Create Assembly
                             </a>
+
+                            <a href="{{ route('assembly.import') }}" class="btn btn-success btn-sm ms-2">+ Upload Bulk
+                                Assembly</a>
                         </div>
                     @endcan
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-xl-12 active-p">
 
@@ -60,16 +64,15 @@
                 @endif
 
                 <div class="card">
-
-                    {{-- <div id="map"></div> --}}
                     <div class="card-body px-0">
                         <div class="table-responsive">
                             <table id="file-export" class="table table-bordered text-nowrap w-100">
                                 <thead>
                                     <tr>
                                         <th>S/N</th>
-                                        <th>Name</th>
+                                        <th>Assembly Name</th>
                                         <th>Assembly Code</th>
+                                        <th>Assembly Category</th>
                                         <th>Regional Code</th>
                                         <th>Regional Name</th>
                                         <th>Set-Up Status</th>
@@ -84,6 +87,7 @@
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $assembly->name }} Assembly</td>
                                             <td>{{ $assembly->assembly_code }}</td>
+                                            <td>{{ $assembly->assembly_category ?? 'N/A' }}</td>
                                             <td>{{ $assembly->regional_code }}</td>
                                             <td>{{ $assembly->region->name ?? 'N/A' }}</td>
                                             <td>{{ $assembly->status ?? 'Not Active' }}</td>

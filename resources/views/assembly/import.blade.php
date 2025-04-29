@@ -13,21 +13,17 @@
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <div>
                         <h4 class="fw-bold text-primary mb-1">
-                            <i class="ri-money-dollar-circle-line me-2"></i> Rates Settings
+                            <i class="ri-settings-5-line me-2"></i> Assembly Setup - Configurations
                         </h4>
 
                         <p class="mb-0 text-muted fs-14">
-                            You are Importing Rates Settings Record To your
-                            central database repository.
+                            Manage your Assembly here.
                         </p>
                     </div>
-                    @can('rates.create')
-                        <div class="d-flex gap-2">
-                            <a href="{{ route('rates.index') }}" class="btn btn-sm btn-primary">
+                    @can('assemblies.create')
+                        <div>
+                            <a href="{{ route('assembly.index') }}" class="btn btn-primary btn-sm ms-2">
                                 <i class="ri-arrow-go-back-line"></i> Back
-                            </a>
-                            <a href="{{ route('rates.downloadTemplate') }}" class="btn btn-sm btn-success">
-                                <i class="ri-file-download-line me-1"></i> Download Rates Sample
                             </a>
                         </div>
                     @endcan
@@ -39,7 +35,7 @@
                 <div class="card">
 
                     <div class="card-body">
-                        <form class="row g-3 needs-validation" method="POST" action="{{ route('rates.importData') }}"
+                        <form class="row g-3 needs-validation" method="POST" action="{{ route('assembly.importData') }}"
                             enctype="multipart/form-data">
                             @csrf
 
@@ -69,7 +65,7 @@
                             @endif
 
                             <div class="col-md-12 mb-3">
-                                <label for="first_name" class="mb-3">Upload Property Rate Excel File</label>
+                                <label for="first_name" class="mb-3">Upload Assembly Excel File</label>
                                 <input class="file" id="file" name="file" type="file" data-show-upload="false"
                                     data-theme="fa" data-max-file-count="" data-max-total-file-count=""
                                     data-initial-preview-as-data="true" , data-initial-preview=""

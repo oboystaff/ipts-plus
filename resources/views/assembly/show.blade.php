@@ -43,77 +43,74 @@
                             @csrf
 
                             <div class="col-md-6 mb-3">
-                                <label for="name">Assembly Name</label>
+                                <label for="name" class="form-label">Assembly Name</label>
                                 <input type="text" class="form-control" id="name" name="name"
                                     value="{{ $assembly->name }}" readonly>
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="assembly_code">Assembly Code</label>
+                                <label for="assembly_code" class="form-label">Assembly Code</label>
                                 <input type="text" class="form-control" id="assembly_code" name="assembly_code"
                                     value="{{ $assembly->assembly_code }}" readonly>
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="regional_code">Regional Code</label>
+                                <label for="regional" class="form-label">Region Name</label>
+                                <input type="text" class="form-control" id="regional" name="regional"
+                                    value="{{ $assembly->region->name ?? 'N/A' }}" readonly>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="regional_code" class="form-label">Regional Code</label>
                                 <input type="text" class="form-control" id="regional_code" name="regional_code"
                                     value="{{ $assembly->regional_code }}" readonly>
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="status">Status</label>
-                                <input type="text" class="form-control" id="status" name="status"
-                                    value="{{ $assembly->status }}" readonly>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="supervisor">Supervisor</label>
+                                <label for="supervisor" class="form-label">Assembly Admin</label>
                                 <input type="text" class="form-control" id="supervisor" name="supervisor"
                                     value="{{ $assembly->assemblySupervisor->name ?? '' }}" readonly>
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="address">Address</label>
+                                <label for="supervisor" class="form-label">Assembly Category</label>
+                                <input type="text" class="form-control" id="supervisor" name="supervisor"
+                                    value="{{ $assembly->assembly_category ?? 'N/A' }}" readonly>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="address" class="form-label">Address</label>
                                 <input type="text" class="form-control" id="address" name="address"
                                     value="{{ $assembly->address ?? '' }}" readonly>
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="phone">Phone</label>
+                                <label for="phone" class="form-label">Phone</label>
                                 <input type="text" class="form-control" id="phone" name="phone"
                                     value="{{ $assembly->phone ?? '' }}" readonly>
                             </div>
 
                             <div class="col-md-6 mb-3">
+                                <label for="status" class="form-label">Status</label>
+                                <input type="text" class="form-control" id="status" name="status"
+                                    value="{{ $assembly->status }}" readonly>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
+                            </div>
+
+                            <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-6">
                                         @if (isset($assembly->logo))
                                             <label>Assembly Logo</label>
-                                            <img src="{{ asset('storage/images/logo/' . $assembly->logo) }}" width="300"
-                                                height="340" style="border-radius: 10px;">
+                                            <img src="{{ asset('storage/images/logo/' . $assembly->logo) }}"
+                                                width="300" height="340" style="border-radius: 10px;">
                                         @else
                                             <h4 style="color:red">No logo uploaded for the selected assembly</h4>
                                         @endif
                                     </div>
-
-                                    <div class="col-md-6">
-                                        @if (isset($assembly->invoice_layout))
-                                            <label>Assembly Invoice Template</label>
-                                            <img src="{{ asset('assets/images/template/' . $assembly->invoice_layout) }}"
-                                                width="300" height="340" style="border-radius: 10px;">
-                                        @else
-                                            <h4 style="color:red">No template uploaded for the selected assembly</h4>
-                                        @endif
-                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <label for="phone">Selected Boundary</label>
-                                <div id="map" style="height: 500px;"></div>
                             </div>
                         </form>
                     </div>

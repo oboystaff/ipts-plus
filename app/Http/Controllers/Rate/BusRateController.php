@@ -44,7 +44,16 @@ class BusRateController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $zones = Zone::orderBy('name', 'ASC')->get();
+        $zones = Zone::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
 
         $assemblies = Assembly::orderBy('name', 'ASC')
             ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
@@ -79,8 +88,26 @@ class BusRateController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $zones = Zone::orderBy('name', 'ASC')->get();
+        $zones = Zone::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
+
         $propertyUsers = PropertyUser::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
             ->where('zone_id', $rate->zone_id)
             ->get();
 

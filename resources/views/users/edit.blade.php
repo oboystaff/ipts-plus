@@ -112,7 +112,7 @@
 
                     @can('users.create')
                         <a href="{{ route('users.index') }}" class="btn btn-primary">
-                            <i class="fa fa-plus me-1"></i> Back to User Management
+                            <i class="ri-arrow-go-back-line"></i> Back
                         </a>
                     @endcan
                 </div>
@@ -182,9 +182,9 @@
 
                         <div class="col-md-4">
                             <label class="form-label">Gender</label>
-                            <select class="form-control @error('gender') is-invalid @enderror" id="gender" name="gender"
-                                required>
-                                <option value="">Select User Gender</option>
+                            <select class="form-control @error('gender') is-invalid @enderror" id="gender"
+                                name="gender">
+                                <option value="">Select Gender</option>
                                 <option value="Male"
                                     {{ old('gender', $user->gender ?? '') == 'Male' ? 'selected' : '' }}>
                                     Male</option>
@@ -270,45 +270,43 @@
                             @enderror
                         </div>
 
-                        @if ($user->access_level !== 'customer')
-                            <div class="col-md-4">
-                                <label class="form-label">Region</label>
-                                <select class="form-control" name="regional_code">
-                                    <option disabled selected>Select Region</option>
-                                    @foreach ($regions as $region)
-                                        <option value="{{ $region->regional_code }}"
-                                            {{ old('regional_code', $user->regional_code) == $region->regional_code ? 'selected' : '' }}>
-                                            {{ $region->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Region</label>
+                            <select class="form-control" name="regional_code">
+                                <option disabled selected>Select Region</option>
+                                @foreach ($regions as $region)
+                                    <option value="{{ $region->regional_code }}"
+                                        {{ old('regional_code', $user->regional_code) == $region->regional_code ? 'selected' : '' }}>
+                                        {{ $region->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                            <div class="mb-3 col-md-4">
-                                <label for="assembly_code" class="form-label">Assembly Code</label>
-                                <select class="form-control" name="assembly_code">
-                                    <option value="">Select Assembly</option>
-                                    @foreach ($assemblies as $assembly)
-                                        <option value="{{ $assembly->assembly_code }}"
-                                            {{ old('assembly_code', $user->assembly_code) == $assembly->assembly_code ? 'selected' : '' }}>
-                                            {{ $assembly->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
+                        <div class="mb-3 col-md-4">
+                            <label for="assembly_code" class="form-label">Assembly Code</label>
+                            <select class="form-control" name="assembly_code">
+                                <option value="">Select Assembly</option>
+                                @foreach ($assemblies as $assembly)
+                                    <option value="{{ $assembly->assembly_code }}"
+                                        {{ old('assembly_code', $user->assembly_code) == $assembly->assembly_code ? 'selected' : '' }}>
+                                        {{ $assembly->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                            <div class="mb-3 col-md-4" style="display: none">
-                                <label for="division_code" class="form-label">Division Code</label>
-                                <select class="form-control" name="division_code">
-                                    <option value="">Select Division</option>
-                                    @foreach ($divisions as $division)
-                                        <option value="{{ $division->division_code }}"
-                                            {{ old('division_code', $user->division_code) == $division->division_code ? 'selected' : '' }}>
-                                            {{ $division->division_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        @endif
+                        <div class="mb-3 col-md-4" style="display: none">
+                            <label for="division_code" class="form-label">Division Code</label>
+                            <select class="form-control" name="division_code">
+                                <option value="">Select Division</option>
+                                @foreach ($divisions as $division)
+                                    <option value="{{ $division->division_code }}"
+                                        {{ old('division_code', $user->division_code) == $division->division_code ? 'selected' : '' }}>
+                                        {{ $division->division_name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
 
                         <!-- Fourth Row -->
                         <div class="mb-3 col-md-4">

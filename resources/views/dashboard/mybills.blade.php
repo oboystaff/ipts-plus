@@ -5,12 +5,30 @@
 
 @section('page-content')
     <div class="container-fluid mh-auto">
-        <div class="row">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <div class="card-header">
-                    <div class="card-title">Customer Service / My Bills</div>
+        <div class="card">
+
+            <!-- HEADER SECTION -->
+            <div class="card-body border-bottom pb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="ri-user-settings-line me-2"></i> Rate Payer - Management
+                        </h4>
+
+                        <p class="mb-0 text-muted fs-14">
+                            You are Viewing Rate Payer Bill Record from your
+                            central database repository.
+                        </p>
+                    </div>
+
+                    {{-- <a href="{{ route('dashboard.mybills') }}" class="btn btn-sm btn-primary">
+                        <i class="fa fa-arrow-left me-1"></i> Back
+                    </a> --}}
                 </div>
             </div>
+        </div>
+
+        <div class="row">
 
             <div class="col-xl-12 active-p">
                 <div class="tab-pane fade show active" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab">
@@ -88,10 +106,10 @@
                                                                     href=" {{ route('citizens.viewBill', $bill) }}">View
                                                                     Bill
                                                                 </a>
-                                                                <a class="dropdown-item"
+                                                                {{-- <a class="dropdown-item"
                                                                     href=" {{ route('payments.customerCreate', $bill) }}">Make
                                                                     Payment
-                                                                </a>
+                                                                </a> --}}
                                                             </div>
                                                         </div>
                                                     </div>

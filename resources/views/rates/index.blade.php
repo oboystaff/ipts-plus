@@ -21,16 +21,17 @@
                             </p>
                         </div>
                         @can('rates.create')
-                            <a href="{{ route('rates.create') }}" class="btn btn-sm btn-primary">
-                                <i class="ri-add-circle-line me-1"></i> Add New Rate
-                            </a>
-                            <a href="{{ route('rates.import') }}" class="btn btn-sm btn-primary ms-2">
-                                <i class="ri-upload-cloud-line me-1"></i> Import Bulk Rate
-                            </a>
+                            <div class="d-flex gap-2">
+                                <a href="{{ route('rates.create') }}" class="btn btn-sm btn-primary">
+                                    <i class="ri-add-circle-line me-1"></i> Add New Rate
+                                </a>
+                                <a href="{{ route('rates.import') }}" class="btn btn-sm btn-success ms-2">
+                                    <i class="ri-upload-cloud-line me-1"></i> Import Bulk Rate
+                                </a>
+                            </div>
                         @endcan
                     </div>
                 </div>
-
             </div>
 
 

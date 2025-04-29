@@ -44,7 +44,16 @@ class RateController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $zones = Zone::orderBy('name', 'ASC')->get();
+        $zones = Zone::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
 
         $assemblies = Assembly::orderBy('name', 'ASC')
             ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
@@ -79,8 +88,26 @@ class RateController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $zones = Zone::orderBy('name', 'ASC')->get();
+        $zones = Zone::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
+
         $propertyUsers = PropertyUser::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
             ->where('zone_id', $rate->zone_id)
             ->get();
 
@@ -105,10 +132,39 @@ class RateController extends Controller
 
     public function propertyUse(Request $request)
     {
-        $propertyUse = PropertyUser::orderBy('name', 'ASC')->where('zone_id', $request->zone_id)->get();
+        $propertyUse = PropertyUser::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->where('zone_id', $request->zone_id)
+            ->get();
 
         return response()->json([
             'message' => $propertyUse
+        ]);
+    }
+
+    public function zone(Request $request)
+    {
+        $zones = Zone::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->where('assembly_code', $request->assembly_code)
+            ->get();
+
+        return response()->json([
+            'message' => $zones
         ]);
     }
 

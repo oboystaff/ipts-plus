@@ -34,7 +34,7 @@ class UpdateUserRequest extends FormRequest
             'assembly_code' => 'nullable|string|string|exists:assemblies,assembly_code',
             'division_code' => 'nullable|string|string|exists:divisions,division_code',
             'role' => 'required|string',
-            'gender' => 'required|string'
+            'gender' => 'nullable|string'
         ];
     }
 }

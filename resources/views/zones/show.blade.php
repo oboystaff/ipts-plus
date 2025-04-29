@@ -37,13 +37,26 @@
                         <form class="row g-3 needs-validation" method="POST" action="{{ route('zones.update', $zone) }}">
                             @csrf
 
-                            <div class="col-md-12 mb-3">
-                                <label for="block_code">Zone Name</label>
+                            <div class="col-md-6 mb-3">
+                                <label for="block_code" class="form-label">Zone Name</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
                                     id="name" name="name" placeholder="Zone name" value="{{ $zone->name }}"
                                     readonly>
 
                                 @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="assembly_code" class="form-label">Assembly Code</label>
+                                <input type="text" class="form-control @error('assembly_code') is-invalid @enderror"
+                                    id="assembly_code" name="assembly_code" placeholder="Assembly Code"
+                                    value="{{ $zone->assembly->name ?? 'N/A' }}" readonly>
+
+                                @error('assembly_code')
                                     <span class="invalid-feedback" role="alert">
                                         {{ $message }}
                                     </span>

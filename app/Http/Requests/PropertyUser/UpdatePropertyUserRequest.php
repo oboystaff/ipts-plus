@@ -23,7 +23,8 @@ class UpdatePropertyUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'zone_id' => ['required', 'string', 'exists:zones,id']
+            'zone_id' => ['required', 'string', 'exists:zones,id'],
+            'assembly_code' => ['required', 'string', 'exists:assemblies,assembly_code']
         ];
     }
 }

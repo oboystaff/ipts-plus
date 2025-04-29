@@ -222,7 +222,6 @@ class CitizenController extends Controller
 
     public function frontstore(CreateCustomerRequestFront $request)
     {
-        return "Hello world";
         try {
             $data = $request->validated();
 
@@ -238,21 +237,22 @@ class CitizenController extends Controller
 
             $data['account_number'] = $accountNumber;
             $data['created_by'] = $request->user()->id ?? 'customer';
-            $data['status'] = 'InActive';
+            $data['status'] = 'Active';
 
             if ($request->input('registration_type') === 'organization') {
                 $data['first_name'] = $data['org_first_name'];
                 $data['last_name'] = $data['org_last_name'];
                 $data['telephone_number'] = $data['org_telephone_number'];
+                $data['password'] = $data['org_password'];
             }
 
             $userLoginData = [
                 'name' => $data['first_name'] . ' ' . $data['last_name'],
                 'email' => isset($data['email']) ? $data['email'] : $data['account_number'],
                 'phone' => $data['telephone_number'],
-                'password' => Hash::make(env('DEFAULT_PASSWORD')),
+                'password' => Hash::make($data['password']),
                 'access_level' => 'customer',
-                'status' => 'InActive'
+                'status' => 'Active'
             ];
 
             $user = User::where('phone', $data['telephone_number'])->first();
@@ -263,9 +263,11 @@ class CitizenController extends Controller
 
             $userData = User::create($userLoginData);
             $role = Role::where('name', 'like', '%customer%')->first();
+
             if ($role) {
                 $userData->roles()->sync($role->id);
             }
+
             $data['user_id'] = $userData->id;
 
             if (!empty($userData)) {
@@ -273,9 +275,9 @@ class CitizenController extends Controller
             }
 
             dispatch(new SendRegistrationReminder($customer));
-            dispatch(new SendOTPSMS($customer))->delay(now()->addSeconds(5));
+            //dispatch(new SendOTPSMS($customer))->delay(now()->addSeconds(5));
 
-            return redirect()->route('citizens.activate')->with('status', 'Citizen created successfully, kindly activate your account with the code sent to your phone.');
+            return redirect()->route('auth.index')->with('status', 'Rate payer created successfully, kindly login with your phone number and password.');
         } catch (\Exception $ex) {
             return $ex->getMessage();
         }

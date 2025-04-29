@@ -15,9 +15,6 @@
                             <i class="ri-community-line me-2"></i> Division Settings
                         </h4>
 
-
-
-
                         <p class="mb-0 text-muted fs-14">
                             You are Editing A Division Record from your
                             central database repository.
@@ -29,16 +26,12 @@
                             <i class="fa fa-arrow-left me-1"></i> Back
                         </a>
                     @endcan
-
-
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-
-
                     <div class="card-body">
                         <form class="row g-3 needs-validation" method="POST"
                             action="{{ route('divisions.update', $division) }}">

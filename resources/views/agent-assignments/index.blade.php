@@ -19,7 +19,7 @@
 
                     @can('agent-assignments.create')
                         <a href="{{ route('agent-assignments.create') }}" class="btn btn-primary">
-                            <i class="ri-user-add-line me-1"></i> Add Agents
+                            <i class="ri-user-add-line me-1"></i> Assign Agents
                         </a>
                     @endcan
                 </div>

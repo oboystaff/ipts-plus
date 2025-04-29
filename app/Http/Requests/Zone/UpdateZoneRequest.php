@@ -22,7 +22,8 @@ class UpdateZoneRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string']
+            'name' => ['required', 'string'],
+            'assembly_code' => ['required', 'string', 'exists:assemblies,assembly_code']
         ];
     }
 }

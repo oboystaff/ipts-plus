@@ -12,13 +12,22 @@ use Illuminate\Http\Request;
 
 class PropertyUserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if (!auth()->user()->can('property-uses.view')) {
             abort(403, 'Unauthorized action.');
         }
 
-        $propertyUsers = PropertyUser::orderBy('created_at', 'DESC')->get();
+        $propertyUsers = PropertyUser::orderBy('created_at', 'DESC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
 
         return view('property-users.index', compact('propertyUsers'));
     }
@@ -29,7 +38,17 @@ class PropertyUserController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $zones = Zone::orderBy('name', 'ASC')->get();
+        $zones = Zone::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
+
         $assemblies = Assembly::orderBy('name', 'ASC')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
@@ -60,14 +79,24 @@ class PropertyUserController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $zones = Zone::orderBy('name', 'ASC')->get();
+        $zones = Zone::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
+
         $assemblies = Assembly::orderBy('name', 'ASC')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
             ->get();
 
-        return view('property-users.edit', compact('propertyUser', 'zones'));
+        return view('property-users.edit', compact('propertyUser', 'zones', 'assemblies'));
     }
 
     public function update(UpdatePropertyUserRequest $request, PropertyUser $propertyUser)

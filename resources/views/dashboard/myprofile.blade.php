@@ -18,11 +18,6 @@
                         </p>
 
                     </div>
-                    @can('customers.create')
-                        <a href="{{ route('citizens.index') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus me-1"></i>
-                            Back to Rate Payer Management
-                        </a>
-                    @endcan
 
                 </div>
             </div>
@@ -33,7 +28,7 @@
                 <div class="card">
 
                     <div class="card-body">
-                        <form class="row g-3 needs-validation" action="{{ route('citizens.update', $citizen) }}"
+                        <form class="row g-3 needs-validation" action="{{ route('dashboard.updateMyProfile', $citizen) }}"
                             method="POST">
                             @csrf
 
