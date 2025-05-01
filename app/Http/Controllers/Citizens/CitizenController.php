@@ -15,11 +15,16 @@ use App\Jobs\OTP\SendOTPSMS;
 use App\Models\AuditTrail;
 use Illuminate\Http\Request;
 use App\Models\Citizen;
+use App\Models\BusinessClassType;
 use App\Models\Bill;
 use App\Models\Payment;
 use App\Models\Property;
 use App\Models\Business;
+use App\Models\Zone;
 use App\Models\CustomerType;
+use App\Models\Assembly;
+use App\Models\Division;
+use App\Models\Block;
 use App\Models\User;
 use App\Models\OTP;
 use App\Models\ServiceRequest;
@@ -479,5 +484,62 @@ class CitizenController extends Controller
         }
 
         return Response::download($filePath, 'rate_payer_template.xlsx');
+    }
+
+    public function linkProperty(Request $request)
+    {
+        $businessClassTypes = BusinessClassType::orderBy('name', 'ASC')->get();
+        $customers = Citizen::where('user_id', $request->user()->id)->get();
+
+        $assemblies = Assembly::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
+
+        $zones = Zone::orderBy('name', 'ASC')
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->whereHas('assembly', function ($q) use ($request) {
+                    $q->where('regional_code', $request->user()->regional_code);
+                });
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
+
+        $divisions = Division::orderBy('division_name', 'ASC')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
+
+        $blocks = Block::orderBy('block_name', 'ASC')
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->get();
+
+
+        $property = Property::query()
+            ->when($request->filled('property_number'), function ($query) use ($request) {
+                $query->where('property_number', $request->property_number);
+            })
+            ->orderBy('created_at', 'DESC')
+            ->whereNull('customer_name')
+            ->first();
+
+        return view('dashboard.linkproperty', compact(
+            'businessClassTypes',
+            'customers',
+            'assemblies',
+            'zones',
+            'property',
+            'divisions',
+            'blocks'
+        ));
     }
 }

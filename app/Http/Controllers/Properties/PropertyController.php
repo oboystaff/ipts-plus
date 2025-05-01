@@ -239,6 +239,14 @@ class PropertyController extends Controller
     public function ratePayerStore(CreatePropertyRequest $request)
     {
         $data = $request->validated();
+        $propertyExist = Property::where('property_number', $request->property_num)->first();
+
+        if (isset($propertyExist)) {
+            $propertyExist->update($data);
+
+            return redirect()->route('dashboard.operational')->with('status', 'Rate payer property linked successfully!');
+        }
+
         $data['created_by'] = $request->user()->id;
         $data['property_number'] = $this->generateUniquePropertyNumber($data['assembly_code'], $data['division_id'], $data['block_id']);
 
@@ -268,7 +276,7 @@ class PropertyController extends Controller
         ServiceRequest::create($serviceData);
         AuditTrail::create($auditTrailData);
 
-        return redirect()->back()->with('status', 'Property linked successfully!');
+        return redirect()->route('dashboard.operational')->with('status', 'Rate payer property linked successfully!');
     }
 
     public function getDetails(Property $property)
@@ -553,5 +561,23 @@ class PropertyController extends Controller
         }
 
         return Response::download($filePath, 'property_template.xlsx');
+    }
+
+    public function getAllProperties(Request $request)
+    {
+
+        $properties = Property::query()
+            ->when(!empty($request->user()->regional_code), function ($query) use ($request) {
+                $query->where('regional_code', $request->user()->regional_code);
+            })
+            ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
+                $query->where('assembly_code', $request->user()->assembly_code);
+            })
+            ->whereNotNull('latitude')
+            ->whereNotNull('longitude')
+            ->whereNull('customer_name')
+            ->get();
+
+        return response()->json($properties);
     }
 }

@@ -100,6 +100,7 @@ Route::group(['prefix' => 'property', 'middleware' => 'auth:sanctum'], function 
     Route::get('/import/data', [PropertyController::class, 'import'])->name('properties.import');
     Route::post('/import/data', [PropertyController::class, 'importData'])->name('properties.importData');
     Route::get('/template/data', [PropertyController::class, 'downloadTemplate'])->name('properties.downloadTemplate');
+    Route::get('/get-all/data', [PropertyController::class, 'getAllProperties'])->name('properties.getAll');
 });
 
 
@@ -162,6 +163,7 @@ Route::group(['prefix' => 'citizen', 'middleware' => 'auth:sanctum'], function (
     Route::get('/import/data', [CitizenController::class, 'import'])->name('citizens.import');
     Route::post('/import/data', [CitizenController::class, 'importData'])->name('citizens.importData');
     Route::get('/template/data', [CitizenController::class, 'downloadTemplate'])->name('citizens.downloadTemplate');
+    Route::get('/linkproperty/data', [CitizenController::class, 'linkProperty'])->name('citizens.linkProperty');
 });
 
 // Route for Customer Types
