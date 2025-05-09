@@ -123,7 +123,7 @@ class BuildingController extends Controller
             "data" => [
                 "jobName" => "Hello there",
                 "block" => "1234",
-                "assignedTo" => "Mustapha Salam"
+                "assignedTo" => "Samuel Otu"
             ]
         ]);
     }

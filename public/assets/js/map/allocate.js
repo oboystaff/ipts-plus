@@ -130,7 +130,7 @@ var IMap = function () {
             return [[bb[1], bb[0]], [bb[3], bb[2]]];
         },
         blockInfoTable: function (blocks) {
-            alert(JSON.stringify(blocks));
+            //alert(JSON.stringify(blocks));
             var tblBody = $("#job-body");
             tblBody.empty();
 
