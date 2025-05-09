@@ -872,12 +872,12 @@
                                                 Manage Division</a>
                                         </li>
                                     @endcan
-                                    {{-- @can('blocks.view')
+                                    @can('blocks.view')
                                         <li class="slide">
                                             <a href="{{ route('blocks.index') }}" class="side-menu__item">
                                                 Manage Block</a>
                                         </li>
-                                    @endcan --}}
+                                    @endcan
                                     @can('zones.view')
                                         <li class="slide">
                                             <a href="{{ route('zones.index') }}" class="side-menu__item">
