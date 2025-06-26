@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
 use App\Jobs\Registration\SendRegistrationReminder;
-
+use App\Models\Property;
 
 class CustomerController extends Controller
 {
@@ -201,6 +201,40 @@ class CustomerController extends Controller
         return response()->json([
             'message' => 'Customer updated successfully',
             'data' => $user
+        ]);
+    }
+
+    public function globalSearch($id)
+    {
+        $customer = Citizen::with(['user', 'properties'])
+            ->where(function ($query) use ($id) {
+                $query->where('user_id', $id)
+                    ->orWhere('account_number', $id)
+                    ->orWhere('first_name', 'LIKE', "%$id%")
+                    ->orWhere('last_name', 'LIKE', "%$id%")
+                    ->orWhere('telephone_number', $id)
+                    ->orWhere('ghana_card_number', $id);
+            })
+            ->get();
+
+        $property = Property::with(['customer.user', 'bills'])
+            ->where(function ($query) use ($id) {
+                $query->where('property_number', $id)
+                    ->orWhere('digital_address', $id)
+                    ->orWhere('street_name', 'LIKE', "%$id%")
+                    ->orWhere('location', 'LIKE', "%$id%");
+            })
+            ->get();
+
+        if (count($customer) == 0 && count($property) == 0) {
+            return response()->json([
+                'message' => 'No record found for this customer/property'
+            ], 422);
+        }
+
+        return response()->json([
+            'message' => 'Get customer and property details',
+            'data' => $customer->isNotEmpty() ? $customer : $property
         ]);
     }
 }

@@ -74,6 +74,7 @@ Route::group(['prefix' => 'customer', 'middleware' => 'auth:sanctum'], function 
     Route::get('/fetch/{id}', [CustomerController::class, 'multipleParam']);
     Route::post('/create', [CustomerController::class, 'store']);
     Route::post('/update/{id}', [CustomerController::class, 'update']);
+    Route::get('/search/{id}', [CustomerController::class, 'globalSearch']);
 });
 
 Route::group(['prefix' => 'bill', 'middleware' => 'auth:sanctum'], function () {
