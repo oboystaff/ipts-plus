@@ -206,7 +206,9 @@ class CustomerController extends Controller
 
     public function globalSearch($id)
     {
-        $customer = Citizen::with(['user', 'properties'])
+        $customer = Citizen::with(['properties' => function ($query) {
+            $query->select('customer_name', 'digital_address', 'location', 'street_name', 'assembly_code', 'longitude', 'latitude', 'property_number', 'ratable_value');
+        }])
             ->where(function ($query) use ($id) {
                 $query->where('user_id', $id)
                     ->orWhere('account_number', $id)
@@ -217,7 +219,12 @@ class CustomerController extends Controller
             })
             ->get();
 
-        $property = Property::with(['customer.user', 'bills'])
+        $property = Property::with([
+            'customer' => function ($query) {
+                $query->select('id', 'user_id', 'first_name', 'last_name', 'account_number', 'telephone_number', 'Ghana_card_number');
+            },
+            'bills'
+        ])
             ->where(function ($query) use ($id) {
                 $query->where('property_number', $id)
                     ->orWhere('digital_address', $id)
@@ -226,15 +233,25 @@ class CustomerController extends Controller
             })
             ->get();
 
-        if (count($customer) == 0 && count($property) == 0) {
+        if ($customer->isEmpty() && $property->isEmpty()) {
             return response()->json([
                 'message' => 'No record found for this customer/property'
             ], 422);
         }
 
+        $responseData = [];
+
+        if ($customer->isNotEmpty()) {
+            $responseData['customers'] = $customer;
+        }
+
+        if ($property->isNotEmpty()) {
+            $responseData['properties'] = $property;
+        }
+
         return response()->json([
             'message' => 'Get customer and property details',
-            'data' => $customer->isNotEmpty() ? $customer : $property
+            'data' => $responseData
         ]);
     }
 }
