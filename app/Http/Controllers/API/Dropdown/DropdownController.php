@@ -36,8 +36,8 @@ class DropdownController extends Controller
             ->select('assembly_code AS id', 'name')
             ->get();
 
-        $citizens = Citizen::orderBy('created_at', 'DESC')
-            ->get(['id', 'first_name AS name']);
+        // $citizens = Citizen::orderBy('created_at', 'DESC')
+        //     ->get(['id', 'first_name AS name']);
 
         $blocks = Block::orderBy('created_at', 'DESC')
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
@@ -59,7 +59,6 @@ class DropdownController extends Controller
             'zones' => $zones,
             'divisions' => $divisions,
             'assemblies' => $assemblies,
-            'citizens' => $citizens,
             'blocks' => $blocks,
             'entityTypes' => $entityTypes,
             'propertyUses' => $propertyUses,
