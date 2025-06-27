@@ -207,7 +207,18 @@ class CustomerController extends Controller
     public function globalSearch($id)
     {
         $customer = Citizen::with(['properties' => function ($query) {
-            $query->select('customer_name', 'digital_address', 'location', 'street_name', 'assembly_code', 'longitude', 'latitude', 'property_number', 'ratable_value');
+            $query->select(
+                'id',
+                'customer_name',
+                'digital_address',
+                'location',
+                'street_name',
+                'assembly_code',
+                'longitude',
+                'latitude',
+                'property_number',
+                'ratable_value'
+            );
         }])
             ->where(function ($query) use ($id) {
                 $query->where('user_id', $id)
@@ -221,7 +232,15 @@ class CustomerController extends Controller
 
         $property = Property::with([
             'customer' => function ($query) {
-                $query->select('id', 'user_id', 'first_name', 'last_name', 'account_number', 'telephone_number', 'Ghana_card_number');
+                $query->select(
+                    'id',
+                    'user_id',
+                    'first_name',
+                    'last_name',
+                    'account_number',
+                    'telephone_number',
+                    'Ghana_card_number'
+                );
             },
             'bills'
         ])
@@ -239,19 +258,12 @@ class CustomerController extends Controller
             ], 422);
         }
 
-        $responseData = [];
-
-        if ($customer->isNotEmpty()) {
-            $responseData['customers'] = $customer;
-        }
-
-        if ($property->isNotEmpty()) {
-            $responseData['properties'] = $property;
-        }
-
         return response()->json([
             'message' => 'Get customer and property details',
-            'data' => $responseData
+            'data' => [
+                'customers' => $customer,
+                'properties' => $property
+            ]
         ]);
     }
 }
