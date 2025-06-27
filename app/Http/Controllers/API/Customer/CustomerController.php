@@ -229,7 +229,7 @@ class CustomerController extends Controller
                     'Ghana_card_number'
                 );
             },
-            'bills'
+            'bills.payments'
         ])
             ->where(function ($query) use ($id) {
                 $query->where('property_number', $id)
