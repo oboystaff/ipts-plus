@@ -206,7 +206,7 @@ class CustomerController extends Controller
 
     public function globalSearch($id)
     {
-        $customer = Citizen::with(['properties.bills'])
+        $customer = Citizen::with(['properties'])
             ->where(function ($query) use ($id) {
                 $query->where('user_id', $id)
                     ->orWhere('account_number', $id)
