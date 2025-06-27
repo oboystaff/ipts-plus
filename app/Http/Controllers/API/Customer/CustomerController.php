@@ -206,20 +206,7 @@ class CustomerController extends Controller
 
     public function globalSearch($id)
     {
-        $customer = Citizen::with(['properties' => function ($query) {
-            $query->select(
-                'id',
-                'customer_name',
-                'digital_address',
-                'location',
-                'street_name',
-                'assembly_code',
-                'longitude',
-                'latitude',
-                'property_number',
-                'ratable_value'
-            );
-        }])
+        $customer = Citizen::with(['properties.bills'])
             ->where(function ($query) use ($id) {
                 $query->where('user_id', $id)
                     ->orWhere('account_number', $id)
@@ -252,7 +239,19 @@ class CustomerController extends Controller
             })
             ->get();
 
-        if ($customer->isEmpty() && $property->isEmpty()) {
+        $customerProperties = $customer->flatMap(function ($citizen) {
+            return $citizen->properties;
+        });
+
+        $allProperties = $property->concat($customerProperties)->unique('id')->values();
+
+        $propertyCustomers = $property->map(function ($prop) {
+            return $prop->customer;
+        })->filter()->unique('id')->values();
+
+        $allCustomers = $customer->concat($propertyCustomers)->unique('id')->values();
+
+        if ($allCustomers->isEmpty() && $allProperties->isEmpty()) {
             return response()->json([
                 'message' => 'No record found for this customer/property'
             ], 422);
@@ -261,8 +260,8 @@ class CustomerController extends Controller
         return response()->json([
             'message' => 'Get customer and property details',
             'data' => [
-                'customers' => $customer,
-                'properties' => $property
+                'customers' => $allCustomers,
+                'properties' => $allProperties
             ]
         ]);
     }
