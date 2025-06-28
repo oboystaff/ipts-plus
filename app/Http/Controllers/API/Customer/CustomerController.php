@@ -208,7 +208,9 @@ class CustomerController extends Controller
     {
         $customer = Citizen::with([
             'properties.customer:id,user_id,first_name,last_name,account_number,telephone_number,Ghana_card_number',
-            'properties.bills.payments'
+            'properties.bills.payments',
+            'properties.assembly',
+            'properties.entityType'
         ])
             ->where(function ($query) use ($id) {
                 $query->where('user_id', $id)
