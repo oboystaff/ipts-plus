@@ -19,7 +19,7 @@ class PropertyController extends Controller
     public function index(Request $request)
     {
         $data = Property::orderBy('created_at', 'DESC')
-            ->with(['customer', 'entityType', 'assembly', 'zone', 'division', 'block'])
+            ->with(['customer', 'entityType', 'assembly', 'zone', 'division', 'block', 'bills.payments'])
             ->when(!empty($request->user()->assembly_code), function ($query) use ($request) {
                 $query->where('assembly_code', $request->user()->assembly_code);
             })
@@ -36,7 +36,7 @@ class PropertyController extends Controller
         $property = Property::where('id', $id)
             ->orWhere('property_number', $id)
             ->orWhere('digital_address', $id)
-            ->with(['customer', 'entityType', 'assembly', 'zone', 'division', 'block'])
+            ->with(['customer', 'entityType', 'assembly', 'zone', 'division', 'block', 'bills.payments'])
             ->get();
 
         if (count($property) == 0) {
