@@ -136,20 +136,32 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function dashboardData()
+    public function dashboardData($id)
     {
         $now = Carbon::now();
         $startOfYear = $now->copy()->firstOfYear();
 
-        $totalProperties = DB::table('properties')->count();
+        $agent = User::where('id', $id)
+            ->where('access_level', 'Assembly_Agent')
+            ->first();
+
+        if (empty($agent)) {
+            return response()->json([
+                'message' => 'Agent not found or the user is not an agent, check and try again'
+            ], 422);
+        }
+
+        $totalProperties = DB::table('properties')->where('created_by', $agent->id)->count();
 
         $totalBillsDistributed = DB::table('bills')
             ->where('issue_bill', 'Yes')
+            ->where('issued_by', $agent->id)
             ->count();
 
         $totalBillsAmount = DB::table('bills')
-            ->where('issue_bill', 'Yes')
-            ->sum('amount');
+            ->join('properties', 'bills.property_id', '=', 'properties.id')
+            ->where('properties.created_by', $agent->id)
+            ->sum('bills.amount');
 
         $paymentsQuery = DB::table('payments')
             ->where(function ($q) {
@@ -158,7 +170,8 @@ class DashboardController extends Controller
                         $q2->where('payment_mode', 'momo')
                             ->where('transaction_status', 'Success');
                     });
-            });
+            })
+            ->where('created_by', $agent->id);
 
         $totalPaymentsCount = $paymentsQuery->count();
         $totalAmountCollected = $paymentsQuery->sum('amount');
@@ -179,12 +192,14 @@ class DashboardController extends Controller
             )
             ->groupBy('month')
             ->orderByRaw('STR_TO_DATE(month, \'%b \\\'%y\')')
+            ->where('created_by', $agent->id)
             ->get();
 
         $propertyTypes = DB::table('properties')
             ->join('business_class_types', 'properties.entity_type', '=', 'business_class_types.id')
             ->select('business_class_types.category as type', DB::raw('COUNT(*) as count'))
             ->groupBy('category')
+            ->where('properties.created_by', $agent->id)
             ->get();
 
         $paymentsByType = DB::table('payments')
@@ -200,6 +215,7 @@ class DashboardController extends Controller
             })
             ->select('business_class_types.category as type', DB::raw('SUM(payments.amount) as total'))
             ->groupBy('category')
+            ->where('payments.created_by', $agent->id)
             ->get();
 
         return response()->json([

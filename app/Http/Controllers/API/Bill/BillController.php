@@ -173,7 +173,7 @@ class BillController extends Controller
             ], 422);
         }
 
-        $bill->update(['issue_bill' => 'Yes']);
+        $bill->update(['issue_bill' => 'Yes', 'issued_by' => $request->user()->id]);
 
         return response()->json([
             'message' => 'Customer bill issued successfully'
