@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Payment;
 use App\Models\TaskAssignment;
 use App\Models\Block;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 class DashboardController extends Controller
@@ -131,6 +133,89 @@ class DashboardController extends Controller
         return response()->json([
             'message' => 'Get all agent task assignments',
             'data' => $taskAssignments
+        ]);
+    }
+
+    public function dashboardData()
+    {
+        $now = Carbon::now();
+        $startOfYear = $now->copy()->firstOfYear();
+
+        $totalProperties = DB::table('properties')->count();
+
+        $totalBillsDistributed = DB::table('bills')
+            ->where('issue_bill', 'Yes')
+            ->count();
+
+        $totalBillsAmount = DB::table('bills')
+            ->where('issue_bill', 'Yes')
+            ->sum('amount');
+
+        $paymentsQuery = DB::table('payments')
+            ->where(function ($q) {
+                $q->where('payment_mode', '!=', 'momo')
+                    ->orWhere(function ($q2) {
+                        $q2->where('payment_mode', 'momo')
+                            ->where('transaction_status', 'Success');
+                    });
+            });
+
+        $totalPaymentsCount = $paymentsQuery->count();
+        $totalAmountCollected = $paymentsQuery->sum('amount');
+
+        $monthlyPayments = DB::table('payments')
+            ->whereBetween('created_at', [$startOfYear, $now])
+            ->where(function ($q) {
+                $q->where('payment_mode', '!=', 'momo')
+                    ->orWhere(function ($q2) {
+                        $q2->where('payment_mode', 'momo')
+                            ->where('transaction_status', 'Success');
+                    });
+            })
+            ->select(
+                DB::raw("DATE_FORMAT(created_at, '%b \'%y') as month"),
+                DB::raw('SUM(amount) as total'),
+                DB::raw('COUNT(*) as count')
+            )
+            ->groupBy('month')
+            ->orderByRaw('STR_TO_DATE(month, \'%b \\\'%y\')')
+            ->get();
+
+        $propertyTypes = DB::table('properties')
+            ->join('business_class_types', 'properties.entity_type', '=', 'business_class_types.id')
+            ->select('business_class_types.category as type', DB::raw('COUNT(*) as count'))
+            ->groupBy('category')
+            ->get();
+
+        $paymentsByType = DB::table('payments')
+            ->join('bills', 'payments.bills_id', '=', 'bills.bills_id')
+            ->join('properties', 'bills.property_id', '=', 'properties.id')
+            ->join('business_class_types', 'properties.entity_type', '=', 'business_class_types.id')
+            ->where(function ($q) {
+                $q->where('payment_mode', '!=', 'momo')
+                    ->orWhere(function ($q2) {
+                        $q2->where('payment_mode', 'momo')
+                            ->where('transaction_status', 'Success');
+                    });
+            })
+            ->select('business_class_types.category as type', DB::raw('SUM(payments.amount) as total'))
+            ->groupBy('category')
+            ->get();
+
+        return response()->json([
+            'message' => 'Get agent dashboard data',
+            'data' => [
+                'summary' => [
+                    'total_properties' => $totalProperties,
+                    'total_payments' => $totalPaymentsCount,
+                    'total_bills_distributed' => $totalBillsDistributed,
+                    'total_bills_amount' => (float) $totalBillsAmount,
+                    'total_amount_collected' => (float) $totalAmountCollected,
+                ],
+                'monthly_payments' => $monthlyPayments,
+                'property_types' => $propertyTypes,
+                'payments_by_type' => $paymentsByType,
+            ]
         ]);
     }
 }

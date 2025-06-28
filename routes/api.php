@@ -117,6 +117,7 @@ Route::group(['prefix' => 'customer-support', 'middleware' => 'auth:sanctum'], f
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/payment/{id}', [DashboardController::class, 'agentPayment']);
     Route::get('/task/{id}', [DashboardController::class, 'agentTask']);
+    Route::get('/data/{id}', [DashboardController::class, 'dashboardData']);
 });
 
 Route::group(['prefix' => 'property', 'middleware' => 'auth:sanctum'], function () {
