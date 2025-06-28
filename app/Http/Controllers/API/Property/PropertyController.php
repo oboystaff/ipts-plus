@@ -160,7 +160,7 @@ class PropertyController extends Controller
     {
         $radius = 25; // km
 
-        $properties = Property::with(['customer', 'entityType', 'assembly', 'zone', 'division', 'block'])
+        $properties = Property::with(['customer', 'entityType', 'assembly', 'zone', 'division', 'block', 'bills.payments'])
             ->select('*')
             ->selectRaw(
                 '6371 * ACOS(COS(RADIANS(?)) * COS(RADIANS(latitude)) * COS(RADIANS(?) - RADIANS(longitude)) + SIN(RADIANS(?)) * SIN(RADIANS(latitude))) AS distance',
